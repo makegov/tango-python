@@ -66,14 +66,12 @@ class Tango(SyncAPIClient):
     with_streaming_response: TangoWithStreamedResponse
 
     # client options
-    client_id: str
-    client_secret: str
+    access_token: str
 
     def __init__(
         self,
         *,
-        client_id: str | None = None,
-        client_secret: str | None = None,
+        access_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -95,25 +93,15 @@ class Tango(SyncAPIClient):
     ) -> None:
         """Construct a new synchronous tango client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `client_id` from `CLIENT_ID`
-        - `client_secret` from `CLIENT_SECRET`
+        This automatically infers the `access_token` argument from the `TANGO_API_ACCESS_TOKEN` environment variable if it is not provided.
         """
-        if client_id is None:
-            client_id = os.environ.get("CLIENT_ID")
-        if client_id is None:
+        if access_token is None:
+            access_token = os.environ.get("TANGO_API_ACCESS_TOKEN")
+        if access_token is None:
             raise TangoError(
-                "The client_id client option must be set either by passing client_id to the client or by setting the CLIENT_ID environment variable"
+                "The access_token client option must be set either by passing access_token to the client or by setting the TANGO_API_ACCESS_TOKEN environment variable"
             )
-        self.client_id = client_id
-
-        if client_secret is None:
-            client_secret = os.environ.get("CLIENT_SECRET")
-        if client_secret is None:
-            raise TangoError(
-                "The client_secret client option must be set either by passing client_secret to the client or by setting the CLIENT_SECRET environment variable"
-            )
-        self.client_secret = client_secret
+        self.access_token = access_token
 
         if base_url is None:
             base_url = os.environ.get("TANGO_BASE_URL")
@@ -157,6 +145,12 @@ class Tango(SyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        access_token = self.access_token
+        return {"Authorization": f"Bearer {access_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -167,8 +161,7 @@ class Tango(SyncAPIClient):
     def copy(
         self,
         *,
-        client_id: str | None = None,
-        client_secret: str | None = None,
+        access_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.Client | None = None,
@@ -202,8 +195,7 @@ class Tango(SyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            client_id=client_id or self.client_id,
-            client_secret=client_secret or self.client_secret,
+            access_token=access_token or self.access_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
@@ -272,14 +264,12 @@ class AsyncTango(AsyncAPIClient):
     with_streaming_response: AsyncTangoWithStreamedResponse
 
     # client options
-    client_id: str
-    client_secret: str
+    access_token: str
 
     def __init__(
         self,
         *,
-        client_id: str | None = None,
-        client_secret: str | None = None,
+        access_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -301,25 +291,15 @@ class AsyncTango(AsyncAPIClient):
     ) -> None:
         """Construct a new async tango client instance.
 
-        This automatically infers the following arguments from their corresponding environment variables if they are not provided:
-        - `client_id` from `CLIENT_ID`
-        - `client_secret` from `CLIENT_SECRET`
+        This automatically infers the `access_token` argument from the `TANGO_API_ACCESS_TOKEN` environment variable if it is not provided.
         """
-        if client_id is None:
-            client_id = os.environ.get("CLIENT_ID")
-        if client_id is None:
+        if access_token is None:
+            access_token = os.environ.get("TANGO_API_ACCESS_TOKEN")
+        if access_token is None:
             raise TangoError(
-                "The client_id client option must be set either by passing client_id to the client or by setting the CLIENT_ID environment variable"
+                "The access_token client option must be set either by passing access_token to the client or by setting the TANGO_API_ACCESS_TOKEN environment variable"
             )
-        self.client_id = client_id
-
-        if client_secret is None:
-            client_secret = os.environ.get("CLIENT_SECRET")
-        if client_secret is None:
-            raise TangoError(
-                "The client_secret client option must be set either by passing client_secret to the client or by setting the CLIENT_SECRET environment variable"
-            )
-        self.client_secret = client_secret
+        self.access_token = access_token
 
         if base_url is None:
             base_url = os.environ.get("TANGO_BASE_URL")
@@ -363,6 +343,12 @@ class AsyncTango(AsyncAPIClient):
 
     @property
     @override
+    def auth_headers(self) -> dict[str, str]:
+        access_token = self.access_token
+        return {"Authorization": f"Bearer {access_token}"}
+
+    @property
+    @override
     def default_headers(self) -> dict[str, str | Omit]:
         return {
             **super().default_headers,
@@ -373,8 +359,7 @@ class AsyncTango(AsyncAPIClient):
     def copy(
         self,
         *,
-        client_id: str | None = None,
-        client_secret: str | None = None,
+        access_token: str | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
         http_client: httpx.AsyncClient | None = None,
@@ -408,8 +393,7 @@ class AsyncTango(AsyncAPIClient):
 
         http_client = http_client or self._client
         return self.__class__(
-            client_id=client_id or self.client_id,
-            client_secret=client_secret or self.client_secret,
+            access_token=access_token or self.access_token,
             base_url=base_url or self.base_url,
             timeout=self.timeout if isinstance(timeout, NotGiven) else timeout,
             http_client=http_client,
