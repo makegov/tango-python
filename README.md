@@ -24,27 +24,32 @@ pip install --pre tango-python
 The full API of this library can be found in [api.md](api.md).
 
 ```python
+import os
 from tango import Tango
 
 client = Tango(
-    client_id="My Client ID",
-    client_secret="My Client Secret",
+    access_token=os.environ.get("TANGO_API_ACCESS_TOKEN"),  # This is the default and can be omitted
 )
 
 schema = client.schemas.retrieve()
 ```
+
+While you can provide a `access_token` keyword argument,
+we recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)
+to add `TANGO_API_ACCESS_TOKEN="My Access Token"` to your `.env` file
+so that your Access Token is not stored in source control.
 
 ## Async usage
 
 Simply import `AsyncTango` instead of `Tango` and use `await` with each API call:
 
 ```python
+import os
 import asyncio
 from tango import AsyncTango
 
 client = AsyncTango(
-    client_id="My Client ID",
-    client_secret="My Client Secret",
+    access_token=os.environ.get("TANGO_API_ACCESS_TOKEN"),  # This is the default and can be omitted
 )
 
 
@@ -79,10 +84,7 @@ All errors inherit from `tango.APIError`.
 import tango
 from tango import Tango
 
-client = Tango(
-    client_id="My Client ID",
-    client_secret="My Client Secret",
-)
+client = Tango()
 
 try:
     client.schemas.retrieve()
@@ -125,8 +127,6 @@ from tango import Tango
 client = Tango(
     # default is 2
     max_retries=0,
-    client_id="My Client ID",
-    client_secret="My Client Secret",
 )
 
 # Or, configure per-request:
@@ -145,15 +145,11 @@ from tango import Tango
 client = Tango(
     # 20 seconds (default is 1 minute)
     timeout=20.0,
-    client_id="My Client ID",
-    client_secret="My Client Secret",
 )
 
 # More granular control:
 client = Tango(
     timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),
-    client_id="My Client ID",
-    client_secret="My Client Secret",
 )
 
 # Override per-request:
@@ -197,10 +193,7 @@ The "raw" Response object can be accessed by prefixing `.with_raw_response.` to 
 ```py
 from tango import Tango
 
-client = Tango(
-    client_id="My Client ID",
-    client_secret="My Client Secret",
-)
+client = Tango()
 response = client.schemas.with_raw_response.retrieve()
 print(response.headers.get('X-My-Header'))
 
@@ -281,8 +274,6 @@ client = Tango(
         proxies="http://my.test.proxy.example.com",
         transport=httpx.HTTPTransport(local_address="0.0.0.0"),
     ),
-    client_id="My Client ID",
-    client_secret="My Client Secret",
 )
 ```
 

@@ -24,14 +24,13 @@ from tango import Tango, AsyncTango, APIResponseValidationError
 from tango._types import Omit
 from tango._models import BaseModel, FinalRequestOptions
 from tango._constants import RAW_RESPONSE_HEADER
-from tango._exceptions import APIStatusError, APITimeoutError, APIResponseValidationError
+from tango._exceptions import TangoError, APIStatusError, APITimeoutError, APIResponseValidationError
 from tango._base_client import DEFAULT_TIMEOUT, HTTPX_DEFAULT_TIMEOUT, BaseClient, make_request_options
 
 from .utils import update_env
 
 base_url = os.environ.get("TEST_API_BASE_URL", "http://127.0.0.1:4010")
-client_id = "My Client ID"
-client_secret = "My Client Secret"
+access_token = "My Access Token"
 
 
 def _get_params(client: BaseClient[Any, Any]) -> dict[str, str]:
@@ -53,9 +52,7 @@ def _get_open_connections(client: Tango | AsyncTango) -> int:
 
 
 class TestTango:
-    client = Tango(
-        base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-    )
+    client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     def test_raw_response(self, respx_mock: MockRouter) -> None:
@@ -81,13 +78,9 @@ class TestTango:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(client_id="another My Client ID")
-        assert copied.client_id == "another My Client ID"
-        assert self.client.client_id == "My Client ID"
-
-        copied = self.client.copy(client_secret="another My Client Secret")
-        assert copied.client_secret == "another My Client Secret"
-        assert self.client.client_secret == "My Client Secret"
+        copied = self.client.copy(access_token="another My Access Token")
+        assert copied.access_token == "another My Access Token"
+        assert self.client.access_token == "My Access Token"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -108,8 +101,7 @@ class TestTango:
     def test_copy_default_headers(self) -> None:
         client = Tango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -145,11 +137,7 @@ class TestTango:
 
     def test_copy_default_query(self) -> None:
         client = Tango(
-            base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, access_token=access_token, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -274,11 +262,7 @@ class TestTango:
 
     def test_client_timeout_option(self) -> None:
         client = Tango(
-            base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
+            base_url=base_url, access_token=access_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -289,11 +273,7 @@ class TestTango:
         # custom timeout given to the httpx client should be used
         with httpx.Client(timeout=None) as http_client:
             client = Tango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -303,11 +283,7 @@ class TestTango:
         # no timeout given to the httpx client should not use the httpx default
         with httpx.Client() as http_client:
             client = Tango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -317,11 +293,7 @@ class TestTango:
         # explicitly passing the default timeout currently results in it being ignored
         with httpx.Client(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = Tango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -333,8 +305,7 @@ class TestTango:
             async with httpx.AsyncClient() as http_client:
                 Tango(
                     base_url=base_url,
-                    client_id=client_id,
-                    client_secret=client_secret,
+                    access_token=access_token,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -342,8 +313,7 @@ class TestTango:
     def test_default_headers_option(self) -> None:
         client = Tango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -353,8 +323,7 @@ class TestTango:
 
         client2 = Tango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -365,11 +334,20 @@ class TestTango:
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
+    def test_validate_headers(self) -> None:
+        client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {access_token}"
+
+        with pytest.raises(TangoError):
+            with update_env(**{"TANGO_API_ACCESS_TOKEN": Omit()}):
+                client2 = Tango(base_url=base_url, access_token=None, _strict_response_validation=True)
+            _ = client2
+
     def test_default_query_option(self) -> None:
         client = Tango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -572,10 +550,7 @@ class TestTango:
 
     def test_base_url_setter(self) -> None:
         client = Tango(
-            base_url="https://example.com/from_init",
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
+            base_url="https://example.com/from_init", access_token=access_token, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -585,7 +560,7 @@ class TestTango:
 
     def test_base_url_env(self) -> None:
         with update_env(TANGO_BASE_URL="http://localhost:5000/from/env"):
-            client = Tango(client_id=client_id, client_secret=client_secret, _strict_response_validation=True)
+            client = Tango(access_token=access_token, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -593,14 +568,12 @@ class TestTango:
         [
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -622,14 +595,12 @@ class TestTango:
         [
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -651,14 +622,12 @@ class TestTango:
         [
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             Tango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.Client(),
             ),
@@ -676,9 +645,7 @@ class TestTango:
         assert request.url == "https://myapi.com/foo"
 
     def test_copied_client_does_not_close_http(self) -> None:
-        client = Tango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -689,9 +656,7 @@ class TestTango:
         assert not client.is_closed()
 
     def test_client_context_manager(self) -> None:
-        client = Tango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
         with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -714,8 +679,7 @@ class TestTango:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             Tango(
                 base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -727,16 +691,12 @@ class TestTango:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = Tango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        strict_client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             strict_client.get("/foo", cast_to=Model)
 
-        client = Tango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=False
-        )
+        client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=False)
 
         response = client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -764,9 +724,7 @@ class TestTango:
     )
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = Tango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = Tango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
@@ -874,9 +832,7 @@ class TestTango:
 
 
 class TestAsyncTango:
-    client = AsyncTango(
-        base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-    )
+    client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
     @pytest.mark.respx(base_url=base_url)
     @pytest.mark.asyncio
@@ -904,13 +860,9 @@ class TestAsyncTango:
         copied = self.client.copy()
         assert id(copied) != id(self.client)
 
-        copied = self.client.copy(client_id="another My Client ID")
-        assert copied.client_id == "another My Client ID"
-        assert self.client.client_id == "My Client ID"
-
-        copied = self.client.copy(client_secret="another My Client Secret")
-        assert copied.client_secret == "another My Client Secret"
-        assert self.client.client_secret == "My Client Secret"
+        copied = self.client.copy(access_token="another My Access Token")
+        assert copied.access_token == "another My Access Token"
+        assert self.client.access_token == "My Access Token"
 
     def test_copy_default_options(self) -> None:
         # options that have a default are overridden correctly
@@ -931,8 +883,7 @@ class TestAsyncTango:
     def test_copy_default_headers(self) -> None:
         client = AsyncTango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -968,11 +919,7 @@ class TestAsyncTango:
 
     def test_copy_default_query(self) -> None:
         client = AsyncTango(
-            base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
-            default_query={"foo": "bar"},
+            base_url=base_url, access_token=access_token, _strict_response_validation=True, default_query={"foo": "bar"}
         )
         assert _get_params(client)["foo"] == "bar"
 
@@ -1097,11 +1044,7 @@ class TestAsyncTango:
 
     async def test_client_timeout_option(self) -> None:
         client = AsyncTango(
-            base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
-            timeout=httpx.Timeout(0),
+            base_url=base_url, access_token=access_token, _strict_response_validation=True, timeout=httpx.Timeout(0)
         )
 
         request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1112,11 +1055,7 @@ class TestAsyncTango:
         # custom timeout given to the httpx client should be used
         async with httpx.AsyncClient(timeout=None) as http_client:
             client = AsyncTango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1126,11 +1065,7 @@ class TestAsyncTango:
         # no timeout given to the httpx client should not use the httpx default
         async with httpx.AsyncClient() as http_client:
             client = AsyncTango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1140,11 +1075,7 @@ class TestAsyncTango:
         # explicitly passing the default timeout currently results in it being ignored
         async with httpx.AsyncClient(timeout=HTTPX_DEFAULT_TIMEOUT) as http_client:
             client = AsyncTango(
-                base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
-                _strict_response_validation=True,
-                http_client=http_client,
+                base_url=base_url, access_token=access_token, _strict_response_validation=True, http_client=http_client
             )
 
             request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
@@ -1156,8 +1087,7 @@ class TestAsyncTango:
             with httpx.Client() as http_client:
                 AsyncTango(
                     base_url=base_url,
-                    client_id=client_id,
-                    client_secret=client_secret,
+                    access_token=access_token,
                     _strict_response_validation=True,
                     http_client=cast(Any, http_client),
                 )
@@ -1165,8 +1095,7 @@ class TestAsyncTango:
     def test_default_headers_option(self) -> None:
         client = AsyncTango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={"X-Foo": "bar"},
         )
@@ -1176,8 +1105,7 @@ class TestAsyncTango:
 
         client2 = AsyncTango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_headers={
                 "X-Foo": "stainless",
@@ -1188,11 +1116,20 @@ class TestAsyncTango:
         assert request.headers.get("x-foo") == "stainless"
         assert request.headers.get("x-stainless-lang") == "my-overriding-header"
 
+    def test_validate_headers(self) -> None:
+        client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
+        request = client._build_request(FinalRequestOptions(method="get", url="/foo"))
+        assert request.headers.get("Authorization") == f"Bearer {access_token}"
+
+        with pytest.raises(TangoError):
+            with update_env(**{"TANGO_API_ACCESS_TOKEN": Omit()}):
+                client2 = AsyncTango(base_url=base_url, access_token=None, _strict_response_validation=True)
+            _ = client2
+
     def test_default_query_option(self) -> None:
         client = AsyncTango(
             base_url=base_url,
-            client_id=client_id,
-            client_secret=client_secret,
+            access_token=access_token,
             _strict_response_validation=True,
             default_query={"query_param": "bar"},
         )
@@ -1395,10 +1332,7 @@ class TestAsyncTango:
 
     def test_base_url_setter(self) -> None:
         client = AsyncTango(
-            base_url="https://example.com/from_init",
-            client_id=client_id,
-            client_secret=client_secret,
-            _strict_response_validation=True,
+            base_url="https://example.com/from_init", access_token=access_token, _strict_response_validation=True
         )
         assert client.base_url == "https://example.com/from_init/"
 
@@ -1408,7 +1342,7 @@ class TestAsyncTango:
 
     def test_base_url_env(self) -> None:
         with update_env(TANGO_BASE_URL="http://localhost:5000/from/env"):
-            client = AsyncTango(client_id=client_id, client_secret=client_secret, _strict_response_validation=True)
+            client = AsyncTango(access_token=access_token, _strict_response_validation=True)
             assert client.base_url == "http://localhost:5000/from/env/"
 
     @pytest.mark.parametrize(
@@ -1416,14 +1350,12 @@ class TestAsyncTango:
         [
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1445,14 +1377,12 @@ class TestAsyncTango:
         [
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1474,14 +1404,12 @@ class TestAsyncTango:
         [
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
             ),
             AsyncTango(
                 base_url="http://localhost:5000/custom/path/",
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 http_client=httpx.AsyncClient(),
             ),
@@ -1499,9 +1427,7 @@ class TestAsyncTango:
         assert request.url == "https://myapi.com/foo"
 
     async def test_copied_client_does_not_close_http(self) -> None:
-        client = AsyncTango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
         assert not client.is_closed()
 
         copied = client.copy()
@@ -1513,9 +1439,7 @@ class TestAsyncTango:
         assert not client.is_closed()
 
     async def test_client_context_manager(self) -> None:
-        client = AsyncTango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
         async with client as c2:
             assert c2 is client
             assert not c2.is_closed()
@@ -1539,8 +1463,7 @@ class TestAsyncTango:
         with pytest.raises(TypeError, match=r"max_retries cannot be None"):
             AsyncTango(
                 base_url=base_url,
-                client_id=client_id,
-                client_secret=client_secret,
+                access_token=access_token,
                 _strict_response_validation=True,
                 max_retries=cast(Any, None),
             )
@@ -1553,16 +1476,12 @@ class TestAsyncTango:
 
         respx_mock.get("/foo").mock(return_value=httpx.Response(200, text="my-custom-format"))
 
-        strict_client = AsyncTango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        strict_client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
         with pytest.raises(APIResponseValidationError):
             await strict_client.get("/foo", cast_to=Model)
 
-        client = AsyncTango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=False
-        )
+        client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=False)
 
         response = await client.get("/foo", cast_to=Model)
         assert isinstance(response, str)  # type: ignore[unreachable]
@@ -1591,9 +1510,7 @@ class TestAsyncTango:
     @mock.patch("time.time", mock.MagicMock(return_value=1696004797))
     @pytest.mark.asyncio
     async def test_parse_retry_after_header(self, remaining_retries: int, retry_after: str, timeout: float) -> None:
-        client = AsyncTango(
-            base_url=base_url, client_id=client_id, client_secret=client_secret, _strict_response_validation=True
-        )
+        client = AsyncTango(base_url=base_url, access_token=access_token, _strict_response_validation=True)
 
         headers = httpx.Headers({"retry-after": retry_after})
         options = FinalRequestOptions(method="get", url="/foo", max_retries=3)
