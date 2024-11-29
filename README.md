@@ -1,6 +1,6 @@
 # Tango Python API library
 
-[![PyPI version](https://img.shields.io/pypi/v/tango.svg)](https://pypi.org/project/tango/)
+[![PyPI version](https://img.shields.io/pypi/v/tango-python.svg)](https://pypi.org/project/tango-python/)
 
 The Tango Python library provides convenient access to the Tango REST API from any Python 3.8+
 application. The library includes type definitions for all request params and response fields,
@@ -20,7 +20,7 @@ pip install git+ssh://git@github.com/stainless-sdks/tango-python.git
 ```
 
 > [!NOTE]
-> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre tango`
+> Once this package is [published to PyPI](https://app.stainlessapi.com/docs/guides/publish), this will become: `pip install --pre tango-python`
 
 ## Usage
 
