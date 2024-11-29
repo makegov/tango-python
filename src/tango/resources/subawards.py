@@ -32,7 +32,7 @@ class SubawardsResource(SyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tango-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/makegov/tango-python#accessing-raw-response-data-eg-headers
         """
         return SubawardsResourceWithRawResponse(self)
 
@@ -41,7 +41,7 @@ class SubawardsResource(SyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tango-python#with_streaming_response
+        For more information, see https://www.github.com/makegov/tango-python#with_streaming_response
         """
         return SubawardsResourceWithStreamingResponse(self)
 
@@ -152,7 +152,7 @@ class AsyncSubawardsResource(AsyncAPIResource):
         This property can be used as a prefix for any HTTP method call to return the
         the raw response object instead of the parsed content.
 
-        For more information, see https://www.github.com/stainless-sdks/tango-python#accessing-raw-response-data-eg-headers
+        For more information, see https://www.github.com/makegov/tango-python#accessing-raw-response-data-eg-headers
         """
         return AsyncSubawardsResourceWithRawResponse(self)
 
@@ -161,7 +161,7 @@ class AsyncSubawardsResource(AsyncAPIResource):
         """
         An alternative to `.with_raw_response` that doesn't eagerly read the response body.
 
-        For more information, see https://www.github.com/stainless-sdks/tango-python#with_streaming_response
+        For more information, see https://www.github.com/makegov/tango-python#with_streaming_response
         """
         return AsyncSubawardsResourceWithStreamingResponse(self)
 
