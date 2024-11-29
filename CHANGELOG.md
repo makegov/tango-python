@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.1 (2024-11-29)
+
+Full Changelog: [v0.0.1-alpha.1...v0.1.0-alpha.1](https://github.com/makegov/tango-python/compare/v0.0.1-alpha.1...v0.1.0-alpha.1)
+
+### Features
+
+* **api:** update via SDK Studio ([#4](https://github.com/makegov/tango-python/issues/4)) ([53ec9bd](https://github.com/makegov/tango-python/commit/53ec9bd1e1938224f9fd6ff0036fd61f3bbbcc67))
+
 ## 0.0.1-alpha.1 (2024-11-29)
 
 Full Changelog: [v0.0.1-alpha.0...v0.0.1-alpha.1](https://github.com/makegov/tango-python/compare/v0.0.1-alpha.0...v0.0.1-alpha.1)
