@@ -1,0 +1,107 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=5&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types%2Cphysical_address
+  response:
+    body:
+      string: "{\"count\":1700013,\"next\":\"http://tango.makegov.com/api/entities/?limit=5&page=2&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types%2Cphysical_address\",\"previous\":null,\"results\":[{\"uei\":\"QTY8TUJGMM34\",\"legal_business_name\":\"
+        ALLIANCE PRO GLOBAL LLC\",\"cage_code\":\"16CA8\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"JS\",\"description\":\"Small Business Joint
+        Venture\"},{\"code\":\"JV\",\"description\":\"JV Service-Disabled Veteran-Owned
+        Business Joint Venture\"},{\"code\":\"QF\",\"description\":\"Service Disabled
+        Veteran Owned Business\"}],\"physical_address\":{\"city\":\"Owings Mills\",\"zip_code\":\"21117\",\"country_code\":\"USA\",\"address_line1\":\"11240
+        Reisterstown Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1965\",\"state_or_province_code\":\"MD\"}},{\"uei\":\"SS2CYQC6PLR6\",\"legal_business_name\":\"
+        AMBER RYAN\",\"cage_code\":\"16L33\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"G9\",\"description\":\"Other Than One of the
+        Proceeding\"}],\"physical_address\":{\"city\":\"Salinas\",\"zip_code\":\"93908\",\"country_code\":\"USA\",\"address_line1\":\"22160
+        Berry Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"8728\",\"state_or_province_code\":\"CA\"}},{\"uei\":\"QE4VZK8QZSV3\",\"legal_business_name\":\"
+        Accreditation Board of America, LLC\",\"cage_code\":\"86HD7\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"FR\",\"description\":\"Asian-Pacific American
+        Owned\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"physical_address\":{\"city\":\"Sterling\",\"zip_code\":\"20165\",\"country_code\":\"USA\",\"address_line1\":\"26
+        Dorrell Ct\",\"address_line2\":\"\",\"zip_code_plus4\":\"5713\",\"state_or_province_code\":\"VA\"}},{\"uei\":\"FTK1UZGCZP39\",\"legal_business_name\":\"
+        Arthur V. Mauro Institute for Peace and Justice at St. Paul\u2019s College
+        Inc.\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"1R\",\"description\":\"Private
+        University or College\"},{\"code\":\"A8\",\"description\":\"Non-Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"M8\",\"description\":\"Educational Institution\"}],\"physical_address\":{\"city\":\"Winnipeg\",\"zip_code\":\"R3T
+        2M6\",\"country_code\":\"CAN\",\"address_line1\":\"70 Dysart Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MB\"}},{\"uei\":\"X9E4EJ6SLCS5\",\"legal_business_name\":\"
+        BETHLEHEM BAPTIST CHURCH GASTONIA, NORTH CAROLINA\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"A8\",\"description\":\"Non-Profit
+        Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"GASTONIA\",\"zip_code\":\"28056\",\"country_code\":\"USA\",\"address_line1\":\"3100
+        CITY CHURCH ST BLDG B\",\"address_line2\":\"\",\"zip_code_plus4\":\"0045\",\"state_or_province_code\":\"NC\"}}]}"
+    headers:
+      CF-RAY:
+      - 99f88c362f684ca0-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Nj9ZPu5DmkU4E2%2FBeajEJ7BlHHUmFTmJMnTq3%2BxwN0m%2F9CdCI5CkE0T6J5MzrTfWhCdynTjDtYDRvNMSwvoBv8YTVVQpu7e4wbxxtnbdnf8QutRnBZ3Ec%2F5uUg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3292'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.027s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '972'
+      x-ratelimit-burst-reset:
+      - '54'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998665'
+      x-ratelimit-daily-reset:
+      - '87'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '972'
+      x-ratelimit-reset:
+      - '54'
+    status:
+      code: 200
+      message: OK
+version: 1

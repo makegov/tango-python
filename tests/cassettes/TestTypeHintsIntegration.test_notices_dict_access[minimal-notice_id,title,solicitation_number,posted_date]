@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/notices/?page=1&limit=5&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date
+  response:
+    body:
+      string: '{"count":7975196,"next":"http://tango.makegov.com/api/notices/?limit=5&page=2&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date","previous":null,"results":[{"notice_id":"d5e7d516-698c-4b08-9d2d-f245e36627d6","title":"Crawford
+        Modular Bunkhouse, Boise National Forest","solicitation_number":"1240LT23R0034","posted_date":null},{"notice_id":"d5e94509-01a7-4e85-9308-274c30d6ba4e","title":"6835--Medical
+        Air/Gas and Cylinder Rental","solicitation_number":"36C24623Q0127","posted_date":null},{"notice_id":"6642f6ba-caa4-4cb3-b2ba-3cd9dab3eeaa","title":"Z--GAOA
+        - EMDDO ROADS AND REC SITE REPAIRS","solicitation_number":"140L3625B0002","posted_date":null},{"notice_id":"23f87f32-a95f-4d63-a750-229784139aa3","title":"Maintenance
+        Dredging of the Maurice River, NJ","solicitation_number":"W912BU25BA005","posted_date":null},{"notice_id":"44b721db-c64a-49d8-84c7-43aa160625db","title":"Hazardous
+        Waste Disposal San Diego","solicitation_number":"SP450025R0004","posted_date":null}]}'
+    headers:
+      CF-RAY:
+      - 99f88c69cd17a1e5-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:07 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dhGAO3q5SgkgC1nyJpguTEg2D63hiLtdDGSz4FBw6gnm1bRO%2BVJwqg4u7beTFDco%2BzppB4DUI83WGZCnFoNA2XMJ3cL9jAv7tpQ5mO6WNUoFvYPkUqRR7JLYgg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '983'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.037s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '969'
+      x-ratelimit-burst-reset:
+      - '45'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998662'
+      x-ratelimit-daily-reset:
+      - '78'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '969'
+      x-ratelimit-reset:
+      - '45'
+    status:
+      code: 200
+      message: OK
+version: 1

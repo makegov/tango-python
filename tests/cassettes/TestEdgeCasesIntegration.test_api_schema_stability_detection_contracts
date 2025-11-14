@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ==","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","fiscal_year":2026,"total_contract_value":1089550.8,"base_and_exercised_options_value":1089550.8,"naics_code":561612,"set_aside":"NONE","recipient":{"uei":"HQXXAB4DV7H3","display_name":"REDCON
+        SOLUTIONS GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"GA"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","fiscal_year":2026,"total_contract_value":17351.59,"base_and_exercised_options_value":17351.59,"naics_code":236220,"set_aside":null,"recipient":{"uei":"MR6FELMMCJ31","display_name":"ONSITE
+        CONSTRUCTION GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"KS"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1371325.32,"base_and_exercised_options_value":217309.6,"naics_code":541519,"set_aside":"NONE","recipient":{"uei":"GDQLRDFJNRD3","display_name":"MERLIN
+        INTERNATIONAL, INC."},"place_of_performance":{"country_code":"USA","state_code":"VA"}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":4387892.04,"base_and_exercised_options_value":1460606.88,"naics_code":541820,"set_aside":"SBA","recipient":{"uei":"U3M3JLGJLQ63","display_name":"RACK-WILDNER
+        & REESE, INC."},"place_of_performance":{"country_code":"USA","state_code":"PA"}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":24732.97,"base_and_exercised_options_value":24732.97,"naics_code":541519,"set_aside":null,"recipient":{"uei":"SC8LMLWA6H51","display_name":"REGENCY
+        CONSULTING INC"},"place_of_performance":{"country_code":"USA","state_code":"WV"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1499803.54,"base_and_exercised_options_value":0.0,"naics_code":541211,"set_aside":null,"recipient":{"uei":"ECMMFNMSLXM7","display_name":"ERNST
+        & YOUNG LLP"},"place_of_performance":{"country_code":"USA","state_code":"NY"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":73050.0,"base_and_exercised_options_value":73050.0,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"F4M9NB1HD785","display_name":"COLOSSAL
+        CONTRACTING LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":21711.76,"base_and_exercised_options_value":21711.76,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"JMVMGGNJGA29","display_name":"GOVPLACE,
+        LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":13390.73,"base_and_exercised_options_value":13390.73,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"F4M9NB1HD785","display_name":"COLOSSAL
+        CONTRACTING LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":99974.58,"base_and_exercised_options_value":99974.58,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"JEANDJTZ8HJ3","display_name":"FCN
+        INC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c257e78a225-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BabrvSk9Ci%2F6r8ZGecXuOZfIm0hL4JXLFry%2Fn1tNJUtXjxjmu1Wr1ebgEj9lBrrdmVRisJ%2BUqzYqRHtt3BDNtWhuStZeeyiS00KtsL64dhLGxrEl4uffV%2FAS2w%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4322'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '984'
+      x-ratelimit-burst-reset:
+      - '56'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998677'
+      x-ratelimit-daily-reset:
+      - '89'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '984'
+      x-ratelimit-reset:
+      - '56'
+    status:
+      code: 200
+      message: OK
+version: 1

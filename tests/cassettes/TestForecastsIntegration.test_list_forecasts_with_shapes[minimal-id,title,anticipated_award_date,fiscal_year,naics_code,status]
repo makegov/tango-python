@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/forecasts/?page=1&limit=5&shape=id%2Ctitle%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus
+  response:
+    body:
+      string: '{"count":12610,"next":"http://tango.makegov.com/api/forecasts/?limit=5&page=2&shape=id%2Ctitle%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus","previous":null,"results":[{"id":12641,"title":"WHTF
+        World Cup 2026 Bulk Room Block","anticipated_award_date":"2025-11-24","fiscal_year":2026,"naics_code":"721110","status":null},{"id":12612,"title":"CAEIO
+        Recompete","anticipated_award_date":"2099-09-09","fiscal_year":2099,"naics_code":null,"status":"Acquisition
+        Planning"},{"id":12611,"title":"9mm RHTA AMMUNITION","anticipated_award_date":"2025-11-24","fiscal_year":2026,"naics_code":"332992","status":null},{"id":12610,"title":"BG252
+        Swimming Pool Improvements","anticipated_award_date":"2025-12-31","fiscal_year":2026,"naics_code":"236220","status":null},{"id":12609,"title":"Telecommunications
+        Support for USCG Pacific Area/Southwest District Command Center","anticipated_award_date":"2025-12-31","fiscal_year":2026,"naics_code":"541512","status":null}]}'
+    headers:
+      CF-RAY:
+      - 99f88c7dea93a206-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:10 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VMtqOQtW%2BMOkFwZml%2F32ZqRaJaU9iJBsIfFGqSAZ%2BBEwEF2GVHnnxUZ5lIhXF7wNqtJON%2BmXTTBM%2FF5kZCcLdCDKoUcxe%2BjGC%2FlV%2F83Rz7jbMZlEwGZo085nHg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '967'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.024s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '956'
+      x-ratelimit-burst-reset:
+      - '42'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998649'
+      x-ratelimit-daily-reset:
+      - '75'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '956'
+      x-ratelimit-reset:
+      - '42'
+    status:
+      code: 200
+      message: OK
+version: 1

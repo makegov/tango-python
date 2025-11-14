@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/opportunities/?page=1&limit=5&shape=opportunity_id%2Ctitle%2Csolicitation_number
+  response:
+    body:
+      string: '{"count":190142,"next":"http://tango.makegov.com/api/opportunities/?limit=5&page=2&shape=opportunity_id%2Ctitle%2Csolicitation_number","previous":null,"results":[{"opportunity_id":"d0b894c4-d4fa-440d-b898-d6dec8381b24","title":"47--TUBE
+        ASSEMBLY","solicitation_number":"SPEFA126Q0016"},{"opportunity_id":"b8e8abdb-b055-49da-812e-bc94eb9e66f7","title":"Bus
+        Chaperone Services","solicitation_number":"19SA7026Q0003"},{"opportunity_id":"569a523c-2a60-4bfc-83df-45d926818a58","title":"17--NRP,DRAWBAR,TELESCO","solicitation_number":"SPE8EF26Q0029"},{"opportunity_id":"dd59e39b-b1c9-49c2-830c-abc66ec6511a","title":"30--CONNECTING
+        LINK,RIG","solicitation_number":"SPE4A526T3439"},{"opportunity_id":"743be37d-3b73-4f2c-857b-4c57d1ae8ff1","title":"31--CONE
+        AND ROLLERS,TA","solicitation_number":"SPE4A626T047W"}]}'
+    headers:
+      CF-RAY:
+      - 99f88c98d806a224-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:15 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=TT%2B8oEGHjlLOdLfC6Bvt1FeXW2fG2r6%2B2WngscWTz10A38N5i9UbfDSTOrag15UKCmoMYpYAGgxkDuyN%2Fakku9a6eQXs7lxvl6tMVPhh2QEAAS66d7ge8gqXgA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '806'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.435s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '944'
+      x-ratelimit-burst-reset:
+      - '38'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998637'
+      x-ratelimit-daily-reset:
+      - '70'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '944'
+      x-ratelimit-reset:
+      - '38'
+    status:
+      code: 200
+      message: OK
+version: 1

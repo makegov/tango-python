@@ -1,0 +1,90 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=5&shape=uei%2Clegal_business_name%2Cphysical_address&flat=true
+  response:
+    body:
+      string: "{\"count\":1700013,\"next\":\"http://tango.makegov.com/api/entities/?flat=true&limit=5&page=2&shape=uei%2Clegal_business_name%2Cphysical_address\",\"previous\":null,\"results\":[{\"uei\":\"QTY8TUJGMM34\",\"legal_business_name\":\"
+        ALLIANCE PRO GLOBAL LLC\",\"physical_address.city\":\"Owings Mills\",\"physical_address.zip_code\":\"21117\",\"physical_address.country_code\":\"USA\",\"physical_address.address_line1\":\"11240
+        Reisterstown Rd\",\"physical_address.address_line2\":\"\",\"physical_address.zip_code_plus4\":\"1965\",\"physical_address.state_or_province_code\":\"MD\"},{\"uei\":\"SS2CYQC6PLR6\",\"legal_business_name\":\"
+        AMBER RYAN\",\"physical_address.city\":\"Salinas\",\"physical_address.zip_code\":\"93908\",\"physical_address.country_code\":\"USA\",\"physical_address.address_line1\":\"22160
+        Berry Dr\",\"physical_address.address_line2\":\"\",\"physical_address.zip_code_plus4\":\"8728\",\"physical_address.state_or_province_code\":\"CA\"},{\"uei\":\"QE4VZK8QZSV3\",\"legal_business_name\":\"
+        Accreditation Board of America, LLC\",\"physical_address.city\":\"Sterling\",\"physical_address.zip_code\":\"20165\",\"physical_address.country_code\":\"USA\",\"physical_address.address_line1\":\"26
+        Dorrell Ct\",\"physical_address.address_line2\":\"\",\"physical_address.zip_code_plus4\":\"5713\",\"physical_address.state_or_province_code\":\"VA\"},{\"uei\":\"FTK1UZGCZP39\",\"legal_business_name\":\"
+        Arthur V. Mauro Institute for Peace and Justice at St. Paul\u2019s College
+        Inc.\",\"physical_address.city\":\"Winnipeg\",\"physical_address.zip_code\":\"R3T
+        2M6\",\"physical_address.country_code\":\"CAN\",\"physical_address.address_line1\":\"70
+        Dysart Rd\",\"physical_address.address_line2\":\"\",\"physical_address.zip_code_plus4\":\"\",\"physical_address.state_or_province_code\":\"MB\"},{\"uei\":\"X9E4EJ6SLCS5\",\"legal_business_name\":\"
+        BETHLEHEM BAPTIST CHURCH GASTONIA, NORTH CAROLINA\",\"physical_address.city\":\"GASTONIA\",\"physical_address.zip_code\":\"28056\",\"physical_address.country_code\":\"USA\",\"physical_address.address_line1\":\"3100
+        CITY CHURCH ST BLDG B\",\"physical_address.address_line2\":\"\",\"physical_address.zip_code_plus4\":\"0045\",\"physical_address.state_or_province_code\":\"NC\"}]}"
+    headers:
+      CF-RAY:
+      - 99f88c79d9c4a1e9-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:10 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=O9CRDAKAueQVfn0NnwYkPPuyKV%2F6QZsN795TUFWj774iAEriZBOcaI0dq9gbV0CIAoLYUM4tro0VrhPkQjwrfWXp%2FmZm3RAz5V4V0CFJ9iQFWasKC7SANzHwTg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2039'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.031s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '957'
+      x-ratelimit-burst-reset:
+      - '43'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998650'
+      x-ratelimit-daily-reset:
+      - '76'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '957'
+      x-ratelimit-reset:
+      - '43'
+    status:
+      code: 200
+      message: OK
+version: 1

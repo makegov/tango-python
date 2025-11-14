@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2023-01-01&award_date_lte=2023-12-31
+  response:
+    body:
+      string: '{"count":5547902,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2023-01-01&award_date_lte=2023-12-31&cursor=WyIyMDIzLTEyLTMxIiwgIkNPTlRfQVdEX1c5MTEzTTI0RjAwMDVfOTcwMF9XNTJQMUoxNkQwMDE5Xzk3MDAiXQ%3D%3D","cursor":"WyIyMDIzLTEyLTMxIiwgIkNPTlRfQVdEX1c5MTEzTTI0RjAwMDVfOTcwMF9XNTJQMUoxNkQwMDE5Xzk3MDAiXQ==","results":[{"key":"CONT_AWD_W91QVN24F5018_9700_W91QVN23A0015_9700","piid":"W91QVN24F5018","award_date":"2023-12-31","description":"STAND
+        ALONE CAR DEC 2023","total_contract_value":2718.57,"recipient":{"display_name":"PAJU
+        SANITATION CORP."}},{"key":"CONT_AWD_W91QVN24F5017_9700_W91QVN19D0046_9700","piid":"W91QVN24F5017","award_date":"2023-12-31","description":"STAND
+        ALONE CAR DEC 2023","total_contract_value":7889.61,"recipient":{"display_name":"KOREA
+        HOUSING MANAGEMENT CO.,LTD"}},{"key":"CONT_AWD_W912PF24PV002_9700_-NONE-_-NONE-","piid":"W912PF24PV002","award_date":"2023-12-31","description":"CONSOLIDATED
+        QUARTERLY (1QFY24) REPORTING OF GPC PURCHASES ABOVE THE MPT MADE IN USD.","total_contract_value":126244.26,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W912PF24PV001_9700_-NONE-_-NONE-","piid":"W912PF24PV001","award_date":"2023-12-31","description":"CONSOLIDATED
+        QUARTERLY (1QFY24) REPORTING OF GPC PURCHASES ABOVE THE MPT MADE IN EUR.","total_contract_value":232440.24,"recipient":{"display_name":"GPC
+        FOREIGN CONTRACTOR CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W9113M24F0005_9700_W52P1J16D0019_9700","piid":"W9113M24F0005","award_date":"2023-12-31","description":"RENEWAL
+        FY24 NUTANIX LICENSE","total_contract_value":520635.33,"recipient":{"display_name":"GOVERNMENT
+        ACQUISITIONS INC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c19d9251e27-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=TAISzhKyLbhmdGYWwjQiYlqmze%2FIbUv5vHCWLeUt01ztkHcH4AgWCHAB5Ay4D8P70%2B32qDAR0Js1cV%2FsZsiTDPA5Y8Jh15T6WwXna0fJJ0UJNOJ6on4BJLUa8Q%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1792'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998686'
+      x-ratelimit-daily-reset:
+      - '91'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+version: 1

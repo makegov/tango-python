@@ -1,0 +1,368 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/notices/?page=1&limit=5&shape=notice_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cposted_date%2Cnaics_code%2Cset_aside%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29
+  response:
+    body:
+      string: "{\"count\":7975196,\"next\":\"http://tango.makegov.com/api/notices/?limit=5&page=2&shape=notice_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cposted_date%2Cnaics_code%2Cset_aside%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29\",\"previous\":null,\"results\":[{\"notice_id\":\"d5e7d516-698c-4b08-9d2d-f245e36627d6\",\"title\":\"Crawford
+        Modular Bunkhouse, Boise National Forest\",\"description\":\"<p><strong>Amendment
+        #2 is to remove any mention of Demolition work from the SOW.&nbsp;<br />\\nNO
+        demolition work will need to be completed. &nbsp;<br />\\nAlso remove from
+        the submittal table 013000-1.</strong></p>\\n\\n<p></p>\\n\\n<p>Amendment
+        #1 is to attached revised Crawford Plans. The last two sheets regarding the
+        mechanical economizer system are completely struck from the plans (they are
+        redundant and added to the final submitted plans), and the required roof pitch
+        shown on Sheet 8, A2.01 were adjusted from a 4/12 pitch to a 2.5/12 pitch.
+        Where visible on the revised plans, the plans have been clouded around to
+        help make the changes more apparent.</p>\\n\\n<p></p>\\n\\n<p>SOLICITATION
+        POSTING</p>\\n\",\"solicitation_number\":\"1240LT23R0034\",\"posted_date\":null,\"naics_code\":\"236220\",\"set_aside\":null,\"office\":null,\"place_of_performance\":{\"street_address\":null,\"state\":\"Idaho\",\"city\":\"Cascade\",\"zip\":\"83611\",\"country\":\"UNITED
+        STATES\"}},{\"notice_id\":\"d5e94509-01a7-4e85-9308-274c30d6ba4e\",\"title\":\"6835--Medical
+        Air/Gas and Cylinder Rental\",\"description\":\"Medical Oxygen/Gas and Cylinder
+        Rental\\n\",\"solicitation_number\":\"36C24623Q0127\",\"posted_date\":null,\"naics_code\":\"325120\",\"set_aside\":null,\"office\":null,\"place_of_performance\":{\"street_address\":null,\"state\":null,\"city\":null,\"zip\":null,\"country\":null}},{\"notice_id\":\"6642f6ba-caa4-4cb3-b2ba-3cd9dab3eeaa\",\"title\":\"Z--GAOA
+        - EMDDO ROADS AND REC SITE REPAIRS\",\"description\":\"The Department of Interior,
+        Bureau of Land Management (BLM), Montana State Office intends is soliciting
+        SEALED BIDS for construction activities associated with the repair of roads
+        and parking areas at various BLM recreation sites across the eastern half
+        of Montana.  These sites include Howrey Island, Matthews, Strawberry Hills,
+        Moorhead, and Short Pines OHV. <br/>     *  Howrey Island Recreation Area
+        is located along the Yellowstone River, six miles southwest of Hysham, just
+        off Highway 311. (Treasure County) <br/>     *  Matthews Recreation Area is
+        located about nine miles northeast of Miles City on the south side of the
+        Yellowstone River on Valley Drive East.  (Custer County)<br/>     *  Strawberry
+        Hill Recreation Area is located approximately 5 1/2 Miles east of interstate
+        94 exit 141.  (Custer County)<br/>     *  Moorehead Recreation Area can be
+        accessed from Broadus, take Moorhead Road southwest about thirty miles. Moorhead
+        campground is located four miles north of the Montana-Wyoming border in Powder
+        River County.<br/>     *  Glendive Short Pines Open OHV Area is located approximately
+        6 1/2 miles south of Glendive on road #335.  (Dawson County)<br/><br/>BLM
+        issued Solicitation Number 140L3625B0002 via https://sam.gov/content/opportunities,
+        at the link provided in this notice.  The principal components of the work
+        to be performed include, but are not limited to:<br/><br/>     *  Re-establish
+        road typical section, grade, shape and compact parking areas at BLM recreation
+        sites across the eastern half of Montana.<br/>     *  Provide adequate soil
+        moisture through the application of water to ensure uniform moisture content
+        and to ensure that the precent relative compaction can be achieved.<br/>     *
+        \ Furnish, spread, and compact Crushed Aggregate Surfacing Course as awarded
+        and directed by the Contracting Officer's Representative.<br/>     *  Grade
+        head cut areas and place rip rap as shown in plans to prevent further cutting.<br/><br/>Pursuant
+        to Part 14 and Part 36 of the Federal Acquisition Regulations, BLM issued
+        an Invitation for Bids (IFB) on April 23, 2025.  The estimated price range
+        of this acquisition is between $250,000 and $500,000.  BLM issued the IFB
+        under the total small business set-aside program.  The applicable North American
+        Industry Classification System (NAICS) Code is 237310 and the associated Small
+        Business Size Standard is $45.0 Million.<br/><br/>Amendment 1 was issued on
+        May 21, 2025.  This amendment provides informational copies of the Site Visit
+        Attendance List and Questions/Answers received as related to this project.
+        \ Additionally, this amendment extends the Public Bid Opening by one day to
+        Friday, May 23, 2025 at 2:00 pm.<br/><br/>The Government strongly urges offerors
+        to inspect the sites to gain a better understanding of the work requirements
+        and to satisfy themselves regarding all general and local conditions that
+        may affect the cost of performance.  In no event shall failure to inspect
+        the site constitute grounds for a claim after award.  An organized site visit
+        is currently planned for Tuesday, May 13, 2025, at 10:00 am local time.  Due
+        to the extreme distance between sites, BLM will follow these agenda topics
+        for the site visit:<br/>     *  Meet at BLM's Eastern Montana/Dakotas District,
+        Miles City Field Office, 111 Garryowen Road, Miles City, MT 59301.<br/>     *
+        \ Go Over technical documents and answer questions.<br/>     *  Conduct site
+        tour at Matthews Recreation Site.<br/>     *  Conduct site tour at Strawberry
+        Hills Recreation Site. <br/>     *  Answer additional questions regarding
+        similar work to be done at each site.  All sites are open to the public and
+        can be visited by interested contractors at their convenience.<br/><br/>The
+        organized site visit attendance list and Questions/Answers will then be added
+        to the solicitation package via an amendment.  Interested vendors can reference
+        Section L, Provision 52.236-27 \xBF Alternate I for the detailed information
+        for the site visit.<br/><br/>A single contract award will be made to the responsible
+        offeror that submits the lowest priced, responsive bid in accordance with
+        the Federal Acquisition Regulations.  A firm-fixed priced contract is contemplated.
+        \ Sealed bids will be due on Tuesday, May 22, 2025, at BLM's Eastern Montana/Dakotas
+        District, Miles City Field Office, 111 Garryowen Road, Miles City, MT 59301.<br/><br/>The
+        successful contractor will be required to commence work within 10 calendar
+        days after the date the Contractor receives the notice to proceed and complete
+        the entire work ready for use no later than October 31, 2025 (hard completion
+        date).  The time stated for completion shall include final cleanup of the
+        premises.<br/><br/>For further information about the requirement, offerors
+        should contact Christine Mundt at cmundt@blm.gov or at (406) 896-5030.\",\"solicitation_number\":\"140L3625B0002\",\"posted_date\":null,\"naics_code\":\"237310\",\"set_aside\":null,\"office\":null,\"place_of_performance\":{\"street_address\":null,\"state\":null,\"city\":null,\"zip\":null,\"country\":null}},{\"notice_id\":\"23f87f32-a95f-4d63-a750-229784139aa3\",\"title\":\"Maintenance
+        Dredging of the Maurice River, NJ\",\"description\":\"<p><strong>W912BU25BA005
+        Synopsis:</strong></p>\\n\\n<p><strong>Requirement:</strong>&nbsp;</p>\\n\\n<p>The
+        U.S. Army Corps of Engineer (USACE), Philadelphia District (NAP), anticipates
+        a requirement for Maintenance Dredging of the Maurice River, NJ. The estimated
+        magnitude of this project is between $1,000,000 and $5,000,000.</p>\\n\\n<p><strong><u>This
+        is a Pre-solicitation Notice.</u>&nbsp;</strong>This Notice is being issued
+        for planning and information purposes only. This notice is not a Solicitation,
+        nor is it to be construed as a commitment by the Government. The Government
+        will not pay for any effort expended in responding to this notice, nor will
+        the Government accept proposals as a result of this notice.&nbsp;</p>\\n\\n<p><strong>**
+        Solicitation W912BU25BA005 is expected to be released on or about 11 June
+        2025.&nbsp;</strong></p>\\n\\n<p><strong>PROJECT DESCRIPTION:&nbsp;</strong>Contract
+        work will consist of Maintenance Dredging of the Maurice River federal channel
+        from Station 0+500 to 10+000: (a) Dredging will be required to clear shoaling
+        of approximately 50,000 cubic yards and to maintain safe navigable depths
+        to 8 ft MLLW plus 1-ft overdepth; (b) placement involving beneficial use and
+        marsh restoration alternatives will be utilized on two 9-acre plots in the
+        Heislerville State Wildlife Management Area. Dredging will be by hydraulic
+        pipeline dredge. Containment measures may include turbidity curtains, coir
+        logs and/or hay bales at the two placement sites. Dredging and placement is
+        prohibited from 1 March to 15 September due to environmental restrictions.
+        The period of performance is 240 calendar days from NTP but dredging and placement
+        must not occur during restricted period.&nbsp;</p>\\n\\n<p><strong>DISCLOSURE
+        OF MAGNITUDE OF THE CONSTRUCTION PROJECT:</strong>&nbsp;The estimated price
+        range is between $1,000,000 and $5,000,000.&nbsp;</p>\\n\\n<p><strong>NAICS
+        CODE AND SBA SIZE STANDARD:</strong>&nbsp;237990 &ndash; Other Heavy and Civil
+        Engineering Construction; $45,000,000.</p>\\n\\n<p><strong>TYPE OF SET-ASIDE:</strong>&nbsp;Total
+        Small Business set-aside.</p>\\n\\n<p><strong>ADDITIONAL INFORMATION:&nbsp;</strong>Specific
+        information pertaining to this procurement will be available in the Solicitation.
+        The Solicitation documents will be posted on the SAM.gov website. It is, and
+        will continue to be, the responsibility of all potential Offerors to monitor
+        the SAM.gov website for any amendments, updates, responses to industry questions/comments,
+        etc. The Government will not be maintaining a mailing list.</p>\\n\\n<p><strong>POINT-OF-CONTACT:&nbsp;</strong>The
+        Primary Contract Specialist for this Solicitation is Molly Gallagher, email:
+        molly.gallagher@usace.army.mil. Any communication regarding this notice should
+        be made in writing sent via email and must identify the Solicitation number,
+        company name, address, phone number and point of contact.&nbsp;</p>\\n\",\"solicitation_number\":\"W912BU25BA005\",\"posted_date\":null,\"naics_code\":\"237990\",\"set_aside\":null,\"office\":null,\"place_of_performance\":{\"street_address\":null,\"state\":null,\"city\":null,\"zip\":null,\"country\":null}},{\"notice_id\":\"44b721db-c64a-49d8-84c7-43aa160625db\",\"title\":\"Hazardous
+        Waste Disposal San Diego\",\"description\":\"<p>30JAN2025 -&nbsp;This update
+        is being published for the below two reasons:</p>\\n\\n<p>1. &nbsp;CLIN RE10ME
+        has been removed from the price schedule; and the description of CLIN RE11ME
+        has been corrected to read &quot;1 EA of RE11ME equals 1 drum.&quot;&nbsp;
+        Row 282 has been removed from the spreadsheet to delete RE10ME.&nbsp; Consequently,
+        another version of Attachment 1, &#39;Attachment 1 - Price ScheduleV5.xlsx&#39;
+        has been uploaded. &#39;Attachment 1 - Price ScheduleV4.xlsx&#39; has been
+        removed. &nbsp;Offerors must complete V5 and submit it with their Volume I.
+        &nbsp;</p>\\n\\n<p></p>\\n\\n<p>2. To extend the solicitation deadline to
+        1800EST on Monday, 03FEB2025.&nbsp;</p>\\n\\n<p>***</p>\\n\\n<p>17JAN2025
+        -&nbsp;This update is being published for the below three reasons:</p>\\n\\n<p>1.
+        To answer two bidder questions.</p>\\n\\n<p>Q1: (1) Re: Volume III Small Business
+        Participation Plan &ndash; If we commit to making a genuine good faith effort
+        to achieve all of the subcontracting commitments listed in our Plan, but choose
+        to label them as &ldquo;non-enforceable,&rdquo; as opposed to &ldquo;enforceable,&rdquo;
+        will this negatively impact how our proposal is evaluated? (2) If we label
+        some or all of the commitments as enforceable, but fail to achieve the set
+        targets, what will the consequences be? &nbsp;Please clarify.<br />\\nA1:
+        (1) A &ldquo;non-enforceable&rdquo; subcontracting commitment will not negatively
+        impact how a proposal is evaluated. &nbsp;However, an &ldquo;enforceable&rdquo;
+        subcontracting commitment will positively impact how a proposal is evaluated.
+        &nbsp;As noted in subparagraph 3 of the Small Business Participation evaluation
+        provision (see Attachment 7, p. 8), the Small Business Participation Plan
+        will be evaluated in terms of the offeror&rsquo;s proposed subcontracting
+        participation, the extent of commitment to use the subcontractor(s) (enforceable
+        vs. non-enforceable commitments), and the offeror&rsquo;s established or planned
+        procedures for small business outreach and utilization. &nbsp; Thus, it would
+        be reasonable to expect that the Contracting Officer would rate proposals
+        showing a greater commitment to enforceable subcontracting participation more
+        highly than similar commitments or goals that were not considered enforceable.
+        &nbsp;(2) &ldquo;Enforceable&rdquo; subcontracting commitments will become
+        part of the terms and conditions of the contract; therefore, a breach of the
+        terms of the contract may impact administration of the contract, including
+        the documentation of performance in CPARS and could play a role in decisions
+        regarding termination or option exercise. &nbsp;Additionally, firms that are
+        not small businesses and are required to file a subcontracting plan should
+        note the requirement to annually document how they performed compared to their
+        plan via the Electronic Subcontract Reporting System (eSRS). &nbsp;As noted
+        in the Small Business Subcontracting Plan Submittal requirements (Attachment
+        7, p. 5) &nbsp;the Government will document performance accordingly.</p>\\n\\n<p>Q2:
+        Re: Volume III Small Business Participation Plan &ndash; Do subcontractors
+        have to be registered in Sam.Gov or be certified by any particular certifying
+        agency? Please clarify the eligibility requirements, if any.<br />\\nA2: Short
+        answer, no, they do not have to be registered. &nbsp;If you have the CAGE
+        of a subcontractor, please identify it. &nbsp;However, if the subcontractor
+        is not registered in SAM, the procedures from FAR 52.219-8(e)(1) may be used,
+        which say &quot;The Contractor may accept a subcontractor&#39;s written representations
+        of its size and socioeconomic status as a small business, small disadvantaged
+        business, veteran-owned small business, service-disabled veteran-owned small
+        business, or a women-owned small business if the subcontractor represents
+        that the size and socioeconomic status representations with its offer are
+        current, accurate, and complete as of the date of the offer for the subcontract.&quot;</p>\\n\\n<p><br
+        />\\n2. To upload the final version of Attachment 1, &#39;Attachment 1 - Price
+        ScheduleV4.xlsx&#39;. &#39;Attachment 1 - Price ScheduleV3.xlsx&#39; has been
+        removed to reduce the potential for confusion. &nbsp;<strong>Offerors must
+        complete V4 and submit it with their Volume I. </strong>&nbsp;For your awareness,
+        cells that have changed since the original are highlighted in yellow, and
+        the following three new CLINs were added to the schedule: &quot;LP06C2&quot;,
+        &quot;LP07C4&quot;, and &quot;1005SP, Defoaming Agent for pumping of AFFF
+        rinsates. 1 EA = (1) 5-gal pail.&quot; &nbsp;See section 2.4 a. of the updated
+        PWS for more details.</p>\\n\\n<p><br />\\n3. To upload a revised version
+        of Attachment 2, &#39;Attachment 2 - PWSv2.pdf&#39;. &nbsp;This revised version
+        has an update in section 2.4 a. for new CLIN 1005SP added to the Price Schedule.</p>\\n\\n<p>***</p>\\n\\n<p>10JAN2025
+        -&nbsp;This update is being published for the below three reasons:</p>\\n\\n<p>1.
+        To answer six bidder questions.</p>\\n\\n<p>Q1: The 12 month order history
+        shows very large volumes of supplies being purchased which is not represented
+        in the new volumes. &nbsp;Are supplies now being purchased under a separate
+        contract and this will be used as a backup?<br />\\nA1: No. This is the only
+        contract being used for supplies.</p>\\n\\n<p>Q2: There was a very large volume
+        of alkaline batteries shipped last year, well above the new 30-month anticipated
+        volume. &nbsp;Was there an event that caused the higher volume?<br />\\nA:
+        No event is known. &nbsp;A 30-month ordering history (not 12-month) from the
+        current contract was used for the estimated quantities on this new contract.</p>\\n\\n<p>Q3:
+        Volume I &ndash; In addition to the Minimum Content requested in Attachment
+        7, Page 2 (items a-h), do you also want information on our approach to performing
+        the project work?&nbsp;<br />\\nA3: No additional information is wanted. &nbsp;Only
+        the information requested will be evaluated. &nbsp;</p>\\n\\n<p>Q4: Volume
+        III &ndash; Small Business Participation Plan &ndash; Is the 5% participation
+        goal for Small Disadvantaged Businesses a required subcontracting obligation
+        or an aspirational target the awarded contractor is expected to make a good
+        faith effort to achieve?<br />\\nA4: &nbsp;It is a goal; it is not a required
+        subcontracting obligation. &nbsp;</p>\\n\\n<p>Q5: Do you want us to provide
+        fully burdened unit rates for all line items to include overhead, profit margin,
+        fuel and insurance costs, etc. (everything EXCEPT taxes)?&nbsp;<br />\\nA5:
+        Yes, we need the fully burdened price. &nbsp;This will be a firm-fixed-priced
+        contract, so the only prices paid to the contractor will be the prices on
+        the price schedule.</p>\\n\\n<p>Q6: Can you also provide the solicitation/contract
+        number that this service was provided under?<br />\\nA6: SP450020R0003 and
+        SP450020D0011.</p>\\n\\n<p><br />\\n2. To announce the intent to upload another
+        version of the price schedule.&nbsp; Sadly, a few more typos need to be corrrected.&nbsp;
+        Please be looking for that to be posted early next week. &nbsp;In addition,
+        more answers to questions received will be posted with that update.</p>\\n\\n<p><br
+        />\\n3. To extend the solicitation deadline to 1500EST on Friday, 31JAN2025.
+        &nbsp;This does not extend the cut-off date for the receipt of offeror questions,
+        which was fourteen days prior to the original proposal due date, which was
+        06JAN2025. &nbsp;Any new questions received may not receive an answer.&nbsp;</p>\\n\\n<p>***</p>\\n\\n<p>03JAN2025
+        - This update is being published for the below two reasons:</p>\\n\\n<p>1.
+        To answer the following bidder question:&nbsp; Who is the incumbent contractor?&nbsp;
+        ANSWER:&nbsp;&nbsp;Industrial Waste Utilization, Inc., Montclair, CA 91763.</p>\\n\\n<p>2.
+        To upload another corrected version of Attachment 1, &#39;Attachment 1 - Price
+        ScheduleV3.xlsx&#39;.&nbsp; &#39;Attachment 1 - Price ScheduleV2.xlsx&#39;
+        has been removed to reduce the potential for confusion.&nbsp; Offerors must
+        complete V3 and submit it with their Volume I.&nbsp; For your awareness, cells
+        that have changes since the original are highlighted in yellow.&nbsp; CLINs
+        1095-97SV were on the original price schedule twice, so their duplicates have
+        been removed in V3.&nbsp; Additionally, CLIN 1901SA has been removed and replaced
+        with CLIN 1905SA.</p>\\n\\n<p>***</p>\\n\\n<p>02JAN2025 - This update is being
+        published for the below two reasons:</p>\\n\\n<p>1. To upload a 12-month ordering
+        history report, &#39;Ordering History 25R04.xlsx&#39;.&nbsp; This spreadsheet
+        has two tabs - one for waste and one for services.</p>\\n\\n<p>2.&nbsp; To
+        upload a corrected version of Attachment 1, &#39;Attachment 1 - Price ScheduleV2.xlsx&#39;.&nbsp;
+        ***NOW REMOVED, SEE ABOVE.*** There were two typos in the original that have
+        been corrected as follows:&nbsp;&nbsp;cell C246 was changed from NR96C5 to
+        NR12C5 and cell C151 was changed from FL07C34 to FL07C4.</p>\\n\\n<p>***</p>\\n\\n<p>SPECIAL
+        NOTE:&nbsp; There is only one pdf document attached to this opportunity.&nbsp;
+        SP450025R0004.pdf has nine additional attachments embedded within that one
+        document.&nbsp; If you are using a web browser, Mozilla Firefox may show the
+        attachments within the web browser, Chrome may not show the attachments within
+        the web browser.&nbsp; If you are using an Adobe App, you may need to look
+        for the paperclip looking icon to view the attachments.&nbsp;&nbsp;</p>\\n\\n<p>***</p>\\n\\n<p>Combined
+        Synopsis/Solicitation SP450025R0004 has been prepared in accordance with the
+        procedures in FAR 12.603.&nbsp; The scope of work requires services to remove,
+        transport, recycle, and dispose of hazardous waste located in and around San
+        Diego, California.&nbsp; The following additional information is provided
+        in accordance with FAR 12.603(c)(2).&nbsp;</p>\\n\\n<p></p>\\n\\n<p>(i) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        This is a combined synopsis/solicitation for commercial items prepared in
+        accordance with the format in Subpart 12.6, as supplemented with additional
+        information included in this notice.&nbsp; This announcement constitutes the
+        only solicitation; proposals are being requested and a written solicitation
+        will not be issued.</p>\\n\\n<p>(ii) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Solicitation SP450025R0004 is issued as a request for proposal (RFP).</p>\\n\\n<p>(iii)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This solicitation document
+        and incorporated provisions and clauses are those in effect through Federal
+        Acquisition Circular 2025-01 Effective November 12, 2024.</p>\\n\\n<p>(iv)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This acquisition is being
+        issued as a full and open procurement; the associated NAICS code is 562211;
+        the small business size standard is $47M.</p>\\n\\n<p>(v) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        See Attachment 1 for the Price Schedule.&nbsp;</p>\\n\\n<p>(vi) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        See Attachment 2 for the Performance Work Statement (PWS) and a description
+        of the requirement.</p>\\n\\n<p>(vii) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        The contract is <em>anticipated</em> to have a 30-month base period from March
+        2025 to September 2027 and a 30-month option period.&nbsp; See Attachment
+        3 for a list of pickup locations.</p>\\n\\n<p>(viii) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        The provision at FAR 52.212-1, Instructions to Offerors -- Commercial, applies
+        to this acquisition.&nbsp; See Attachment 7 for addenda to the provision.</p>\\n\\n<p>(ix)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The provision at 52.212-2,
+        Evaluation -- Commercial Items, applies to this acquisition.&nbsp; See Attachment
+        7 for addenda to the provision.</p>\\n\\n<p>(x) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Offerors are advised to include a completed copy of the provision at FAR 52.212-3,
+        Offeror Representations and Certifications -- Commercial Items, Alternate
+        I, with your offer. &nbsp;</p>\\n\\n<p>(xi) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        The clause at 52.212-4, Contract Terms and Conditions -- Commercial Items,
+        applies to this acquisition.&nbsp;</p>\\n\\n<p>(xii) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        The clause at 52.212-5, Contract Terms and Conditions Required to Implement
+        Statutes or Executive Orders -- Commercial Items, applies to this acquisition.&nbsp;
+        See Attachment 7 for 52.212-5 clauses applicable to this acquisition.</p>\\n\\n<p>(xiii)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; See Attachment 7 for additional clauses,
+        contract terms and conditions.</p>\\n\\n<p>(xiv) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        The Defense Priorities and Allocations System (DPAS) is not applicable.</p>\\n\\n<p>(xv)
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Proposals&nbsp;are&nbsp;due&nbsp;by&nbsp;1830
+        EST&nbsp;on January 20, 2025.&nbsp; Proposals shall be emailed to <u>andrea.tichenor@dla.mil</u>
+        and hazardouscontractswest@dla.mil.&nbsp;</p>\\n\\n<p>(xvi) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Offerors must submit all questions regarding this solicitation in writing
+        via email to Andrea Tichenor at andrea.tichenor@dla.mil.&nbsp; The cut-off
+        date for the receipt of offeror questions is 06JAN2025.&nbsp; Questions received
+        after that time may not receive an answer.&nbsp;</p>\\n\\n<p></p>\\n\\n<p>*SP450025R0004
+        ATTACHMENTS:</p>\\n\\n<p>ATTACHMENT 1 - Price Schedule</p>\\n\\n<p>ATTACHMENT
+        2 - Performance Work Statement (PWS)</p>\\n\\n<p>ATTACHMENT 3 - Pickup Locations</p>\\n\\n<p>ATTACHMENT
+        4 - KTR Work Surveillance Checklist Placement or Removal Empty ROB or Vac
+        Box</p>\\n\\n<p>ATTACHMENT 5 - KTR Work Surveillance Checklist ICS</p>\\n\\n<p>ATTACHMENT
+        6 - DLA Form 2505</p>\\n\\n<p>ATTACHMENT 7 - Addenda to FAR 52.212-1 &amp;
+        52.212-2, Additional Contract Terms &amp; Conditions</p>\\n\\n<p>ATTACHMENT
+        8 - Past Performance Information (PPI) Questionnaire</p>\\n\\n<p>ATTACHMENT
+        9 - Provision Fill-ins</p>\\n\\n<p>OTHER DOCUMENT CONTAINED WITHIN THE CONTRACT:
+        Department of Labor Wage Determination (1996-0223) Revision 63, dated 07/22/2024,
+        https://sam.gov/wage-determination/1996-0223/63.</p>\\n\",\"solicitation_number\":\"SP450025R0004\",\"posted_date\":null,\"naics_code\":\"562211\",\"set_aside\":null,\"office\":null,\"place_of_performance\":{\"street_address\":null,\"state\":null,\"city\":null,\"zip\":null,\"country\":null}}]}"
+    headers:
+      CF-RAY:
+      - 99f88c6b38c3ad02-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:07 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JVn1NvQJqNebWLowD6oCOpsryJmsR28O%2BRvDhGowHgx2FgbwT%2BkkCqrFbZXMyYsklsp3ihCMDXXNMNOVqEMm2w2a4%2FdUD0OnTayZpMbteEVQbQIN4%2FzwEecR5A%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '24469'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.030s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '968'
+      x-ratelimit-burst-reset:
+      - '45'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998661'
+      x-ratelimit-daily-reset:
+      - '78'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '968'
+      x-ratelimit-reset:
+      - '45'
+    status:
+      code: 200
+      message: OK
+version: 1

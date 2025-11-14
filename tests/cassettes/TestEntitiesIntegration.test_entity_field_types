@@ -1,0 +1,228 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=25&shape=uei%2Clegal_business_name%2Cdba_name%2Ccage_code%2Cbusiness_types%2Cprimary_naics%2Cnaics_codes%2Cpsc_codes%2Cemail_address%2Centity_url%2Cdescription%2Ccapabilities%2Ckeywords%2Cphysical_address%2Cmailing_address%2Cfederal_obligations%2Ccongressional_district
+  response:
+    body:
+      string: "{\"count\":1700013,\"next\":\"http://tango.makegov.com/api/entities/?limit=25&page=2&shape=uei%2Clegal_business_name%2Cdba_name%2Ccage_code%2Cbusiness_types%2Cprimary_naics%2Cnaics_codes%2Cpsc_codes%2Cemail_address%2Centity_url%2Cdescription%2Ccapabilities%2Ckeywords%2Cphysical_address%2Cmailing_address%2Cfederal_obligations%2Ccongressional_district\",\"previous\":null,\"results\":[{\"uei\":\"QTY8TUJGMM34\",\"legal_business_name\":\"
+        ALLIANCE PRO GLOBAL LLC\",\"dba_name\":\"\",\"cage_code\":\"16CA8\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"JS\",\"description\":\"Small Business Joint
+        Venture\"},{\"code\":\"JV\",\"description\":\"JV Service-Disabled Veteran-Owned
+        Business Joint Venture\"},{\"code\":\"QF\",\"description\":\"Service Disabled
+        Veteran Owned Business\"}],\"primary_naics\":\"541611\",\"naics_codes\":[{\"code\":\"518210\",\"sba_small_business\":\"Y\"},{\"code\":\"541199\",\"sba_small_business\":\"Y\"},{\"code\":\"541219\",\"sba_small_business\":\"Y\"},{\"code\":\"541511\",\"sba_small_business\":\"Y\"},{\"code\":\"541512\",\"sba_small_business\":\"Y\"},{\"code\":\"541513\",\"sba_small_business\":\"Y\"},{\"code\":\"541519\",\"sba_small_business\":\"E\"},{\"code\":\"541611\",\"sba_small_business\":\"Y\"},{\"code\":\"541612\",\"sba_small_business\":\"Y\"},{\"code\":\"541613\",\"sba_small_business\":\"Y\"},{\"code\":\"541614\",\"sba_small_business\":\"Y\"},{\"code\":\"541618\",\"sba_small_business\":\"Y\"},{\"code\":\"541690\",\"sba_small_business\":\"Y\"},{\"code\":\"541820\",\"sba_small_business\":\"Y\"},{\"code\":\"541930\",\"sba_small_business\":\"Y\"},{\"code\":\"541990\",\"sba_small_business\":\"Y\"},{\"code\":\"561110\",\"sba_small_business\":\"Y\"},{\"code\":\"561210\",\"sba_small_business\":\"Y\"},{\"code\":\"561320\",\"sba_small_business\":\"Y\"},{\"code\":\"561499\",\"sba_small_business\":\"Y\"},{\"code\":\"561720\",\"sba_small_business\":\"Y\"},{\"code\":\"561990\",\"sba_small_business\":\"Y\"},{\"code\":\"562998\",\"sba_small_business\":\"Y\"},{\"code\":\"611710\",\"sba_small_business\":\"Y\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Owings
+        Mills\",\"zip_code\":\"21117\",\"country_code\":\"USA\",\"address_line1\":\"11240
+        Reisterstown Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1965\",\"state_or_province_code\":\"MD\"},\"mailing_address\":{\"city\":\"Owings
+        Mills\",\"zip_code\":\"21117\",\"country_code\":\"USA\",\"address_line1\":\"11240
+        Reisterstown Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1965\",\"state_or_province_code\":\"MD\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"02\"},{\"uei\":\"SS2CYQC6PLR6\",\"legal_business_name\":\"
+        AMBER RYAN\",\"dba_name\":\"Ryan Local Business Concierge\",\"cage_code\":\"16L33\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"G9\",\"description\":\"Other Than One of the
+        Proceeding\"}],\"primary_naics\":\"561110\",\"naics_codes\":[{\"code\":\"561110\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"AF34\",\"B550\"],\"email_address\":null,\"entity_url\":\"https://www.localbusinessconcierge.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Salinas\",\"zip_code\":\"93908\",\"country_code\":\"USA\",\"address_line1\":\"22160
+        Berry Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"8728\",\"state_or_province_code\":\"CA\"},\"mailing_address\":{\"city\":\"Salinas\",\"zip_code\":\"93908\",\"country_code\":\"USA\",\"address_line1\":\"22160
+        Berry Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"8728\",\"state_or_province_code\":\"CA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"19\"},{\"uei\":\"QE4VZK8QZSV3\",\"legal_business_name\":\"
+        Accreditation Board of America, LLC\",\"dba_name\":\"ABA\",\"cage_code\":\"86HD7\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"FR\",\"description\":\"Asian-Pacific American
+        Owned\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"primary_naics\":\"541990\",\"naics_codes\":[{\"code\":\"541990\",\"sba_small_business\":\"Y\"},{\"code\":\"611430\",\"sba_small_business\":\"Y\"},{\"code\":\"813910\",\"sba_small_business\":\"Y\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://www.abofamerica.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Sterling\",\"zip_code\":\"20165\",\"country_code\":\"USA\",\"address_line1\":\"26
+        Dorrell Ct\",\"address_line2\":\"\",\"zip_code_plus4\":\"5713\",\"state_or_province_code\":\"VA\"},\"mailing_address\":{\"city\":\"HERNDON\",\"zip_code\":\"20171\",\"country_code\":\"USA\",\"address_line1\":\"13800
+        COPPERMINE RD\",\"address_line2\":\"\",\"zip_code_plus4\":\"6163\",\"state_or_province_code\":\"VA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"10\"},{\"uei\":\"FTK1UZGCZP39\",\"legal_business_name\":\"
+        Arthur V. Mauro Institute for Peace and Justice at St. Paul\u2019s College
+        Inc.\",\"dba_name\":\"\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"1R\",\"description\":\"Private
+        University or College\"},{\"code\":\"A8\",\"description\":\"Non-Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"M8\",\"description\":\"Educational Institution\"}],\"primary_naics\":null,\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://umanitoba.ca/st-pauls-college/mauro-institute-peace-justice\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Winnipeg\",\"zip_code\":\"R3T
+        2M6\",\"country_code\":\"CAN\",\"address_line1\":\"70 Dysart Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MB\"},\"mailing_address\":{\"city\":\"Winnipeg\",\"zip_code\":\"R3T
+        2M6\",\"country_code\":\"CAN\",\"address_line1\":\"c/o St. Paul's College\",\"address_line2\":\"70
+        Dysart Road, Room 252\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MB\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"\"},{\"uei\":\"X9E4EJ6SLCS5\",\"legal_business_name\":\"
+        BETHLEHEM BAPTIST CHURCH GASTONIA, NORTH CAROLINA\",\"dba_name\":\"CITY CHURCH\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"A8\",\"description\":\"Non-Profit
+        Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"primary_naics\":\"\",\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://citync.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"GASTONIA\",\"zip_code\":\"28056\",\"country_code\":\"USA\",\"address_line1\":\"3100
+        CITY CHURCH ST BLDG B\",\"address_line2\":\"\",\"zip_code_plus4\":\"0045\",\"state_or_province_code\":\"NC\"},\"mailing_address\":{\"city\":\"Gastonia\",\"zip_code\":\"28055\",\"country_code\":\"USA\",\"address_line1\":\"P.O.
+        Box 551387\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"NC\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"14\"},{\"uei\":\"VTQDBML6HG18\",\"legal_business_name\":\"
+        Bahareh Khiabani\",\"dba_name\":\"1080STUDIO\",\"cage_code\":\"15G41\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"primary_naics\":\"541310\",\"naics_codes\":[{\"code\":\"541310\",\"sba_small_business\":\"Y\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://www.1080studio.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Berkeley\",\"zip_code\":\"94710\",\"country_code\":\"USA\",\"address_line1\":\"1080
+        Delaware St Unit 415\",\"address_line2\":\"\",\"zip_code_plus4\":\"2183\",\"state_or_province_code\":\"CA\"},\"mailing_address\":{\"city\":\"Berkeley\",\"zip_code\":\"94710\",\"country_code\":\"USA\",\"address_line1\":\"1080
+        Delaware St Unit 415\",\"address_line2\":\"\",\"zip_code_plus4\":\"2183\",\"state_or_province_code\":\"CA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"12\"},{\"uei\":\"ZYEQK6YZRVR6\",\"legal_business_name\":\"
+        Clyde Joseph Enterprises, LLC\",\"dba_name\":\"Blastco\",\"cage_code\":\"16B28\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"primary_naics\":\"332812\",\"naics_codes\":[{\"code\":\"332811\",\"sba_small_business\":\"Y\"},{\"code\":\"332812\",\"sba_small_business\":\"Y\"},{\"code\":\"332813\",\"sba_small_business\":\"Y\"},{\"code\":\"333992\",\"sba_small_business\":\"Y\"},{\"code\":\"811310\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"4940\",\"J010\",\"J012\",\"J015\",\"J016\",\"J017\",\"J019\",\"J020\",\"J022\",\"J023\",\"J024\",\"J025\",\"J026\",\"J031\",\"J034\",\"J035\",\"J036\",\"J037\",\"J038\",\"J041\",\"J042\",\"J043\",\"J044\",\"J045\",\"J046\",\"J047\",\"J048\",\"J049\",\"J053\",\"J054\",\"J056\",\"J059\",\"J061\",\"J066\",\"J071\",\"J072\",\"J073\",\"J080\",\"J081\",\"J093\",\"J094\",\"J095\",\"K038\",\"K049\",\"L049\"],\"email_address\":null,\"entity_url\":\"https://www.blastcoinc.com/\",\"description\":\"Contact:
+        DRAKE HILL\",\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Wentzville\",\"zip_code\":\"63385\",\"country_code\":\"USA\",\"address_line1\":\"131
+        Freymuth Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"3632\",\"state_or_province_code\":\"MO\"},\"mailing_address\":{\"city\":\"Wentzville\",\"zip_code\":\"63385\",\"country_code\":\"USA\",\"address_line1\":\"131
+        Freymuth Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"3632\",\"state_or_province_code\":\"MO\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"03\"},{\"uei\":\"SAYLQCANSYD4\",\"legal_business_name\":\"
+        Coil-Tran LLC\",\"dba_name\":\"Noratel US\",\"cage_code\":\"14FW3\",\"business_types\":[{\"code\":\"20\",\"description\":\"Foreign
+        Owned\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"MF\",\"description\":\"Manufacturer of Goods\"}],\"primary_naics\":\"335311\",\"naics_codes\":[{\"code\":\"334416\",\"sba_small_business\":\"N\"},{\"code\":\"335311\",\"sba_small_business\":\"N\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://www.noratel.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"HOBART\",\"zip_code\":\"46342\",\"country_code\":\"USA\",\"address_line1\":\"160
+        S ILLINOIS ST\",\"address_line2\":\"\",\"zip_code_plus4\":\"4512\",\"state_or_province_code\":\"IN\"},\"mailing_address\":{\"city\":\"HOBART\",\"zip_code\":\"46342\",\"country_code\":\"USA\",\"address_line1\":\"160
+        S ILLINOIS ST\",\"address_line2\":\"\",\"zip_code_plus4\":\"4512\",\"state_or_province_code\":\"IN\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"01\"},{\"uei\":\"N5YHPLQELFW5\",\"legal_business_name\":\"
+        Cuyuna Range Housing, Inc.\",\"dba_name\":\"\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"A8\",\"description\":\"Non-Profit
+        Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"primary_naics\":\"\",\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Ironton\",\"zip_code\":\"56455\",\"country_code\":\"USA\",\"address_line1\":\"500
+        8th Ave Ofc 214\",\"address_line2\":\"\",\"zip_code_plus4\":\"9701\",\"state_or_province_code\":\"MN\"},\"mailing_address\":{\"city\":\"Ironton\",\"zip_code\":\"56455\",\"country_code\":\"USA\",\"address_line1\":\"500
+        8th Ave Ofc 214\",\"address_line2\":\"\",\"zip_code_plus4\":\"9701\",\"state_or_province_code\":\"MN\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"08\"},{\"uei\":\"U6EUU7F4RAG4\",\"legal_business_name\":\"
+        DOE THE BARBER 23, LLC\",\"dba_name\":\"\",\"cage_code\":\"16D37\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran
+        Owned Business\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"},{\"code\":\"QF\",\"description\":\"Service
+        Disabled Veteran Owned Business\"}],\"primary_naics\":\"812111\",\"naics_codes\":[{\"code\":\"812111\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"8405\"],\"email_address\":null,\"entity_url\":\"https://doethebarber23.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Wichita\",\"zip_code\":\"67214\",\"country_code\":\"USA\",\"address_line1\":\"140
+        N Hillside St # 5\",\"address_line2\":\"\",\"zip_code_plus4\":\"4919\",\"state_or_province_code\":\"KS\"},\"mailing_address\":{\"city\":\"Wichita\",\"zip_code\":\"67214\",\"country_code\":\"USA\",\"address_line1\":\"140
+        N Hillside St # 5\",\"address_line2\":\"\",\"zip_code_plus4\":\"4919\",\"state_or_province_code\":\"KS\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"04\"},{\"uei\":\"L676QG9DC797\",\"legal_business_name\":\"
+        Dayna Regina Terrell\",\"dba_name\":\"Law Office of Dayna R. Terrell\",\"cage_code\":\"14UB3\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"}],\"primary_naics\":\"541110\",\"naics_codes\":[{\"code\":\"541110\",\"sba_small_business\":\"Y\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":null,\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Youngstown\",\"zip_code\":\"44511\",\"country_code\":\"USA\",\"address_line1\":\"933
+        Ottawa Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"1418\",\"state_or_province_code\":\"OH\"},\"mailing_address\":{\"city\":\"Youngstown\",\"zip_code\":\"44511\",\"country_code\":\"USA\",\"address_line1\":\"933
+        Ottawa Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"1418\",\"state_or_province_code\":\"OH\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"06\"},{\"uei\":\"FR59S9V8J4K5\",\"legal_business_name\":\"
+        EVANSVILLE VANDERBURGH PUBLIC LIBRARY\",\"dba_name\":\"\",\"cage_code\":\"6DYM5\",\"business_types\":[{\"code\":\"12\",\"description\":\"U.S.
+        Local Government\"},{\"code\":\"C7\",\"description\":\"County\"}],\"primary_naics\":null,\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://evpl.org/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Evansville\",\"zip_code\":\"47713\",\"country_code\":\"USA\",\"address_line1\":\"200
+        SE Martin Luther King Jr Blvd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1802\",\"state_or_province_code\":\"IN\"},\"mailing_address\":{\"city\":\"EVANSVILLE\",\"zip_code\":\"47713\",\"country_code\":\"USA\",\"address_line1\":\"200
+        SE MARTIN LUTHER KING JR BLVD\",\"address_line2\":\"\",\"zip_code_plus4\":\"1802\",\"state_or_province_code\":\"IN\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":1,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"08\"},{\"uei\":\"DJJSTLWX9BL1\",\"legal_business_name\":\"
+        FALCONWARE LLC\",\"dba_name\":\"\",\"cage_code\":\"14HC5\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"FR\",\"description\":\"Asian-Pacific American
+        Owned\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"primary_naics\":\"541511\",\"naics_codes\":[{\"code\":\"541511\",\"sba_small_business\":\"Y\"},{\"code\":\"541512\",\"sba_small_business\":\"Y\"},{\"code\":\"541690\",\"sba_small_business\":\"Y\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":null,\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Seattle\",\"zip_code\":\"98109\",\"country_code\":\"USA\",\"address_line1\":\"130
+        Boren Ave N Apt 607\",\"address_line2\":\"\",\"zip_code_plus4\":\"6309\",\"state_or_province_code\":\"WA\"},\"mailing_address\":{\"city\":\"Seattle\",\"zip_code\":\"98109\",\"country_code\":\"USA\",\"address_line1\":\"130
+        Boren Ave N Apt 607\",\"address_line2\":\"\",\"zip_code_plus4\":\"6309\",\"state_or_province_code\":\"WA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"07\"},{\"uei\":\"UMTSKVL7YM15\",\"legal_business_name\":\"
+        FIELDREADY SOLUTIONS GROUP, LLC\",\"dba_name\":\"\",\"cage_code\":\"14Q40\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"primary_naics\":\"423450\",\"naics_codes\":[{\"code\":\"339112\",\"sba_small_business\":\"Y\"},{\"code\":\"339113\",\"sba_small_business\":\"Y\"},{\"code\":\"423450\",\"sba_small_business\":\"Y\"},{\"code\":\"423490\",\"sba_small_business\":\"Y\"},{\"code\":\"423910\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"6510\",\"6515\",\"6530\",\"6532\",\"6540\",\"6545\"],\"email_address\":null,\"entity_url\":null,\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Bel
+        Air\",\"zip_code\":\"21014\",\"country_code\":\"USA\",\"address_line1\":\"612
+        Wendellwood Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"2832\",\"state_or_province_code\":\"MD\"},\"mailing_address\":{\"city\":\"Bel
+        Air\",\"zip_code\":\"21014\",\"country_code\":\"USA\",\"address_line1\":\"612
+        Wendellwood Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"2832\",\"state_or_province_code\":\"MD\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"01\"},{\"uei\":\"MBQMLN5JWEL4\",\"legal_business_name\":\"
+        Forstrom and Torgerson HS, L.L.C.\",\"dba_name\":\"\",\"cage_code\":\"5LCN9\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"primary_naics\":\"721110\",\"naics_codes\":[{\"code\":\"721110\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"V231\"],\"email_address\":null,\"entity_url\":\"https://www.hiltonshoreview.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Shoreview\",\"zip_code\":\"55126\",\"country_code\":\"USA\",\"address_line1\":\"1050
+        Gramsie Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"2949\",\"state_or_province_code\":\"MN\"},\"mailing_address\":{\"city\":\"Willmar\",\"zip_code\":\"56201\",\"country_code\":\"USA\",\"address_line1\":\"103
+        15TH AVE NW, #200\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MN\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":2,\"subawards_count\":0,\"awards_obligated\":21789.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"04\"},{\"uei\":\"J5XPMVA3TKN9\",\"legal_business_name\":\"
+        Gina A Gallegos\",\"dba_name\":\"A Plus Cleaning Services\",\"cage_code\":\"16E89\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"}],\"primary_naics\":\"561720\",\"naics_codes\":[{\"code\":\"561720\",\"sba_small_business\":\"Y\"},{\"code\":\"561740\",\"sba_small_business\":\"Y\"},{\"code\":\"561790\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"S201\",\"S214\",\"S222\",\"S299\"],\"email_address\":null,\"entity_url\":\"\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Albuquerque\",\"zip_code\":\"87110\",\"country_code\":\"USA\",\"address_line1\":\"3808
+        Candelaria Rd NE\",\"address_line2\":\"\",\"zip_code_plus4\":\"1662\",\"state_or_province_code\":\"NM\"},\"mailing_address\":{\"city\":\"Albuquerque\",\"zip_code\":\"87110\",\"country_code\":\"USA\",\"address_line1\":\"3808
+        Candelaria Rd NE\",\"address_line2\":\"\",\"zip_code_plus4\":\"1662\",\"state_or_province_code\":\"NM\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"01\"},{\"uei\":\"HDFVZNRP9G53\",\"legal_business_name\":\"
+        Governors Workforce Development Board\",\"dba_name\":\"\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"12\",\"description\":\"U.S.
+        Local Government\"}],\"primary_naics\":null,\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://viwdb.vi.gov/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Christiansted\",\"zip_code\":\"00820\",\"country_code\":\"USA\",\"address_line1\":\"4401
+        Sion Farm\",\"address_line2\":\"\",\"zip_code_plus4\":\"4245\",\"state_or_province_code\":\"VI\"},\"mailing_address\":{\"city\":\"Christiansted\",\"zip_code\":\"00820\",\"country_code\":\"USA\",\"address_line1\":\"4401
+        Sion Farm\",\"address_line2\":\"\",\"zip_code_plus4\":\"4245\",\"state_or_province_code\":\"VI\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"98\"},{\"uei\":\"RBDKYFGXG533\",\"legal_business_name\":\"
+        Inner Armor, LLC\",\"dba_name\":\"\",\"cage_code\":\"15GH4\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"primary_naics\":\"525120\",\"naics_codes\":[{\"code\":\"525120\",\"sba_small_business\":\"Y\"},{\"code\":\"541714\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"AN11\",\"Q519\"],\"email_address\":null,\"entity_url\":\"https://www.forgeinnerarmor.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"GRANDVILLE\",\"zip_code\":\"49418\",\"country_code\":\"USA\",\"address_line1\":\"3747
+        40TH ST SW\",\"address_line2\":\"\",\"zip_code_plus4\":\"3132\",\"state_or_province_code\":\"MI\"},\"mailing_address\":{\"city\":\"Holland\",\"zip_code\":\"49423\",\"country_code\":\"USA\",\"address_line1\":\"240
+        E 8th St.\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MI\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"02\"},{\"uei\":\"Z75YD1TKFNH1\",\"legal_business_name\":\"
+        JAYRON RATEN CLEMENTE\",\"dba_name\":\"Teufel Hunden Transport\",\"cage_code\":\"SSXS7\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"primary_naics\":\"485999\",\"naics_codes\":[{\"code\":\"485999\",\"sba_small_business\":\"N\"}],\"psc_codes\":null,\"email_address\":null,\"entity_url\":null,\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"ZARAGOZA\",\"zip_code\":\"\",\"country_code\":\"PHL\",\"address_line1\":\"430
+        MADRE PALLA 1ST DISTRICT, DEL PILAR\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"},\"mailing_address\":{\"city\":\"ZARAGOZA\",\"zip_code\":\"\",\"country_code\":\"PHL\",\"address_line1\":\"430
+        MADRE PALLA 1ST DISTRICT, DEL PILAR\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"\"},{\"uei\":\"WUEKW2WMK1G4\",\"legal_business_name\":\"
+        MAX BIROU PROIECTARE SRL\",\"dba_name\":\"\",\"cage_code\":\"1JLAL\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"primary_naics\":\"236210\",\"naics_codes\":[{\"code\":\"236116\",\"sba_small_business\":\"N\"},{\"code\":\"236210\",\"sba_small_business\":\"N\"},{\"code\":\"236220\",\"sba_small_business\":\"N\"},{\"code\":\"237130\",\"sba_small_business\":\"N\"},{\"code\":\"237990\",\"sba_small_business\":\"E\"},{\"code\":\"238910\",\"sba_small_business\":\"N\"}],\"psc_codes\":[\"C1AA\",\"C1AB\",\"C1BE\",\"C1CA\",\"C1FA\"],\"email_address\":null,\"entity_url\":\"https://www.maxprojekt.ro/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Iasi\",\"zip_code\":\"\",\"country_code\":\"ROU\",\"address_line1\":\"IASI
+        COUNTRY, IASI MUNICIPALITY, NO 16-18-20 MELODIEI STREET, BUILDING NO 1, 2
+        ND FLOOR, APT.10\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"},\"mailing_address\":{\"city\":\"Iasi\",\"zip_code\":\"\",\"country_code\":\"ROU\",\"address_line1\":\"IASI
+        COUNTRY, IASI MUNICIPALITY, NO 16-18-20 MELODIEI STREET, BUILDING NO 1, 2
+        ND FLOOR, APT.10\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"\"},{\"uei\":\"GU1BXWKZBTK8\",\"legal_business_name\":\"
+        NM Consulting LLC\",\"dba_name\":\"\",\"cage_code\":\"14UU1\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"},{\"code\":\"OY\",\"description\":\"Black
+        American Owned\"}],\"primary_naics\":\"541611\",\"naics_codes\":[{\"code\":\"541611\",\"sba_small_business\":\"Y\"},{\"code\":\"541612\",\"sba_small_business\":\"Y\"},{\"code\":\"541613\",\"sba_small_business\":\"Y\"},{\"code\":\"541618\",\"sba_small_business\":\"Y\"},{\"code\":\"541720\",\"sba_small_business\":\"Y\"},{\"code\":\"561110\",\"sba_small_business\":\"Y\"},{\"code\":\"561410\",\"sba_small_business\":\"Y\"},{\"code\":\"561499\",\"sba_small_business\":\"Y\"},{\"code\":\"611430\",\"sba_small_business\":\"Y\"},{\"code\":\"611710\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"R408\",\"R410\",\"R499\",\"R699\",\"R701\",\"R707\",\"R799\",\"U004\",\"U006\",\"U008\"],\"email_address\":null,\"entity_url\":\"https://www.nmcstrategies.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Omaha\",\"zip_code\":\"68112\",\"country_code\":\"USA\",\"address_line1\":\"3011
+        Whitmore St\",\"address_line2\":\"\",\"zip_code_plus4\":\"3149\",\"state_or_province_code\":\"NE\"},\"mailing_address\":{\"city\":\"Omaha\",\"zip_code\":\"68154\",\"country_code\":\"USA\",\"address_line1\":\"12020
+        Shamrock Plz, Ste 201\",\"address_line2\":\"PMB576371\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"NE\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"02\"},{\"uei\":\"W7VVRWFNCXJ7\",\"legal_business_name\":\"
+        OSPRE Solutions Inc.\",\"dba_name\":\"\",\"cage_code\":\"16L02\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"QF\",\"description\":\"Service Disabled Veteran
+        Owned Business\"}],\"primary_naics\":\"541512\",\"naics_codes\":[{\"code\":\"541512\",\"sba_small_business\":\"Y\"},{\"code\":\"541519\",\"sba_small_business\":\"E\"}],\"psc_codes\":[\"7A20\",\"DA10\"],\"email_address\":null,\"entity_url\":\"https://ospresolutions.org/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Sykesville\",\"zip_code\":\"21784\",\"country_code\":\"USA\",\"address_line1\":\"670
+        River Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"5503\",\"state_or_province_code\":\"MD\"},\"mailing_address\":{\"city\":\"Sykesville\",\"zip_code\":\"21784\",\"country_code\":\"USA\",\"address_line1\":\"670
+        River Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"5503\",\"state_or_province_code\":\"MD\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"03\"},{\"uei\":\"TLZFY6CQ9KK4\",\"legal_business_name\":\"
+        Ophthalmic Therapeutic Innovation LLC\",\"dba_name\":\"\",\"cage_code\":\"8RZ63\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman Owned Small
+        Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"primary_naics\":\"541714\",\"naics_codes\":[{\"code\":\"541713\",\"sba_small_business\":\"Y\"},{\"code\":\"541714\",\"sba_small_business\":\"Y\"}],\"psc_codes\":[\"6505\",\"Q511\"],\"email_address\":null,\"entity_url\":\"https://ophthalmic-innovation.com/\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"PEABODY\",\"zip_code\":\"01960\",\"country_code\":\"USA\",\"address_line1\":\"20
+        KEYES DR APT 10\",\"address_line2\":\"\",\"zip_code_plus4\":\"8024\",\"state_or_province_code\":\"MA\"},\"mailing_address\":{\"city\":\"Peabody
+        \",\"zip_code\":\"01960\",\"country_code\":\"USA\",\"address_line1\":\"20
+        Keyes Dr Apt 10\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"06\"},{\"uei\":\"YEVYSM49LK67\",\"legal_business_name\":\"
+        PK Oxford Square Limited Partnership\",\"dba_name\":\"\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"primary_naics\":\"\",\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Okemos\",\"zip_code\":\"48864\",\"country_code\":\"USA\",\"address_line1\":\"1784
+        Hamilton Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1811\",\"state_or_province_code\":\"MI\"},\"mailing_address\":{\"city\":\"Okemos\",\"zip_code\":\"48864\",\"country_code\":\"USA\",\"address_line1\":\"1784
+        Hamilton Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1811\",\"state_or_province_code\":\"MI\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"07\"},{\"uei\":\"LFCHPU28HMA5\",\"legal_business_name\":\"
+        RECLAMATION DISTRICT 2025\",\"dba_name\":\"\",\"cage_code\":\"6HQ97\",\"business_types\":[{\"code\":\"2F\",\"description\":\"U.S.
+        State Government\"}],\"primary_naics\":null,\"naics_codes\":null,\"psc_codes\":null,\"email_address\":null,\"entity_url\":\"https://hollandtract.org/holland_main/home\",\"description\":null,\"capabilities\":null,\"keywords\":null,\"physical_address\":{\"city\":\"Stockton\",\"zip_code\":\"95202\",\"country_code\":\"USA\",\"address_line1\":\"343
+        E Main St Ste 715\",\"address_line2\":\"\",\"zip_code_plus4\":\"2977\",\"state_or_province_code\":\"CA\"},\"mailing_address\":{\"city\":\"Stockton\",\"zip_code\":\"95202\",\"country_code\":\"USA\",\"address_line1\":\"343
+        E Main St Ste 715\",\"address_line2\":\"\",\"zip_code_plus4\":\"2977\",\"state_or_province_code\":\"CA\"},\"federal_obligations\":{\"total\":{\"idv_count\":0,\"awards_count\":0,\"subawards_count\":0,\"awards_obligated\":0.0,\"subawards_obligated\":0.0},\"active\":{\"idv_count\":0,\"awards_count\":0,\"awards_obligated\":0.0}},\"congressional_district\":\"09\"}]}"
+    headers:
+      CF-RAY:
+      - 99f88c756c9cad23-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:09 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=b2kO6Iwf6Gp9UGYBf8ShGtIRLep%2F7g7eLKTkz760QbU%2Bzw5oxQpcb5iDtgRd94TxZeAaZcbb%2FI5DlslENvMw%2FvZkL44XGlR%2FzY8Ua2beWYsS7WOmHlT10o%2Fiqw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '32823'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.055s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '960'
+      x-ratelimit-burst-reset:
+      - '44'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998653'
+      x-ratelimit-daily-reset:
+      - '76'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '960'
+      x-ratelimit-reset:
+      - '44'
+    status:
+      code: 200
+      message: OK
+version: 1

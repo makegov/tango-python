@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/business_types/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":78,"next":"http://tango.makegov.com/api/business_types/?limit=10&page=2","previous":null,"results":[{"name":"1862
+        Land Grant College","code":"G6"},{"name":"1890 Land Grant College","code":"G7"},{"name":"1994
+        Land Grant College","code":"G8"},{"name":"AbilityOne Non-Profit Agency","code":"A7"},{"name":"Airport
+        Authority","code":"TR"},{"name":"Alaskan Native Corporation Owned Firm","code":"05"},{"name":"Alaskan
+        Native Servicing Institution","code":"G3"},{"name":"American Indian Owned","code":"OW"},{"name":"Asian-Pacific
+        American Owned","code":"FR"},{"name":"Black American Owned","code":"OY"}]}'
+    headers:
+      CF-RAY:
+      - 99f88ca22d29ad17-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4xYKzbxhdurGdkpgrJ6Uywm8vMOjnNdWio5Y5hS7K7NtJ4ijaq0S%2FxVIipcFHofHFrOlgVXxRj1CJPQ%2B5bWD7%2FuPL3Ok2TmBkz6JirsusILCFdSDSuEwBIIqbg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '606'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.018s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '8'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '84'
+      x-ratelimit-daily-reset:
+      - '73213'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '8'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

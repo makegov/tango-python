@@ -1,0 +1,98 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/agencies/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":1496,"next":"http://tango.makegov.com/api/agencies/?limit=10&page=2","previous":null,"results":[{"code":"21EB","name":"1st
+        Personnel Command","abbreviation":"","department":{"name":"Department of Defense","code":97}},{"code":"21E2","name":"21st
+        Theater Army Area Command","abbreviation":"","department":{"name":"Department
+        of Defense","code":97}},{"code":"21EO","name":"59th Ordnance Brigade","abbreviation":"","department":{"name":"Department
+        of Defense","code":97}},{"code":"21EN","name":"7th Army Training Command","abbreviation":"","department":{"name":"Department
+        of Defense","code":97}},{"code":"21P8","name":"8th U.S. Army","abbreviation":"","department":{"name":"Department
+        of Defense","code":97}},{"code":"0938","name":"Abraham Lincoln Bicentennial
+        Commission","abbreviation":"ALBC","department":{"name":"Abraham Lincoln Bicentennial
+        Commission","code":289}},{"code":"9147","name":"Academic Improvement and Teacher
+        Quality Programs","abbreviation":"AITQ","department":{"name":"Department of
+        Education","code":91}},{"code":"9532","name":"Access Board","abbreviation":"USAB","department":{"name":"Access
+        Board","code":310}},{"code":"21AE","name":"Acquisition Executive Support Command
+        Agency","abbreviation":"","department":{"name":"Department of Defense","code":97}},{"code":"3621","name":"Actuarial
+        Analysis and Data Development Service","abbreviation":"","department":{"name":"Department
+        of Veterans Affairs","code":36}}]}'
+    headers:
+      Age:
+      - '962'
+      CF-RAY:
+      - 99f88c0fd8a4a22a-MSP
+      Cache-Control:
+      - max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=29%2FzmYVGPWUoxUAiX9%2BwP7Lab2WSYHUIyl8XgOF%2BdxdxldrCYATc9I9k9yko%2Bm5MDHkpoS6OMYDeGkezCurBAMCGQl8XjM4HXyC%2Fv6WYtQc5pSXM%2FFqLxRLGBQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1441'
+      cross-origin-opener-policy:
+      - same-origin
+      expires:
+      - Mon, 17 Nov 2025 16:44:51 GMT
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.009s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '10'
+      x-ratelimit-burst-reset:
+      - '0'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '86'
+      x-ratelimit-daily-reset:
+      - '73237'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '10'
+      x-ratelimit-reset:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

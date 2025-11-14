@@ -1,0 +1,81 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/business_types/?page=1&limit=5
+  response:
+    body:
+      string: '{"count":78,"next":"http://tango.makegov.com/api/business_types/?limit=5&page=2","previous":null,"results":[{"name":"1862
+        Land Grant College","code":"G6"},{"name":"1890 Land Grant College","code":"G7"},{"name":"1994
+        Land Grant College","code":"G8"},{"name":"AbilityOne Non-Profit Agency","code":"A7"},{"name":"Airport
+        Authority","code":"TR"}]}'
+    headers:
+      CF-RAY:
+      - 99f88ca0e902acee-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=PD0tKr4PP4uihP44ycd9GZw9Nl9bJQlOaHr0%2B30G8mK4eoNm3RZcERA9jL1y4Z8%2F7JFwyOEJhww%2BHlf7q5rjAJeEK5vrAP7JV7MgE1xusEaQQA9z56G9MG9tUw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '343'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.014s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '9'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '85'
+      x-ratelimit-daily-reset:
+      - '73213'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '9'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

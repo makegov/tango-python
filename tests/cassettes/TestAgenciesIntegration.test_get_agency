@@ -1,0 +1,85 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/agencies/4700/
+  response:
+    body:
+      string: '{"code":"4700","name":"General Services Administration","abbreviation":"GSA","department":{"name":"General
+        Services Administration","code":47}}'
+    headers:
+      Age:
+      - '962'
+      CF-RAY:
+      - 99f88c10fadea1c5-MSP
+      Cache-Control:
+      - max-age=86400
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:53 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mO7vhOOg6oeZRYvsMT7JOAtLlc23jY0g%2Fv8r9f581zD7bWlvQObVkPrKUh8r8hmkVrtXtudyMLwe0u%2BLO4dG9PBdOfT1nlVgCodcUAuoyj21xGBKaZRH93jY2g%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '143'
+      cross-origin-opener-policy:
+      - same-origin
+      expires:
+      - Mon, 17 Nov 2025 16:44:51 GMT
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.009s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '10'
+      x-ratelimit-burst-reset:
+      - '0'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '86'
+      x-ratelimit-daily-reset:
+      - '73237'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '10'
+      x-ratelimit-reset:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

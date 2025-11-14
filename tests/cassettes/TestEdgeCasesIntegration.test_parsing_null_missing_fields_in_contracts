@@ -1,0 +1,128 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=50&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=50&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzY5NzNHSDI2UDAwMDA0XzY5MjBfLU5PTkUtXy1OT05FLSJd","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzY5NzNHSDI2UDAwMDA0XzY5MjBfLU5PTkUtXy1OT05FLSJd","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","fiscal_year":2026,"total_contract_value":1089550.8,"base_and_exercised_options_value":1089550.8,"naics_code":561612,"set_aside":"NONE","recipient":{"uei":"HQXXAB4DV7H3","display_name":"REDCON
+        SOLUTIONS GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"GA"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","fiscal_year":2026,"total_contract_value":17351.59,"base_and_exercised_options_value":17351.59,"naics_code":236220,"set_aside":null,"recipient":{"uei":"MR6FELMMCJ31","display_name":"ONSITE
+        CONSTRUCTION GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"KS"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1371325.32,"base_and_exercised_options_value":217309.6,"naics_code":541519,"set_aside":"NONE","recipient":{"uei":"GDQLRDFJNRD3","display_name":"MERLIN
+        INTERNATIONAL, INC."},"place_of_performance":{"country_code":"USA","state_code":"VA"}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":4387892.04,"base_and_exercised_options_value":1460606.88,"naics_code":541820,"set_aside":"SBA","recipient":{"uei":"U3M3JLGJLQ63","display_name":"RACK-WILDNER
+        & REESE, INC."},"place_of_performance":{"country_code":"USA","state_code":"PA"}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":24732.97,"base_and_exercised_options_value":24732.97,"naics_code":541519,"set_aside":null,"recipient":{"uei":"SC8LMLWA6H51","display_name":"REGENCY
+        CONSULTING INC"},"place_of_performance":{"country_code":"USA","state_code":"WV"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1499803.54,"base_and_exercised_options_value":0.0,"naics_code":541211,"set_aside":null,"recipient":{"uei":"ECMMFNMSLXM7","display_name":"ERNST
+        & YOUNG LLP"},"place_of_performance":{"country_code":"USA","state_code":"NY"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":73050.0,"base_and_exercised_options_value":73050.0,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"F4M9NB1HD785","display_name":"COLOSSAL
+        CONTRACTING LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":21711.76,"base_and_exercised_options_value":21711.76,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"JMVMGGNJGA29","display_name":"GOVPLACE,
+        LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":13390.73,"base_and_exercised_options_value":13390.73,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"F4M9NB1HD785","display_name":"COLOSSAL
+        CONTRACTING LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":99974.58,"base_and_exercised_options_value":99974.58,"naics_code":541519,"set_aside":"SBA","recipient":{"uei":"JEANDJTZ8HJ3","display_name":"FCN
+        INC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_80HQTR26F7003_8000_80NSSC21D0001_8000","piid":"80HQTR26F7003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":14940.34,"base_and_exercised_options_value":14940.34,"naics_code":511210,"set_aside":null,"recipient":{"uei":"YQXBZHMXEVE5","display_name":"THE
+        MATHWORKS, INC."},"place_of_performance":{"country_code":"USA","state_code":"MA"}},{"key":"CONT_AWD_80HQTR26F7002_8000_80NSSC21D0001_8000","piid":"80HQTR26F7002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":2651.0,"base_and_exercised_options_value":2651.0,"naics_code":511210,"set_aside":null,"recipient":{"uei":"YQXBZHMXEVE5","display_name":"THE
+        MATHWORKS, INC."},"place_of_performance":{"country_code":"USA","state_code":"MA"}},{"key":"CONT_AWD_80HQTR26F7001_8000_80NSSC21D0001_8000","piid":"80HQTR26F7001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":3140.0,"base_and_exercised_options_value":3140.0,"naics_code":511210,"set_aside":null,"recipient":{"uei":"YQXBZHMXEVE5","display_name":"THE
+        MATHWORKS, INC."},"place_of_performance":{"country_code":"USA","state_code":"MA"}},{"key":"CONT_AWD_80ARC026FA001_8000_80GRC025DA001_8000","piid":"80ARC026FA001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":106717.31,"base_and_exercised_options_value":106717.31,"naics_code":561720,"set_aside":null,"recipient":{"uei":"GD6WB8VPQ3J9","display_name":"AHTNA
+        INTEGRATED SERVICES LLC"},"place_of_performance":{"country_code":"USA","state_code":"CA"}},{"key":"CONT_AWD_75N93026F00001_7529_HHSN316201500040W_7529","piid":"75N93026F00001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":79453.12,"base_and_exercised_options_value":79453.12,"naics_code":541519,"set_aside":null,"recipient":{"uei":"XK11LLUL61A7","display_name":"NEW
+        TECH SOLUTIONS, INC."},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_75H71226F80002_7527_36F79724D0071_3600","piid":"75H71226F80002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":630011.67,"base_and_exercised_options_value":630011.67,"naics_code":334510,"set_aside":null,"recipient":{"uei":"G3KKGDBCNSL7","display_name":"AFTER
+        ACTION MEDICAL AND DENTAL SUPPLY, LLC"},"place_of_performance":{"country_code":"USA","state_code":"AZ"}},{"key":"CONT_AWD_75H71226F28005_7527_75H71224A00019_7527","piid":"75H71226F28005","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":256875.0,"base_and_exercised_options_value":256875.0,"naics_code":621512,"set_aside":"SDVOSBC","recipient":{"uei":"Z7NABFAK25Y7","display_name":"VETMED
+        GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"AZ"}},{"key":"CONT_AWD_75H71126P00002_7527_-NONE-_-NONE-","piid":"75H71126P00002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":25000.0,"base_and_exercised_options_value":25000.0,"naics_code":491110,"set_aside":"NONE","recipient":{"uei":"V5E8DNCCNH69","display_name":"THE
+        PITNEY BOWES BANK, INC."},"place_of_performance":{"country_code":"USA","state_code":"OK"}},{"key":"CONT_AWD_75H71126F27002_7527_75H71126D00001_7527","piid":"75H71126F27002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":35000.0,"base_and_exercised_options_value":35000.0,"naics_code":621511,"set_aside":null,"recipient":{"uei":"HLQFA6AXYJK5","display_name":"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC"},"place_of_performance":{"country_code":"USA","state_code":"OK"}},{"key":"CONT_AWD_75H71126F27001_7527_75H71126D00001_7527","piid":"75H71126F27001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":198000.0,"base_and_exercised_options_value":198000.0,"naics_code":621511,"set_aside":null,"recipient":{"uei":"HLQFA6AXYJK5","display_name":"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC"},"place_of_performance":{"country_code":"USA","state_code":"OK"}},{"key":"CONT_AWD_75H70726P00003_7527_-NONE-_-NONE-","piid":"75H70726P00003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":899491.87,"base_and_exercised_options_value":169848.67,"naics_code":621330,"set_aside":"SBA","recipient":{"uei":"TVKUHNPQ4KJ3","display_name":"TESTUDO
+        LOGISTICS LLC"},"place_of_performance":{"country_code":"USA","state_code":"NM"}},{"key":"CONT_AWD_75H70626P00018_7527_-NONE-_-NONE-","piid":"75H70626P00018","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":405600.0,"base_and_exercised_options_value":405600.0,"naics_code":621399,"set_aside":"NONE","recipient":{"uei":"NHBEN7FLTDR8","display_name":"BAY
+        AREA ANESTHESIA LLC"},"place_of_performance":{"country_code":"USA","state_code":"SD"}},{"key":"CONT_AWD_75H70426F80001_7527_140A1624D0044_1450","piid":"75H70426F80001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":10481443.48,"base_and_exercised_options_value":1974917.4,"naics_code":541519,"set_aside":null,"recipient":{"uei":"M52ELQGPE843","display_name":"WICHITA
+        TRIBAL ENTERPRISES, LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_75H70326F08037_7527_75H70323D00002_7527","piid":"75H70326F08037","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":43763.4,"base_and_exercised_options_value":43763.4,"naics_code":237110,"set_aside":null,"recipient":{"uei":"NA7QDG668B66","display_name":"AMA
+        DIVERSIFIED CONSTRUCTION GROUP"},"place_of_performance":{"country_code":"USA","state_code":"CA"}},{"key":"CONT_AWD_75FCMC26F0019_7530_75FCMC20D0015_7530","piid":"75FCMC26F0019","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":27298525.06,"base_and_exercised_options_value":5346719.28,"naics_code":541990,"set_aside":"SBA","recipient":{"uei":"ZE8XMALLRYN5","display_name":"SIGNATURE
+        CONSULTING GROUP LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_75FCMC26F0018_7530_75FCMC21D0001_7530","piid":"75FCMC26F0018","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":18912158.95,"base_and_exercised_options_value":3272263.92,"naics_code":541990,"set_aside":"SBA","recipient":{"uei":"C81ZW3KPFGV9","display_name":"ARCH
+        SYSTEMS LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z04026P60355Y00_7008_-NONE-_-NONE-","piid":"70Z04026P60355Y00","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":23751.0,"base_and_exercised_options_value":23751.0,"naics_code":336310,"set_aside":"NONE","recipient":{"uei":"LR2HQKYJLDZ7","display_name":"JA
+        MOODY LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z04026P60353Y00_7008_-NONE-_-NONE-","piid":"70Z04026P60353Y00","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":13650.0,"base_and_exercised_options_value":13650.0,"naics_code":532412,"set_aside":"NONE","recipient":{"uei":"DZ4JXAPAU222","display_name":"UNITED
+        RENTALS, INC."},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z03826PZ0000018_7008_-NONE-_-NONE-","piid":"70Z03826PZ0000018","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":34505.0,"base_and_exercised_options_value":13802.0,"naics_code":336413,"set_aside":"SBA","recipient":{"uei":"ZZGWX398RJJ6","display_name":"FSR
+        CONSULTING LLC"},"place_of_performance":{"country_code":"USA","state_code":"PA"}},{"key":"CONT_AWD_70Z03826PR0000011_7008_-NONE-_-NONE-","piid":"70Z03826PR0000011","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":18960.0,"base_and_exercised_options_value":18960.0,"naics_code":336413,"set_aside":"SBA","recipient":{"uei":"W9UFFHJXD489","display_name":"BROWN
+        HELICOPTER, INC."},"place_of_performance":{"country_code":"USA","state_code":"FL"}},{"key":"CONT_AWD_70Z03826PF0003002_7008_-NONE-_-NONE-","piid":"70Z03826PF0003002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":48909.32,"base_and_exercised_options_value":48909.32,"naics_code":337214,"set_aside":"NONE","recipient":{"uei":"UKZDZ3TPMLU1","display_name":"TECH
+        SERVICE SOLUTIONS LLC"},"place_of_performance":{"country_code":"USA","state_code":"AZ"}},{"key":"CONT_AWD_70Z03826FZ0000011_7008_70Z03825DJ0000014_7008","piid":"70Z03826FZ0000011","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":155655.0,"base_and_exercised_options_value":155655.0,"naics_code":336413,"set_aside":null,"recipient":{"uei":"WNG8LVV75EP3","display_name":"AVIATRIX
+        INC"},"place_of_performance":{"country_code":"USA","state_code":"OR"}},{"key":"CONT_AWD_70Z03826FZ0000010_7008_70Z03823DB0000033_7008","piid":"70Z03826FZ0000010","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1524.0,"base_and_exercised_options_value":1524.0,"naics_code":336413,"set_aside":null,"recipient":{"uei":"WMZDQS99YLT6","display_name":"DENISE
+        LAMPIGNANO"},"place_of_performance":{"country_code":"USA","state_code":"CA"}},{"key":"CONT_AWD_70Z03826FF0003003_7008_GS21F0104W_4730","piid":"70Z03826FF0003003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":19742.25,"base_and_exercised_options_value":19742.25,"naics_code":444130,"set_aside":null,"recipient":{"uei":"C3DYGNCJF9C5","display_name":"HARDWARENOW
+        LLC"},"place_of_performance":{"country_code":"USA","state_code":"LA"}},{"key":"CONT_AWD_70Z02326PSALC0003_7008_-NONE-_-NONE-","piid":"70Z02326PSALC0003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":41000.0,"base_and_exercised_options_value":41000.0,"naics_code":325520,"set_aside":"NONE","recipient":{"uei":"G3UJV497QGU3","display_name":"FERGUSON
+        ENTERPRISES LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z02326PSALC0002_7008_-NONE-_-NONE-","piid":"70Z02326PSALC0002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":41000.0,"base_and_exercised_options_value":41000.0,"naics_code":326191,"set_aside":"NONE","recipient":{"uei":"K6HPN25G7FC4","display_name":"INTEGRATED
+        PROCUREMENT TECHNOLOGIES"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z02326P92200002_7008_-NONE-_-NONE-","piid":"70Z02326P92200002","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":8316.16,"base_and_exercised_options_value":8316.16,"naics_code":532111,"set_aside":"NONE","recipient":{"uei":"LCGJCZLHSUK5","display_name":"SIXT
+        RENT A CAR LLC"},"place_of_performance":{"country_code":"USA","state_code":"MD"}},{"key":"CONT_AWD_70Z02326P73120001_7008_-NONE-_-NONE-","piid":"70Z02326P73120001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":13225.0,"base_and_exercised_options_value":13225.0,"naics_code":611430,"set_aside":"NONE","recipient":{"uei":"H5RKZWN8JCT4","display_name":"NATIONAL
+        ASSOCIATION OF STATE BOATING LAW ADMINISTRATORS, INC"},"place_of_performance":{"country_code":"USA","state_code":"KY"}},{"key":"CONT_AWD_70SBUR26F00000011_7003_47QSMS24D007V_4732","piid":"70SBUR26F00000011","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":27107.0,"base_and_exercised_options_value":27107.0,"naics_code":322291,"set_aside":"EDWOSB","recipient":{"uei":"MAGTJ8T9NQE8","display_name":"ALPHAVETS,
+        INC"},"place_of_performance":{"country_code":"USA","state_code":"VI"}},{"key":"CONT_AWD_70LGLY26FGLB00003_7015_47QSWA19D001E_4732","piid":"70LGLY26FGLB00003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":16672.0,"base_and_exercised_options_value":16672.0,"naics_code":315990,"set_aside":null,"recipient":{"uei":"RG8WLU64Q6A1","display_name":"DUMMIES
+        UNLIMITED, INC."},"place_of_performance":{"country_code":"USA","state_code":"GA"}},{"key":"CONT_AWD_70FBR626P00000003_7022_-NONE-_-NONE-","piid":"70FBR626P00000003","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":38000.0,"base_and_exercised_options_value":38000.0,"naics_code":424120,"set_aside":"SBA","recipient":{"uei":"QXFZWPP4RHZ4","display_name":"DESTINY
+        SOLUTIONS INC"},"place_of_performance":{"country_code":"USA","state_code":"TX"}},{"key":"CONT_AWD_70CDCR26FR0000001_7012_N0002325D0004_9700","piid":"70CDCR26FR0000001","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1339875022.97,"base_and_exercised_options_value":598444871.04,"naics_code":541614,"set_aside":null,"recipient":{"uei":"Y5U3BSK2G389","display_name":"ACQUISITION
+        LOGISTICS LLC"},"place_of_performance":{"country_code":"USA","state_code":"TX"}},{"key":"CONT_AWD_6991PE26F00007N_6938_693JF725D000010_6938","piid":"6991PE26F00007N","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":1032110.0,"base_and_exercised_options_value":1032110.0,"naics_code":483111,"set_aside":null,"recipient":{"uei":"S9L9DZ8RBNL6","display_name":"PATRIOT
+        CONTRACT SERVICES, LLC"},"place_of_performance":{"country_code":"USA","state_code":"WA"}},{"key":"CONT_AWD_6991PE26F00006N_6938_693JF725D000016_6938","piid":"6991PE26F00006N","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":5029282.5,"base_and_exercised_options_value":5029282.5,"naics_code":483111,"set_aside":null,"recipient":{"uei":"UFQGBQM3JDY5","display_name":"TOTE
+        SERVICES, LLC"},"place_of_performance":{"country_code":"USA","state_code":"OR"}},{"key":"CONT_AWD_697DCK26F00013_6920_697DCK22D00001_6920","piid":"697DCK26F00013","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":67124.93,"base_and_exercised_options_value":67124.93,"naics_code":541512,"set_aside":null,"recipient":{"uei":"PHZDZ8SJ5CM1","display_name":"CDW
+        GOVERNMENT LLC"},"place_of_performance":{"country_code":"USA","state_code":"OK"}},{"key":"CONT_AWD_6973GH26P00296_6920_-NONE-_-NONE-","piid":"6973GH26P00296","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":10800.0,"base_and_exercised_options_value":10800.0,"naics_code":811310,"set_aside":"NONE","recipient":{"uei":"V3GYNR44KT73","display_name":"SIERRA
+        ENTERPRISES LLC"},"place_of_performance":{"country_code":"USA","state_code":"OK"}},{"key":"CONT_AWD_6973GH26P00287_6920_-NONE-_-NONE-","piid":"6973GH26P00287","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":20415.12,"base_and_exercised_options_value":20415.12,"naics_code":334519,"set_aside":"NONE","recipient":{"uei":"FCMPZKYCYKH5","display_name":"VAISALA
+        INC."},"place_of_performance":{"country_code":"USA","state_code":"CO"}},{"key":"CONT_AWD_6973GH26P00279_6920_-NONE-_-NONE-","piid":"6973GH26P00279","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":19051.5,"base_and_exercised_options_value":19051.5,"naics_code":335139,"set_aside":"NONE","recipient":{"uei":"LHRMMVUCQFB8","display_name":"HUGHEY
+        & PHILLIPS LLC"},"place_of_performance":{"country_code":"USA","state_code":"OH"}},{"key":"CONT_AWD_6973GH26P00273_6920_-NONE-_-NONE-","piid":"6973GH26P00273","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":31070.0,"base_and_exercised_options_value":31070.0,"naics_code":423690,"set_aside":"NONE","recipient":{"uei":"ELRJA5VU2TC4","display_name":"GIGLI
+        ENTERPRISES, INC."},"place_of_performance":{"country_code":"USA","state_code":"FL"}},{"key":"CONT_AWD_6973GH26P00004_6920_-NONE-_-NONE-","piid":"6973GH26P00004","award_date":"2025-11-14","fiscal_year":2026,"total_contract_value":85555.0,"base_and_exercised_options_value":85555.0,"naics_code":237130,"set_aside":"SBA","recipient":{"uei":"UKJALGAAJB32","display_name":"SHECKLER
+        CONTRACTING, INC."},"place_of_performance":{"country_code":"USA","state_code":"PA"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c211a48a221-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:55 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=%2B3uSxbp65XdRYAE83o1oxNBFbcyke%2BHg3wajVMxMWsUubaDLrcEK7UVUDI%2BajAGtLaCZXlr0s6%2F0Dq1HwDpXILQJO9q52eZ6BHj%2FvRkfbMJS5bHQ9tBj7iV7lw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '19592'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '987'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998680'
+      x-ratelimit-daily-reset:
+      - '90'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '987'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+version: 1

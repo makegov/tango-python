@@ -1,0 +1,289 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29
+  response:
+    body:
+      string: "{\"count\":81180424,\"next\":\"http://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ%3D%3D\",\"cursor\":\"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ==\",\"results\":[{\"key\":\"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022\",\"piid\":\"70FBR426F00000001\",\"award_date\":\"2025-11-15\",\"description\":\"THE
+        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
+        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
+        FORT MYERS FLORIDA.\",\"total_contract_value\":1089550.8,\"recipient\":{\"display_name\":\"REDCON
+        SOLUTIONS GROUP LLC\"},\"awarding_office\":{\"office_code\":\"70FBR4\",\"office_name\":\"REGION
+        4: EMERGENCY PREPAREDNESS AN\",\"agency_code\":\"7022\",\"agency_name\":\"Federal
+        Emergency Management Agency\",\"department_code\":70,\"department_name\":\"Department
+        of Homeland Security\"},\"funding_office\":{\"office_code\":\"70FPRR\",\"office_name\":\"ORR
+        \u2013 OFFICE OF RESPONSE AND RECOVERY\",\"agency_code\":\"7022\",\"agency_name\":\"Federal
+        Emergency Management Agency\",\"department_code\":70,\"department_name\":\"Department
+        of Homeland Security\"}},{\"key\":\"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600\",\"piid\":\"36C25526N0084\",\"award_date\":\"2025-11-15\",\"description\":\"TOPEKA
+        JOC\",\"total_contract_value\":17351.59,\"recipient\":{\"display_name\":\"ONSITE
+        CONSTRUCTION GROUP LLC\"},\"awarding_office\":{\"office_code\":\"36C255\",\"office_name\":\"255-NETWORK
+        CONTRACT OFFICE 15 (36C255)\",\"agency_code\":\"3600\",\"agency_name\":\"Department
+        of Veterans Affairs\",\"department_code\":36,\"department_name\":\"Department
+        of Veterans Affairs\"},\"funding_office\":{\"office_code\":\"36C589\",\"office_name\":\"589
+        KAN WESTERN ORBIT\",\"agency_code\":\"3600\",\"agency_name\":\"Department
+        of Veterans Affairs\",\"department_code\":36,\"department_name\":\"Department
+        of Veterans Affairs\"}},{\"key\":\"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-\",\"piid\":\"9523ZY26C0001\",\"award_date\":\"2025-11-14\",\"description\":\"TO
+        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)\",\"total_contract_value\":1371325.32,\"recipient\":{\"display_name\":\"MERLIN
+        INTERNATIONAL, INC.\"},\"awarding_office\":{\"office_code\":\"9523ZY\",\"office_name\":\"COMMODITY
+        FUTURES TRADING COMM\",\"agency_code\":\"9507\",\"agency_name\":\"Commodity
+        Futures Trading Commission\",\"department_code\":339,\"department_name\":\"Commodity
+        Futures Trading Commission\"},\"funding_office\":{\"office_code\":\"9523ZY\",\"office_name\":\"COMMODITY
+        FUTURES TRADING COMM\",\"agency_code\":\"9507\",\"agency_name\":\"Commodity
+        Futures Trading Commission\",\"department_code\":339,\"department_name\":\"Commodity
+        Futures Trading Commission\"}},{\"key\":\"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900\",\"piid\":\"89243426FEE000564\",\"award_date\":\"2025-11-14\",\"description\":\"U.S.
+        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
+        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
+        OFFICE\",\"total_contract_value\":4387892.04,\"recipient\":{\"display_name\":\"RACK-WILDNER
+        & REESE, INC.\"},\"awarding_office\":{\"office_code\":\"892434\",\"office_name\":\"GOLDEN
+        FIELD OFFICE\",\"agency_code\":\"8900\",\"agency_name\":\"Department of Energy\",\"department_code\":89,\"department_name\":\"Department
+        of Energy\"},\"funding_office\":{\"office_code\":\"892403\",\"office_name\":\"ENERGY
+        EFFICIENCYRENEWABLE ENERGY\",\"agency_code\":\"8900\",\"agency_name\":\"Department
+        of Energy\",\"department_code\":89,\"department_name\":\"Department of Energy\"}},{\"key\":\"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000\",\"piid\":\"89243326FFE400735\",\"award_date\":\"2025-11-14\",\"description\":\"SOLARWINDS
+        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.\",\"total_contract_value\":24732.97,\"recipient\":{\"display_name\":\"REGENCY
+        CONSULTING INC\"},\"awarding_office\":{\"office_code\":\"892433\",\"office_name\":\"NATIONAL
+        ENERGY TECHNOLOGY LABORATORY\",\"agency_code\":\"8900\",\"agency_name\":\"Department
+        of Energy\",\"department_code\":89,\"department_name\":\"Department of Energy\"},\"funding_office\":{\"office_code\":\"892404\",\"office_name\":\"FOSSIL
+        ENERGY AND CARBON MANAGEMENT\",\"agency_code\":\"8900\",\"agency_name\":\"Department
+        of Energy\",\"department_code\":89,\"department_name\":\"Department of Energy\"}},{\"key\":\"CONT_AWD_86614625F00001_8600_86615121A00005_8600\",\"piid\":\"86614625F00001\",\"award_date\":\"2025-11-14\",\"description\":\"COMPREHENSIVE
+        RISK ASSESSMENT AND MITIGATION - OCFO\",\"total_contract_value\":1499803.54,\"recipient\":{\"display_name\":\"ERNST
+        & YOUNG LLP\"},\"awarding_office\":{\"office_code\":\"866143\",\"office_name\":\"CPO
+        : PHILADELPHIA OPERATIONS BRANC\",\"agency_code\":\"8600\",\"agency_name\":\"Department
+        of Housing and Urban Development\",\"department_code\":86,\"department_name\":\"Department
+        of Housing and Urban Development\"},\"funding_office\":{\"office_code\":\"865580\",\"office_name\":\"CFO
+        : CHIEF FINANCIAL OFFICER\",\"agency_code\":\"8600\",\"agency_name\":\"Department
+        of Housing and Urban Development\",\"department_code\":86,\"department_name\":\"Department
+        of Housing and Urban Development\"}},{\"key\":\"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000\",\"piid\":\"80NSSC26FA013\",\"award_date\":\"2025-11-14\",\"description\":\"F5
+        NETWORK MAINTENANCE RENEWAL\",\"total_contract_value\":73050.0,\"recipient\":{\"display_name\":\"COLOSSAL
+        CONTRACTING LLC\"},\"awarding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000\",\"piid\":\"80NSSC26FA012\",\"award_date\":\"2025-11-14\",\"description\":\"XSI
+        HARDWARE MAINTENANCE RENEWAL FY26\",\"total_contract_value\":21711.76,\"recipient\":{\"display_name\":\"GOVPLACE,
+        LLC\"},\"awarding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000\",\"piid\":\"80NSSC26FA009\",\"award_date\":\"2025-11-14\",\"description\":\"TELLABS
+        STANDARD SUPPORT & PANORAMA INM\",\"total_contract_value\":13390.73,\"recipient\":{\"display_name\":\"COLOSSAL
+        CONTRACTING LLC\"},\"awarding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000\",\"piid\":\"80NSSC26FA006\",\"award_date\":\"2025-11-14\",\"description\":\"CISCO
+        NASA CISCO REMOTE VPN OBSOLESCENCE REPLACEMENT\",\"total_contract_value\":99974.58,\"recipient\":{\"display_name\":\"FCN
+        INC\"},\"awarding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80NSSC\",\"office_name\":\"NASA
+        SHARED SERVICES CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80HQTR26F7003_8000_80NSSC21D0001_8000\",\"piid\":\"80HQTR26F7003\",\"award_date\":\"2025-11-14\",\"description\":\"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR JSC  PER QUOTE 13896654
+        DATED 11/13/2025.\",\"total_contract_value\":14940.34,\"recipient\":{\"display_name\":\"THE
+        MATHWORKS, INC.\"},\"awarding_office\":{\"office_code\":\"80HQTR\",\"office_name\":\"NASA
+        HEADQUARTERS\",\"agency_code\":\"8000\",\"agency_name\":\"National Aeronautics
+        and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80TECH\",\"office_name\":\"NASA
+        IT PROCUREMENT OFFICE\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80HQTR26F7002_8000_80NSSC21D0001_8000\",\"piid\":\"80HQTR26F7002\",\"award_date\":\"2025-11-14\",\"description\":\"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR GSFC PER QUOTE 13896650
+        DATED 11/13/2025.\",\"total_contract_value\":2651.0,\"recipient\":{\"display_name\":\"THE
+        MATHWORKS, INC.\"},\"awarding_office\":{\"office_code\":\"80HQTR\",\"office_name\":\"NASA
+        HEADQUARTERS\",\"agency_code\":\"8000\",\"agency_name\":\"National Aeronautics
+        and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80TECH\",\"office_name\":\"NASA
+        IT PROCUREMENT OFFICE\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80HQTR26F7001_8000_80NSSC21D0001_8000\",\"piid\":\"80HQTR26F7001\",\"award_date\":\"2025-11-14\",\"description\":\"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES PER QUOTE 13896646 DATED
+        11/13/2025.\",\"total_contract_value\":3140.0,\"recipient\":{\"display_name\":\"THE
+        MATHWORKS, INC.\"},\"awarding_office\":{\"office_code\":\"80HQTR\",\"office_name\":\"NASA
+        HEADQUARTERS\",\"agency_code\":\"8000\",\"agency_name\":\"National Aeronautics
+        and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80TECH\",\"office_name\":\"NASA
+        IT PROCUREMENT OFFICE\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_80ARC026FA001_8000_80GRC025DA001_8000\",\"piid\":\"80ARC026FA001\",\"award_date\":\"2025-11-14\",\"description\":\"TASK
+        ORDER TO PROVIDE CUSTODIAL SERVICES ABOVE THE BASELINE SERVICES.\",\"total_contract_value\":106717.31,\"recipient\":{\"display_name\":\"AHTNA
+        INTEGRATED SERVICES LLC\"},\"awarding_office\":{\"office_code\":\"80ARC0\",\"office_name\":\"NASA
+        AMES RESEARCH CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"},\"funding_office\":{\"office_code\":\"80ARC0\",\"office_name\":\"NASA
+        AMES RESEARCH CENTER\",\"agency_code\":\"8000\",\"agency_name\":\"National
+        Aeronautics and Space Administration\",\"department_code\":80,\"department_name\":\"National
+        Aeronautics and Space Administration\"}},{\"key\":\"CONT_AWD_75N93026F00001_7529_HHSN316201500040W_7529\",\"piid\":\"75N93026F00001\",\"award_date\":\"2025-11-14\",\"description\":\"AWS
+        CLOUDLINK SERVICE - RDCF 2X10G (AMBIS 2275621)\",\"total_contract_value\":79453.12,\"recipient\":{\"display_name\":\"NEW
+        TECH SOLUTIONS, INC.\"},\"awarding_office\":{\"office_code\":\"75N930\",\"office_name\":\"NATIONAL
+        INSTITUTES OF HEALTH NIAID\",\"agency_code\":\"7529\",\"agency_name\":\"National
+        Institutes of Health\",\"department_code\":75,\"department_name\":\"Department
+        of Health and Human Services\"},\"funding_office\":{\"office_code\":\"75N930\",\"office_name\":\"NATIONAL
+        INSTITUTES OF HEALTH NIAID\",\"agency_code\":\"7529\",\"agency_name\":\"National
+        Institutes of Health\",\"department_code\":75,\"department_name\":\"Department
+        of Health and Human Services\"}},{\"key\":\"CONT_AWD_75H71226F80002_7527_36F79724D0071_3600\",\"piid\":\"75H71226F80002\",\"award_date\":\"2025-11-14\",\"description\":\"ZOLL
+        MEDICAL CORPORATION DEFIBRILLATOR EQUIPMENT\",\"total_contract_value\":630011.67,\"recipient\":{\"display_name\":\"AFTER
+        ACTION MEDICAL AND DENTAL SUPPLY, LLC\"},\"awarding_office\":{\"office_code\":\"75H712\",\"office_name\":\"PHOENIX
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H712\",\"office_name\":\"PHOENIX
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H71226F28005_7527_75H71224A00019_7527\",\"piid\":\"75H71226F28005\",\"award_date\":\"2025-11-14\",\"description\":\"BPA
+        CALL FOR CRSU. TELERADIOLOGY SERVICES\",\"total_contract_value\":256875.0,\"recipient\":{\"display_name\":\"VETMED
+        GROUP LLC\"},\"awarding_office\":{\"office_code\":\"75H712\",\"office_name\":\"PHOENIX
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H712\",\"office_name\":\"PHOENIX
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H71126P00002_7527_-NONE-_-NONE-\",\"piid\":\"75H71126P00002\",\"award_date\":\"2025-11-14\",\"description\":\"PITNEY
+        BOWES POSTAGE REFILL FOR LAWTON INDIAN HOSPITAL.\",\"total_contract_value\":25000.0,\"recipient\":{\"display_name\":\"THE
+        PITNEY BOWES BANK, INC.\"},\"awarding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H71126F27002_7527_75H71126D00001_7527\",\"piid\":\"75H71126F27002\",\"award_date\":\"2025-11-14\",\"description\":\"LAB
+        AND PATHOLOGY - OCAO\",\"total_contract_value\":35000.0,\"recipient\":{\"display_name\":\"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC\"},\"awarding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H71126F27001_7527_75H71126D00001_7527\",\"piid\":\"75H71126F27001\",\"award_date\":\"2025-11-14\",\"description\":\"LAB
+        AND PATHOLOGY - OCAO\",\"total_contract_value\":198000.0,\"recipient\":{\"display_name\":\"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC\"},\"awarding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H711\",\"office_name\":\"OK
+        CITY AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H70726P00003_7527_-NONE-_-NONE-\",\"piid\":\"75H70726P00003\",\"award_date\":\"2025-11-14\",\"description\":\"LICENSED
+        CLINICAL SOCIAL WORKER (LCSW) - NSRTC\",\"total_contract_value\":899491.87,\"recipient\":{\"display_name\":\"TESTUDO
+        LOGISTICS LLC\"},\"awarding_office\":{\"office_code\":\"75H707\",\"office_name\":\"ALBUQUERQUE
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H707\",\"office_name\":\"ALBUQUERQUE
+        AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H70626P00018_7527_-NONE-_-NONE-\",\"piid\":\"75H70626P00018\",\"award_date\":\"2025-11-14\",\"description\":\"REGISTERED
+        NURSE SERVICES FOR THE INPATIENT AND EMERGENCY ROOM DEPARTMENT AT THE CHEYENNE
+        RIVER HEALTH CENTER LOCATED IN EAGLE BUTTE, SD. PERIOD OF PERFORMANCE IS 90
+        DAYS FROM DATE AWARDED.\",\"total_contract_value\":405600.0,\"recipient\":{\"display_name\":\"BAY
+        AREA ANESTHESIA LLC\"},\"awarding_office\":{\"office_code\":\"75H706\",\"office_name\":\"GREAT
+        PLAINS AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H706\",\"office_name\":\"GREAT
+        PLAINS AREA INDIAN HEALTH SVC\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H70426F80001_7527_140A1624D0044_1450\",\"piid\":\"75H70426F80001\",\"award_date\":\"2025-11-14\",\"description\":\"INFRASTRUCTURE
+        & PLATFORM SUPPORT SERVICES FOR RESOURCE AND PATIENT MANAGEMENT SYSTEM (CSMT
+        O&M)\",\"total_contract_value\":10481443.48,\"recipient\":{\"display_name\":\"WICHITA
+        TRIBAL ENTERPRISES, LLC\"},\"awarding_office\":{\"office_code\":\"75H704\",\"office_name\":\"DIVISION
+        OF ACQUISITIONS POLICY HQ\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H704\",\"office_name\":\"DIVISION
+        OF ACQUISITIONS POLICY HQ\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75H70326F08037_7527_75H70323D00002_7527\",\"piid\":\"75H70326F08037\",\"award_date\":\"2025-11-14\",\"description\":\"THE
+        CONTRACTOR SHALL PROVIDE ALL LABOR, MATERIALS, EQUIPMENT, TOOLS, TRANSPORTATION,
+        AND SUPERVISION NECESSARY TO FURNISH AND COMPLETE THE WORK AS SPECIFIED AT
+        SANTA YSABEL SAN DIEGO, CA\",\"total_contract_value\":43763.4,\"recipient\":{\"display_name\":\"AMA
+        DIVERSIFIED CONSTRUCTION GROUP\"},\"awarding_office\":{\"office_code\":\"75H703\",\"office_name\":\"CALIFORNIA
+        INDIAN HEALTH SERVICE\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"},\"funding_office\":{\"office_code\":\"75H703\",\"office_name\":\"CALIFORNIA
+        INDIAN HEALTH SERVICE\",\"agency_code\":\"7527\",\"agency_name\":\"Indian
+        Health Service\",\"department_code\":75,\"department_name\":\"Department of
+        Health and Human Services\"}},{\"key\":\"CONT_AWD_75FCMC26F0019_7530_75FCMC20D0015_7530\",\"piid\":\"75FCMC26F0019\",\"award_date\":\"2025-11-14\",\"description\":\"CMS
+        WILL UTILIZE THIS TASK ORDER AS A PART OF THE OVERALL PROVIDER ENROLLMENT
+        AND OVERSIGHT, INDEFINITE DELIVERY, INDEFINITE QUANTITY CONTRACT (PEO-IDIQ)
+        TO DETECT, PREVENT, AND PROACTIVELY DETER FRAUD, WASTE AND ABUSE IN THE MEDICARE
+        AND/OR MEDICAID\",\"total_contract_value\":27298525.06,\"recipient\":{\"display_name\":\"SIGNATURE
+        CONSULTING GROUP LLC\"},\"awarding_office\":{\"office_code\":\"75FCMC\",\"office_name\":\"OFC
+        OF ACQUISITION AND GRANTS MGMT\",\"agency_code\":\"7530\",\"agency_name\":\"Centers
+        for Medicare and Medicaid Services\",\"department_code\":75,\"department_name\":\"Department
+        of Health and Human Services\"},\"funding_office\":{\"office_code\":\"75FCMC\",\"office_name\":\"OFC
+        OF ACQUISITION AND GRANTS MGMT\",\"agency_code\":\"7530\",\"agency_name\":\"Centers
+        for Medicare and Medicaid Services\",\"department_code\":75,\"department_name\":\"Department
+        of Health and Human Services\"}}],\"count_type\":\"approximate\"}"
+    headers:
+      CF-RAY:
+      - 99f88c22c914a1c4-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:56 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=yhmr9ngctrZTw%2Bt4yKZ5VeXmt21oMggbbU2b95a5dNKB5pNfs9xuAFo0UaNNa0njvLo0KmBQRMB%2FhY8z%2BYIKq7CIo2ulXRTUghu8jnB4pdauGzppKMxKJjQBoQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '19863'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '986'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998679'
+      x-ratelimit-daily-reset:
+      - '90'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '986'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+version: 1

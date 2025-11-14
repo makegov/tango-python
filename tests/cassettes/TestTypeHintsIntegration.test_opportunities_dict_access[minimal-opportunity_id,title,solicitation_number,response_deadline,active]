@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/opportunities/?page=1&limit=5&shape=opportunity_id%2Ctitle%2Csolicitation_number%2Cresponse_deadline%2Cactive
+  response:
+    body:
+      string: '{"count":190142,"next":"http://tango.makegov.com/api/opportunities/?limit=5&page=2&shape=opportunity_id%2Ctitle%2Csolicitation_number%2Cresponse_deadline%2Cactive","previous":null,"results":[{"opportunity_id":"569a523c-2a60-4bfc-83df-45d926818a58","title":"17--NRP,DRAWBAR,TELESCO","solicitation_number":"SPE8EF26Q0029","response_deadline":"2025-12-01T00:00:00+00:00","active":true},{"opportunity_id":"dd59e39b-b1c9-49c2-830c-abc66ec6511a","title":"30--CONNECTING
+        LINK,RIG","solicitation_number":"SPE4A526T3439","response_deadline":"2025-11-24T00:00:00+00:00","active":true},{"opportunity_id":"743be37d-3b73-4f2c-857b-4c57d1ae8ff1","title":"31--CONE
+        AND ROLLERS,TA","solicitation_number":"SPE4A626T047W","response_deadline":"2025-11-24T00:00:00+00:00","active":true},{"opportunity_id":"f5ce34a6-fe69-465a-9a47-e3e445c63f55","title":"47--HOSE
+        ASSEMBLY,NONME","solicitation_number":"SPE7M426T2717","response_deadline":"2025-11-28T00:00:00+00:00","active":true},{"opportunity_id":"f967a1d6-d155-4e10-a193-7cf1e4e464ac","title":"66--DRAFTING
+        MACHINE","solicitation_number":"SPE8E926T0681","response_deadline":"2025-11-28T00:00:00+00:00","active":true}]}'
+    headers:
+      CF-RAY:
+      - 99f88c377eda5107-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:06 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qexlKzjP6hPbecEtMXzp%2BeHlof5kpNcOu8bxuAarQXtdYgZsWt7cTQf7TG%2F8BqF%2FS%2B7KRuVkKSETBjWgHmDaWc5RWLI9stLw5WzE9k5QRV5meKIPYhJQvGnTVQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1149'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 7.207s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '971'
+      x-ratelimit-burst-reset:
+      - '46'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998664'
+      x-ratelimit-daily-reset:
+      - '79'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '971'
+      x-ratelimit-reset:
+      - '46'
+    status:
+      code: 200
+      message: OK
+version: 1

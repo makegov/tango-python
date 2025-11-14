@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ==","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","total_contract_value":1089550.8,"recipient":{"display_name":"REDCON
+        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE
+        CONSTRUCTION GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","total_contract_value":1371325.32,"recipient":{"display_name":"MERLIN
+        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","total_contract_value":4387892.04,"recipient":{"display_name":"RACK-WILDNER
+        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","total_contract_value":24732.97,"recipient":{"display_name":"REGENCY
+        CONSULTING INC"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","total_contract_value":1499803.54,"recipient":{"display_name":"ERNST
+        & YOUNG LLP"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","total_contract_value":73050.0,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","total_contract_value":21711.76,"recipient":{"display_name":"GOVPLACE,
+        LLC"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","total_contract_value":13390.73,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","total_contract_value":99974.58,"recipient":{"display_name":"FCN
+        INC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c287fc7ace8-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:57 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AtZxOXC8gsDnaPfsLdAzUQ2Q58stFppvk4H15T8JMeQdvgsYlhByvXtSZZvi0ohnUSdum3sb0xNGDkwAkisojipvl2WGq4jQa1gp46u%2FlMhQnMbbh02jxusKXw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2059'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '982'
+      x-ratelimit-burst-reset:
+      - '56'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998675'
+      x-ratelimit-daily-reset:
+      - '89'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '982'
+      x-ratelimit-reset:
+      - '56'
+    status:
+      code: 200
+      message: OK
+version: 1

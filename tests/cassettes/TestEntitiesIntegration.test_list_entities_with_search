@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=5&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types&search=IBM
+  response:
+    body:
+      string: '{"count":119,"next":"http://tango.makegov.com/api/entities/?limit=5&page=2&search=IBM&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types","previous":null,"results":[{"uei":"VYK6E3QPX4J5","legal_business_name":"4
+        WALLS IT BUSINESS SOLUTIONS LLC","cage_code":"9HXV4","business_types":[{"code":"23","description":"Minority
+        Owned Business"},{"code":"27","description":"Self Certified Small Disadvantaged
+        Business"},{"code":"2X","description":"For Profit Organization"},{"code":"A5","description":"Veteran
+        Owned Business"},{"code":"OY","description":"Black American Owned"},{"code":"QF","description":"Service
+        Disabled Veteran Owned Business"}]},{"uei":"T7HKTLJUT3G5","legal_business_name":"ABUNDANS
+        INFORMATION TECHNOLOGY LLC","cage_code":"8DVM4","business_types":{"23":true,"27":true,"2X":true,"8W":true,"A2":true,"LJ":true,"OY":true}},{"uei":"ZB2SDLFGUKG1","legal_business_name":"ARRIETTY
+        SOLUTIONS INC.","cage_code":"7QF84","business_types":{"23":true,"27":true,"2X":true,"8W":true,"A2":true,"FR":true}},{"uei":"LTSLH5CNK8J9","legal_business_name":"COMBS,
+        MARION W","cage_code":null,"business_types":[{"code":"2X","description":"For
+        Profit Organization"}]},{"uei":"PZEFNJ7QL3C3","legal_business_name":"CROSS
+        INTELLIGENCE ANALYSIS, L.L.C.","cage_code":"87QD9","business_types":{"23":true,"2X":true,"8W":true,"A2":true,"A5":true,"LJ":true,"OY":true,"QF":true}}]}'
+    headers:
+      CF-RAY:
+      - 99f88c71d9ec4ca8-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:08 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mhMHQOpyS5rMUpWnpWQbkjIiBTWPRRnz%2B%2BsMbB%2BAGgMxJxjn8OHMTf2n23uZUISs8fgua7VcS1IYKvIIX1dod1wdStmKHft5%2FfBlCX9FfyEUF3xNvmQlymPGQQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1369'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.039s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '963'
+      x-ratelimit-burst-reset:
+      - '44'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998656'
+      x-ratelimit-daily-reset:
+      - '77'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '963'
+      x-ratelimit-reset:
+      - '44'
+    status:
+      code: 200
+      message: OK
+version: 1

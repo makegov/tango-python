@@ -1,0 +1,196 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=25&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types%2Cphysical_address
+  response:
+    body:
+      string: "{\"count\":1700013,\"next\":\"http://tango.makegov.com/api/entities/?limit=25&page=2&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types%2Cphysical_address\",\"previous\":null,\"results\":[{\"uei\":\"QTY8TUJGMM34\",\"legal_business_name\":\"
+        ALLIANCE PRO GLOBAL LLC\",\"cage_code\":\"16CA8\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"JS\",\"description\":\"Small Business Joint
+        Venture\"},{\"code\":\"JV\",\"description\":\"JV Service-Disabled Veteran-Owned
+        Business Joint Venture\"},{\"code\":\"QF\",\"description\":\"Service Disabled
+        Veteran Owned Business\"}],\"physical_address\":{\"city\":\"Owings Mills\",\"zip_code\":\"21117\",\"country_code\":\"USA\",\"address_line1\":\"11240
+        Reisterstown Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1965\",\"state_or_province_code\":\"MD\"}},{\"uei\":\"SS2CYQC6PLR6\",\"legal_business_name\":\"
+        AMBER RYAN\",\"cage_code\":\"16L33\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"G9\",\"description\":\"Other Than One of the
+        Proceeding\"}],\"physical_address\":{\"city\":\"Salinas\",\"zip_code\":\"93908\",\"country_code\":\"USA\",\"address_line1\":\"22160
+        Berry Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"8728\",\"state_or_province_code\":\"CA\"}},{\"uei\":\"QE4VZK8QZSV3\",\"legal_business_name\":\"
+        Accreditation Board of America, LLC\",\"cage_code\":\"86HD7\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"FR\",\"description\":\"Asian-Pacific American
+        Owned\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"physical_address\":{\"city\":\"Sterling\",\"zip_code\":\"20165\",\"country_code\":\"USA\",\"address_line1\":\"26
+        Dorrell Ct\",\"address_line2\":\"\",\"zip_code_plus4\":\"5713\",\"state_or_province_code\":\"VA\"}},{\"uei\":\"FTK1UZGCZP39\",\"legal_business_name\":\"
+        Arthur V. Mauro Institute for Peace and Justice at St. Paul\u2019s College
+        Inc.\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"1R\",\"description\":\"Private
+        University or College\"},{\"code\":\"A8\",\"description\":\"Non-Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"M8\",\"description\":\"Educational Institution\"}],\"physical_address\":{\"city\":\"Winnipeg\",\"zip_code\":\"R3T
+        2M6\",\"country_code\":\"CAN\",\"address_line1\":\"70 Dysart Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"MB\"}},{\"uei\":\"X9E4EJ6SLCS5\",\"legal_business_name\":\"
+        BETHLEHEM BAPTIST CHURCH GASTONIA, NORTH CAROLINA\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"A8\",\"description\":\"Non-Profit
+        Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"GASTONIA\",\"zip_code\":\"28056\",\"country_code\":\"USA\",\"address_line1\":\"3100
+        CITY CHURCH ST BLDG B\",\"address_line2\":\"\",\"zip_code_plus4\":\"0045\",\"state_or_province_code\":\"NC\"}},{\"uei\":\"VTQDBML6HG18\",\"legal_business_name\":\"
+        Bahareh Khiabani\",\"cage_code\":\"15G41\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"Berkeley\",\"zip_code\":\"94710\",\"country_code\":\"USA\",\"address_line1\":\"1080
+        Delaware St Unit 415\",\"address_line2\":\"\",\"zip_code_plus4\":\"2183\",\"state_or_province_code\":\"CA\"}},{\"uei\":\"ZYEQK6YZRVR6\",\"legal_business_name\":\"
+        Clyde Joseph Enterprises, LLC\",\"cage_code\":\"16B28\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"physical_address\":{\"city\":\"Wentzville\",\"zip_code\":\"63385\",\"country_code\":\"USA\",\"address_line1\":\"131
+        Freymuth Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"3632\",\"state_or_province_code\":\"MO\"}},{\"uei\":\"SAYLQCANSYD4\",\"legal_business_name\":\"
+        Coil-Tran LLC\",\"cage_code\":\"14FW3\",\"business_types\":[{\"code\":\"20\",\"description\":\"Foreign
+        Owned\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"MF\",\"description\":\"Manufacturer of Goods\"}],\"physical_address\":{\"city\":\"HOBART\",\"zip_code\":\"46342\",\"country_code\":\"USA\",\"address_line1\":\"160
+        S ILLINOIS ST\",\"address_line2\":\"\",\"zip_code_plus4\":\"4512\",\"state_or_province_code\":\"IN\"}},{\"uei\":\"N5YHPLQELFW5\",\"legal_business_name\":\"
+        Cuyuna Range Housing, Inc.\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"A8\",\"description\":\"Non-Profit
+        Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"physical_address\":{\"city\":\"Ironton\",\"zip_code\":\"56455\",\"country_code\":\"USA\",\"address_line1\":\"500
+        8th Ave Ofc 214\",\"address_line2\":\"\",\"zip_code_plus4\":\"9701\",\"state_or_province_code\":\"MN\"}},{\"uei\":\"U6EUU7F4RAG4\",\"legal_business_name\":\"
+        DOE THE BARBER 23, LLC\",\"cage_code\":\"16D37\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran
+        Owned Business\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"},{\"code\":\"QF\",\"description\":\"Service
+        Disabled Veteran Owned Business\"}],\"physical_address\":{\"city\":\"Wichita\",\"zip_code\":\"67214\",\"country_code\":\"USA\",\"address_line1\":\"140
+        N Hillside St # 5\",\"address_line2\":\"\",\"zip_code_plus4\":\"4919\",\"state_or_province_code\":\"KS\"}},{\"uei\":\"L676QG9DC797\",\"legal_business_name\":\"
+        Dayna Regina Terrell\",\"cage_code\":\"14UB3\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"}],\"physical_address\":{\"city\":\"Youngstown\",\"zip_code\":\"44511\",\"country_code\":\"USA\",\"address_line1\":\"933
+        Ottawa Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"1418\",\"state_or_province_code\":\"OH\"}},{\"uei\":\"FR59S9V8J4K5\",\"legal_business_name\":\"
+        EVANSVILLE VANDERBURGH PUBLIC LIBRARY\",\"cage_code\":\"6DYM5\",\"business_types\":[{\"code\":\"12\",\"description\":\"U.S.
+        Local Government\"},{\"code\":\"C7\",\"description\":\"County\"}],\"physical_address\":{\"city\":\"Evansville\",\"zip_code\":\"47713\",\"country_code\":\"USA\",\"address_line1\":\"200
+        SE Martin Luther King Jr Blvd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1802\",\"state_or_province_code\":\"IN\"}},{\"uei\":\"DJJSTLWX9BL1\",\"legal_business_name\":\"
+        FALCONWARE LLC\",\"cage_code\":\"14HC5\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"FR\",\"description\":\"Asian-Pacific American
+        Owned\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"physical_address\":{\"city\":\"Seattle\",\"zip_code\":\"98109\",\"country_code\":\"USA\",\"address_line1\":\"130
+        Boren Ave N Apt 607\",\"address_line2\":\"\",\"zip_code_plus4\":\"6309\",\"state_or_province_code\":\"WA\"}},{\"uei\":\"UMTSKVL7YM15\",\"legal_business_name\":\"
+        FIELDREADY SOLUTIONS GROUP, LLC\",\"cage_code\":\"14Q40\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"physical_address\":{\"city\":\"Bel
+        Air\",\"zip_code\":\"21014\",\"country_code\":\"USA\",\"address_line1\":\"612
+        Wendellwood Dr\",\"address_line2\":\"\",\"zip_code_plus4\":\"2832\",\"state_or_province_code\":\"MD\"}},{\"uei\":\"MBQMLN5JWEL4\",\"legal_business_name\":\"
+        Forstrom and Torgerson HS, L.L.C.\",\"cage_code\":\"5LCN9\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"physical_address\":{\"city\":\"Shoreview\",\"zip_code\":\"55126\",\"country_code\":\"USA\",\"address_line1\":\"1050
+        Gramsie Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"2949\",\"state_or_province_code\":\"MN\"}},{\"uei\":\"J5XPMVA3TKN9\",\"legal_business_name\":\"
+        Gina A Gallegos\",\"cage_code\":\"16E89\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"OY\",\"description\":\"Black American Owned\"}],\"physical_address\":{\"city\":\"Albuquerque\",\"zip_code\":\"87110\",\"country_code\":\"USA\",\"address_line1\":\"3808
+        Candelaria Rd NE\",\"address_line2\":\"\",\"zip_code_plus4\":\"1662\",\"state_or_province_code\":\"NM\"}},{\"uei\":\"HDFVZNRP9G53\",\"legal_business_name\":\"
+        Governors Workforce Development Board\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"12\",\"description\":\"U.S.
+        Local Government\"}],\"physical_address\":{\"city\":\"Christiansted\",\"zip_code\":\"00820\",\"country_code\":\"USA\",\"address_line1\":\"4401
+        Sion Farm\",\"address_line2\":\"\",\"zip_code_plus4\":\"4245\",\"state_or_province_code\":\"VI\"}},{\"uei\":\"RBDKYFGXG533\",\"legal_business_name\":\"
+        Inner Armor, LLC\",\"cage_code\":\"15GH4\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited
+        Liability Company\"}],\"physical_address\":{\"city\":\"GRANDVILLE\",\"zip_code\":\"49418\",\"country_code\":\"USA\",\"address_line1\":\"3747
+        40TH ST SW\",\"address_line2\":\"\",\"zip_code_plus4\":\"3132\",\"state_or_province_code\":\"MI\"}},{\"uei\":\"Z75YD1TKFNH1\",\"legal_business_name\":\"
+        JAYRON RATEN CLEMENTE\",\"cage_code\":\"SSXS7\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"ZARAGOZA\",\"zip_code\":\"\",\"country_code\":\"PHL\",\"address_line1\":\"430
+        MADRE PALLA 1ST DISTRICT, DEL PILAR\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"}},{\"uei\":\"WUEKW2WMK1G4\",\"legal_business_name\":\"
+        MAX BIROU PROIECTARE SRL\",\"cage_code\":\"1JLAL\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"Iasi\",\"zip_code\":\"\",\"country_code\":\"ROU\",\"address_line1\":\"IASI
+        COUNTRY, IASI MUNICIPALITY, NO 16-18-20 MELODIEI STREET, BUILDING NO 1, 2
+        ND FLOOR, APT.10\",\"address_line2\":\"\",\"zip_code_plus4\":\"\",\"state_or_province_code\":\"\"}},{\"uei\":\"GU1BXWKZBTK8\",\"legal_business_name\":\"
+        NM Consulting LLC\",\"cage_code\":\"14UU1\",\"business_types\":[{\"code\":\"23\",\"description\":\"Minority
+        Owned Business\"},{\"code\":\"27\",\"description\":\"Self Certified Small
+        Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman
+        Owned Small Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"},{\"code\":\"OY\",\"description\":\"Black
+        American Owned\"}],\"physical_address\":{\"city\":\"Omaha\",\"zip_code\":\"68112\",\"country_code\":\"USA\",\"address_line1\":\"3011
+        Whitmore St\",\"address_line2\":\"\",\"zip_code_plus4\":\"3149\",\"state_or_province_code\":\"NE\"}},{\"uei\":\"W7VVRWFNCXJ7\",\"legal_business_name\":\"
+        OSPRE Solutions Inc.\",\"cage_code\":\"16L02\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"A5\",\"description\":\"Veteran Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"QF\",\"description\":\"Service Disabled Veteran
+        Owned Business\"}],\"physical_address\":{\"city\":\"Sykesville\",\"zip_code\":\"21784\",\"country_code\":\"USA\",\"address_line1\":\"670
+        River Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"5503\",\"state_or_province_code\":\"MD\"}},{\"uei\":\"TLZFY6CQ9KK4\",\"legal_business_name\":\"
+        Ophthalmic Therapeutic Innovation LLC\",\"cage_code\":\"8RZ63\",\"business_types\":[{\"code\":\"27\",\"description\":\"Self
+        Certified Small Disadvantaged Business\"},{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"8W\",\"description\":\"Woman Owned Small
+        Business\"},{\"code\":\"A2\",\"description\":\"Woman Owned Business\"},{\"code\":\"F\",\"description\":\"Business
+        or Organization\"},{\"code\":\"LJ\",\"description\":\"Limited Liability Company\"}],\"physical_address\":{\"city\":\"PEABODY\",\"zip_code\":\"01960\",\"country_code\":\"USA\",\"address_line1\":\"20
+        KEYES DR APT 10\",\"address_line2\":\"\",\"zip_code_plus4\":\"8024\",\"state_or_province_code\":\"MA\"}},{\"uei\":\"YEVYSM49LK67\",\"legal_business_name\":\"
+        PK Oxford Square Limited Partnership\",\"cage_code\":\"\",\"business_types\":[{\"code\":\"2X\",\"description\":\"For
+        Profit Organization\"},{\"code\":\"F\",\"description\":\"Business or Organization\"}],\"physical_address\":{\"city\":\"Okemos\",\"zip_code\":\"48864\",\"country_code\":\"USA\",\"address_line1\":\"1784
+        Hamilton Rd\",\"address_line2\":\"\",\"zip_code_plus4\":\"1811\",\"state_or_province_code\":\"MI\"}},{\"uei\":\"LFCHPU28HMA5\",\"legal_business_name\":\"
+        RECLAMATION DISTRICT 2025\",\"cage_code\":\"6HQ97\",\"business_types\":[{\"code\":\"2F\",\"description\":\"U.S.
+        State Government\"}],\"physical_address\":{\"city\":\"Stockton\",\"zip_code\":\"95202\",\"country_code\":\"USA\",\"address_line1\":\"343
+        E Main St Ste 715\",\"address_line2\":\"\",\"zip_code_plus4\":\"2977\",\"state_or_province_code\":\"CA\"}}]}"
+    headers:
+      CF-RAY:
+      - 99f88c77095ba22d-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:09 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4da2sXNBy5Bk1x9IEzOajg%2B%2Bp%2Frd3V6j3xoKbc%2B6A%2F5qlZHfAnx6ag%2Bs1crSyPNG7%2BdbZ%2Bq3KxV4qH7RbEsUFpw27ldCSjSyh93SMxFh9IsHPfVvyvhl9N0sUA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '13657'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '959'
+      x-ratelimit-burst-reset:
+      - '43'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998652'
+      x-ratelimit-daily-reset:
+      - '76'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '959'
+      x-ratelimit-reset:
+      - '43'
+    status:
+      code: 200
+      message: OK
+version: 1

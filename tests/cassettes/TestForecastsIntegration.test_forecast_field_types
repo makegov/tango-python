@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/forecasts/?page=1&limit=10&shape=id%2Ctitle%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus
+  response:
+    body:
+      string: '{"count":12610,"next":"http://tango.makegov.com/api/forecasts/?limit=10&page=2&shape=id%2Ctitle%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus","previous":null,"results":[{"id":12641,"title":"WHTF
+        World Cup 2026 Bulk Room Block","anticipated_award_date":"2025-11-24","fiscal_year":2026,"naics_code":"721110","status":null},{"id":12612,"title":"CAEIO
+        Recompete","anticipated_award_date":"2099-09-09","fiscal_year":2099,"naics_code":null,"status":"Acquisition
+        Planning"},{"id":12611,"title":"9mm RHTA AMMUNITION","anticipated_award_date":"2025-11-24","fiscal_year":2026,"naics_code":"332992","status":null},{"id":12610,"title":"BG252
+        Swimming Pool Improvements","anticipated_award_date":"2025-12-31","fiscal_year":2026,"naics_code":"236220","status":null},{"id":12609,"title":"Telecommunications
+        Support for USCG Pacific Area/Southwest District Command Center","anticipated_award_date":"2025-12-31","fiscal_year":2026,"naics_code":"541512","status":null},{"id":12608,"title":"Inmarsat
+        Fleet Broadband (FBB) SIM Shared Corp Allowance Plan (SCAP)","anticipated_award_date":"2025-12-15","fiscal_year":2026,"naics_code":"517410","status":null},{"id":12607,"title":"Region
+        4 Administrative Support Services","anticipated_award_date":"2026-01-15","fiscal_year":2026,"naics_code":"561110","status":null},{"id":12606,"title":"Targeting
+        Operations Division - Lead Development and Open-Source Intelligence Analysis","anticipated_award_date":"2026-05-08","fiscal_year":2026,"naics_code":"561990","status":null},{"id":12605,"title":"Audio
+        Visual Equipment","anticipated_award_date":"2025-12-01","fiscal_year":2026,"naics_code":"334310","status":null},{"id":12604,"title":"20V4000M93L
+        MTU Parts","anticipated_award_date":"2026-01-14","fiscal_year":2026,"naics_code":"333618","status":null}]}'
+    headers:
+      CF-RAY:
+      - 99f88c81af9b4c92-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:11 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bH%2BdJ9vPAOU7joMhU3x%2FBDE1B5yAZdmg%2BdTt9Oyz8joho1SfOCyta%2FUbqsthJ7DLXLT59%2BQ8l4htE%2BsHNwyx5%2BjZcWBnXdLPgLLPEJ8JyNs6I77%2FATvSTqDyew%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1790'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '956'
+      x-ratelimit-burst-reset:
+      - '42'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998649'
+      x-ratelimit-daily-reset:
+      - '75'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '956'
+      x-ratelimit-reset:
+      - '42'
+    status:
+      code: 200
+      message: OK
+version: 1

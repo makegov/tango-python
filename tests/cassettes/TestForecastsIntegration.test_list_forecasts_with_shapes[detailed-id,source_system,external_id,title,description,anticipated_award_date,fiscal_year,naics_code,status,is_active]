@@ -1,0 +1,107 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/forecasts/?page=1&limit=5&shape=id%2Csource_system%2Cexternal_id%2Ctitle%2Cdescription%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus%2Cis_active
+  response:
+    body:
+      string: "{\"count\":12610,\"next\":\"http://tango.makegov.com/api/forecasts/?limit=5&page=2&shape=id%2Csource_system%2Cexternal_id%2Ctitle%2Cdescription%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus%2Cis_active\",\"previous\":null,\"results\":[{\"id\":12641,\"source_system\":\"DHS\",\"external_id\":\"72497\",\"title\":\"WHTF
+        World Cup 2026 Bulk Room Block\",\"description\":\"The White House Task Force
+        (WHTF) seeks to secure hotel standard/deluxe room blocks in all designated
+        U.S. cities hosting the 2026 F\xE9d\xE9ration Internationale de Football Association
+        (FIFA) World Cup to support personnel and operational needs during the event.
+        The room blocks will accommodate WHTF staff and affiliated travelers for durations
+        ranging from 20 to 44 days per city. This initiative aims to ensure uniform
+        terms, flexibility, and convenience across all cities while meeting logistical
+        requirements.\",\"anticipated_award_date\":\"2025-11-24\",\"fiscal_year\":2026,\"naics_code\":\"721110\",\"status\":null,\"is_active\":true},{\"id\":12612,\"source_system\":\"GSA\",\"external_id\":\"39588\",\"title\":\"CAEIO
+        Recompete\",\"description\":\"The CAEIO Recompete is to provide Operations
+        and Maintenance (O&M) of the global CA IT environment within an Information
+        Technology Service Management (ITSM) framework.\",\"anticipated_award_date\":\"2099-09-09\",\"fiscal_year\":2099,\"naics_code\":null,\"status\":\"Acquisition
+        Planning\",\"is_active\":true},{\"id\":12611,\"source_system\":\"DHS\",\"external_id\":\"72499\",\"title\":\"9mm
+        RHTA AMMUNITION\",\"description\":\"This requirement is for 4 million rounds
+        of 9MM Reduced Hazard Training Ammunition (RHTA) against existing multiple
+        award IDIQ contracts and will be competed between those contract holders in
+        accordance with FAR 16.505(b)(1) Fair Opportunity. This is not a new requirement,
+        nor will any solicitation be issued.\",\"anticipated_award_date\":\"2025-11-24\",\"fiscal_year\":2026,\"naics_code\":\"332992\",\"status\":null,\"is_active\":true},{\"id\":12610,\"source_system\":\"DHS\",\"external_id\":\"72334\",\"title\":\"BG252
+        Swimming Pool Improvements\",\"description\":\"Interior swimming pool resurfacing,
+        filter system replacement and installation of a monorail hoist system.\",\"anticipated_award_date\":\"2025-12-31\",\"fiscal_year\":2026,\"naics_code\":\"236220\",\"status\":null,\"is_active\":true},{\"id\":12609,\"source_system\":\"DHS\",\"external_id\":\"70899\",\"title\":\"Telecommunications
+        Support for USCG Pacific Area/Southwest District Command Center\",\"description\":\"The
+        purpose of this contract is to obtain telecommunications support services
+        for Command, Control, Communications, Computers, Cyber, and Intelligence (C5I)
+        CLASSIFIED and UNCLASSIFIED hardware and software services for the Department
+        of Homeland Security, United States Coast Guard, and the District Eleven /
+        Pacific Area Command Center. The overall purpose of this PWS is to fully support
+        the District Eleven / Pacific Area Command Center in maintaining classified
+        and unclassified C5I support with on-site contractor support. The specific
+        objective is to maintain C5I continuity for the Command Center and for the
+        United States Coast Guard.\",\"anticipated_award_date\":\"2025-12-31\",\"fiscal_year\":2026,\"naics_code\":\"541512\",\"status\":null,\"is_active\":true}]}"
+    headers:
+      CF-RAY:
+      - 99f88c7f2a47b45f-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:11 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AlvlhAJB0oJNwKPZiW5wuiVjjIuHAlxIdg3ohvv7b5SViJDO7H%2FYECc1CCRslppY3T1H5Ij%2B7QLe7qtM5HpzZ4xCUhhjc92j9tln%2B7iyQmXxw4yTAoneKaL5%2FQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3152'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '956'
+      x-ratelimit-burst-reset:
+      - '42'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998649'
+      x-ratelimit-daily-reset:
+      - '75'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '956'
+      x-ratelimit-reset:
+      - '42'
+    status:
+      code: 200
+      message: OK
+version: 1

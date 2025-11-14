@@ -1,0 +1,143 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ==","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","fiscal_year":2026,"description":"THE
+        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
+        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
+        FORT MYERS FLORIDA.","total_contract_value":1089550.8,"recipient":{"display_name":"REDCON
+        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","fiscal_year":2026,"description":"TOPEKA
+        JOC","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE CONSTRUCTION
+        GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","fiscal_year":2026,"description":"TO
+        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)","total_contract_value":1371325.32,"recipient":{"display_name":"MERLIN
+        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","fiscal_year":2026,"description":"U.S.
+        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
+        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
+        OFFICE","total_contract_value":4387892.04,"recipient":{"display_name":"RACK-WILDNER
+        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","fiscal_year":2026,"description":"SOLARWINDS
+        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.","total_contract_value":24732.97,"recipient":{"display_name":"REGENCY
+        CONSULTING INC"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","award_date":"2025-11-14","fiscal_year":2026,"description":"COMPREHENSIVE
+        RISK ASSESSMENT AND MITIGATION - OCFO","total_contract_value":1499803.54,"recipient":{"display_name":"ERNST
+        & YOUNG LLP"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","award_date":"2025-11-14","fiscal_year":2026,"description":"F5
+        NETWORK MAINTENANCE RENEWAL","total_contract_value":73050.0,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","award_date":"2025-11-14","fiscal_year":2026,"description":"XSI
+        HARDWARE MAINTENANCE RENEWAL FY26","total_contract_value":21711.76,"recipient":{"display_name":"GOVPLACE,
+        LLC"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","award_date":"2025-11-14","fiscal_year":2026,"description":"TELLABS
+        STANDARD SUPPORT & PANORAMA INM","total_contract_value":13390.73,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","fiscal_year":2026,"description":"CISCO
+        NASA CISCO REMOTE VPN OBSOLESCENCE REPLACEMENT","total_contract_value":99974.58,"recipient":{"display_name":"FCN
+        INC"}},{"key":"CONT_AWD_80HQTR26F7003_8000_80NSSC21D0001_8000","piid":"80HQTR26F7003","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR JSC  PER QUOTE 13896654
+        DATED 11/13/2025.","total_contract_value":14940.34,"recipient":{"display_name":"THE
+        MATHWORKS, INC."}},{"key":"CONT_AWD_80HQTR26F7002_8000_80NSSC21D0001_8000","piid":"80HQTR26F7002","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR GSFC PER QUOTE 13896650
+        DATED 11/13/2025.","total_contract_value":2651.0,"recipient":{"display_name":"THE
+        MATHWORKS, INC."}},{"key":"CONT_AWD_80HQTR26F7001_8000_80NSSC21D0001_8000","piid":"80HQTR26F7001","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
+        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES PER QUOTE 13896646 DATED
+        11/13/2025.","total_contract_value":3140.0,"recipient":{"display_name":"THE
+        MATHWORKS, INC."}},{"key":"CONT_AWD_80ARC026FA001_8000_80GRC025DA001_8000","piid":"80ARC026FA001","award_date":"2025-11-14","fiscal_year":2026,"description":"TASK
+        ORDER TO PROVIDE CUSTODIAL SERVICES ABOVE THE BASELINE SERVICES.","total_contract_value":106717.31,"recipient":{"display_name":"AHTNA
+        INTEGRATED SERVICES LLC"}},{"key":"CONT_AWD_75N93026F00001_7529_HHSN316201500040W_7529","piid":"75N93026F00001","award_date":"2025-11-14","fiscal_year":2026,"description":"AWS
+        CLOUDLINK SERVICE - RDCF 2X10G (AMBIS 2275621)","total_contract_value":79453.12,"recipient":{"display_name":"NEW
+        TECH SOLUTIONS, INC."}},{"key":"CONT_AWD_75H71226F80002_7527_36F79724D0071_3600","piid":"75H71226F80002","award_date":"2025-11-14","fiscal_year":2026,"description":"ZOLL
+        MEDICAL CORPORATION DEFIBRILLATOR EQUIPMENT","total_contract_value":630011.67,"recipient":{"display_name":"AFTER
+        ACTION MEDICAL AND DENTAL SUPPLY, LLC"}},{"key":"CONT_AWD_75H71226F28005_7527_75H71224A00019_7527","piid":"75H71226F28005","award_date":"2025-11-14","fiscal_year":2026,"description":"BPA
+        CALL FOR CRSU. TELERADIOLOGY SERVICES","total_contract_value":256875.0,"recipient":{"display_name":"VETMED
+        GROUP LLC"}},{"key":"CONT_AWD_75H71126P00002_7527_-NONE-_-NONE-","piid":"75H71126P00002","award_date":"2025-11-14","fiscal_year":2026,"description":"PITNEY
+        BOWES POSTAGE REFILL FOR LAWTON INDIAN HOSPITAL.","total_contract_value":25000.0,"recipient":{"display_name":"THE
+        PITNEY BOWES BANK, INC."}},{"key":"CONT_AWD_75H71126F27002_7527_75H71126D00001_7527","piid":"75H71126F27002","award_date":"2025-11-14","fiscal_year":2026,"description":"LAB
+        AND PATHOLOGY - OCAO","total_contract_value":35000.0,"recipient":{"display_name":"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC"}},{"key":"CONT_AWD_75H71126F27001_7527_75H71126D00001_7527","piid":"75H71126F27001","award_date":"2025-11-14","fiscal_year":2026,"description":"LAB
+        AND PATHOLOGY - OCAO","total_contract_value":198000.0,"recipient":{"display_name":"DIAGNOSTIC
+        LABORATORY OF OKLAHOMA LLC"}},{"key":"CONT_AWD_75H70726P00003_7527_-NONE-_-NONE-","piid":"75H70726P00003","award_date":"2025-11-14","fiscal_year":2026,"description":"LICENSED
+        CLINICAL SOCIAL WORKER (LCSW) - NSRTC","total_contract_value":899491.87,"recipient":{"display_name":"TESTUDO
+        LOGISTICS LLC"}},{"key":"CONT_AWD_75H70626P00018_7527_-NONE-_-NONE-","piid":"75H70626P00018","award_date":"2025-11-14","fiscal_year":2026,"description":"REGISTERED
+        NURSE SERVICES FOR THE INPATIENT AND EMERGENCY ROOM DEPARTMENT AT THE CHEYENNE
+        RIVER HEALTH CENTER LOCATED IN EAGLE BUTTE, SD. PERIOD OF PERFORMANCE IS 90
+        DAYS FROM DATE AWARDED.","total_contract_value":405600.0,"recipient":{"display_name":"BAY
+        AREA ANESTHESIA LLC"}},{"key":"CONT_AWD_75H70426F80001_7527_140A1624D0044_1450","piid":"75H70426F80001","award_date":"2025-11-14","fiscal_year":2026,"description":"INFRASTRUCTURE
+        & PLATFORM SUPPORT SERVICES FOR RESOURCE AND PATIENT MANAGEMENT SYSTEM (CSMT
+        O&M)","total_contract_value":10481443.48,"recipient":{"display_name":"WICHITA
+        TRIBAL ENTERPRISES, LLC"}},{"key":"CONT_AWD_75H70326F08037_7527_75H70323D00002_7527","piid":"75H70326F08037","award_date":"2025-11-14","fiscal_year":2026,"description":"THE
+        CONTRACTOR SHALL PROVIDE ALL LABOR, MATERIALS, EQUIPMENT, TOOLS, TRANSPORTATION,
+        AND SUPERVISION NECESSARY TO FURNISH AND COMPLETE THE WORK AS SPECIFIED AT
+        SANTA YSABEL SAN DIEGO, CA","total_contract_value":43763.4,"recipient":{"display_name":"AMA
+        DIVERSIFIED CONSTRUCTION GROUP"}},{"key":"CONT_AWD_75FCMC26F0019_7530_75FCMC20D0015_7530","piid":"75FCMC26F0019","award_date":"2025-11-14","fiscal_year":2026,"description":"CMS
+        WILL UTILIZE THIS TASK ORDER AS A PART OF THE OVERALL PROVIDER ENROLLMENT
+        AND OVERSIGHT, INDEFINITE DELIVERY, INDEFINITE QUANTITY CONTRACT (PEO-IDIQ)
+        TO DETECT, PREVENT, AND PROACTIVELY DETER FRAUD, WASTE AND ABUSE IN THE MEDICARE
+        AND/OR MEDICAID","total_contract_value":27298525.06,"recipient":{"display_name":"SIGNATURE
+        CONSULTING GROUP LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c2cbd8ca1dc-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:57 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=m%2BXfk9Ju6b%2B3QuWMMQEUDYT4p84n7mxhnKhYOv%2FO52N9CYNIEB5aef2h%2B0WFMj5n%2B5By2Wrdti1f0X%2FuKlF74%2BBynN6Ao7eYuvn0XQmhUqjU7bzudFZMtEgB3w%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '8291'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '979'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998672'
+      x-ratelimit-daily-reset:
+      - '88'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '979'
+      x-ratelimit-reset:
+      - '55'
+    status:
+      code: 200
+      message: OK
+version: 1

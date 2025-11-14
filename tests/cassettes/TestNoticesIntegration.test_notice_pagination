@@ -1,0 +1,164 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/notices/?page=1&limit=5&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date
+  response:
+    body:
+      string: '{"count":7975196,"next":"http://tango.makegov.com/api/notices/?limit=5&page=2&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date","previous":null,"results":[{"notice_id":"d5e7d516-698c-4b08-9d2d-f245e36627d6","title":"Crawford
+        Modular Bunkhouse, Boise National Forest","solicitation_number":"1240LT23R0034","posted_date":null},{"notice_id":"d5e94509-01a7-4e85-9308-274c30d6ba4e","title":"6835--Medical
+        Air/Gas and Cylinder Rental","solicitation_number":"36C24623Q0127","posted_date":null},{"notice_id":"6642f6ba-caa4-4cb3-b2ba-3cd9dab3eeaa","title":"Z--GAOA
+        - EMDDO ROADS AND REC SITE REPAIRS","solicitation_number":"140L3625B0002","posted_date":null},{"notice_id":"23f87f32-a95f-4d63-a750-229784139aa3","title":"Maintenance
+        Dredging of the Maurice River, NJ","solicitation_number":"W912BU25BA005","posted_date":null},{"notice_id":"44b721db-c64a-49d8-84c7-43aa160625db","title":"Hazardous
+        Waste Disposal San Diego","solicitation_number":"SP450025R0004","posted_date":null}]}'
+    headers:
+      CF-RAY:
+      - 99f88c8abd7d5122-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:12 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=tK522CYDk9d2wJYOqfbYcteeRcDAX6joGIp%2BHEsmYbkuBkWNaImsANfTicpoBJh6pzpPALwUt19BPci6tsOG6B48vPRv91UeNDRtL3K%2BtgMvCip8mk0nw92TXg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '983'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '949'
+      x-ratelimit-burst-reset:
+      - '40'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998642'
+      x-ratelimit-daily-reset:
+      - '73'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '949'
+      x-ratelimit-reset:
+      - '40'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/notices/?page=2&limit=5&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date
+  response:
+    body:
+      string: '{"count":7975196,"next":"http://tango.makegov.com/api/notices/?limit=5&page=3&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date","previous":"http://tango.makegov.com/api/notices/?limit=5&shape=notice_id%2Ctitle%2Csolicitation_number%2Cposted_date","results":[{"notice_id":"acb7e123-b9d0-43b5-9b99-2ee924a763ee","title":"120mm
+        Tank Training Ammunition - FY22-FY26","solicitation_number":"W52P1J-21-R-0035","posted_date":null},{"notice_id":"f85f22bb-512b-42da-83bd-b78446b146d1","title":"SPE4A624R0101,
+        6340012871321, SENSOR,FIRE, 3800-01-1125/340-212-17","solicitation_number":"SPE4A624R0101","posted_date":null},{"notice_id":"5a2edf47-1876-4524-b33b-d9368237d83d","title":"M--Wayside
+        Exhibit Planning, Design, Fabrication, and","solicitation_number":"140P2124R0007","posted_date":null},{"notice_id":"9d89412a-fd63-44cb-9958-ab1e3730b534","title":"Safety
+        Fuel Container Identification Tags, NFES 0801, 0803, & 0805","solicitation_number":"1202SC25Q2706","posted_date":null},{"notice_id":"530dd5c4-e52f-445a-9da0-ad30e37b14e7","title":"LTUY252018
+        Repair Building 53 for Interim Occupancy","solicitation_number":"W50S8K25QA003","posted_date":null}]}'
+    headers:
+      CF-RAY:
+      - 99f88c8b8e805122-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:12 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zePMKAinMRLM3Oua%2BG%2F2i7DiXlxVVrfQm2Gvd0RIV3mMXpEQKIISooB1RnVZtpuhBD3%2Bo2fjGTH8eHCJuCvfW9E%2BunthYivBBQadE6%2FfFWxhahPT8FGwfPyM3w%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1156'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.029s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '948'
+      x-ratelimit-burst-reset:
+      - '40'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998641'
+      x-ratelimit-daily-reset:
+      - '73'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '948'
+      x-ratelimit-reset:
+      - '40'
+    status:
+      code: 200
+      message: OK
+version: 1

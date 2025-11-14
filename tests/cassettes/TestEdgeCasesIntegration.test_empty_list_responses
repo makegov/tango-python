@@ -1,0 +1,78 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2099-01-01
+  response:
+    body:
+      string: '{"count":0,"next":null,"cursor":null,"results":[],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c2e1e69a20d-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:58 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=My5qT6ZJS4kpHm%2Fu0P1UHphlhaaCiL4qSnuXdJNSeZebD1dPPmgY8VoIyuNFf10ERRHh5%2BR37IsD22gQLTBGBPKNlo39vYGASefYELcwBTiZElAeH31dE6Ofbg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '77'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '978'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998671'
+      x-ratelimit-daily-reset:
+      - '88'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '978'
+      x-ratelimit-reset:
+      - '55'
+    status:
+      code: 200
+      message: OK
+version: 1

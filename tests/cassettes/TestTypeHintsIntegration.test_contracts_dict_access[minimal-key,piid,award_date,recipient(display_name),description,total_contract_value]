@@ -1,0 +1,92 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0=","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","description":"THE
+        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
+        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
+        FORT MYERS FLORIDA.","total_contract_value":1089550.8,"recipient":{"display_name":"REDCON
+        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","description":"TOPEKA
+        JOC","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE CONSTRUCTION
+        GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","description":"TO
+        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)","total_contract_value":1371325.32,"recipient":{"display_name":"MERLIN
+        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","description":"U.S.
+        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
+        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
+        OFFICE","total_contract_value":4387892.04,"recipient":{"display_name":"RACK-WILDNER
+        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","description":"SOLARWINDS
+        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.","total_contract_value":24732.97,"recipient":{"display_name":"REGENCY
+        CONSULTING INC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c30fcf1a20f-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:58 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Y4jFgNm%2BrBVchQ%2B8FfyeJXUfKAVyeqj4wGgLUDO%2BKG4qkU%2Fm8yeTuQaA7Kaecwz%2FoBKqAaknBIiUFX46OWwJEOTveBKFV%2F277CJp5Upk9byTEgDeG%2FFeq05nlQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1974'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '976'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998669'
+      x-ratelimit-daily-reset:
+      - '87'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '976'
+      x-ratelimit-reset:
+      - '55'
+    status:
+      code: 200
+      message: OK
+version: 1

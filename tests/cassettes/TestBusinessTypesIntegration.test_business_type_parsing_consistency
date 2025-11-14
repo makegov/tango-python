@@ -1,0 +1,91 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/business_types/?page=1&limit=25
+  response:
+    body:
+      string: '{"count":78,"next":"http://tango.makegov.com/api/business_types/?limit=25&page=2","previous":null,"results":[{"name":"1862
+        Land Grant College","code":"G6"},{"name":"1890 Land Grant College","code":"G7"},{"name":"1994
+        Land Grant College","code":"G8"},{"name":"AbilityOne Non-Profit Agency","code":"A7"},{"name":"Airport
+        Authority","code":"TR"},{"name":"Alaskan Native Corporation Owned Firm","code":"05"},{"name":"Alaskan
+        Native Servicing Institution","code":"G3"},{"name":"American Indian Owned","code":"OW"},{"name":"Asian-Pacific
+        American Owned","code":"FR"},{"name":"Black American Owned","code":"OY"},{"name":"City","code":"C8"},{"name":"Community
+        Development Corporation","code":"H2"},{"name":"Community Development Corporation
+        Owned Firm","code":"HK"},{"name":"Council of Governments","code":"UD"},{"name":"County","code":"C7"},{"name":"DOT
+        Certified DBE","code":"HQ"},{"name":"Domestic Shelter","code":"6D"},{"name":"Economically
+        Disadvantaged Joint Venture Women-Owned Small Business","code":"8D"},{"name":"Economically
+        Disadvantaged Women-Owned Small Business","code":"8E"},{"name":"Educational
+        Institution","code":"M8"},{"name":"Federal Agency","code":"NG"},{"name":"Federally
+        Funded Research and Development Center","code":"QW"},{"name":"For Profit Organization","code":"2X"},{"name":"Foreign
+        Government","code":"CY"},{"name":"Foreign Owned","code":"20"}]}'
+    headers:
+      CF-RAY:
+      - 99f88ca359176a43-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=aYxoz9eKuyyNhmDjL6JdkOdnhc2rTW8Cj0cFzXZ62cBpOU864buD2vkfNKiAGvIVqeb%2FFj6dyzXjdzqWJubPVDptJGACgRtwZhF%2FNUBTUeB%2BQDfijz0eXFFfoA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1367'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.015s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '7'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '83'
+      x-ratelimit-daily-reset:
+      - '73213'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '7'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

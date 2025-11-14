@@ -1,0 +1,92 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
+  response:
+    body:
+      string: '{"count":402447,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700&cursor=WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0%3D","cursor":"WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0=","results":[{"key":"CONT_AWD_47QSWA26P03JH_4732_-NONE-_-NONE-","piid":"47QSWA26P03JH","award_date":"2025-11-13","description":"STONE,
+        SHARPENING, UN-MOUNTED, NOT OIL IMPREGNATED, NATURAL (NOVACULITE)SQUARE STYLE,
+        HARD DENSITY, 3.00-3.500 INCH DENSITY, .500 INCH WIDTH, .500 INCH THICKNESS","total_contract_value":187.88,"recipient":{"display_name":"F
+        & M MICRO PRODUCTS INC"}},{"key":"CONT_AWD_47QSWA26P03JG_4732_-NONE-_-NONE-","piid":"47QSWA26P03JG","award_date":"2025-11-13","description":"FASTENER
+        TAPE, HOOK & LOOP:BLACK VELCRO HOOK& LOOP FASTENER TAPE W/ADHESIVE BACK. WIDTH-3/4
+        IN WIDE, UI: RO/5YD(5 YARDS PER ROLL)","total_contract_value":64.5,"recipient":{"display_name":"MBA
+        OFFICE SUPPLY, INC."}},{"key":"CONT_AWD_47QSWA26P03JF_4732_-NONE-_-NONE-","piid":"47QSWA26P03JF","award_date":"2025-11-13","description":"CLEANER,
+        CONDENSER COIL:ACIDIC AIR CONDITIONING COIL CLEANER. FOAMINM BLEND OF SOLVENTS,
+        WETTING AGENTS AND ACIDS SPECIFICALLY MADE FOR CLEANING ALUMINUM FINNED AIR-COOLED
+        CONDENSERS. DILUTION RATIO OF 1 PART CLEANER TO 3 PARTS WATER. ONE (1) EACH
+        FI","total_contract_value":367.37,"recipient":{"display_name":"NOREX GROUP,
+        LLC"}},{"key":"CONT_AWD_47QSWA26P03JE_4732_-NONE-_-NONE-","piid":"47QSWA26P03JE","award_date":"2025-11-13","description":"CLOTH,CLEANING","total_contract_value":44.85,"recipient":{"display_name":"PREMIER
+        & COMPANIES, INC."}},{"key":"CONT_AWD_47QSWA26P03JD_4732_-NONE-_-NONE-","piid":"47QSWA26P03JD","award_date":"2025-11-13","description":"FLOUR
+        SIFTER","total_contract_value":2122.0,"recipient":{"display_name":"F & M MICRO
+        PRODUCTS INC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f88c18b9f61e27-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:00:54 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qlhkNS1%2FHntX%2FIS1n0ZoqhAkM8scYa0plUkcBEH1rd8FZ%2FMxMj0mwLaZeUzpREqnC%2Fb0Qgz2iOsy4BKSTKcohRjQB1rHPsxA9c%2F%2BFp%2F55dSnUAJV5zzioN%2FJ8Q%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1994'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '994'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998687'
+      x-ratelimit-daily-reset:
+      - '91'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '994'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+version: 1

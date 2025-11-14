@@ -1,0 +1,129 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/opportunities/?page=1&limit=5&shape=opportunity_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cresponse_deadline%2Cfirst_notice_date%2Clast_notice_date%2Cactive%2Cnaics_code%2Cpsc_code%2Cset_aside%2Csam_url%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29
+  response:
+    body:
+      string: '{"count":190142,"next":"http://tango.makegov.com/api/opportunities/?limit=5&page=2&shape=opportunity_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cresponse_deadline%2Cfirst_notice_date%2Clast_notice_date%2Cactive%2Cnaics_code%2Cpsc_code%2Cset_aside%2Csam_url%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29","previous":null,"results":[{"opportunity_id":"569a523c-2a60-4bfc-83df-45d926818a58","title":"17--NRP,DRAWBAR,TELESCO","description":"Proposed
+        procurement for NSN 1740016221432 NRP,DRAWBAR,TELESCO:\nLine 0001 Qty 30     UI
+        EA  Deliver To: W1A8 DLA DISTRIBUTION By: 0090 DAYS ADO\nThe solicitation
+        is an RFQ and will be available at the link provided in this notice.  Hard
+        copies of this solicitation are not available.  Digitized drawings and Military
+        Specifications and Standards may be retrieved, or ordered, electronically.\nAll
+        responsible sources may submit a quote which, if timely received, shall be
+        considered.\nQuotes may be submitted electronically.\n","solicitation_number":"SPE8EF26Q0029","response_deadline":"2025-12-01T00:00:00+00:00","first_notice_date":"2025-11-16T11:09:42+00:00","last_notice_date":"2025-11-16T11:09:42+00:00","active":true,"naics_code":336212,"psc_code":"17","set_aside":"SBA","sam_url":"https://sam.gov/opp/569a523c2a604bfc83df45d926818a58/view","office":{"office_code":"SPE8EF","office_name":"DLA
+        TROOP SUPPORT","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"dd59e39b-b1c9-49c2-830c-abc66ec6511a","title":"30--CONNECTING
+        LINK,RIG","description":"Proposed procurement for NSN 3040015894908 CONNECTING
+        LINK,RIG:\nLine 0001 Qty 5      UI EA  Deliver To: W1A8 DLA DIST SAN JOAQUIN
+        By: 0159 DAYS ADO\nApproved source is 0W6H8 3671240C01003-5.\nThe solicitation
+        is an RFQ and will be available at the link provided in this notice.  Hard
+        copies of this solicitation are not available. Specifications, plans, or drawings
+        are not available.\nAll responsible sources may submit a quote which, if timely
+        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE4A526T3439","response_deadline":"2025-11-24T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:55+00:00","last_notice_date":"2025-11-16T06:00:55+00:00","active":true,"naics_code":333613,"psc_code":"30","set_aside":null,"sam_url":"https://sam.gov/opp/dd59e39bb1c949c2830cabc66ec6511a/view","office":{"office_code":"SPE4A5","office_name":"DLA
+        AVIATION","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"743be37d-3b73-4f2c-857b-4c57d1ae8ff1","title":"31--CONE
+        AND ROLLERS,TA","description":"Proposed procurement for NSN 3110013984248
+        CONE AND ROLLERS,TA:\nLine 0001 Qty 1336   UI EA  Deliver To: DLA DISTRIBUTION
+        SAN DIEGO By: 0156 DAYS ADO\nThis is a source controlled drawing item.  Approved
+        sources are 60038 28682-20629; 60038 9235611-163; 97153 9235611-163.\nThe
+        solicitation is an RFQ and will be available at the link provided in this
+        notice.  Hard copies of this solicitation are not available. The items furnished
+        must meet the requirements of the drawing cited in the solicitation. Digitized
+        drawings and Military Specifications and Standards may be retrieved, or ordered,
+        electronically.\nAll responsible sources may submit a quote which, if timely
+        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE4A626T047W","response_deadline":"2025-11-24T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:44+00:00","last_notice_date":"2025-11-16T06:00:44+00:00","active":true,"naics_code":332991,"psc_code":"31","set_aside":null,"sam_url":"https://sam.gov/opp/743be37d3b734f2c857b4c57d1ae8ff1/view","office":{"office_code":"SPE4A6","office_name":"DLA
+        AVIATION","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"f5ce34a6-fe69-465a-9a47-e3e445c63f55","title":"47--HOSE
+        ASSEMBLY,NONME","description":"Proposed procurement for NSN 4720002304007
+        HOSE ASSEMBLY,NONME:\nLine 0001 Qty 17     UI EA  Deliver To: DLA DISTRIBUTION
+        WARNER ROBINS By: 0080 DAYS ADO\nThis is a source controlled drawing item.  Approved
+        sources are 78570 96320; 98441 A2148-1.\nThe solicitation is an RFQ and will
+        be available at the link provided in this notice.  Hard copies of this solicitation
+        are not available. The items furnished must meet the requirements of the drawing
+        cited in the solicitation. Digitized drawings and Military Specifications
+        and Standards may be retrieved, or ordered, electronically.\nAll responsible
+        sources may submit a quote which, if timely received, shall be considered.\nQuotes
+        must be submitted electronically.\n","solicitation_number":"SPE7M426T2717","response_deadline":"2025-11-28T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:42+00:00","last_notice_date":"2025-11-16T06:00:42+00:00","active":true,"naics_code":332999,"psc_code":"47","set_aside":"SBA","sam_url":"https://sam.gov/opp/f5ce34a6fe69465a9a47e3e445c63f55/view","office":{"office_code":"SPE7M4","office_name":"DLA
+        LAND AND MARITIME","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"f967a1d6-d155-4e10-a193-7cf1e4e464ac","title":"66--DRAFTING
+        MACHINE","description":"Proposed procurement for NSN 6675001740508 DRAFTING
+        MACHINE:\nLine 0001 Qty 75     UI EA  Deliver To: W1A8 DLA DISTRIBUTION By:
+        0065 DAYS ADO\nApproved source is 1GRU3 3300NP-16.\nThe solicitation is an
+        RFQ and will be available at the link provided in this notice.  Hard copies
+        of this solicitation are not available. Specifications, plans, or drawings
+        are not available.\nAll responsible sources may submit a quote which, if timely
+        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE8E926T0681","response_deadline":"2025-11-28T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:40+00:00","last_notice_date":"2025-11-16T06:00:40+00:00","active":true,"naics_code":321999,"psc_code":"66","set_aside":null,"sam_url":"https://sam.gov/opp/f967a1d6d1554e10a1937cf1e4e464ac/view","office":{"office_code":"SPE8E9","office_name":"DLA
+        TROOP SUPPORT","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}}]}'
+    headers:
+      CF-RAY:
+      - 99f88c65be9dad0b-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 17:01:07 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WRhOdUlaWvcgwyoI50Mw7Fov1fImYrSp3yYyVv93j1nrE6xb8vkRPd5f4PiXYap4rPyRtwKEax0dgE7Jn3WGrLGPyRIfxewC8guqW4IqDjTv88iEOZiXL1%2FE5g%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '6941'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.481s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '970'
+      x-ratelimit-burst-reset:
+      - '46'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998663'
+      x-ratelimit-daily-reset:
+      - '79'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '970'
+      x-ratelimit-reset:
+      - '46'
+    status:
+      code: 200
+      message: OK
+version: 1
