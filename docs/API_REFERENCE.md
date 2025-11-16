@@ -114,24 +114,37 @@ contracts = client.list_contracts(
     flat=False,
     flat_lists=False,
     # Filter parameters (all optional)
-    keyword=None,
+    # Text search
+    keyword=None,  # Mapped to 'search' API param
+    # Date filters
     award_date_gte=None,
     award_date_lte=None,
-    award_amount_gte=None,
-    award_amount_lte=None,
+    pop_start_date_gte=None,
+    pop_start_date_lte=None,
+    pop_end_date_gte=None,
+    pop_end_date_lte=None,
+    expiring_gte=None,
+    expiring_lte=None,
+    # Party filters
     awarding_agency=None,
     funding_agency=None,
-    recipient_name=None,
-    recipient_uei=None,
-    naics_code=None,
-    psc_code=None,
-    place_of_performance_state=None,
-    place_of_performance_zip=None,
+    recipient_name=None,  # Mapped to 'recipient' API param
+    recipient_uei=None,  # Mapped to 'uei' API param
+    # Classification
+    naics_code=None,  # Mapped to 'naics' API param
+    psc_code=None,  # Mapped to 'psc' API param
+    set_aside_type=None,  # Mapped to 'set_aside' API param
+    # Type filters
     fiscal_year=None,
-    contract_type=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
     award_type=None,
-    set_aside_type=None,
-    extent_competed=None,
+    # Identifiers
+    piid=None,
+    solicitation_identifier=None,
+    # Sorting
+    sort=None,  # Combined with 'order' into 'ordering' API param
+    order=None,  # 'asc' or 'desc'
 )
 ```
 
@@ -145,36 +158,42 @@ contracts = client.list_contracts(
 **Filter Parameters:**
 
 **Text Search:**
-- `keyword` - Search contract descriptions and titles
+- `keyword` - Search contract descriptions (automatically mapped to API's 'search' parameter)
 
 **Date Filters:**
 - `award_date_gte` - Awarded on or after date (YYYY-MM-DD)
 - `award_date_lte` - Awarded on or before date (YYYY-MM-DD)
-
-**Amount Filters:**
-- `award_amount_gte` - Minimum award amount
-- `award_amount_lte` - Maximum award amount
+- `pop_start_date_gte` - Period of performance start date ≥
+- `pop_start_date_lte` - Period of performance start date ≤
+- `pop_end_date_gte` - Period of performance end date ≥
+- `pop_end_date_lte` - Period of performance end date ≤
+- `expiring_gte` - Expiring on or after date
+- `expiring_lte` - Expiring on or before date
 
 **Party Filters:**
-- `awarding_agency` - Agency code awarding the contract
-- `funding_agency` - Agency code funding the contract
-- `recipient_name` - Vendor/recipient name (partial match)
-- `recipient_uei` - Vendor UEI (exact match)
+- `awarding_agency` - Agency code (e.g., "4700" for GSA)
+- `funding_agency` - Funding agency code
+- `recipient_name` - Vendor/recipient name (mapped to 'recipient' API param)
+- `recipient_uei` - Vendor UEI (mapped to 'uei' API param)
 
 **Classification:**
-- `naics_code` - NAICS industry code
-- `psc_code` - Product/Service code
-
-**Location:**
-- `place_of_performance_state` - State code (e.g., "CA", "NY")
-- `place_of_performance_zip` - ZIP code
+- `naics_code` - NAICS industry code (mapped to 'naics' API param)
+- `psc_code` - Product/Service code (mapped to 'psc' API param)
+- `set_aside_type` - Set-aside type (mapped to 'set_aside' API param)
 
 **Type Filters:**
-- `fiscal_year` - Federal fiscal year
-- `contract_type` - Type of contract
-- `award_type` - Award type
-- `set_aside_type` - Small business set-aside type
-- `extent_competed` - Competition extent
+- `fiscal_year` - Federal fiscal year (exact match)
+- `fiscal_year_gte` - Fiscal year ≥
+- `fiscal_year_lte` - Fiscal year ≤
+- `award_type` - Award type code
+
+**Identifiers:**
+- `piid` - Procurement Instrument Identifier (exact match)
+- `solicitation_identifier` - Solicitation ID
+
+**Sorting:**
+- `sort` - Field to sort by (e.g., "award_date", "obligated")
+- `order` - Sort order: "asc" or "desc" (default: "asc")
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with contract dictionaries
 
@@ -186,7 +205,13 @@ contracts = client.list_contracts(limit=10)
 
 # Filter by agency
 contracts = client.list_contracts(
-    awarding_agency="GSA",
+    awarding_agency="4700",  # GSA agency code
+    limit=50
+)
+
+# Text search
+contracts = client.list_contracts(
+    keyword="software development",
     limit=50
 )
 
@@ -197,25 +222,34 @@ contracts = client.list_contracts(
     limit=100
 )
 
-# Amount range
+# Expiring contracts
 contracts = client.list_contracts(
-    award_amount_gte=100000,
-    award_amount_lte=1000000,
+    expiring_gte="2025-01-01",
+    expiring_lte="2025-12-31",
     limit=50
 )
 
 # Multiple filters
 contracts = client.list_contracts(
-    awarding_agency="DOD",
-    naics_code="541511",  # IT services
+    keyword="IT services",
+    awarding_agency="4700",  # GSA
     fiscal_year=2024,
+    naics_code="541511",
     limit=100
 )
 
 # With shaping for performance
 contracts = client.list_contracts(
     shape="key,piid,recipient(display_name),total_contract_value,award_date",
-    awarding_agency="GSA",
+    awarding_agency="4700",
+    fiscal_year=2024,
+    limit=100
+)
+
+# Sorting results
+contracts = client.list_contracts(
+    sort="award_date",
+    order="desc",
     limit=100
 )
 ```

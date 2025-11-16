@@ -1,0 +1,180 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425
+  response:
+    body:
+      string: '{"count":184419,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425&cursor=WyIyMDI1LTExLTA3IiwgIkNPTlRfQVdEXzM2Qzc3NjI2TjAwNDhfMzYwMF8zNkMxMEYyMkQwMDEzXzM2MDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTA3IiwgIkNPTlRfQVdEXzM2Qzc3NjI2TjAwNDhfMzYwMF8zNkMxMEYyMkQwMDEzXzM2MDAiXQ==","results":[{"key":"CONT_AWD_36C26326P0102_3600_-NONE-_-NONE-","piid":"36C26326P0102","award_date":"2025-11-14","description":"LIFE
+        SAFETY EVALUATIONS AND STATEMENT OF CONDITIONS SERVICE CONTRACT","total_contract_value":103600.0,"recipient":{"display_name":"HEIDELBERG
+        RESOURCES, LLC"}},{"key":"CONT_AWD_6913G626F40007N_6901_6913G621D300001_6901","piid":"6913G626F40007N","award_date":"2025-11-13","description":"MISSION
+        INFORMATION TECHNOLOGY SUPPORT (MITS) SUPPORT SERVICES; ARPA-I X-BRIDGE PROGRAM
+        SUPPORT","total_contract_value":187268.28,"recipient":{"display_name":"KBR
+        WYLE SERVICES, LLC"}},{"key":"CONT_AWD_68HERC26F0036_6800_68HERC25D0007_6800","piid":"68HERC26F0036","award_date":"2025-11-10","description":"PSC-
+        R425 NEW TASK ORDER \"INTEGRATION, DEVELOPMENT, AND SUPPORT OF ELECTRONIC
+        ENGINE CONTROLS\" COST-PLUS FIXED-FEE (CPFF) TERM-TYPE, 12-MONTH PERIOD OF
+        PERFORMANCE","total_contract_value":1337051.0,"recipient":{"display_name":"SOUTHWEST
+        RESEARCH INSTITUTE"}},{"key":"CONT_AWD_36C77626N0054_3600_36C10F22D0012_3600","piid":"36C77626N0054","award_date":"2025-11-07","description":"CMS
+        PROFESSIONAL SERVICES LEBANON PA","total_contract_value":2053771.2,"recipient":{"display_name":"SSPC
+        LLC"}},{"key":"CONT_AWD_36C77626N0048_3600_36C10F22D0013_3600","piid":"36C77626N0048","award_date":"2025-11-07","description":"CMS
+        PROFESSIONAL SERVICES HOUSTON, TX","total_contract_value":1231450.24,"recipient":{"display_name":"VALI
+        COOPER INTERNATIONAL, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b92289e5a24a-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:25 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dt%2BCBkOvsiXGBF4SCwGRIbTWzGIr6%2Bx%2BxaMkYaND1y0cSjynRz5F7mi90LIAM5Mhbhv9P1YPry9UtMdILmsjmaP5%2BbYXMJcXRVoZK7dSxCtNY2ZFwRE%2Bhiuitw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1880'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.027s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999018'
+      x-ratelimit-daily-reset:
+      - '10'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425
+  response:
+    body:
+      string: '{"count":184419,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425&cursor=WyIyMDI1LTExLTA3IiwgIkNPTlRfQVdEXzM2Qzc3NjI2TjAwNDhfMzYwMF8zNkMxMEYyMkQwMDEzXzM2MDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTA3IiwgIkNPTlRfQVdEXzM2Qzc3NjI2TjAwNDhfMzYwMF8zNkMxMEYyMkQwMDEzXzM2MDAiXQ==","results":[{"key":"CONT_AWD_36C26326P0102_3600_-NONE-_-NONE-","piid":"36C26326P0102","award_date":"2025-11-14","description":"LIFE
+        SAFETY EVALUATIONS AND STATEMENT OF CONDITIONS SERVICE CONTRACT","total_contract_value":103600.0,"recipient":{"display_name":"HEIDELBERG
+        RESOURCES, LLC"}},{"key":"CONT_AWD_6913G626F40007N_6901_6913G621D300001_6901","piid":"6913G626F40007N","award_date":"2025-11-13","description":"MISSION
+        INFORMATION TECHNOLOGY SUPPORT (MITS) SUPPORT SERVICES; ARPA-I X-BRIDGE PROGRAM
+        SUPPORT","total_contract_value":187268.28,"recipient":{"display_name":"KBR
+        WYLE SERVICES, LLC"}},{"key":"CONT_AWD_68HERC26F0036_6800_68HERC25D0007_6800","piid":"68HERC26F0036","award_date":"2025-11-10","description":"PSC-
+        R425 NEW TASK ORDER \"INTEGRATION, DEVELOPMENT, AND SUPPORT OF ELECTRONIC
+        ENGINE CONTROLS\" COST-PLUS FIXED-FEE (CPFF) TERM-TYPE, 12-MONTH PERIOD OF
+        PERFORMANCE","total_contract_value":1337051.0,"recipient":{"display_name":"SOUTHWEST
+        RESEARCH INSTITUTE"}},{"key":"CONT_AWD_36C77626N0054_3600_36C10F22D0012_3600","piid":"36C77626N0054","award_date":"2025-11-07","description":"CMS
+        PROFESSIONAL SERVICES LEBANON PA","total_contract_value":2053771.2,"recipient":{"display_name":"SSPC
+        LLC"}},{"key":"CONT_AWD_36C77626N0048_3600_36C10F22D0013_3600","piid":"36C77626N0048","award_date":"2025-11-07","description":"CMS
+        PROFESSIONAL SERVICES HOUSTON, TX","total_contract_value":1231450.24,"recipient":{"display_name":"VALI
+        COOPER INTERNATIONAL, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b94b6f0da214-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=gQUD0VMLLVhjQdelMxlRrzxHAbP1pJAmnWCpCxTpw%2B6YpoxAgEnBXB1b%2F%2FEin3uFM6wMLnIFTMitepNrgadZ6Uts8UoFVyuEumcKKw14UToExKtidfq8MKhzWA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1880'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '987'
+      x-ratelimit-burst-reset:
+      - '35'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999008'
+      x-ratelimit-daily-reset:
+      - '4'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '987'
+      x-ratelimit-reset:
+      - '35'
+    status:
+      code: 200
+      message: OK
+version: 1

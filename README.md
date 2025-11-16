@@ -106,30 +106,50 @@ contracts = client.list_contracts(
     limit=25,
     # Filter parameters
     keyword="software",
-    awarding_agency="GSA",
+    awarding_agency="4700",  # GSA agency code
     award_date_gte="2023-01-01",
-    award_amount_gte=100000,
+    fiscal_year=2024,
     naics_code="541511"
 )
 
 # Filter by specific agency
 contracts = client.list_contracts(
-    awarding_agency="DOD",
+    awarding_agency="4700",  # GSA
     limit=50
 )
 ```
 
 **Available Filter Parameters:**
 
-- `keyword` - Text search
-- `award_date_gte`, `award_date_lte` - Date range filters
-- `award_amount_gte`, `award_amount_lte` - Amount filters
-- `awarding_agency`, `funding_agency` - Agency filters
-- `recipient_name`, `recipient_uei` - Recipient filters
-- `naics_code`, `psc_code` - Classification codes
-- `place_of_performance_state`, `place_of_performance_zip` - Location filters
-- `fiscal_year` - Fiscal year filter
-- `contract_type`, `award_type`, `set_aside_type`, `extent_competed` - Type filters
+**Text Search:**
+- `keyword` - Search contract descriptions (mapped to 'search' API param)
+
+**Date Filters:**
+- `award_date_gte`, `award_date_lte` - Award date range
+- `pop_start_date_gte`, `pop_start_date_lte` - Period of performance start date range
+- `pop_end_date_gte`, `pop_end_date_lte` - Period of performance end date range
+- `expiring_gte`, `expiring_lte` - Contract expiration date range
+
+**Party Filters:**
+- `awarding_agency`, `funding_agency` - Agency codes
+- `recipient_name`, `recipient_uei` - Vendor/recipient filters
+
+**Classification:**
+- `naics_code`, `psc_code` - Industry/product codes
+- `set_aside_type` - Set-aside type
+
+**Type Filters:**
+- `fiscal_year`, `fiscal_year_gte`, `fiscal_year_lte` - Fiscal year filters
+- `award_type` - Award type code
+
+**Identifiers:**
+- `piid` - Procurement Instrument Identifier
+- `solicitation_identifier` - Solicitation ID
+
+**Sorting:**
+- `sort`, `order` - Sort results (e.g., `sort="award_date"`, `order="desc"`)
+
+**Response Options:**
 - `shape`, `flat`, `flat_lists` - Response shaping options
 
 ### Entities (Vendors/Recipients)

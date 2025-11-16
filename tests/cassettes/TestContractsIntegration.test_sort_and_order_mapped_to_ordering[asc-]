@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date&cursor=WyIyMDI0LTEwLTAxIiwgIkNPTlRfQVdEX1c5MVpMSzI1UFYwMDA4Xzk3MDBfLU5PTkUtXy1OT05FLSJd","cursor":"WyIyMDI0LTEwLTAxIiwgIkNPTlRfQVdEX1c5MVpMSzI1UFYwMDA4Xzk3MDBfLU5PTkUtXy1OT05FLSJd","results":[{"key":"CONT_AWD_W91ZLK25PV0012_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0012","award_date":"2024-10-01","description":"CONSOLIDATED
+        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":694435.17,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0011_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0011","award_date":"2024-10-01","description":"CONSOLIDATED
+        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":856590.91,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0010_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0010","award_date":"2024-10-01","description":"CONSOLIDATED
+        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":1652994.57,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0009_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0009","award_date":"2024-10-01","description":"CONSOLIDATED
+        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":2924202.87,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0008_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0008","award_date":"2024-10-01","description":"CONSOLIDATED
+        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":1660531.17,"recipient":{"display_name":"GPC
+        CONSOLIDATED REPORTING"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b9500ac37091-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Hn6sigbNxA8KjM8jxSWxwWAtxuE%2B4fKymm4c8eZlNM1Y6SLQT6nb8qzV%2BFtq%2BeOvHNjoYx7zntQQd34HrshMi3Rc6vl28F0%2FjsBND2AN339IRSjA%2FkOM2rhMfg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1946'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.019s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '984'
+      x-ratelimit-burst-reset:
+      - '34'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999005'
+      x-ratelimit-daily-reset:
+      - '3'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '984'
+      x-ratelimit-reset:
+      - '34'
+    status:
+      code: 200
+      message: OK
+version: 1

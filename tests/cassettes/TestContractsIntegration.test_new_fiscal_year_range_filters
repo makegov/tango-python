@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&fiscal_year_gte=2020&fiscal_year_lte=2024
+  response:
+    body:
+      string: '{"count":26520260,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&fiscal_year_gte=2020&fiscal_year_lte=2024&cursor=WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX1c5MVdGVTI0RjAwNjBfOTcwMF9XOTFXRlUyMkEwMDAyXzk3MDAiXQ%3D%3D","cursor":"WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX1c5MVdGVTI0RjAwNjBfOTcwMF9XOTFXRlUyMkEwMDAyXzk3MDAiXQ==","results":[{"key":"CONT_AWD_W91ZLK24F0263_9700_W91ZLK20D0002_9700","piid":"W91ZLK24F0263","award_date":"2024-09-30","description":"PURCHASE
+        OF 236 (EA) AC ADSORBER 24\"X24\"X16\" HEGA-AC-16","total_contract_value":600235.32,"recipient":{"display_name":"RSE
+        INC"}},{"key":"CONT_AWD_W91WFU24P0009_9700_-NONE-_-NONE-","piid":"W91WFU24P0009","award_date":"2024-09-30","description":"FORCE
+        PROTECTION ATVS","total_contract_value":88965.16,"recipient":{"display_name":"FUDURIC
+        GMBH & CO. KG"}},{"key":"CONT_AWD_W91WFU24F0062_9700_W91WFU23A0001_9700","piid":"W91WFU24F0062","award_date":"2024-09-30","description":"PANZER
+        BUILDING 2915 MATERIALS","total_contract_value":376219.32,"recipient":{"display_name":"M.C.
+        DEAN EUROPE GMBH"}},{"key":"CONT_AWD_W91WFU24F0061_9700_W91WFU22A0002_9700","piid":"W91WFU24F0061","award_date":"2024-09-30","description":"650
+        MI ESS","total_contract_value":425106.93,"recipient":{"display_name":"M. C.
+        DEAN, INC."}},{"key":"CONT_AWD_W91WFU24F0060_9700_W91WFU22A0002_9700","piid":"W91WFU24F0060","award_date":"2024-09-30","description":"MWR
+        KELLEY ARMS ROOM ESS INSTALL","total_contract_value":127537.49,"recipient":{"display_name":"M.
+        C. DEAN, INC."}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9bacd2ba136b7-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:27:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dSKG2Se0dDGaTIzdrdnwpt4eTYieE38V23%2B50sDxnDanuHaK%2FgU%2BYiH4pbGrI8UTCrqYMgeA1VC1Qrn0qRuMabivMUxp%2B0uE1ecO8eSGty5OCdFCYlsY7MhvCQ%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1626'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.023s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '998'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999005'
+      x-ratelimit-daily-reset:
+      - '13'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '998'
+      x-ratelimit-reset:
+      - '29'
+    status:
+      code: 200
+      message: OK
+version: 1

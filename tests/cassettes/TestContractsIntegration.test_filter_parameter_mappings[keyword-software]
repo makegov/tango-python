@@ -1,0 +1,180 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software
+  response:
+    body:
+      string: '{"count":367674,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&cursor=WyIyMDI1LTEwLTI0IiwgIkNPTlRfQVdEXzM2QzI0ODI2RjAwMzNfMzYwMF9HUzM1RjA0MDhYXzQ3MzIiXQ%3D%3D","cursor":"WyIyMDI1LTEwLTI0IiwgIkNPTlRfQVdEXzM2QzI0ODI2RjAwMzNfMzYwMF9HUzM1RjA0MDhYXzQ3MzIiXQ==","results":[{"key":"CONT_AWD_36C25926N0050_3600_36C25922A0038_3600","piid":"36C25926N0050","award_date":"2025-10-27","description":"ACUSTAF
+        LABOR MANAGEMENT SOFTWARE","total_contract_value":1555761.6,"recipient":{"display_name":"ACUSTAF
+        DEVELOPMENT CORP"}},{"key":"CONT_AWD_2032H526P00006_2050_-NONE-_-NONE-","piid":"2032H526P00006","award_date":"2025-10-27","description":"THIS
+        REQUIREMENT IS FOR PENETRATION COLLABORATION TESTING SOFTWARE.","total_contract_value":12400.0,"recipient":{"display_name":"FCN
+        INC"}},{"key":"CONT_AWD_697DCK26F00006_6920_697DCK22D00001_6920","piid":"697DCK26F00006","award_date":"2025-10-24","description":"OPENTEXT
+        SOFTWARE RENEWAL","total_contract_value":53148.18,"recipient":{"display_name":"CDW
+        GOVERNMENT LLC"}},{"key":"CONT_AWD_47QSSC26P0759_4732_-NONE-_-NONE-","piid":"47QSSC26P0759","award_date":"2025-10-24","description":"IAW
+        RFQ 47QSSC25Q0249 & Q-373816, ANY NON-GSA SCHEDULE COMMERCIAL SOFTWARE IS
+        SUBJECT TO ANSYS GENERAL TERMS AND CONDITIONS (AGTC) AND ANY ADDITIONAL TERMS
+        APPLICABLE TO THE OFFER TYPE ON THE QUOTE. AGTC AND ADDITIONAL TERMS ARE AT
+        WWW.ANSYS.COM/AGTC","total_contract_value":55891.46,"recipient":{"display_name":"ANSYS
+        INC"}},{"key":"CONT_AWD_36C24826F0033_3600_GS35F0408X_4732","piid":"36C24826F0033","award_date":"2025-10-24","description":"ACUSTAF
+        LABOR MANAGEMENT SOFTWARE","total_contract_value":76648.0,"recipient":{"display_name":"ACUSTAF
+        DEVELOPMENT CORP"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b9208bd8a214-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:24 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=p9mBmV5CQqVQ1b2fws6tlzLhdhGUzxLGW3Tql8D4nV%2BrnNL0UJdBJoJjSK21AY%2BsYQ7tHe2a9I%2B55OFiHbqc91MdQ1cj0aW0GDhlHV6e1b5QTpzooIWGIbWA7w%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1840'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.023s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '998'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999019'
+      x-ratelimit-daily-reset:
+      - '11'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '998'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software
+  response:
+    body:
+      string: '{"count":367674,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&cursor=WyIyMDI1LTEwLTI0IiwgIkNPTlRfQVdEXzM2QzI0ODI2RjAwMzNfMzYwMF9HUzM1RjA0MDhYXzQ3MzIiXQ%3D%3D","cursor":"WyIyMDI1LTEwLTI0IiwgIkNPTlRfQVdEXzM2QzI0ODI2RjAwMzNfMzYwMF9HUzM1RjA0MDhYXzQ3MzIiXQ==","results":[{"key":"CONT_AWD_36C25926N0050_3600_36C25922A0038_3600","piid":"36C25926N0050","award_date":"2025-10-27","description":"ACUSTAF
+        LABOR MANAGEMENT SOFTWARE","total_contract_value":1555761.6,"recipient":{"display_name":"ACUSTAF
+        DEVELOPMENT CORP"}},{"key":"CONT_AWD_2032H526P00006_2050_-NONE-_-NONE-","piid":"2032H526P00006","award_date":"2025-10-27","description":"THIS
+        REQUIREMENT IS FOR PENETRATION COLLABORATION TESTING SOFTWARE.","total_contract_value":12400.0,"recipient":{"display_name":"FCN
+        INC"}},{"key":"CONT_AWD_697DCK26F00006_6920_697DCK22D00001_6920","piid":"697DCK26F00006","award_date":"2025-10-24","description":"OPENTEXT
+        SOFTWARE RENEWAL","total_contract_value":53148.18,"recipient":{"display_name":"CDW
+        GOVERNMENT LLC"}},{"key":"CONT_AWD_47QSSC26P0759_4732_-NONE-_-NONE-","piid":"47QSSC26P0759","award_date":"2025-10-24","description":"IAW
+        RFQ 47QSSC25Q0249 & Q-373816, ANY NON-GSA SCHEDULE COMMERCIAL SOFTWARE IS
+        SUBJECT TO ANSYS GENERAL TERMS AND CONDITIONS (AGTC) AND ANY ADDITIONAL TERMS
+        APPLICABLE TO THE OFFER TYPE ON THE QUOTE. AGTC AND ADDITIONAL TERMS ARE AT
+        WWW.ANSYS.COM/AGTC","total_contract_value":55891.46,"recipient":{"display_name":"ANSYS
+        INC"}},{"key":"CONT_AWD_36C24826F0033_3600_GS35F0408X_4732","piid":"36C24826F0033","award_date":"2025-10-24","description":"ACUSTAF
+        LABOR MANAGEMENT SOFTWARE","total_contract_value":76648.0,"recipient":{"display_name":"ACUSTAF
+        DEVELOPMENT CORP"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b949de6f543d-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Lk%2B2nEQUX3T3xm7%2FSLWUrrDKGP%2Bvnx4ux7MqyPpwKrsFabol7vmyg00sVYyOdjAgKAaPbR6OS5f%2BPNMzp2HCYBNJuzHfHLnxYsYD%2F0uj6u9cexYllDxKZKQYFA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1840'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '988'
+      x-ratelimit-burst-reset:
+      - '35'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999009'
+      x-ratelimit-daily-reset:
+      - '4'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '988'
+      x-ratelimit-reset:
+      - '35'
+    status:
+      code: 200
+      message: OK
+version: 1

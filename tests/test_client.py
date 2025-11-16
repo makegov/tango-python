@@ -742,17 +742,24 @@ class TestAdditionalEndpoints:
         filters = SearchFilters(
             keyword="test",
             awarding_agency="GSA",
-            award_amount_gte=Decimal("1000"),
-            award_amount_lte=Decimal("10000"),
+            fiscal_year=2024,
         )
 
         results = client.list_contracts(filters=filters)
 
-        # Verify filter parameters were passed
+        # Verify filter parameters were passed (with correct mappings)
         call_args = mock_request.call_args
-        assert call_args[1]["params"]["keyword"] == "test"
-        assert call_args[1]["params"]["awarding_agency"] == "GSA"
-        assert call_args[1]["params"]["award_amount_gte"] == "1000"
+        params = call_args[1]["params"]
+
+        # keyword should be mapped to 'search'
+        assert params["search"] == "test", "keyword should be mapped to 'search'"
+        assert "keyword" not in params, "keyword should not be in params"
+
+        # awarding_agency should pass through as-is
+        assert params["awarding_agency"] == "GSA"
+
+        # fiscal_year should pass through as-is
+        assert params["fiscal_year"] == 2024
 
         # Verify results were returned correctly
         assert results.count == 0
@@ -796,6 +803,113 @@ class TestAdditionalEndpoints:
         # Verify shape parameter exists and is separate
         assert "shape" in params, "shape parameter should exist"
         assert isinstance(params["shape"], str), "shape should be a string"
+
+    @pytest.mark.parametrize(
+        "client_param,api_param,test_value",
+        [
+            ("keyword", "search", "software"),
+            ("psc_code", "psc", "R425"),
+            ("recipient_name", "recipient", "Acme Corp"),
+            ("recipient_uei", "uei", "ABC123XYZ456"),
+            ("set_aside_type", "set_aside", "8A"),
+        ],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_filter_parameter_mappings(self, mock_request, client_param, api_param, test_value):
+        """Test that filter parameters are correctly mapped to API parameters"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 0}'
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_contracts(**{client_param: test_value}, limit=10)
+
+        call_args = mock_request.call_args
+        params = call_args[1]["params"]
+
+        # Verify parameter is mapped to API param
+        assert api_param in params, f"{client_param} should be mapped to '{api_param}' API param"
+        assert params[api_param] == test_value
+        # Verify original parameter is not in params
+        assert client_param not in params, f"{client_param} should be mapped, not sent as-is"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_sort_and_order_mapped_to_ordering(self, mock_request):
+        """Test that 'sort' and 'order' parameters are combined into 'ordering' API param"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 0}'
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        # Test ascending order (default)
+        client.list_contracts(sort="award_date", order="asc", limit=10)
+        call_args = mock_request.call_args
+        params = call_args[1]["params"]
+
+        assert "ordering" in params, "sort+order should be combined into 'ordering'"
+        assert params["ordering"] == "award_date", "ascending should have no prefix"
+        assert "sort" not in params
+        assert "order" not in params
+
+        # Test descending order
+        client.list_contracts(sort="award_date", order="desc", limit=10)
+        call_args = mock_request.call_args
+        params = call_args[1]["params"]
+
+        assert params["ordering"] == "-award_date", "descending should have '-' prefix"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_new_api_parameters_are_supported(self, mock_request):
+        """Test that new API parameters are passed through correctly"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 0}'
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_contracts(
+            pop_start_date_gte="2024-01-01",
+            pop_end_date_lte="2024-12-31",
+            expiring_gte="2025-01-01",
+            fiscal_year_gte=2020,
+            fiscal_year_lte=2024,
+            piid="CONTRACT-123",
+            solicitation_identifier="SOL-456",
+            limit=10,
+        )
+
+        call_args = mock_request.call_args
+        params = call_args[1]["params"]
+
+        # All new parameters should be present
+        assert params["pop_start_date_gte"] == "2024-01-01"
+        assert params["pop_end_date_lte"] == "2024-12-31"
+        assert params["expiring_gte"] == "2025-01-01"
+        assert params["fiscal_year_gte"] == 2020
+        assert params["fiscal_year_lte"] == 2024
+        assert params["piid"] == "CONTRACT-123"
+        assert params["solicitation_identifier"] == "SOL-456"
 
     @patch("tango.client.httpx.Client.request")
     def test_get_entity(self, mock_request):

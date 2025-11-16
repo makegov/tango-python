@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024
+  response:
+    body:
+      string: '{"count":19897,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024&cursor=WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX040MjE1ODI0UDAwNjZfOTcwMF8tTk9ORS1fLU5PTkUtIl0%3D","cursor":"WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX040MjE1ODI0UDAwNjZfOTcwMF8tTk9ORS1fLU5PTkUtIl0=","results":[{"key":"CONT_AWD_W9124P24P0111_9700_-NONE-_-NONE-","piid":"W9124P24P0111","award_date":"2024-09-30","description":"VAULT
+        STANDARD SOFTWARE","total_contract_value":5691.7,"recipient":{"display_name":"SOURCEGEAR
+        LLC"}},{"key":"CONT_AWD_W9124P24F0836_9700_W52P1J16D0010_9700","piid":"W9124P24F0836","award_date":"2024-09-30","description":"HARDWARE
+        4 COMPUTE AND STORE SERVERS AND SOFTWARE AND ACCESSORIES","total_contract_value":110430.08,"recipient":{"display_name":"DELL
+        FEDERAL SYSTEMS L.P"}},{"key":"CONT_AWD_W58RGZ24F0485_9700_W58RGZ20D0028_9700","piid":"W58RGZ24F0485","award_date":"2024-09-30","description":"TAIWAN
+        SOFTWARE LOAD ORDERING PERIOD FIVE","total_contract_value":3180.0,"recipient":{"display_name":"SIKORSKY
+        AIRCRAFT CORPORATION"}},{"key":"CONT_AWD_N6133124P1133_9700_-NONE-_-NONE-","piid":"N6133124P1133","award_date":"2024-09-30","description":"INTERMAPHICS
+        SINGLE DEVELOPER SOFTWARE LICENSE RENEWALS","total_contract_value":35471.0,"recipient":{"display_name":"KONGSBERG
+        GEOSPATIAL LTD."}},{"key":"CONT_AWD_N4215824P0066_9700_-NONE-_-NONE-","piid":"N4215824P0066","award_date":"2024-09-30","description":"MAINTENANCE
+        RENEWAL FOR CUTWORKS SOFTWAR","total_contract_value":26312.0,"recipient":{"display_name":"Gerber
+        Technology LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9bad0193653dd-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:27:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SRyRdoiP9hOuJaVXkasmQbhwoXzbLuUxGdXOVKEfkq07PwiW%2BGiUTC5WLvBBHMNP8eWthb%2F0hZe4jpvHj5WiF1w4zGfrKxGy5CrIlILosVybiMf85AvITMEtGw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1736'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999003'
+      x-ratelimit-daily-reset:
+      - '13'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '29'
+    status:
+      code: 200
+      message: OK
+version: 1

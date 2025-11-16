@@ -30,31 +30,58 @@ class SearchFilters:
     This is a convenience class for passing search parameters to list_contracts().
     All fields are optional and will be converted to query parameters.
     You can also pass these parameters directly to list_contracts() as keyword arguments.
+
+    Note: Some parameters are automatically mapped to the correct API parameter names:
+    - keyword → search
+    - naics_code → naics
+    - psc_code → psc
+    - recipient_name → recipient
+    - recipient_uei → uei
+    - set_aside_type → set_aside
+    - sort + order → ordering
     """
 
+    # Pagination
     page: int = 1
     limit: int = 25
-    keyword: str | None = None
+
+    # Text search
+    keyword: str | None = None  # Mapped to 'search' API param
+
+    # Date filters
     award_date_gte: str | None = None
     award_date_lte: str | None = None
-    award_amount_gte: Decimal | None = None
-    award_amount_lte: Decimal | None = None
+    pop_start_date_gte: str | None = None  # Period of performance start date >=
+    pop_start_date_lte: str | None = None  # Period of performance start date <=
+    pop_end_date_gte: str | None = None  # Period of performance end date >=
+    pop_end_date_lte: str | None = None  # Period of performance end date <=
+    expiring_gte: str | None = None  # Expiring on or after
+    expiring_lte: str | None = None  # Expiring on or before
+
+    # Party filters
     awarding_agency: str | None = None
     funding_agency: str | None = None
-    recipient_name: str | None = None
-    recipient_uei: str | None = None
-    naics_code: str | None = None
-    psc_code: str | None = None
-    place_of_performance_state: str | None = None
-    place_of_performance_zip: str | None = None
-    cfda_number: str | None = None
-    contract_type: str | None = None
-    award_type: str | None = None
-    set_aside_type: str | None = None
-    extent_competed: str | None = None
+    recipient_name: str | None = None  # Mapped to 'recipient' API param
+    recipient_uei: str | None = None  # Mapped to 'uei' API param
+
+    # Classification filters
+    naics_code: str | None = None  # Mapped to 'naics' API param
+    psc_code: str | None = None  # Mapped to 'psc' API param
+    set_aside_type: str | None = None  # Mapped to 'set_aside' API param
+
+    # Type filters
     fiscal_year: int | None = None
-    sort: str | None = None
-    order: str | None = None
+    fiscal_year_gte: int | None = None  # Fiscal year >=
+    fiscal_year_lte: int | None = None  # Fiscal year <=
+    award_type: str | None = None
+
+    # Identifiers
+    piid: str | None = None  # Procurement Instrument Identifier
+    solicitation_identifier: str | None = None
+
+    # Sorting
+    sort: str | None = None  # Combined with 'order' into 'ordering' API param
+    order: str | None = None  # 'asc' or 'desc'
 
     def to_dict(self) -> dict[str, Any]:
         """Convert to dictionary for API parameters"""

@@ -396,12 +396,45 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys (e.g., items.0.field)
             filters: Optional SearchFilters object or dict for backward compatibility.
                     Filter parameters can also be passed as keyword arguments.
-            **kwargs: Filter parameters (keyword, award_date_gte, award_date_lte,
-                    award_amount_gte, award_amount_lte, awarding_agency, funding_agency,
-                    recipient_name, recipient_uei, naics_code, psc_code,
-                    place_of_performance_state, place_of_performance_zip, cfda_number,
-                    contract_type, award_type, set_aside_type, extent_competed,
-                    fiscal_year, sort, order)
+            **kwargs: Filter parameters
+
+                    Text search:
+                    - keyword: Search contract descriptions (mapped to 'search' API param)
+
+                    Date filters:
+                    - award_date_gte: Award date >= (YYYY-MM-DD)
+                    - award_date_lte: Award date <= (YYYY-MM-DD)
+                    - pop_start_date_gte: Period of performance start date >=
+                    - pop_start_date_lte: Period of performance start date <=
+                    - pop_end_date_gte: Period of performance end date >=
+                    - pop_end_date_lte: Period of performance end date <=
+                    - expiring_gte: Expiring on or after date
+                    - expiring_lte: Expiring on or before date
+
+                    Party filters:
+                    - awarding_agency: Awarding agency code (e.g., "4700" for GSA)
+                    - funding_agency: Funding agency code
+                    - recipient_name: Vendor/recipient name (mapped to 'recipient' API param)
+                    - recipient_uei: Vendor UEI (mapped to 'uei' API param)
+
+                    Classification filters:
+                    - naics_code: NAICS code (mapped to 'naics' API param)
+                    - psc_code: PSC code (mapped to 'psc' API param)
+                    - set_aside_type: Set-aside type (mapped to 'set_aside' API param)
+
+                    Type filters:
+                    - fiscal_year: Fiscal year (exact match)
+                    - fiscal_year_gte: Fiscal year >=
+                    - fiscal_year_lte: Fiscal year <=
+                    - award_type: Award type code
+
+                    Identifiers:
+                    - piid: Procurement Instrument Identifier
+                    - solicitation_identifier: Solicitation ID
+
+                    Sorting:
+                    - sort: Field to sort by (combined with 'order')
+                    - order: Sort order ('asc' or 'desc', default 'asc')
 
         Examples:
             >>> # Simple usage
@@ -409,14 +442,27 @@ class TangoClient:
 
             >>> # With keyword arguments
             >>> contracts = client.list_contracts(
-            ...     awarding_agency="GSA",
+            ...     awarding_agency="4700",  # GSA
             ...     award_date_gte="2023-01-01",
             ...     limit=25
             ... )
 
-            >>> # With SearchFilters object
-            >>> filters = SearchFilters(keyword="IT", awarding_agency="GSA")
+            >>> # Text search
+            >>> contracts = client.list_contracts(keyword="software development")
+
+            >>> # With SearchFilters object (legacy)
+            >>> filters = SearchFilters(
+            ...     keyword="IT",
+            ...     awarding_agency="4700",
+            ...     fiscal_year=2024
+            ... )
             >>> contracts = client.list_contracts(filters=filters)
+
+            >>> # Using new date range filters
+            >>> contracts = client.list_contracts(
+            ...     expiring_gte="2025-01-01",
+            ...     expiring_lte="2025-12-31"
+            ... )
         """
         # Start with explicit parameters
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
@@ -471,8 +517,22 @@ class TangoClient:
         # Map Python parameter names to API parameter names
         # The API may expect different parameter names than our Python interface
         api_param_mapping = {
-            "naics_code": "naics",  # API expects 'naics' not 'naics_code' for filtering
+            "naics_code": "naics",  # API expects 'naics' not 'naics_code'
+            "keyword": "search",  # API expects 'search' not 'keyword'
+            "psc_code": "psc",  # API expects 'psc' not 'psc_code'
+            "recipient_name": "recipient",  # API expects 'recipient' not 'recipient_name'
+            "recipient_uei": "uei",  # API expects 'uei' not 'recipient_uei'
+            "set_aside_type": "set_aside",  # API expects 'set_aside' not 'set_aside_type'
         }
+
+        # Handle sort + order → ordering conversion
+        # API expects single 'ordering' parameter with '-' prefix for descending
+        sort_field = filter_params.pop("sort", None)
+        sort_order = filter_params.pop("order", None)
+        if sort_field:
+            # Prefix with '-' for descending order
+            prefix = "-" if sort_order == "desc" else ""
+            filter_params["ordering"] = f"{prefix}{sort_field}"
 
         # Apply parameter name mapping and process values
         api_params = {}
@@ -481,11 +541,7 @@ class TangoClient:
                 continue  # Skip None values
             # Map to API parameter name if needed
             api_key = api_param_mapping.get(key, key)
-            # Convert Decimal/numeric values to strings for award amounts
-            if key in ("award_amount_gte", "award_amount_lte"):
-                api_params[api_key] = str(value)
-            else:
-                api_params[api_key] = value
+            api_params[api_key] = value
 
         # Update params with all filter parameters
         # This is the same pattern as other endpoints use

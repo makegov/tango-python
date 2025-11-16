@@ -202,4 +202,207 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzgwTlNTQzI2RkEwMDZfODAwMF9OTkcxNVNDNzFCXzgwMDAiXQ==","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","description":"THE
+        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
+        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
+        FORT MYERS FLORIDA.","total_contract_value":1089550.8,"recipient":{"display_name":"REDCON
+        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","description":"TOPEKA
+        JOC","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE CONSTRUCTION
+        GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","description":"TO
+        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)","total_contract_value":1371325.32,"recipient":{"display_name":"MERLIN
+        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","description":"U.S.
+        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
+        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
+        OFFICE","total_contract_value":4387892.04,"recipient":{"display_name":"RACK-WILDNER
+        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","description":"SOLARWINDS
+        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.","total_contract_value":24732.97,"recipient":{"display_name":"REGENCY
+        CONSULTING INC"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","award_date":"2025-11-14","description":"COMPREHENSIVE
+        RISK ASSESSMENT AND MITIGATION - OCFO","total_contract_value":1499803.54,"recipient":{"display_name":"ERNST
+        & YOUNG LLP"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","award_date":"2025-11-14","description":"F5
+        NETWORK MAINTENANCE RENEWAL","total_contract_value":73050.0,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","award_date":"2025-11-14","description":"XSI
+        HARDWARE MAINTENANCE RENEWAL FY26","total_contract_value":21711.76,"recipient":{"display_name":"GOVPLACE,
+        LLC"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","award_date":"2025-11-14","description":"TELLABS
+        STANDARD SUPPORT & PANORAMA INM","total_contract_value":13390.73,"recipient":{"display_name":"COLOSSAL
+        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","description":"CISCO
+        NASA CISCO REMOTE VPN OBSOLESCENCE REPLACEMENT","total_contract_value":99974.58,"recipient":{"display_name":"FCN
+        INC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b9478e52a246-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Q3Ga41VdrgK4svGk%2F1hiKjWlPEKII0WUQhxfbq5vWc%2B%2FXTRtaVbNBfx1okT8EJisZeY6nUH2ngtYwavrziOOht%2BmcOOIfoa%2FZ8KmpLNA6kCz1PqQ5Bx3zABXAg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3190'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '990'
+      x-ratelimit-burst-reset:
+      - '35'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999011'
+      x-ratelimit-daily-reset:
+      - '5'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '990'
+      x-ratelimit-reset:
+      - '35'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cnaics_code&naics=541511
+  response:
+    body:
+      string: '{"count":108453,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cnaics_code&naics=541511&cursor=WyIyMDI1LTExLTA2IiwgIkNPTlRfQVdEXzM2QzI2MjI2TjAxNjBfMzYwMF8zNkMxMEcyMUEwMDAzXzM2MDAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTA2IiwgIkNPTlRfQVdEXzM2QzI2MjI2TjAxNjBfMzYwMF8zNkMxMEcyMUEwMDAzXzM2MDAiXQ==","results":[{"key":"CONT_AWD_36C25926N0113_3600_36C10G23A0004_3600","piid":"36C25926N0113","award_date":"2025-11-14","description":"INNOVIAN
+        PROFESSIONALSERVICES-CLINICAL/TRAINING","total_contract_value":13280.0,"naics_code":541511,"recipient":{"display_name":"DRAEGER
+        INC"}},{"key":"CONT_AWD_2033H626F00020_2036_2033H622D00003_2036","piid":"2033H626F00020","award_date":"2025-11-14","description":"SALESFORCE
+        PROFESSIONAL SERVICES - OPERATION & MAINTENANCE (O&M)","total_contract_value":1547899.0,"naics_code":541511,"recipient":{"display_name":"SOUTHPOINT
+        CONSULTING, INC."}},{"key":"CONT_AWD_70Z04026P60414Y00_7008_-NONE-_-NONE-","piid":"70Z04026P60414Y00","award_date":"2025-11-13","description":"SIX-MONTH
+        PROTOTYPE DEVELOPMENT AND TESTING OF FLOORGANISE''S FLOOR2PLAN TIME KEEPING
+        MODULE AT CG YARD","total_contract_value":50000.0,"naics_code":541511,"recipient":{"display_name":"FLOORGANISE
+        USA INC"}},{"key":"CONT_AWD_36C26126N0206_3600_36C10G21A0003_3600","piid":"36C26126N0206","award_date":"2025-11-13","description":"MEDICAL
+        RECORD CODING","total_contract_value":112395.0,"naics_code":541511,"recipient":{"display_name":"COOPER
+        THOMAS LLC"}},{"key":"CONT_AWD_75R60226C00001_7526_-NONE-_-NONE-","piid":"75R60226C00001","award_date":"2025-11-12","description":"HSB115
+        C 7520 OPTN CLOUD MIGRATION AND HARDWARE: THE PURPOSE OF THIS CONTRACT IS
+        TO PROVIDE ALL PERSONNEL, MANAGEMENT, MATERIALS, EQUIPMENT, AND SERVICES NECESSARY
+        TO MIGRATE THE ORGAN PROCUREMENT AND TRANSPLANTATION NETWORK (OPTN) INFORMATION
+        TECHNO","total_contract_value":12250000.0,"naics_code":541511,"recipient":{"display_name":"UNITED
+        NETWORK FOR ORGAN SHARING"}},{"key":"CONT_AWD_36C26326N0244_3600_36C26325A0002_3600","piid":"36C26326N0244","award_date":"2025-11-12","description":"MEDICAL
+        CODING TASK ORDER FOR THE VA NEBRASKA-WESTERN IOWA HEALTH CARE SYSTEM","total_contract_value":375737.24,"naics_code":541511,"recipient":{"display_name":"SIERRA7,
+        INC."}},{"key":"CONT_AWD_15B10626P00000047_1540_-NONE-_-NONE-","piid":"15B10626P00000047","award_date":"2025-11-12","description":"TELCOR:
+        STAT STRIP GLUCOSE SOFTWARE SUPPORT DOS: OCTOBER 1, 2025 THRU SEPTEMBER 30,
+        2026   FUNDS WILL BE OBLIGATED THROUGH A MOD UPON THE OFFICIAL ANNOUNCEMENT
+        OF THE CR DATE AND/OR WHEN THE BUDGET IS PASSED.","total_contract_value":2638.89,"naics_code":541511,"recipient":{"display_name":"TELCOR
+        INC"}},{"key":"CONT_AWD_36C25526P0013_3600_-NONE-_-NONE-","piid":"36C25526P0013","award_date":"2025-11-10","description":"SOFTWARE
+        SUPPORT AND MAINTENANCE","total_contract_value":175500.0,"naics_code":541511,"recipient":{"display_name":"ELEKTA
+        INC"}},{"key":"CONT_AWD_205AE926C00004_2050_-NONE-_-NONE-","piid":"205AE926C00004","award_date":"2025-11-07","description":"CORPORATE
+        DATA AND INTERNAL REVENUE SERVICE INFORMATION SYSTEMS SUPPORT. FIRM-FIXED
+        PRICE. BASE AND TWO OPTION PERIODS.","total_contract_value":9179526.24,"naics_code":541511,"recipient":{"display_name":"NTVI
+        SOLUTIONS, LLC"}},{"key":"CONT_AWD_36C26226N0160_3600_36C10G21A0003_3600","piid":"36C26226N0160","award_date":"2025-11-06","description":"OY4
+        - MEDICAL CODING SERVICES","total_contract_value":204040.0,"naics_code":541511,"recipient":{"display_name":"COOPER
+        THOMAS LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b9484ef3a246-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5hzfarrPrlMq%2BgMA8jdVAH%2FtBiqQilBlOrfikd4FklzaRb0Cu3Pb5KPbe4K0yAjbhh7sdfVedKv7vVv4IKDBoVViZzm3SRj2m4Ca7MydI0D4bej6O532eqNyfw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3638'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '989'
+      x-ratelimit-burst-reset:
+      - '35'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999010'
+      x-ratelimit-daily-reset:
+      - '4'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '989'
+      x-ratelimit-reset:
+      - '35'
+    status:
+      code: 200
+      message: OK
 version: 1

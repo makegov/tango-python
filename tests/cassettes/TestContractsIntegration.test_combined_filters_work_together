@@ -1,0 +1,92 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&fiscal_year=2024&award_type=A&awarding_agency=4700
+  response:
+    body:
+      string: '{"count":21,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&fiscal_year=2024&award_type=A&awarding_agency=4700&cursor=WyIyMDI0LTA4LTI4IiwgIkNPTlRfQVdEXzQ3UVNTQzI0RkRaSEhfNDczMl80N1FTSEEyMUEwMDBEXzQ3MzIiXQ%3D%3D","cursor":"WyIyMDI0LTA4LTI4IiwgIkNPTlRfQVdEXzQ3UVNTQzI0RkRaSEhfNDczMl80N1FTSEEyMUEwMDBEXzQ3MzIiXQ==","results":[{"key":"CONT_AWD_47PD0524F0118_4740_47PN0323A0001_4740","piid":"47PD0524F0118","award_date":"2024-09-23","description":"BAS
+        SOFTWARE UPGRADE 116 NORTH MAIN STREET, HARRISONBURG, VA 22802, VA0686ZZ","total_contract_value":150184.34,"recipient":{"display_name":"DAE
+        SUNG LLC"}},{"key":"CONT_AWD_47QPCA24F0064_4732_47QPCA21A0008_4732","piid":"47QPCA24F0064","award_date":"2024-09-18","description":"LOGINGOV
+        SOFTWARE DEVELOPMENT SERVICES  TOTAL CALL ORDER","total_contract_value":1471057.09,"recipient":{"display_name":"BIXAL
+        SOLUTIONS INCORPORATED"}},{"key":"CONT_AWD_47PD0424F0077_4740_47PD0319A0008_4740","piid":"47PD0424F0077","award_date":"2024-09-16","description":"THE
+        CONTRACTOR SHALL PROVIDE ALL MATERIAL, TOOLS, LABOR, EQUIPMENT AND SUPERVISION
+        TO REPLACE 1 MOTION CONTROL SCR OUTPUT SOFTWARE BOARD IN ELEVATOR 2 IN THE
+        POST OFFICE BUILDING  401 MARKET ST CAMDEN NJ 08102-1568 NJ0015ZZ","total_contract_value":3762.0,"recipient":{"display_name":"RAVEN
+        SERVICES CORP"}},{"key":"CONT_AWD_47QFAA24F0008_4732_47QFAA21A0002_4732","piid":"47QFAA24F0008","award_date":"2024-09-04","description":"NDMS  SOFTWARE
+        DEVELOPMENT SUPPORT SERVICES IV","total_contract_value":10730405.97,"recipient":{"display_name":"DELOITTE
+        & TOUCHE LLP"}},{"key":"CONT_AWD_47QSSC24FDZHH_4732_47QSHA21A000D_4732","piid":"47QSSC24FDZHH","award_date":"2024-08-28","description":"INSTALLATION
+        TOOL, FIN: FRONT WIDTH: 2 INCHES HANDLE WIDTH: 1 INCH OVERALL LENGTH: 6-1/2
+        INCHES MATERIAL: STEEL SPECTRUM SCIENCES AND SOFTWARE INC. SP548005-103 OR
+        EQUAL. (PARTIAL DESCRIPTION)","total_contract_value":2511.32,"recipient":{"display_name":"WRIGHT
+        TOOL COMPANY, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9bad1b99bb1e4-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:27:34 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eSvfyiWH5soLXpt1tCgGAG2zwDn6f64Nhv%2BgzZuMcFJbDDdEs1ogZCirDxYnbothRGaUv8%2FEhlEuOmxdAtGDdqpazq5nGwZ0YALbDAN4XTxAtZyMX3jb2dmjOw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2114'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999002'
+      x-ratelimit-daily-reset:
+      - '12'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '28'
+    status:
+      code: 200
+      message: OK
+version: 1

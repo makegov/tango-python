@@ -107,4 +107,112 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cfiscal_year%2Cset_aside%2Crecipient%28display_name%2Cuei%29%2Cawarding_office%28%2A%29%2Cplace_of_performance%28city_name%2Cstate_code%2Cstate_name%2Ccountry_code%2Ccountry_name%29%2Cnaics_code%2Cpsc_code
+  response:
+    body:
+      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cfiscal_year%2Cset_aside%2Crecipient%28display_name%2Cuei%29%2Cawarding_office%28%2A%29%2Cplace_of_performance%28city_name%2Cstate_code%2Cstate_name%2Ccountry_code%2Ccountry_name%29%2Cnaics_code%2Cpsc_code&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0=","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","description":"THE
+        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
+        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
+        FORT MYERS FLORIDA.","total_contract_value":1089550.8,"obligated":1089550.8,"fiscal_year":2026,"set_aside":"NONE","naics_code":561612,"psc_code":"S206","recipient":{"uei":"HQXXAB4DV7H3","display_name":"REDCON
+        SOLUTIONS GROUP LLC"},"awarding_office":{"office_code":"70FBR4","office_name":"REGION
+        4: EMERGENCY PREPAREDNESS AN","agency_code":"7022","agency_name":"Federal
+        Emergency Management Agency","department_code":70,"department_name":"Department
+        of Homeland Security"},"place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"GA","state_name":"GEORGIA","city_name":"ATLANTA"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","description":"TOPEKA
+        JOC","total_contract_value":17351.59,"obligated":17351.59,"fiscal_year":2026,"set_aside":null,"naics_code":236220,"psc_code":"Z2NB","recipient":{"uei":"MR6FELMMCJ31","display_name":"ONSITE
+        CONSTRUCTION GROUP LLC"},"awarding_office":{"office_code":"36C255","office_name":"255-NETWORK
+        CONTRACT OFFICE 15 (36C255)","agency_code":"3600","agency_name":"Department
+        of Veterans Affairs","department_code":36,"department_name":"Department of
+        Veterans Affairs"},"place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"KS","state_name":"KANSAS","city_name":"LEAVENWORTH"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","description":"TO
+        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)","total_contract_value":1371325.32,"obligated":0.0,"fiscal_year":2026,"set_aside":"NONE","naics_code":541519,"psc_code":"DA01","recipient":{"uei":"GDQLRDFJNRD3","display_name":"MERLIN
+        INTERNATIONAL, INC."},"awarding_office":{"office_code":"9523ZY","office_name":"COMMODITY
+        FUTURES TRADING COMM","agency_code":"9507","agency_name":"Commodity Futures
+        Trading Commission","department_code":339,"department_name":"Commodity Futures
+        Trading Commission"},"place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"VA","state_name":"VIRGINIA","city_name":"VIENNA"}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","description":"U.S.
+        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
+        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
+        OFFICE","total_contract_value":4387892.04,"obligated":500000.0,"fiscal_year":2026,"set_aside":"SBA","naics_code":541820,"psc_code":"R699","recipient":{"uei":"U3M3JLGJLQ63","display_name":"RACK-WILDNER
+        & REESE, INC."},"awarding_office":{"office_code":"892434","office_name":"GOLDEN
+        FIELD OFFICE","agency_code":"8900","agency_name":"Department of Energy","department_code":89,"department_name":"Department
+        of Energy"},"place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"PA","state_name":"PENNSYLVANIA","city_name":"PITTSBURGH"}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","description":"SOLARWINDS
+        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.","total_contract_value":24732.97,"obligated":24732.97,"fiscal_year":2026,"set_aside":null,"naics_code":541519,"psc_code":"DA10","recipient":{"uei":"SC8LMLWA6H51","display_name":"REGENCY
+        CONSULTING INC"},"awarding_office":{"office_code":"892433","office_name":"NATIONAL
+        ENERGY TECHNOLOGY LABORATORY","agency_code":"8900","agency_name":"Department
+        of Energy","department_code":89,"department_name":"Department of Energy"},"place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"WV","state_name":"WEST VIRGINIA","city_name":"MORGANTOWN"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9b94189bcaeb6-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:26:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=B4l%2Bt9efDa3eoQ3M5aLVuNHSddUpu8%2FMMOKKL7z1DVFxXH6mV%2Ftl0C3oyk%2Fr5S4dPZNXlnpqtcyoYbWhNJfO9vD6Ed1fXW64OXW%2BRglZOfcPQz58Bh%2F3RNfxzg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4603'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '994'
+      x-ratelimit-burst-reset:
+      - '36'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999015'
+      x-ratelimit-daily-reset:
+      - '5'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '994'
+      x-ratelimit-reset:
+      - '36'
+    status:
+      code: 200
+      message: OK
 version: 1

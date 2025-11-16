@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&expiring_gte=2025-01-01&expiring_lte=2025-12-31
+  response:
+    body:
+      string: '{"count":4015598,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&expiring_gte=2025-01-01&expiring_lte=2025-12-31&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzcwWjAzODI2UEYwMDAzMDAyXzcwMDhfLU5PTkUtXy1OT05FLSJd","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzcwWjAzODI2UEYwMDAzMDAyXzcwMDhfLU5PTkUtXy1OT05FLSJd","results":[{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","description":"TOPEKA
+        JOC","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE CONSTRUCTION
+        GROUP LLC"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","description":"CISCO
+        NASA CISCO REMOTE VPN OBSOLESCENCE REPLACEMENT","total_contract_value":99974.58,"recipient":{"display_name":"FCN
+        INC"}},{"key":"CONT_AWD_75H71226F80002_7527_36F79724D0071_3600","piid":"75H71226F80002","award_date":"2025-11-14","description":"ZOLL
+        MEDICAL CORPORATION DEFIBRILLATOR EQUIPMENT","total_contract_value":630011.67,"recipient":{"display_name":"AFTER
+        ACTION MEDICAL AND DENTAL SUPPLY, LLC"}},{"key":"CONT_AWD_70Z04026P60355Y00_7008_-NONE-_-NONE-","piid":"70Z04026P60355Y00","award_date":"2025-11-14","description":"VALVE,
+        4\" IPS, GATE, BRONZE","total_contract_value":23751.0,"recipient":{"display_name":"JA
+        MOODY LLC"}},{"key":"CONT_AWD_70Z03826PF0003002_7008_-NONE-_-NONE-","piid":"70Z03826PF0003002","award_date":"2025-11-14","description":"PROCUREMENT
+        OF INDUSTRIAL STEEL SHELVES AND CABINETS USED FOR STORAGE OF AIRCRAFT PARTS.","total_contract_value":48909.32,"recipient":{"display_name":"TECH
+        SERVICE SOLUTIONS LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 99f9bcb5acada1f2-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 20:29:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=y7UadM8c0zgIPSBpaDWFbbCex4VHKopag7elRnKB48W2UlDxzkLnKFr%2FQxZqUWHq%2B0Bm5jGg0RFnGjOaedFEpgsvbe4gQmp4mViBB5KNlfzWPMFzNpV12cEfkw%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1736'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 25.005s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '998'
+      x-ratelimit-burst-reset:
+      - '4'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999005'
+      x-ratelimit-daily-reset:
+      - '7'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '998'
+      x-ratelimit-reset:
+      - '4'
+    status:
+      code: 200
+      message: OK
+version: 1
