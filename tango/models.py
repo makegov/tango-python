@@ -415,3 +415,6 @@ class ShapeConfig:
 
     # Default for list_notices()
     NOTICES_MINIMAL: Final = "notice_id,title,solicitation_number,posted_date"
+
+    # Default for list_grants()
+    GRANTS_MINIMAL: Final = "grant_id,opportunity_number,title,status(*),agency_code"

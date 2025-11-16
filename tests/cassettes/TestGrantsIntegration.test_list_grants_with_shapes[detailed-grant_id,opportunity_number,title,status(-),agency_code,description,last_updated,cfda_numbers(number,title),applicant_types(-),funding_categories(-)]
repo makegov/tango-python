@@ -1,0 +1,179 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/grants/?page=1&limit=5&shape=grant_id%2Copportunity_number%2Ctitle%2Cstatus%28%2A%29%2Cagency_code%2Cdescription%2Clast_updated%2Ccfda_numbers%28number%2Ctitle%29%2Capplicant_types%28%2A%29%2Cfunding_categories%28%2A%29
+  response:
+    body:
+      string: "{\"count\":2690,\"next\":\"http://tango.makegov.com/api/grants/?limit=5&page=2&shape=grant_id%2Copportunity_number%2Ctitle%2Cstatus%28%2A%29%2Cagency_code%2Cdescription%2Clast_updated%2Ccfda_numbers%28number%2Ctitle%29%2Capplicant_types%28%2A%29%2Cfunding_categories%28%2A%29\",\"previous\":null,\"results\":[{\"grant_id\":360862,\"opportunity_number\":\"DE-FOA-0003390\",\"title\":\"Infrastructure
+        Investment and Jobs Act (IIJA): Mine of the Future - Proving Ground Initiative\",\"agency_code\":\"DOE-NETL\",\"description\":\"<p>The
+        objective of NOFO-0003390 is to establish mining technology proving grounds
+        that accelerate novel technology development for the U.S. mining sector. These
+        competitive awards would invest in the infrastructure and technologies to
+        transform mining practices and speed the development of secure and resilient
+        domestic CMM supply networks of the future.</p>\",\"last_updated\":\"2025-11-16T10:11:20+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"81.089\",\"title\":\"Fossil
+        Energy Research and Development\"}],\"applicant_types\":[{\"code\":\"99\",\"description\":\"Unrestricted
+        (i.e., open to any type of entity above), subject to any clarification in
+        text field entitled \\\"Additional Information on Eligibility\\\"\"}],\"funding_categories\":[{\"code\":\"EN\",\"description\":\"Energy\"}]},{\"grant_id\":360863,\"opportunity_number\":\"DE-FOA-0003583\",\"title\":\"Infrastructure
+        Investment and Jobs Act (IIJA) &ndash; Mines &amp; Metals Capacity Expansion
+        &ndash; Piloting Byproduct Critical Minerals and Materials Recovery at Domestic
+        Industrial Facilities\",\"agency_code\":\"DOE-NETL\",\"description\":\"<p>The
+        focus of this NOFO is to invest in American industrial facilities that have
+        the potential to produce valuable critical material byproducts from existing
+        industrial processes. Industries such as mining and mineral processing, power
+        generation, coal, oil and gas, specialty metals, and basic materials have
+        the potential to address many of America\u2019s most severe mineral vulnerabilities.</p>\",\"last_updated\":\"2025-11-16T10:11:19+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"81.089\",\"title\":\"Fossil
+        Energy Research and Development\"}],\"applicant_types\":[{\"code\":\"99\",\"description\":\"Unrestricted
+        (i.e., open to any type of entity above), subject to any clarification in
+        text field entitled \\\"Additional Information on Eligibility\\\"\"}],\"funding_categories\":[{\"code\":\"IIJ\",\"description\":\"Infrastructure
+        Investment and Jobs Act (IIJA)\"}]},{\"grant_id\":360861,\"opportunity_number\":\"FR-6900-N-25\",\"title\":\"FY
+        2025 Continuum of Care Competition and Youth Homeless Demonstration Program
+        Grants NOFO\",\"agency_code\":\"HUD\",\"description\":\"The Continuum of Care
+        (CoC) Program is designed to:promote a community-wide commitment to the goal
+        of ending homelessness;provide funding for efforts by nonprofit providers,
+        States, Indian Tribes or Tribally Designated Housing Entities [as defined
+        in section 4 of the Native American Housing Assistance and Self-Determination
+        Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly rehouse
+        individuals and families experiencing homelessness, persons experiencing trauma
+        or a lack of safety related to fleeing or attempting to flee domestic violence,
+        dating violence, sexual assault, and stalking, and youth experiencing homelessness
+        while minimizing the trauma and dislocation caused by homelessness;promote
+        access to, and effective utilization of, mainstream programs and programs
+        funded with State or local resources; andoptimize self-sufficiency among individuals
+        and families experiencing homelessness.The goal of the Youth Homelessness
+        Demonstration Program (YHDP) is to support the development and implementation
+        of a coordinated community approach to preventing and ending youth homelessness
+        and sharing that experience with and mobilizing communities around the country
+        toward the same end. The population to be served by the demonstration program
+        is youth ages 24 and younger who are experiencing homelessness, including
+        unaccompanied and pregnant or parenting youth.\",\"last_updated\":\"2025-11-16T10:11:17+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"14.267\",\"title\":\"Continuum
+        of Care Program \"}],\"applicant_types\":[{\"code\":\"11\",\"description\":\"Native
+        American tribal organizations (other than Federally recognized tribal governments)\"},{\"code\":\"12\",\"description\":\"Nonprofits
+        having a 501(c)(3) status with the IRS, other than institutions of higher
+        education\"},{\"code\":\"07\",\"description\":\"Native American tribal governments
+        (Federally recognized)\"},{\"code\":\"25\",\"description\":\"Others (see text
+        field entitled \\\"Additional Information on Eligibility\\\" for clarification)\"},{\"code\":\"04\",\"description\":\"Special
+        district governments\"},{\"code\":\"08\",\"description\":\"Public housing
+        authorities/Indian housing authorities\"},{\"code\":\"01\",\"description\":\"County
+        governments\"},{\"code\":\"00\",\"description\":\"State governments\"},{\"code\":\"02\",\"description\":\"City
+        or township governments\"}],\"funding_categories\":[{\"code\":\"CD\",\"description\":\"Community
+        Development\"}]},{\"grant_id\":360851,\"opportunity_number\":\"ED-GRANTS-111225-001\",\"title\":\"Office
+        of Postsecondary Education (OPE): Fund for the Improvement of Postsecondary
+        Education (FIPSE): Special Projects;  Assistance Listing Number (ALN) 84.116J\",\"agency_code\":\"ED\",\"description\":\"<p>Note:
+        Each funding opportunity description is a synopsis of information in the Federal
+        Register application notice. For specific information about eligibility, please
+        see the official application notice. The official version of this document
+        is the document published in the Federal Register. Please review the official
+        application notice for pre-application and application requirements, application
+        submission information, performance measures, priorities and program contact
+        information.</p><p><br></p><p>For the addresses for obtaining and submitting
+        an application, please refer to our Common Instructions for Applicants to
+        Department of Education Discretionary Grant Programs, published in the Federal
+        Register on August 29, 2025&nbsp;(90 FR 42234), and available at https://www.federalregister.gov/documents/2025/08/29/2025-</p><p>16571/common-instructions-and-information-for-applicants-to\\u0002department-of-education-discretionary-grantams.</p><p><br></p><p><em>Purpose
+        of Program:</em> The FIPSE Special Projects Program provides grants to institutions
+        of higher education (IHEs), combinations of such institutions, and other public
+        and private nonprofit institutions and agencies, as the Secretary deems necessary,
+        to support innovative projects concerning one or more areas of national need
+        identified by the Secretary. This competition focuses on supporting four areas
+        of national need\u2014(1) advancing the understanding of and use of Artificial
+        Intelligence (AI) technology in postsecondary education, (2) promoting civil
+        discourse on college and university campuses, (3) promoting accreditation
+        reform, and (4) supporting capacity-building for high-quality short-term programs.</p><p><br></p><p>In
+        order to support these four crucial needs, this competition includes seven
+        absolute priorities under which applicants can apply: two priorities dedicated
+        to advancing the understanding and use of AI in postsecondary education (Absolute
+        Priorities 1 and 2), one priority dedicated to promoting civil discourse on
+        college and university campuses (Absolute Priority 3), two priorities within
+        promoting accreditation reform (Absolute Priorities 4 and 5), and two priorities
+        for capacity-building for high-quality short-term programs (Absolute Priorities
+        6 and 7). The Department intends to award $50 million to advance AI in Education,
+        $60 million to promote civil discourse on college and university campuses,
+        $7 million to support accreditation reform, and $50 million for high-quality
+        short-term programs. The Department may adjust these estimates based on interest
+        and quality of applications.</p><p><br></p><p>Assistance Listing Number 84.116J</p>\",\"last_updated\":\"2025-11-16T10:11:15+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"84.116\",\"title\":\"Fund
+        for the Improvement of Postsecondary Education\"}],\"applicant_types\":[{\"code\":\"25\",\"description\":\"Others
+        (see text field entitled \\\"Additional Information on Eligibility\\\" for
+        clarification)\"}],\"funding_categories\":[{\"code\":\"ED\",\"description\":\"Education\"}]},{\"grant_id\":345316,\"opportunity_number\":\"2026TTPSF\",\"title\":\"2026
+        Tribal Transportation Program Safety Fund\",\"agency_code\":\"DOT-FHWA\",\"description\":\"<p>Eligible
+        projects described in section 148(a)(4) are strategies, activities, and projects
+        on a public road that are consistent with a transportation safety plan and
+        that (i) correct or improve a hazardous road location or feature, or (ii)
+        address a highway safety problem. TTPSF emphasizes the development of strategic
+        transportation safety plans using a data-driven process as a means for Tribes
+        to identify transportation safety needs and determine how those needs will
+        be addressed in Tribal communities. FHWA has identified four eligibility categories:
+        transportation safety plans; data assessment, improvement, and analysis activities;
+        systemic roadway departure countermeasures; and infrastructure improvements
+        and other eligible activities as listed in 23 U.S.C. \xA7 148(a)(4).</p>\",\"last_updated\":\"2025-11-13T10:39:21+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"20.205\",\"title\":\"Highway
+        Planning and Construction\"}],\"applicant_types\":[{\"code\":\"07\",\"description\":\"Native
+        American tribal governments (Federally recognized)\"}],\"funding_categories\":[{\"code\":\"T\",\"description\":\"Transportation\"}]}]}"
+    headers:
+      CF-RAY:
+      - 99f95d296d7836b7-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 19:23:37 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6JUXlQvu7LLZoY2mMeXmy4Xg5%2BPpgiC4qMdV86%2FqLnrk9egyO1P2674q41bqEJMM%2FNXjObYFKxZ5Po9DZqDTlpjUAHln6bBMS6020sKpqOip5Ui3qcHw8UPIXg%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '9683'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.033s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998709'
+      x-ratelimit-daily-reset:
+      - '833'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

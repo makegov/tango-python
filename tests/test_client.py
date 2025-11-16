@@ -457,6 +457,35 @@ class TestDynamicModelsIntegration:
         assert result["notice_id"] == "NOTICE-123"
 
     @patch("tango.client.httpx.Client.request")
+    def test_list_grants_returns_dynamic_models(self, mock_request):
+        """Test list_grants returns dynamic models"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "grant_id": 12345,
+                    "opportunity_number": "OPP-123",
+                    "title": "Test Grant",
+                    "status": {"code": "OPEN", "description": "Open"},
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        grants = client.list_grants()
+
+        assert grants.count == 1
+        result = grants.results[0]
+        assert isinstance(result, dict)
+        assert result["grant_id"] == 12345
+
+    @patch("tango.client.httpx.Client.request")
     def test_default_shape_applied_when_none_provided(self, mock_request):
         """Test default shape is applied when no shape is provided"""
         mock_response = Mock()
@@ -866,6 +895,36 @@ class TestAdditionalEndpoints:
         assert notices.count == 1
         assert notices.results[0].notice_id == "N123"
         assert notices.results[0].title == "Test Notice"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_grants(self, mock_request):
+        """Test list_grants endpoint"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 1}'
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "grant_id": 12345,
+                    "opportunity_number": "OPP-123",
+                    "title": "Test Grant",
+                    "status": {"code": "OPEN", "description": "Open"},
+                    "agency_code": "HHS",
+                }
+            ],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        grants = client.list_grants()
+
+        assert grants.count == 1
+        assert grants.results[0].grant_id == 12345
+        assert grants.results[0].title == "Test Grant"
+        assert grants.results[0].opportunity_number == "OPP-123"
 
 
 # ============================================================================

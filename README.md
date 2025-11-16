@@ -6,7 +6,7 @@ A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, f
 
 - **Dynamic Response Shaping** - Request only the fields you need, reducing payload sizes by 60-80%
 - **Full Type Safety** - Runtime-generated TypedDict types with accurate type hints for IDE autocomplete
-- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, entities, forecasts, opportunities, notices) [Note: the current version does NOT implement all endpoints, we will be adding them incrementally]
+- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, entities, forecasts, opportunities, notices, grants) [Note: the current version does NOT implement all endpoints, we will be adding them incrementally]
 - **Flexible Data Access** - Dictionary-based response objects with validation
 - **Modern Python** - Built for Python 3.12+ using modern async-ready patterns
 - **Production-Ready** - Comprehensive test suite with VCR.py-based integration tests
@@ -171,6 +171,16 @@ opportunities = client.list_opportunities(
 # List contract notices
 notices = client.list_notices(
     agency="DOD",
+    limit=25
+)
+```
+
+### Grants
+
+```python
+# List grant opportunities
+grants = client.list_grants(
+    agency_code="HHS",
     limit=25
 )
 ```
@@ -360,39 +370,63 @@ uv run ruff format tango/ && uv run ruff check tango/ && uv run mypy tango/
 
 ```
 tango-python/
-├── tango/
+├── tango/                    # Main SDK package
 │   ├── __init__.py          # Public API exports
 │   ├── client.py            # TangoClient implementation
 │   ├── models.py            # Data models and shape configs
 │   ├── exceptions.py        # Exception classes
 │   └── shapes/              # Dynamic model system
+│       ├── __init__.py      # Shapes package exports
 │       ├── parser.py        # Shape string parser
 │       ├── generator.py     # TypedDict generator
 │       ├── factory.py       # Instance factory
 │       ├── schema.py        # Schema registry
-│       ├── explicit_schemas.py  # Predefined schemas
+│       ├── explicit_schemas.py  # Predefined schemas (Contract, Entity, Grant, etc.)
+│       ├── models.py        # Shape specification models
 │       └── types.py         # TypedDict exports
-├── tests/
-│   ├── test_client.py       # Unit tests
+├── tests/                    # Test suite
+│   ├── __init__.py
+│   ├── conftest.py          # Pytest configuration
+│   ├── test_client.py       # Unit tests for client
 │   ├── test_models.py       # Model tests
 │   ├── test_shapes.py       # Shape system tests
+│   ├── cassettes/           # VCR.py HTTP cassettes
 │   └── integration/         # Integration tests
+│       ├── __init__.py
 │       ├── README.md        # Integration test docs
-│       ├── conftest.py      # Test fixtures
+│       ├── conftest.py      # Integration test fixtures
 │       ├── validation.py    # Validation utilities
-│       └── test_*.py        # Integration test files
-├── docs/
+│       ├── test_agencies_integration.py
+│       ├── test_contracts_integration.py
+│       ├── test_entities_integration.py
+│       ├── test_forecasts_integration.py
+│       ├── test_grants_integration.py
+│       ├── test_notices_integration.py
+│       ├── test_opportunities_integration.py
+│       ├── test_reference_data_integration.py
+│       └── test_edge_cases_integration.py
+├── docs/                     # Documentation
+│   ├── API_REFERENCE.md     # Complete API reference
+│   ├── DEVELOPERS.md        # Developer guide
 │   ├── SHAPES.md            # Shape system guide
-│   ├── API_REFERENCE.md     # API reference
-│   └── DYNAMIC_MODELS.md    # Dynamic models docs
-└── pyproject.toml           # Project configuration
+│   └── quick_start.ipynb    # Interactive quick start
+├── scripts/                  # Utility scripts
+│   ├── README.md
+│   ├── fetch_api_schema.py
+│   └── generate_schemas_from_api.py
+├── pyproject.toml           # Project configuration
+├── uv.lock                  # Dependency lock file
+├── LICENSE                  # MIT License
+├── CHANGELOG.md            # Version history
+└── README.md               # This file
 ```
 
 ## Documentation
 
 - [Shape System Guide](docs/SHAPES.md) - Comprehensive guide to response shaping
 - [API Reference](docs/API_REFERENCE.md) - Detailed API documentation
-- [Dynamic Models](docs/DYNAMIC_MODELS.md) - Technical documentation on the dynamic model system
+- [Developer Guide](docs/DEVELOPERS.md) - Technical documentation for developers
+- [Quick Start Notebook](docs/quick_start.ipynb) - Interactive Jupyter notebook with examples
 
 ## Requirements
 

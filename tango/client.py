@@ -21,6 +21,7 @@ from tango.models import (
     Contract,
     Entity,
     Forecast,
+    Grant,
     Location,
     Notice,
     Opportunity,
@@ -741,6 +742,58 @@ class TangoClient:
         results = [
             self._parse_response_with_shape(notice, shape, Notice, flat, flat_lists)
             for notice in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    # Grant endpoints
+    def list_grants(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        **filters,
+    ) -> PaginatedResponse:
+        """
+        List grants
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape).
+                   Use None to disable shaping, ShapeConfig.GRANTS_MINIMAL for minimal,
+                   or provide custom shape string
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            **filters: Additional filter parameters
+        """
+        params = {"page": page, "limit": min(limit, 100)}
+
+        # Add shape parameter with default minimal shape
+        if shape is None:
+            shape = ShapeConfig.GRANTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        params.update(filters)
+
+        data = self._get("/api/grants/", params)
+
+        # Always use dynamic parsing
+        results = [
+            self._parse_response_with_shape(grant, shape, Grant, flat, flat_lists)
+            for grant in data["results"]
         ]
 
         return PaginatedResponse(

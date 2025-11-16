@@ -11,6 +11,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Forecasts](#forecasts)
 - [Opportunities](#opportunities)
 - [Notices](#notices)
+- [Grants](#grants)
 - [Business Types](#business-types)
 - [Response Objects](#response-objects)
 - [Error Handling](#error-handling)
@@ -458,6 +459,83 @@ for notice in notices.results:
 - `description` - Description
 - `posted_date` - Date posted
 - `naics_code` - Industry code
+
+---
+
+## Grants
+
+Federal grant opportunities and assistance listings.
+
+### list_grants()
+
+List grant opportunities.
+
+```python
+grants = client.list_grants(
+    page=1,
+    limit=25,
+    shape=None,
+    flat=False,
+    flat_lists=False,
+    # Additional filters
+    agency_code=None,
+)
+```
+
+**Parameters:**
+- `page` (int): Page number
+- `limit` (int): Results per page (max 100)
+- `shape` (str): Response shape string (defaults to minimal shape).
+               Use None to disable shaping, ShapeConfig.GRANTS_MINIMAL for minimal,
+               or provide custom shape string
+- `flat` (bool): Flatten nested objects in shaped response
+- `flat_lists` (bool): Flatten arrays using indexed keys
+- `agency_code` (str): Filter by agency code
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with grant dictionaries
+
+**Example:**
+```python
+grants = client.list_grants(agency_code="HHS", limit=20)
+
+for grant in grants.results:
+    print(f"{grant['title']}")
+    print(f"Opportunity: {grant.get('opportunity_number', 'N/A')}")
+    print(f"Status: {grant.get('status', {}).get('description', 'N/A')}")
+```
+
+**Common Grant Fields:**
+- `grant_id` - Grant identifier
+- `opportunity_number` - Opportunity number
+- `title` - Grant title
+- `status` - Status information (nested object with code and description)
+- `agency_code` - Agency code
+- `description` - Description
+- `last_updated` - Last updated timestamp
+- `cfda_numbers` - CFDA numbers (list of objects with number and title)
+- `applicant_types` - Applicant types (list of objects with code and description)
+- `funding_categories` - Funding categories (list of objects with code and description)
+- `funding_instruments` - Funding instruments (list of objects with code and description)
+- `category` - Category (object with code and description)
+- `important_dates` - Important dates (list)
+- `attachments` - Attachments (list of objects)
+
+**Example with Expanded Fields:**
+```python
+# Get grants with expanded status and CFDA numbers
+grants = client.list_grants(
+    shape="grant_id,title,opportunity_number,status(*),cfda_numbers(number,title)",
+    limit=10
+)
+
+for grant in grants.results:
+    print(f"Grant: {grant['title']}")
+    if grant.get('status'):
+        print(f"Status: {grant['status'].get('description')}")
+    if grant.get('cfda_numbers'):
+        for cfda in grant['cfda_numbers']:
+            print(f"CFDA: {cfda.get('number')} - {cfda.get('title')}")
+```
 
 ---
 

@@ -588,6 +588,98 @@ AGENCY_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+# Nested schemas for Grant fields
+CFDA_NUMBER_SCHEMA: dict[str, FieldSchema] = {
+    "number": FieldSchema(name="number", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+}
+
+CODE_DESCRIPTION_SCHEMA: dict[str, FieldSchema] = {
+    "code": FieldSchema(name="code", type=str, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+}
+
+GRANT_ATTACHMENT_SCHEMA: dict[str, FieldSchema] = {
+    "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=True, is_list=False),
+    "resource_id": FieldSchema(name="resource_id", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+}
+
+GRANT_SCHEMA: dict[str, FieldSchema] = {
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "applicant_eligibility_description": FieldSchema(
+        name="applicant_eligibility_description", type=str, is_optional=True, is_list=False
+    ),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "funding_activity_category_description": FieldSchema(
+        name="funding_activity_category_description", type=str, is_optional=True, is_list=False
+    ),
+    "grant_id": FieldSchema(name="grant_id", type=int, is_optional=False, is_list=False),
+    "grantor_contact": FieldSchema(
+        name="grantor_contact", type=dict, is_optional=True, is_list=True
+    ),
+    "last_updated": FieldSchema(
+        name="last_updated", type=datetime, is_optional=True, is_list=False
+    ),
+    "opportunity_number": FieldSchema(
+        name="opportunity_number", type=str, is_optional=False, is_list=False
+    ),
+    "status": FieldSchema(
+        name="status", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
+    "title": FieldSchema(name="title", type=str, is_optional=False, is_list=False),
+    # Expanded fields
+    "cfda_numbers": FieldSchema(
+        name="cfda_numbers",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="CFDANumber",
+    ),
+    "applicant_types": FieldSchema(
+        name="applicant_types",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="CodeDescription",
+    ),
+    "category": FieldSchema(
+        name="category", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
+    "funding_categories": FieldSchema(
+        name="funding_categories",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="CodeDescription",
+    ),
+    "funding_details": FieldSchema(
+        name="funding_details", type=dict, is_optional=True, is_list=True
+    ),
+    "funding_instruments": FieldSchema(
+        name="funding_instruments",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="CodeDescription",
+    ),
+    "important_dates": FieldSchema(
+        name="important_dates", type=dict, is_optional=True, is_list=True
+    ),
+    "attachments": FieldSchema(
+        name="attachments",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="GrantAttachment",
+    ),
+}
+
+
 # ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
@@ -610,6 +702,11 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Opportunity": OPPORTUNITY_SCHEMA,
     "Notice": NOTICE_SCHEMA,
     "Agency": AGENCY_SCHEMA,
+    "Grant": GRANT_SCHEMA,
+    # Nested schemas for Grant fields
+    "CFDANumber": CFDA_NUMBER_SCHEMA,
+    "CodeDescription": CODE_DESCRIPTION_SCHEMA,
+    "GrantAttachment": GRANT_ATTACHMENT_SCHEMA,
 }
 
 

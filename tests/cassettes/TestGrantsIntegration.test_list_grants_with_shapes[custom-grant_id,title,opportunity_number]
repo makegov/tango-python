@@ -1,0 +1,87 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/grants/?page=1&limit=5&shape=grant_id%2Ctitle%2Copportunity_number
+  response:
+    body:
+      string: '{"count":2690,"next":"http://tango.makegov.com/api/grants/?limit=5&page=2&shape=grant_id%2Ctitle%2Copportunity_number","previous":null,"results":[{"grant_id":360862,"title":"Infrastructure
+        Investment and Jobs Act (IIJA): Mine of the Future - Proving Ground Initiative","opportunity_number":"DE-FOA-0003390"},{"grant_id":360863,"title":"Infrastructure
+        Investment and Jobs Act (IIJA) &ndash; Mines &amp; Metals Capacity Expansion
+        &ndash; Piloting Byproduct Critical Minerals and Materials Recovery at Domestic
+        Industrial Facilities","opportunity_number":"DE-FOA-0003583"},{"grant_id":360861,"title":"FY
+        2025 Continuum of Care Competition and Youth Homeless Demonstration Program
+        Grants NOFO","opportunity_number":"FR-6900-N-25"},{"grant_id":360851,"title":"Office
+        of Postsecondary Education (OPE): Fund for the Improvement of Postsecondary
+        Education (FIPSE): Special Projects;  Assistance Listing Number (ALN) 84.116J","opportunity_number":"ED-GRANTS-111225-001"},{"grant_id":345316,"title":"2026
+        Tribal Transportation Program Safety Fund","opportunity_number":"2026TTPSF"}]}'
+    headers:
+      CF-RAY:
+      - 99f95d2afc5fa1de-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 16 Nov 2025 19:23:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=06lJ7dU0cgrEWK5EHqacLc48K1HP4UoOLS%2BW%2FdU9%2FCBWGo6VPdC97IaEjm5r3q1eOy1Htj11hFFh8MixvmuRji3qboVbhHhYFLuRbw8LRXjlCTKy0u1IQ%2F0XeA%3D%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      alt-svc:
+      - h3=":443"; ma=86400
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1073'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.029s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1998708'
+      x-ratelimit-daily-reset:
+      - '832'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

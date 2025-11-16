@@ -393,6 +393,20 @@ class TypeGenerator:
             TypeGenerationError: If model cannot be resolved
         """
         if isinstance(nested_model, str):
+            # First check if it's in the schema registry (for schema-only models)
+            schema = self._schema_registry.get_schema(nested_model)
+            if schema:
+                # Create a simple type to represent this schema-only model
+                # We'll use a dynamically created type that the schema registry can work with
+                # Create a type that can be used as a model class
+                # The schema registry will handle the actual schema lookup
+                class_name = nested_model
+                model_type = type(class_name, (object,), {"__name__": class_name})
+                # Register it with the schema registry if not already registered
+                if not self._schema_registry.is_registered(model_type):
+                    self._schema_registry._schemas[model_type] = schema
+                return model_type
+
             # Try to import the model from tango.models
             try:
                 from tango import models

@@ -1381,8 +1381,14 @@ class TestDefaultShapes:
         """Test that NOTICES_MINIMAL default is defined"""
         assert hasattr(ShapeConfig, "NOTICES_MINIMAL")
         shape = ShapeConfig.NOTICES_MINIMAL
-        assert "notice_id" in shape
+
+    def test_grants_minimal_default_is_defined(self):
+        """Test that GRANTS_MINIMAL default is defined"""
+        assert hasattr(ShapeConfig, "GRANTS_MINIMAL")
+        shape = ShapeConfig.GRANTS_MINIMAL
+        assert "grant_id" in shape
         assert "title" in shape
+        assert "opportunity_number" in shape
 
     def test_contracts_minimal_excludes_award_type(self):
         """Test that CONTRACTS_MINIMAL doesn't include award_type (not in API)"""
@@ -1539,6 +1545,26 @@ class TestDefaultShapeUsage:
 
         call_args = mock_request.call_args
         assert call_args[1]["params"]["shape"] == ShapeConfig.NOTICES_MINIMAL
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_grants_defaults_to_minimal(self, mock_request):
+        """Test that list_grants uses GRANTS_MINIMAL by default"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_grants()
+
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["shape"] == ShapeConfig.GRANTS_MINIMAL
 
 
 # ============================================================================
