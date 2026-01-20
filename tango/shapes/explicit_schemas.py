@@ -23,6 +23,60 @@ OFFICE_SCHEMA: dict[str, FieldSchema] = {
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
 }
 
+# Awards endpoints often return a richer office object (awarding/funding office).
+AWARD_OFFICE_SCHEMA: dict[str, FieldSchema] = {
+    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=str, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+}
+
+PERIOD_OF_PERFORMANCE_IDV_SCHEMA: dict[str, FieldSchema] = {
+    "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
+    "last_date_to_order": FieldSchema(
+        name="last_date_to_order", type=date, is_optional=True, is_list=False
+    ),
+}
+
+OFFICERS_SCHEMA: dict[str, FieldSchema] = {
+    "highly_compensated_officer_1_name": FieldSchema(
+        name="highly_compensated_officer_1_name", type=str, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_1_amount": FieldSchema(
+        name="highly_compensated_officer_1_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_2_name": FieldSchema(
+        name="highly_compensated_officer_2_name", type=str, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_2_amount": FieldSchema(
+        name="highly_compensated_officer_2_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_3_name": FieldSchema(
+        name="highly_compensated_officer_3_name", type=str, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_3_amount": FieldSchema(
+        name="highly_compensated_officer_3_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_4_name": FieldSchema(
+        name="highly_compensated_officer_4_name", type=str, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_4_amount": FieldSchema(
+        name="highly_compensated_officer_4_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_5_name": FieldSchema(
+        name="highly_compensated_officer_5_name", type=str, is_optional=True, is_list=False
+    ),
+    "highly_compensated_officer_5_amount": FieldSchema(
+        name="highly_compensated_officer_5_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+}
+
 
 LOCATION_SCHEMA: dict[str, FieldSchema] = {
     "city_name": FieldSchema(name="city_name", type=str, is_optional=True, is_list=False),
@@ -153,6 +207,9 @@ RECIPIENT_PROFILE_SCHEMA: dict[str, FieldSchema] = {
     "location": FieldSchema(
         name="location", type=dict, is_optional=True, is_list=False, nested_model="Location"
     ),
+    # Award endpoints may expose these legacy identifiers/fields.
+    "cage": FieldSchema(name="cage", type=str, is_optional=True, is_list=False),
+    "duns": FieldSchema(name="duns", type=str, is_optional=True, is_list=False),
 }
 
 
@@ -681,11 +738,250 @@ GRANT_SCHEMA: dict[str, FieldSchema] = {
 
 
 # ============================================================================
+# VEHICLES (Awards) RESOURCE SCHEMAS
+# ============================================================================
+
+# Vehicles expose a "competition_details(...)" expansion that shapes an underlying JSON object.
+# We model that as a nested schema to allow field selection (including wildcard use).
+VEHICLE_COMPETITION_DETAILS_SCHEMA: dict[str, FieldSchema] = {
+    "commercial_item_acquisition_procedures": FieldSchema(
+        name="commercial_item_acquisition_procedures", type=dict, is_optional=True, is_list=False
+    ),
+    "evaluated_preference": FieldSchema(
+        name="evaluated_preference", type=dict, is_optional=True, is_list=False
+    ),
+    "extent_competed": FieldSchema(
+        name="extent_competed", type=dict, is_optional=True, is_list=False
+    ),
+    "most_recent_solicitation_date": FieldSchema(
+        name="most_recent_solicitation_date", type=date, is_optional=True, is_list=False
+    ),
+    "number_of_offers_received": FieldSchema(
+        name="number_of_offers_received", type=int, is_optional=True, is_list=False
+    ),
+    "original_solicitation_date": FieldSchema(
+        name="original_solicitation_date", type=date, is_optional=True, is_list=False
+    ),
+    "other_than_full_and_open_competition": FieldSchema(
+        name="other_than_full_and_open_competition", type=dict, is_optional=True, is_list=False
+    ),
+    "set_aside": FieldSchema(name="set_aside", type=dict, is_optional=True, is_list=False),
+    "simplified_procedures_for_certain_commercial_items": FieldSchema(
+        name="simplified_procedures_for_certain_commercial_items",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+    ),
+    "small_business_competitiveness_demonstration_program": FieldSchema(
+        name="small_business_competitiveness_demonstration_program",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+    ),
+    "solicitation_identifier": FieldSchema(
+        name="solicitation_identifier", type=str, is_optional=True, is_list=False
+    ),
+    "solicitation_procedures": FieldSchema(
+        name="solicitation_procedures", type=dict, is_optional=True, is_list=False
+    ),
+}
+
+
+# IDV schema (used for `/api/idvs/`, and also by Vehicles awardees shaping).
+IDV_SCHEMA: dict[str, FieldSchema] = {
+    # Identifiers
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    "key": FieldSchema(name="key", type=str, is_optional=False, is_list=False),
+    "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
+    # Core fields
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
+    "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
+    "total_contract_value": FieldSchema(
+        name="total_contract_value", type=Decimal, is_optional=True, is_list=False
+    ),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "base_and_exercised_options_value": FieldSchema(
+        name="base_and_exercised_options_value", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "idv_type": FieldSchema(name="idv_type", type=dict, is_optional=True, is_list=False),
+    "multiple_or_single_award_idv": FieldSchema(
+        name="multiple_or_single_award_idv", type=dict, is_optional=True, is_list=False
+    ),
+    "type_of_idc": FieldSchema(name="type_of_idc", type=dict, is_optional=True, is_list=False),
+    # Expansions / nested objects
+    "recipient": FieldSchema(
+        name="recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+    "place_of_performance": FieldSchema(
+        name="place_of_performance",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="PlaceOfPerformance",
+    ),
+    "officers": FieldSchema(
+        name="officers", type=dict, is_optional=True, is_list=False, nested_model="Officers"
+    ),
+    "parent_award": FieldSchema(
+        name="parent_award",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="ParentAward",
+    ),
+    "awarding_office": FieldSchema(
+        name="awarding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AwardOffice",
+    ),
+    "funding_office": FieldSchema(
+        name="funding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AwardOffice",
+    ),
+    "legislative_mandates": FieldSchema(
+        name="legislative_mandates",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="LegislativeMandates",
+    ),
+    "set_aside": FieldSchema(
+        name="set_aside", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
+    "period_of_performance": FieldSchema(
+        name="period_of_performance",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="IDVPeriodOfPerformance",
+    ),
+    "transactions": FieldSchema(
+        name="transactions",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="Transaction",
+    ),
+    "subawards_summary": FieldSchema(
+        name="subawards_summary",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="SubawardsSummary",
+    ),
+    "competition": FieldSchema(
+        name="competition",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="ContractOrIDVCompetition",
+    ),
+    "awards": FieldSchema(
+        name="awards", type=dict, is_optional=True, is_list=True, nested_model="Contract"
+    ),
+    # Alias expansion used in vehicle shaping: orders(...) == IDV child awards/contracts.
+    "orders": FieldSchema(
+        name="orders", type=dict, is_optional=True, is_list=True, nested_model="Contract"
+    ),
+    # Shapes that request naics(...) / psc(...)
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
+    "psc": FieldSchema(
+        name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
+    # Vehicle membership rollups (present on `/api/vehicles/{uuid}/awardees/`).
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
+    "idv_obligations": FieldSchema(
+        name="idv_obligations", type=Decimal, is_optional=True, is_list=False
+    ),
+    "idv_contracts_value": FieldSchema(
+        name="idv_contracts_value", type=Decimal, is_optional=True, is_list=False
+    ),
+}
+
+
+VEHICLE_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=False, is_list=False),
+    "solicitation_identifier": FieldSchema(
+        name="solicitation_identifier", type=str, is_optional=False, is_list=False
+    ),
+    "agency_id": FieldSchema(name="agency_id", type=str, is_optional=False, is_list=False),
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
+    # Choice fields are returned as {code, description} objects.
+    "vehicle_type": FieldSchema(name="vehicle_type", type=dict, is_optional=True, is_list=False),
+    "who_can_use": FieldSchema(name="who_can_use", type=dict, is_optional=True, is_list=False),
+    "type_of_idc": FieldSchema(name="type_of_idc", type=dict, is_optional=True, is_list=False),
+    "contract_type": FieldSchema(name="contract_type", type=dict, is_optional=True, is_list=False),
+    "agency_details": FieldSchema(
+        name="agency_details", type=dict, is_optional=True, is_list=False
+    ),
+    "descriptions": FieldSchema(name="descriptions", type=str, is_optional=True, is_list=True),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "last_date_to_order": FieldSchema(
+        name="last_date_to_order", type=date, is_optional=True, is_list=False
+    ),
+    "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
+    "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
+    "vehicle_obligations": FieldSchema(
+        name="vehicle_obligations", type=Decimal, is_optional=True, is_list=False
+    ),
+    "vehicle_contracts_value": FieldSchema(
+        name="vehicle_contracts_value", type=Decimal, is_optional=True, is_list=False
+    ),
+    # Opportunity-derived fields (SAM.gov)
+    "solicitation_title": FieldSchema(
+        name="solicitation_title", type=str, is_optional=True, is_list=False
+    ),
+    "solicitation_description": FieldSchema(
+        name="solicitation_description", type=str, is_optional=True, is_list=False
+    ),
+    "solicitation_date": FieldSchema(
+        name="solicitation_date", type=date, is_optional=True, is_list=False
+    ),
+    "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
+    "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
+    "set_aside": FieldSchema(name="set_aside", type=str, is_optional=True, is_list=False),
+    # Shaping expansions
+    "awardees": FieldSchema(
+        name="awardees", type=dict, is_optional=True, is_list=True, nested_model="IDV"
+    ),
+    "opportunity": FieldSchema(
+        name="opportunity", type=dict, is_optional=True, is_list=False, nested_model="Opportunity"
+    ),
+    "competition_details": FieldSchema(
+        name="competition_details",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="VehicleCompetitionDetails",
+    ),
+}
+
+
+# ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
 
 EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Office": OFFICE_SCHEMA,
+    "AwardOffice": AWARD_OFFICE_SCHEMA,
     "Location": LOCATION_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "Competition": COMPETITION_SCHEMA,
@@ -697,12 +993,18 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Contact": CONTACT_SCHEMA,
     "RecipientProfile": RECIPIENT_PROFILE_SCHEMA,
     "Contract": CONTRACT_SCHEMA,
+    "IDVPeriodOfPerformance": PERIOD_OF_PERFORMANCE_IDV_SCHEMA,
+    "Officers": OFFICERS_SCHEMA,
     "Entity": ENTITY_SCHEMA,
     "Forecast": FORECAST_SCHEMA,
     "Opportunity": OPPORTUNITY_SCHEMA,
     "Notice": NOTICE_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Grant": GRANT_SCHEMA,
+    # Vehicles (Awards)
+    "Vehicle": VEHICLE_SCHEMA,
+    "IDV": IDV_SCHEMA,
+    "VehicleCompetitionDetails": VEHICLE_COMPETITION_DETAILS_SCHEMA,
     # Nested schemas for Grant fields
     "CFDANumber": CFDA_NUMBER_SCHEMA,
     "CodeDescription": CODE_DESCRIPTION_SCHEMA,

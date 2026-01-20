@@ -281,6 +281,32 @@ class Contract:
 
 
 @dataclass
+class IDV:
+    """Schema definition for IDV (used by Vehicles awardees shaping)"""
+
+    uuid: str
+    key: str
+    piid: str | None = None
+    award_date: date | None = None
+    description: str | None = None
+    recipient: RecipientProfile | None = None
+
+
+@dataclass
+class Vehicle:
+    """Schema definition for Vehicle (not used for instances)"""
+
+    uuid: str
+    solicitation_identifier: str
+    agency_id: str
+    solicitation_title: str | None = None
+    solicitation_date: date | None = None
+    award_date: date | None = None
+    last_date_to_order: date | None = None
+    fiscal_year: int | None = None
+
+
+@dataclass
 class Entity:
     """Schema definition for Entity (not used for instances)"""
 
@@ -445,3 +471,32 @@ class ShapeConfig:
 
     # Default for list_grants()
     GRANTS_MINIMAL: Final = "grant_id,opportunity_number,title,status(*),agency_code"
+
+    # Default for list_idvs()
+    IDVS_MINIMAL: Final = "key,piid,award_date,recipient(display_name,uei),description,total_contract_value,obligated,idv_type"
+
+    # Default for get_idv()
+    IDVS_COMPREHENSIVE: Final = (
+        "key,piid,award_date,description,fiscal_year,total_contract_value,base_and_exercised_options_value,obligated,"
+        "idv_type,multiple_or_single_award_idv,type_of_idc,period_of_performance(start_date,last_date_to_order),"
+        "recipient(display_name,legal_business_name,uei,cage_code),"
+        "awarding_office(*),funding_office(*),place_of_performance(*),parent_award(key,piid),"
+        "competition(*),legislative_mandates(*),transactions(*),subawards_summary(*)"
+    )
+
+    # Default for list_vehicles()
+    VEHICLES_MINIMAL: Final = (
+        "uuid,solicitation_identifier,organization_id,awardee_count,order_count,"
+        "vehicle_obligations,vehicle_contracts_value,solicitation_title,solicitation_date"
+    )
+
+    # Default for get_vehicle()
+    VEHICLES_COMPREHENSIVE: Final = (
+        "uuid,solicitation_identifier,agency_id,organization_id,vehicle_type,who_can_use,"
+        "solicitation_title,solicitation_description,solicitation_date,naics_code,psc_code,set_aside,"
+        "fiscal_year,award_date,last_date_to_order,awardee_count,order_count,vehicle_obligations,vehicle_contracts_value,"
+        "type_of_idc,contract_type,competition_details(*)"
+    )
+
+    # Default for list_vehicle_awardees()
+    VEHICLE_AWARDEES_MINIMAL: Final = "uuid,key,piid,award_date,title,order_count,idv_obligations,idv_contracts_value,recipient(display_name,uei)"
