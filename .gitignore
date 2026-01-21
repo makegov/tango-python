@@ -145,6 +145,6 @@ dmypy.json
 .DS_Store
 Thumbs.db
 
-# other
-/yoni
+# Other
+yoni/
 .cursor/*

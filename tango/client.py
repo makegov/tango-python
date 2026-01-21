@@ -30,6 +30,12 @@ from tango.models import (
     SearchFilters,
     ShapeConfig,
     Vehicle,
+    WebhookEndpoint,
+    WebhookEventType,
+    WebhookEventTypesResponse,
+    WebhookSubjectTypeDefinition,
+    WebhookSubscription,
+    WebhookTestDeliveryResult,
 )
 from tango.shapes import (
     ModelFactory,
@@ -142,6 +148,14 @@ class TangoClient:
     def _post(self, endpoint: str, json_data: dict[str, Any]) -> dict[str, Any]:
         """Make a POST request"""
         return self._request("POST", endpoint, json_data=json_data)
+
+    def _patch(self, endpoint: str, json_data: dict[str, Any]) -> dict[str, Any]:
+        """Make a PATCH request"""
+        return self._request("PATCH", endpoint, json_data=json_data)
+
+    def _delete(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
+        """Make a DELETE request"""
+        return self._request("DELETE", endpoint, params=params)
 
     # ============================================================================
     # Shape Parsing Utilities
@@ -1227,3 +1241,287 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
         )
+
+    # ============================================================================
+    # Webhooks (v2)
+    # ============================================================================
+
+    def list_webhook_event_types(self) -> WebhookEventTypesResponse:
+        """Discover supported webhook event types and subject types."""
+        data = self._get("/api/webhooks/event-types/")
+
+        event_types = [
+            WebhookEventType(
+                event_type=str(e.get("event_type", "")),
+                default_subject_type=str(e.get("default_subject_type", "")),
+                description=str(e.get("description", "")),
+                schema_version=int(e.get("schema_version", 1)),
+            )
+            for e in (data.get("event_types") or [])
+            if isinstance(e, dict)
+        ]
+
+        subject_types = [str(x) for x in (data.get("subject_types") or [])]
+
+        subject_type_definitions = [
+            WebhookSubjectTypeDefinition(
+                subject_type=str(d.get("subject_type", "")),
+                description=str(d.get("description", "")),
+                id_format=str(d.get("id_format", "")),
+                status=str(d.get("status", "active")),
+            )
+            for d in (data.get("subject_type_definitions") or [])
+            if isinstance(d, dict)
+        ]
+
+        return WebhookEventTypesResponse(
+            event_types=event_types,
+            subject_types=subject_types,
+            subject_type_definitions=subject_type_definitions,
+        )
+
+    def list_webhook_subscriptions(
+        self, page: int = 1, page_size: int | None = None
+    ) -> PaginatedResponse[WebhookSubscription]:
+        """
+        List webhook subscriptions for the authenticated user's endpoint.
+
+        Notes:
+        - This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
+        """
+        params: dict[str, Any] = {"page": page}
+        if page_size is not None:
+            params["page_size"] = page_size
+
+        data = self._get("/api/webhooks/subscriptions/", params)
+        results = [
+            WebhookSubscription(
+                id=str(item.get("id", "")),
+                endpoint=str(item.get("endpoint")) if item.get("endpoint") is not None else None,
+                subscription_name=str(item.get("subscription_name", "")),
+                payload=item.get("payload"),
+                created_at=str(item.get("created_at", "")),
+            )
+            for item in (data.get("results") or [])
+            if isinstance(item, dict)
+        ]
+
+        return PaginatedResponse(
+            count=int(data.get("count", len(results))),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_webhook_subscription(self, subscription_id: str) -> WebhookSubscription:
+        """Get a single webhook subscription by id (UUID)."""
+        if not subscription_id:
+            raise TangoValidationError("Webhook subscription_id is required")
+
+        data = self._get(f"/api/webhooks/subscriptions/{subscription_id}/")
+        return WebhookSubscription(
+            id=str(data.get("id", "")),
+            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
+            subscription_name=str(data.get("subscription_name", "")),
+            payload=data.get("payload"),
+            created_at=str(data.get("created_at", "")),
+        )
+
+    def create_webhook_subscription(
+        self, subscription_name: str, payload: dict[str, Any]
+    ) -> WebhookSubscription:
+        """Create a webhook subscription."""
+        if not subscription_name:
+            raise TangoValidationError("Webhook subscription_name is required")
+
+        data = self._post(
+            "/api/webhooks/subscriptions/",
+            {"subscription_name": subscription_name, "payload": payload},
+        )
+
+        return WebhookSubscription(
+            id=str(data.get("id", "")),
+            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
+            subscription_name=str(data.get("subscription_name", "")),
+            payload=data.get("payload"),
+            created_at=str(data.get("created_at", "")),
+        )
+
+    def update_webhook_subscription(
+        self,
+        subscription_id: str,
+        *,
+        subscription_name: str | None = None,
+        payload: dict[str, Any] | None = None,
+    ) -> WebhookSubscription:
+        """Patch a webhook subscription."""
+        if not subscription_id:
+            raise TangoValidationError("Webhook subscription_id is required")
+
+        body: dict[str, Any] = {}
+        if subscription_name is not None:
+            body["subscription_name"] = subscription_name
+        if payload is not None:
+            body["payload"] = payload
+
+        data = self._patch(f"/api/webhooks/subscriptions/{subscription_id}/", body)
+        return WebhookSubscription(
+            id=str(data.get("id", "")),
+            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
+            subscription_name=str(data.get("subscription_name", "")),
+            payload=data.get("payload"),
+            created_at=str(data.get("created_at", "")),
+        )
+
+    def delete_webhook_subscription(self, subscription_id: str) -> None:
+        """Delete a webhook subscription."""
+        if not subscription_id:
+            raise TangoValidationError("Webhook subscription_id is required")
+        self._delete(f"/api/webhooks/subscriptions/{subscription_id}/")
+
+    def get_webhook_endpoint(self, endpoint_id: str) -> WebhookEndpoint:
+        """Get a webhook endpoint by id (UUID)."""
+        if not endpoint_id:
+            raise TangoValidationError("Webhook endpoint_id is required")
+        data = self._get(f"/api/webhooks/endpoints/{endpoint_id}/")
+        return WebhookEndpoint(
+            id=str(data.get("id", "")),
+            name=str(data.get("name", "")),
+            callback_url=str(data.get("callback_url", "")),
+            secret=str(data.get("secret")) if data.get("secret") is not None else None,
+            is_active=bool(data.get("is_active", False)),
+            created_at=str(data.get("created_at", "")),
+            updated_at=str(data.get("updated_at", "")),
+        )
+
+    def list_webhook_endpoints(
+        self, page: int = 1, limit: int = 25
+    ) -> PaginatedResponse[WebhookEndpoint]:
+        """
+        List webhook endpoints accessible to the authenticated user.
+
+        Notes:
+        - In typical production usage, MakeGov provisions the initial endpoint for you.
+        - The API is opinionated: endpoints are "owned" by you (name == username/email).
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        data = self._get("/api/webhooks/endpoints/", params)
+
+        results = [
+            WebhookEndpoint(
+                id=str(item.get("id", "")),
+                name=str(item.get("name", "")),
+                callback_url=str(item.get("callback_url", "")),
+                secret=str(item.get("secret")) if item.get("secret") is not None else None,
+                is_active=bool(item.get("is_active", False)),
+                created_at=str(item.get("created_at", "")),
+                updated_at=str(item.get("updated_at", "")),
+            )
+            for item in (data.get("results") or [])
+            if isinstance(item, dict)
+        ]
+
+        return PaginatedResponse(
+            count=int(data.get("count", len(results))),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def create_webhook_endpoint(self, callback_url: str, is_active: bool = True) -> WebhookEndpoint:
+        """
+        Create a webhook endpoint for the authenticated user.
+
+        Note:
+        - The server generates `secret` and manages `name`.
+        - Only one endpoint per user is allowed; if one already exists, this will fail.
+        """
+        if not callback_url:
+            raise TangoValidationError("Webhook callback_url is required")
+
+        data = self._post(
+            "/api/webhooks/endpoints/",
+            {"callback_url": callback_url, "is_active": is_active},
+        )
+        return WebhookEndpoint(
+            id=str(data.get("id", "")),
+            name=str(data.get("name", "")),
+            callback_url=str(data.get("callback_url", "")),
+            secret=str(data.get("secret")) if data.get("secret") is not None else None,
+            is_active=bool(data.get("is_active", False)),
+            created_at=str(data.get("created_at", "")),
+            updated_at=str(data.get("updated_at", "")),
+        )
+
+    def update_webhook_endpoint(
+        self,
+        endpoint_id: str,
+        *,
+        callback_url: str | None = None,
+        is_active: bool | None = None,
+    ) -> WebhookEndpoint:
+        """Patch a webhook endpoint."""
+        if not endpoint_id:
+            raise TangoValidationError("Webhook endpoint_id is required")
+
+        body: dict[str, Any] = {}
+        if callback_url is not None:
+            body["callback_url"] = callback_url
+        if is_active is not None:
+            body["is_active"] = is_active
+
+        data = self._patch(f"/api/webhooks/endpoints/{endpoint_id}/", body)
+        return WebhookEndpoint(
+            id=str(data.get("id", "")),
+            name=str(data.get("name", "")),
+            callback_url=str(data.get("callback_url", "")),
+            secret=str(data.get("secret")) if data.get("secret") is not None else None,
+            is_active=bool(data.get("is_active", False)),
+            created_at=str(data.get("created_at", "")),
+            updated_at=str(data.get("updated_at", "")),
+        )
+
+    def delete_webhook_endpoint(self, endpoint_id: str) -> None:
+        """Delete a webhook endpoint."""
+        if not endpoint_id:
+            raise TangoValidationError("Webhook endpoint_id is required")
+        self._delete(f"/api/webhooks/endpoints/{endpoint_id}/")
+
+    def test_webhook_delivery(self, endpoint_id: str | None = None) -> WebhookTestDeliveryResult:
+        """
+        Send an immediate test webhook to your endpoint.
+
+        If endpoint_id is not provided, the server will use your default endpoint.
+        """
+        body: dict[str, Any] = {}
+        if endpoint_id:
+            body["endpoint_id"] = endpoint_id
+        data = self._post("/api/webhooks/endpoints/test-delivery/", body)
+        return WebhookTestDeliveryResult(
+            success=bool(data.get("success", False)),
+            status_code=int(data["status_code"]) if data.get("status_code") is not None else None,
+            response_time_ms=int(data["response_time_ms"])
+            if data.get("response_time_ms") is not None
+            else None,
+            endpoint_url=str(data.get("endpoint_url"))
+            if data.get("endpoint_url") is not None
+            else None,
+            message=str(data.get("message")) if data.get("message") is not None else None,
+            error=str(data.get("error")) if data.get("error") is not None else None,
+            response_body=str(data.get("response_body"))
+            if data.get("response_body") is not None
+            else None,
+            test_payload=data.get("test_payload"),
+        )
+
+    def get_webhook_sample_payload(self, event_type: str | None = None) -> dict[str, Any]:
+        """
+        Fetch Tango-shaped sample webhook deliveries.
+
+        - If event_type is provided, returns the single-event response.
+        - Otherwise returns a `samples` mapping for all supported event types.
+        """
+        params: dict[str, Any] = {}
+        if event_type:
+            params["event_type"] = event_type
+        return self._get("/api/webhooks/endpoints/sample-payload/", params)
