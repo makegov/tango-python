@@ -375,7 +375,7 @@ class TangoClient:
     # Contract endpoints
     def list_contracts(
         self,
-        page: int = 1,
+        cursor: str | None = None,
         limit: int = 25,
         shape: str | None = None,
         flat: bool = False,
@@ -387,7 +387,8 @@ class TangoClient:
         List contracts with optional filtering
 
         Args:
-            page: Page number
+            cursor: Cursor token for pagination (from previous response.cursor).
+                   If not provided, starts from the beginning.
             limit: Results per page (max 100)
             shape: Response shape string (defaults to minimal shape).
                    Use None to disable shaping, ShapeConfig.CONTRACTS_MINIMAL for minimal,
@@ -450,6 +451,11 @@ class TangoClient:
             >>> # Text search
             >>> contracts = client.list_contracts(keyword="software development")
 
+            >>> # Pagination with cursor
+            >>> response = client.list_contracts(limit=25)
+            >>> if response.cursor:
+            ...     next_page = client.list_contracts(cursor=response.cursor, limit=25)
+
             >>> # With SearchFilters object (legacy)
             >>> filters = SearchFilters(
             ...     keyword="IT",
@@ -464,8 +470,14 @@ class TangoClient:
             ...     expiring_lte="2025-12-31"
             ... )
         """
-        # Start with explicit parameters
-        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        # Start with pagination parameters
+        # Use cursor if provided, otherwise use page=1 for first request
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        else:
+            # First page uses page=1, subsequent pages use cursor
+            params["page"] = 1
 
         # Handle filters parameter (backward compatibility)
         filter_dict: dict[str, Any] = {}
@@ -477,24 +489,20 @@ class TangoClient:
                 # dict
                 filter_dict = filters
 
-            # Extract page/limit from filters if using defaults
-            if page == 1 and "page" in filter_dict:
-                params["page"] = filter_dict.pop("page", 1)
+            # Extract limit from filters if using defaults
             if limit == 25 and "limit" in filter_dict:
                 params["limit"] = min(filter_dict.pop("limit", 25), 100)
 
         # Merge kwargs and filter_dict (kwargs take precedence)
         filter_params = {**filter_dict, **kwargs}
 
-        # Explicitly exclude shape-related parameters from filter_params
+        # Explicitly exclude shape-related and pagination parameters from filter_params
         # These are handled separately and should not be sent as query parameters
-        shape_related_params = {"shape", "flat", "flat_lists"}
-        for param in shape_related_params:
+        excluded_params = {"shape", "flat", "flat_lists", "cursor", "page"}
+        for param in excluded_params:
             filter_params.pop(param, None)
 
-        # Extract page/limit from kwargs if provided (override explicit params)
-        if "page" in filter_params:
-            params["page"] = filter_params.pop("page")
+        # Extract limit from kwargs if provided (override explicit params)
         if "limit" in filter_params:
             params["limit"] = min(filter_params.pop("limit"), 100)
 
@@ -560,6 +568,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            cursor=data.get("cursor"),
         )
 
     # Business Types endpoints

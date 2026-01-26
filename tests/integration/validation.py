@@ -19,6 +19,8 @@ def validate_pagination(response: Any) -> None:
     assert isinstance(response.results, list), "Response 'results' must be a list"
     assert response.count >= 0, "Response 'count' must be non-negative"
     assert isinstance(response.count, int), "Response 'count' must be an integer"
+    # Cursor field should exist (may be None for last page)
+    assert hasattr(response, "cursor"), "Response missing 'cursor' attribute"
 
 
 def validate_contract_fields(contract: Any, minimal: bool = True) -> None:

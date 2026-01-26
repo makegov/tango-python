@@ -168,9 +168,7 @@ class TestContractsIntegration:
         - Results match the filter criteria
         """
         # Create search filters with just date range (award_amount filter may not work as expected)
-        filters = SearchFilters(
-            page=1, limit=5, award_date_gte="2023-01-01", award_date_lte="2023-12-31"
-        )
+        filters = SearchFilters(limit=5, award_date_gte="2023-01-01", award_date_lte="2023-12-31")
 
         response = tango_client.list_contracts(filters=filters)
 
@@ -215,9 +213,9 @@ class TestContractsIntegration:
 
         # Verify that filtered results have fewer or equal count than baseline
         # (The filter should reduce the result set)
-        assert (
-            filtered_response.count <= baseline_count
-        ), f"Filtered count ({filtered_response.count}) should be <= baseline count ({baseline_count})"
+        assert filtered_response.count <= baseline_count, (
+            f"Filtered count ({filtered_response.count}) should be <= baseline count ({baseline_count})"
+        )
 
         # If we have results, validate them
         if filtered_response.results:
@@ -385,9 +383,7 @@ class TestContractsIntegration:
         - Sort and order parameters are correctly combined
         - Ascending order has no prefix, descending has '-' prefix
         """
-        response = tango_client.list_contracts(
-            sort="award_date", order=order, limit=5
-        )
+        response = tango_client.list_contracts(sort="award_date", order=order, limit=5)
 
         validate_pagination(response)
         assert len(response.results) > 0
@@ -400,11 +396,13 @@ class TestContractsIntegration:
         Validates:
         - New POP date filters work without errors
         - Filters can be combined
-        
+
         Note: This test is skipped because POP date queries are very slow (>30s timeout)
         and cause test timeouts. The filter functionality is validated by other tests.
         """
-        pytest.skip("POP date filters cause slow API responses (>30s), skipping to avoid test timeouts")
+        pytest.skip(
+            "POP date filters cause slow API responses (>30s), skipping to avoid test timeouts"
+        )
 
     @handle_api_exceptions("contracts")
     def test_new_expiring_filters(self, tango_client):
@@ -427,9 +425,7 @@ class TestContractsIntegration:
         Validates:
         - Fiscal year range filters work correctly
         """
-        response = tango_client.list_contracts(
-            fiscal_year_gte=2020, fiscal_year_lte=2024, limit=5
-        )
+        response = tango_client.list_contracts(fiscal_year_gte=2020, fiscal_year_lte=2024, limit=5)
 
         validate_pagination(response)
         # Should work without errors
@@ -486,3 +482,58 @@ class TestContractsIntegration:
 
         validate_pagination(response)
         # Multiple filters should work together
+
+    @handle_api_exceptions("contracts")
+    def test_contract_cursor_pagination(self, tango_client):
+        """Test cursor-based pagination for contracts
+
+        Validates:
+        - First page returns a cursor
+        - Cursor can be used to get next page
+        - Different pages return different results
+        - Cursor is None on last page
+
+        Note: This test requires a VCR cassette. To record it, run:
+        TANGO_REFRESH_CASSETTES=true TANGO_API_KEY=your-key pytest tests/integration/test_contracts_integration.py::TestContractsIntegration::test_contract_cursor_pagination
+        """
+        # Get first page
+        page1 = tango_client.list_contracts(limit=5)
+        validate_pagination(page1)
+        assert page1.count > 0, "Expected at least one contract"
+        assert len(page1.results) > 0, "Expected results in first page"
+
+        # Verify cursor is present (unless it's the last page)
+        if page1.next:
+            assert page1.cursor is not None, "Cursor should be present when next page exists"
+        else:
+            # If no next page, cursor may be None
+            pass
+
+        # If we have a cursor, use it to get the next page
+        if page1.cursor:
+            page2 = tango_client.list_contracts(cursor=page1.cursor, limit=5)
+            validate_pagination(page2)
+            assert len(page2.results) > 0, "Expected results in second page"
+
+            # Verify pages have different results
+            if page1.results and page2.results:
+                # Get contract keys (unique identifiers)
+                contract1_key = (
+                    page1.results[0].get("key")
+                    if isinstance(page1.results[0], dict)
+                    else getattr(page1.results[0], "key", None)
+                )
+                contract2_key = (
+                    page2.results[0].get("key")
+                    if isinstance(page2.results[0], dict)
+                    else getattr(page2.results[0], "key", None)
+                )
+
+                assert contract1_key is not None, "First contract should have a key"
+                assert contract2_key is not None, "Second contract should have a key"
+                assert contract1_key != contract2_key, (
+                    "Different pages should have different results"
+                )
+
+            # Verify total count is consistent
+            assert page1.count == page2.count, "Total count should be the same across pages"
