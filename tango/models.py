@@ -39,10 +39,13 @@ class SearchFilters:
     - recipient_uei → uei
     - set_aside_type → set_aside
     - sort + order → ordering
+
+    Note: Contracts use cursor-based pagination. Use cursor from previous response
+    to get the next page.
     """
 
     # Pagination
-    page: int = 1
+    cursor: str | None = None  # Cursor token for cursor-based pagination
     limit: int = 25
 
     # Text search
@@ -416,6 +419,7 @@ class PaginatedResponse[T]:
         next: URL for the next page of results (None if last page)
         previous: URL for the previous page of results (None if first page)
         results: List of result items (type depends on shape parameter)
+        cursor: Cursor token for cursor-based pagination (None if not available)
         page_metadata: Optional metadata about the current page
 
     Examples:
@@ -425,12 +429,16 @@ class PaginatedResponse[T]:
         >>> print(f"Total: {response.count}")
         >>> for contract in response.results:
         ...     print(contract["piid"])
+        >>> # Use cursor for next page
+        >>> if response.cursor:
+        ...     next_response = client.list_contracts(cursor=response.cursor)
     """
 
     count: int
     next: str | None
     previous: str | None
     results: list[T]
+    cursor: str | None = None
     page_metadata: dict[str, Any] | None = None
 
 
