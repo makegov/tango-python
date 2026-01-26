@@ -18,7 +18,6 @@ Usage:
 import pytest
 
 from tango import ShapeConfig
-from tango.exceptions import TangoAuthError, TangoNotFoundError, TangoValidationError
 from tests.integration.validation import (
     validate_agency_fields,
     validate_contract_fields,
@@ -175,7 +174,9 @@ class TestProductionSmoke:
 
         # If there are more results, test second page
         if page1.next is not None and page1.count > 2:
-            page2 = production_client.list_contracts(cursor=page1.cursor, limit=2, shape=ShapeConfig.CONTRACTS_MINIMAL)
+            page2 = production_client.list_contracts(
+                cursor=page1.cursor, limit=2, shape=ShapeConfig.CONTRACTS_MINIMAL
+            )
 
             validate_pagination(page2)
             assert len(page2.results) > 0, "Expected results on second page"
@@ -184,7 +185,6 @@ class TestProductionSmoke:
                 assert page1.results[0].get("key") != page2.results[0].get("key"), (
                     "Page 1 and Page 2 should have different results"
                 )
-
 
     @handle_rate_limit
     @handle_auth_error
@@ -207,3 +207,108 @@ class TestProductionSmoke:
         if len(response.results) > 0:
             contract = response.results[0]
             validate_no_parsing_errors(contract)
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_idvs_basic(self, production_client):
+        """Test basic IDV listing
+
+        Validates:
+        - Basic IDV listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_idvs(limit=5)
+
+        # Validate response structure
+        validate_pagination(response)
+        # IDVs may be empty, so we just validate structure
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            idv = response.results[0]
+            validate_no_parsing_errors(idv)
+            # Verify required fields are present
+            assert idv.get("key") is not None, "IDV key should be present"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_idv(self, production_client):
+        """Test getting a specific IDV
+
+        Validates:
+        - Single IDV retrieval works
+        - IDV parsing is correct
+        """
+        # First, get an IDV key from listing
+        list_response = production_client.list_idvs(limit=1)
+        if not list_response.results:
+            pytest.skip("No IDVs available to test get_idv")
+
+        idv_key = (
+            list_response.results[0].get("key")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].key
+        )
+        assert idv_key is not None, "IDV key should be present"
+
+        idv = production_client.get_idv(idv_key)
+
+        validate_no_parsing_errors(idv)
+        assert idv.get("key") is not None, "IDV key should be present"
+        assert idv.get("key") == idv_key if isinstance(idv, dict) else idv.key == idv_key, (
+            "Returned IDV should match requested key"
+        )
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_vehicles_basic(self, production_client):
+        """Test basic vehicle listing
+
+        Validates:
+        - Basic vehicle listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_vehicles(limit=5)
+
+        # Validate response structure
+        validate_pagination(response)
+        # Vehicles may be empty, so we just validate structure
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            vehicle = response.results[0]
+            validate_no_parsing_errors(vehicle)
+            # Verify required fields are present
+            assert vehicle.get("uuid") is not None or hasattr(vehicle, "uuid"), (
+                "Vehicle uuid should be present"
+            )
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_vehicle(self, production_client):
+        """Test getting a specific vehicle
+
+        Validates:
+        - Single vehicle retrieval works
+        - Vehicle parsing is correct
+        """
+        # First, get a vehicle UUID from listing
+        list_response = production_client.list_vehicles(limit=1)
+        if not list_response.results:
+            pytest.skip("No vehicles available to test get_vehicle")
+
+        vehicle_uuid = (
+            list_response.results[0].get("uuid")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].uuid
+        )
+        assert vehicle_uuid is not None, "Vehicle UUID should be present"
+
+        vehicle = production_client.get_vehicle(vehicle_uuid)
+
+        validate_no_parsing_errors(vehicle)
+        assert vehicle.get("uuid") is not None or hasattr(vehicle, "uuid"), (
+            "Vehicle uuid should be present"
+        )
