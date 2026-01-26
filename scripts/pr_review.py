@@ -142,8 +142,8 @@ def detect_pr_from_github_actions() -> PRInfo | None:
                             url=pr.get("html_url"),
                             state=pr.get("state"),
                         )
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"Warning: Could not read/parse GitHub event file: {e}", file=sys.stderr)
 
     if pr_number:
         try:
@@ -195,9 +195,10 @@ def get_pr_info_from_gh_cli(pr_number: int | None = None) -> PRInfo | None:
             except (json.JSONDecodeError, KeyError):
                 pass
     except FileNotFoundError:
+        # gh CLI not available - this is expected in some environments
         pass
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"Warning: Error getting PR info from gh CLI: {e}", file=sys.stderr)
 
     return None
 
@@ -214,11 +215,10 @@ def detect_pr_from_branch() -> PRInfo | None:
             check=False,
         )
         if result.returncode == 0:
-            current_branch = result.stdout.strip()
             # Try to get PR info for this branch
             return get_pr_info_from_gh_cli(None)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"Warning: Error detecting PR from branch: {e}", file=sys.stderr)
 
     return None
 

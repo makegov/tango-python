@@ -1,0 +1,284 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700
+  response:
+    body:
+      string: '{"count":5545,"next":"http://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700&cursor=WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous":null,"cursor":"WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous_cursor":null,"results":[{"key":"CONT_IDV_47QSMS26D0023_4732","piid":"47QSMS26D0023","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":475000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"R7A8T1CDJHA3","display_name":"IMAGE
+        PRINTING COMPANY, INC."}},{"key":"CONT_IDV_47QTCA26D0031_4732","piid":"47QTCA26D0031","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"VB34UDK8T7S7","display_name":"NAVCARA
+        LLC"}},{"key":"CONT_IDV_47QRAA26D0032_4732","piid":"47QRAA26D0032","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"GP58ACJU35Q3","display_name":"BONNER
+        COMMUNICATIONS LLC"}},{"key":"CONT_IDV_47QSMS26D0022_4732","piid":"47QSMS26D0022","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"C1NZB7KDTEK3","display_name":"SENTINEL
+        SERVICES, LLC"}},{"key":"CONT_IDV_47QRAA26D0031_4732","piid":"47QRAA26D0031","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":5002000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"XKNBXQT1K1Q9","display_name":"BULLDOG
+        CONSULTING SERVICES LLC"}},{"key":"CONT_IDV_47QRAA26D0030_4732","piid":"47QRAA26D0030","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2850000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PHU5ZESD58A7","display_name":"QSOURCE"}},{"key":"CONT_IDV_47QRAA26D002Z_4732","piid":"47QRAA26D002Z","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PJKDKEL234X1","display_name":"ST.
+        MORITZ ENTERPRISES, L.L.C."}},{"key":"CONT_IDV_47QSCC26D0001_4732","piid":"47QSCC26D0001","award_date":"2026-01-21","description":"OTHER
+        THAN SCHEDULE","total_contract_value":77780735.0,"obligated":0.0,"idv_type":"B","recipient":{"uei":"QEMLRQA7PLG4","display_name":"AMENTUM
+        SERVICES, INC."}},{"key":"CONT_IDV_47QSMS26D0021_4732","piid":"47QSMS26D0021","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":10000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"CMNQCL7FNKB1","display_name":"DRI
+        INC"}},{"key":"CONT_IDV_47QRCA26DA018_4732","piid":"47QRCA26DA018","award_date":"2026-01-21","description":"ONE
+        ACQUISITION SOLUTION FOR INTEGRATED SERVICES PLUS (OASIS+) 8(A) SMALL BUSINESS
+        MULTIPLE AGENCY CONTRACT (MAC)","total_contract_value":999999999999.0,"obligated":2500.0,"idv_type":"B","recipient":{"uei":"N6LCFMKNCNT5","display_name":"CHUGACH
+        SOLUTIONS ENTERPRISE, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c42ff639876e544-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Jon5gWiH9%2FIqIbVyXcdfVjZnoDuYOnq8Jsvr6cN6BhY%2Fe7huuo4c8jTP3XHjwqR54x1ySiKun%2BMWJWOtANgc%2F8cf72X0JVkGLFBlT33AE4mXEJJoVyZaVA4NVrQ%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3278'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.081s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '986'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999817'
+      x-ratelimit-daily-reset:
+      - '56989'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '986'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700
+  response:
+    body:
+      string: '{"count":5545,"next":"http://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700&cursor=WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous":null,"cursor":"WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous_cursor":null,"results":[{"key":"CONT_IDV_47QSMS26D0023_4732","piid":"47QSMS26D0023","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":475000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"R7A8T1CDJHA3","display_name":"IMAGE
+        PRINTING COMPANY, INC."}},{"key":"CONT_IDV_47QTCA26D0031_4732","piid":"47QTCA26D0031","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"VB34UDK8T7S7","display_name":"NAVCARA
+        LLC"}},{"key":"CONT_IDV_47QRAA26D0032_4732","piid":"47QRAA26D0032","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"GP58ACJU35Q3","display_name":"BONNER
+        COMMUNICATIONS LLC"}},{"key":"CONT_IDV_47QSMS26D0022_4732","piid":"47QSMS26D0022","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"C1NZB7KDTEK3","display_name":"SENTINEL
+        SERVICES, LLC"}},{"key":"CONT_IDV_47QRAA26D0031_4732","piid":"47QRAA26D0031","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":5002000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"XKNBXQT1K1Q9","display_name":"BULLDOG
+        CONSULTING SERVICES LLC"}},{"key":"CONT_IDV_47QRAA26D0030_4732","piid":"47QRAA26D0030","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2850000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PHU5ZESD58A7","display_name":"QSOURCE"}},{"key":"CONT_IDV_47QRAA26D002Z_4732","piid":"47QRAA26D002Z","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PJKDKEL234X1","display_name":"ST.
+        MORITZ ENTERPRISES, L.L.C."}},{"key":"CONT_IDV_47QSCC26D0001_4732","piid":"47QSCC26D0001","award_date":"2026-01-21","description":"OTHER
+        THAN SCHEDULE","total_contract_value":77780735.0,"obligated":0.0,"idv_type":"B","recipient":{"uei":"QEMLRQA7PLG4","display_name":"AMENTUM
+        SERVICES, INC."}},{"key":"CONT_IDV_47QSMS26D0021_4732","piid":"47QSMS26D0021","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":10000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"CMNQCL7FNKB1","display_name":"DRI
+        INC"}},{"key":"CONT_IDV_47QRCA26DA018_4732","piid":"47QRCA26DA018","award_date":"2026-01-21","description":"ONE
+        ACQUISITION SOLUTION FOR INTEGRATED SERVICES PLUS (OASIS+) 8(A) SMALL BUSINESS
+        MULTIPLE AGENCY CONTRACT (MAC)","total_contract_value":999999999999.0,"obligated":2500.0,"idv_type":"B","recipient":{"uei":"N6LCFMKNCNT5","display_name":"CHUGACH
+        SOLUTIONS ENTERPRISE, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c4313859b381177-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:17 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=gbn4C1NVvPJ7KoMp%2F75kZlFZB5s33Pzl8gMrqFm%2BagtXTzakrSodS9nank4n4TqNT7rSDERbp%2BqJvNAo6TrSKi%2FGbED%2FCzRJSl0IKisL7quNnHv47IDpPfXeFUs%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3278'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.101s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '994'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999809'
+      x-ratelimit-daily-reset:
+      - '56164'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '994'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700
+  response:
+    body:
+      string: '{"count":5545,"next":"http://tango.makegov.com/api/idvs/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&awarding_agency=4700&cursor=WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous":null,"cursor":"WyIyMDI2LTAxLTIxIiwgIjZkOGUwZWZkLTNmMWUtNTg2Ni1iMzVjLWJiODFmMWIxMTdhMSJd","previous_cursor":null,"results":[{"key":"CONT_IDV_47QSMS26D0023_4732","piid":"47QSMS26D0023","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":475000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"R7A8T1CDJHA3","display_name":"IMAGE
+        PRINTING COMPANY, INC."}},{"key":"CONT_IDV_47QTCA26D0031_4732","piid":"47QTCA26D0031","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"VB34UDK8T7S7","display_name":"NAVCARA
+        LLC"}},{"key":"CONT_IDV_47QRAA26D0032_4732","piid":"47QRAA26D0032","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"GP58ACJU35Q3","display_name":"BONNER
+        COMMUNICATIONS LLC"}},{"key":"CONT_IDV_47QSMS26D0022_4732","piid":"47QSMS26D0022","award_date":"2026-01-23","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":1000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"C1NZB7KDTEK3","display_name":"SENTINEL
+        SERVICES, LLC"}},{"key":"CONT_IDV_47QRAA26D0031_4732","piid":"47QRAA26D0031","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":5002000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"XKNBXQT1K1Q9","display_name":"BULLDOG
+        CONSULTING SERVICES LLC"}},{"key":"CONT_IDV_47QRAA26D0030_4732","piid":"47QRAA26D0030","award_date":"2026-01-22","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2850000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PHU5ZESD58A7","display_name":"QSOURCE"}},{"key":"CONT_IDV_47QRAA26D002Z_4732","piid":"47QRAA26D002Z","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":2500000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"PJKDKEL234X1","display_name":"ST.
+        MORITZ ENTERPRISES, L.L.C."}},{"key":"CONT_IDV_47QSCC26D0001_4732","piid":"47QSCC26D0001","award_date":"2026-01-21","description":"OTHER
+        THAN SCHEDULE","total_contract_value":77780735.0,"obligated":0.0,"idv_type":"B","recipient":{"uei":"QEMLRQA7PLG4","display_name":"AMENTUM
+        SERVICES, INC."}},{"key":"CONT_IDV_47QSMS26D0021_4732","piid":"47QSMS26D0021","award_date":"2026-01-21","description":"FEDERAL
+        SUPPLY SCHEDULE CONTRACT","total_contract_value":10000000.0,"obligated":0.0,"idv_type":"C","recipient":{"uei":"CMNQCL7FNKB1","display_name":"DRI
+        INC"}},{"key":"CONT_IDV_47QRCA26DA018_4732","piid":"47QRCA26DA018","award_date":"2026-01-21","description":"ONE
+        ACQUISITION SOLUTION FOR INTEGRATED SERVICES PLUS (OASIS+) 8(A) SMALL BUSINESS
+        MULTIPLE AGENCY CONTRACT (MAC)","total_contract_value":999999999999.0,"obligated":2500.0,"idv_type":"B","recipient":{"uei":"N6LCFMKNCNT5","display_name":"CHUGACH
+        SOLUTIONS ENTERPRISE, LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c4316d29c6d61a1-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=LxavUXBOLUK9EVBwDpBQ37sj%2FZtDBQpel35WMOGkYrjhsClltYwTUHXGGFol6Brh8qysVvNqOY0jKa2O%2FEkWlajZYtXC1B%2FRevdP%2F%2FrKyGRAAwtspB9bWDPPDXk%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3278'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.143s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '994'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999793'
+      x-ratelimit-daily-reset:
+      - '56029'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '994'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+version: 1

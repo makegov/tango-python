@@ -485,9 +485,9 @@ class ShapeConfig:
 
     # Default for get_idv()
     IDVS_COMPREHENSIVE: Final = (
-        "key,piid,award_date,description,fiscal_year,total_contract_value,base_and_exercised_options_value,obligated,"
+        "key,piid,award_date,description,fiscal_year,total_contract_value,obligated,"
         "idv_type,multiple_or_single_award_idv,type_of_idc,period_of_performance(start_date,last_date_to_order),"
-        "recipient(display_name,legal_business_name,uei,cage_code),"
+        "recipient(display_name,legal_business_name,uei,cage),"
         "awarding_office(*),funding_office(*),place_of_performance(*),parent_award(key,piid),"
         "competition(*),legislative_mandates(*),transactions(*),subawards_summary(*)"
     )
