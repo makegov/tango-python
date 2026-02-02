@@ -7,6 +7,8 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Client Initialization](#client-initialization)
 - [Agencies](#agencies)
 - [Contracts](#contracts)
+- [IDVs](#idvs)
+- [Vehicles](#vehicles)
 - [Entities](#entities)
 - [Forecasts](#forecasts)
 - [Opportunities](#opportunities)
@@ -268,6 +270,119 @@ contracts = client.list_contracts(
 - `naics` - Industry classification (nested)
 - `psc` - Product/service code (nested)
 - `place_of_performance` - Location (nested)
+
+---
+
+## Vehicles
+
+Vehicles provide a solicitation-centric way to discover groups of related IDVs and (optionally) expand into the underlying awards via shaping.
+
+### list_vehicles()
+
+List vehicles with optional vehicle-level full-text search.
+
+```python
+vehicles = client.list_vehicles(
+    page=1,
+    limit=25,
+    search="GSA schedule",
+    shape=ShapeConfig.VEHICLES_MINIMAL,
+    flat=False,
+    flat_lists=False,
+)
+```
+
+**Parameters:**
+- `page` (int): Page number (default: 1)
+- `limit` (int): Results per page (default: 25, max: 100)
+- `search` (str, optional): Vehicle-level search term
+- `shape` (str, optional): Shape string (defaults to `ShapeConfig.VEHICLES_MINIMAL`)
+- `flat` (bool): Flatten nested objects in shaped response
+- `flat_lists` (bool): Flatten arrays using indexed keys
+- `joiner` (str): Joiner used when `flat=True` (default: `"."`)
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with vehicle dictionaries
+
+### get_vehicle()
+
+Get a single vehicle by UUID.
+
+```python
+vehicle = client.get_vehicle(
+    uuid="00000000-0000-0000-0000-000000000001",
+    shape=ShapeConfig.VEHICLES_COMPREHENSIVE,
+)
+```
+
+**Notes:**
+- On the vehicle detail endpoint, `search` filters **expanded awardees** when your `shape` includes `awardees(...)` (it does not filter the vehicle itself).
+
+### list_vehicle_awardees()
+
+List the IDV awardees for a vehicle.
+
+```python
+awardees = client.list_vehicle_awardees(
+    uuid="00000000-0000-0000-0000-000000000001",
+    shape=ShapeConfig.VEHICLE_AWARDEES_MINIMAL,
+)
+```
+
+---
+
+## IDVs
+
+IDVs (indefinite delivery vehicles) are the parent “vehicle award” records that can have child awards/orders under them.
+
+### list_idvs()
+
+```python
+idvs = client.list_idvs(
+    limit=25,
+    cursor=None,
+    shape=ShapeConfig.IDVS_MINIMAL,
+    awarding_agency="4700",
+)
+```
+
+Notes:
+
+- This endpoint uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
+
+### get_idv()
+
+```python
+idv = client.get_idv("SOME_IDV_KEY", shape=ShapeConfig.IDVS_COMPREHENSIVE)
+```
+
+### list_idv_awards()
+
+Lists child awards (contracts) under an IDV.
+
+```python
+awards = client.list_idv_awards("SOME_IDV_KEY", limit=25)
+```
+
+### list_idv_child_idvs()
+
+Lists child IDVs under an IDV.
+
+```python
+children = client.list_idv_child_idvs("SOME_IDV_KEY", limit=25)
+```
+
+### list_idv_transactions()
+
+```python
+tx = client.list_idv_transactions("SOME_IDV_KEY", limit=100)
+```
+
+### get_idv_summary() / list_idv_summary_awards()
+
+```python
+summary = client.get_idv_summary("SOLICITATION_IDENTIFIER")
+awards = client.list_idv_summary_awards("SOLICITATION_IDENTIFIER", limit=25)
+```
 
 ---
 

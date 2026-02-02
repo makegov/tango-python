@@ -1,0 +1,1505 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42ec0d6a9d22f2-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:57:20 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=y3DsJyUFe2TuARtGz6e92R3MPSrN2X6VWVQDGSuTyM5%2FRNsr8gCbKSX3kyjWImFegehT60gNT9Rr5W2s9WKmkkEWSXVucfjZ4dNVetvM6bgrLtNL81TCC%2BLTYuY%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.030s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999875'
+      x-ratelimit-daily-reset:
+      - '57781'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42ec0e5bd022f2-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:57:20 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=LVHu2Ux6qHItTmsgSAgwyDVfik0ei5Vbpp9q3yXROX70F5ltN4cyKA7EOaD6lYIj4HzP1jXOlmpcP25znCJrJx4gPPgoYZGIknO6XKTrhV2sL9EJL0pE9K5uylA%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.055s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999874'
+      x-ratelimit-daily-reset:
+      - '57781'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42efae7ed9a206-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:59:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Hxv%2BoiHzN57PuugErOwBO6949jBnd1F3C5enFAoLNBVwSvxNogu75B4Vfd4idoaSshCt2tL6FV%2BwkenYWnr1Iix7PZLBNrKInzd81vf%2FMM%2ByW%2FvWzr1P%2B3t7"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.024s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999867'
+      x-ratelimit-daily-reset:
+      - '57632'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42efaf483aa206-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:59:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CKK9DfxqArUGTDHKsrtnwQ6G2L3xhPeST7tbk%2FVw%2F%2Fqefb%2FSO4KVhOwZ49r%2FSfLLMs4kQRGcyx1StUouJ%2FPIwH8ULdySl4bXBSbYXS%2BLZMMVDvdpWw0wlRyD"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.114s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999866'
+      x-ratelimit-daily-reset:
+      - '57632'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f5535cddeff9-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:03:40 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=EkcU2tq1UQIYm9cFoeCDnzME%2FSR%2BpUGGr50FWxb8OkVjcKWpFHWfCT6nGvRTySnwkXyPYnAyuJEy18dbUz%2FzqNwGqJj3hEEqSuGySDI9DADm2bvYqhYuGz1Pjns%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '994'
+      x-ratelimit-burst-reset:
+      - '46'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999855'
+      x-ratelimit-daily-reset:
+      - '57401'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '994'
+      x-ratelimit-reset:
+      - '46'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42f5542fdbeff9-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:03:40 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mP%2FzW1b9j29cfFB66UZe1kBnDBvWm6dD0k8wTMvwJ3S5CZhmFfxHdGRhqyMnoPbauLdJ2I%2B%2BMWfZwb8DhNbTxwRsqlVvR1NcrBtP77Z%2F2tmgFO8gUYnE0txmQMw%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.099s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '45'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999854'
+      x-ratelimit-daily-reset:
+      - '57401'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '45'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f6e2ec1c7769-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:04:44 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=r%2FYAtdqSlOIhFk0s9MPvRkFopL5oO0A8OC%2FlMzLPaQfKNC6rLoTQHB4yxHD17nlCDMoru4qW1MQ2bStcZp6F6ZEB4LXulfgEVmGklXgbf8wHoBSFQ4vwdABcU0U%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '2'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999844'
+      x-ratelimit-daily-reset:
+      - '57337'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '2'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42f6e3af187769-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:04:44 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ajSYys%2FtFeFHhauEWfQGhEqs7v%2F80gwil71aXzIqY8x8gq8N4oVvcYFEsSMg0Zp8OH1Kn4ynRq%2F4HydvZGQ5K%2FJitPm7YB8QBHJCu%2Bz3dR6enGN0Lgp3qZxhBqc%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.061s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '2'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999843'
+      x-ratelimit-daily-reset:
+      - '57337'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '2'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f9f30deaa1fa-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:06:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=vaUzRGeAVdHZ6UGlDxYCq1FDESeTvIH3dlIv2gs2%2FEnUdUXR2YmOCRCJwoLEFwPAfEcBX%2BmdhtTNJ8QcxByBnch%2FJ%2BpHosOvzj9Jm3PKtHPI11tGzb%2F%2Bi%2B4s"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.023s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999835'
+      x-ratelimit-daily-reset:
+      - '57212'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42f9f3bf7ea1fa-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:06:49 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CguTArOZfgBzTHnFo8fLJ0Ofyq2DAuTbV95j9v3QT2J%2Ff5KkXoY%2FUSOz60VyNHWzK6SCyKPzUjtt2jx4C7SH5SbFv9%2B9LjY1fYBamOP74Dt9cNdpmSj4ukVS"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.055s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999834'
+      x-ratelimit-daily-reset:
+      - '57212'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42fef3fb641259-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:14 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xLo3MaQuS2BtJAieypg4wV3QRiAxasRHjvHjCmkWdq9RWAN3onXfhK79OpFMX1vn9tPLoPa9%2FqFPrCu%2BuRNks8%2B66G3ei7uW1T7nYespflCDoFL8Dzm90ZWF4BY%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.038s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999827'
+      x-ratelimit-daily-reset:
+      - '57007'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42fef4fc7a1259-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:14 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4DVZrUd1gFWkOQNmNPFRMqeVGxXKWta1cr%2FNeSKxM7qsGYdHIRJ7RO0zsjH86T%2F9NYgPHpmzQTOZJQuoMXCO4RcpsOXQkIvYtX6TniG%2F6HszRf0clCG%2FEXWdmAk%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.070s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999826'
+      x-ratelimit-daily-reset:
+      - '57007'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c42ff60fde19d42-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=k3iVYztqUcguh89MxyY75%2F0Dx0ykrB8Oqn5DWnB5S4WDSmM9qAsczp93cL3Pfu9fHaAXBUcWlWxL6xlrlkBh8WHILXUaFETngX1KpyRbyGfARv8K9Gv2jeHRguw%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '988'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999819'
+      x-ratelimit-daily-reset:
+      - '56989'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '988'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c42ff61d8c99d42-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WLh43ySkfMdYb7hqLyb4C2ZhnQZhNa4XjJfAsrBf920dLrUGbEilrZaOtxqiCQU5CWaahonaPVO9gcsfLgF1wL4lGc1hIb8SZ1VrRvZ6FYaTUv5%2FDbTwKRFWzCs%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.053s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '987'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999818'
+      x-ratelimit-daily-reset:
+      - '56989'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '987'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c43138228256194-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=L3eQbWp%2FbBtivQcCX2dhIpV1DQ1kqvs810AWNAcr46guTgqoqMZ0VzkMzg8EWNKbdJpnp0s3gxVLTCGigPHnw9V0jgXxYpZuOa4sOFj8qMQgNAVyWVi2BucmSgE%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999811'
+      x-ratelimit-daily-reset:
+      - '56165'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c43138399706194-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=f4NSNdRPw7Ke3uTg5LaixhAiIz4FQzs6fe6T52eEEz9n5jYlmfDBJD0sdMhRgAw03Eix3smrM3deW9YvjD9xIBF08hRKCStBT1ukt8CqmE7JDux7%2BpgTJxDtblY%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.083s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999810'
+      x-ratelimit-daily-reset:
+      - '56165'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":5706,"next":"http://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
+        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9c4316ceddf260a2-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=aNGXCsCVXN3UFaB4Hmvuqgx%2FTFOM1QYtAZqihSV6cw%2FQT4DZ0%2Fb2673jXuuDFIiWsL%2FIUaGVQNBvi2K7TnFlqpq8wphApndhRCJ0qXYcdLpIZa3TAvKnZE9Ke5o%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '667'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999795'
+      x-ratelimit-daily-reset:
+      - '56030'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":38,"next":"http://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
+        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
+        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
+        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
+        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
+        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
+        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
+        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
+        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
+        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"SAGE
+        PRODUCTS, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
+        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
+        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
+        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
+        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
+        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
+        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
+        INC."}}]}'
+    headers:
+      CF-RAY:
+      - 9c4316cfbeaf60a2-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=NLz29nCCLbZdkOu04laH2zoOFLJhhoad3MuKYTBjGd7Qn39Zvg8fVGHL43UjrIc4WMVm9r5kOejXDyw5tpMgYLq9HLRPk8U62srSEyNbn1KIHFbE3ql%2F3Pnq1o4%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3417'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.162s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999794'
+      x-ratelimit-daily-reset:
+      - '56029'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+version: 1

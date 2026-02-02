@@ -1,0 +1,494 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
+  response:
+    body:
+      string: '{"count":1151197,"next":"http://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous":null,"cursor":"WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous_cursor":null,"results":[{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c42ff6548c0a219-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=vWpNPPFWjwKTPWHzjWMNFrLy9qO6UOcaqk2c4iu7I%2B1VaXT7KKmmX5QwN%2B4Osm8CZ3n97%2Fek1ZenZof50MJI4qOR55zJk8GtvynWduer1l0q38HFLP1%2FrM2X"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '721'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.029s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '985'
+      x-ratelimit-burst-reset:
+      - '41'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999816'
+      x-ratelimit-daily-reset:
+      - '56989'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '985'
+      x-ratelimit-reset:
+      - '41'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/CONT_IDV_83310126AC060_8300/?shape=key%2Cpiid%2Caward_date%2Cdescription%2Cfiscal_year%2Ctotal_contract_value%2Cobligated%2Cidv_type%2Cmultiple_or_single_award_idv%2Ctype_of_idc%2Cperiod_of_performance%28start_date%2Clast_date_to_order%29%2Crecipient%28display_name%2Clegal_business_name%2Cuei%2Ccage%29%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Cplace_of_performance%28%2A%29%2Cparent_award%28key%2Cpiid%29%2Ccompetition%28%2A%29%2Clegislative_mandates%28%2A%29%2Ctransactions%28%2A%29%2Csubawards_summary%28%2A%29
+  response:
+    body:
+      string: '{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","fiscal_year":2026,"total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","multiple_or_single_award_idv":"S","type_of_idc":null,"period_of_performance":{"start_date":"2026-01-25"},"recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"},"awarding_office":{"office_code":"833101","office_name":"EXPORT
+        IMPORT BANK OF US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"funding_office":{"office_code":"833100","office_name":"EXPORT
+        IMPORT BANK OF THE US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"place_of_performance":{"country_code":null,"country_name":null,"state_code":null,"state_name":null,"city_name":"","zip_code":""},"parent_award":{"key":"CONT_IDV_47QSMS25D008R_4732","piid":"47QSMS25D008R"},"competition":{"contract_type":{"code":"J","description":"Firm
+        Fixed Price"},"extent_competed":{"code":"A","description":"Full and Open Competition"},"number_of_offers_received":1,"other_than_full_and_open_competition":null,"solicitation_date":null,"solicitation_identifier":"83310126QC007","solicitation_procedures":{"code":"MAFO","description":"Subject
+        to Multiple Award Fair Opportunity"}},"legislative_mandates":{"clinger_cohen_act_planning":{"code":"N","description":"No"},"construction_wage_rate_requirements":{"code":"X","description":"Not
+        Applicable"},"employment_eligibility_verification":null,"interagency_contracting_authority":{"code":"X","description":"Not
+        Applicable"},"labor_standards":{"code":"Y","description":"Yes"},"materials_supplies_articles_equipment":{"code":"X","description":"Not
+        Applicable"},"other_statutory_authority":null,"service_contract_inventory":null},"transactions":[{"obligated":0.0,"action_type":null,"description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","transaction_date":"2026-01-23","modification_number":"0"},{"obligated":0.0,"action_type":null,"description":null,"transaction_date":"2026-01-23","modification_number":"0"}],"subawards_summary":{}}'
+    headers:
+      CF-RAY:
+      - 9c42ff660a1da219-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CDmtotyd1YNAcya4vXmxhisr7jUyQG13WnZN7CZ3gwcTjMJJQ9TcPfu7W7kCv7HetrXob7aBKDaWw9uRd0CwO4epYtY7bAU1Gu9FRbiY3i6NzmvjekXxXRAs"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2300'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.051s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '984'
+      x-ratelimit-burst-reset:
+      - '40'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999815'
+      x-ratelimit-daily-reset:
+      - '56989'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '984'
+      x-ratelimit-reset:
+      - '40'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
+  response:
+    body:
+      string: '{"count":1151197,"next":"http://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous":null,"cursor":"WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous_cursor":null,"results":[{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c431387fdf41156-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:17 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BwMqzL%2FSx4odkSKpO9f30x%2F5qf0DUVm4mQ01fFR6Rt0AiN0jS62MHEnf48CaFU8yNHf%2By6eCrQ8zy0HqmFldYdTne6gML5N14FI3Z%2F7MQcQNMvJbLBhg9ptMu0g%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '721'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.030s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999808'
+      x-ratelimit-daily-reset:
+      - '56164'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/CONT_IDV_83310126AC060_8300/?shape=key%2Cpiid%2Caward_date%2Cdescription%2Cfiscal_year%2Ctotal_contract_value%2Cobligated%2Cidv_type%2Cmultiple_or_single_award_idv%2Ctype_of_idc%2Cperiod_of_performance%28start_date%2Clast_date_to_order%29%2Crecipient%28display_name%2Clegal_business_name%2Cuei%2Ccage%29%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Cplace_of_performance%28%2A%29%2Cparent_award%28key%2Cpiid%29%2Ccompetition%28%2A%29%2Clegislative_mandates%28%2A%29%2Ctransactions%28%2A%29%2Csubawards_summary%28%2A%29
+  response:
+    body:
+      string: '{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","fiscal_year":2026,"total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","multiple_or_single_award_idv":"S","type_of_idc":null,"period_of_performance":{"start_date":"2026-01-25"},"recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"},"awarding_office":{"office_code":"833101","office_name":"EXPORT
+        IMPORT BANK OF US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"funding_office":{"office_code":"833100","office_name":"EXPORT
+        IMPORT BANK OF THE US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"place_of_performance":{"country_code":null,"country_name":null,"state_code":null,"state_name":null,"city_name":"","zip_code":""},"parent_award":{"key":"CONT_IDV_47QSMS25D008R_4732","piid":"47QSMS25D008R"},"competition":{"contract_type":{"code":"J","description":"Firm
+        Fixed Price"},"extent_competed":{"code":"A","description":"Full and Open Competition"},"number_of_offers_received":1,"other_than_full_and_open_competition":null,"solicitation_date":null,"solicitation_identifier":"83310126QC007","solicitation_procedures":{"code":"MAFO","description":"Subject
+        to Multiple Award Fair Opportunity"}},"legislative_mandates":{"clinger_cohen_act_planning":{"code":"N","description":"No"},"construction_wage_rate_requirements":{"code":"X","description":"Not
+        Applicable"},"employment_eligibility_verification":null,"interagency_contracting_authority":{"code":"X","description":"Not
+        Applicable"},"labor_standards":{"code":"Y","description":"Yes"},"materials_supplies_articles_equipment":{"code":"X","description":"Not
+        Applicable"},"other_statutory_authority":null,"service_contract_inventory":null},"transactions":[{"obligated":0.0,"action_type":null,"description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","transaction_date":"2026-01-23","modification_number":"0"},{"obligated":0.0,"action_type":null,"description":null,"transaction_date":"2026-01-23","modification_number":"0"}],"subawards_summary":{}}'
+    headers:
+      CF-RAY:
+      - 9c431388ef0f1156-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:17 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sNNqc9G%2BrY4o357FmfGMUec419NFKSLQMaQ54J25XitqaJ%2Bvn%2Fq5n1xjMrinU0m6ZQ9agiXByyxnZntRwK47vmWGsA6wO0PGSZ7mM%2BQ3KV9A8cgX8r2lRG56sDo%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2300'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.053s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999807'
+      x-ratelimit-daily-reset:
+      - '56164'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
+  response:
+    body:
+      string: '{"count":1151197,"next":"http://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous":null,"cursor":"WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous_cursor":null,"results":[{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c4316d4c9bca242-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8ecg7W8FD3%2BrCmR4HRWiACkOmCalOOVEFs%2BcbFmG7vj%2B5PBoBz0aowsiG2dlt14dUTvfs9Th5t3uuItTOpqjP9GR9F3ASIgEI6wNkesprWNFTa1lHFwyk5KuiC0%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '721'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.033s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999792'
+      x-ratelimit-daily-reset:
+      - '56029'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/CONT_IDV_83310126AC060_8300/?shape=key%2Cpiid%2Caward_date%2Cdescription%2Cfiscal_year%2Ctotal_contract_value%2Cobligated%2Cidv_type%2Cmultiple_or_single_award_idv%2Ctype_of_idc%2Cperiod_of_performance%28start_date%2Clast_date_to_order%29%2Crecipient%28display_name%2Clegal_business_name%2Cuei%2Ccage%29%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Cplace_of_performance%28%2A%29%2Cparent_award%28key%2Cpiid%29%2Ccompetition%28%2A%29%2Clegislative_mandates%28%2A%29%2Ctransactions%28%2A%29%2Csubawards_summary%28%2A%29
+  response:
+    body:
+      string: '{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","fiscal_year":2026,"total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","multiple_or_single_award_idv":"S","type_of_idc":null,"period_of_performance":{"start_date":"2026-01-25"},"recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"},"awarding_office":{"office_code":"833101","office_name":"EXPORT
+        IMPORT BANK OF US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"funding_office":{"office_code":"833100","office_name":"EXPORT
+        IMPORT BANK OF THE US","agency_code":"8300","agency_name":"Export-Import Bank
+        of the United States","department_code":83,"department_name":"Export-Import
+        Bank of the United States"},"place_of_performance":{"country_code":null,"country_name":null,"state_code":null,"state_name":null,"city_name":"","zip_code":""},"parent_award":{"key":"CONT_IDV_47QSMS25D008R_4732","piid":"47QSMS25D008R"},"competition":{"contract_type":{"code":"J","description":"Firm
+        Fixed Price"},"extent_competed":{"code":"A","description":"Full and Open Competition"},"number_of_offers_received":1,"other_than_full_and_open_competition":null,"solicitation_date":null,"solicitation_identifier":"83310126QC007","solicitation_procedures":{"code":"MAFO","description":"Subject
+        to Multiple Award Fair Opportunity"}},"legislative_mandates":{"clinger_cohen_act_planning":{"code":"N","description":"No"},"construction_wage_rate_requirements":{"code":"X","description":"Not
+        Applicable"},"employment_eligibility_verification":null,"interagency_contracting_authority":{"code":"X","description":"Not
+        Applicable"},"labor_standards":{"code":"Y","description":"Yes"},"materials_supplies_articles_equipment":{"code":"X","description":"Not
+        Applicable"},"other_statutory_authority":null,"service_contract_inventory":null},"transactions":[{"obligated":0.0,"action_type":null,"description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","transaction_date":"2026-01-23","modification_number":"0"},{"obligated":0.0,"action_type":null,"description":null,"transaction_date":"2026-01-23","modification_number":"0"}],"subawards_summary":{}}'
+    headers:
+      CF-RAY:
+      - 9c4316d66b24a242-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:32 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ATfp0dpDPDHZG%2Bt9F57m6Em2GBrkaz8ThUXP%2BDFzxUOaJqlsGNrdlxLfSuOhOnEK1SdZ%2BhMIaG%2F80KDPKb93OplPoVW5f5dujBihzwUTkRR6L5bTwAMaMNBJZJQ%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2300'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.052s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999791'
+      x-ratelimit-daily-reset:
+      - '56029'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+version: 1

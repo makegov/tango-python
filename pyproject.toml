@@ -97,6 +97,7 @@ markers = [
     "live: Tests that always use live API (skip cassettes)",
     "cached: Tests that only run with cached responses",
     "slow: Tests that are slow to execute",
+    "production: Production API smoke tests that run against live API",
 ]
 
 [tool.coverage.run]

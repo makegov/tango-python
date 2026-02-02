@@ -16,6 +16,7 @@ from tango.exceptions import (
     TangoValidationError,
 )
 from tango.models import (
+    IDV,
     Agency,
     BusinessType,
     Contract,
@@ -28,6 +29,7 @@ from tango.models import (
     PaginatedResponse,
     SearchFilters,
     ShapeConfig,
+    Vehicle,
 )
 from tango.shapes import (
     ModelFactory,
@@ -152,6 +154,7 @@ class TangoClient:
         base_model: type,
         flat: bool = False,
         flat_lists: bool = False,
+        joiner: str = ".",
     ) -> Any:
         """
         Parse API response using dynamic model generation
@@ -189,7 +192,7 @@ class TangoClient:
 
         # Unflatten if necessary
         if flat:
-            data = self._unflatten_response(data)
+            data = self._unflatten_response(data, joiner=joiner)
 
         # Create typed instance
         return self._model_factory.create_instance(
@@ -375,7 +378,7 @@ class TangoClient:
     # Contract endpoints
     def list_contracts(
         self,
-        page: int = 1,
+        cursor: str | None = None,
         limit: int = 25,
         shape: str | None = None,
         flat: bool = False,
@@ -387,7 +390,8 @@ class TangoClient:
         List contracts with optional filtering
 
         Args:
-            page: Page number
+            cursor: Cursor token for pagination (from previous response.cursor).
+                   If not provided, starts from the beginning.
             limit: Results per page (max 100)
             shape: Response shape string (defaults to minimal shape).
                    Use None to disable shaping, ShapeConfig.CONTRACTS_MINIMAL for minimal,
@@ -450,6 +454,11 @@ class TangoClient:
             >>> # Text search
             >>> contracts = client.list_contracts(keyword="software development")
 
+            >>> # Pagination with cursor
+            >>> response = client.list_contracts(limit=25)
+            >>> if response.cursor:
+            ...     next_page = client.list_contracts(cursor=response.cursor, limit=25)
+
             >>> # With SearchFilters object (legacy)
             >>> filters = SearchFilters(
             ...     keyword="IT",
@@ -464,8 +473,14 @@ class TangoClient:
             ...     expiring_lte="2025-12-31"
             ... )
         """
-        # Start with explicit parameters
-        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        # Start with pagination parameters
+        # Use cursor if provided, otherwise use page=1 for first request
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        else:
+            # First page uses page=1, subsequent pages use cursor
+            params["page"] = 1
 
         # Handle filters parameter (backward compatibility)
         filter_dict: dict[str, Any] = {}
@@ -477,24 +492,20 @@ class TangoClient:
                 # dict
                 filter_dict = filters
 
-            # Extract page/limit from filters if using defaults
-            if page == 1 and "page" in filter_dict:
-                params["page"] = filter_dict.pop("page", 1)
+            # Extract limit from filters if using defaults
             if limit == 25 and "limit" in filter_dict:
                 params["limit"] = min(filter_dict.pop("limit", 25), 100)
 
         # Merge kwargs and filter_dict (kwargs take precedence)
         filter_params = {**filter_dict, **kwargs}
 
-        # Explicitly exclude shape-related parameters from filter_params
+        # Explicitly exclude shape-related and pagination parameters from filter_params
         # These are handled separately and should not be sent as query parameters
-        shape_related_params = {"shape", "flat", "flat_lists"}
-        for param in shape_related_params:
+        excluded_params = {"shape", "flat", "flat_lists", "cursor", "page"}
+        for param in excluded_params:
             filter_params.pop(param, None)
 
-        # Extract page/limit from kwargs if provided (override explicit params)
-        if "page" in filter_params:
-            params["page"] = filter_params.pop("page")
+        # Extract limit from kwargs if provided (override explicit params)
         if "limit" in filter_params:
             params["limit"] = min(filter_params.pop("limit"), 100)
 
@@ -553,6 +564,364 @@ class TangoClient:
         results = [
             self._parse_response_with_shape(contract, shape, Contract, flat, flat_lists)
             for contract in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+        )
+
+    # ============================================================================
+    # IDVs (Awards)
+    # ============================================================================
+
+    def list_idvs(
+        self,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        **filters,
+    ) -> PaginatedResponse:
+        """
+        List IDVs (indefinite delivery vehicles) with keyset pagination.
+
+        This mirrors `/api/idvs/` and supports the same filter parameters as the API,
+        plus shaping via `shape`.
+        """
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+
+        if shape is None:
+            shape = ShapeConfig.IDVS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        params.update({k: v for k, v in filters.items() if v is not None})
+
+        data = self._get("/api/idvs/", params)
+
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, IDV, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def get_idv(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single IDV by award key (`/api/idvs/{key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.IDVS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/idvs/{key}/", params)
+        return self._parse_response_with_shape(data, shape, IDV, flat, flat_lists, joiner=joiner)
+
+    def list_idv_awards(
+        self,
+        key: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        filters: SearchFilters | dict[str, Any] | None = None,
+        **kwargs,
+    ) -> PaginatedResponse:
+        """
+        List child awards (contracts) under an IDV (`/api/idvs/{key}/awards/`).
+
+        This endpoint behaves like `/api/contracts/`, but scoped to a specific IDV.
+        """
+        # Reuse list_contracts mapping and behavior by calling the endpoint directly.
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+
+        if shape is None:
+            shape = ShapeConfig.CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        filter_dict: dict[str, Any] = {}
+        if filters is not None:
+            filter_dict = filters.to_dict() if hasattr(filters, "to_dict") else filters
+        filter_params = {**filter_dict, **kwargs}
+        for param in {"shape", "flat", "flat_lists", "joiner", "limit", "cursor"}:
+            filter_params.pop(param, None)
+
+        # Same mapping used by list_contracts()
+        api_param_mapping = {
+            "naics_code": "naics",
+            "keyword": "search",
+            "psc_code": "psc",
+            "recipient_name": "recipient",
+            "recipient_uei": "uei",
+            "set_aside_type": "set_aside",
+        }
+        sort_field = filter_params.pop("sort", None)
+        sort_order = filter_params.pop("order", None)
+        if sort_field:
+            prefix = "-" if sort_order == "desc" else ""
+            filter_params["ordering"] = f"{prefix}{sort_field}"
+
+        api_params: dict[str, Any] = {}
+        for k, v in filter_params.items():
+            if v is None:
+                continue
+            api_params[api_param_mapping.get(k, k)] = v
+        params.update(api_params)
+
+        data = self._get(f"/api/idvs/{key}/awards/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, Contract, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def list_idv_child_idvs(
+        self,
+        key: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        **filters,
+    ) -> PaginatedResponse:
+        """List child IDVs under an IDV (`/api/idvs/{key}/idvs/`)."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+
+        if shape is None:
+            shape = ShapeConfig.IDVS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        params.update({k: v for k, v in filters.items() if v is not None})
+
+        data = self._get(f"/api/idvs/{key}/idvs/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, IDV, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def list_idv_transactions(
+        self, key: str, limit: int = 100, cursor: str | None = None
+    ) -> PaginatedResponse:
+        """List transactions for an IDV (`/api/idvs/{key}/transactions/`)."""
+        params: dict[str, Any] = {"limit": min(limit, 500)}
+        if cursor:
+            params["cursor"] = cursor
+        data = self._get(f"/api/idvs/{key}/transactions/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results") or [],
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def get_idv_summary(self, identifier: str) -> dict[str, Any]:
+        """Get a summary for an IDV solicitation identifier (`/api/idvs/{identifier}/summary/`)."""
+        return self._get(f"/api/idvs/{identifier}/summary/")
+
+    def list_idv_summary_awards(
+        self,
+        identifier: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List awards under an IDV summary (`/api/idvs/{identifier}/summary/awards/`)."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if ordering:
+            params["ordering"] = ordering
+        data = self._get(f"/api/idvs/{identifier}/summary/awards/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results") or [],
+            page_metadata=data.get("page_metadata"),
+        )
+
+    # ============================================================================
+    # Vehicles (Awards)
+    # ============================================================================
+
+    def list_vehicles(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        search: str | None = None,
+    ) -> PaginatedResponse:
+        """List Vehicles (solicitation-centric groupings of IDVs)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.VEHICLES_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        if search:
+            params["search"] = search
+
+        data = self._get("/api/vehicles/", params)
+
+        results = [
+            self._parse_response_with_shape(
+                vehicle, shape, Vehicle, flat, flat_lists, joiner=joiner
+            )
+            for vehicle in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_vehicle(
+        self,
+        uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        search: str | None = None,
+    ) -> Any:
+        """Get a Vehicle by UUID."""
+        params: dict[str, Any] = {}
+
+        if shape is None:
+            shape = ShapeConfig.VEHICLES_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        # On vehicle detail, `search` filters expanded awardees when shaping includes `awardees(...)`.
+        if search:
+            params["search"] = search
+
+        data = self._get(f"/api/vehicles/{uuid}/", params)
+        return self._parse_response_with_shape(
+            data, shape, Vehicle, flat, flat_lists, joiner=joiner
+        )
+
+    def list_vehicle_awardees(
+        self,
+        uuid: str,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> PaginatedResponse:
+        """List the IDV awardees for a Vehicle (`/api/vehicles/{uuid}/awardees/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.VEHICLE_AWARDEES_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/vehicles/{uuid}/awardees/", params)
+
+        results = [
+            self._parse_response_with_shape(awardee, shape, IDV, flat, flat_lists, joiner=joiner)
+            for awardee in data["results"]
         ]
 
         return PaginatedResponse(
