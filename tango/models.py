@@ -39,10 +39,13 @@ class SearchFilters:
     - recipient_uei → uei
     - set_aside_type → set_aside
     - sort + order → ordering
+
+    Note: Contracts use cursor-based pagination. Use cursor from previous response
+    to get the next page.
     """
 
     # Pagination
-    page: int = 1
+    cursor: str | None = None  # Cursor token for cursor-based pagination
     limit: int = 25
 
     # Text search
@@ -416,6 +419,7 @@ class PaginatedResponse[T]:
         next: URL for the next page of results (None if last page)
         previous: URL for the previous page of results (None if first page)
         results: List of result items (type depends on shape parameter)
+        cursor: Cursor token for cursor-based pagination (None if not available)
         page_metadata: Optional metadata about the current page
 
     Examples:
@@ -425,12 +429,16 @@ class PaginatedResponse[T]:
         >>> print(f"Total: {response.count}")
         >>> for contract in response.results:
         ...     print(contract["piid"])
+        >>> # Use cursor for next page
+        >>> if response.cursor:
+        ...     next_response = client.list_contracts(cursor=response.cursor)
     """
 
     count: int
     next: str | None
     previous: str | None
     results: list[T]
+    cursor: str | None = None
     page_metadata: dict[str, Any] | None = None
 
 
@@ -477,9 +485,9 @@ class ShapeConfig:
 
     # Default for get_idv()
     IDVS_COMPREHENSIVE: Final = (
-        "key,piid,award_date,description,fiscal_year,total_contract_value,base_and_exercised_options_value,obligated,"
+        "key,piid,award_date,description,fiscal_year,total_contract_value,obligated,"
         "idv_type,multiple_or_single_award_idv,type_of_idc,period_of_performance(start_date,last_date_to_order),"
-        "recipient(display_name,legal_business_name,uei,cage_code),"
+        "recipient(display_name,legal_business_name,uei,cage),"
         "awarding_office(*),funding_office(*),place_of_performance(*),parent_award(key,piid),"
         "competition(*),legislative_mandates(*),transactions(*),subawards_summary(*)"
     )

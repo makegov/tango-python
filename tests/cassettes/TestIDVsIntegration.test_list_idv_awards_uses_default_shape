@@ -1,0 +1,302 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
+  response:
+    body:
+      string: '{"count":1151197,"next":"http://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous":null,"cursor":"WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous_cursor":null,"results":[{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c43138aaa7f10d1-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:17 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=yZUNcnkTrEdarVYGa%2FcflMLJhs7NqEtwUH9vY60INmKI49BGiuIVrNb7knmqmK2w75DAObXXWNTRPpCYiMLWMX5YJvbFrD%2FSDxq%2FVYu2A2ISpm5XtE7Zo32vQM0%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '721'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.029s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '991'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999806'
+      x-ratelimit-daily-reset:
+      - '56164'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '991'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/CONT_IDV_83310126AC060_8300/awards/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":0,"next":null,"previous":null,"cursor":null,"previous_cursor":null,"results":[],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c43138bab6d10d1-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:17 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8jnqlUQal5PqMf74IreAP%2BFaAQcndsBxY9SWOQV0H0lZ4i%2FdW4cjiUOcmhPtYAzYDDpAjKAICzHawqklt3AquAxRAT6wGyX79fpltj9xEdBXGRcOWiZ%2BVBHVj8s%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '116'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.055s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '990'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999805'
+      x-ratelimit-daily-reset:
+      - '56163'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '990'
+      x-ratelimit-reset:
+      - '57'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
+  response:
+    body:
+      string: '{"count":1151197,"next":"http://tango.makegov.com/api/idvs/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous":null,"cursor":"WyIyMDI2LTAxLTIzIiwgImUyMzQzNTk2LTQ1MDctNTZjMi1iNjQ0LWJhMmYyODI0OGQ2NyJd","previous_cursor":null,"results":[{"key":"CONT_IDV_83310126AC060_8300","piid":"83310126AC060","award_date":"2026-01-23","description":"FAR
+        8.4 BPA FOR OFFICE FURNITURE - SB SET-ASIDE","total_contract_value":7500000.0,"obligated":0.0,"idv_type":"E","recipient":{"uei":"P4XNSMKPNGM5","display_name":"PRICE
+        MODERN LLC"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c4316d7f9f01150-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Pt8wWegli4AxUywblYHp8njNDZaxgkCLGZvzu4p1vJR4VghvEwCydu5mzWm7ZnDaSub9NSwWeMXo4AENrd3UBJR2Nh2p6xAsl%2BssIfhFUhWogz2ZuMiqKC8GQOE%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '721'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.030s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '991'
+      x-ratelimit-burst-reset:
+      - '56'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999790'
+      x-ratelimit-daily-reset:
+      - '56028'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '991'
+      x-ratelimit-reset:
+      - '56'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/idvs/CONT_IDV_83310126AC060_8300/awards/?limit=10&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":0,"next":null,"previous":null,"cursor":null,"previous_cursor":null,"results":[],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9c4316d8cabb1150-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:33 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=10lMw9Ks5igT7hz5N%2Br%2Bhc8S8bu8Fl3wY4Fkl60fAVaGUROD7JgNLZ4ez3ZrGZ7My%2BW9UER7u%2FEK%2BD7ewW2THxyAQc4lrvcI539dTkRyJqLg7x%2FQLaYudzgvFSA%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '116'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.050s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '990'
+      x-ratelimit-burst-reset:
+      - '56'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999789'
+      x-ratelimit-daily-reset:
+      - '56028'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '990'
+      x-ratelimit-reset:
+      - '56'
+    status:
+      code: 200
+      message: OK
+version: 1

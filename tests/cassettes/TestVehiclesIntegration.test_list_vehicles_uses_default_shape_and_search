@@ -1,0 +1,812 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42ec08288b6157-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:57:19 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Vd5G0eTbThOypHfG5zl75MpwYZWDHyRWvY7BJ1jSR52vmz%2FAuyM3Ouz%2BHFvw16AwFXPIvYzWbEtXsSjavguf1A6yDTelC9Xg4fh3DOaBJ5AOVVj2j2Awk5Rpm7Q%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.024s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999878'
+      x-ratelimit-daily-reset:
+      - '57782'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42efaa397afc89-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 20:59:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IW0sLspMYzZonWLlDxjK33jd%2BROxCnqBO5v1j0XYccssgisfHcCBuioe2e5Bgpih2aOphdQnyVHhKdoZise9BZogocHGNlsni%2FOTC1ELV%2BM6e%2BJMq2hYJ6Cq"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.037s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999870'
+      x-ratelimit-daily-reset:
+      - '57633'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f54f0da8880c-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:03:39 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DbIa7dUkJt8Rrsci9%2FKRosRY85aG7QgNvDg2ZK0Cv6i2mTDevQeWzfp5oJmRzIwK%2F9A3t8V0vTFXBQtWzrCP7SpDNEA6xdX2HBNn2RVKj%2FhcA8nqpejmQXbE08k%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.041s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '46'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999858'
+      x-ratelimit-daily-reset:
+      - '57402'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '46'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f6deb8f3ac5a-YYZ
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:04:43 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=GCRp3pPcG27pisclDNFBb0MQuNWx%2FA0GmBEWrpms4q5yvak4McPo0AsOrnFGt8lpe0MnYzJmHCOwCmM7KQ0ym1zlA1QAp2Qo%2BjnJ1aqK8lpQVzOGII%2FF160wW3Q%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '0'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999847'
+      x-ratelimit-daily-reset:
+      - '57338'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42f9ee28e6b45f-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:06:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xzdI3nNezC0tkpinOPliSFNMkeYJjhet2tQzcU0u0dcJ4G4aZ7OAKv8xzybr8hROUDzuOZ1x6RBTQJNFCa9OT%2FWu3zBQRvCpD40jP%2FVugHOGXfUYyvnyeKJv"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999838'
+      x-ratelimit-daily-reset:
+      - '57212'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42feeeaee1a20d-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:13 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=vXpDAGdkO9Q4%2BpDoHq7eiyNuIsl8pN0s1hsnAV2iVp4DkAR0wrYYuEFpuynDIzGV0274Ym5f%2FYcKmMWUsXxN2nYsfZTcpnp75aF0JcpqgHgbaMALzf7atNHF"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.043s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999830'
+      x-ratelimit-daily-reset:
+      - '57008'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c42ff5d48dfe8fb-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:10:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=uvXloYasFnOGONEkPRAKiiK1IOuWnOX5ge3O%2F%2FMU4jmAilThkrzF82XHceOML0PXYDD4hpNtROjD%2FYCfqipwd3EdRG66Kyh%2B765sShYsHe%2BDwSXfX%2FKmRYbpHvo%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.025s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '991'
+      x-ratelimit-burst-reset:
+      - '42'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999822'
+      x-ratelimit-daily-reset:
+      - '56990'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '991'
+      x-ratelimit-reset:
+      - '42'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c43137bcb037a66-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:24:15 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=kw8DCODSDwJpH1z0uqHHAtJBPaJpND1VbZ4XAFMlebD%2BW95hAtOGMBlDt192yl2I5QtO%2B%2B2bWsVie%2FqeAAIaIe2kfe25%2BRDKvCKCyDKSp9oWsVCxgAUGpQkzbVQ%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.074s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999814'
+      x-ratelimit-daily-reset:
+      - '56166'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date&search=GSA
+  response:
+    body:
+      string: '{"count":33,"next":"http://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","solicitation_identifier":"47PB0023R0012","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":24,"order_count":47,"vehicle_obligations":22150617.51,"vehicle_contracts_value":22150617.51,"solicitation_title":"GSA
+        Region 1 Construction IDIQ - North/Boston/South Zones","solicitation_date":"2023-06-30"},{"uuid":"59cee065-88e2-5a98-be93-004df7e23d18","solicitation_identifier":"47PB0023R0059","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":18,"vehicle_obligations":1076051.76,"vehicle_contracts_value":1118930.13,"solicitation_title":"Architectural
+        and Engineering Multiple Award IDIQ New England","solicitation_date":"2023-09-13"},{"uuid":"e2e29269-a44e-5490-85a7-c3bba68964cb","solicitation_identifier":"47PC0318R0003","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":0,"vehicle_obligations":0.0,"vehicle_contracts_value":0.0,"solicitation_title":"R&A
+        IDIQ Puerto Rico and U.S. Virgin Islands","solicitation_date":"2018-04-17"},{"uuid":"62779c22-7aa4-5b4b-8a20-b15e5e088e5e","solicitation_identifier":"47PC0319N0002","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":8,"order_count":82,"vehicle_obligations":102363485.57,"vehicle_contracts_value":129262449.49,"solicitation_title":"Architect-Engineer
+        Services for Multiple-Award Indefinite Delivery Indefinite Quantity Contracts","solicitation_date":"2019-05-31"},{"uuid":"5e617570-c22e-52a8-b8fa-2be1e421edf3","solicitation_identifier":"47PD0222R0035","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":15,"order_count":26,"vehicle_obligations":89066346.86,"vehicle_contracts_value":96045297.22,"solicitation_title":"Multiple
+        Award Indefinite Delivery Indefinite Quantity (IDIQ) for General Construction
+        Services in the East Coast Corridor of PBS Region 3","solicitation_date":"2022-04-20"},{"uuid":"2db26c00-0be0-5220-a275-21d83b06086d","solicitation_identifier":"47PE0119R0001","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":103,"vehicle_obligations":21159088.16,"vehicle_contracts_value":21391358.12,"solicitation_title":"GSA,
+        PBS Region 4 A&E Services IDIQ (Synopsis Issued 10/19/2018; Solicitation Issued
+        11/07/2018; Offer Due Date 12/7/2018; Technical Evaluations 12/10/2018 through
+        12/14/2018; Pricing Phase; 12/20/2018; Award; 05/24/2019)","solicitation_date":"2018-10-19"},{"uuid":"c77fc373-4a44-5431-ba2c-723bb1606d0c","solicitation_identifier":"47PE0719R0007","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":3,"order_count":128,"vehicle_obligations":6560553.83,"vehicle_contracts_value":6564627.87,"solicitation_title":"Multiple
+        Award Indefinite-Delivery Indefinite Quantity Term Construction Contracts
+        for Florida","solicitation_date":"2018-11-01"},{"uuid":"1e2a03d2-244c-5bc1-a960-79da9fc0efa8","solicitation_identifier":"47PF0018R0061","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":7,"order_count":238,"vehicle_obligations":22366820.83,"vehicle_contracts_value":22500989.68,"solicitation_title":"Northern
+        Service Center Operations Division (NSCOD) Indefinite Delivery Indefinite
+        Quantity (IDIQ) Contracts for Architectural and Engineering Services (A/E)","solicitation_date":"2018-04-09"},{"uuid":"04975c1d-2e2e-5fd8-a32f-770893fd6a76","solicitation_identifier":"47PF0019R0083","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":4,"order_count":64,"vehicle_obligations":974694.11,"vehicle_contracts_value":974694.11,"solicitation_title":"R5
+        Space Planning and Interior Design Services Indefinite Delivery Indefinite
+        Quantity (IDIQ) Procurement","solicitation_date":"2019-08-01"},{"uuid":"87ac1077-87f0-5bd6-91c0-5681c7077923","solicitation_identifier":"47PF0020R0004","organization_id":"17417361-31f1-5514-9623-5ef7b0ae02db","awardee_count":6,"order_count":159,"vehicle_obligations":22195074.62,"vehicle_contracts_value":22684204.36,"solicitation_title":"GSA
+        Region 5 Supplemental Architect & Engineering Services IDIQ","solicitation_date":"2019-12-18"}]}'
+    headers:
+      CF-RAY:
+      - 9c4316c41a4a61d9-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 26 Jan 2026 21:26:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VjkpxlNc06ToORJqtzsiQ%2BvkskmCULPG%2FlTpXCaHP%2BELiwug1HMSQ%2BlRhnuamTae61juZCkr3QTeqzMeDad%2BMeCg9YWKvrtWIlUCmbjxtuKmvzhSY6sI7tklc%2FY%3D"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4418'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.605s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999798'
+      x-ratelimit-daily-reset:
+      - '56031'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1
