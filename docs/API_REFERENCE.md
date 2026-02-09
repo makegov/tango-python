@@ -15,6 +15,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Notices](#notices)
 - [Grants](#grants)
 - [Business Types](#business-types)
+- [Webhooks](#webhooks)
 - [Response Objects](#response-objects)
 - [Error Handling](#error-handling)
 
@@ -718,6 +719,135 @@ for biz_type in business_types.results:
 - `code` - Business type code
 - `name` - Business type name
 - `description` - Description
+
+---
+
+## Webhooks
+
+Webhook APIs let **Large / Enterprise** users manage subscription filters for outbound Tango webhooks.
+
+### list_webhook_event_types()
+
+Discover supported `event_type` values and subject types.
+
+```python
+info = client.list_webhook_event_types()
+print(info.event_types[0].event_type)
+```
+
+### list_webhook_subscriptions()
+
+```python
+subs = client.list_webhook_subscriptions(page=1, page_size=25)
+```
+
+Notes:
+
+- This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
+
+### create_webhook_subscription()
+
+```python
+sub = client.create_webhook_subscription(
+    "Track specific vendors",
+    {
+        "records": [
+            {"event_type": "awards.new_award", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
+            {"event_type": "awards.new_transaction", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
+        ]
+    },
+)
+```
+
+Notes:
+
+- Prefer v2 fields: `subject_type` + `subject_ids`.
+- Legacy compatibility: `resource_ids` is accepted as an alias for `subject_ids` (don’t send both).
+- Catch-all: `subject_ids: []` means “all subjects” for that record and is **Enterprise-only**. Large tier users must list specific IDs.
+
+### update_webhook_subscription()
+
+```python
+sub = client.update_webhook_subscription("SUBSCRIPTION_UUID", subscription_name="Updated name")
+```
+
+### delete_webhook_subscription()
+
+```python
+client.delete_webhook_subscription("SUBSCRIPTION_UUID")
+```
+
+### list_webhook_endpoints()
+
+List your webhook endpoint(s).
+
+```python
+endpoints = client.list_webhook_endpoints(page=1, limit=25)
+```
+
+### get_webhook_endpoint()
+
+```python
+endpoint = client.get_webhook_endpoint("ENDPOINT_UUID")
+```
+
+### create_webhook_endpoint() / update_webhook_endpoint() / delete_webhook_endpoint()
+
+In production, MakeGov provisions the initial endpoint for you. These are most useful for dev/self-service.
+
+```python
+endpoint = client.create_webhook_endpoint("https://example.com/tango/webhooks")
+endpoint = client.update_webhook_endpoint(endpoint.id, is_active=False)
+client.delete_webhook_endpoint(endpoint.id)
+```
+
+### test_webhook_delivery()
+
+Send an immediate test webhook to your configured endpoint.
+
+```python
+result = client.test_webhook_delivery()
+print(result.success, result.status_code)
+```
+
+### get_webhook_sample_payload()
+
+Fetch Tango-shaped sample deliveries (and sample subscription request bodies).
+
+```python
+sample = client.get_webhook_sample_payload(event_type="awards.new_award")
+print(sample["event_type"])
+```
+
+### Deliveries / redelivery
+
+The API does not currently expose a public `/api/webhooks/deliveries/` or redelivery endpoint. Use:
+
+- `test_webhook_delivery()` for connectivity checks
+- `get_webhook_sample_payload()` for building handlers + subscription payloads
+
+### Receiving webhooks (signature verification)
+
+Every delivery includes an HMAC signature header:
+
+- `X-Tango-Signature: sha256=<hex digest>`
+
+Compute the digest over the **raw request body bytes** using your shared secret.
+
+```python
+import hashlib
+import hmac
+
+
+def verify_tango_webhook_signature(secret: str, raw_body: bytes, signature_header: str | None) -> bool:
+    if not signature_header:
+        return False
+    sig = signature_header.strip()
+    if sig.startswith("sha256="):
+        sig = sig[len("sha256=") :]
+    expected = hmac.new(secret.encode(), raw_body, hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, sig)
+```
 
 ---
 

@@ -6,7 +6,7 @@ A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, f
 
 - **Dynamic Response Shaping** - Request only the fields you need, reducing payload sizes by 60-80%
 - **Full Type Safety** - Runtime-generated TypedDict types with accurate type hints for IDE autocomplete
-- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, entities, forecasts, opportunities, notices, grants) [Note: the current version does NOT implement all endpoints, we will be adding them incrementally]
+- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, entities, forecasts, opportunities, notices, grants, webhooks) [Note: the current version does NOT implement all endpoints, we will be adding them incrementally]
 - **Flexible Data Access** - Dictionary-based response objects with validation
 - **Modern Python** - Built for Python 3.12+ using modern async-ready patterns
 - **Production-Ready** - Comprehensive test suite with VCR.py-based integration tests

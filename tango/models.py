@@ -407,6 +407,61 @@ class APIKey:
 
 
 @dataclass
+class WebhookEventType:
+    event_type: str
+    default_subject_type: str
+    description: str
+    schema_version: int
+
+
+@dataclass
+class WebhookSubjectTypeDefinition:
+    subject_type: str
+    description: str
+    id_format: str
+    status: str
+
+
+@dataclass
+class WebhookEventTypesResponse:
+    event_types: list[WebhookEventType]
+    subject_types: list[str]
+    subject_type_definitions: list[WebhookSubjectTypeDefinition]
+
+
+@dataclass
+class WebhookSubscription:
+    id: str
+    subscription_name: str
+    payload: dict[str, Any] | None
+    created_at: str
+    endpoint: str | None = None
+
+
+@dataclass
+class WebhookEndpoint:
+    id: str
+    name: str
+    callback_url: str
+    is_active: bool
+    created_at: str
+    updated_at: str
+    secret: str | None = None
+
+
+@dataclass
+class WebhookTestDeliveryResult:
+    success: bool
+    status_code: int | None = None
+    response_time_ms: int | None = None
+    endpoint_url: str | None = None
+    message: str | None = None
+    error: str | None = None
+    response_body: str | None = None
+    test_payload: dict[str, Any] | None = None
+
+
+@dataclass
 class PaginatedResponse[T]:
     """Paginated API response
 
