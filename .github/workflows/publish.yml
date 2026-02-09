@@ -3,6 +3,7 @@ name: Publish to PyPI
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   build-and-publish:
@@ -24,5 +25,5 @@ jobs:
     
     - name: Publish to PyPI
       env:
-        UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        UV_PUBLISH_TOKEN: ${{ secrets.TANGO_PYPI_TOKEN }}
       run: uv publish
