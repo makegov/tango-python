@@ -12,6 +12,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v4
+
+    - name: Checkout tango API repo (manifest source)
+      uses: actions/checkout@v4
+      with:
+        repository: makegov/tango
+        path: tango-api
     
     - name: Install uv
       uses: astral-sh/setup-uv@v4
@@ -29,3 +35,6 @@ jobs:
     
     - name: Lint with ruff
       run: uv run ruff check tango/
+
+    - name: Check SDK filter/shape conformance
+      run: uv run python scripts/check_filter_shape_conformance.py --manifest tango-api/contracts/filter_shape_contract.json

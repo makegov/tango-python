@@ -1,0 +1,78 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/offices/?page=1&limit=1
+  response:
+    body:
+      string: '{"count":166427,"next":"http://tango.makegov.com/api/offices/?limit=1&page=2","previous":null,"results":[{"office_code":"960207","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"}]}'
+    headers:
+      CF-RAY:
+      - 9cc8ee2c0d60acf4-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:16:58 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CK8zmhB6yCzN2PROXTNzHpT4%2B87LTKrxMUDOSeRtvw1wDquuc1YhoF%2FLvFpFsMxXL9vcJEiv6kuWsU9dKuIYe8bpCCkuxfo57o%2FTmk0B"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '319'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.040s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '8'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '41'
+      x-ratelimit-daily-reset:
+      - '50685'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '8'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

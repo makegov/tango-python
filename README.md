@@ -432,8 +432,10 @@ tango-python/
 │   └── quick_start.ipynb    # Interactive quick start
 ├── scripts/                  # Utility scripts
 │   ├── README.md
+│   ├── check_filter_shape_conformance.py  # Filter + shape conformance (CI)
 │   ├── fetch_api_schema.py
-│   └── generate_schemas_from_api.py
+│   ├── generate_schemas_from_api.py
+│   └── pr_review.py          # PR validation (lint, types, tests, conformance)
 ├── pyproject.toml           # Project configuration
 ├── uv.lock                  # Dependency lock file
 ├── LICENSE                  # MIT License
@@ -471,7 +473,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Run tests (`uv run pytest`)
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+3. Run lint and format: `uv run ruff format tango/ && uv run ruff check tango/`
+4. Run type checking: `uv run mypy tango/`
+5. Run tests: `uv run pytest`
+6. (Optional) Run [filter and shape conformance](scripts/README.md#filter-and-shape-conformance) if you have the tango API manifest; CI will run it on push/PR
+7. Commit your changes (`git commit -m 'Add amazing feature'`)
+8. Push to the branch (`git push origin feature/amazing-feature`)
+9. Open a Pull Request
+
+For a single command that runs formatting, linting, type checking, and tests (and conformance when the manifest is present), use: `uv run python scripts/pr_review.py --mode full`

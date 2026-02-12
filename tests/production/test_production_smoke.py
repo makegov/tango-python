@@ -312,3 +312,407 @@ class TestProductionSmoke:
         assert vehicle.get("uuid") is not None or hasattr(vehicle, "uuid"), (
             "Vehicle uuid should be present"
         )
+
+    # ============================================================================
+    # OTA Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_otas_basic(self, production_client):
+        """Test basic OTA listing
+
+        Validates:
+        - Basic OTA listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_otas(limit=5)
+
+        # Validate response structure
+        validate_pagination(response)
+        # OTAs may be empty, so we just validate structure
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            ota = response.results[0]
+            validate_no_parsing_errors(ota)
+            # Verify required fields are present
+            assert ota.get("key") is not None, "OTA key should be present"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_ota(self, production_client):
+        """Test getting a specific OTA
+
+        Validates:
+        - Single OTA retrieval works
+        - OTA parsing is correct
+        """
+        # First, get an OTA key from listing
+        list_response = production_client.list_otas(limit=1)
+        if not list_response.results:
+            pytest.skip("No OTAs available to test get_ota")
+
+        ota_key = (
+            list_response.results[0].get("key")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].key
+        )
+        assert ota_key is not None, "OTA key should be present"
+
+        ota = production_client.get_ota(ota_key)
+
+        validate_no_parsing_errors(ota)
+        assert ota.get("key") is not None, "OTA key should be present"
+
+    # ============================================================================
+    # OTIDV Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_otidvs_basic(self, production_client):
+        """Test basic OTIDV listing
+
+        Validates:
+        - Basic OTIDV listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_otidvs(limit=5)
+
+        # Validate response structure
+        validate_pagination(response)
+        # OTIDVs may be empty, so we just validate structure
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            otidv = response.results[0]
+            validate_no_parsing_errors(otidv)
+            # Verify required fields are present
+            assert otidv.get("key") is not None, "OTIDV key should be present"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_otidv(self, production_client):
+        """Test getting a specific OTIDV
+
+        Validates:
+        - Single OTIDV retrieval works
+        - OTIDV parsing is correct
+        """
+        # First, get an OTIDV key from listing
+        list_response = production_client.list_otidvs(limit=1)
+        if not list_response.results:
+            pytest.skip("No OTIDVs available to test get_otidv")
+
+        otidv_key = (
+            list_response.results[0].get("key")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].key
+        )
+        assert otidv_key is not None, "OTIDV key should be present"
+
+        otidv = production_client.get_otidv(otidv_key)
+
+        validate_no_parsing_errors(otidv)
+        assert otidv.get("key") is not None, "OTIDV key should be present"
+
+    # ============================================================================
+    # Organization Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_organizations(self, production_client):
+        """Test organization listing
+
+        Validates:
+        - Organization listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_organizations(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            org = response.results[0]
+            validate_no_parsing_errors(org)
+            # Organizations should have fh_key or key
+            has_key = org.get("fh_key") is not None or org.get("key") is not None
+            assert has_key, "Organization should have fh_key or key"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_organization(self, production_client):
+        """Test getting a specific organization
+
+        Validates:
+        - Single organization retrieval works
+        - Organization parsing is correct
+        """
+        # First, get an organization fh_key from listing
+        list_response = production_client.list_organizations(limit=1)
+        if not list_response.results:
+            pytest.skip("No organizations available to test get_organization")
+
+        org = list_response.results[0]
+        fh_key = org.get("fh_key") if isinstance(org, dict) else getattr(org, "fh_key", None)
+        if fh_key is None:
+            pytest.skip("First organization has no fh_key")
+
+        result = production_client.get_organization(fh_key)
+
+        validate_no_parsing_errors(result)
+
+    # ============================================================================
+    # Office Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_offices(self, production_client):
+        """Test office listing
+
+        Validates:
+        - Office listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_offices(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            office = response.results[0]
+            # Offices are returned as raw dicts
+            assert isinstance(office, dict), "Office should be a dict"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_get_office(self, production_client):
+        """Test getting a specific office
+
+        Validates:
+        - Single office retrieval works
+        - Office data is returned
+        """
+        # First, get an office code from listing
+        list_response = production_client.list_offices(limit=1)
+        if not list_response.results:
+            pytest.skip("No offices available to test get_office")
+
+        office = list_response.results[0]
+        # API returns 'office_code', not 'code'
+        code = (
+            office.get("office_code")
+            if isinstance(office, dict)
+            else getattr(office, "office_code", None)
+        )
+        if code is None:
+            pytest.skip("First office has no office_code")
+
+        result = production_client.get_office(code)
+
+        assert isinstance(result, dict), "Office should be a dict"
+        assert result.get("office_code") is not None, "Office code should be present"
+
+    # ============================================================================
+    # Subaward Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_subawards(self, production_client):
+        """Test subaward listing
+
+        Validates:
+        - Subaward listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_subawards(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            subaward = response.results[0]
+            validate_no_parsing_errors(subaward)
+            # Subawards should have id or award_key
+            has_id = subaward.get("id") is not None or subaward.get("award_key") is not None
+            assert has_id, "Subaward should have id or award_key"
+
+    # ============================================================================
+    # NAICS Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_naics(self, production_client):
+        """Test NAICS code listing
+
+        Validates:
+        - NAICS listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_naics(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            naics = response.results[0]
+            # NAICS codes are returned as raw dicts
+            assert isinstance(naics, dict), "NAICS should be a dict"
+            # Should have code field
+            assert naics.get("code") is not None, "NAICS code should be present"
+
+    # ============================================================================
+    # Assistance Endpoints
+    # ============================================================================
+
+    # @handle_rate_limit
+    # @handle_auth_error
+    # def test_list_assistance(self, production_client):
+    #     """Test assistance listing
+
+    #     Validates:
+    #     - Assistance listing works
+    #     - Response parsing is correct
+    #     - Pagination structure is valid
+    #     """
+    #     response = production_client.list_assistance(limit=5)
+
+    #     validate_pagination(response)
+    #     assert response.count >= 0, "Count should be non-negative"
+
+    #     if len(response.results) > 0:
+    #         assistance = response.results[0]
+    #         # Assistance records are returned as raw dicts
+    #         assert isinstance(assistance, dict), "Assistance should be a dict"
+
+    # ============================================================================
+    # Forecast Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_forecasts(self, production_client):
+        """Test forecast listing
+
+        Validates:
+        - Forecast listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_forecasts(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            forecast = response.results[0]
+            validate_no_parsing_errors(forecast)
+
+    # ============================================================================
+    # Notice Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_notices(self, production_client):
+        """Test notice listing
+
+        Validates:
+        - Notice listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_notices(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            notice = response.results[0]
+            validate_no_parsing_errors(notice)
+
+    # ============================================================================
+    # Grant Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_grants(self, production_client):
+        """Test grant listing
+
+        Validates:
+        - Grant listing works
+        - Response parsing is correct
+        - Pagination structure is valid
+        """
+        response = production_client.list_grants(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+        if len(response.results) > 0:
+            grant = response.results[0]
+            validate_no_parsing_errors(grant)
+
+    # ============================================================================
+    # Webhook Endpoints
+    # ============================================================================
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_webhook_event_types(self, production_client):
+        """Test webhook event types listing
+
+        Validates:
+        - Webhook event types endpoint works
+        - Response structure is valid
+        """
+        response = production_client.list_webhook_event_types()
+
+        # Response should have event_types list
+        assert hasattr(response, "event_types"), "Response should have event_types"
+        assert isinstance(response.event_types, list), "event_types should be a list"
+
+        # Response should have subject_types list
+        assert hasattr(response, "subject_types"), "Response should have subject_types"
+        assert isinstance(response.subject_types, list), "subject_types should be a list"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_webhook_endpoints(self, production_client):
+        """Test webhook endpoints listing
+
+        Validates:
+        - Webhook endpoints listing works
+        - Response parsing is correct
+        """
+        response = production_client.list_webhook_endpoints(limit=5)
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_webhook_subscriptions(self, production_client):
+        """Test webhook subscriptions listing
+
+        Validates:
+        - Webhook subscriptions listing works
+        - Response parsing is correct
+        """
+        response = production_client.list_webhook_subscriptions()
+
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"

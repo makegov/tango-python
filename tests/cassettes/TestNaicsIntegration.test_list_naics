@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/naics/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":1012,"next":"http://tango.makegov.com/api/naics/?limit=10&page=2","previous":null,"results":[{"code":111110,"description":"Soybean
+        Farming"},{"code":111120,"description":"Oilseed (except Soybean) Farming"},{"code":111130,"description":"Dry
+        Pea and Bean Farming"},{"code":111140,"description":"Wheat Farming"},{"code":111150,"description":"Corn
+        Farming"},{"code":111160,"description":"Rice Farming"},{"code":111191,"description":"Oilseed
+        and Grain Combination Farming"},{"code":111199,"description":"All Other Grain
+        Farming"},{"code":111211,"description":"Potato Farming"},{"code":111219,"description":"Other
+        Vegetable (except Potato) and Melon Farming"}]}'
+    headers:
+      CF-RAY:
+      - 9cc8ee2dc963a1c7-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:16:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CgIX49cZWQu0gqgo7uv%2F6TQJQj%2BvSn9ezrnzvH5Q6EwTpFfGFa20BOJZC%2Bon3QDJda85%2Fbf5y5Vt4di9CIjzStG3cyLigqsEicAzMTuc"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '664'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.038s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '7'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '40'
+      x-ratelimit-daily-reset:
+      - '50685'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '7'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

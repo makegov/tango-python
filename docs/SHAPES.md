@@ -2,6 +2,8 @@
 
 Response shaping lets you control which fields the API returns, making your requests faster and more efficient. Instead of receiving hundreds of fields you don't need, you specify exactly what you want.
 
+**See also:** [API Reference](API_REFERENCE.md) for method parameters and [ShapeConfig (predefined shapes)](API_REFERENCE.md#shapeconfig-predefined-shapes); [Developer Guide](DEVELOPERS.md) for dynamic models and maintainer conformance.
+
 ## Why Use Response Shaping?
 
 **Performance Benefits:**
@@ -27,10 +29,35 @@ contracts = client.list_contracts(
     shape="key,piid,recipient(display_name),total_contract_value"
 )
 
+# Or use a predefined shape constant
+from tango import ShapeConfig
+contracts = client.list_contracts(shape=ShapeConfig.CONTRACTS_MINIMAL, limit=10)
+
 # Access the data
 for contract in contracts.results:
     print(f"{contract['piid']}: {contract['recipient']['display_name']}")
 ```
+
+## Predefined shapes (ShapeConfig)
+
+Instead of writing shape strings by hand, you can use the SDK’s predefined constants. Each list/get method has a default minimal shape when you omit `shape`; you can also pass a constant explicitly.
+
+```python
+from tango import TangoClient, ShapeConfig
+
+client = TangoClient()
+
+# These are equivalent (list_contracts defaults to CONTRACTS_MINIMAL)
+contracts = client.list_contracts(limit=10)
+contracts = client.list_contracts(shape=ShapeConfig.CONTRACTS_MINIMAL, limit=10)
+
+# Other resources
+entities = client.list_entities(shape=ShapeConfig.ENTITIES_MINIMAL)
+idvs = client.list_idvs(shape=ShapeConfig.IDVS_MINIMAL)
+grants = client.list_grants(shape=ShapeConfig.GRANTS_MINIMAL)
+```
+
+**Available constants:** Contracts (`CONTRACTS_MINIMAL`), Entities (`ENTITIES_MINIMAL`, `ENTITIES_COMPREHENSIVE`), Forecasts, Opportunities, Notices, Grants, IDVs, Vehicles, Organizations, OTAs, OTIDVs, Subawards. See [API Reference – ShapeConfig](API_REFERENCE.md#shapeconfig-predefined-shapes) for the full table and which method uses which constant.
 
 ## Basic Shaping
 
@@ -455,5 +482,6 @@ display_name = contract.get('recipient', {}).get('display_name', 'Unknown')
 - **Define patterns** - Create reusable shapes for your common queries
 
 For more help, see:
+- [API Reference](API_REFERENCE.md) - Method parameters, [ShapeConfig table](API_REFERENCE.md#shapeconfig-predefined-shapes), and field context
+- [Developer Guide](DEVELOPERS.md) - Dynamic models, predefined shapes in depth, and SDK conformance (for maintainers)
 - [Quick Start Guide](quick_start.ipynb) - Interactive examples
-- [API Reference](API_REFERENCE.md) - Complete field listings

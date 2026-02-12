@@ -156,6 +156,214 @@ class TestTangoClient:
         assert entities.results[0]["uei"] == "ABC123DEF456"
 
     @patch("tango.client.httpx.Client.request")
+    def test_list_offices(self, mock_request):
+        """Test list_offices method"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [{"code": "OFF1", "name": "Office One", "agency": "4700"}],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        offices = client.list_offices(limit=10)
+
+        assert offices.count == 1
+        assert len(offices.results) == 1
+        assert offices.results[0]["code"] == "OFF1"
+        assert offices.results[0]["name"] == "Office One"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_get_office(self, mock_request):
+        """Test get_office method"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {"code": "OFF1", "name": "Office One", "agency": "4700"}
+        mock_response.content = b'{"code": "OFF1"}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        office = client.get_office("OFF1")
+
+        assert office["code"] == "OFF1"
+        assert office["name"] == "Office One"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_naics(self, mock_request):
+        """Test list_naics method"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [{"code": "541511", "description": "Custom Computer Programming"}],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        naics = client.list_naics(limit=10, search="programming")
+
+        assert naics.count == 1
+        assert len(naics.results) == 1
+        assert naics.results[0]["code"] == "541511"
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["search"] == "programming"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_organizations_with_default_shape(self, mock_request):
+        """Test list_organizations uses default minimal shape"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [{"key": "ORG1", "fh_key": "DOD", "name": "Department of Defense"}],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        orgs = client.list_organizations(limit=10)
+
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["shape"] == ShapeConfig.ORGANIZATIONS_MINIMAL
+        assert orgs.count == 1
+        assert orgs.results[0]["key"] == "ORG1"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_otas_with_default_shape(self, mock_request):
+        """Test list_otas uses default minimal shape and cursor pagination"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "key": "OTA-1",
+                    "piid": "PIID-OTA",
+                    "award_date": "2024-01-01",
+                    "recipient": {"display_name": "Acme", "uei": "UEI123"},
+                    "description": "OTA award",
+                    "total_contract_value": "50000.00",
+                    "obligated": "25000.00",
+                }
+            ],
+            "cursor": "next-page-token",
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        otas = client.list_otas(limit=10)
+
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["shape"] == ShapeConfig.OTAS_MINIMAL
+        assert otas.count == 1
+        assert otas.results[0]["key"] == "OTA-1"
+        assert otas.cursor == "next-page-token"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_otidvs_with_default_shape(self, mock_request):
+        """Test list_otidvs uses default minimal shape"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "key": "OTIDV-1",
+                    "piid": "PIID-OT",
+                    "award_date": "2024-01-01",
+                    "recipient": {"display_name": "Acme", "uei": "UEI123"},
+                    "description": "OTIDV",
+                    "total_contract_value": "100000.00",
+                    "obligated": "50000.00",
+                    "idv_type": {},
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        otidvs = client.list_otidvs(limit=10)
+
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["shape"] == ShapeConfig.OTIDVS_MINIMAL
+        assert otidvs.count == 1
+        assert otidvs.results[0]["key"] == "OTIDV-1"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_subawards_with_default_shape(self, mock_request):
+        """Test list_subawards uses default minimal shape"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "id": "SUB-1",
+                    "award_key": "CONT_AWD_123",
+                    "prime_recipient": {"uei": "P1", "display_name": "Prime"},
+                    "subaward_recipient": {"uei": "S1", "display_name": "Sub"},
+                    "amount": "10000.00",
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        subawards = client.list_subawards(limit=10)
+
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["shape"] == ShapeConfig.SUBAWARDS_MINIMAL
+        assert subawards.count == 1
+        # Default shape does not include id (API rejects it); assert on award_key
+        assert subawards.results[0]["award_key"] == "CONT_AWD_123"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_assistance(self, mock_request):
+        """Test list_assistance method (keyset pagination, raw results)"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 2,
+            "next": None,
+            "previous": None,
+            "results": [
+                {"award_key": "ASST-1", "recipient": "Recipient A", "fiscal_year": 2024},
+                {"award_key": "ASST-2", "recipient": "Recipient B", "fiscal_year": 2023},
+            ],
+            "cursor": None,
+        }
+        mock_response.content = b'{"count": 2}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        assistance = client.list_assistance(limit=25, fiscal_year=2024)
+
+        assert assistance.count == 2
+        assert len(assistance.results) == 2
+        assert assistance.results[0]["award_key"] == "ASST-1"
+        call_args = mock_request.call_args
+        assert call_args[1]["params"]["fiscal_year"] == 2024
+        assert call_args[1]["params"]["limit"] == 25
+
+    @patch("tango.client.httpx.Client.request")
     def test_error_handling_401(self, mock_request):
         """Test 401 authentication error handling"""
         mock_response = Mock()
@@ -358,7 +566,10 @@ class TestWebhooksEndpoints:
         sample_response.status_code = 200
         sample_response.json.return_value = {
             "event_type": "awards.new_award",
-            "sample_delivery": {"timestamp": "2026-01-01T00:00:00Z", "events": [{"event_type": "awards.new_award"}]},
+            "sample_delivery": {
+                "timestamp": "2026-01-01T00:00:00Z",
+                "events": [{"event_type": "awards.new_award"}],
+            },
         }
         sample_response.content = b'{"event_type": "awards.new_award"}'
 
@@ -435,13 +646,20 @@ class TestWebhooksEndpoints:
         delete_response.status_code = 204
         delete_response.content = b""
 
-        mock_request.side_effect = [list_response, create_response, update_response, delete_response]
+        mock_request.side_effect = [
+            list_response,
+            create_response,
+            update_response,
+            delete_response,
+        ]
 
         endpoints = client.list_webhook_endpoints(page=2, limit=10)
         assert endpoints.count == 1
         assert endpoints.results[0].name == "yoni"
 
-        created = client.create_webhook_endpoint("https://example.com/tango/webhooks", is_active=True)
+        created = client.create_webhook_endpoint(
+            "https://example.com/tango/webhooks", is_active=True
+        )
         assert created.secret == "secret"
 
         updated = client.update_webhook_endpoint("ep-1", is_active=False)
@@ -1034,26 +1252,30 @@ class TestAdditionalEndpoints:
         mock_request.return_value = mock_response
 
         client = TangoClient(api_key="test-key")
-        
+
         # Test with naics_code as keyword argument
         client.list_contracts(naics_code="541511", limit=10)
-        
+
         # Verify the HTTP request was made
         assert mock_request.called
-        
+
         # Get the call arguments
         call_args = mock_request.call_args
         params = call_args[1]["params"]
-        
+
         # Verify naics_code is mapped to 'naics' in query params (API expects 'naics' not 'naics_code')
         assert "naics" in params, "naics should be in query parameters (mapped from naics_code)"
         assert params["naics"] == "541511", "naics value should be '541511'"
-        assert "naics_code" not in params, "naics_code should be mapped to 'naics', not sent as naics_code"
-        
+        assert "naics_code" not in params, (
+            "naics_code should be mapped to 'naics', not sent as naics_code"
+        )
+
         # Verify naics_code is NOT in the shape parameter
         shape = params.get("shape", "")
-        assert "naics_code" not in shape, f"naics_code should NOT be in shape parameter, but shape is: {shape}"
-        
+        assert "naics_code" not in shape, (
+            f"naics_code should NOT be in shape parameter, but shape is: {shape}"
+        )
+
         # Verify shape parameter exists and is separate
         assert "shape" in params, "shape parameter should exist"
         assert isinstance(params["shape"], str), "shape should be a string"

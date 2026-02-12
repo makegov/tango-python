@@ -17,6 +17,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Business Types](#business-types)
 - [Webhooks](#webhooks)
 - [Response Objects](#response-objects)
+- [ShapeConfig (predefined shapes)](#shapeconfig-predefined-shapes)
 - [Error Handling](#error-handling)
 
 ## Client Initialization
@@ -904,6 +905,48 @@ print(f"Total collected: {len(all_results)} results")
 
 ---
 
+## ShapeConfig (predefined shapes)
+
+The SDK provides predefined shape strings as constants on `ShapeConfig`. Use them as the `shape` argument for list/get methods when you want a consistent, validated set of fields without building a custom shape string.
+
+```python
+from tango import TangoClient, ShapeConfig
+
+client = TangoClient()
+
+# List methods default to the minimal shape when shape is omitted
+contracts = client.list_contracts(limit=10)  # uses CONTRACTS_MINIMAL
+
+# Or pass the constant explicitly
+contracts = client.list_contracts(shape=ShapeConfig.CONTRACTS_MINIMAL, limit=10)
+entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
+```
+
+**Available constants (by resource):**
+
+| Constant | Used by | Description |
+|----------|---------|-------------|
+| `CONTRACTS_MINIMAL` | `list_contracts`, `search_contracts` | key, piid, award_date, recipient(display_name), description, total_contract_value |
+| `ENTITIES_MINIMAL` | `list_entities` | uei, legal_business_name, cage_code, business_types |
+| `ENTITIES_COMPREHENSIVE` | `get_entity` | Full entity profile (addresses, naics, psc, obligations, etc.) |
+| `FORECASTS_MINIMAL` | `list_forecasts` | id, title, anticipated_award_date, fiscal_year, naics_code, status |
+| `OPPORTUNITIES_MINIMAL` | `list_opportunities` | opportunity_id, title, solicitation_number, response_deadline, active |
+| `NOTICES_MINIMAL` | `list_notices` | notice_id, title, solicitation_number, posted_date |
+| `GRANTS_MINIMAL` | `list_grants` | grant_id, opportunity_number, title, status(*), agency_code |
+| `IDVS_MINIMAL` | `list_idvs`, `list_vehicle_awardees` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
+| `IDVS_COMPREHENSIVE` | `get_idv` | Full IDV with offices, place_of_performance, competition, transactions, etc. |
+| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, organization_id, awardee_count, order_count, vehicle_obligations, vehicle_contracts_value, solicitation_title, solicitation_date |
+| `VEHICLES_COMPREHENSIVE` | `get_vehicle` | Full vehicle with competition_details, fiscal_year, set_aside, etc. |
+| `VEHICLE_AWARDEES_MINIMAL` | `list_vehicle_awardees` | uuid, key, piid, award_date, title, order_count, idv_obligations, idv_contracts_value, recipient(display_name,uei) |
+| `ORGANIZATIONS_MINIMAL` | `list_organizations`, `list_organization_offices` | key, fh_key, name, level, type, short_name |
+| `OTAS_MINIMAL` | `list_otas` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated |
+| `OTIDVS_MINIMAL` | `list_otidvs` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
+| `SUBAWARDS_MINIMAL` | `list_subawards` | award_key, prime_recipient(uei,display_name), subaward_recipient(uei,display_name) |
+
+All predefined shapes are validated at SDK release time (see [Developer Guide](DEVELOPERS.md#sdk-conformance-maintainers)). For custom shapes, see the [Shaping Guide](SHAPES.md).
+
+---
+
 ## Error Handling
 
 The SDK provides specific exception types for different error scenarios.
@@ -1094,7 +1137,8 @@ client = TangoClient()
 
 ## Additional Resources
 
-- [Shaping Guide](SHAPES.md) - Comprehensive guide to response shaping
+- [Shaping Guide](SHAPES.md) - Response shaping syntax, examples, and field reference
+- [Developer Guide](DEVELOPERS.md) - Dynamic models, predefined shapes, and SDK conformance (maintainers)
 - [Quick Start](quick_start.ipynb) - Interactive notebook with examples
 - [GitHub Repository](https://github.com/makegov/tango-python) - Source code and examples
 - [Tango API Documentation](https://tango.makegov.com/docs) - Full API documentation

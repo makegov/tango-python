@@ -1,0 +1,152 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/organizations/?page=1&limit=1&shape=key%2Cfh_key%2Cname%2Clevel%2Ctype%2Cshort_name
+  response:
+    body:
+      string: '{"count":99298,"next":"http://tango.makegov.com/api/organizations/?limit=1&page=2&shape=key%2Cfh_key%2Cname%2Clevel%2Ctype%2Cshort_name","previous":null,"results":[{"key":"2278181c-046b-5265-b4e6-74444829a573","fh_key":100000000,"name":"DEPT
+        OF DEFENSE","level":1,"type":"DEPARTMENT","short_name":"DOD"}]}'
+    headers:
+      CF-RAY:
+      - 9cc8ee30eb24ad23-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:16:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rwxEYQnJhgPHJeAS0Y7SPgAG%2BvZAcDJnsjqG%2B3kdu9dT7YMoYA54o1luqFIi50TMJfveLsgRaP5%2BEG6aN%2BWoY1HrlCcBTtnd5r35Uh0O"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '305'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.048s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '5'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '38'
+      x-ratelimit-daily-reset:
+      - '50685'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '5'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/organizations/100000000/?shape=key%2Cfh_key%2Cname%2Clevel%2Ctype%2Cshort_name
+  response:
+    body:
+      string: '{"key":"2278181c-046b-5265-b4e6-74444829a573","fh_key":100000000,"name":"DEPT
+        OF DEFENSE","level":1,"type":"DEPARTMENT","short_name":"DOD"}'
+    headers:
+      CF-RAY:
+      - 9cc8ee31bc4aad23-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:16:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Qe%2BHwjPzrj1nOhNW8CjCpLpVjm2kIbEhgiiQhxuiXBbWPq781nUXFXY%2BMiqpcv2Zzwk5B9q7uQE83ZOwKhKiKSJewLQrxxiBBgbi%2FE3z"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '139'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '4'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '37'
+      x-ratelimit-daily-reset:
+      - '50685'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '4'
+      x-ratelimit-reset:
+      - '58'
+    status:
+      code: 200
+      message: OK
+version: 1

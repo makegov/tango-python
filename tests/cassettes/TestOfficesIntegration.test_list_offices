@@ -1,0 +1,96 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/offices/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":166427,"next":"http://tango.makegov.com/api/offices/?limit=10&page=2","previous":null,"results":[{"office_code":"963102","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"9624C6","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"960426","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"968291","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"967445","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"967442","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"960207","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"9624AQ","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"},{"office_code":"F05603","office_name":"","agency_code":"5100","agency_name":"Federal
+        Deposit Insurance Corporation","department_code":51,"department_name":"Federal
+        Deposit Insurance Corporation"},{"office_code":"967227","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"}]}'
+    headers:
+      CF-RAY:
+      - 9cc8ee2a6fdc5116-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:16:58 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WB7nhDGkIAChXbNOfe42%2F79Sk2xOP4yoRyFf%2BHFVMOWfK3C7w1plxUpqMukhC7zUtjy8OKdGtQu5GeQwLhwtyaCCPrf7aiMA4a2ne2Qn"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2220'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.070s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '10'
+      x-ratelimit-burst-remaining:
+      - '9'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '100'
+      x-ratelimit-daily-remaining:
+      - '42'
+      x-ratelimit-daily-reset:
+      - '50686'
+      x-ratelimit-limit:
+      - '10'
+      x-ratelimit-remaining:
+      - '9'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

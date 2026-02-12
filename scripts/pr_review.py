@@ -5,6 +5,7 @@ This script runs validation checks on PR changes, including:
 - Production API smoke tests
 - Linting (ruff)
 - Type checking (mypy)
+- Filter and shape conformance (when manifest is available)
 - Full test suite
 
 Automatically detects PR context from:
@@ -335,6 +336,25 @@ def run_production_tests() -> int:
     return run_command(cmd, "Production API smoke tests", check=False)
 
 
+def run_conformance_check() -> int:
+    """Run filter and shape conformance. Skips if manifest not found."""
+    manifest_path = os.getenv("TANGO_CONTRACT_MANIFEST")
+    if not manifest_path:
+        manifest_path = str(project_root / "tango-api" / "contracts" / "filter_shape_contract.json")
+    path = Path(manifest_path)
+    if not path.exists():
+        print_warning("Conformance manifest not found - skipping filter/shape conformance")
+        print(f"  Expected: {path}")
+        print("  Set TANGO_CONTRACT_MANIFEST or clone tango repo as tango-api/ (see scripts/README.md)")
+        return 0  # Don't fail when manifest is missing
+
+    cmd = [
+        "uv", "run", "python", "scripts/check_filter_shape_conformance.py",
+        "--manifest", manifest_path,
+    ]
+    return run_command(cmd, "Filter and shape conformance", check=False)
+
+
 def run_all_tests() -> int:
     """Run full test suite"""
     cmd = ["uv", "run", "pytest", "tests/", "-m", "not integration"]
@@ -441,6 +461,7 @@ def main() -> int:
         exit_codes.append(run_formatting_check())
         exit_codes.append(run_linting())
         exit_codes.append(run_type_checking())
+        exit_codes.append(run_conformance_check())
         exit_codes.append(run_all_tests())
         exit_codes.append(run_integration_tests())
 
@@ -448,6 +469,7 @@ def main() -> int:
         exit_codes.append(run_formatting_check(changed_files if use_changed_files else None))
         exit_codes.append(run_linting(changed_files if use_changed_files else None))
         exit_codes.append(run_type_checking(changed_files if use_changed_files else None))
+        exit_codes.append(run_conformance_check())
         exit_codes.append(run_production_tests())
 
     # Summary

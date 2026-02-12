@@ -1,0 +1,306 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/otas/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated
+  response:
+    body:
+      string: '{"count":7021,"next":"http://tango.makegov.com/api/otas/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated&cursor=WyIyMDI2LTAxLTMwIiwgImExM2IyZjgxLWMwY2MtNWYwZC1iODYwLTRlOTI0NjQ4OGRmNyJd","previous":null,"cursor":"WyIyMDI2LTAxLTMwIiwgImExM2IyZjgxLWMwY2MtNWYwZC1iODYwLTRlOTI0NjQ4OGRmNyJd","previous_cursor":null,"results":[{"key":"OT_AWD_140D042690006_1406_-NONE-_-NONE-","piid":"140D042690006","award_date":"2026-01-30","description":"COLUMBIA
+        - TEARWISE | OCULAB","total_contract_value":17341223.0,"obligated":9364971.0,"recipient":{"uei":"F4N1QNPB95M4","display_name":"THE
+        TRUSTEES OF COLUMBIA UNIVERSITY IN THE CITY OF NEW YORK"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9cc8fb5e88fe4c9c-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:25:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eg4zgbwcYMJVsQkCZ6PgLdXTvGNiEE8mX%2BzNWACsnpNKsErEZ0WrFMMVzaE5vN7oUU2DPmfXhYtfhYva8o8qCobsUMomyaxuNofs3YKx"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '735'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.038s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '34'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999585'
+      x-ratelimit-daily-reset:
+      - '34462'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '34'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/otas/OT_AWD_140D042690006_1406_-NONE-_-NONE-/?shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated
+  response:
+    body:
+      string: '{"key":"OT_AWD_140D042690006_1406_-NONE-_-NONE-","piid":"140D042690006","award_date":"2026-01-30","description":"COLUMBIA
+        - TEARWISE | OCULAB","total_contract_value":17341223.0,"obligated":9364971.0,"recipient":{"uei":"F4N1QNPB95M4","display_name":"THE
+        TRUSTEES OF COLUMBIA UNIVERSITY IN THE CITY OF NEW YORK"}}'
+    headers:
+      CF-RAY:
+      - 9cc8fb5fab1d4c9c-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:25:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=THrFBx9%2FlBiWKKq1IdrC2TzYOeU7V1yW8gI7veHjFpPddEJs1cGJ%2BwaYUeZRHt00VHi6xWtq%2ByKhPOsIpoE9XG5TZHu8gVt6kLbxeYbR"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '311'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '33'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999584'
+      x-ratelimit-daily-reset:
+      - '34462'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '33'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/otas/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated
+  response:
+    body:
+      string: '{"count":7021,"next":"http://tango.makegov.com/api/otas/?limit=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated&cursor=WyIyMDI2LTAxLTMwIiwgImExM2IyZjgxLWMwY2MtNWYwZC1iODYwLTRlOTI0NjQ4OGRmNyJd","previous":null,"cursor":"WyIyMDI2LTAxLTMwIiwgImExM2IyZjgxLWMwY2MtNWYwZC1iODYwLTRlOTI0NjQ4OGRmNyJd","previous_cursor":null,"results":[{"key":"OT_AWD_140D042690006_1406_-NONE-_-NONE-","piid":"140D042690006","award_date":"2026-01-30","description":"COLUMBIA
+        - TEARWISE | OCULAB","total_contract_value":17341223.0,"obligated":9364971.0,"recipient":{"uei":"F4N1QNPB95M4","display_name":"THE
+        TRUSTEES OF COLUMBIA UNIVERSITY IN THE CITY OF NEW YORK"}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9cc8fedfdd345108-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:28:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=P553qdumsYNmdbK9YWeYnVjsTo1t8cl3YFBFWzFfgv%2Fy4PlSgAk4VCiIfuTeVJQSRFxwwnkwG6iop43UwMndvtxb2BDjuAiy65Ti2gZh"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '735'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.025s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '998'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999565'
+      x-ratelimit-daily-reset:
+      - '34318'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '998'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/otas/OT_AWD_140D042690006_1406_-NONE-_-NONE-/?shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated
+  response:
+    body:
+      string: '{"key":"OT_AWD_140D042690006_1406_-NONE-_-NONE-","piid":"140D042690006","award_date":"2026-01-30","description":"COLUMBIA
+        - TEARWISE | OCULAB","total_contract_value":17341223.0,"obligated":9364971.0,"recipient":{"uei":"F4N1QNPB95M4","display_name":"THE
+        TRUSTEES OF COLUMBIA UNIVERSITY IN THE CITY OF NEW YORK"}}'
+    headers:
+      CF-RAY:
+      - 9cc8fee0ae7a5108-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:28:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qVM1gjFV8SFgR9yeWh4pc1Xpr794j6TESnd2mVl3o0lee2pNvaEmWMEVCcqhreVkNY%2BXvDqOo5GT4NuMKmcAnSDyDYVM6%2BBq7mdsg3Fq"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '311'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.033s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999564'
+      x-ratelimit-daily-reset:
+      - '34318'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1
