@@ -1,0 +1,95 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/subawards/?page=1&limit=10&shape=award_key%2Cprime_recipient%28uei%2Cdisplay_name%29%2Csubaward_recipient%28uei%2Cdisplay_name%29
+  response:
+    body:
+      string: '{"count":3094272,"next":"http://tango.makegov.com/api/subawards/?limit=10&page=2&shape=award_key%2Cprime_recipient%28uei%2Cdisplay_name%29%2Csubaward_recipient%28uei%2Cdisplay_name%29","previous":null,"results":[{"award_key":"CONT_AWD_75P00123F37026_7570_HHSP233201500038I_7555","prime_recipient":{"uei":"YY46Q97AEZA8","display_name":"RAND
+        CORPORATION, THE"},"subaward_recipient":{"uei":"VNAYDLRGSKU3","display_name":"THE
+        URBAN INSTITUTE"}},{"award_key":"CONT_AWD_75P00123F37026_7570_HHSP233201500038I_7555","prime_recipient":{"uei":"YY46Q97AEZA8","display_name":"RAND
+        CORPORATION, THE"},"subaward_recipient":{"uei":"VNAYDLRGSKU3","display_name":"THE
+        URBAN INSTITUTE"}},{"award_key":"CONT_AWD_1333BJ24F00000002_1344_1333BJ21D00280002_1344","prime_recipient":{"uei":"VMRTJLWMQRH7","display_name":"HALVIK
+        CORP"},"subaward_recipient":{"uei":"MMLKHMM35UR8","display_name":"VARCONS
+        INC."}},{"award_key":"CONT_AWD_75N91025F00016_7529_75N91019D00024_7529","prime_recipient":{"uei":"HV8BH9BPG8Y9","display_name":"LEIDOS
+        BIOMEDICAL RESEARCH, INC."},"subaward_recipient":{"uei":"TN8FW9VP39W1","display_name":"RIGAKU
+        AMERICAS HOLDING, INC."}},{"award_key":"CONT_AWD_1333BJ24F00000002_1344_1333BJ21D00280002_1344","prime_recipient":{"uei":"VMRTJLWMQRH7","display_name":"HALVIK
+        CORP"},"subaward_recipient":{"uei":"XA1BEU918DZ3","display_name":"BNL, INC."}},{"award_key":"CONT_AWD_1333BJ24F00000002_1344_1333BJ21D00280002_1344","prime_recipient":{"uei":"VMRTJLWMQRH7","display_name":"HALVIK
+        CORP"},"subaward_recipient":{"uei":"LEPBQQF94NC5","display_name":"GOVERNMENT
+        NETWORK SOLUTIONS, INC."}},{"award_key":"CONT_AWD_80LARC23FA017_8000_80JSC023DA017_8000","prime_recipient":{"uei":"C6KAN1XKA915","display_name":"YULISTA
+        SOLUTIONS LLC"},"subaward_recipient":{"uei":"HZV7HJMAFC28","display_name":"HONEYWELL
+        INTERNATIONAL INC."}},{"award_key":"CONT_AWD_15F06724F0000945_1549_GS00F072CA_4732","prime_recipient":{"uei":"XYB4JU4PA6T4","display_name":"ECS
+        FEDERAL, LLC"},"subaward_recipient":{"uei":"NNB7LNYTJMN5","display_name":"MIRLOGIC
+        SOLUTIONS CORPORATION"}},{"award_key":"CONT_AWD_75N93024F00001_7529_75N93022D00007_7529","prime_recipient":{"uei":"SRG2J1WS9X63","display_name":"SRI
+        INTERNATIONAL"},"subaward_recipient":{"uei":"WMTJS85D4X19","display_name":"ANTECH
+        DIAGNOSTICS, INC"}},{"award_key":"CONT_AWD_70Z05326FENVI0002_7008_70Z05019DWESTON08_7008","prime_recipient":{"uei":"V8CUHEL7FQ33","display_name":"WESTON
+        SOLUTIONS, INC."},"subaward_recipient":{"uei":"HL9BANW2EUD4","display_name":"SGS
+        NORTH AMERICA INC."}}],"count_type":"approximate"}'
+    headers:
+      CF-RAY:
+      - 9cc90bf23f9f4cb7-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 12 Feb 2026 03:37:18 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=NSOWA%2FvWTY4xjLNbgxdMLbwSZkA73E2kl%2F1fvKdgum8Q1XwbpF%2BQ85pMYRFLYGlRtm%2FeFC19ZXpUjRqCfSTf549QAT1GRkpH2bOjpHPU"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2534'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.040s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999542'
+      x-ratelimit-daily-reset:
+      - '33783'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

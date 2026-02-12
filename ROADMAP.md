@@ -2,14 +2,7 @@
 
 ## Now
 
-- [ ] Align existing API to the SDK
-    - [ ] Add in existing IDV endpoint
-    - [ ] Add in existing OTA endpoint
-    - [ ] Add in existing OTIDV endpoint
-    - [ ] Add in existing financial assistance endpoint
-    - [ ] Add in account usage endpoint
-    - [ ] Add in webhooks endpoint
-    - [ ] Add in subawards endpoint
+- [X] Align existing API to the SDK
 - [ ] Better Filter DX
     - [ ] Dataclasses for search validation and typing
 - [ ] Docs improvements

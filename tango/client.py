@@ -17,6 +17,8 @@ from tango.exceptions import (
 )
 from tango.models import (
     IDV,
+    OTA,
+    OTIDV,
     Agency,
     BusinessType,
     Contract,
@@ -26,9 +28,11 @@ from tango.models import (
     Location,
     Notice,
     Opportunity,
+    Organization,
     PaginatedResponse,
     SearchFilters,
     ShapeConfig,
+    Subaward,
     Vehicle,
     WebhookEndpoint,
     WebhookEventType,
@@ -362,9 +366,13 @@ class TangoClient:
     # ============================================================================
 
     # Agency endpoints
-    def list_agencies(self, page: int = 1, limit: int = 25) -> PaginatedResponse:
+    def list_agencies(
+        self, page: int = 1, limit: int = 25, search: str | None = None
+    ) -> PaginatedResponse:
         """List all agencies"""
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if search:
+            params["search"] = search
         data = self._get("/api/agencies/", params)
         return PaginatedResponse(
             count=data["count"],
@@ -389,6 +397,96 @@ class TangoClient:
             raise TangoNotFoundError(f"Agency '{code}' not found", 404)
         return agency
 
+    def list_offices(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        search: str | None = None,
+    ) -> PaginatedResponse:
+        """List offices (`/api/offices/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if search is not None:
+            params["search"] = search
+        data = self._get("/api/offices/", params)
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results", []),
+        )
+
+    def get_office(self, code: str) -> dict[str, Any]:
+        """Get a single office by code (`/api/offices/{code}/`)."""
+        return self._get(f"/api/offices/{code}/")
+
+    def list_organizations(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        cgac: str | None = None,
+        include_inactive: bool | None = None,
+        level: int | None = None,
+        parent: str | None = None,
+        search: str | None = None,
+        type: str | None = None,
+    ) -> PaginatedResponse:
+        """List organizations (`/api/organizations/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.ORGANIZATIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        if cgac is not None:
+            params["cgac"] = cgac
+        if include_inactive is not None:
+            params["include_inactive"] = include_inactive
+        if level is not None:
+            params["level"] = level
+        if parent is not None:
+            params["parent"] = parent
+        if search is not None:
+            params["search"] = search
+        if type is not None:
+            params["type"] = type
+        data = self._get("/api/organizations/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, Organization, flat, flat_lists)
+            for obj in data.get("results", [])
+        ]
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_organization(
+        self,
+        fh_key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """Get a single organization by fh_key (`/api/organizations/{fh_key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.ORGANIZATIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/organizations/{fh_key}/", params)
+        return self._parse_response_with_shape(data, shape, Organization, flat, flat_lists)
+
     # Contract endpoints
     def list_contracts(
         self,
@@ -398,7 +496,7 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         filters: SearchFilters | dict[str, Any] | None = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> PaginatedResponse:
         """
         List contracts with optional filtering
@@ -600,7 +698,7 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         joiner: str = ".",
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List IDVs (indefinite delivery vehicles) with keyset pagination.
@@ -675,7 +773,7 @@ class TangoClient:
         flat_lists: bool = False,
         joiner: str = ".",
         filters: SearchFilters | dict[str, Any] | None = None,
-        **kwargs,
+        **kwargs: Any,
     ) -> PaginatedResponse:
         """
         List child awards (contracts) under an IDV (`/api/idvs/{key}/awards/`).
@@ -751,7 +849,7 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         joiner: str = ".",
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """List child IDVs under an IDV (`/api/idvs/{key}/idvs/`)."""
         params: dict[str, Any] = {"limit": min(limit, 100)}
@@ -826,6 +924,268 @@ class TangoClient:
             previous=data.get("previous"),
             results=data.get("results") or [],
             page_metadata=data.get("page_metadata"),
+        )
+
+    def list_otas(
+        self,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        awarding_agency: str | None = None,
+        expiring_gte: str | None = None,
+        expiring_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        funding_agency: str | None = None,
+        ordering: str | None = None,
+        piid: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        psc: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        uei: str | None = None,
+    ) -> PaginatedResponse:
+        """List OTAs (Other Transaction Agreements) (`/api/otas/`). Keyset pagination."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            shape = ShapeConfig.OTAS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for key, val in (
+            ("award_date", award_date),
+            ("award_date_gte", award_date_gte),
+            ("award_date_lte", award_date_lte),
+            ("awarding_agency", awarding_agency),
+            ("expiring_gte", expiring_gte),
+            ("expiring_lte", expiring_lte),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("funding_agency", funding_agency),
+            ("ordering", ordering),
+            ("piid", piid),
+            ("pop_end_date_gte", pop_end_date_gte),
+            ("pop_end_date_lte", pop_end_date_lte),
+            ("pop_start_date_gte", pop_start_date_gte),
+            ("pop_start_date_lte", pop_start_date_lte),
+            ("psc", psc),
+            ("recipient", recipient),
+            ("search", search),
+            ("uei", uei),
+        ):
+            if val is not None:
+                params[key] = val
+        data = self._get("/api/otas/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, OTA, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def get_ota(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single OTA by key (`/api/otas/{key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.OTAS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/otas/{key}/", params)
+        return self._parse_response_with_shape(data, shape, OTA, flat, flat_lists, joiner=joiner)
+
+    def list_otidvs(
+        self,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        awarding_agency: str | None = None,
+        expiring_gte: str | None = None,
+        expiring_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        funding_agency: str | None = None,
+        ordering: str | None = None,
+        piid: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        psc: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        uei: str | None = None,
+    ) -> PaginatedResponse:
+        """List OTIDVs (Other Transaction IDVs) (`/api/otidvs/`). Keyset pagination."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            shape = ShapeConfig.OTIDVS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for key, val in (
+            ("award_date", award_date),
+            ("award_date_gte", award_date_gte),
+            ("award_date_lte", award_date_lte),
+            ("awarding_agency", awarding_agency),
+            ("expiring_gte", expiring_gte),
+            ("expiring_lte", expiring_lte),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("funding_agency", funding_agency),
+            ("ordering", ordering),
+            ("piid", piid),
+            ("pop_end_date_gte", pop_end_date_gte),
+            ("pop_end_date_lte", pop_end_date_lte),
+            ("pop_start_date_gte", pop_start_date_gte),
+            ("pop_start_date_lte", pop_start_date_lte),
+            ("psc", psc),
+            ("recipient", recipient),
+            ("search", search),
+            ("uei", uei),
+        ):
+            if val is not None:
+                params[key] = val
+        data = self._get("/api/otidvs/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, OTIDV, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def get_otidv(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single OTIDV by key (`/api/otidvs/{key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.OTIDVS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/otidvs/{key}/", params)
+        return self._parse_response_with_shape(data, shape, OTIDV, flat, flat_lists, joiner=joiner)
+
+    def list_subawards(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        award_key: str | None = None,
+        awarding_agency: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        funding_agency: str | None = None,
+        prime_uei: str | None = None,
+        recipient: str | None = None,
+        sub_uei: str | None = None,
+    ) -> PaginatedResponse:
+        """List subawards (`/api/subawards/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.SUBAWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for key, val in (
+            ("award_key", award_key),
+            ("awarding_agency", awarding_agency),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("funding_agency", funding_agency),
+            ("prime_uei", prime_uei),
+            ("recipient", recipient),
+            ("sub_uei", sub_uei),
+        ):
+            if val is not None:
+                params[key] = val
+        data = self._get("/api/subawards/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, Subaward, flat, flat_lists)
+            for obj in data.get("results", [])
+        ]
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
         )
 
     # ============================================================================
@@ -957,6 +1317,42 @@ class TangoClient:
             results=[BusinessType(**btype) for btype in data["results"]],
         )
 
+    def list_naics(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        employee_limit: int | None = None,
+        employee_limit_gte: int | None = None,
+        employee_limit_lte: int | None = None,
+        revenue_limit: int | None = None,
+        revenue_limit_gte: int | None = None,
+        revenue_limit_lte: int | None = None,
+        search: str | None = None,
+    ) -> PaginatedResponse:
+        """List NAICS codes (`/api/naics/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if employee_limit is not None:
+            params["employee_limit"] = employee_limit
+        if employee_limit_gte is not None:
+            params["employee_limit_gte"] = employee_limit_gte
+        if employee_limit_lte is not None:
+            params["employee_limit_lte"] = employee_limit_lte
+        if revenue_limit is not None:
+            params["revenue_limit"] = revenue_limit
+        if revenue_limit_gte is not None:
+            params["revenue_limit_gte"] = revenue_limit_gte
+        if revenue_limit_lte is not None:
+            params["revenue_limit_lte"] = revenue_limit_lte
+        if search is not None:
+            params["search"] = search
+        data = self._get("/api/naics/", params)
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results", []),
+        )
+
     # Entity endpoints
     def list_entities(
         self,
@@ -966,7 +1362,7 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         search: str | None = None,
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List entities (vendors/recipients)
@@ -980,7 +1376,7 @@ class TangoClient:
             search: Search query (maps to 'q' parameter)
             **filters: Additional filter parameters (uei, cage_code, etc.)
         """
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         # Add shape parameter with default minimal shape
         if shape is None:
@@ -1046,7 +1442,7 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List contract forecasts
@@ -1059,7 +1455,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             **filters: Additional filter parameters
         """
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         # Add shape parameter with default minimal shape
         if shape is None:
@@ -1096,7 +1492,7 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List contract opportunities/solicitations
@@ -1109,7 +1505,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             **filters: Additional filter parameters
         """
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         # Add shape parameter with default minimal shape
         if shape is None:
@@ -1146,7 +1542,7 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List contract notices
@@ -1161,7 +1557,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             **filters: Additional filter parameters
         """
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         # Add shape parameter with default minimal shape
         if shape is None:
@@ -1198,7 +1594,7 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters,
+        **filters: Any,
     ) -> PaginatedResponse:
         """
         List grants
@@ -1213,7 +1609,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             **filters: Additional filter parameters
         """
-        params = {"page": page, "limit": min(limit, 100)}
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         # Add shape parameter with default minimal shape
         if shape is None:
@@ -1240,6 +1636,47 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+        )
+
+    def list_assistance(
+        self,
+        limit: int = 25,
+        cursor: str | None = None,
+        assistance_type: str | None = None,
+        award_key: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        highly_compensated_officers: str | None = None,
+        recipient: str | None = None,
+        recipient_address: str | None = None,
+        search: str | None = None,
+    ) -> PaginatedResponse:
+        """List assistance (financial assistance) transactions (`/api/assistance/`). Keyset pagination."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        for key, val in (
+            ("assistance_type", assistance_type),
+            ("award_key", award_key),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("highly_compensated_officers", highly_compensated_officers),
+            ("recipient", recipient),
+            ("recipient_address", recipient_address),
+            ("search", search),
+        ):
+            if val is not None:
+                params[key] = val
+        data = self._get("/api/assistance/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results", []),
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
         )
 
     # ============================================================================

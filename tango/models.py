@@ -296,6 +296,50 @@ class IDV:
 
 
 @dataclass
+class Organization:
+    """Schema definition for Organization (not used for instances)"""
+
+    key: str
+    fh_key: str | None = None
+    name: str | None = None
+    level: int | None = None
+    type: str | None = None
+
+
+@dataclass
+class OTA:
+    """Schema definition for OTA / Other Transaction Agreement (not used for instances)"""
+
+    key: str
+    piid: str | None = None
+    award_date: date | None = None
+    description: str | None = None
+    recipient: RecipientProfile | None = None
+
+
+@dataclass
+class OTIDV:
+    """Schema definition for OTIDV / Other Transaction IDV (not used for instances)"""
+
+    key: str
+    piid: str | None = None
+    award_date: date | None = None
+    description: str | None = None
+    recipient: RecipientProfile | None = None
+
+
+@dataclass
+class Subaward:
+    """Schema definition for Subaward (not used for instances)"""
+
+    id: str | None = None
+    award_key: str | None = None
+    prime_uei: str | None = None
+    sub_uei: str | None = None
+    amount: Decimal | None = None
+
+
+@dataclass
 class Vehicle:
     """Schema definition for Vehicle (not used for instances)"""
 
@@ -563,3 +607,20 @@ class ShapeConfig:
 
     # Default for list_vehicle_awardees()
     VEHICLE_AWARDEES_MINIMAL: Final = "uuid,key,piid,award_date,title,order_count,idv_obligations,idv_contracts_value,recipient(display_name,uei)"
+
+    # Default for list_organizations()
+    ORGANIZATIONS_MINIMAL: Final = "key,fh_key,name,level,type,short_name"
+
+    # Default for list_otas()
+    OTAS_MINIMAL: Final = (
+        "key,piid,award_date,recipient(display_name,uei),description,total_contract_value,obligated"
+    )
+
+    # Default for list_otidvs()
+    OTIDVS_MINIMAL: Final = "key,piid,award_date,recipient(display_name,uei),description,total_contract_value,obligated,idv_type"
+
+    # Default for list_subawards()
+    # Note: API does not accept "id" or "amount" in shape (unknown_field). Use only accepted fields.
+    SUBAWARDS_MINIMAL: Final = (
+        "award_key,prime_recipient(uei,display_name),subaward_recipient(uei,display_name)"
+    )

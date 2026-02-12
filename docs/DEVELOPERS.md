@@ -12,6 +12,7 @@ The Tango SDK uses dynamic models that generate runtime types matching the exact
 - [Type Hints and IDE Support](#type-hints-and-ide-support)
 - [Performance Considerations](#performance-considerations)
 - [Troubleshooting](#troubleshooting)
+- [SDK conformance (maintainers)](#sdk-conformance-maintainers)
 
 ## Overview
 
@@ -622,6 +623,32 @@ If you encounter issues:
 2. Review the [Migration Guide](MIGRATION_GUIDE.md) for common patterns
 3. See [examples/](../examples/) for working code samples
 4. Contact support at [tango@makegov.com](mailto:tango@makegov.com)
+
+## SDK conformance (maintainers)
+
+The SDK is kept in sync with the Tango API and its own shape schemas via two conformance checks. Both run in CI on every push and PR (see [Lint workflow](../.github/workflows/lint.yml)) and can be run locally with [scripts/check_filter_shape_conformance.py](../scripts/check_filter_shape_conformance.py).
+
+### Filter conformance
+
+- **What it checks:** Every list/get endpoint in the canonical manifest (from the [tango](https://github.com/makegov/tango) API repo) has a matching SDK method that exposes the manifest’s filter parameters—either as explicit arguments or via the method’s `api_param_mapping`.
+- **Why it matters:** Ensures the SDK supports all query filters the API exposes for each resource, so users can filter without relying on undocumented `**kwargs`.
+- **Warnings:** Methods that take filters only via `**kwargs` are reported as warnings (filter names cannot be verified against the manifest).
+
+### Shape conformance
+
+- **What it checks:** Every predefined shape in `ShapeConfig` (e.g. `CONTRACTS_MINIMAL`, `IDVS_MINIMAL`, `GRANTS_MINIMAL`) is parsed and validated against the SDK’s explicit schemas in `tango/shapes/explicit_schemas.py`. Each shape must only reference fields that exist for that model (including nested fields).
+- **Why it matters:** Ensures default shapes never reference invalid or renamed fields, so default list/get behavior stays valid after schema or API changes.
+- **Errors:** Parse failures or invalid field names in any `ShapeConfig` constant are reported as errors and fail the check.
+
+### Running the conformance check
+
+- **In CI:** The [Lint workflow](../.github/workflows/lint.yml) runs the full check automatically (it has access to the manifest). No setup needed for push/PR.
+- **Locally:** You need the manifest file to run the script. If you have it (e.g. a path to `filter_shape_contract.json` from the [tango](https://github.com/makegov/tango) repo—wherever you keep that repo—or from a colleague), run:
+  ```bash
+  uv run python scripts/check_filter_shape_conformance.py --manifest /path/to/filter_shape_contract.json
+  ```
+  If you don’t have the manifest, CI will still run the full check on your branch; shape conformance is included whenever the script runs.
+- **Output:** JSON with `errors` and `warnings`. Exit code 1 if there are any errors. See [scripts/README.md](../scripts/README.md#filter-and-shape-conformance) for full usage and `--list-missing`.
 
 ## Next Steps
 

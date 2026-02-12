@@ -975,6 +975,76 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+# Organization (agencies hierarchy)
+ORGANIZATION_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "fh_key": FieldSchema(name="fh_key", type=str, is_optional=False, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "short_name": FieldSchema(name="short_name", type=str, is_optional=True, is_list=False),
+    "level": FieldSchema(name="level", type=int, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+}
+
+# OTA (Other Transaction Agreement) - IDV-like
+OTA_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=False, is_list=False),
+    "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "total_contract_value": FieldSchema(
+        name="total_contract_value", type=Decimal, is_optional=True, is_list=False
+    ),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "recipient": FieldSchema(
+        name="recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+}
+
+# OTIDV (Other Transaction IDV) - IDV-like
+OTIDV_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=False, is_list=False),
+    "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "total_contract_value": FieldSchema(
+        name="total_contract_value", type=Decimal, is_optional=True, is_list=False
+    ),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "idv_type": FieldSchema(name="idv_type", type=dict, is_optional=True, is_list=False),
+    "recipient": FieldSchema(
+        name="recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+}
+
+# Subaward (prime/sub awards)
+SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
+    "id": FieldSchema(name="id", type=str, is_optional=True, is_list=False),
+    "award_key": FieldSchema(name="award_key", type=str, is_optional=True, is_list=False),
+    "amount": FieldSchema(name="amount", type=Decimal, is_optional=True, is_list=False),
+    "prime_recipient": FieldSchema(
+        name="prime_recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+    "subaward_recipient": FieldSchema(
+        name="subaward_recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+}
+
 # ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
@@ -1009,6 +1079,11 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "CFDANumber": CFDA_NUMBER_SCHEMA,
     "CodeDescription": CODE_DESCRIPTION_SCHEMA,
     "GrantAttachment": GRANT_ATTACHMENT_SCHEMA,
+    # Additional list endpoints
+    "Organization": ORGANIZATION_SCHEMA,
+    "OTA": OTA_SCHEMA,
+    "OTIDV": OTIDV_SCHEMA,
+    "Subaward": SUBAWARD_SCHEMA,
 }
 
 
