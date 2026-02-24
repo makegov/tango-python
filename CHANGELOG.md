@@ -7,11 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.3.0] - 2026-02-12
+## [0.4.0] - 2026-02-24
 
 ### Added
+- Offices, Organizations, OTAs, OTIDVs, Subawards, NAICS, and Assistance endpoints.
+- Filter/shape conformance tooling and documentation.
 
 ### Changed
+- CI lint workflow runs filter/shape conformance when the manifest is available.
 
 ## [0.3.0] - 2026-02-09
 

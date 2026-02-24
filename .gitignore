@@ -148,3 +148,5 @@ Thumbs.db
 # Other
 yoni/
 .cursor/*
+
+examples/
