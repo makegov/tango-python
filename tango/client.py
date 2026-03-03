@@ -25,6 +25,7 @@ from tango.models import (
     Entity,
     Forecast,
     Grant,
+    GsaElibraryContract,
     Location,
     Notice,
     Opportunity,
@@ -496,7 +497,34 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         filters: SearchFilters | dict[str, Any] | None = None,
-        **kwargs: Any,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        award_type: str | None = None,
+        awarding_agency: str | None = None,
+        expiring_gte: str | None = None,
+        expiring_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        funding_agency: str | None = None,
+        obligated_gte: str | None = None,
+        obligated_lte: str | None = None,
+        ordering: str | None = None,
+        piid: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        solicitation_identifier: str | None = None,
+        keyword: str | None = None,
+        naics_code: str | None = None,
+        psc_code: str | None = None,
+        recipient_name: str | None = None,
+        recipient_uei: str | None = None,
+        set_aside_type: str | None = None,
+        sort: str | None = None,
+        order: str | None = None,
     ) -> PaginatedResponse:
         """
         List contracts with optional filtering
@@ -511,118 +539,61 @@ class TangoClient:
             flat: If True, flatten nested objects in shaped response using dot notation
             flat_lists: If True, flatten arrays using indexed keys (e.g., items.0.field)
             filters: Optional SearchFilters object or dict for backward compatibility.
-                    Filter parameters can also be passed as keyword arguments.
-            **kwargs: Filter parameters
-
-                    Text search:
-                    - keyword: Search contract descriptions (mapped to 'search' API param)
-
-                    Date filters:
-                    - award_date_gte: Award date >= (YYYY-MM-DD)
-                    - award_date_lte: Award date <= (YYYY-MM-DD)
-                    - pop_start_date_gte: Period of performance start date >=
-                    - pop_start_date_lte: Period of performance start date <=
-                    - pop_end_date_gte: Period of performance end date >=
-                    - pop_end_date_lte: Period of performance end date <=
-                    - expiring_gte: Expiring on or after date
-                    - expiring_lte: Expiring on or before date
-
-                    Party filters:
-                    - awarding_agency: Awarding agency code (e.g., "4700" for GSA)
-                    - funding_agency: Funding agency code
-                    - recipient_name: Vendor/recipient name (mapped to 'recipient' API param)
-                    - recipient_uei: Vendor UEI (mapped to 'uei' API param)
-
-                    Classification filters:
-                    - naics_code: NAICS code (mapped to 'naics' API param)
-                    - psc_code: PSC code (mapped to 'psc' API param)
-                    - set_aside_type: Set-aside type (mapped to 'set_aside' API param)
-
-                    Type filters:
-                    - fiscal_year: Fiscal year (exact match)
-                    - fiscal_year_gte: Fiscal year >=
-                    - fiscal_year_lte: Fiscal year <=
-                    - award_type: Award type code
-
-                    Identifiers:
-                    - piid: Procurement Instrument Identifier
-                    - solicitation_identifier: Solicitation ID
-
-                    Sorting:
-                    - sort: Field to sort by (combined with 'order')
-                    - order: Sort order ('asc' or 'desc', default 'asc')
+            award_date: Award date (exact match, YYYY-MM-DD)
+            award_date_gte: Award date >= (YYYY-MM-DD)
+            award_date_lte: Award date <= (YYYY-MM-DD)
+            award_type: Award type code
+            awarding_agency: Awarding agency code (e.g., "4700" for GSA)
+            expiring_gte: Expiring on or after date
+            expiring_lte: Expiring on or before date
+            fiscal_year: Fiscal year (exact match)
+            fiscal_year_gte: Fiscal year >=
+            fiscal_year_lte: Fiscal year <=
+            funding_agency: Funding agency code
+            obligated_gte: Obligated amount >=
+            obligated_lte: Obligated amount <=
+            ordering: Sort ordering (prefix with '-' for descending)
+            piid: Procurement Instrument Identifier
+            pop_end_date_gte: Period of performance end date >=
+            pop_end_date_lte: Period of performance end date <=
+            pop_start_date_gte: Period of performance start date >=
+            pop_start_date_lte: Period of performance start date <=
+            solicitation_identifier: Solicitation ID
+            keyword: Search contract descriptions (mapped to 'search' API param)
+            naics_code: NAICS code (mapped to 'naics' API param)
+            psc_code: PSC code (mapped to 'psc' API param)
+            recipient_name: Vendor/recipient name (mapped to 'recipient' API param)
+            recipient_uei: Vendor UEI (mapped to 'uei' API param)
+            set_aside_type: Set-aside type (mapped to 'set_aside' API param)
+            sort: Field to sort by (combined with 'order' to produce 'ordering')
+            order: Sort order ('asc' or 'desc', default 'asc')
 
         Examples:
-            >>> # Simple usage
             >>> contracts = client.list_contracts(limit=10)
-
-            >>> # With keyword arguments
             >>> contracts = client.list_contracts(
-            ...     awarding_agency="4700",  # GSA
-            ...     award_date_gte="2023-01-01",
-            ...     limit=25
-            ... )
-
-            >>> # Text search
-            >>> contracts = client.list_contracts(keyword="software development")
-
-            >>> # Pagination with cursor
-            >>> response = client.list_contracts(limit=25)
-            >>> if response.cursor:
-            ...     next_page = client.list_contracts(cursor=response.cursor, limit=25)
-
-            >>> # With SearchFilters object (legacy)
-            >>> filters = SearchFilters(
-            ...     keyword="IT",
             ...     awarding_agency="4700",
-            ...     fiscal_year=2024
+            ...     award_date_gte="2023-01-01",
+            ...     limit=25,
             ... )
-            >>> contracts = client.list_contracts(filters=filters)
-
-            >>> # Using new date range filters
-            >>> contracts = client.list_contracts(
-            ...     expiring_gte="2025-01-01",
-            ...     expiring_lte="2025-12-31"
-            ... )
+            >>> contracts = client.list_contracts(keyword="software development")
         """
-        # Start with pagination parameters
-        # Use cursor if provided, otherwise use page=1 for first request
         params: dict[str, Any] = {"limit": min(limit, 100)}
         if cursor:
             params["cursor"] = cursor
         else:
-            # First page uses page=1, subsequent pages use cursor
             params["page"] = 1
 
-        # Handle filters parameter (backward compatibility)
+        # Handle legacy filters parameter (backward compatibility)
         filter_dict: dict[str, Any] = {}
         if filters is not None:
             if hasattr(filters, "to_dict"):
-                # SearchFilters object
                 filter_dict = filters.to_dict()
             else:
-                # dict
-                filter_dict = filters
+                filter_dict = dict(filters)
 
-            # Extract limit from filters if using defaults
             if limit == 25 and "limit" in filter_dict:
                 params["limit"] = min(filter_dict.pop("limit", 25), 100)
 
-        # Merge kwargs and filter_dict (kwargs take precedence)
-        filter_params = {**filter_dict, **kwargs}
-
-        # Explicitly exclude shape-related and pagination parameters from filter_params
-        # These are handled separately and should not be sent as query parameters
-        excluded_params = {"shape", "flat", "flat_lists", "cursor", "page"}
-        for param in excluded_params:
-            filter_params.pop(param, None)
-
-        # Extract limit from kwargs if provided (override explicit params)
-        if "limit" in filter_params:
-            params["limit"] = min(filter_params.pop("limit"), 100)
-
-        # Add shape parameter with default minimal shape
-        # This is separate from filter parameters and controls response fields, not filtering
         if shape is None:
             shape = ShapeConfig.CONTRACTS_MINIMAL
         if shape:
@@ -632,43 +603,65 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        # Process filter parameters - convert award amounts to strings
-        # Map Python parameter names to API parameter names if needed
-        # Then update params with all filters (excluding None values)
-        # This matches the pattern used by other endpoints (params.update(filters))
-
-        # Map Python parameter names to API parameter names
-        # The API may expect different parameter names than our Python interface
         api_param_mapping = {
-            "naics_code": "naics",  # API expects 'naics' not 'naics_code'
-            "keyword": "search",  # API expects 'search' not 'keyword'
-            "psc_code": "psc",  # API expects 'psc' not 'psc_code'
-            "recipient_name": "recipient",  # API expects 'recipient' not 'recipient_name'
-            "recipient_uei": "uei",  # API expects 'uei' not 'recipient_uei'
-            "set_aside_type": "set_aside",  # API expects 'set_aside' not 'set_aside_type'
+            "naics_code": "naics",
+            "keyword": "search",
+            "psc_code": "psc",
+            "recipient_name": "recipient",
+            "recipient_uei": "uei",
+            "set_aside_type": "set_aside",
         }
 
+        # Collect explicit filter params; legacy filter_dict values are used as fallback
+        filter_params: dict[str, Any] = {}
+        for key, val in (
+            ("award_date", award_date),
+            ("award_date_gte", award_date_gte),
+            ("award_date_lte", award_date_lte),
+            ("award_type", award_type),
+            ("awarding_agency", awarding_agency),
+            ("expiring_gte", expiring_gte),
+            ("expiring_lte", expiring_lte),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("funding_agency", funding_agency),
+            ("obligated_gte", obligated_gte),
+            ("obligated_lte", obligated_lte),
+            ("ordering", ordering),
+            ("piid", piid),
+            ("pop_end_date_gte", pop_end_date_gte),
+            ("pop_end_date_lte", pop_end_date_lte),
+            ("pop_start_date_gte", pop_start_date_gte),
+            ("pop_start_date_lte", pop_start_date_lte),
+            ("solicitation_identifier", solicitation_identifier),
+            ("keyword", keyword),
+            ("naics_code", naics_code),
+            ("psc_code", psc_code),
+            ("recipient_name", recipient_name),
+            ("recipient_uei", recipient_uei),
+            ("set_aside_type", set_aside_type),
+        ):
+            if val is not None:
+                filter_params[key] = val
+
+        # Merge: explicit params take precedence over legacy filter_dict
+        excluded = {"shape", "flat", "flat_lists", "cursor", "page", "limit"}
+        for k, v in filter_dict.items():
+            if k not in excluded and k not in filter_params and v is not None:
+                filter_params[k] = v
+
         # Handle sort + order → ordering conversion
-        # API expects single 'ordering' parameter with '-' prefix for descending
-        sort_field = filter_params.pop("sort", None)
-        sort_order = filter_params.pop("order", None)
-        if sort_field:
-            # Prefix with '-' for descending order
+        sort_field = sort or filter_dict.get("sort")
+        sort_order = order or filter_dict.get("order")
+        if sort_field and "ordering" not in filter_params:
             prefix = "-" if sort_order == "desc" else ""
             filter_params["ordering"] = f"{prefix}{sort_field}"
 
-        # Apply parameter name mapping and process values
-        api_params = {}
+        # Apply parameter name mapping and add to params
         for key, value in filter_params.items():
-            if value is None:
-                continue  # Skip None values
-            # Map to API parameter name if needed
             api_key = api_param_mapping.get(key, key)
-            api_params[api_key] = value
-
-        # Update params with all filter parameters
-        # This is the same pattern as other endpoints use
-        params.update(api_params)
+            params[api_key] = value
 
         data = self._get("/api/contracts/", params)
 
@@ -698,7 +691,30 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         joiner: str = ".",
-        **filters: Any,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        awarding_agency: str | None = None,
+        expiring_gte: str | None = None,
+        expiring_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        funding_agency: str | None = None,
+        idv_type: str | None = None,
+        last_date_to_order_gte: str | None = None,
+        last_date_to_order_lte: str | None = None,
+        naics: str | None = None,
+        ordering: str | None = None,
+        piid: str | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        psc: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        set_aside: str | None = None,
+        solicitation_identifier: str | None = None,
+        uei: str | None = None,
     ) -> PaginatedResponse:
         """
         List IDVs (indefinite delivery vehicles) with keyset pagination.
@@ -721,7 +737,34 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        params.update({k: v for k, v in filters.items() if v is not None})
+        for key, val in (
+            ("award_date", award_date),
+            ("award_date_gte", award_date_gte),
+            ("award_date_lte", award_date_lte),
+            ("awarding_agency", awarding_agency),
+            ("expiring_gte", expiring_gte),
+            ("expiring_lte", expiring_lte),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("funding_agency", funding_agency),
+            ("idv_type", idv_type),
+            ("last_date_to_order_gte", last_date_to_order_gte),
+            ("last_date_to_order_lte", last_date_to_order_lte),
+            ("naics", naics),
+            ("ordering", ordering),
+            ("piid", piid),
+            ("pop_start_date_gte", pop_start_date_gte),
+            ("pop_start_date_lte", pop_start_date_lte),
+            ("psc", psc),
+            ("recipient", recipient),
+            ("search", search),
+            ("set_aside", set_aside),
+            ("solicitation_identifier", solicitation_identifier),
+            ("uei", uei),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/idvs/", params)
 
@@ -1189,6 +1232,88 @@ class TangoClient:
         )
 
     # ============================================================================
+    # GSA eLibrary Contracts
+    # ============================================================================
+
+    def list_gsa_elibrary_contracts(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        contract_number: str | None = None,
+        key: str | None = None,
+        piid: str | None = None,
+        schedule: str | None = None,
+        search: str | None = None,
+        sin: str | None = None,
+        uei: str | None = None,
+    ) -> PaginatedResponse:
+        """List GSA eLibrary contracts (`/api/gsa_elibrary_contracts/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.GSA_ELIBRARY_CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for k, val in (
+            ("contract_number", contract_number),
+            ("key", key),
+            ("piid", piid),
+            ("schedule", schedule),
+            ("search", search),
+            ("sin", sin),
+            ("uei", uei),
+        ):
+            if val is not None:
+                params[k] = val
+        data = self._get("/api/gsa_elibrary_contracts/", params)
+        results = [
+            self._parse_response_with_shape(
+                obj, shape, GsaElibraryContract, flat, flat_lists, joiner=joiner
+            )
+            for obj in data.get("results", [])
+        ]
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_gsa_elibrary_contract(
+        self,
+        uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single GSA eLibrary contract by UUID (`/api/gsa_elibrary_contracts/{uuid}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.GSA_ELIBRARY_CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/gsa_elibrary_contracts/{uuid}/", params)
+        return self._parse_response_with_shape(
+            data, shape, GsaElibraryContract, flat, flat_lists, joiner=joiner
+        )
+
+    # ============================================================================
     # Vehicles (Awards)
     # ============================================================================
 
@@ -1362,7 +1487,17 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         search: str | None = None,
-        **filters: Any,
+        cage_code: str | None = None,
+        naics: str | None = None,
+        name: str | None = None,
+        psc: str | None = None,
+        purpose_of_registration_code: str | None = None,
+        socioeconomic: str | None = None,
+        state: str | None = None,
+        total_awards_obligated_gte: str | None = None,
+        total_awards_obligated_lte: str | None = None,
+        uei: str | None = None,
+        zip_code: str | None = None,
     ) -> PaginatedResponse:
         """
         List entities (vendors/recipients)
@@ -1373,12 +1508,21 @@ class TangoClient:
             shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            search: Search query (maps to 'q' parameter)
-            **filters: Additional filter parameters (uei, cage_code, etc.)
+            search: Search query
+            cage_code: CAGE code filter
+            naics: NAICS code filter
+            name: Entity name filter
+            psc: PSC code filter
+            purpose_of_registration_code: Purpose of registration code
+            socioeconomic: Socioeconomic status filter
+            state: State filter
+            total_awards_obligated_gte: Total awards obligated >=
+            total_awards_obligated_lte: Total awards obligated <=
+            uei: Unique Entity Identifier
+            zip_code: ZIP code filter
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
-        # Add shape parameter with default minimal shape
         if shape is None:
             shape = ShapeConfig.ENTITIES_MINIMAL
         if shape:
@@ -1388,11 +1532,22 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        # Map 'search' parameter to 'q' (query parameter)
-        if search:
-            params["search"] = search
-
-        params.update(filters)
+        for key, val in (
+            ("search", search),
+            ("cage_code", cage_code),
+            ("naics", naics),
+            ("name", name),
+            ("psc", psc),
+            ("purpose_of_registration_code", purpose_of_registration_code),
+            ("socioeconomic", socioeconomic),
+            ("state", state),
+            ("total_awards_obligated_gte", total_awards_obligated_gte),
+            ("total_awards_obligated_lte", total_awards_obligated_lte),
+            ("uei", uei),
+            ("zip_code", zip_code),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/entities/", params)
 
@@ -1442,7 +1597,19 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters: Any,
+        agency: str | None = None,
+        award_date_after: str | None = None,
+        award_date_before: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        modified_after: str | None = None,
+        modified_before: str | None = None,
+        naics_code: str | None = None,
+        naics_starts_with: str | None = None,
+        search: str | None = None,
+        source_system: str | None = None,
+        status: str | None = None,
     ) -> PaginatedResponse:
         """
         List contract forecasts
@@ -1453,11 +1620,22 @@ class TangoClient:
             shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            **filters: Additional filter parameters
+            agency: Agency filter
+            award_date_after: Award date after (YYYY-MM-DD)
+            award_date_before: Award date before (YYYY-MM-DD)
+            fiscal_year: Fiscal year (exact match)
+            fiscal_year_gte: Fiscal year >=
+            fiscal_year_lte: Fiscal year <=
+            modified_after: Modified after date
+            modified_before: Modified before date
+            naics_code: NAICS code filter
+            naics_starts_with: NAICS code prefix filter
+            search: Search query
+            source_system: Source system filter
+            status: Status filter
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
-        # Add shape parameter with default minimal shape
         if shape is None:
             shape = ShapeConfig.FORECASTS_MINIMAL
         if shape:
@@ -1467,7 +1645,23 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        params.update(filters)
+        for key, val in (
+            ("agency", agency),
+            ("award_date_after", award_date_after),
+            ("award_date_before", award_date_before),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year_gte", fiscal_year_gte),
+            ("fiscal_year_lte", fiscal_year_lte),
+            ("modified_after", modified_after),
+            ("modified_before", modified_before),
+            ("naics_code", naics_code),
+            ("naics_starts_with", naics_starts_with),
+            ("search", search),
+            ("source_system", source_system),
+            ("status", status),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/forecasts/", params)
 
@@ -1492,7 +1686,21 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters: Any,
+        active: bool | None = None,
+        agency: str | None = None,
+        first_notice_date_after: str | None = None,
+        first_notice_date_before: str | None = None,
+        last_notice_date_after: str | None = None,
+        last_notice_date_before: str | None = None,
+        naics: str | None = None,
+        notice_type: str | None = None,
+        place_of_performance: str | None = None,
+        psc: str | None = None,
+        response_deadline_after: str | None = None,
+        response_deadline_before: str | None = None,
+        search: str | None = None,
+        set_aside: str | None = None,
+        solicitation_number: str | None = None,
     ) -> PaginatedResponse:
         """
         List contract opportunities/solicitations
@@ -1503,11 +1711,24 @@ class TangoClient:
             shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            **filters: Additional filter parameters
+            active: Filter by active status
+            agency: Agency filter
+            first_notice_date_after: First notice date after
+            first_notice_date_before: First notice date before
+            last_notice_date_after: Last notice date after
+            last_notice_date_before: Last notice date before
+            naics: NAICS code filter
+            notice_type: Notice type filter
+            place_of_performance: Place of performance filter
+            psc: PSC code filter
+            response_deadline_after: Response deadline after
+            response_deadline_before: Response deadline before
+            search: Search query
+            set_aside: Set-aside type filter
+            solicitation_number: Solicitation number filter
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
-        # Add shape parameter with default minimal shape
         if shape is None:
             shape = ShapeConfig.OPPORTUNITIES_MINIMAL
         if shape:
@@ -1517,7 +1738,25 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        params.update(filters)
+        for key, val in (
+            ("active", active),
+            ("agency", agency),
+            ("first_notice_date_after", first_notice_date_after),
+            ("first_notice_date_before", first_notice_date_before),
+            ("last_notice_date_after", last_notice_date_after),
+            ("last_notice_date_before", last_notice_date_before),
+            ("naics", naics),
+            ("notice_type", notice_type),
+            ("place_of_performance", place_of_performance),
+            ("psc", psc),
+            ("response_deadline_after", response_deadline_after),
+            ("response_deadline_before", response_deadline_before),
+            ("search", search),
+            ("set_aside", set_aside),
+            ("solicitation_number", solicitation_number),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/opportunities/", params)
 
@@ -1542,7 +1781,18 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters: Any,
+        active: bool | None = None,
+        agency: str | None = None,
+        naics: str | None = None,
+        notice_type: str | None = None,
+        posted_date_after: str | None = None,
+        posted_date_before: str | None = None,
+        psc: str | None = None,
+        response_deadline_after: str | None = None,
+        response_deadline_before: str | None = None,
+        search: str | None = None,
+        set_aside: str | None = None,
+        solicitation_number: str | None = None,
     ) -> PaginatedResponse:
         """
         List contract notices
@@ -1550,16 +1800,24 @@ class TangoClient:
         Args:
             page: Page number
             limit: Results per page (max 100)
-            shape: Response shape string (defaults to minimal shape).
-                   Use None to disable shaping, ShapeConfig.NOTICES_MINIMAL for minimal,
-                   or provide custom shape string
+            shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            **filters: Additional filter parameters
+            active: Filter by active status
+            agency: Agency filter
+            naics: NAICS code filter
+            notice_type: Notice type filter
+            posted_date_after: Posted date after
+            posted_date_before: Posted date before
+            psc: PSC code filter
+            response_deadline_after: Response deadline after
+            response_deadline_before: Response deadline before
+            search: Search query
+            set_aside: Set-aside type filter
+            solicitation_number: Solicitation number filter
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
-        # Add shape parameter with default minimal shape
         if shape is None:
             shape = ShapeConfig.NOTICES_MINIMAL
         if shape:
@@ -1569,7 +1827,22 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        params.update(filters)
+        for key, val in (
+            ("active", active),
+            ("agency", agency),
+            ("naics", naics),
+            ("notice_type", notice_type),
+            ("posted_date_after", posted_date_after),
+            ("posted_date_before", posted_date_before),
+            ("psc", psc),
+            ("response_deadline_after", response_deadline_after),
+            ("response_deadline_before", response_deadline_before),
+            ("search", search),
+            ("set_aside", set_aside),
+            ("solicitation_number", solicitation_number),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/notices/", params)
 
@@ -1594,7 +1867,18 @@ class TangoClient:
         shape: str | None = None,
         flat: bool = False,
         flat_lists: bool = False,
-        **filters: Any,
+        agency: str | None = None,
+        applicant_types: str | None = None,
+        cfda_number: str | None = None,
+        funding_categories: str | None = None,
+        funding_instruments: str | None = None,
+        opportunity_number: str | None = None,
+        posted_date_after: str | None = None,
+        posted_date_before: str | None = None,
+        response_date_after: str | None = None,
+        response_date_before: str | None = None,
+        search: str | None = None,
+        status: str | None = None,
     ) -> PaginatedResponse:
         """
         List grants
@@ -1602,16 +1886,24 @@ class TangoClient:
         Args:
             page: Page number
             limit: Results per page (max 100)
-            shape: Response shape string (defaults to minimal shape).
-                   Use None to disable shaping, ShapeConfig.GRANTS_MINIMAL for minimal,
-                   or provide custom shape string
+            shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            **filters: Additional filter parameters
+            agency: Agency filter
+            applicant_types: Applicant types filter
+            cfda_number: CFDA number filter
+            funding_categories: Funding categories filter
+            funding_instruments: Funding instruments filter
+            opportunity_number: Opportunity number filter
+            posted_date_after: Posted date after
+            posted_date_before: Posted date before
+            response_date_after: Response date after
+            response_date_before: Response date before
+            search: Search query
+            status: Status filter
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
-        # Add shape parameter with default minimal shape
         if shape is None:
             shape = ShapeConfig.GRANTS_MINIMAL
         if shape:
@@ -1621,7 +1913,22 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        params.update(filters)
+        for key, val in (
+            ("agency", agency),
+            ("applicant_types", applicant_types),
+            ("cfda_number", cfda_number),
+            ("funding_categories", funding_categories),
+            ("funding_instruments", funding_instruments),
+            ("opportunity_number", opportunity_number),
+            ("posted_date_after", posted_date_after),
+            ("posted_date_before", posted_date_before),
+            ("response_date_after", response_date_after),
+            ("response_date_before", response_date_before),
+            ("search", search),
+            ("status", status),
+        ):
+            if val is not None:
+                params[key] = val
 
         data = self._get("/api/grants/", params)
 

@@ -340,6 +340,19 @@ class Subaward:
 
 
 @dataclass
+class GsaElibraryContract:
+    """Schema definition for GSA eLibrary Contract (not used for instances)"""
+
+    uuid: str
+    contract_number: str | None = None
+    schedule: str | None = None
+    cooperative_purchasing: bool | None = None
+    disaster_recovery_purchasing: bool | None = None
+    file_urls: list[str] | None = None
+    sins: list[str] | None = None
+
+
+@dataclass
 class Vehicle:
     """Schema definition for Vehicle (not used for instances)"""
 
@@ -623,4 +636,9 @@ class ShapeConfig:
     # Note: API does not accept "id" or "amount" in shape (unknown_field). Use only accepted fields.
     SUBAWARDS_MINIMAL: Final = (
         "award_key,prime_recipient(uei,display_name),subaward_recipient(uei,display_name)"
+    )
+
+    # Default for list_gsa_elibrary_contracts()
+    GSA_ELIBRARY_CONTRACTS_MINIMAL: Final = (
+        "uuid,contract_number,schedule,recipient(display_name,uei),idv(key,award_date)"
     )
