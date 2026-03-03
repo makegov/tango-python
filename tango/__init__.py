@@ -9,6 +9,7 @@ from .exceptions import (
     TangoValidationError,
 )
 from .models import (
+    GsaElibraryContract,
     PaginatedResponse,
     SearchFilters,
     ShapeConfig,
@@ -26,7 +27,7 @@ from .shapes import (
     TypeGenerator,
 )
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -34,6 +35,7 @@ __all__ = [
     "TangoNotFoundError",
     "TangoValidationError",
     "TangoRateLimitError",
+    "GsaElibraryContract",
     "PaginatedResponse",
     "SearchFilters",
     "ShapeConfig",

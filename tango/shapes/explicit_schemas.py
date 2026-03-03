@@ -1045,6 +1045,42 @@ SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+# GSA eLibrary Contract
+GSA_ELIBRARY_IDV_REF_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+}
+
+GSA_ELIBRARY_CONTRACT_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=False, is_list=False),
+    "contract_number": FieldSchema(
+        name="contract_number", type=str, is_optional=True, is_list=False
+    ),
+    "cooperative_purchasing": FieldSchema(
+        name="cooperative_purchasing", type=bool, is_optional=True, is_list=False
+    ),
+    "disaster_recovery_purchasing": FieldSchema(
+        name="disaster_recovery_purchasing", type=bool, is_optional=True, is_list=False
+    ),
+    "file_urls": FieldSchema(name="file_urls", type=list, is_optional=True, is_list=True),
+    "schedule": FieldSchema(name="schedule", type=str, is_optional=True, is_list=False),
+    "sins": FieldSchema(name="sins", type=list, is_optional=True, is_list=True),
+    "idv": FieldSchema(
+        name="idv",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="GsaElibraryIdvRef",
+    ),
+    "recipient": FieldSchema(
+        name="recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="RecipientProfile",
+    ),
+}
+
 # ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
@@ -1084,6 +1120,9 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "OTA": OTA_SCHEMA,
     "OTIDV": OTIDV_SCHEMA,
     "Subaward": SUBAWARD_SCHEMA,
+    # GSA eLibrary
+    "GsaElibraryContract": GSA_ELIBRARY_CONTRACT_SCHEMA,
+    "GsaElibraryIdvRef": GSA_ELIBRARY_IDV_REF_SCHEMA,
 }
 
 

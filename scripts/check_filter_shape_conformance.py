@@ -21,7 +21,7 @@ import argparse
 import ast
 import json
 from pathlib import Path
-from typing import Any, Type
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CLIENT_PATH = REPO_ROOT / "tango" / "client.py"
@@ -49,32 +49,34 @@ RESOURCE_TO_METHOD: dict[str, str] = {
     "entities": "list_entities",
     "agencies": "list_agencies",
     "naics": "list_naics",
+    "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
     # Resources not yet implemented in SDK
     "assistance": None,
     "offices": None,
 }
 
 
-def get_shape_config_entries() -> list[tuple[str, str, Type[Any]]]:
+def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
     """Return (shape_name, shape_string, model_class) for every ShapeConfig constant."""
     from tango.models import (
+        IDV,
+        OTA,
+        OTIDV,
         Contract,
         Entity,
         Forecast,
         Grant,
-        IDV,
+        GsaElibraryContract,
         Notice,
-        OTA,
-        Organization,
         Opportunity,
-        OTIDV,
+        Organization,
         ShapeConfig,
         Subaward,
         Vehicle,
     )
 
     # ShapeConfig constant name -> (shape string, model class for validation)
-    entries: list[tuple[str, str, Type[Any]]] = []
+    entries: list[tuple[str, str, type[Any]]] = []
     configs = [
         ("CONTRACTS_MINIMAL", ShapeConfig.CONTRACTS_MINIMAL, Contract),
         ("ENTITIES_MINIMAL", ShapeConfig.ENTITIES_MINIMAL, Entity),
@@ -92,6 +94,11 @@ def get_shape_config_entries() -> list[tuple[str, str, Type[Any]]]:
         ("OTAS_MINIMAL", ShapeConfig.OTAS_MINIMAL, OTA),
         ("OTIDVS_MINIMAL", ShapeConfig.OTIDVS_MINIMAL, OTIDV),
         ("SUBAWARDS_MINIMAL", ShapeConfig.SUBAWARDS_MINIMAL, Subaward),
+        (
+            "GSA_ELIBRARY_CONTRACTS_MINIMAL",
+            ShapeConfig.GSA_ELIBRARY_CONTRACTS_MINIMAL,
+            GsaElibraryContract,
+        ),
     ]
     for name, shape_str, model_cls in configs:
         entries.append((name, shape_str, model_cls))
@@ -166,16 +173,12 @@ def run_check(manifest_path: Path) -> tuple[list[str], list[str]]:
             # Explicitly marked as not implemented
             runtime_filters = payload.get("runtime", {}).get("filter_params", [])
             if runtime_filters:
-                warnings.append(
-                    f"{resource_name}: no SDK method implemented for this resource"
-                )
+                warnings.append(f"{resource_name}: no SDK method implemented for this resource")
             continue
 
         if sdk_method not in methods:
             # Method mapped but not found in client.py
-            errors.append(
-                f"{resource_name}: mapped method `{sdk_method}` not found in SDK client"
-            )
+            errors.append(f"{resource_name}: mapped method `{sdk_method}` not found in SDK client")
             continue
 
         runtime_filters = set(payload.get("runtime", {}).get("filter_params", []))
@@ -212,12 +215,14 @@ def get_unmapped_resources(manifest_path: Path) -> list[dict[str, Any]]:
         # Check if unmapped or method doesn't exist
         if sdk_method is None or sdk_method not in methods:
             runtime = payload.get("runtime", {}) or {}
-            unmapped.append({
-                "resource": resource_name,
-                "expected_method": sdk_method,
-                "filter_params": runtime.get("filter_params", []),
-                "pagination_class": (runtime.get("pagination") or {}).get("class", ""),
-            })
+            unmapped.append(
+                {
+                    "resource": resource_name,
+                    "expected_method": sdk_method,
+                    "filter_params": runtime.get("filter_params", []),
+                    "pagination_class": (runtime.get("pagination") or {}).get("class", ""),
+                }
+            )
     return unmapped
 
 
