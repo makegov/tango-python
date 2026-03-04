@@ -1,0 +1,152 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/?page=1&limit=1&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date
+  response:
+    body:
+      string: '{"count":15580,"next":"https://tango.makegov.com/api/protests/?limit=1&page=2&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date","previous":null,"results":[{"case_id":"af3327fd-df8c-55e3-a736-ffa4b4c6f9c0","case_number":"b-423590","title":"Soft
+        Tech Consulting, Inc. (W911QX24R0005)","source_system":"gao","outcome":"Dismissed","filed_date":"2025-09-22"}]}'
+    headers:
+      CF-RAY:
+      - 9d709a9d9c5da1f7-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 11:40:04 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=e1RczGwx9pDiPSoXiTEdhZ2ik%2B2Ctbqv6RaPLqO7RJ2yh5zlzvaQgG1uEOWkbnK9CIupfv1rl0hv0HVbYkpUFyDkJjc4cT%2FG8P5SPu7OuB23UT45HDq5Y8sK"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '381'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.069s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '960'
+      x-ratelimit-burst-reset:
+      - '5'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999689'
+      x-ratelimit-daily-reset:
+      - '4817'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '960'
+      x-ratelimit-reset:
+      - '5'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/af3327fd-df8c-55e3-a736-ffa4b4c6f9c0/?shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date
+  response:
+    body:
+      string: '{"case_id":"af3327fd-df8c-55e3-a736-ffa4b4c6f9c0","case_number":"b-423590","title":"Soft
+        Tech Consulting, Inc. (W911QX24R0005)","source_system":"gao","outcome":"Dismissed","filed_date":"2025-09-22"}'
+    headers:
+      CF-RAY:
+      - 9d709a9e9d51a1f7-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 11:40:04 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eW5ZB9j%2FdigxrLpEqbZrUlKk%2BL%2FO%2F2aNooV6NR6Rut5TUOmo5Sg4xX8dULwX91Tb0tb85NyAvglrtEItTfUhb5KLQcS997pnveFYidbId2926o7MFOEMq1j5"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '198'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.339s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '959'
+      x-ratelimit-burst-reset:
+      - '4'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999688'
+      x-ratelimit-daily-reset:
+      - '4817'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '959'
+      x-ratelimit-reset:
+      - '4'
+    status:
+      code: 200
+      message: OK
+version: 1

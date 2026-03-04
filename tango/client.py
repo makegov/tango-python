@@ -31,6 +31,7 @@ from tango.models import (
     Opportunity,
     Organization,
     PaginatedResponse,
+    Protest,
     SearchFilters,
     ShapeConfig,
     Subaward,
@@ -1858,6 +1859,129 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
         )
+
+    # Protest endpoints
+    # See https://tango.makegov.com/docs/api-reference/protests.md
+    # Note: Protests API does not support ordering (returns 400 if provided).
+    # Use shape=...,dockets(...) to request nested dockets.
+    def list_protests(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        source_system: str | None = None,
+        outcome: str | None = None,
+        case_type: str | None = None,
+        agency: str | None = None,
+        case_number: str | None = None,
+        solicitation_number: str | None = None,
+        protester: str | None = None,
+        filed_date_after: str | None = None,
+        filed_date_before: str | None = None,
+        decision_date_after: str | None = None,
+        decision_date_before: str | None = None,
+        search: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List bid protests.
+
+        Returns case-level protest records. Use shape=...,dockets(...) to include
+        nested dockets. API reference: https://tango.makegov.com/docs/api-reference/protests.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            source_system: Filter by source system (e.g. gao)
+            outcome: Filter by outcome (e.g. Denied, Dismissed, Withdrawn, Sustained)
+            case_type: Filter by case type
+            agency: Filter by protested agency text
+            case_number: Filter by case number (e.g. b-423274)
+            solicitation_number: Filter by exact solicitation number
+            protester: Filter by protester name text
+            filed_date_after: Filed date on or after
+            filed_date_before: Filed date on or before
+            decision_date_after: Decision date on or after
+            decision_date_before: Decision date on or before
+            search: Full-text search over protest searchable fields
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.PROTESTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("source_system", source_system),
+            ("outcome", outcome),
+            ("case_type", case_type),
+            ("agency", agency),
+            ("case_number", case_number),
+            ("solicitation_number", solicitation_number),
+            ("protester", protester),
+            ("filed_date_after", filed_date_after),
+            ("filed_date_before", filed_date_before),
+            ("decision_date_after", decision_date_after),
+            ("decision_date_before", decision_date_before),
+            ("search", search),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/protests/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, Protest, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_protest(
+        self,
+        case_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single protest by case_id (RFC 4122 UUID).
+
+        Use shape=...,dockets(...) to include nested dockets.
+        API reference: https://tango.makegov.com/docs/api-reference/protests.md
+
+        Args:
+            case_id: Deterministic case UUID (from source_system + base_case_number)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.PROTESTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/protests/{case_id}/", params)
+        return self._parse_response_with_shape(data, shape, Protest, flat, flat_lists)
 
     # Grant endpoints
     def list_grants(

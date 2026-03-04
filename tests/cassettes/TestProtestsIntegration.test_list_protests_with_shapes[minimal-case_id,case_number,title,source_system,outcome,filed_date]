@@ -1,0 +1,81 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/?page=1&limit=5&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date
+  response:
+    body:
+      string: '{"count":15580,"next":"https://tango.makegov.com/api/protests/?limit=5&page=2&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date","previous":null,"results":[{"case_id":"af3327fd-df8c-55e3-a736-ffa4b4c6f9c0","case_number":"b-423590","title":"Soft
+        Tech Consulting, Inc. (W911QX24R0005)","source_system":"gao","outcome":"Dismissed","filed_date":"2025-09-22"},{"case_id":"5e418646-19c0-580c-93a5-5e29b85cdfa5","case_number":"b-423664","title":"Bellese
+        Technologies, LLC (RFQ-250189J)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-01-23"},{"case_id":"aafe0be7-1199-5ade-a436-b21db751fab4","case_number":"b-424191","title":"JBW
+        FEDITC JV, LLC ()","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"16b98e60-31d3-51d3-a069-6abe798e50a8","case_number":"b-424266","title":"AcmeSolv,
+        LLC (70CDCR26R00000009)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-02-13"},{"case_id":"50007ecc-70ca-5b93-a23c-7782c50ed641","case_number":"b-424272","title":"CVTEK
+        LLC (70B04C25R00000154)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-02-17"}]}'
+    headers:
+      CF-RAY:
+      - 9d709a941c39a1bf-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 11:40:02 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ykDTiZWD8U90xS0GsmStOwBR3LS5CKncILzn7juD10na7vMgp%2FqFHDN5k%2FurRTGpIPlYPYlyapNTCZf4BeWXsxCqlYPH60THTUxYAZkhnak4%2BqUvliTE8ZQd"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1124'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.077s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '966'
+      x-ratelimit-burst-reset:
+      - '6'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999695'
+      x-ratelimit-daily-reset:
+      - '4819'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '966'
+      x-ratelimit-reset:
+      - '6'
+    status:
+      code: 200
+      message: OK
+version: 1

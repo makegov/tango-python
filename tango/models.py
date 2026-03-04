@@ -434,6 +434,33 @@ class Notice:
 
 
 @dataclass
+class Protest:
+    """Schema definition for Protest (not used for instances)
+
+    Bid protest records at /api/protests/. Case-level object identified by case_id (UUID).
+    See https://tango.makegov.com/docs/api-reference/protests.md.
+    """
+
+    case_id: str
+    case_number: str | None = None
+    title: str | None = None
+    source_system: str | None = None
+    outcome: str | None = None
+    agency: str | None = None
+    protester: str | None = None
+    solicitation_number: str | None = None
+    case_type: str | None = None
+    filed_date: datetime | None = None
+    posted_date: datetime | None = None
+    decision_date: datetime | None = None
+    due_date: datetime | None = None
+    docket_url: str | None = None
+    decision_url: str | None = None
+    digest: str | None = None
+    dockets: list[dict[str, Any]] | None = None
+
+
+@dataclass
 class AssistanceListing:
     """Schema definition for Assistance Listing (not used for instances)"""
 
@@ -588,6 +615,9 @@ class ShapeConfig:
 
     # Default for list_notices()
     NOTICES_MINIMAL: Final = "notice_id,title,solicitation_number,posted_date"
+
+    # Default for list_protests()
+    PROTESTS_MINIMAL: Final = "case_id,case_number,title,source_system,outcome,filed_date"
 
     # Default for list_grants()
     GRANTS_MINIMAL: Final = "grant_id,opportunity_number,title,status(*),agency_code"
