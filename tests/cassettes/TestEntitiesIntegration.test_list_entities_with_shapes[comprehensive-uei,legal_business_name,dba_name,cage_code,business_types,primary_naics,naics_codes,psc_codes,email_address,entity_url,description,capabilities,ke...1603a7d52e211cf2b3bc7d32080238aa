@@ -1,0 +1,116 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=5&shape=uei%2Clegal_business_name%2Cdba_name%2Ccage_code%2Cbusiness_types%2Cprimary_naics%2Cnaics_codes%2Cpsc_codes%2Cemail_address%2Centity_url%2Cdescription%2Ccapabilities%2Ckeywords%2Cphysical_address%2Cmailing_address%2Cfederal_obligations%28%2A%29%2Ccongressional_district
+  response:
+    body:
+      string: '{"count":1744479,"next":"https://tango.makegov.com/api/entities/?limit=5&page=2&shape=uei%2Clegal_business_name%2Cdba_name%2Ccage_code%2Cbusiness_types%2Cprimary_naics%2Cnaics_codes%2Cpsc_codes%2Cemail_address%2Centity_url%2Cdescription%2Ccapabilities%2Ckeywords%2Cphysical_address%2Cmailing_address%2Cfederal_obligations%28%2A%29%2Ccongressional_district","previous":null,"results":[{"uei":"ZM3PA9VDX2W1","legal_business_name":"
+        106 Advisory Group L.L.C","dba_name":"","cage_code":"18U69","business_types":[{"code":"27","description":"Self
+        Certified Small Disadvantaged Business"},{"code":"2X","description":"For Profit
+        Organization"},{"code":"A5","description":"Veteran Owned Business"},{"code":"F","description":"Business
+        or Organization"},{"code":"QF","description":"Service Disabled Veteran Owned
+        Business"}],"primary_naics":"541620","naics_codes":[{"code":"541620","sba_small_business":"Y"},{"code":"541690","sba_small_business":"Y"}],"psc_codes":["B503","B521"],"email_address":null,"entity_url":"https://www.106advisorygroup.com/","description":null,"capabilities":null,"keywords":null,"physical_address":{"city":"Springfield","zip_code":"72157","country_code":"USA","address_line1":"32
+        Reville Rd","address_line2":"","zip_code_plus4":"9515","state_or_province_code":"AR"},"mailing_address":{"city":"Springfield","zip_code":"72157","country_code":"USA","address_line1":"32
+        Reville Rd","address_line2":"","zip_code_plus4":"9515","state_or_province_code":"AR"},"congressional_district":"02","federal_obligations":{"total":{"idv_count":0,"awards_count":0,"subawards_count":0,"awards_obligated":0.0,"subawards_obligated":0.0},"active":{"idv_count":0,"awards_count":0,"awards_obligated":0.0}}},{"uei":"QTY8TUJGMM34","legal_business_name":"
+        ALLIANCE PRO GLOBAL LLC","dba_name":"","cage_code":"16CA8","business_types":[{"code":"27","description":"Self
+        Certified Small Disadvantaged Business"},{"code":"2X","description":"For Profit
+        Organization"},{"code":"A5","description":"Veteran Owned Business"},{"code":"F","description":"Business
+        or Organization"},{"code":"JS","description":"Small Business Joint Venture"},{"code":"JV","description":"JV
+        Service-Disabled Veteran-Owned Business Joint Venture"},{"code":"QF","description":"Service
+        Disabled Veteran Owned Business"}],"primary_naics":"541611","naics_codes":[{"code":"518210","sba_small_business":"Y"},{"code":"541199","sba_small_business":"Y"},{"code":"541219","sba_small_business":"Y"},{"code":"541511","sba_small_business":"Y"},{"code":"541512","sba_small_business":"Y"},{"code":"541513","sba_small_business":"Y"},{"code":"541519","sba_small_business":"E"},{"code":"541611","sba_small_business":"Y"},{"code":"541612","sba_small_business":"Y"},{"code":"541613","sba_small_business":"Y"},{"code":"541614","sba_small_business":"Y"},{"code":"541618","sba_small_business":"Y"},{"code":"541690","sba_small_business":"Y"},{"code":"541820","sba_small_business":"Y"},{"code":"541930","sba_small_business":"Y"},{"code":"541990","sba_small_business":"Y"},{"code":"561110","sba_small_business":"Y"},{"code":"561210","sba_small_business":"Y"},{"code":"561320","sba_small_business":"Y"},{"code":"561499","sba_small_business":"Y"},{"code":"561720","sba_small_business":"Y"},{"code":"561990","sba_small_business":"Y"},{"code":"562998","sba_small_business":"Y"},{"code":"611710","sba_small_business":"Y"}],"psc_codes":null,"email_address":null,"entity_url":"","description":null,"capabilities":null,"keywords":null,"physical_address":{"city":"Owings
+        Mills","zip_code":"21117","country_code":"USA","address_line1":"11240 Reisterstown
+        Rd","address_line2":"","zip_code_plus4":"1965","state_or_province_code":"MD"},"mailing_address":{"city":"Owings
+        Mills","zip_code":"21117","country_code":"USA","address_line1":"11240 Reisterstown
+        Rd","address_line2":"","zip_code_plus4":"1965","state_or_province_code":"MD"},"congressional_district":"02","federal_obligations":{"total":{"idv_count":0,"awards_count":0,"subawards_count":0,"awards_obligated":0.0,"subawards_obligated":0.0},"active":{"idv_count":0,"awards_count":0,"awards_obligated":0.0}}},{"uei":"NZQ7T5A89WP3","legal_business_name":"
+        ARMY LEGEND CLEANERS LLC","dba_name":"","cage_code":"18LK9","business_types":[{"code":"23","description":"Minority
+        Owned Business"},{"code":"27","description":"Self Certified Small Disadvantaged
+        Business"},{"code":"2X","description":"For Profit Organization"},{"code":"A5","description":"Veteran
+        Owned Business"},{"code":"F","description":"Business or Organization"},{"code":"LJ","description":"Limited
+        Liability Company"},{"code":"PI","description":"Hispanic American Owned"},{"code":"QF","description":"Service
+        Disabled Veteran Owned Business"}],"primary_naics":"561720","naics_codes":[{"code":"561720","sba_small_business":"Y"}],"psc_codes":["S201"],"email_address":null,"entity_url":null,"description":null,"capabilities":null,"keywords":null,"physical_address":{"city":"Vine
+        Grove","zip_code":"40175","country_code":"USA","address_line1":"65 Shacklette
+        Ct","address_line2":"","zip_code_plus4":"1081","state_or_province_code":"KY"},"mailing_address":{"city":"Vine
+        Grove","zip_code":"40175","country_code":"USA","address_line1":"65 Shacklette
+        Ct","address_line2":"","zip_code_plus4":"1081","state_or_province_code":"KY"},"congressional_district":"02","federal_obligations":{"total":{"idv_count":0,"awards_count":0,"subawards_count":0,"awards_obligated":0.0,"subawards_obligated":0.0},"active":{"idv_count":0,"awards_count":0,"awards_obligated":0.0}}},{"uei":"P6KLKJWXNGD5","legal_business_name":"
+        AccessIT Group, LLC.","dba_name":"","cage_code":"3DCC1","business_types":[{"code":"2X","description":"For
+        Profit Organization"},{"code":"F","description":"Business or Organization"}],"primary_naics":"541512","naics_codes":[{"code":"541512","sba_small_business":"N"}],"psc_codes":null,"email_address":null,"entity_url":"https://www.accessitgroup.com/","description":null,"capabilities":null,"keywords":null,"physical_address":{"city":"King
+        of Prussia","zip_code":"19406","country_code":"USA","address_line1":"2000
+        Valley Forge Cir Ste 106","address_line2":"","zip_code_plus4":"4526","state_or_province_code":"PA"},"mailing_address":{"city":"KING
+        OF PRUSSIA","zip_code":"19406","country_code":"USA","address_line1":"20106
+        VALLEY FORGE CIRCLE","address_line2":"","zip_code_plus4":"1112","state_or_province_code":"PA"},"congressional_district":"04","federal_obligations":{"total":{"idv_count":0,"awards_count":8,"subawards_count":7,"awards_obligated":39217.28,"subawards_obligated":558846.9},"active":{"idv_count":0,"awards_count":0,"awards_obligated":0.0}}},{"uei":"ER55X1L9EBZ7","legal_business_name":"
+        Andrews Consulting Services LLC","dba_name":"","cage_code":"18P33","business_types":[{"code":"2X","description":"For
+        Profit Organization"},{"code":"8W","description":"Woman Owned Small Business"},{"code":"A2","description":"Woman
+        Owned Business"},{"code":"F","description":"Business or Organization"},{"code":"LJ","description":"Limited
+        Liability Company"}],"primary_naics":"621340","naics_codes":[{"code":"621340","sba_small_business":"Y"}],"psc_codes":null,"email_address":null,"entity_url":null,"description":"Contact:
+        HANNAH ANDREWS","capabilities":null,"keywords":null,"physical_address":{"city":"Poteau","zip_code":"74953","country_code":"USA","address_line1":"22680
+        Cabot Ln","address_line2":"","zip_code_plus4":"7825","state_or_province_code":"OK"},"mailing_address":{"city":"Poteau","zip_code":"74953","country_code":"USA","address_line1":"22680
+        Cabot Ln","address_line2":"","zip_code_plus4":"7825","state_or_province_code":"OK"},"congressional_district":"02","federal_obligations":{"total":{"idv_count":0,"awards_count":0,"subawards_count":0,"awards_obligated":0.0,"subawards_obligated":0.0},"active":{"idv_count":0,"awards_count":0,"awards_obligated":0.0}}}]}'
+    headers:
+      CF-RAY:
+      - 9d71a72a2c0bad02-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 14:43:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=B8XDkU1GcoUrtYOxelrcdlE6uJzRUDniYVa9DprAfV0hN8uD%2FG20raliLm1BKPi4DfMX3EZLyUHh4lMRHWei6LFDMZOheeSxdd%2FgBWrFlzL4V6kf7SitJTZP"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '7792'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '972'
+      x-ratelimit-burst-reset:
+      - '25'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999732'
+      x-ratelimit-daily-reset:
+      - '84985'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '972'
+      x-ratelimit-reset:
+      - '25'
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -13,49 +13,48 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
+    uri: https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
   response:
     body:
-      string: '{"count":402447,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700&cursor=WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0%3D","cursor":"WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0=","results":[{"key":"CONT_AWD_47QSWA26P03JH_4732_-NONE-_-NONE-","piid":"47QSWA26P03JH","award_date":"2025-11-13","description":"STONE,
-        SHARPENING, UN-MOUNTED, NOT OIL IMPREGNATED, NATURAL (NOVACULITE)SQUARE STYLE,
-        HARD DENSITY, 3.00-3.500 INCH DENSITY, .500 INCH WIDTH, .500 INCH THICKNESS","total_contract_value":187.88,"recipient":{"display_name":"F
-        & M MICRO PRODUCTS INC"}},{"key":"CONT_AWD_47QSWA26P03JG_4732_-NONE-_-NONE-","piid":"47QSWA26P03JG","award_date":"2025-11-13","description":"FASTENER
-        TAPE, HOOK & LOOP:BLACK VELCRO HOOK& LOOP FASTENER TAPE W/ADHESIVE BACK. WIDTH-3/4
-        IN WIDE, UI: RO/5YD(5 YARDS PER ROLL)","total_contract_value":64.5,"recipient":{"display_name":"MBA
-        OFFICE SUPPLY, INC."}},{"key":"CONT_AWD_47QSWA26P03JF_4732_-NONE-_-NONE-","piid":"47QSWA26P03JF","award_date":"2025-11-13","description":"CLEANER,
-        CONDENSER COIL:ACIDIC AIR CONDITIONING COIL CLEANER. FOAMINM BLEND OF SOLVENTS,
-        WETTING AGENTS AND ACIDS SPECIFICALLY MADE FOR CLEANING ALUMINUM FINNED AIR-COOLED
-        CONDENSERS. DILUTION RATIO OF 1 PART CLEANER TO 3 PARTS WATER. ONE (1) EACH
-        FI","total_contract_value":367.37,"recipient":{"display_name":"NOREX GROUP,
-        LLC"}},{"key":"CONT_AWD_47QSWA26P03JE_4732_-NONE-_-NONE-","piid":"47QSWA26P03JE","award_date":"2025-11-13","description":"CLOTH,CLEANING","total_contract_value":44.85,"recipient":{"display_name":"PREMIER
-        & COMPANIES, INC."}},{"key":"CONT_AWD_47QSWA26P03JD_4732_-NONE-_-NONE-","piid":"47QSWA26P03JD","award_date":"2025-11-13","description":"FLOUR
-        SIFTER","total_contract_value":2122.0,"recipient":{"display_name":"F & M MICRO
-        PRODUCTS INC"}}],"count_type":"approximate"}'
+      string: '{"count":438863,"next":"https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700&cursor=WyIyMDI2LTAzLTAzIiwgImQ4MGViMDdkLTRlNjktNTEwNS04NmQ1LWU5NTI4MTJhMTRlNSJd","previous":null,"cursor":"WyIyMDI2LTAzLTAzIiwgImQ4MGViMDdkLTRlNjktNTEwNS04NmQ1LWU5NTI4MTJhMTRlNSJd","previous_cursor":null,"results":[{"key":"CONT_AWD_47PC5226F0162_4740_47PN0323A0001_4740","piid":"47PC5226F0162","award_date":"2026-03-03","description":"THIS
+        REQUIREMENT IS TO  REPAIR CHILLER #2 AND DESCALING OF CHILLERS #1 AND #2 LOCATED
+        ON THE 11TH FLOOR OF THE RICHMOND FEDERAL OFFICE BUILDING, 400 N. 8TH STREET
+        RICHMOND, VA.","total_contract_value":42670.6,"recipient":{"display_name":"DAE
+        SUNG LLC"}},{"key":"CONT_AWD_47PC5226F0161_4740_47PB0023A0008_4740","piid":"47PC5226F0161","award_date":"2026-03-03","description":"MUSKIE
+        FEDERAL BUILDING VENTING INSTALLATION, AUGUSTA, ME.  THIS PROJECT REMOVES
+        EXISTING VENTING AND INSTALLS NEW VENTING.","total_contract_value":105712.26,"recipient":{"display_name":"ACTION
+        FACILITIES MANAGEMENT INC"}},{"key":"CONT_AWD_47PC5426F0097_4740_47PD0319A0008_4740","piid":"47PC5426F0097","award_date":"2026-03-03","description":"BOGGS
+        PIPE LEAKS","total_contract_value":9761.1,"recipient":{"display_name":"RAVEN
+        SERVICES CORP"}},{"key":"CONT_AWD_47PD5326F0096_4740_47PF0023A0006_4740","piid":"47PD5326F0096","award_date":"2026-03-03","description":"THE
+        REPAIR FRONT PARKING LOT SECURITY LED LIGHT FIXTURES WILL BE PERFORMED AT
+        THE BISHOP HENRY WHIPPLE FEDERAL BUILDING IN 1 FEDERAL DR, FORT SNELLING,
+        MN 55111-4008.","total_contract_value":32070.5,"recipient":{"display_name":"CMI
+        MANAGEMENT, LLC"}},{"key":"CONT_AWD_47PC5326F0050_4740_47PB0022A0002_4740","piid":"47PC5326F0050","award_date":"2026-03-03","description":"CIRCUIT
+        LIGHTING REPAIR","total_contract_value":4396.18,"recipient":{"display_name":"KCORP
+        TECHNOLOGY SERVICES, INC."}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 99f88c18b9f61e27-MSP
+      - 9d71a55dfb4bacd6-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 17:00:54 GMT
+      - Wed, 04 Mar 2026 14:42:10 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qlhkNS1%2FHntX%2FIS1n0ZoqhAkM8scYa0plUkcBEH1rd8FZ%2FMxMj0mwLaZeUzpREqnC%2Fb0Qgz2iOsy4BKSTKcohRjQB1rHPsxA9c%2F%2BFp%2F55dSnUAJV5zzioN%2FJ8Q%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=OyVrqRSeNn9pTd%2FO7lGbfpODJ2Jq3PrksZIdpQnENeMlcH2HAfFbRiClygiWkOrPUwu7I9NC6RtBhBOBmPYByIwxgjVZqukOWUtNY0QaUYu64EUSDhWRSvq4"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1994'
+      - '1989'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -65,117 +64,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.020s
+      - 0.047s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '994'
+      - '960'
       x-ratelimit-burst-reset:
-      - '58'
+      - '4'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998687'
+      - '1999772'
       x-ratelimit-daily-reset:
-      - '91'
+      - '85058'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '994'
+      - '960'
       x-ratelimit-reset:
-      - '58'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      host:
-      - tango.makegov.com
-      user-agent:
-      - python-httpx/0.28.1
-    method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
-  response:
-    body:
-      string: '{"count":402447,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700&cursor=WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0%3D","cursor":"WyIyMDI1LTExLTEzIiwgIkNPTlRfQVdEXzQ3UVNXQTI2UDAzSkRfNDczMl8tTk9ORS1fLU5PTkUtIl0=","results":[{"key":"CONT_AWD_47QSWA26P03JH_4732_-NONE-_-NONE-","piid":"47QSWA26P03JH","award_date":"2025-11-13","description":"STONE,
-        SHARPENING, UN-MOUNTED, NOT OIL IMPREGNATED, NATURAL (NOVACULITE)SQUARE STYLE,
-        HARD DENSITY, 3.00-3.500 INCH DENSITY, .500 INCH WIDTH, .500 INCH THICKNESS","total_contract_value":187.88,"recipient":{"display_name":"F
-        & M MICRO PRODUCTS INC"}},{"key":"CONT_AWD_47QSWA26P03JG_4732_-NONE-_-NONE-","piid":"47QSWA26P03JG","award_date":"2025-11-13","description":"FASTENER
-        TAPE, HOOK & LOOP:BLACK VELCRO HOOK& LOOP FASTENER TAPE W/ADHESIVE BACK. WIDTH-3/4
-        IN WIDE, UI: RO/5YD(5 YARDS PER ROLL)","total_contract_value":64.5,"recipient":{"display_name":"MBA
-        OFFICE SUPPLY, INC."}},{"key":"CONT_AWD_47QSWA26P03JF_4732_-NONE-_-NONE-","piid":"47QSWA26P03JF","award_date":"2025-11-13","description":"CLEANER,
-        CONDENSER COIL:ACIDIC AIR CONDITIONING COIL CLEANER. FOAMINM BLEND OF SOLVENTS,
-        WETTING AGENTS AND ACIDS SPECIFICALLY MADE FOR CLEANING ALUMINUM FINNED AIR-COOLED
-        CONDENSERS. DILUTION RATIO OF 1 PART CLEANER TO 3 PARTS WATER. ONE (1) EACH
-        FI","total_contract_value":367.37,"recipient":{"display_name":"NOREX GROUP,
-        LLC"}},{"key":"CONT_AWD_47QSWA26P03JE_4732_-NONE-_-NONE-","piid":"47QSWA26P03JE","award_date":"2025-11-13","description":"CLOTH,CLEANING","total_contract_value":44.85,"recipient":{"display_name":"PREMIER
-        & COMPANIES, INC."}},{"key":"CONT_AWD_47QSWA26P03JD_4732_-NONE-_-NONE-","piid":"47QSWA26P03JD","award_date":"2025-11-13","description":"FLOUR
-        SIFTER","total_contract_value":2122.0,"recipient":{"display_name":"F & M MICRO
-        PRODUCTS INC"}}],"count_type":"approximate"}'
-    headers:
-      CF-RAY:
-      - 99f9b9430da65425-YYZ
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Sun, 16 Nov 2025 20:26:30 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=DCQup15PEKHEUV%2F7TNM5Cdh1UXA2KtOart%2BSzS7Ha7Pv3zAxJ8cdkdyrhWCdXP9nFElVirvLw0Eu48tPb6LlybU%2FYzML8qSF6KfmIH4XGi%2FUYMWHLEwPhrvUyQ%3D%3D"}]}'
-      Server:
-      - cloudflare
-      Transfer-Encoding:
-      - chunked
-      allow:
-      - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
-      cf-cache-status:
-      - DYNAMIC
-      content-length:
-      - '1994'
-      cross-origin-opener-policy:
-      - same-origin
-      referrer-policy:
-      - same-origin
-      vary:
-      - Accept, Cookie
-      x-content-type-options:
-      - nosniff
-      x-execution-time:
-      - 0.021s
-      x-frame-options:
-      - DENY
-      x-ratelimit-burst-limit:
-      - '1000'
-      x-ratelimit-burst-remaining:
-      - '993'
-      x-ratelimit-burst-reset:
-      - '36'
-      x-ratelimit-daily-limit:
-      - '2000000'
-      x-ratelimit-daily-remaining:
-      - '1999014'
-      x-ratelimit-daily-reset:
-      - '5'
-      x-ratelimit-limit:
-      - '1000'
-      x-ratelimit-remaining:
-      - '993'
-      x-ratelimit-reset:
-      - '36'
+      - '4'
     status:
       code: 200
       message: OK

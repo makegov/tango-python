@@ -602,7 +602,7 @@ class ShapeConfig:
         "business_types,primary_naics,naics_codes,psc_codes,"
         "email_address,entity_url,description,capabilities,keywords,"
         "physical_address,mailing_address,"
-        "federal_obligations,congressional_district"
+        "federal_obligations(*),congressional_district"
     )
 
     # Default for list_forecasts()

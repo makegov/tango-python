@@ -371,7 +371,7 @@ contracts = client.list_contracts(shape=DASHBOARD_SHAPE, limit=50)
 - `mailing_address(...)` - Mailing address
 
 **Financial:**
-- `federal_obligations` - Total federal obligations
+- `federal_obligations(*)` - Expansion for total/active federal obligations
 
 ## Performance Comparison
 

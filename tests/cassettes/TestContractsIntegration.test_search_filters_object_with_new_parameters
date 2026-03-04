@@ -13,45 +13,46 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024
+    uri: https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024
   response:
     body:
-      string: '{"count":19897,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024&cursor=WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX040MjE1ODI0UDAwNjZfOTcwMF8tTk9ORS1fLU5PTkUtIl0%3D","cursor":"WyIyMDI0LTA5LTMwIiwgIkNPTlRfQVdEX040MjE1ODI0UDAwNjZfOTcwMF8tTk9ORS1fLU5PTkUtIl0=","results":[{"key":"CONT_AWD_W9124P24P0111_9700_-NONE-_-NONE-","piid":"W9124P24P0111","award_date":"2024-09-30","description":"VAULT
-        STANDARD SOFTWARE","total_contract_value":5691.7,"recipient":{"display_name":"SOURCEGEAR
-        LLC"}},{"key":"CONT_AWD_W9124P24F0836_9700_W52P1J16D0010_9700","piid":"W9124P24F0836","award_date":"2024-09-30","description":"HARDWARE
-        4 COMPUTE AND STORE SERVERS AND SOFTWARE AND ACCESSORIES","total_contract_value":110430.08,"recipient":{"display_name":"DELL
-        FEDERAL SYSTEMS L.P"}},{"key":"CONT_AWD_W58RGZ24F0485_9700_W58RGZ20D0028_9700","piid":"W58RGZ24F0485","award_date":"2024-09-30","description":"TAIWAN
-        SOFTWARE LOAD ORDERING PERIOD FIVE","total_contract_value":3180.0,"recipient":{"display_name":"SIKORSKY
-        AIRCRAFT CORPORATION"}},{"key":"CONT_AWD_N6133124P1133_9700_-NONE-_-NONE-","piid":"N6133124P1133","award_date":"2024-09-30","description":"INTERMAPHICS
-        SINGLE DEVELOPER SOFTWARE LICENSE RENEWALS","total_contract_value":35471.0,"recipient":{"display_name":"KONGSBERG
-        GEOSPATIAL LTD."}},{"key":"CONT_AWD_N4215824P0066_9700_-NONE-_-NONE-","piid":"N4215824P0066","award_date":"2024-09-30","description":"MAINTENANCE
-        RENEWAL FOR CUTWORKS SOFTWAR","total_contract_value":26312.0,"recipient":{"display_name":"Gerber
-        Technology LLC"}}],"count_type":"approximate"}'
+      string: '{"count":3838,"next":"https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&pop_start_date_gte=2024-01-01&expiring_lte=2025-12-31&fiscal_year=2024&cursor=WyIyMDI0LTA5LTMwIiwgImY3OWM0ZGJmLTM4ZTQtNWRiNi04MTU4LTMxNjdhNTk1YjgzZCJd","previous":null,"cursor":"WyIyMDI0LTA5LTMwIiwgImY3OWM0ZGJmLTM4ZTQtNWRiNi04MTU4LTMxNjdhNTk1YjgzZCJd","previous_cursor":null,"results":[{"key":"CONT_AWD_47QSSC24FFY0X_4732_GS02FW0003_4730","piid":"47QSSC24FFY0X","award_date":"2024-09-30","description":"MOUSE,
+        DATA ENTRY: ITEMNAME MOUSE, OPTICAL SENSOR, 3-BUTTON SHAPE ERGONOMIC SHAPE
+        TYPE OPTICALDESIGN 800DPI BUTTON OPTIONS 2 NAVIGATION BUTTONS AND A SCROLL
+        WHEEL COLOR BLACK AND GREY SOFTWARE PLUG & PLAY PORT TYPE USB PORT OPERATING
+        SYSTEM ANY PC/ W","total_contract_value":409.0,"recipient":{"display_name":"NATIONAL
+        INDUSTRIES FOR THE BLIND"}},{"key":"CONT_AWD_FA521524FG044_9700_NNG15SC82B_8000","piid":"FA521524FG044","award_date":"2024-09-30","description":"IT
+        AND TELECOM -BUSINESS APPLICATION SOFTWARE","total_contract_value":24990.0,"recipient":{"display_name":"NEW
+        TECH SOLUTIONS, INC."}},{"key":"CONT_AWD_15JCRT24F00000065_1501_NNG15SD39B_8000","piid":"15JCRT24F00000065","award_date":"2024-09-30","description":"SOFTWARE
+        SUBSCRIPTION  VMWARE CLOUD FOUNDATION 5 (VSAN)","total_contract_value":67165.5,"recipient":{"display_name":"REGAN
+        TECHNOLOGIES CORP"}},{"key":"CONT_AWD_HTC71124FD085_9700_N6600121A0031_9700","piid":"HTC71124FD085","award_date":"2024-09-30","description":"FLEXERA
+        DATA PLATFORM SOFTWARE AND IMPLEMENTATION AND TRAINING SERVICES","total_contract_value":97292.6,"recipient":{"display_name":"CARAHSOFT
+        TECHNOLOGY CORP."}},{"key":"CONT_AWD_HQ003424F0803_9700_HQ003420D0002_9700","piid":"HQ003424F0803","award_date":"2024-09-30","description":"SOFTWARE-AS-A-SERVICE
+        PLATFORM LICENSES","total_contract_value":3750000.0,"recipient":{"display_name":"POPLICUS
+        INCORPORATED"}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 99f9bad0193653dd-YYZ
+      - 9d71a6510e96a1f5-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 20:27:33 GMT
+      - Wed, 04 Mar 2026 14:42:51 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SRyRdoiP9hOuJaVXkasmQbhwoXzbLuUxGdXOVKEfkq07PwiW%2BGiUTC5WLvBBHMNP8eWthb%2F0hZe4jpvHj5WiF1w4zGfrKxGy5CrIlILosVybiMf85AvITMEtGw%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=qCOlGs58pPjl54W6jecs3lQES%2FzCr4LErkvBjrxry6dVVNWCUjNy%2FxEhMooMKW27byIgQ%2BgGzESlxhOaI3Ugj8Vy%2FqM2X6Badx8Leze%2B6axu7k8FKH%2FJ2b8y"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1736'
+      - '2021'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -61,27 +62,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.022s
+      - 2.380s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '996'
+      - '978'
       x-ratelimit-burst-reset:
-      - '29'
+      - '16'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999003'
+      - '1999758'
       x-ratelimit-daily-reset:
-      - '13'
+      - '85017'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '996'
+      - '978'
       x-ratelimit-reset:
-      - '29'
+      - '16'
     status:
       code: 200
       message: OK

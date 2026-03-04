@@ -13,100 +13,88 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+    uri: https://tango.makegov.com/api/contracts/?limit=25&page=1&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
   response:
     body:
-      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ%3D%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzc1RkNNQzI2RjAwMTlfNzUzMF83NUZDTUMyMEQwMDE1Xzc1MzAiXQ==","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","award_date":"2025-11-15","fiscal_year":2026,"description":"THE
-        PURPOSE OF THIS BLANKET PURCHASE AGREEMENT (BPA) CALL ORDER IS FOR LEVEL II
-        ARMED GUARD SERVICES IN SUPPORT OF DR4763-FL AND DR4734-FL. LAKE MARY AND
-        FORT MYERS FLORIDA.","total_contract_value":1089550.8,"recipient":{"display_name":"REDCON
-        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","award_date":"2025-11-15","fiscal_year":2026,"description":"TOPEKA
-        JOC","total_contract_value":17351.59,"recipient":{"display_name":"ONSITE CONSTRUCTION
-        GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","award_date":"2025-11-14","fiscal_year":2026,"description":"TO
-        FUND THE RECOMPETE OF AN AUTOMATED HIRING SOLUTION (MONSTER)","total_contract_value":1371325.32,"recipient":{"display_name":"MERLIN
-        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","award_date":"2025-11-14","fiscal_year":2026,"description":"U.S.
-        DEPARTMENT OF ENERGY (DOE), OFFICE OF ENERGY EFFICIENCY AND RENEWABLE ENERGY
-        (EERE), STRATEGIC ENGAGEMENT AND OUTREACH SUPPORT SERVICES (SEOSS), EERE FRONT
-        OFFICE","total_contract_value":4387892.04,"recipient":{"display_name":"RACK-WILDNER
-        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","award_date":"2025-11-14","fiscal_year":2026,"description":"SOLARWINDS
-        SOFTWARE RENEWAL POP 11/15/25 - 11/15/26.","total_contract_value":24732.97,"recipient":{"display_name":"REGENCY
-        CONSULTING INC"}},{"key":"CONT_AWD_86614625F00001_8600_86615121A00005_8600","piid":"86614625F00001","award_date":"2025-11-14","fiscal_year":2026,"description":"COMPREHENSIVE
-        RISK ASSESSMENT AND MITIGATION - OCFO","total_contract_value":1499803.54,"recipient":{"display_name":"ERNST
-        & YOUNG LLP"}},{"key":"CONT_AWD_80NSSC26FA013_8000_NNG15SD72B_8000","piid":"80NSSC26FA013","award_date":"2025-11-14","fiscal_year":2026,"description":"F5
-        NETWORK MAINTENANCE RENEWAL","total_contract_value":73050.0,"recipient":{"display_name":"COLOSSAL
-        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA012_8000_NNG15SC77B_8000","piid":"80NSSC26FA012","award_date":"2025-11-14","fiscal_year":2026,"description":"XSI
-        HARDWARE MAINTENANCE RENEWAL FY26","total_contract_value":21711.76,"recipient":{"display_name":"GOVPLACE,
-        LLC"}},{"key":"CONT_AWD_80NSSC26FA009_8000_NNG15SD72B_8000","piid":"80NSSC26FA009","award_date":"2025-11-14","fiscal_year":2026,"description":"TELLABS
-        STANDARD SUPPORT & PANORAMA INM","total_contract_value":13390.73,"recipient":{"display_name":"COLOSSAL
-        CONTRACTING LLC"}},{"key":"CONT_AWD_80NSSC26FA006_8000_NNG15SC71B_8000","piid":"80NSSC26FA006","award_date":"2025-11-14","fiscal_year":2026,"description":"CISCO
-        NASA CISCO REMOTE VPN OBSOLESCENCE REPLACEMENT","total_contract_value":99974.58,"recipient":{"display_name":"FCN
-        INC"}},{"key":"CONT_AWD_80HQTR26F7003_8000_80NSSC21D0001_8000","piid":"80HQTR26F7003","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
-        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR JSC  PER QUOTE 13896654
-        DATED 11/13/2025.","total_contract_value":14940.34,"recipient":{"display_name":"THE
-        MATHWORKS, INC."}},{"key":"CONT_AWD_80HQTR26F7002_8000_80NSSC21D0001_8000","piid":"80HQTR26F7002","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
-        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES FOR GSFC PER QUOTE 13896650
-        DATED 11/13/2025.","total_contract_value":2651.0,"recipient":{"display_name":"THE
-        MATHWORKS, INC."}},{"key":"CONT_AWD_80HQTR26F7001_8000_80NSSC21D0001_8000","piid":"80HQTR26F7001","award_date":"2025-11-14","fiscal_year":2026,"description":"THIS
-        TASK ORDER IS TO PURCHASE MATHWORKS MATLAB LICENSES PER QUOTE 13896646 DATED
-        11/13/2025.","total_contract_value":3140.0,"recipient":{"display_name":"THE
-        MATHWORKS, INC."}},{"key":"CONT_AWD_80ARC026FA001_8000_80GRC025DA001_8000","piid":"80ARC026FA001","award_date":"2025-11-14","fiscal_year":2026,"description":"TASK
-        ORDER TO PROVIDE CUSTODIAL SERVICES ABOVE THE BASELINE SERVICES.","total_contract_value":106717.31,"recipient":{"display_name":"AHTNA
-        INTEGRATED SERVICES LLC"}},{"key":"CONT_AWD_75N93026F00001_7529_HHSN316201500040W_7529","piid":"75N93026F00001","award_date":"2025-11-14","fiscal_year":2026,"description":"AWS
-        CLOUDLINK SERVICE - RDCF 2X10G (AMBIS 2275621)","total_contract_value":79453.12,"recipient":{"display_name":"NEW
-        TECH SOLUTIONS, INC."}},{"key":"CONT_AWD_75H71226F80002_7527_36F79724D0071_3600","piid":"75H71226F80002","award_date":"2025-11-14","fiscal_year":2026,"description":"ZOLL
-        MEDICAL CORPORATION DEFIBRILLATOR EQUIPMENT","total_contract_value":630011.67,"recipient":{"display_name":"AFTER
-        ACTION MEDICAL AND DENTAL SUPPLY, LLC"}},{"key":"CONT_AWD_75H71226F28005_7527_75H71224A00019_7527","piid":"75H71226F28005","award_date":"2025-11-14","fiscal_year":2026,"description":"BPA
-        CALL FOR CRSU. TELERADIOLOGY SERVICES","total_contract_value":256875.0,"recipient":{"display_name":"VETMED
-        GROUP LLC"}},{"key":"CONT_AWD_75H71126P00002_7527_-NONE-_-NONE-","piid":"75H71126P00002","award_date":"2025-11-14","fiscal_year":2026,"description":"PITNEY
-        BOWES POSTAGE REFILL FOR LAWTON INDIAN HOSPITAL.","total_contract_value":25000.0,"recipient":{"display_name":"THE
-        PITNEY BOWES BANK, INC."}},{"key":"CONT_AWD_75H71126F27002_7527_75H71126D00001_7527","piid":"75H71126F27002","award_date":"2025-11-14","fiscal_year":2026,"description":"LAB
-        AND PATHOLOGY - OCAO","total_contract_value":35000.0,"recipient":{"display_name":"DIAGNOSTIC
-        LABORATORY OF OKLAHOMA LLC"}},{"key":"CONT_AWD_75H71126F27001_7527_75H71126D00001_7527","piid":"75H71126F27001","award_date":"2025-11-14","fiscal_year":2026,"description":"LAB
-        AND PATHOLOGY - OCAO","total_contract_value":198000.0,"recipient":{"display_name":"DIAGNOSTIC
-        LABORATORY OF OKLAHOMA LLC"}},{"key":"CONT_AWD_75H70726P00003_7527_-NONE-_-NONE-","piid":"75H70726P00003","award_date":"2025-11-14","fiscal_year":2026,"description":"LICENSED
-        CLINICAL SOCIAL WORKER (LCSW) - NSRTC","total_contract_value":899491.87,"recipient":{"display_name":"TESTUDO
-        LOGISTICS LLC"}},{"key":"CONT_AWD_75H70626P00018_7527_-NONE-_-NONE-","piid":"75H70626P00018","award_date":"2025-11-14","fiscal_year":2026,"description":"REGISTERED
-        NURSE SERVICES FOR THE INPATIENT AND EMERGENCY ROOM DEPARTMENT AT THE CHEYENNE
-        RIVER HEALTH CENTER LOCATED IN EAGLE BUTTE, SD. PERIOD OF PERFORMANCE IS 90
-        DAYS FROM DATE AWARDED.","total_contract_value":405600.0,"recipient":{"display_name":"BAY
-        AREA ANESTHESIA LLC"}},{"key":"CONT_AWD_75H70426F80001_7527_140A1624D0044_1450","piid":"75H70426F80001","award_date":"2025-11-14","fiscal_year":2026,"description":"INFRASTRUCTURE
-        & PLATFORM SUPPORT SERVICES FOR RESOURCE AND PATIENT MANAGEMENT SYSTEM (CSMT
-        O&M)","total_contract_value":10481443.48,"recipient":{"display_name":"WICHITA
-        TRIBAL ENTERPRISES, LLC"}},{"key":"CONT_AWD_75H70326F08037_7527_75H70323D00002_7527","piid":"75H70326F08037","award_date":"2025-11-14","fiscal_year":2026,"description":"THE
-        CONTRACTOR SHALL PROVIDE ALL LABOR, MATERIALS, EQUIPMENT, TOOLS, TRANSPORTATION,
-        AND SUPERVISION NECESSARY TO FURNISH AND COMPLETE THE WORK AS SPECIFIED AT
-        SANTA YSABEL SAN DIEGO, CA","total_contract_value":43763.4,"recipient":{"display_name":"AMA
-        DIVERSIFIED CONSTRUCTION GROUP"}},{"key":"CONT_AWD_75FCMC26F0019_7530_75FCMC20D0015_7530","piid":"75FCMC26F0019","award_date":"2025-11-14","fiscal_year":2026,"description":"CMS
-        WILL UTILIZE THIS TASK ORDER AS A PART OF THE OVERALL PROVIDER ENROLLMENT
-        AND OVERSIGHT, INDEFINITE DELIVERY, INDEFINITE QUANTITY CONTRACT (PEO-IDIQ)
-        TO DETECT, PREVENT, AND PROACTIVELY DETER FRAUD, WASTE AND ABUSE IN THE MEDICARE
-        AND/OR MEDICAID","total_contract_value":27298525.06,"recipient":{"display_name":"SIGNATURE
-        CONSULTING GROUP LLC"}}],"count_type":"approximate"}'
+      string: '{"count":82734960,"next":"https://tango.makegov.com/api/contracts/?limit=25&page=1&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI2LTAzLTAzIiwgImY0YzVjMGQ3LTg1NmEtNWNlNS1iYzk3LTQxYjM1NjRhNzY2ZSJd","previous":null,"cursor":"WyIyMDI2LTAzLTAzIiwgImY0YzVjMGQ3LTg1NmEtNWNlNS1iYzk3LTQxYjM1NjRhNzY2ZSJd","previous_cursor":null,"results":[{"key":"CONT_AWD_75N98026P00064_7529_-NONE-_-NONE-","piid":"75N98026P00064","award_date":"2026-03-03","fiscal_year":2026,"description":"PEOPLE
+        DESIGNS INC:1201783 [26-000077]","total_contract_value":122510.0,"recipient":{"display_name":"PEOPLE
+        DESIGNS INC"}},{"key":"CONT_AWD_49100426P0007_4900_-NONE-_-NONE-","piid":"49100426P0007","award_date":"2026-03-03","fiscal_year":2026,"description":"ELSEVIER
+        PURE PLATFORM","total_contract_value":945638.46,"recipient":{"display_name":"ELSEVIER
+        INC."}},{"key":"CONT_AWD_15B10926F00000059_1540_15BNAS24A00000044_1540","piid":"15B10926F00000059","award_date":"2026-03-03","fiscal_year":2026,"description":"LABORATORY
+        SERVICES FOR I/M URANALYSIS FOR FY26","total_contract_value":255.0,"recipient":{"display_name":"PHAMATECH,
+        INCORPORATED"}},{"key":"CONT_AWD_36C25226N0271_3600_36C25223A0024_3600","piid":"36C25226N0271","award_date":"2026-03-03","fiscal_year":2026,"description":"CPT
+        - BLOOD CULTURE TESTING","total_contract_value":36904.0,"recipient":{"display_name":"BIOMERIEUX
+        INC"}},{"key":"CONT_AWD_15B50526F00000100_1540_15BNAS25A00000158_1540","piid":"15B50526F00000100","award_date":"2026-03-03","fiscal_year":2026,"description":"HYGIENE
+        ITEMS / STANDARD ISSUE - UNICOR\nMAR FY26","total_contract_value":8865.0,"recipient":{"display_name":"Federal
+        Prison Industries, Inc"}},{"key":"CONT_AWD_15DDTR26F00000050_1524_15F06720A0001516_1549","piid":"15DDTR26F00000050","award_date":"2026-03-03","fiscal_year":2026,"description":"TITLE:
+        AT&T FIRST NET / 15 IPHONES & 2 TABLETS\nREQUESTOR: VEDA S FARMER\nREF AWARD/BPA:
+        15F06720A0001516\nPOP DATES: 05/01/2026 TO 04/30/2027","total_contract_value":4786.76,"recipient":{"display_name":"ATT
+        MOBILITY LLC"}},{"key":"CONT_AWD_140P5326P0007_1443_-NONE-_-NONE-","piid":"140P5326P0007","award_date":"2026-03-03","fiscal_year":2026,"description":"DISPATCH
+        SERVICES FOR CUMBERLAND GAP NATIONAL HISTORIC PARK","total_contract_value":22000.0,"recipient":{"display_name":"CLAIBORNE
+        COUNTY EMERGENCY COMMUNICATIONS"}},{"key":"CONT_AWD_HC101326FA732_9700_HC101322D0005_9700","piid":"HC101326FA732","award_date":"2026-03-03","fiscal_year":2026,"description":"EMCC002595EBM\nENHANCED
+        MOBILE SATELLITE SERVICES (EMSS) EQUIPMENT/ACTIVATION/REPAIR","total_contract_value":102.26,"recipient":{"display_name":"TRACE
+        SYSTEMS INC."}},{"key":"CONT_AWD_36C25226N0273_3600_36C25223A0024_3600","piid":"36C25226N0273","award_date":"2026-03-03","fiscal_year":2026,"description":"CPT
+        - BLOOD CULTURE TESTING","total_contract_value":53379.0,"recipient":{"display_name":"BIOMERIEUX
+        INC"}},{"key":"CONT_AWD_75H70926F07004_7527_75H70925D00010_7527","piid":"75H70926F07004","award_date":"2026-03-03","fiscal_year":2026,"description":"FBSU
+        TASK ORDER FOR DENTAL ASSISTANTS / BUYER: PRUDENCE YO\nBASE WITH FOUR OPTION
+        YEARS\nFBSU TASK ORDER FOR DENTAL ASSISTANTS / BUYER: PRUDENCE YO\nBILLINGS
+        ID/IQ MEDICAL SUPPORT SERVICES \nBASE OBLIGATED AMOUNT: $  289,553.28\nAGGREGATE
+        AMOUNT:","total_contract_value":1554054.48,"recipient":{"display_name":"CHENEGA
+        GOVERNMENT MISSION SOLUTIONS, LLC"}},{"key":"CONT_AWD_121NTP26C0037_12K2_-NONE-_-NONE-","piid":"121NTP26C0037","award_date":"2026-03-03","fiscal_year":2026,"description":"COMMODITIES
+        FOR USG FOOD DONATIONS: 2000011195/4210007509/RICE, 5/20 LG, W-MLD, FORT BAG-50
+        KG","total_contract_value":232336.8,"recipient":{"display_name":"FARMERS RICE
+        MILLING CO LLC"}},{"key":"CONT_AWD_15JUST26F00000001_1501_15JUST25A00000004_1501","piid":"15JUST26F00000001","award_date":"2026-03-03","fiscal_year":2026,"description":"TEMPORARY
+        PARALEGAL SERVICES (TPS)","total_contract_value":102692.72,"recipient":{"display_name":"ARDELLE
+        ASSOCIATES, INC."}},{"key":"CONT_AWD_12314426F0088_1205_NNG15SC27B_8000","piid":"12314426F0088","award_date":"2026-03-03","fiscal_year":2026,"description":"OFFICE
+        OF CHIEF INFORMATION OFFICER (OCIO) DIGITAL INFRASTRUCTURE\nSERVICES DIVISION
+        (DISC) USDA","total_contract_value":1825268.82,"recipient":{"display_name":"CARAHSOFT
+        TECHNOLOGY CORP."}},{"key":"CONT_AWD_36C25226N0267_3600_36C25223A0024_3600","piid":"36C25226N0267","award_date":"2026-03-03","fiscal_year":2026,"description":"CPT
+        - BLOOD CULTURE TESTING","total_contract_value":5272.0,"recipient":{"display_name":"BIOMERIEUX
+        INC"}},{"key":"CONT_AWD_89503626PSW000279_8900_-NONE-_-NONE-","piid":"89503626PSW000279","award_date":"2026-03-03","fiscal_year":2026,"description":"TRANSFORMER
+        DISPOSAL","total_contract_value":33299.59,"recipient":{"display_name":"ACCURATE
+        STRUCTURAL INC."}},{"key":"CONT_AWD_15B51926P00000105_1540_-NONE-_-NONE-","piid":"15B51926P00000105","award_date":"2026-03-03","fiscal_year":2026,"description":"NATIONAL
+        FOOD GROUP","total_contract_value":8500.0,"recipient":{"display_name":"NATIONAL
+        FOOD GROUP INC"}},{"key":"CONT_AWD_15B40326F00000061_1540_15JPSS25D00000293_1501","piid":"15B40326F00000061","award_date":"2026-03-03","fiscal_year":2026,"description":"FY26
+        M2 FEDEX DELIVERY SERVICES\nDOJ CONTRACT 15JPSS25D00000293\nDELIVERY ORDER
+        PERIOD OF PERFORMANCE:  OCTOBER 1, 2025 - SEPTEMBER 30, 2026","total_contract_value":690.01,"recipient":{"display_name":"FEDERAL
+        EXPRESS CORPORATION"}},{"key":"CONT_AWD_697DCK26F00246_6920_697DCK22D00001_6920","piid":"697DCK26F00246","award_date":"2026-03-03","fiscal_year":2026,"description":"ZSCALER
+        FOR ANNUAL RENEWAL.","total_contract_value":10349981.0,"recipient":{"display_name":"CDW
+        Government LLC"}},{"key":"CONT_AWD_75D30126C20873_7523_-NONE-_-NONE-","piid":"75D30126C20873","award_date":"2026-03-03","fiscal_year":2026,"description":"EMORY
+        EMERGENCY SERVICES","total_contract_value":7576879.8,"recipient":{"display_name":"EMORY
+        UNIVERSITY"}},{"key":"CONT_AWD_15B40126F00000075_1540_15BFA025A00000039_1540","piid":"15B40126F00000075","award_date":"2026-03-03","fiscal_year":2026,"description":"MATTRESSES","total_contract_value":15120.0,"recipient":{"display_name":"Federal
+        Prison Industries, Inc"}},{"key":"CONT_AWD_6973GH26F00502_6920_6973GH18D00082_6920","piid":"6973GH26F00502","award_date":"2026-03-03","fiscal_year":2026,"description":"UPS
+        EQUIPMENT PURCHASE FOR THE INSTALLATION AT LAXN USDE.","total_contract_value":110361.74,"recipient":{"display_name":"EATON
+        CORPORATION"}},{"key":"CONT_AWD_15USAN26F00000206_1542_15UC0C25D00000775_1542","piid":"15USAN26F00000206","award_date":"2026-03-03","fiscal_year":2026,"description":"PAPER","total_contract_value":53283.65,"recipient":{"display_name":"WESTERN
+        STATES ENVELOPE CO"}},{"key":"CONT_AWD_140PS126C0003_1443_-NONE-_-NONE-","piid":"140PS126C0003","award_date":"2026-03-03","fiscal_year":2026,"description":"MAINTENANCE
+        DREDGING OF DAVIS BAYOU DOCK","total_contract_value":374959.2,"recipient":{"display_name":"BREAKWATER
+        MARINE CONSTRUCTION, LLC"}},{"key":"CONT_AWD_15M10226FA4700078_1544_15F06725D0000479_1549","piid":"15M10226FA4700078","award_date":"2026-03-03","fiscal_year":2026,"description":"MISSION
+        CRITICAL - APPREHENDING FUGITIVES\nFY26 D80 BUSCH HELMETS (FBI 0479)","total_contract_value":72675.0,"recipient":{"display_name":"PREDICTIVE
+        BALLISTICS LLC"}},{"key":"CONT_AWD_36C26126P0463_3600_-NONE-_-NONE-","piid":"36C26126P0463","award_date":"2026-03-03","fiscal_year":2026,"description":"PROSTHETICS
+        - STAIRLIFT","total_contract_value":20625.0,"recipient":{"display_name":"ALOHA
+        LIFTS LLC"}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 99f88c2cbd8ca1dc-MSP
+      - 9d71a715f992a213-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 17:00:57 GMT
+      - Wed, 04 Mar 2026 14:43:20 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=m%2BXfk9Ju6b%2B3QuWMMQEUDYT4p84n7mxhnKhYOv%2FO52N9CYNIEB5aef2h%2B0WFMj5n%2B5By2Wrdti1f0X%2FuKlF74%2BBynN6Ao7eYuvn0XQmhUqjU7bzudFZMtEgB3w%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=E%2BSWXPFay%2FAN3Hy4nhdrvAFOtKmNZKqYotOV8yIrP1HBxlpNQG%2Bp7qgrH8KdX9lMbLv%2FoFcZ3O%2FhKMU2bLGWWZ6lr5fMXmp5JzsBFeYZPdt2c9Gr5CRCGQzz"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '8291'
+      - '7660'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -116,27 +104,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.021s
+      - 0.084s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '979'
+      - '981'
       x-ratelimit-burst-reset:
-      - '55'
+      - '0'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998672'
+      - '1999746'
       x-ratelimit-daily-reset:
-      - '88'
+      - '84988'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '979'
+      - '981'
       x-ratelimit-reset:
-      - '55'
+      - '0'
     status:
       code: 200
       message: OK

@@ -16,133 +16,198 @@ interactions:
     uri: https://tango.makegov.com/api/grants/?page=1&limit=5&shape=grant_id%2Copportunity_number%2Ctitle%2Cstatus%28%2A%29%2Cagency_code%2Cdescription%2Clast_updated%2Ccfda_numbers%28number%2Ctitle%29%2Capplicant_types%28%2A%29%2Cfunding_categories%28%2A%29
   response:
     body:
-      string: "{\"count\":2690,\"next\":\"http://tango.makegov.com/api/grants/?limit=5&page=2&shape=grant_id%2Copportunity_number%2Ctitle%2Cstatus%28%2A%29%2Cagency_code%2Cdescription%2Clast_updated%2Ccfda_numbers%28number%2Ctitle%29%2Capplicant_types%28%2A%29%2Cfunding_categories%28%2A%29\",\"previous\":null,\"results\":[{\"grant_id\":360862,\"opportunity_number\":\"DE-FOA-0003390\",\"title\":\"Infrastructure
-        Investment and Jobs Act (IIJA): Mine of the Future - Proving Ground Initiative\",\"agency_code\":\"DOE-NETL\",\"description\":\"<p>The
-        objective of NOFO-0003390 is to establish mining technology proving grounds
-        that accelerate novel technology development for the U.S. mining sector. These
-        competitive awards would invest in the infrastructure and technologies to
-        transform mining practices and speed the development of secure and resilient
-        domestic CMM supply networks of the future.</p>\",\"last_updated\":\"2025-11-16T10:11:20+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"81.089\",\"title\":\"Fossil
-        Energy Research and Development\"}],\"applicant_types\":[{\"code\":\"99\",\"description\":\"Unrestricted
-        (i.e., open to any type of entity above), subject to any clarification in
-        text field entitled \\\"Additional Information on Eligibility\\\"\"}],\"funding_categories\":[{\"code\":\"EN\",\"description\":\"Energy\"}]},{\"grant_id\":360863,\"opportunity_number\":\"DE-FOA-0003583\",\"title\":\"Infrastructure
-        Investment and Jobs Act (IIJA) &ndash; Mines &amp; Metals Capacity Expansion
-        &ndash; Piloting Byproduct Critical Minerals and Materials Recovery at Domestic
-        Industrial Facilities\",\"agency_code\":\"DOE-NETL\",\"description\":\"<p>The
-        focus of this NOFO is to invest in American industrial facilities that have
-        the potential to produce valuable critical material byproducts from existing
-        industrial processes. Industries such as mining and mineral processing, power
-        generation, coal, oil and gas, specialty metals, and basic materials have
-        the potential to address many of America\u2019s most severe mineral vulnerabilities.</p>\",\"last_updated\":\"2025-11-16T10:11:19+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"81.089\",\"title\":\"Fossil
-        Energy Research and Development\"}],\"applicant_types\":[{\"code\":\"99\",\"description\":\"Unrestricted
-        (i.e., open to any type of entity above), subject to any clarification in
-        text field entitled \\\"Additional Information on Eligibility\\\"\"}],\"funding_categories\":[{\"code\":\"IIJ\",\"description\":\"Infrastructure
-        Investment and Jobs Act (IIJA)\"}]},{\"grant_id\":360861,\"opportunity_number\":\"FR-6900-N-25\",\"title\":\"FY
-        2025 Continuum of Care Competition and Youth Homeless Demonstration Program
-        Grants NOFO\",\"agency_code\":\"HUD\",\"description\":\"The Continuum of Care
-        (CoC) Program is designed to:promote a community-wide commitment to the goal
-        of ending homelessness;provide funding for efforts by nonprofit providers,
-        States, Indian Tribes or Tribally Designated Housing Entities [as defined
-        in section 4 of the Native American Housing Assistance and Self-Determination
-        Act of 1996 (25 U.S.C. 4103) (TDHEs)], and local governments to quickly rehouse
-        individuals and families experiencing homelessness, persons experiencing trauma
-        or a lack of safety related to fleeing or attempting to flee domestic violence,
-        dating violence, sexual assault, and stalking, and youth experiencing homelessness
-        while minimizing the trauma and dislocation caused by homelessness;promote
-        access to, and effective utilization of, mainstream programs and programs
-        funded with State or local resources; andoptimize self-sufficiency among individuals
-        and families experiencing homelessness.The goal of the Youth Homelessness
-        Demonstration Program (YHDP) is to support the development and implementation
-        of a coordinated community approach to preventing and ending youth homelessness
-        and sharing that experience with and mobilizing communities around the country
-        toward the same end. The population to be served by the demonstration program
-        is youth ages 24 and younger who are experiencing homelessness, including
-        unaccompanied and pregnant or parenting youth.\",\"last_updated\":\"2025-11-16T10:11:17+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"14.267\",\"title\":\"Continuum
-        of Care Program \"}],\"applicant_types\":[{\"code\":\"11\",\"description\":\"Native
-        American tribal organizations (other than Federally recognized tribal governments)\"},{\"code\":\"12\",\"description\":\"Nonprofits
-        having a 501(c)(3) status with the IRS, other than institutions of higher
-        education\"},{\"code\":\"07\",\"description\":\"Native American tribal governments
-        (Federally recognized)\"},{\"code\":\"25\",\"description\":\"Others (see text
-        field entitled \\\"Additional Information on Eligibility\\\" for clarification)\"},{\"code\":\"04\",\"description\":\"Special
-        district governments\"},{\"code\":\"08\",\"description\":\"Public housing
-        authorities/Indian housing authorities\"},{\"code\":\"01\",\"description\":\"County
-        governments\"},{\"code\":\"00\",\"description\":\"State governments\"},{\"code\":\"02\",\"description\":\"City
-        or township governments\"}],\"funding_categories\":[{\"code\":\"CD\",\"description\":\"Community
-        Development\"}]},{\"grant_id\":360851,\"opportunity_number\":\"ED-GRANTS-111225-001\",\"title\":\"Office
-        of Postsecondary Education (OPE): Fund for the Improvement of Postsecondary
-        Education (FIPSE): Special Projects;  Assistance Listing Number (ALN) 84.116J\",\"agency_code\":\"ED\",\"description\":\"<p>Note:
-        Each funding opportunity description is a synopsis of information in the Federal
-        Register application notice. For specific information about eligibility, please
-        see the official application notice. The official version of this document
-        is the document published in the Federal Register. Please review the official
-        application notice for pre-application and application requirements, application
-        submission information, performance measures, priorities and program contact
-        information.</p><p><br></p><p>For the addresses for obtaining and submitting
-        an application, please refer to our Common Instructions for Applicants to
-        Department of Education Discretionary Grant Programs, published in the Federal
-        Register on August 29, 2025&nbsp;(90 FR 42234), and available at https://www.federalregister.gov/documents/2025/08/29/2025-</p><p>16571/common-instructions-and-information-for-applicants-to\\u0002department-of-education-discretionary-grantams.</p><p><br></p><p><em>Purpose
-        of Program:</em> The FIPSE Special Projects Program provides grants to institutions
-        of higher education (IHEs), combinations of such institutions, and other public
-        and private nonprofit institutions and agencies, as the Secretary deems necessary,
-        to support innovative projects concerning one or more areas of national need
-        identified by the Secretary. This competition focuses on supporting four areas
-        of national need\u2014(1) advancing the understanding of and use of Artificial
-        Intelligence (AI) technology in postsecondary education, (2) promoting civil
-        discourse on college and university campuses, (3) promoting accreditation
-        reform, and (4) supporting capacity-building for high-quality short-term programs.</p><p><br></p><p>In
-        order to support these four crucial needs, this competition includes seven
-        absolute priorities under which applicants can apply: two priorities dedicated
-        to advancing the understanding and use of AI in postsecondary education (Absolute
-        Priorities 1 and 2), one priority dedicated to promoting civil discourse on
-        college and university campuses (Absolute Priority 3), two priorities within
-        promoting accreditation reform (Absolute Priorities 4 and 5), and two priorities
-        for capacity-building for high-quality short-term programs (Absolute Priorities
-        6 and 7). The Department intends to award $50 million to advance AI in Education,
-        $60 million to promote civil discourse on college and university campuses,
-        $7 million to support accreditation reform, and $50 million for high-quality
-        short-term programs. The Department may adjust these estimates based on interest
-        and quality of applications.</p><p><br></p><p>Assistance Listing Number 84.116J</p>\",\"last_updated\":\"2025-11-16T10:11:15+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"84.116\",\"title\":\"Fund
-        for the Improvement of Postsecondary Education\"}],\"applicant_types\":[{\"code\":\"25\",\"description\":\"Others
+      string: "{\"count\":3088,\"next\":\"https://tango.makegov.com/api/grants/?limit=5&page=2&shape=grant_id%2Copportunity_number%2Ctitle%2Cstatus%28%2A%29%2Cagency_code%2Cdescription%2Clast_updated%2Ccfda_numbers%28number%2Ctitle%29%2Capplicant_types%28%2A%29%2Cfunding_categories%28%2A%29\",\"previous\":null,\"results\":[{\"grant_id\":361395,\"opportunity_number\":\"USAFCPFREEDOM250\",\"title\":\"U.S.
+        Ambassadors Fund for Cultural Preservation Freedom 250\",\"agency_code\":\"DOS-ECA\",\"description\":\"<p><span
+        style=\\\"color: rgb(0, 0, 0);\\\">This Freedom 250 special edition of the
+        AFCP honors&nbsp;the&nbsp;enduring commitment&nbsp;of the United States&nbsp;to
+        freedom, democracy, and unity via cultural heritage stewardship.&nbsp;In the
+        spirit of these values, priority projects should incorporate technical exchange
+        between Americans and foreign counterparts and illuminate the rich historical
+        and cultural ties between the United States and countries around the world.
+        </span>AFCP will prioritize projects that meet one or more of the following
+        criteria:&nbsp;</p>\\n<p>&nbsp;</p>\\n<ol>\\n <li>Cultural objects or sites
+        in other countries associated with, or&nbsp;frequently&nbsp;visited by notable
+        Americans, such as homes, studios, or institutions.</li>\\n <li>Cultural objects
+        or sites in other countries developed, excavated, or otherwise brought to
+        light by American archaeologists or other heritage professionals.</li>\\n
+        <li>Cultural objects or sites in other countries associated with American
+        history or American contributions to significant historical events, such as
+        peace agreements, military memorials, and other commemorative sites.</li>\\n
+        <li>Cultural objects or sites in other countries associated with American
+        innovations and leadership in the sciences, such as laboratories or observatories.&nbsp;</li>\\n
+        <li>Cultural objects or sites in other countries highlighting the intellectual
+        and philosophical roots of American institutions.</li>\\n <li>Cultural objects
+        or sites in other countries associated with American-inspired&nbsp;independence
+        movements that&nbsp;showcase&nbsp;the United States as an example for nations
+        striving toward liberty and self-governance.&nbsp;</li>\\n <li>Forms of traditional
+        cultural expression such as music and dance that heavily&nbsp;influenced American
+        art forms or vice versa.&nbsp;</li>\\n <li>Historical sites of significance
+        to diaspora communities in the United States.&nbsp;</li>\\n</ol>\\n<p><br></p>\\n<p>See
+        the USAFCPFreedom250 PDF on the Related Documents tab for details.&nbsp;</p>\\n<p><br></p>\\n<p>NOTE:
+        Application deadlines vary by U.S. embassy. Contact the U.S. embassy directly
+        for application deadlines.</p>\",\"last_updated\":\"2026-03-04T10:11:22+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"19.025\",\"title\":\"U.S.
+        Ambassadors Fund for Cultural Preservation\"}],\"applicant_types\":[{\"code\":\"25\",\"description\":\"Others
         (see text field entitled \\\"Additional Information on Eligibility\\\" for
-        clarification)\"}],\"funding_categories\":[{\"code\":\"ED\",\"description\":\"Education\"}]},{\"grant_id\":345316,\"opportunity_number\":\"2026TTPSF\",\"title\":\"2026
-        Tribal Transportation Program Safety Fund\",\"agency_code\":\"DOT-FHWA\",\"description\":\"<p>Eligible
-        projects described in section 148(a)(4) are strategies, activities, and projects
-        on a public road that are consistent with a transportation safety plan and
-        that (i) correct or improve a hazardous road location or feature, or (ii)
-        address a highway safety problem. TTPSF emphasizes the development of strategic
-        transportation safety plans using a data-driven process as a means for Tribes
-        to identify transportation safety needs and determine how those needs will
-        be addressed in Tribal communities. FHWA has identified four eligibility categories:
-        transportation safety plans; data assessment, improvement, and analysis activities;
-        systemic roadway departure countermeasures; and infrastructure improvements
-        and other eligible activities as listed in 23 U.S.C. \xA7 148(a)(4).</p>\",\"last_updated\":\"2025-11-13T10:39:21+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"20.205\",\"title\":\"Highway
-        Planning and Construction\"}],\"applicant_types\":[{\"code\":\"07\",\"description\":\"Native
-        American tribal governments (Federally recognized)\"}],\"funding_categories\":[{\"code\":\"T\",\"description\":\"Transportation\"}]}]}"
+        clarification)\"}],\"funding_categories\":[{\"code\":\"O\",\"description\":\"Other\"}]},{\"grant_id\":361394,\"opportunity_number\":\"PAR-26-119\",\"title\":\"NEI
+        Collaborative Clinical Vision Research (UG1 - Clinical Trial Optional)\",\"agency_code\":\"HHS-NIH11\",\"description\":\"<p>The
+        NEI uses UG1 cooperative agreement awards to support investigator-initiated
+        clinical vision research projects, including multi-center clinical trials,
+        human gene-transfer, stem cell therapy trials, epidemiological studies, and
+        other studies that are complex, high resource, or that require increased oversight
+        due to elevated safety considerations.</p><p>These collaborative clinical
+        vision research projects would address chronic diseases across the lifespan
+        through research on the burden of eye and vision conditions, their causes,
+        diagnoses, prevention, treatment, and rehabilitation. &nbsp;These projects
+        are multifaceted and of high public health significance, requiring careful
+        oversight and monitoring by National Institutes of Health (NIH) staff.&nbsp;&nbsp;</p><p>The
+        intent of this funding opportunity announcement is to provide a collaborative
+        framework for the following components: Chair's Grant, Coordinating Center,
+        and Resource Center(s).</p>\",\"last_updated\":\"2026-03-04T10:11:22+00:00\",\"status\":{\"code\":\"F\",\"description\":\"Forecasted\"},\"cfda_numbers\":[{\"number\":\"93.867\",\"title\":\"Vision
+        Research\"}],\"applicant_types\":[{\"code\":\"06\",\"description\":\"Public
+        and State controlled institutions of higher education\"},{\"code\":\"02\",\"description\":\"City
+        or township governments\"},{\"code\":\"12\",\"description\":\"Nonprofits having
+        a 501(c)(3) status with the IRS, other than institutions of higher education\"},{\"code\":\"13\",\"description\":\"Nonprofits
+        that do not have a 501(c)(3) status with the IRS, other than institutions
+        of higher education\"},{\"code\":\"23\",\"description\":\"Small businesses\"},{\"code\":\"22\",\"description\":\"For
+        profit organizations other than small businesses\"},{\"code\":\"05\",\"description\":\"Independent
+        school districts\"},{\"code\":\"08\",\"description\":\"Public housing authorities/Indian
+        housing authorities\"},{\"code\":\"04\",\"description\":\"Special district
+        governments\"},{\"code\":\"25\",\"description\":\"Others (see text field entitled
+        \\\"Additional Information on Eligibility\\\" for clarification)\"},{\"code\":\"20\",\"description\":\"Private
+        institutions of higher education\"},{\"code\":\"00\",\"description\":\"State
+        governments\"},{\"code\":\"07\",\"description\":\"Native American tribal governments
+        (Federally recognized)\"},{\"code\":\"01\",\"description\":\"County governments\"},{\"code\":\"11\",\"description\":\"Native
+        American tribal organizations (other than Federally recognized tribal governments)\"}],\"funding_categories\":[{\"code\":\"HL\",\"description\":\"Health\"}]},{\"grant_id\":361393,\"opportunity_number\":\"DE-FOA-0003602\",\"title\":\"Early
+        Career Research Program (ECRP)\",\"agency_code\":\"PAMS-SC\",\"description\":\"<p>DOE
+        SC hereby invites applications for support under the ECRP in the following
+        program areas: Advanced Scientific Computing Research (ASCR); Basic Energy
+        Sciences (BES); Biological and Environmental Research (BER); Fusion Energy
+        Sciences (FES); High Energy Physics (HEP); Nuclear Physics (NP); Isotope Research
+        and Development and Production (DOE IP). The purpose of this program is to
+        support the development of individual research programs of outstanding scientists
+        early in their careers and to stimulate research careers in the areas supported
+        by SC.</p>\",\"last_updated\":\"2026-03-04T10:11:22+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"81.049\",\"title\":\"Office
+        of Science Financial Assistance Program\"}],\"applicant_types\":[{\"code\":\"25\",\"description\":\"Others
+        (see text field entitled \\\"Additional Information on Eligibility\\\" for
+        clarification)\"},{\"code\":\"06\",\"description\":\"Public and State controlled
+        institutions of higher education\"},{\"code\":\"20\",\"description\":\"Private
+        institutions of higher education\"}],\"funding_categories\":[{\"code\":\"ST\",\"description\":\"Science
+        and Technology and other Research and Development\"}]},{\"grant_id\":361398,\"opportunity_number\":\"DFOP0017856\",\"title\":\"FY
+        2026 J. Christopher Stevens Virtual Exchange Initiative   (JCSVEI) Program\",\"agency_code\":\"DOS-ECA\",\"description\":\"<p>The
+        Global Leaders Division, Office of Citizen Exchanges, Bureau of Educational
+        and Cultural Affairs (ECA) invites proposal submissions for a cooperative
+        agreement to design, administer, and implement the J. Christopher Stevens
+        Virtual Exchange Initiative (JCSVEI). The JCSVEI advances U.S. foreign policy
+        priorities by championing American scientific excellence, technological leadership,
+        and innovation, while promoting core U.S. principles\u2014freedom of speech,
+        individual liberty, and the rule of law\u2014as foundations of peace and prosperity.
+        The program achieves these goals through American-led virtual exchanges that
+        connects young leaders in the Middle East and North Africa (MENA) with peers
+        across the United States. </p>\\n<p><br></p>\\n<p>Through interactive digital
+        programming, participants will explore U.S. global leadership in science,
+        technology, business, and civic life, while demonstrating how American freedom
+        of speech, rule of law, and individual liberty underpin prosperity and opportunity.
+        They will collaborate virtually with peers overseas to develop digital storytelling
+        projects, podcasts, vlogs, and other media that illustrate the strength of
+        American communities and the nation\u2019s commitment to open exchange, innovation,
+        and collaboration. The initiative will also challenge participants to apply
+        American ingenuity to practical solutions that promote economic opportunity,
+        job creation, and digital connectivity\u2014contributing to shared prosperity
+        and regional stability. By reinforcing the spirit of the Abraham Accords and
+        advancing U.S. engagement with the Gulf Cooperation Council, the program will
+        strengthen ties between the United States and key partners in the Middle East
+        while advancing America\u2019s vision of a secure, prosperous, and interconnected
+        region. </p>\\n<p><br></p>\\n<p><span style=\\\"color: black;\\\">The JCSVEI
+        will use a range of virtual exchange formats\u2014live dialogues, collaborative
+        digital projects, online trainings, and virtual workshops\u2014to reach approximately
+        8,000 participants annually.&nbsp;&nbsp;Programming should promote mutual
+        collaboration grounded in U.S. leadership, encouraging youth to view the United
+        States as a trusted partner in science, entrepreneurship, and global problem-solving.&nbsp;</span></p>\\n<p><span
+        style=\\\"color: black;\\\">An Alumni Leadership Academy will provide continued
+        engagement for participants who&nbsp;demonstrate&nbsp;strong leadership potential,
+        equipping them to serve as ambassadors of U.S. values and connectors between
+        American and Middle Eastern communities. Follow-on activities should reinforce
+        long-term networks that advance America\u2019s economic, security, and diplomatic
+        priorities.&nbsp;</span></p>\\n<p><span style=\\\"color: black;\\\">&nbsp;</span></p>\\n<p><span
+        style=\\\"color: black;\\\">Organizations applying for this award must&nbsp;demonstrate&nbsp;the
+        capacity to recruit, select, and manage up to&nbsp;six&nbsp;partner organizations
+        as sub-award recipients to implement virtual exchange components under the
+        JCSVEI umbrella. The primary award recipient will&nbsp;maintain&nbsp;full
+        oversight of sub-awards, ensuring compliance, accountability, and alignment
+        with ECA\u2019s goals, performance measures, and branding standards.&nbsp;</span></p>\\n<p><br></p>\\n<p><span
+        style=\\\"color: black;\\\">Please see the Notice of Funding Opportunity for
+        additional information.</span></p>\",\"last_updated\":\"2026-03-04T10:11:22+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"19.415\",\"title\":\"Professional
+        and Cultural Exchange Programs - Citizen Exchanges\"}],\"applicant_types\":[{\"code\":\"06\",\"description\":\"Public
+        and State controlled institutions of higher education\"},{\"code\":\"20\",\"description\":\"Private
+        institutions of higher education\"},{\"code\":\"25\",\"description\":\"Others
+        (see text field entitled \\\"Additional Information on Eligibility\\\" for
+        clarification)\"},{\"code\":\"12\",\"description\":\"Nonprofits having a 501(c)(3)
+        status with the IRS, other than institutions of higher education\"}],\"funding_categories\":[{\"code\":\"O\",\"description\":\"Other\"}]},{\"grant_id\":361402,\"opportunity_number\":\"DFOP0017868\",\"title\":\"FY
+        2026 American Film Showcase\",\"agency_code\":\"DOS-ECA\",\"description\":\"<p><span
+        style=\\\"color: black;\\\">The Bureau of Educational and Cultural Affairs
+        (ECA) intends to award one Cooperative agreement for approximately $1,540,000
+        to fund the FY 2026 American Film Showcase (AFS), a dynamic and adaptable
+        initiative that combines and harnesses the power of cultural and commercial
+        diplomacy to elevate American creativity as a driver of global influence and
+        economic vitality.&nbsp;By highlighting U.S. leadership in film, television,
+        gaming, and media arts, AFS opens new markets for American creative industries,
+        attracts foreign investment, and reinforces the nation\u2019s reputation as
+        a global center for innovation and storytelling. </span></p>\\n<p><span style=\\\"color:
+        black;\\\">&nbsp;</span></p>\\n<p><span style=\\\"color: black;\\\">U.S. embassies
+        play a key collaborative role by identifying and submitting program ideas
+        and nominating participants, allowing AFS to deliver tailored engagements,
+        such as lectures, masterclasses, residencies, screenings, and workshops, led
+        by top industry professionals. This flexible model not only advances U.S.
+        foreign policy but also strengthens American global business and creative
+        competitiveness and cultural influence by forging connections between U.S.
+        and international entertainment professionals, creating lasting commercial
+        and professional opportunities for American creatives.</span></p>\\n<p><span
+        style=\\\"color: black;\\\">&nbsp;</span></p>\\n<p>Finally, the FY 2026 AFS
+        award will also include <em>Made in America: Creative Capital</em>, an expansion
+        component designed to further amplify program impact.&nbsp;This initiative
+        will broaden activities by incorporating a commercial diplomacy focus, featuring
+        activities such as business residencies, co-production labs, a Creative IP
+        &amp; Licensing Exchange, creative showcases, export-ready labs, global creative
+        business accelerators, international fellowships, investment forums, and market
+        access and distribution workshops.&nbsp;These activities will help equip an
+        estimated 40-50 U.S. creators to succeed in international markets and forge
+        long-term commercial partnerships. &nbsp;By integrating cultural initiatives
+        with commercial strategy, <em>Made in America: Creative Capital</em> positions
+        the United States as the premier destination for creative investment, fueling
+        job creation, innovation, and sustained economic growth.&nbsp;Together, these
+        efforts ensure that American public diplomacy remains agile and effective,
+        advancing national prosperity and global influence through the transformative
+        power of creativity.</p>\\n<p><br></p>\\n<p>Please see the Notice of Funding
+        Opportunity for additional information.</p>\",\"last_updated\":\"2026-03-04T10:11:22+00:00\",\"status\":{\"code\":\"P\",\"description\":\"Posted\"},\"cfda_numbers\":[{\"number\":\"19.415\",\"title\":\"Professional
+        and Cultural Exchange Programs - Citizen Exchanges\"}],\"applicant_types\":[{\"code\":\"20\",\"description\":\"Private
+        institutions of higher education\"},{\"code\":\"12\",\"description\":\"Nonprofits
+        having a 501(c)(3) status with the IRS, other than institutions of higher
+        education\"},{\"code\":\"25\",\"description\":\"Others (see text field entitled
+        \\\"Additional Information on Eligibility\\\" for clarification)\"},{\"code\":\"06\",\"description\":\"Public
+        and State controlled institutions of higher education\"}],\"funding_categories\":[{\"code\":\"O\",\"description\":\"Other\"}]}]}"
     headers:
       CF-RAY:
-      - 99f95d296d7836b7-YYZ
+      - 9d71a7411cd6a1d1-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 19:23:37 GMT
+      - Wed, 04 Mar 2026 14:43:27 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=6JUXlQvu7LLZoY2mMeXmy4Xg5%2BPpgiC4qMdV86%2FqLnrk9egyO1P2674q41bqEJMM%2FNXjObYFKxZ5Po9DZqDTlpjUAHln6bBMS6020sKpqOip5Ui3qcHw8UPIXg%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8oaog530M1OrdjVfbGn%2Bb5GgWUaG1B6BUaohD8elQi6fk%2FCyZK5KYrvEdmVj2Lbsjwaxn9Hb8rfHmWWYM7gjknJisVEyMT40h5EcVVXlIb2RGHOcX7cXagCU"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '9683'
+      - '14698'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -152,27 +217,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.033s
+      - 0.023s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '997'
+      - '955'
       x-ratelimit-burst-reset:
-      - '59'
+      - '21'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998709'
+      - '1999715'
       x-ratelimit-daily-reset:
-      - '833'
+      - '84981'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '997'
+      - '955'
       x-ratelimit-reset:
-      - '59'
+      - '21'
     status:
       code: 200
       message: OK

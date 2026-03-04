@@ -16,61 +16,94 @@ interactions:
     uri: https://tango.makegov.com/api/forecasts/?page=1&limit=5&shape=id%2Csource_system%2Cexternal_id%2Ctitle%2Cdescription%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus%2Cis_active
   response:
     body:
-      string: "{\"count\":12610,\"next\":\"http://tango.makegov.com/api/forecasts/?limit=5&page=2&shape=id%2Csource_system%2Cexternal_id%2Ctitle%2Cdescription%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus%2Cis_active\",\"previous\":null,\"results\":[{\"id\":12641,\"source_system\":\"DHS\",\"external_id\":\"72497\",\"title\":\"WHTF
-        World Cup 2026 Bulk Room Block\",\"description\":\"The White House Task Force
-        (WHTF) seeks to secure hotel standard/deluxe room blocks in all designated
-        U.S. cities hosting the 2026 F\xE9d\xE9ration Internationale de Football Association
-        (FIFA) World Cup to support personnel and operational needs during the event.
-        The room blocks will accommodate WHTF staff and affiliated travelers for durations
-        ranging from 20 to 44 days per city. This initiative aims to ensure uniform
-        terms, flexibility, and convenience across all cities while meeting logistical
-        requirements.\",\"anticipated_award_date\":\"2025-11-24\",\"fiscal_year\":2026,\"naics_code\":\"721110\",\"status\":null,\"is_active\":true},{\"id\":12612,\"source_system\":\"GSA\",\"external_id\":\"39588\",\"title\":\"CAEIO
-        Recompete\",\"description\":\"The CAEIO Recompete is to provide Operations
-        and Maintenance (O&M) of the global CA IT environment within an Information
-        Technology Service Management (ITSM) framework.\",\"anticipated_award_date\":\"2099-09-09\",\"fiscal_year\":2099,\"naics_code\":null,\"status\":\"Acquisition
-        Planning\",\"is_active\":true},{\"id\":12611,\"source_system\":\"DHS\",\"external_id\":\"72499\",\"title\":\"9mm
-        RHTA AMMUNITION\",\"description\":\"This requirement is for 4 million rounds
-        of 9MM Reduced Hazard Training Ammunition (RHTA) against existing multiple
-        award IDIQ contracts and will be competed between those contract holders in
-        accordance with FAR 16.505(b)(1) Fair Opportunity. This is not a new requirement,
-        nor will any solicitation be issued.\",\"anticipated_award_date\":\"2025-11-24\",\"fiscal_year\":2026,\"naics_code\":\"332992\",\"status\":null,\"is_active\":true},{\"id\":12610,\"source_system\":\"DHS\",\"external_id\":\"72334\",\"title\":\"BG252
-        Swimming Pool Improvements\",\"description\":\"Interior swimming pool resurfacing,
-        filter system replacement and installation of a monorail hoist system.\",\"anticipated_award_date\":\"2025-12-31\",\"fiscal_year\":2026,\"naics_code\":\"236220\",\"status\":null,\"is_active\":true},{\"id\":12609,\"source_system\":\"DHS\",\"external_id\":\"70899\",\"title\":\"Telecommunications
-        Support for USCG Pacific Area/Southwest District Command Center\",\"description\":\"The
-        purpose of this contract is to obtain telecommunications support services
-        for Command, Control, Communications, Computers, Cyber, and Intelligence (C5I)
-        CLASSIFIED and UNCLASSIFIED hardware and software services for the Department
-        of Homeland Security, United States Coast Guard, and the District Eleven /
-        Pacific Area Command Center. The overall purpose of this PWS is to fully support
-        the District Eleven / Pacific Area Command Center in maintaining classified
-        and unclassified C5I support with on-site contractor support. The specific
-        objective is to maintain C5I continuity for the Command Center and for the
-        United States Coast Guard.\",\"anticipated_award_date\":\"2025-12-31\",\"fiscal_year\":2026,\"naics_code\":\"541512\",\"status\":null,\"is_active\":true}]}"
+      string: '{"count":14807,"next":"https://tango.makegov.com/api/forecasts/?limit=5&page=2&shape=id%2Csource_system%2Cexternal_id%2Ctitle%2Cdescription%2Canticipated_award_date%2Cfiscal_year%2Cnaics_code%2Cstatus%2Cis_active","previous":null,"results":[{"id":13931,"source_system":"DHS","external_id":"73269","title":"PIDC
+        Range Targeting and Bullet Trap Systems","description":"Remove the old Targeting
+        System and install a New Targeting System. Push back existing berms and install
+        concrete pads for bullet traps.\r\n\r\nThe new system shall include fully
+        electric turning targets with electronic controls through hand held computer
+        systems. The controls shall include single control,\r\n\r\nmultiple target
+        controls, and fully automatic target controls programmability.","anticipated_award_date":"2026-04-01","fiscal_year":2026,"naics_code":"238990","status":null,"is_active":true},{"id":13930,"source_system":"DHS","external_id":"73271","title":"Enterprise
+        Gateway and Integration Services (EGIS) III","description":"USCIS has a requirement
+        for Enterprise Gateway and Integration Services (EGIS) III. Historically,
+        EGIS has served as the enterprise integration backbone connecting USCIS internal
+        systems with Department of Homeland Security (DHS), interagency, and external
+        partners. While this core mission remains critical, EGIS will also expand
+        this role supporting national security, immigration system integrity and advanced
+        adjudication operations with key mission including: National security vetting
+        and evolving immigration policies; screening immigration benefit applicants;
+        protecting immigration benefits and work authorization integrity; advanced
+        data integration, analytics, AI-enabled anomaly detection, and decision support;
+        agility, rapid delivery, operational excellence, transparency, and reduced
+        duplication; fraud detection, risk scoring, and investigative data workflows.
+        \r\nAs of 3/3/2026 we are in the market research/ acquisition planning phase
+        of this acquisition, as such, some of the APFS fields may change over the
+        coming months. This record will continually be updated once changes to the
+        strategy are known.","anticipated_award_date":"2027-03-01","fiscal_year":2027,"naics_code":"541512","status":null,"is_active":true},{"id":13929,"source_system":"DHS","external_id":"73270","title":"Base
+        Operation Support Services for Air Station Barbers Point","description":"Provide
+        facilities maintenance, services and support for U.S. Coast Guard AIRSTA Barbers
+        which occupies over 58 acres with several buildings totaling over 105,000
+        square feet of floor space. Types of structures include but are not limited
+        to: aircraft hangars, office buildings, warehouses, fuel storage tanks, industrial
+        shops, a galley, crew berthing area, equipment storage sheds, recreational
+        facilities and appurtenances serving the Coast Guard.\r\n\r\nThe contractor
+        will provide preventive and routine maintenance services for fire protection
+        systems, security and CCTV systems, grounds maintenance, oil water separator
+        & used cooking oil disposal/grease trap maintenance, food service equipment,
+        water treatment systems, HVAC & compressed air systems, floor scrubber/sweeper
+        equipment, fuel storage & distribution system, pavement sweeping service,
+        pest control service, janitorial service, laundry service, refuse disposal
+        service, and material handling equipment.  The contract will include an IDIQ
+        component for corrective maintenance and repair needs related to these services.","anticipated_award_date":"2026-03-23","fiscal_year":2026,"naics_code":"561210","status":null,"is_active":true},{"id":13928,"source_system":"DHS","external_id":"73256","title":"MH-60T
+        Jayhawk Flight Training Devices (FTD)","description":"The United States Coast
+        Guard (USCG) is seeking a comprehensive, state-of-the-art training solution
+        to modernize the training infrastructure for its MH-60T Jayhawk helicopter
+        fleet. The contractor will serve as the systems integrator, responsible for
+        the design, fabrication, delivery, installation, integration, testing, and
+        support of a suite of three distinct, yet interoperable, advanced training
+        devices.\r\n\r\nThis acquisition will enhance the operational readiness, safety,
+        and mission effectiveness of both pilots and rear-crew members. The objective
+        is to provide comprehensive, high-fidelity training for a full spectrum of
+        mission scenarios, including search and rescue (SAR), emergency procedures,
+        and hoist operations, in a safe, repeatable, and cost-effective environment.\r\n\r\nThe
+        core of the requirement is the delivery of a turnkey solution that includes
+        three training systems:\r\n\r\nOne (1) MH-60T Level 7 Flight Training Device
+        (FTD): A high-fidelity, fixed-base flight simulator that fully replicates
+        the MH-60T cockpit and systems for pilot and aircrew procedure training.\r\nOne
+        (1) Hoist Mission Training System (HMTS): A full-size, immersive, mixed-reality
+        trainer designed for realistic SAR and hoist operations training for rear-crew
+        members.\r\nOne (1) Portable Hoist Mission Training System (P-HMTS): A modular,
+        transportable version of the hoist trainer that enables mobile and distributed
+        training capabilities.","anticipated_award_date":"2026-07-01","fiscal_year":2026,"naics_code":"333310","status":null,"is_active":true},{"id":13927,"source_system":"DHS","external_id":"72987","title":"USCG
+        Cloud Center of Excellence","description":"The United States Coast Guard (USCG)
+        Cloud Center of Excellence (CCoE) will serve as the strategic and operational
+        hub for all USCG cloud initiatives. Designed to align with Department of Homeland
+        Security (DHS) enterprise priorities and the strategic imperatives of Force
+        Design 2028 (FD2028), the CCoE will architect secure, resilient, and interoperable
+        cloud environments that support mission continuity across USCG terrestrial,
+        maritime, and airborne components.","anticipated_award_date":"2026-03-31","fiscal_year":2026,"naics_code":"518210","status":null,"is_active":true}]}'
     headers:
       CF-RAY:
-      - 99f88c7f2a47b45f-MSP
+      - 9d71a73a6f09a1e5-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 17:01:11 GMT
+      - Wed, 04 Mar 2026 14:43:26 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AlvlhAJB0oJNwKPZiW5wuiVjjIuHAlxIdg3ohvv7b5SViJDO7H%2FYECc1CCRslppY3T1H5Ij%2B7QLe7qtM5HpzZ4xCUhhjc92j9tln%2B7iyQmXxw4yTAoneKaL5%2FQ%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=lsv6zIFQvEeefi5N9Clbg2M7ton%2F84m92%2FrWKhINn9J60eADAqTeffmJGDMW77VTCg4Y%2Bvc2TSb6I7v%2FZld%2FaI02wOTRZYNA60LWoLSh6Beb0IKxVenxViwl"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '3152'
+      - '5967'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -80,27 +113,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.026s
+      - 0.015s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '956'
+      - '960'
       x-ratelimit-burst-reset:
-      - '42'
+      - '22'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998649'
+      - '1999720'
       x-ratelimit-daily-reset:
-      - '75'
+      - '84982'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '956'
+      - '960'
       x-ratelimit-reset:
-      - '42'
+      - '22'
     status:
       code: 200
       message: OK
