@@ -1,0 +1,160 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/?page=1&limit=5&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date
+  response:
+    body:
+      string: '{"count":15006,"next":"https://tango.makegov.com/api/protests/?limit=5&page=2&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date","previous":null,"results":[{"case_id":"af3327fd-df8c-55e3-a736-ffa4b4c6f9c0","case_number":"b-423590","title":"Soft
+        Tech Consulting, Inc. (W911QX24R0005)","source_system":"gao","outcome":"Dismissed","filed_date":"2025-09-22"},{"case_id":"5e418646-19c0-580c-93a5-5e29b85cdfa5","case_number":"b-423664","title":"Bellese
+        Technologies, LLC (RFQ-250189J)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-01-23"},{"case_id":"aafe0be7-1199-5ade-a436-b21db751fab4","case_number":"b-424191","title":"JBW
+        FEDITC JV, LLC ()","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"16b98e60-31d3-51d3-a069-6abe798e50a8","case_number":"b-424266","title":"AcmeSolv,
+        LLC (70CDCR26R00000009)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-02-13"},{"case_id":"50007ecc-70ca-5b93-a23c-7782c50ed641","case_number":"b-424272","title":"CVTEK
+        LLC (70B04C25R00000154)","source_system":"gao","outcome":"Dismissed","filed_date":"2026-02-17"}]}'
+    headers:
+      CF-RAY:
+      - 9d71a782dfae4cbc-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 14:43:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ni4WxTlarTPDDzVoMEXmEJoMnKr4LhGlkNsLBsYZaB3hwPUCRrdRqdvrHDOjKcON2fESI9JXLh4fzFexiRY%2BgV8zoqZ3MKmS9kvDsEWbN1aRoTBB3zmZR1TH"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1124'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.069s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '919'
+      x-ratelimit-burst-reset:
+      - '10'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999679'
+      x-ratelimit-daily-reset:
+      - '84970'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '919'
+      x-ratelimit-reset:
+      - '10'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/?page=2&limit=5&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date
+  response:
+    body:
+      string: '{"count":15006,"next":"https://tango.makegov.com/api/protests/?limit=5&page=3&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date","previous":"https://tango.makegov.com/api/protests/?limit=5&shape=case_id%2Ccase_number%2Ctitle%2Csource_system%2Coutcome%2Cfiled_date","results":[{"case_id":"d73c4a61-6252-5e60-b1c6-7f807c96d247","case_number":"b-424295","title":"BDR
+        Solutions, LLC (HT001126RE011)","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"80024894-78f8-5f79-b6e7-86698022c634","case_number":"b-424296","title":"CGI
+        Federal, Inc. (36C10B26Q0168)","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"4c12fb7a-f78a-54ac-9330-f41282b92adc","case_number":"b-424297","title":"Dispel
+        LLC (FA489026QCN19)","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"e7255a8b-2ec2-5179-85cd-f50c532976aa","case_number":"b-424298","title":"Copper
+        Mountain Services, LLC (140P8525R0002)","source_system":"gao","outcome":null,"filed_date":"2026-03-03"},{"case_id":"f85ca4a2-f55c-519c-be04-9796b7756c9a","case_number":"b-423165","title":"Mission
+        Analytics, LLC (36C26224Q1803)","source_system":"gao","outcome":null,"filed_date":"2026-03-02"}]}'
+    headers:
+      CF-RAY:
+      - 9d71a785bc6f4cbc-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 14:43:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=SoeljvcpXp5bDcb5YeLdnnUQg7959mOcyp0XBdpP%2BJVL0FOKolqJ9HviapoB6W0oOb447rZ7XVQVUH9pFgN5N%2Bpjtx7NntO5tbvK91nZwcR5P0RP3CEru3qZ"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1228'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.074s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '918'
+      x-ratelimit-burst-reset:
+      - '10'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999678'
+      x-ratelimit-daily-reset:
+      - '84970'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '918'
+      x-ratelimit-reset:
+      - '10'
+    status:
+      code: 200
+      message: OK
+version: 1

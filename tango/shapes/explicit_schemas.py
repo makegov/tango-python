@@ -637,6 +637,57 @@ NOTICE_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+# Docket-level fields for Protest dockets expansion: dockets(docket_number, filed_date, ...)
+PROTEST_DOCKET_SCHEMA: dict[str, FieldSchema] = {
+    "source_system": FieldSchema(name="source_system", type=str, is_optional=True, is_list=False),
+    "case_number": FieldSchema(name="case_number", type=str, is_optional=True, is_list=False),
+    "docket_number": FieldSchema(name="docket_number", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "protester": FieldSchema(name="protester", type=str, is_optional=True, is_list=False),
+    "agency": FieldSchema(name="agency", type=str, is_optional=True, is_list=False),
+    "solicitation_number": FieldSchema(
+        name="solicitation_number", type=str, is_optional=True, is_list=False
+    ),
+    "case_type": FieldSchema(name="case_type", type=str, is_optional=True, is_list=False),
+    "outcome": FieldSchema(name="outcome", type=str, is_optional=True, is_list=False),
+    "filed_date": FieldSchema(name="filed_date", type=datetime, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=True, is_list=False),
+    "decision_date": FieldSchema(
+        name="decision_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "due_date": FieldSchema(name="due_date", type=datetime, is_optional=True, is_list=False),
+    "docket_url": FieldSchema(name="docket_url", type=str, is_optional=True, is_list=False),
+    "decision_url": FieldSchema(name="decision_url", type=str, is_optional=True, is_list=False),
+    "digest": FieldSchema(name="digest", type=str, is_optional=True, is_list=False),
+}
+
+PROTEST_SCHEMA: dict[str, FieldSchema] = {
+    "case_id": FieldSchema(name="case_id", type=str, is_optional=False, is_list=False),
+    "case_number": FieldSchema(name="case_number", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "source_system": FieldSchema(name="source_system", type=str, is_optional=True, is_list=False),
+    "outcome": FieldSchema(name="outcome", type=str, is_optional=True, is_list=False),
+    "agency": FieldSchema(name="agency", type=str, is_optional=True, is_list=False),
+    "protester": FieldSchema(name="protester", type=str, is_optional=True, is_list=False),
+    "solicitation_number": FieldSchema(
+        name="solicitation_number", type=str, is_optional=True, is_list=False
+    ),
+    "case_type": FieldSchema(name="case_type", type=str, is_optional=True, is_list=False),
+    "filed_date": FieldSchema(name="filed_date", type=datetime, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=True, is_list=False),
+    "decision_date": FieldSchema(
+        name="decision_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "due_date": FieldSchema(name="due_date", type=datetime, is_optional=True, is_list=False),
+    "docket_url": FieldSchema(name="docket_url", type=str, is_optional=True, is_list=False),
+    "decision_url": FieldSchema(name="decision_url", type=str, is_optional=True, is_list=False),
+    "digest": FieldSchema(name="digest", type=str, is_optional=True, is_list=False),
+    "dockets": FieldSchema(
+        name="dockets", type=dict, is_optional=True, is_list=True, nested_model="ProtestDocket"
+    ),
+}
+
+
 AGENCY_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=str, is_optional=False, is_list=False),
@@ -1105,6 +1156,8 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Forecast": FORECAST_SCHEMA,
     "Opportunity": OPPORTUNITY_SCHEMA,
     "Notice": NOTICE_SCHEMA,
+    "Protest": PROTEST_SCHEMA,
+    "ProtestDocket": PROTEST_DOCKET_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Grant": GRANT_SCHEMA,
     # Vehicles (Awards)

@@ -16,22 +16,22 @@ interactions:
     uri: https://tango.makegov.com/api/offices/?page=1&limit=1
   response:
     body:
-      string: '{"count":166427,"next":"http://tango.makegov.com/api/offices/?limit=1&page=2","previous":null,"results":[{"office_code":"960207","office_name":"","agency_code":"96CE","agency_name":"U.S.
+      string: '{"count":166427,"next":"https://tango.makegov.com/api/offices/?limit=1&page=2","previous":null,"results":[{"office_code":"960207","office_name":"","agency_code":"96CE","agency_name":"U.S.
         Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
         of Engineers - Civil Works"}]}'
     headers:
       CF-RAY:
-      - 9cc8ee2c0d60acf4-MSP
+      - 9d71a756c8c94c94-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Thu, 12 Feb 2026 03:16:58 GMT
+      - Wed, 04 Mar 2026 14:43:31 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CK8zmhB6yCzN2PROXTNzHpT4%2B87LTKrxMUDOSeRtvw1wDquuc1YhoF%2FLvFpFsMxXL9vcJEiv6kuWsU9dKuIYe8bpCCkuxfo57o%2FTmk0B"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JxVMrDQE7wiob2jJedbttdfsXkjw%2FQjYeziRT2rzO9V%2Bgk22q0QT21K7xldhmFeESG2qwKrzbQwmnZQV5cO3%2F0sDgs89l3brbwpGEQqji4DobljKs24a6XOW"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -41,7 +41,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '319'
+      - '320'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -51,27 +51,103 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.040s
+      - 0.016s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
-      - '10'
+      - '1000'
       x-ratelimit-burst-remaining:
-      - '8'
+      - '940'
       x-ratelimit-burst-reset:
-      - '59'
+      - '17'
       x-ratelimit-daily-limit:
-      - '100'
+      - '2000000'
       x-ratelimit-daily-remaining:
-      - '41'
+      - '1999700'
       x-ratelimit-daily-reset:
-      - '50685'
+      - '84978'
       x-ratelimit-limit:
-      - '10'
+      - '1000'
       x-ratelimit-remaining:
-      - '8'
+      - '940'
       x-ratelimit-reset:
-      - '59'
+      - '17'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/offices/960207/
+  response:
+    body:
+      string: '{"office_code":"960207","office_name":"","agency_code":"96CE","agency_name":"U.S.
+        Army Corps of Engineers - Civil Program Financing Only","department_code":96,"department_name":"Corps
+        of Engineers - Civil Works"}'
+    headers:
+      CF-RAY:
+      - 9d71a7578a004c94-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 14:43:31 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ioRA8Bs7A2bgOnTAdzS2Bg8zNtd%2BmwmU4lfHMtRwJvW88QibvDKB6PUXXZB9ExA1ciTGHxnom14qmPLzoqs9KPdQR4gcm68pOaW254KHrjXsRZyP6GEXcJkp"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '212'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.024s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '939'
+      x-ratelimit-burst-reset:
+      - '17'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999699'
+      x-ratelimit-daily-reset:
+      - '84977'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '939'
+      x-ratelimit-reset:
+      - '17'
     status:
       code: 200
       message: OK

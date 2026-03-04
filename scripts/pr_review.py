@@ -169,9 +169,22 @@ def get_pr_info_from_gh_cli(pr_number: int | None = None) -> PRInfo | None:
 
         # Get current PR or specific PR number
         if pr_number:
-            cmd = ["gh", "pr", "view", str(pr_number), "--json", "number,title,author,baseRefName,headRefName,url,state"]
+            cmd = [
+                "gh",
+                "pr",
+                "view",
+                str(pr_number),
+                "--json",
+                "number,title,author,baseRefName,headRefName,url,state",
+            ]
         else:
-            cmd = ["gh", "pr", "view", "--json", "number,title,author,baseRefName,headRefName,url,state"]
+            cmd = [
+                "gh",
+                "pr",
+                "view",
+                "--json",
+                "number,title,author,baseRefName,headRefName,url,state",
+            ]
 
         result = subprocess.run(
             cmd,
@@ -345,12 +358,18 @@ def run_conformance_check() -> int:
     if not path.exists():
         print_warning("Conformance manifest not found - skipping filter/shape conformance")
         print(f"  Expected: {path}")
-        print("  Set TANGO_CONTRACT_MANIFEST or clone tango repo as tango-api/ (see scripts/README.md)")
+        print(
+            "  Set TANGO_CONTRACT_MANIFEST or clone tango repo as tango-api/ (see scripts/README.md)"
+        )
         return 0  # Don't fail when manifest is missing
 
     cmd = [
-        "uv", "run", "python", "scripts/check_filter_shape_conformance.py",
-        "--manifest", manifest_path,
+        "uv",
+        "run",
+        "python",
+        "scripts/check_filter_shape_conformance.py",
+        "--manifest",
+        manifest_path,
     ]
     return run_command(cmd, "Filter and shape conformance", check=False)
 

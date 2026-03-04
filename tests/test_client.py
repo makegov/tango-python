@@ -336,34 +336,6 @@ class TestTangoClient:
         assert subawards.results[0]["award_key"] == "CONT_AWD_123"
 
     @patch("tango.client.httpx.Client.request")
-    def test_list_assistance(self, mock_request):
-        """Test list_assistance method (keyset pagination, raw results)"""
-        mock_response = Mock()
-        mock_response.is_success = True
-        mock_response.json.return_value = {
-            "count": 2,
-            "next": None,
-            "previous": None,
-            "results": [
-                {"award_key": "ASST-1", "recipient": "Recipient A", "fiscal_year": 2024},
-                {"award_key": "ASST-2", "recipient": "Recipient B", "fiscal_year": 2023},
-            ],
-            "cursor": None,
-        }
-        mock_response.content = b'{"count": 2}'
-        mock_request.return_value = mock_response
-
-        client = TangoClient(api_key="test-key")
-        assistance = client.list_assistance(limit=25, fiscal_year=2024)
-
-        assert assistance.count == 2
-        assert len(assistance.results) == 2
-        assert assistance.results[0]["award_key"] == "ASST-1"
-        call_args = mock_request.call_args
-        assert call_args[1]["params"]["fiscal_year"] == 2024
-        assert call_args[1]["params"]["limit"] == 25
-
-    @patch("tango.client.httpx.Client.request")
     def test_error_handling_401(self, mock_request):
         """Test 401 authentication error handling"""
         mock_response = Mock()

@@ -13,40 +13,38 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value%2Caward_date
+    uri: https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value%2Caward_date
   response:
     body:
-      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value%2Caward_date&cursor=WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0%3D","cursor":"WyIyMDI1LTExLTE0IiwgIkNPTlRfQVdEXzg5MjQzMzI2RkZFNDAwNzM1Xzg5MDBfTk5HMTVTRDYxQl84MDAwIl0=","results":[{"key":"CONT_AWD_70FBR426F00000001_7022_70FBR423A00000007_7022","piid":"70FBR426F00000001","total_contract_value":1089550.8,"award_date":"2025-11-15","recipient":{"display_name":"REDCON
-        SOLUTIONS GROUP LLC"}},{"key":"CONT_AWD_36C25526N0084_3600_36C25525D0027_3600","piid":"36C25526N0084","total_contract_value":17351.59,"award_date":"2025-11-15","recipient":{"display_name":"ONSITE
-        CONSTRUCTION GROUP LLC"}},{"key":"CONT_AWD_9523ZY26C0001_9507_-NONE-_-NONE-","piid":"9523ZY26C0001","total_contract_value":1371325.32,"award_date":"2025-11-14","recipient":{"display_name":"MERLIN
-        INTERNATIONAL, INC."}},{"key":"CONT_AWD_89243426FEE000564_8900_89243423AEE000009_8900","piid":"89243426FEE000564","total_contract_value":4387892.04,"award_date":"2025-11-14","recipient":{"display_name":"RACK-WILDNER
-        & REESE, INC."}},{"key":"CONT_AWD_89243326FFE400735_8900_NNG15SD61B_8000","piid":"89243326FFE400735","total_contract_value":24732.97,"award_date":"2025-11-14","recipient":{"display_name":"REGENCY
-        CONSULTING INC"}}],"count_type":"approximate"}'
+      string: '{"count":82734960,"next":"https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Crecipient%28display_name%29%2Ctotal_contract_value%2Caward_date&cursor=WyIyMDI2LTAzLTAzIiwgImZlMzAxYTBiLTM1NTMtNTE1MS04NjU5LTkxYmJlNmJhZDdhNSJd","previous":null,"cursor":"WyIyMDI2LTAzLTAzIiwgImZlMzAxYTBiLTM1NTMtNTE1MS04NjU5LTkxYmJlNmJhZDdhNSJd","previous_cursor":null,"results":[{"key":"CONT_AWD_75N98026P00064_7529_-NONE-_-NONE-","piid":"75N98026P00064","total_contract_value":122510.0,"award_date":"2026-03-03","recipient":{"display_name":"PEOPLE
+        DESIGNS INC"}},{"key":"CONT_AWD_49100426P0007_4900_-NONE-_-NONE-","piid":"49100426P0007","total_contract_value":945638.46,"award_date":"2026-03-03","recipient":{"display_name":"ELSEVIER
+        INC."}},{"key":"CONT_AWD_15B10926F00000059_1540_15BNAS24A00000044_1540","piid":"15B10926F00000059","total_contract_value":255.0,"award_date":"2026-03-03","recipient":{"display_name":"PHAMATECH,
+        INCORPORATED"}},{"key":"CONT_AWD_36C25226N0271_3600_36C25223A0024_3600","piid":"36C25226N0271","total_contract_value":36904.0,"award_date":"2026-03-03","recipient":{"display_name":"BIOMERIEUX
+        INC"}},{"key":"CONT_AWD_15B50526F00000100_1540_15BNAS25A00000158_1540","piid":"15B50526F00000100","total_contract_value":8865.0,"award_date":"2026-03-03","recipient":{"display_name":"Federal
+        Prison Industries, Inc"}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 99f88c14cc41a1cf-MSP
+      - 9d71a558f9f3348b-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 17:00:53 GMT
+      - Wed, 04 Mar 2026 14:42:09 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=RdpQ8AKZVQPvnpvsYs9%2Bti1c59X99BvYU6%2BQQBQvylJ1ULcBu0b0rOAfceFlVSNZJDrNhnya9VKH1n9Ndfe0oYwOiq31DJ9jFRN7yEF0PuTyEX1KB8ynlsoJHg%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hB701E8P6REseg3OOxBNy9hhYPIYJDJmEqVyU%2BDDseuBgB0aYzIUc0T8L3kPyNjDYVyA0t%2B1vpuhuF0%2FN%2FBzUav2Rr4oAXSLx64FIVjIysdjwhtBYwREJh3d"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1410'
+      - '1367'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -56,27 +54,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.021s
+      - 0.039s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '997'
+      - '963'
       x-ratelimit-burst-reset:
-      - '59'
+      - '5'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998690'
+      - '1999775'
       x-ratelimit-daily-reset:
-      - '92'
+      - '85059'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '997'
+      - '963'
       x-ratelimit-reset:
-      - '59'
+      - '5'
     status:
       code: 200
       message: OK

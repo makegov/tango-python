@@ -21,7 +21,6 @@ Usage:
     TANGO_REFRESH_CASSETTES=true TANGO_API_KEY=xxx pytest tests/integration/
 """
 
-
 import pytest
 
 from tango import ShapeConfig

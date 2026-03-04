@@ -16,83 +16,92 @@ interactions:
     uri: https://tango.makegov.com/api/opportunities/?page=1&limit=5&shape=opportunity_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cresponse_deadline%2Cfirst_notice_date%2Clast_notice_date%2Cactive%2Cnaics_code%2Cpsc_code%2Cset_aside%2Csam_url%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29
   response:
     body:
-      string: '{"count":190142,"next":"http://tango.makegov.com/api/opportunities/?limit=5&page=2&shape=opportunity_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cresponse_deadline%2Cfirst_notice_date%2Clast_notice_date%2Cactive%2Cnaics_code%2Cpsc_code%2Cset_aside%2Csam_url%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29","previous":null,"results":[{"opportunity_id":"569a523c-2a60-4bfc-83df-45d926818a58","title":"17--NRP,DRAWBAR,TELESCO","description":"Proposed
-        procurement for NSN 1740016221432 NRP,DRAWBAR,TELESCO:\nLine 0001 Qty 30     UI
-        EA  Deliver To: W1A8 DLA DISTRIBUTION By: 0090 DAYS ADO\nThe solicitation
-        is an RFQ and will be available at the link provided in this notice.  Hard
-        copies of this solicitation are not available.  Digitized drawings and Military
-        Specifications and Standards may be retrieved, or ordered, electronically.\nAll
-        responsible sources may submit a quote which, if timely received, shall be
-        considered.\nQuotes may be submitted electronically.\n","solicitation_number":"SPE8EF26Q0029","response_deadline":"2025-12-01T00:00:00+00:00","first_notice_date":"2025-11-16T11:09:42+00:00","last_notice_date":"2025-11-16T11:09:42+00:00","active":true,"naics_code":336212,"psc_code":"17","set_aside":"SBA","sam_url":"https://sam.gov/opp/569a523c2a604bfc83df45d926818a58/view","office":{"office_code":"SPE8EF","office_name":"DLA
-        TROOP SUPPORT","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
-        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"dd59e39b-b1c9-49c2-830c-abc66ec6511a","title":"30--CONNECTING
-        LINK,RIG","description":"Proposed procurement for NSN 3040015894908 CONNECTING
-        LINK,RIG:\nLine 0001 Qty 5      UI EA  Deliver To: W1A8 DLA DIST SAN JOAQUIN
-        By: 0159 DAYS ADO\nApproved source is 0W6H8 3671240C01003-5.\nThe solicitation
-        is an RFQ and will be available at the link provided in this notice.  Hard
-        copies of this solicitation are not available. Specifications, plans, or drawings
-        are not available.\nAll responsible sources may submit a quote which, if timely
-        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE4A526T3439","response_deadline":"2025-11-24T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:55+00:00","last_notice_date":"2025-11-16T06:00:55+00:00","active":true,"naics_code":333613,"psc_code":"30","set_aside":null,"sam_url":"https://sam.gov/opp/dd59e39bb1c949c2830cabc66ec6511a/view","office":{"office_code":"SPE4A5","office_name":"DLA
-        AVIATION","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
-        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"743be37d-3b73-4f2c-857b-4c57d1ae8ff1","title":"31--CONE
-        AND ROLLERS,TA","description":"Proposed procurement for NSN 3110013984248
-        CONE AND ROLLERS,TA:\nLine 0001 Qty 1336   UI EA  Deliver To: DLA DISTRIBUTION
-        SAN DIEGO By: 0156 DAYS ADO\nThis is a source controlled drawing item.  Approved
-        sources are 60038 28682-20629; 60038 9235611-163; 97153 9235611-163.\nThe
-        solicitation is an RFQ and will be available at the link provided in this
-        notice.  Hard copies of this solicitation are not available. The items furnished
-        must meet the requirements of the drawing cited in the solicitation. Digitized
-        drawings and Military Specifications and Standards may be retrieved, or ordered,
-        electronically.\nAll responsible sources may submit a quote which, if timely
-        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE4A626T047W","response_deadline":"2025-11-24T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:44+00:00","last_notice_date":"2025-11-16T06:00:44+00:00","active":true,"naics_code":332991,"psc_code":"31","set_aside":null,"sam_url":"https://sam.gov/opp/743be37d3b734f2c857b4c57d1ae8ff1/view","office":{"office_code":"SPE4A6","office_name":"DLA
-        AVIATION","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
-        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"f5ce34a6-fe69-465a-9a47-e3e445c63f55","title":"47--HOSE
-        ASSEMBLY,NONME","description":"Proposed procurement for NSN 4720002304007
-        HOSE ASSEMBLY,NONME:\nLine 0001 Qty 17     UI EA  Deliver To: DLA DISTRIBUTION
-        WARNER ROBINS By: 0080 DAYS ADO\nThis is a source controlled drawing item.  Approved
-        sources are 78570 96320; 98441 A2148-1.\nThe solicitation is an RFQ and will
-        be available at the link provided in this notice.  Hard copies of this solicitation
-        are not available. The items furnished must meet the requirements of the drawing
-        cited in the solicitation. Digitized drawings and Military Specifications
-        and Standards may be retrieved, or ordered, electronically.\nAll responsible
-        sources may submit a quote which, if timely received, shall be considered.\nQuotes
-        must be submitted electronically.\n","solicitation_number":"SPE7M426T2717","response_deadline":"2025-11-28T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:42+00:00","last_notice_date":"2025-11-16T06:00:42+00:00","active":true,"naics_code":332999,"psc_code":"47","set_aside":"SBA","sam_url":"https://sam.gov/opp/f5ce34a6fe69465a9a47e3e445c63f55/view","office":{"office_code":"SPE7M4","office_name":"DLA
-        LAND AND MARITIME","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
-        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}},{"opportunity_id":"f967a1d6-d155-4e10-a193-7cf1e4e464ac","title":"66--DRAFTING
-        MACHINE","description":"Proposed procurement for NSN 6675001740508 DRAFTING
-        MACHINE:\nLine 0001 Qty 75     UI EA  Deliver To: W1A8 DLA DISTRIBUTION By:
-        0065 DAYS ADO\nApproved source is 1GRU3 3300NP-16.\nThe solicitation is an
-        RFQ and will be available at the link provided in this notice.  Hard copies
-        of this solicitation are not available. Specifications, plans, or drawings
-        are not available.\nAll responsible sources may submit a quote which, if timely
-        received, shall be considered.\nQuotes must be submitted electronically.\n","solicitation_number":"SPE8E926T0681","response_deadline":"2025-11-28T00:00:00+00:00","first_notice_date":"2025-11-16T06:00:40+00:00","last_notice_date":"2025-11-16T06:00:40+00:00","active":true,"naics_code":321999,"psc_code":"66","set_aside":null,"sam_url":"https://sam.gov/opp/f967a1d6d1554e10a1937cf1e4e464ac/view","office":{"office_code":"SPE8E9","office_name":"DLA
-        TROOP SUPPORT","agency_code":"97AS","agency_name":"Defense Logistics Agency","department_code":97,"department_name":"Department
-        of Defense"},"place_of_performance":{"zip":null,"city":null,"state":null,"country":null,"street_address":null}}]}'
+      string: '{"count":30155,"next":"https://tango.makegov.com/api/opportunities/?limit=5&page=2&shape=opportunity_id%2Ctitle%2Cdescription%2Csolicitation_number%2Cresponse_deadline%2Cfirst_notice_date%2Clast_notice_date%2Cactive%2Cnaics_code%2Cpsc_code%2Cset_aside%2Csam_url%2Coffice%28%2A%29%2Cplace_of_performance%28%2A%29","previous":null,"results":[{"opportunity_id":"5d5dbbec-35b9-4fd3-b887-8b2d094d8d93","title":"U.S.
+        Embassy Antananarivo: Central Alarm Monitoring Services","description":"<p>The
+        vendor shall provide</p>\n\n<ol>\n\t<li>Alarm installation and maintenance
+        services:\n\t<ol>\n\t\t<li>One quote, for service provider owned alarm systems
+        completely provided and maintained from the service provider; or</li>\n\t\t<li>One
+        quote, for service provider owned communications modules to be installed in
+        existing AES 5100 and 6100 systems. (This communications module must be able
+        to communicate with service providers monitoring center.</li>\n\t</ol>\n\t</li>\n\t<li>Provision
+        of Central Alarm Monitoring System (CAMS) Monitoring Services. This is defined
+        as an alarm system that also makes the intrusion known at another location
+        by means of an automatic telephone dialer, wired connection or by radio transmission
+        to a central monitoring location. CAMS must be monitored 24/7 and have a 24/7
+        dedicated response, i.e. Local Guard Mobile Patrol or a commercial security
+        response company.&nbsp; The response service does not need to be armed with
+        firearms.</li>\n</ol>\n","solicitation_number":"PR15858949","response_deadline":"2026-04-17T13:00:00+00:00","first_notice_date":"2026-03-04T07:19:42+00:00","last_notice_date":"2026-03-04T07:19:42+00:00","active":true,"naics_code":561612,"psc_code":"K063","set_aside":null,"sam_url":"https://sam.gov/opp/5d5dbbec35b94fd3b8878b2d094d8d93/view","office":{"office_code":"19MA10","office_name":"U.S.
+        EMBASSY ANTANANARIVO","agency_code":"1900","agency_name":"Department of State","department_code":19,"department_name":"Department
+        of State"},"place_of_performance":{"zip":"101","city":"Antananarivo","state":"MG-T","country":"MDG","street_address":null}},{"opportunity_id":"e863b8c2-7509-4e37-9b2f-61c2a05a286c","title":"Purchase,
+        20Feet Conex Box","description":"<p></p>\n\n<p>To purchase six (6) each 20ft
+        conex boxes that are manufactured to comply with ISO 668 standard.</p>\n\n<p>Remarks:
+        Rear and Front double-sided door type Exterior color RAL6003 Olive Green is
+        preferable.</p>\n\n<p>WARRANTY: Manufacture Warranty required at delivery.</p>\n","solicitation_number":"N6264926QE011","response_deadline":"2026-03-10T01:00:00+00:00","first_notice_date":"2026-03-04T01:29:49+00:00","last_notice_date":"2026-03-04T06:01:26+00:00","active":true,"naics_code":332439,"psc_code":"8150","set_aside":"NONE","sam_url":"https://sam.gov/opp/30ed251d67d749ad904e3398f4581cb2/view","office":{"office_code":"N62649","office_name":"NAVSUP
+        FLT LOG CTR  YOKOSUKA","agency_code":"1700","agency_name":"Department of the
+        Navy","department_code":97,"department_name":"Department of Defense"},"place_of_performance":{"zip":null,"city":"Sasebo","state":"JP-42","country":"JPN","street_address":null}},{"opportunity_id":"3cf28036-c04c-4e3a-a0df-035b8761779e","title":"Purchase,
+        Install, Removal, On-site Training of 1ea Band Saw","description":"<p>This
+        is a Presolicitation Notice issued in accordance with (IAW) Revolutionary
+        FAR Overhaul (RFO) FAR 5.1 and 12.201-1(c)(2).</p>\n\n<p>THIS NOTICE IS NOT
+        A REQUEST FOR COMPETITIVE PROPOSALS NOR QUOTATIONS.</p>\n\n<p>The Government
+        intends to solicit this requirement directly from suppliers IAW RFO FAR 12.201-1(c)(2)
+        for firm-fixed price contract for purchase, installation, removal/disposal
+        of existing Band Saw, and on-site training in Japanese of 1ea brand new Band
+        Saw at Sagami General Depot, Kanagawa Prefecture, Japan.&nbsp;<br />\nAnticipated
+        award date is around 15 May 2026 (subject to change).</p>\n\n<p>Agency: Department
+        of the Air Force<br />\nOffice: 374th Contracting Squadron, Bldg 620, Yokota
+        Air Base, Fussa-shi, Tokyo, Japan<br />\nSet-aside: N/A<br />\nNAICS Code:
+        221310</p>\n\n<p>Description: Purchase, Install, Removal, On-site Training
+        of 1ea Band Saw, Amada HK400 or equal at Sagami General Depot, JAPAN</p>\n\n<p>Note:
+        This project will be performed in its entirety in the country of Japan. The
+        successful offeror must have valid licenses to perform work in the country
+        of Japan.<br />\n&nbsp;</p>\n","solicitation_number":"FA520926Q0019","response_deadline":"2026-03-19T05:00:00+00:00","first_notice_date":"2026-03-04T05:36:11+00:00","last_notice_date":"2026-03-04T05:36:11+00:00","active":true,"naics_code":333248,"psc_code":"3405","set_aside":"NONE","sam_url":"https://sam.gov/opp/3cf28036c04c4e3aa0df035b8761779e/view","office":{"office_code":"FA5209","office_name":"FA5209  374
+        CONS PK","agency_code":"5700","agency_name":"Department of the Air Force","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":"Sagamihara","state":"JP-14","country":"JPN","street_address":null}},{"opportunity_id":"e67a42c5-e7bc-42ea-948b-e55560208455","title":"Portable
+        Toilets in support of Friendship Day FY26","description":"<p>The contractor
+        shall provide portable toilets, handicap accessible portable toilets, and
+        hand washing stations for visitors to the Iwakuni Friendship Day Air Show
+        on May 02 &ndash; May 03, 2026, with no additional cost to the U.S. Government.
+        The contractor will, without any additional expense to the U.S. Government,
+        obtain necessary licenses and permits applicable to execute the requirement
+        .</p>\n\n<p></p>\n","solicitation_number":"M6740026Q0015","response_deadline":"2026-03-12T23:00:00+00:00","first_notice_date":"2026-02-20T05:16:29+00:00","last_notice_date":"2026-03-04T05:07:12+00:00","active":true,"naics_code":532411,"psc_code":"W085","set_aside":"NONE","sam_url":"https://sam.gov/opp/c17e6afedae846ed9d1965af77202a3b/view","office":{"office_code":"M67400","office_name":"COMMANDING
+        OFFICER","agency_code":"1700","agency_name":"Department of the Navy","department_code":97,"department_name":"Department
+        of Defense"},"place_of_performance":{"zip":null,"city":"Iwakuni","state":"JP-35","country":"JPN","street_address":null}},{"opportunity_id":"0fe3adb2-602d-4737-876d-49174eab17ec","title":"Sources
+        Sought for Starlink Mini Terminals and accessories","description":"<ol>\n\t<li>The
+        Contractor shall furnish and deliver items listed below to the U.S. Embassy
+        Ulaanbaatar, Mongolia in accordance with the specifications and terms and
+        conditions set forth herein. The materials and equipment requested are meant
+        to provide medical clinics in Omnogobi, Dornogobi, and Dundgovi Province,
+        Mongolia with Starlink Mini Terminals needed to provide internet connectivity
+        to ambulances during medical emergencies and increase standard of medical
+        care in a prehospital setting. &nbsp;</li>\n</ol>\n\n<p>List of Items to be
+        Procured 70 total units:</p>\n\n<p>Starlink Mini Terminals</p>\n\n<p>Starlink
+        Mini Magnetic Mount</p>\n\n<p>12V Cigarette lighter adapter, 10ft braided</p>\n\n<p>Starlink
+        Mini Protective cover&nbsp;&nbsp;&nbsp; &nbsp;</p>\n","solicitation_number":"19MG1026Q0004","response_deadline":"2026-03-19T08:00:00+00:00","first_notice_date":"2026-03-04T04:27:00+00:00","last_notice_date":"2026-03-04T04:27:00+00:00","active":true,"naics_code":null,"psc_code":"DG11","set_aside":"NONE","sam_url":"https://sam.gov/opp/0fe3adb2602d4737876d49174eab17ec/view","office":{"office_code":"19MG10","office_name":"U.S.
+        EMBASSY ULAANBAATAR","agency_code":"1900","agency_name":"Department of State","department_code":19,"department_name":"Department
+        of State"},"place_of_performance":{"zip":null,"city":"ulaanbaatar","state":"MN-1","country":"MNG","street_address":null}}]}'
     headers:
       CF-RAY:
-      - 99f88c94b8e4a1cf-MSP
+      - 9d71a75d7cc628fe-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 17:01:14 GMT
+      - Wed, 04 Mar 2026 14:43:32 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=bfiSBpNQl38vrPnHP7HI3YFOwzR3dDgcM0FB0CidZ6EI4KTEa0GsJxOnlJ1mjgGRc%2BHPebVTHUqPRqB%2B7PPaDyVCHexR0KJR4kco7ZxjEfdUi3b%2FHfie5BvkVA%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IBHiAtZYosQcLpC1FXl%2BiVjGduWsVWiMAPOjl6saWJSNPs0A41usE20vEwuhlPeLlJKxiZsHKgkar%2FMn5weukt8e6oczdmUxxVc8ei%2BY778598LYrIiF%2B51e"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '6941'
+      - '7739'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -102,27 +111,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.478s
+      - 0.016s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '945'
+      - '936'
       x-ratelimit-burst-reset:
-      - '38'
+      - '16'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1998638'
+      - '1999696'
       x-ratelimit-daily-reset:
-      - '71'
+      - '84977'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '945'
+      - '936'
       x-ratelimit-reset:
-      - '38'
+      - '16'
     status:
       code: 200
       message: OK

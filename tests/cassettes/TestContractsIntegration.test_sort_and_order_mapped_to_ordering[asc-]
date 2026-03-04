@@ -13,45 +13,43 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date
+    uri: https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date
   response:
     body:
-      string: '{"count":81180424,"next":"http://tango.makegov.com/api/contracts/?page=1&limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date&cursor=WyIyMDI0LTEwLTAxIiwgIkNPTlRfQVdEX1c5MVpMSzI1UFYwMDA4Xzk3MDBfLU5PTkUtXy1OT05FLSJd","cursor":"WyIyMDI0LTEwLTAxIiwgIkNPTlRfQVdEX1c5MVpMSzI1UFYwMDA4Xzk3MDBfLU5PTkUtXy1OT05FLSJd","results":[{"key":"CONT_AWD_W91ZLK25PV0012_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0012","award_date":"2024-10-01","description":"CONSOLIDATED
-        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":694435.17,"recipient":{"display_name":"GPC
-        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0011_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0011","award_date":"2024-10-01","description":"CONSOLIDATED
-        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":856590.91,"recipient":{"display_name":"GPC
-        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0010_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0010","award_date":"2024-10-01","description":"CONSOLIDATED
-        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":1652994.57,"recipient":{"display_name":"GPC
-        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0009_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0009","award_date":"2024-10-01","description":"CONSOLIDATED
-        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":2924202.87,"recipient":{"display_name":"GPC
-        CONSOLIDATED REPORTING"}},{"key":"CONT_AWD_W91ZLK25PV0008_9700_-NONE-_-NONE-","piid":"W91ZLK25PV0008","award_date":"2024-10-01","description":"CONSOLIDATED
-        MONTHLY GOVERNMENT PURCHASE CARD TRANSACTIONS ABOVE THE MICRO-PURCHASE THRESHOLD.","total_contract_value":1660531.17,"recipient":{"display_name":"GPC
-        CONSOLIDATED REPORTING"}}],"count_type":"approximate"}'
+      string: '{"count":82734960,"next":"https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date&cursor=WyIxOTgxLTAzLTE1IiwgImRkMmFlMjQ4LTlkNDktNWI3Zi04MWJmLWQxNDA4Njg2NjBiYiJd","previous":null,"cursor":"WyIxOTgxLTAzLTE1IiwgImRkMmFlMjQ4LTlkNDktNWI3Zi04MWJmLWQxNDA4Njg2NjBiYiJd","previous_cursor":null,"results":[{"key":"CONT_AWD_N6871167C0149_9700_-NONE-_-NONE-","piid":"N6871167C0149","award_date":"1967-01-01","description":null,"total_contract_value":35397.0,"recipient":{"display_name":"NV
+        ENERGY INC"}},{"key":"CONT_AWD_N6871170C1205_9700_-NONE-_-NONE-","piid":"N6871170C1205","award_date":"1970-06-07","description":null,"total_contract_value":1644571.58,"recipient":{"display_name":"IMPERIAL
+        IRRIGATION DISTRICT"}},{"key":"CONT_AWD_N6871177F7668_9700_-NONE-_-NONE-","piid":"N6871177F7668","award_date":"1977-06-01","description":null,"total_contract_value":62000.0,"recipient":{"display_name":"SOUTHWEST
+        GAS CORPORATION"}},{"key":"CONT_AWD_N6274268C0001_9700_-NONE-_-NONE-","piid":"N6274268C0001","award_date":"1979-10-01","description":"200112!000326!5700!CA12  !30
+        CONS/LGC                     !N6274268C0001  !A!N!*!N!QW02               !20010923!20010930!031754690!006926927!103901773!N!HAWAIIAN
+        ELECTRIC COMPANY, INC!821 WARD AVENUE           !HONOLULU            !HI!96840!22700!009!15!KAHULUI             !MAUI                  !HAWAII    !+000000145373!N!N!000000000000!S112!ELECTRIC
+        SERVICES                                 !S1 !SERVICES                      !3000!NOT
+        DISCERNABLE OR CLASSIFIED !221122!*!*!3! ! ! !*!*!*!B!*!*!N!Z!B !U!J!1!001!N!1E!Z!N!Z!  !  !Y!C!N!
+        ! ! !Z!Z!A!A!000!A!B!N! ! ! ! !    !      !0001!","total_contract_value":47128741.0,"recipient":{"display_name":"HAWAIIAN
+        ELECTRIC COMPANY, INC."}},{"key":"CONT_AWD_18500198103C05390539GS00C02543_1700_GS00C02543_142F","piid":"18500198103C05390539GS00C02543","award_date":"1981-03-15","description":null,"total_contract_value":0.0,"recipient":{"display_name":"625
+        ORLEANS PLACE"}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 99f9b9500ac37091-YYZ
+      - 9d71a5a4ed53ad1a-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sun, 16 Nov 2025 20:26:32 GMT
+      - Wed, 04 Mar 2026 14:42:21 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Hn6sigbNxA8KjM8jxSWxwWAtxuE%2B4fKymm4c8eZlNM1Y6SLQT6nb8qzV%2BFtq%2BeOvHNjoYx7zntQQd34HrshMi3Rc6vl28F0%2FjsBND2AN339IRSjA%2FkOM2rhMfg%3D%3D"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hOrQlp6nHmL%2BVF83mrFiZO175qqSBBMMVwLa1P6u0KcucHyYCEdoMkdgZ9oDkz1Zg17KzRIwpVc7X%2BMVRMMr265%2Fzde5Aq4NVp4LfCMTEPHhMTUNUIdVnQMv"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
       - chunked
       allow:
       - GET, HEAD, OPTIONS
-      alt-svc:
-      - h3=":443"; ma=86400
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1946'
+      - '2094'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -61,27 +59,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.019s
+      - 0.052s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '984'
+      - '983'
       x-ratelimit-burst-reset:
-      - '34'
+      - '46'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999005'
+      - '1999763'
       x-ratelimit-daily-reset:
-      - '3'
+      - '85047'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '984'
+      - '983'
       x-ratelimit-reset:
-      - '34'
+      - '46'
     status:
       code: 200
       message: OK

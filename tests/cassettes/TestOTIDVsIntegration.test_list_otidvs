@@ -16,33 +16,32 @@ interactions:
     uri: https://tango.makegov.com/api/otidvs/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
   response:
     body:
-      string: '{"count":2053,"next":"http://tango.makegov.com/api/otidvs/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI1LTEwLTIyIiwgImJkZmE1MDJhLTRjOTMtNWM0ZS1hMDcxLTYzNWRhNThiNGVlMSJd","previous":null,"cursor":"WyIyMDI1LTEwLTIyIiwgImJkZmE1MDJhLTRjOTMtNWM0ZS1hMDcxLTYzNWRhNThiNGVlMSJd","previous_cursor":null,"results":[{"key":"OT_IDV_HR0011269E026_9700","piid":"HR0011269E026","award_date":"2025-11-12","description":"DEVELOPMENT
-        OF NEW COMPUTATIONAL PRINCIPLES FOR ADAPTATION, ORCHESTRATION, AND ENGINEERING
-        OF BIOLOGICAL SYSTEMS","total_contract_value":1838712.0,"obligated":318987.0,"idv_type":"O","recipient":{"uei":"CURENVCZT6Z4","display_name":"WOLFRAM
-        FOUNDATION"}},{"key":"OT_IDV_H92405269E001_9700","piid":"H92405269E001","award_date":"2025-11-03","description":"OTA
-        PROTOTYPE OF FUTURESS/INNOVATION CYCLES RAPID\nPROTOTYPING BUSINESS PROCESS","total_contract_value":49000000.0,"obligated":2988524.1,"idv_type":"O","recipient":{"uei":"QNXRK3LEY5W8","display_name":"LIBERTY
-        ALLIANCE, LLC"}},{"key":"OT_IDV_HR0011269E022_9700","piid":"HR0011269E022","award_date":"2025-10-28","description":"RAPID
-        RESILIENCE RESPONSES (R3) - PROGRAM TASK CALL 08, AUTHORING TRAINING FOR HUNT
-        AND EXQUISITE NETWORK ANALYTICS (ATHENA).","total_contract_value":9072116.0,"obligated":4054352.0,"idv_type":"O","recipient":{"uei":"MQ1TKVG8MN89","display_name":"ULTIMATE
-        KNOWLEDGE CORPORATION"}},{"key":"OT_IDV_N000392690001_9700","piid":"N000392690001","award_date":"2025-10-27","description":"PHASE
-        1 COMPLETION","total_contract_value":5095641.0,"obligated":10191282.0,"idv_type":"O","recipient":{"uei":"SMM7VQCC87V3","display_name":"APPLIED
-        INTUITION GOVERNMENT INC"}},{"key":"OT_IDV_HR0011269E038_9700","piid":"HR0011269E038","award_date":"2025-10-22","description":"INERTIAL
-        SCALING FOR DERISKING STABILITY AND CONTROL OF TIGHTLY COUPLED AEROPROPULSIVE
-        AIRCRAFT CONFIGURATIONS","total_contract_value":1800000.0,"obligated":2600000.0,"idv_type":"O","recipient":{"uei":"QCRHSCGFBLN4","display_name":"WHISPER
-        AERO INC"}}],"count_type":"approximate"}'
+      string: '{"count":2074,"next":"https://tango.makegov.com/api/otidvs/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI1LTEyLTAzIiwgIjlmN2Y5ZmQzLWQzNmEtNWU2OS1iZWIwLWM3YzFkZDk5ZDVmZCJd","previous":null,"cursor":"WyIyMDI1LTEyLTAzIiwgIjlmN2Y5ZmQzLWQzNmEtNWU2OS1iZWIwLWM3YzFkZDk5ZDVmZCJd","previous_cursor":null,"results":[{"key":"OT_IDV_HR00112590164_9700","piid":"HR00112590164","award_date":"2026-02-17","description":"INTELLIGENT
+        NETWORKING VIA KOOPMAN-BASED SEMANTIC-COMMUNICATIONS (INKS)","total_contract_value":350000.0,"obligated":350000.0,"idv_type":"O","recipient":{"uei":"JFNPF1DXEP54","display_name":"AIMDYN,
+        INC."}},{"key":"OT_IDV_W519TC2592037_9700","piid":"W519TC2592037","award_date":"2026-02-09","description":"MUNITIONS
+        AND ENERGETICS TECHNOLOGY CENTER (METC) - DEVELOPMENT AND INTEGRATION OF NEXT-GENERATION
+        MUNITION SYSTEMS AWARD.","total_contract_value":980693.0,"obligated":980693.0,"idv_type":"O","recipient":{"uei":"VFVENKZEF891","display_name":"ONE
+        NATION INNOVATION"}},{"key":"OT_IDV_HR0011269E046_9700","piid":"HR0011269E046","award_date":"2025-12-03","description":"DARPA
+        RESEARCH PROJECT","total_contract_value":999829.0,"obligated":999829.0,"idv_type":"O","recipient":{"uei":"KBVQPMHDD4V7","display_name":"GRAPHENE
+        COMPOSITES LLC"}},{"key":"OT_IDV_FA9101269B003_9700","piid":"FA9101269B003","award_date":"2025-12-03","description":"BURST
+        DIAPHRAGM FABRICATION FOLLOW-ON PRODUCTION - UNITED PRECISION CORP","total_contract_value":6800000.0,"obligated":0.0,"idv_type":"O","recipient":{"uei":"HFALSP1F9ZD3","display_name":"UNITED
+        PRECISION CORP."}},{"key":"OT_IDV_W91CRB269Z021_9700","piid":"W91CRB269Z021","award_date":"2025-12-03","description":"PROTOTYPE
+        PROJECT ORDER C5-21-2021 RTC APPROACH TO PERSISTENT INTEGRATED DEVELOPMENTAL
+        (RAPID) TESTING.","total_contract_value":3359272.85,"obligated":3359272.85,"idv_type":"O","recipient":{"uei":"GFJNNNA72UN4","display_name":"CONSORTIUM
+        MANAGEMENT GROUP, INC."}}],"count_type":"approximate"}'
     headers:
       CF-RAY:
-      - 9cc8fb610806a1d9-MSP
+      - 9d71a76ab8174ca9-MSP
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Thu, 12 Feb 2026 03:25:59 GMT
+      - Wed, 04 Mar 2026 14:43:34 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5RmWeXI5DiklZEB9XlgTzqJxMKXj%2FmOeZk33CRVmzP32Ji25dZNgH3dXTRYSNqXCRvlv33aeLA4ZRXDzEe4il7iwVZMf7rD%2B9x2Lfxjo"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=f5LQLhbnzqCmYhEuioJvj473GcztsNIrCf3sVXFIAse7oFe005Ueb4qPpidEqFXRvb5tI%2BUUMzh9%2BJhznV4vC%2BR88nrbGgl4YcQ%2BM1tL4vocYKjU5%2BAsQwR0"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -52,7 +51,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '2123'
+      - '2053'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -62,114 +61,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.038s
+      - 0.036s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '995'
+      - '927'
       x-ratelimit-burst-reset:
-      - '33'
+      - '14'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999583'
+      - '1999687'
       x-ratelimit-daily-reset:
-      - '34462'
+      - '84974'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '995'
+      - '927'
       x-ratelimit-reset:
-      - '33'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: ''
-    headers:
-      accept:
-      - '*/*'
-      accept-encoding:
-      - gzip, deflate
-      connection:
-      - keep-alive
-      host:
-      - tango.makegov.com
-      user-agent:
-      - python-httpx/0.28.1
-    method: GET
-    uri: https://tango.makegov.com/api/otidvs/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type
-  response:
-    body:
-      string: '{"count":2053,"next":"http://tango.makegov.com/api/otidvs/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%2Cuei%29%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cidv_type&cursor=WyIyMDI1LTEwLTIyIiwgImJkZmE1MDJhLTRjOTMtNWM0ZS1hMDcxLTYzNWRhNThiNGVlMSJd","previous":null,"cursor":"WyIyMDI1LTEwLTIyIiwgImJkZmE1MDJhLTRjOTMtNWM0ZS1hMDcxLTYzNWRhNThiNGVlMSJd","previous_cursor":null,"results":[{"key":"OT_IDV_HR0011269E026_9700","piid":"HR0011269E026","award_date":"2025-11-12","description":"DEVELOPMENT
-        OF NEW COMPUTATIONAL PRINCIPLES FOR ADAPTATION, ORCHESTRATION, AND ENGINEERING
-        OF BIOLOGICAL SYSTEMS","total_contract_value":1838712.0,"obligated":318987.0,"idv_type":"O","recipient":{"uei":"CURENVCZT6Z4","display_name":"WOLFRAM
-        FOUNDATION"}},{"key":"OT_IDV_H92405269E001_9700","piid":"H92405269E001","award_date":"2025-11-03","description":"OTA
-        PROTOTYPE OF FUTURESS/INNOVATION CYCLES RAPID\nPROTOTYPING BUSINESS PROCESS","total_contract_value":49000000.0,"obligated":2988524.1,"idv_type":"O","recipient":{"uei":"QNXRK3LEY5W8","display_name":"LIBERTY
-        ALLIANCE, LLC"}},{"key":"OT_IDV_HR0011269E022_9700","piid":"HR0011269E022","award_date":"2025-10-28","description":"RAPID
-        RESILIENCE RESPONSES (R3) - PROGRAM TASK CALL 08, AUTHORING TRAINING FOR HUNT
-        AND EXQUISITE NETWORK ANALYTICS (ATHENA).","total_contract_value":9072116.0,"obligated":4054352.0,"idv_type":"O","recipient":{"uei":"MQ1TKVG8MN89","display_name":"ULTIMATE
-        KNOWLEDGE CORPORATION"}},{"key":"OT_IDV_N000392690001_9700","piid":"N000392690001","award_date":"2025-10-27","description":"PHASE
-        1 COMPLETION","total_contract_value":5095641.0,"obligated":10191282.0,"idv_type":"O","recipient":{"uei":"SMM7VQCC87V3","display_name":"APPLIED
-        INTUITION GOVERNMENT INC"}},{"key":"OT_IDV_HR0011269E038_9700","piid":"HR0011269E038","award_date":"2025-10-22","description":"INERTIAL
-        SCALING FOR DERISKING STABILITY AND CONTROL OF TIGHTLY COUPLED AEROPROPULSIVE
-        AIRCRAFT CONFIGURATIONS","total_contract_value":1800000.0,"obligated":2600000.0,"idv_type":"O","recipient":{"uei":"QCRHSCGFBLN4","display_name":"WHISPER
-        AERO INC"}}],"count_type":"approximate"}'
-    headers:
-      CF-RAY:
-      - 9cc8fee21e454c91-MSP
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Thu, 12 Feb 2026 03:28:23 GMT
-      Nel:
-      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
-      Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=kWPjvB7QGrMtsezlFvY59XUQ%2ByxeqyOdMq1rbTRxUbRQ1BdR8jTLZlrpCcZJjQ2bFBD8A4C3ms9gqB41Vnk1Cl2iUAnQHMWi%2Fk30HSy8"}]}'
-      Server:
-      - cloudflare
-      Transfer-Encoding:
-      - chunked
-      allow:
-      - GET, HEAD, OPTIONS
-      cf-cache-status:
-      - DYNAMIC
-      content-length:
-      - '2123'
-      cross-origin-opener-policy:
-      - same-origin
-      referrer-policy:
-      - same-origin
-      vary:
-      - Accept, Cookie
-      x-content-type-options:
-      - nosniff
-      x-execution-time:
-      - 0.025s
-      x-frame-options:
-      - DENY
-      x-ratelimit-burst-limit:
-      - '1000'
-      x-ratelimit-burst-remaining:
-      - '996'
-      x-ratelimit-burst-reset:
-      - '59'
-      x-ratelimit-daily-limit:
-      - '2000000'
-      x-ratelimit-daily-remaining:
-      - '1999563'
-      x-ratelimit-daily-reset:
-      - '34318'
-      x-ratelimit-limit:
-      - '1000'
-      x-ratelimit-remaining:
-      - '996'
-      x-ratelimit-reset:
-      - '59'
+      - '14'
     status:
       code: 200
       message: OK

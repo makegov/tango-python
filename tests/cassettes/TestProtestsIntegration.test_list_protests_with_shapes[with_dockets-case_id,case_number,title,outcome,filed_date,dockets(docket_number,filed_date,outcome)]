@@ -1,0 +1,81 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/protests/?page=1&limit=5&shape=case_id%2Ccase_number%2Ctitle%2Coutcome%2Cfiled_date%2Cdockets%28docket_number%2Cfiled_date%2Coutcome%29
+  response:
+    body:
+      string: '{"count":15006,"next":"https://tango.makegov.com/api/protests/?limit=5&page=2&shape=case_id%2Ccase_number%2Ctitle%2Coutcome%2Cfiled_date%2Cdockets%28docket_number%2Cfiled_date%2Coutcome%29","previous":null,"results":[{"case_id":"af3327fd-df8c-55e3-a736-ffa4b4c6f9c0","case_number":"b-423590","title":"Soft
+        Tech Consulting, Inc. (W911QX24R0005)","outcome":"Dismissed","filed_date":"2025-09-22","dockets":[{"docket_number":"b-423590.4","filed_date":"2025-09-22","outcome":"Dismissed"},{"docket_number":"b-423590.5","filed_date":"2025-09-22","outcome":"Dismissed"},{"docket_number":"b-423590.6","filed_date":"2026-02-13","outcome":null},{"docket_number":"b-423590.3","filed_date":"2025-06-09","outcome":"Dismissed"},{"docket_number":"b-423590.2","filed_date":"2025-06-03","outcome":"Dismissed"},{"docket_number":"b-423590.1","filed_date":"2025-06-02","outcome":"Dismissed"}]},{"case_id":"5e418646-19c0-580c-93a5-5e29b85cdfa5","case_number":"b-423664","title":"Bellese
+        Technologies, LLC (RFQ-250189J)","outcome":"Dismissed","filed_date":"2026-01-23","dockets":[{"docket_number":"b-423664.6","filed_date":"2026-01-23","outcome":"Dismissed"},{"docket_number":"b-423664.3","filed_date":"2025-07-17","outcome":"Dismissed"},{"docket_number":"b-423664.2","filed_date":"2025-06-23","outcome":"Dismissed"},{"docket_number":"b-423664.5","filed_date":"2025-08-22","outcome":"Dismissed"},{"docket_number":"b-423664.4","filed_date":"2025-08-04","outcome":"Dismissed"},{"docket_number":"b-423664.1","filed_date":"2025-06-23","outcome":"Dismissed"}]},{"case_id":"aafe0be7-1199-5ade-a436-b21db751fab4","case_number":"b-424191","title":"JBW
+        FEDITC JV, LLC ()","outcome":null,"filed_date":"2026-03-03","dockets":[{"docket_number":"b-424191.3","filed_date":"2026-03-03","outcome":null},{"docket_number":"b-424191.2","filed_date":"2026-01-20","outcome":"Dismissed"},{"docket_number":"b-424191.1","filed_date":"2026-01-05","outcome":"Dismissed"}]},{"case_id":"16b98e60-31d3-51d3-a069-6abe798e50a8","case_number":"b-424266","title":"AcmeSolv,
+        LLC (70CDCR26R00000009)","outcome":"Dismissed","filed_date":"2026-02-13","dockets":[{"docket_number":"b-424266.1","filed_date":"2026-02-13","outcome":"Dismissed"}]},{"case_id":"50007ecc-70ca-5b93-a23c-7782c50ed641","case_number":"b-424272","title":"CVTEK
+        LLC (70B04C25R00000154)","outcome":"Dismissed","filed_date":"2026-02-17","dockets":[{"docket_number":"b-424272.1","filed_date":"2026-02-17","outcome":"Dismissed"}]}]}'
+    headers:
+      CF-RAY:
+      - 9d71a7791884ad23-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 04 Mar 2026 14:43:36 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sAUrtss2Oezxr%2FHa2Amit6iSLzDnx9Y675Efwujc%2F2ox3g7ldgmjuZLDo3UmMN4pw7TsLZaEwTMjJ77n0J1uXzVltgEBL9iE5WwnSKqfl5VfpjJ%2BkndxU%2BQ%2F"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2439'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.062s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '922'
+      x-ratelimit-burst-reset:
+      - '12'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999682'
+      x-ratelimit-daily-reset:
+      - '84972'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '922'
+      x-ratelimit-reset:
+      - '12'
+    status:
+      code: 200
+      message: OK
+version: 1

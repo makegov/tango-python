@@ -1,10 +1,13 @@
 name: Linting
 
+# Disabled: requires checkout of private makegov/tango repo for filter_shape conformance check.
+# Re-enable when that repo is accessible (e.g. add TANGO_API_REPO_ACCESS_TOKEN secret).
 on:
-  push:
-    branches: [ main, develop ]
-  pull_request:
-    branches: [ main, develop ]
+  workflow_dispatch:
+  # push:
+  #   branches: [ main, develop ]
+  # pull_request:
+  #   branches: [ main, develop ]
 
 jobs:
   lint:
