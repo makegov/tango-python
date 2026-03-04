@@ -6,15 +6,24 @@ Complete reference for all Tango Python SDK methods and functionality.
 
 - [Client Initialization](#client-initialization)
 - [Agencies](#agencies)
+- [Offices](#offices)
+- [Organizations](#organizations)
 - [Contracts](#contracts)
 - [IDVs](#idvs)
+- [OTAs](#otas)
+- [OTIDVs](#otidvs)
+- [Subawards](#subawards)
 - [Vehicles](#vehicles)
 - [Entities](#entities)
 - [Forecasts](#forecasts)
 - [Opportunities](#opportunities)
 - [Notices](#notices)
 - [Grants](#grants)
+- [Assistance](#assistance)
+- [GSA eLibrary Contracts](#gsa-elibrary-contracts)
+- [Protests](#protests)
 - [Business Types](#business-types)
+- [NAICS](#naics)
 - [Webhooks](#webhooks)
 - [Response Objects](#response-objects)
 - [ShapeConfig (predefined shapes)](#shapeconfig-predefined-shapes)
@@ -99,6 +108,98 @@ if gsa.get('department'):
 - `name` - Full agency name
 - `abbreviation` - Short name
 - `department` - Parent department (if applicable)
+
+---
+
+## Offices
+
+Federal agency offices.
+
+### list_offices()
+
+List offices with optional search.
+
+```python
+offices = client.list_offices(page=1, limit=25, search="acquisitions")
+```
+
+**Parameters:**
+- `page` (int): Page number (default: 1)
+- `limit` (int): Results per page (default: 25, max: 100)
+- `search` (str, optional): Search term
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with office dictionaries
+
+### get_office()
+
+Get a specific office by code.
+
+```python
+office = client.get_office(code="4732XX")
+```
+
+**Parameters:**
+- `code` (str): Office code
+
+**Returns:** Dictionary with office details
+
+---
+
+## Organizations
+
+Federal organizations (hierarchical agency structure).
+
+### list_organizations()
+
+List organizations with filtering and shaping.
+
+```python
+organizations = client.list_organizations(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.ORGANIZATIONS_MINIMAL,
+    # Filter parameters
+    cgac=None,
+    include_inactive=None,
+    level=None,
+    parent=None,
+    search=None,
+    type=None,
+)
+```
+
+**Parameters:**
+- `page` (int): Page number (default: 1)
+- `limit` (int): Results per page (default: 25, max: 100)
+- `shape` (str, optional): Response shape string
+- `flat` (bool): Flatten nested objects (default: False)
+- `flat_lists` (bool): Flatten arrays with indexed keys (default: False)
+
+**Filter Parameters:**
+- `cgac` - Filter by CGAC code
+- `include_inactive` - Include inactive organizations
+- `level` - Filter by organization level
+- `parent` - Filter by parent organization
+- `search` - Search term
+- `type` - Filter by organization type
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with organization dictionaries
+
+### get_organization()
+
+Get a specific organization by fh_key.
+
+```python
+org = client.get_organization(fh_key="ORG_KEY", shape=ShapeConfig.ORGANIZATIONS_MINIMAL)
+```
+
+**Parameters:**
+- `fh_key` (str): Organization key
+- `shape` (str, optional): Response shape string
+- `flat` (bool): Flatten nested objects (default: False)
+- `flat_lists` (bool): Flatten arrays with indexed keys (default: False)
+
+**Returns:** Dictionary with organization details
 
 ---
 
@@ -275,6 +376,128 @@ contracts = client.list_contracts(
 
 ---
 
+## OTAs
+
+Other Transaction Agreements — non-FAR-based awards.
+
+### list_otas()
+
+List OTAs with keyset pagination, filtering, and shaping.
+
+```python
+otas = client.list_otas(
+    limit=25,
+    cursor=None,
+    shape=ShapeConfig.OTAS_MINIMAL,
+    # Filter parameters (all optional)
+    award_date=None,
+    award_date_gte=None,
+    award_date_lte=None,
+    awarding_agency=None,
+    expiring_gte=None,
+    expiring_lte=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    funding_agency=None,
+    ordering=None,
+    piid=None,
+    pop_end_date_gte=None,
+    pop_end_date_lte=None,
+    pop_start_date_gte=None,
+    pop_start_date_lte=None,
+    psc=None,
+    recipient=None,
+    search=None,
+    uei=None,
+)
+```
+
+**Notes:**
+- Uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
+- Filter parameters mirror those on `list_contracts`.
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with OTA dictionaries
+
+### get_ota()
+
+```python
+ota = client.get_ota("OTA_KEY", shape=ShapeConfig.OTAS_MINIMAL)
+```
+
+---
+
+## OTIDVs
+
+Other Transaction IDVs — umbrella OT agreements that can have child awards.
+
+### list_otidvs()
+
+List OTIDVs with keyset pagination, filtering, and shaping.
+
+```python
+otidvs = client.list_otidvs(
+    limit=25,
+    cursor=None,
+    shape=ShapeConfig.OTIDVS_MINIMAL,
+    # Same filter parameters as list_otas()
+)
+```
+
+**Notes:**
+- Uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
+- Filter parameters are identical to `list_otas()`.
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with OTIDV dictionaries
+
+### get_otidv()
+
+```python
+otidv = client.get_otidv("OTIDV_KEY", shape=ShapeConfig.OTIDVS_MINIMAL)
+```
+
+---
+
+## Subawards
+
+Subcontract and subaward data under prime awards.
+
+### list_subawards()
+
+List subawards with filtering and shaping.
+
+```python
+subawards = client.list_subawards(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.SUBAWARDS_MINIMAL,
+    # Filter parameters (all optional)
+    award_key=None,
+    awarding_agency=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    funding_agency=None,
+    prime_uei=None,
+    recipient=None,
+    sub_uei=None,
+)
+```
+
+**Filter Parameters:**
+- `award_key` - Filter by prime award key
+- `awarding_agency` - Filter by awarding agency code
+- `fiscal_year` - Exact fiscal year
+- `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
+- `funding_agency` - Filter by funding agency code
+- `prime_uei` - Filter by prime awardee UEI
+- `recipient` - Search by subrecipient name
+- `sub_uei` - Filter by subrecipient UEI
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with subaward dictionaries
+
+---
+
 ## Vehicles
 
 Vehicles provide a solicitation-centric way to discover groups of related IDVs and (optionally) expand into the underlying awards via shaping.
@@ -402,7 +625,20 @@ entities = client.list_entities(
     limit=25,
     shape=None,
     flat=False,
-    # Additional filters can be passed as **kwargs
+    flat_lists=False,
+    # Filter parameters (all optional)
+    search=None,
+    cage_code=None,
+    naics=None,
+    name=None,
+    psc=None,
+    purpose_of_registration_code=None,
+    socioeconomic=None,
+    state=None,
+    total_awards_obligated_gte=None,
+    total_awards_obligated_lte=None,
+    uei=None,
+    zip_code=None,
 )
 ```
 
@@ -411,12 +647,26 @@ entities = client.list_entities(
 - `limit` (int): Results per page
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
+- `flat_lists` (bool): Flatten arrays with indexed keys
+
+**Filter Parameters:**
+- `search` - Full-text search
+- `cage_code` - Filter by CAGE code
+- `naics` - Filter by NAICS code
+- `name` - Filter by entity name
+- `psc` - Filter by PSC code
+- `purpose_of_registration_code` - Filter by registration purpose
+- `socioeconomic` - Filter by socioeconomic status
+- `state` - Filter by state
+- `total_awards_obligated_gte` / `total_awards_obligated_lte` - Obligation amount range
+- `uei` - Filter by UEI
+- `zip_code` - Filter by ZIP code
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with entity dictionaries
 
 **Example:**
 ```python
-entities = client.list_entities(limit=20)
+entities = client.list_entities(search="Booz Allen", limit=20)
 
 for entity in entities.results:
     print(f"{entity['display_name']}")
@@ -479,8 +729,21 @@ forecasts = client.list_forecasts(
     limit=25,
     shape=None,
     flat=False,
-    # Additional filters
+    flat_lists=False,
+    # Filter parameters (all optional)
     agency=None,
+    award_date_after=None,
+    award_date_before=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    modified_after=None,
+    modified_before=None,
+    naics_code=None,
+    naics_starts_with=None,
+    search=None,
+    source_system=None,
+    status=None,
 )
 ```
 
@@ -489,13 +752,25 @@ forecasts = client.list_forecasts(
 - `limit` (int): Results per page
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
-- `agency` (str): Filter by agency code
+- `flat_lists` (bool): Flatten arrays with indexed keys
+
+**Filter Parameters:**
+- `agency` - Filter by agency code
+- `award_date_after` / `award_date_before` - Expected award date range
+- `fiscal_year` - Exact fiscal year
+- `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
+- `modified_after` / `modified_before` - Last-modified date range
+- `naics_code` - NAICS code (exact match)
+- `naics_starts_with` - NAICS code prefix
+- `search` - Full-text search
+- `source_system` - Filter by source system
+- `status` - Filter by status
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with forecast dictionaries
 
 **Example:**
 ```python
-forecasts = client.list_forecasts(agency="GSA", limit=20)
+forecasts = client.list_forecasts(agency="GSA", fiscal_year=2025, limit=20)
 
 for forecast in forecasts.results:
     print(f"{forecast['title']}")
@@ -520,7 +795,7 @@ Active contract opportunities and solicitations.
 
 ### list_opportunities()
 
-List contract opportunities.
+List contract opportunities/solicitations.
 
 ```python
 opportunities = client.list_opportunities(
@@ -528,8 +803,23 @@ opportunities = client.list_opportunities(
     limit=25,
     shape=None,
     flat=False,
-    # Additional filters
+    flat_lists=False,
+    # Filter parameters (all optional)
+    active=None,
     agency=None,
+    first_notice_date_after=None,
+    first_notice_date_before=None,
+    last_notice_date_after=None,
+    last_notice_date_before=None,
+    naics=None,
+    notice_type=None,
+    place_of_performance=None,
+    psc=None,
+    response_deadline_after=None,
+    response_deadline_before=None,
+    search=None,
+    set_aside=None,
+    solicitation_number=None,
 )
 ```
 
@@ -538,13 +828,27 @@ opportunities = client.list_opportunities(
 - `limit` (int): Results per page
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
-- `agency` (str): Filter by agency code
+- `flat_lists` (bool): Flatten arrays with indexed keys
+
+**Filter Parameters:**
+- `active` - Filter by active status (bool)
+- `agency` - Filter by agency code
+- `first_notice_date_after` / `first_notice_date_before` - First notice date range
+- `last_notice_date_after` / `last_notice_date_before` - Last notice date range
+- `naics` - NAICS code
+- `notice_type` - Filter by notice type
+- `place_of_performance` - Filter by place of performance
+- `psc` - PSC code
+- `response_deadline_after` / `response_deadline_before` - Response deadline range
+- `search` - Full-text search
+- `set_aside` - Set-aside type
+- `solicitation_number` - Solicitation number (exact match)
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with opportunity dictionaries
 
 **Example:**
 ```python
-opportunities = client.list_opportunities(agency="DOD", limit=20)
+opportunities = client.list_opportunities(agency="DOD", active=True, limit=20)
 
 for opp in opportunities.results:
     print(f"{opp['title']}")
@@ -579,8 +883,20 @@ notices = client.list_notices(
     limit=25,
     shape=None,
     flat=False,
-    # Additional filters
+    flat_lists=False,
+    # Filter parameters (all optional)
+    active=None,
     agency=None,
+    naics=None,
+    notice_type=None,
+    posted_date_after=None,
+    posted_date_before=None,
+    psc=None,
+    response_deadline_after=None,
+    response_deadline_before=None,
+    search=None,
+    set_aside=None,
+    solicitation_number=None,
 )
 ```
 
@@ -589,13 +905,25 @@ notices = client.list_notices(
 - `limit` (int): Results per page
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
-- `agency` (str): Filter by agency code
+- `flat_lists` (bool): Flatten arrays with indexed keys
+
+**Filter Parameters:**
+- `active` - Filter by active status (bool)
+- `agency` - Filter by agency code
+- `naics` - NAICS code
+- `notice_type` - Filter by notice type
+- `posted_date_after` / `posted_date_before` - Posted date range
+- `psc` - PSC code
+- `response_deadline_after` / `response_deadline_before` - Response deadline range
+- `search` - Full-text search
+- `set_aside` - Set-aside type
+- `solicitation_number` - Solicitation number (exact match)
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with notice dictionaries
 
 **Example:**
 ```python
-notices = client.list_notices(agency="GSA", limit=20)
+notices = client.list_notices(agency="GSA", notice_type="award", limit=20)
 
 for notice in notices.results:
     print(f"{notice['title']}")
@@ -628,26 +956,46 @@ grants = client.list_grants(
     shape=None,
     flat=False,
     flat_lists=False,
-    # Additional filters
-    agency_code=None,
+    # Filter parameters (all optional)
+    agency=None,
+    applicant_types=None,
+    cfda_number=None,
+    funding_categories=None,
+    funding_instruments=None,
+    opportunity_number=None,
+    posted_date_after=None,
+    posted_date_before=None,
+    response_date_after=None,
+    response_date_before=None,
+    search=None,
+    status=None,
 )
 ```
 
 **Parameters:**
 - `page` (int): Page number
 - `limit` (int): Results per page (max 100)
-- `shape` (str): Response shape string (defaults to minimal shape).
-               Use None to disable shaping, ShapeConfig.GRANTS_MINIMAL for minimal,
-               or provide custom shape string
+- `shape` (str): Response shape string
 - `flat` (bool): Flatten nested objects in shaped response
 - `flat_lists` (bool): Flatten arrays using indexed keys
-- `agency_code` (str): Filter by agency code
+
+**Filter Parameters:**
+- `agency` - Filter by agency code
+- `applicant_types` - Filter by applicant type
+- `cfda_number` - Filter by CFDA number
+- `funding_categories` - Filter by funding category
+- `funding_instruments` - Filter by funding instrument
+- `opportunity_number` - Filter by opportunity number (exact match)
+- `posted_date_after` / `posted_date_before` - Posted date range
+- `response_date_after` / `response_date_before` - Response date range
+- `search` - Full-text search
+- `status` - Filter by status
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with grant dictionaries
 
 **Example:**
 ```python
-grants = client.list_grants(agency_code="HHS", limit=20)
+grants = client.list_grants(agency="HHS", status="forecasted", limit=20)
 
 for grant in grants.results:
     print(f"{grant['title']}")
@@ -690,6 +1038,166 @@ for grant in grants.results:
 
 ---
 
+## Assistance
+
+Financial assistance transactions (grants, direct payments, etc.).
+
+### list_assistance()
+
+List assistance transactions with keyset pagination.
+
+```python
+assistance = client.list_assistance(
+    limit=25,
+    cursor=None,
+    # Filter parameters (all optional)
+    assistance_type=None,
+    award_key=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    highly_compensated_officers=None,
+    recipient=None,
+    recipient_address=None,
+    search=None,
+)
+```
+
+**Notes:**
+- Uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
+
+**Filter Parameters:**
+- `assistance_type` - Filter by assistance type
+- `award_key` - Filter by award key
+- `fiscal_year` - Exact fiscal year
+- `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
+- `highly_compensated_officers` - Filter by highly compensated officers
+- `recipient` - Search by recipient name
+- `recipient_address` - Filter by recipient address
+- `search` - Full-text search
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with assistance dictionaries
+
+---
+
+## GSA eLibrary Contracts
+
+GSA Schedule contracts from the GSA eLibrary.
+
+### list_gsa_elibrary_contracts()
+
+List GSA eLibrary contracts with filtering and shaping.
+
+```python
+contracts = client.list_gsa_elibrary_contracts(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.GSA_ELIBRARY_CONTRACTS_MINIMAL,
+    # Filter parameters (all optional)
+    contract_number=None,
+    key=None,
+    piid=None,
+    schedule=None,
+    search=None,
+    sin=None,
+    uei=None,
+)
+```
+
+**Filter Parameters:**
+- `contract_number` - Filter by contract number
+- `key` - Filter by key
+- `piid` - Filter by PIID
+- `schedule` - Filter by GSA schedule
+- `search` - Full-text search
+- `sin` - Filter by SIN (Special Item Number)
+- `uei` - Filter by UEI
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with GSA eLibrary contract dictionaries
+
+### get_gsa_elibrary_contract()
+
+Get a single GSA eLibrary contract by UUID.
+
+```python
+contract = client.get_gsa_elibrary_contract("UUID_HERE")
+```
+
+---
+
+## Protests
+
+Bid protest records (GAO, COFC, etc.).
+
+### list_protests()
+
+List bid protests with filtering and shaping.
+
+```python
+protests = client.list_protests(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.PROTESTS_MINIMAL,
+    # Filter parameters (all optional)
+    source_system=None,
+    outcome=None,
+    case_type=None,
+    agency=None,
+    case_number=None,
+    solicitation_number=None,
+    protester=None,
+    filed_date_after=None,
+    filed_date_before=None,
+    decision_date_after=None,
+    decision_date_before=None,
+    search=None,
+)
+```
+
+**Filter Parameters:**
+- `source_system` - Filter by source system (e.g., `"gao"`)
+- `outcome` - Filter by outcome (e.g., `"Denied"`, `"Dismissed"`, `"Withdrawn"`, `"Sustained"`)
+- `case_type` - Filter by case type
+- `agency` - Filter by protested agency
+- `case_number` - Filter by case number (e.g., `"b-423274"`)
+- `solicitation_number` - Filter by solicitation number
+- `protester` - Search by protester name
+- `filed_date_after` / `filed_date_before` - Filed date range
+- `decision_date_after` / `decision_date_before` - Decision date range
+- `search` - Full-text search
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with protest dictionaries
+
+**Example:**
+```python
+protests = client.list_protests(
+    source_system="gao",
+    outcome="Sustained",
+    filed_date_after="2024-01-01",
+    shape="case_id,case_number,title,outcome,filed_date,dockets(docket_number,outcome)",
+    limit=25,
+)
+
+for protest in protests.results:
+    print(f"{protest['case_number']}: {protest['title']} — {protest['outcome']}")
+```
+
+### get_protest()
+
+Get a single protest by case_id (UUID).
+
+```python
+protest = client.get_protest(
+    "CASE_UUID",
+    shape="case_id,case_number,title,source_system,outcome,filed_date,dockets(*)",
+)
+```
+
+**Notes:**
+- Use `shape=...,dockets(...)` to include nested docket records.
+
+---
+
 ## Business Types
 
 Business type classifications.
@@ -720,6 +1228,48 @@ for biz_type in business_types.results:
 - `code` - Business type code
 - `name` - Business type name
 - `description` - Description
+
+---
+
+## NAICS
+
+NAICS (North American Industry Classification System) codes.
+
+### list_naics()
+
+List NAICS codes with optional filtering.
+
+```python
+naics = client.list_naics(
+    page=1,
+    limit=25,
+    # Filter parameters (all optional)
+    employee_limit=None,
+    employee_limit_gte=None,
+    employee_limit_lte=None,
+    revenue_limit=None,
+    revenue_limit_gte=None,
+    revenue_limit_lte=None,
+    search=None,
+)
+```
+
+**Filter Parameters:**
+- `employee_limit` - Exact employee size standard
+- `employee_limit_gte` / `employee_limit_lte` - Employee limit range
+- `revenue_limit` - Exact revenue size standard
+- `revenue_limit_gte` / `revenue_limit_lte` - Revenue limit range
+- `search` - Full-text search (code or description)
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with NAICS dictionaries
+
+**Example:**
+```python
+naics = client.list_naics(search="software", limit=10)
+
+for code in naics.results:
+    print(f"{code['code']}: {code['title']}")
+```
 
 ---
 
@@ -942,6 +1492,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `OTAS_MINIMAL` | `list_otas` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated |
 | `OTIDVS_MINIMAL` | `list_otidvs` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `SUBAWARDS_MINIMAL` | `list_subawards` | award_key, prime_recipient(uei,display_name), subaward_recipient(uei,display_name) |
+| `GSA_ELIBRARY_CONTRACTS_MINIMAL` | `list_gsa_elibrary_contracts` | uuid, contract_number, schedule, recipient(display_name,uei), idv(key,award_date) |
+| `PROTESTS_MINIMAL` | `list_protests` | case_id, case_number, title, source_system, outcome, filed_date |
 
 All predefined shapes are validated at SDK release time (see [Developer Guide](DEVELOPERS.md#sdk-conformance-maintainers)). For custom shapes, see the [Shaping Guide](SHAPES.md).
 

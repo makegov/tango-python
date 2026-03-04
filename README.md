@@ -6,7 +6,7 @@ A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, f
 
 - **Dynamic Response Shaping** - Request only the fields you need, reducing payload sizes by 60-80%
 - **Full Type Safety** - Runtime-generated TypedDict types with accurate type hints for IDE autocomplete
-- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, entities, forecasts, opportunities, notices, grants, webhooks) [Note: the current version does NOT implement all endpoints, we will be adding them incrementally]
+- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, IDVs, OTAs, entities, forecasts, opportunities, notices, grants, protests, webhooks, and more)
 - **Flexible Data Access** - Dictionary-based response objects with validation
 - **Modern Python** - Built for Python 3.12+ using modern async-ready patterns
 - **Production-Ready** - Comprehensive test suite with VCR.py-based integration tests
@@ -152,14 +152,33 @@ contracts = client.list_contracts(
 **Response Options:**
 - `shape`, `flat`, `flat_lists` - Response shaping options
 
+### IDVs, OTAs, OTIDVs
+
+```python
+# List IDVs (keyset pagination)
+idvs = client.list_idvs(limit=25, awarding_agency="4700")
+
+# Get single IDV with shaping
+idv = client.get_idv("IDV_KEY", shape=ShapeConfig.IDVS_COMPREHENSIVE)
+
+# OTAs and OTIDVs follow the same pattern
+otas = client.list_otas(limit=25)
+otidvs = client.list_otidvs(limit=25)
+```
+
+### Vehicles
+
+```python
+vehicles = client.list_vehicles(search="GSA schedule", shape=ShapeConfig.VEHICLES_MINIMAL)
+vehicle = client.get_vehicle("UUID", shape=ShapeConfig.VEHICLES_COMPREHENSIVE)
+awardees = client.list_vehicle_awardees("UUID")
+```
+
 ### Entities (Vendors/Recipients)
 
 ```python
-# List entities
-entities = client.list_entities(
-    page=1,
-    limit=25
-)
+# List entities with filters
+entities = client.list_entities(search="Booz Allen", state="VA", limit=25)
 
 # Get specific entity by UEI or CAGE code
 entity = client.get_entity("ZQGGHJH74DW7")
@@ -168,47 +187,50 @@ entity = client.get_entity("ZQGGHJH74DW7")
 ### Forecasts
 
 ```python
-# List contract forecasts
-forecasts = client.list_forecasts(
-    agency="GSA",
-    limit=25
-)
+forecasts = client.list_forecasts(agency="GSA", fiscal_year=2025, limit=25)
 ```
 
 ### Opportunities
 
 ```python
-# List opportunities/solicitations
-opportunities = client.list_opportunities(
-    agency="DOD",
-    limit=25
-)
+opportunities = client.list_opportunities(agency="DOD", active=True, limit=25)
 ```
 
 ### Notices
 
 ```python
-# List contract notices
-notices = client.list_notices(
-    agency="DOD",
-    limit=25
-)
+notices = client.list_notices(agency="DOD", notice_type="award", limit=25)
 ```
 
 ### Grants
 
 ```python
-# List grant opportunities
-grants = client.list_grants(
-    agency_code="HHS",
-    limit=25
-)
+grants = client.list_grants(agency="HHS", status="forecasted", limit=25)
 ```
 
-### Business Types
+### Protests
 
 ```python
-# List business types
+protests = client.list_protests(source_system="gao", outcome="Sustained", limit=25)
+protest = client.get_protest("CASE_UUID")
+```
+
+### GSA eLibrary Contracts
+
+```python
+contracts = client.list_gsa_elibrary_contracts(schedule="MAS", limit=25)
+contract = client.get_gsa_elibrary_contract("UUID")
+```
+
+### Reference Data
+
+```python
+# Offices, organizations, NAICS, subawards, assistance, business types
+offices = client.list_offices(search="acquisitions")
+organizations = client.list_organizations(level=1)
+naics = client.list_naics(search="software")
+subawards = client.list_subawards(prime_uei="UEI123")
+assistance = client.list_assistance(fiscal_year=2025)
 business_types = client.list_business_types()
 ```
 
@@ -417,13 +439,21 @@ tango-python/
 │       ├── conftest.py      # Integration test fixtures
 │       ├── validation.py    # Validation utilities
 │       ├── test_agencies_integration.py
+│       ├── test_assistance_integration.py
 │       ├── test_contracts_integration.py
 │       ├── test_entities_integration.py
 │       ├── test_forecasts_integration.py
 │       ├── test_grants_integration.py
+│       ├── test_naics_integration.py
 │       ├── test_notices_integration.py
+│       ├── test_offices_integration.py
 │       ├── test_opportunities_integration.py
+│       ├── test_organizations_integration.py
+│       ├── test_otas_otidvs_integration.py
+│       ├── test_protests_integration.py
 │       ├── test_reference_data_integration.py
+│       ├── test_subawards_integration.py
+│       ├── test_vehicles_idvs_integration.py
 │       └── test_edge_cases_integration.py
 ├── docs/                     # Documentation
 │   ├── API_REFERENCE.md     # Complete API reference
