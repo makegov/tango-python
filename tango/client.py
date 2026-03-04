@@ -944,32 +944,6 @@ class TangoClient:
             page_metadata=data.get("page_metadata"),
         )
 
-    def get_idv_summary(self, identifier: str) -> dict[str, Any]:
-        """Get a summary for an IDV solicitation identifier (`/api/idvs/{identifier}/summary/`)."""
-        return self._get(f"/api/idvs/{identifier}/summary/")
-
-    def list_idv_summary_awards(
-        self,
-        identifier: str,
-        limit: int = 25,
-        cursor: str | None = None,
-        ordering: str | None = None,
-    ) -> PaginatedResponse:
-        """List awards under an IDV summary (`/api/idvs/{identifier}/summary/awards/`)."""
-        params: dict[str, Any] = {"limit": min(limit, 100)}
-        if cursor:
-            params["cursor"] = cursor
-        if ordering:
-            params["ordering"] = ordering
-        data = self._get(f"/api/idvs/{identifier}/summary/awards/", params)
-        return PaginatedResponse(
-            count=int(data.get("count") or len(data.get("results") or [])),
-            next=data.get("next"),
-            previous=data.get("previous"),
-            results=data.get("results") or [],
-            page_metadata=data.get("page_metadata"),
-        )
-
     def list_otas(
         self,
         limit: int = 25,
@@ -2067,47 +2041,6 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
-        )
-
-    def list_assistance(
-        self,
-        limit: int = 25,
-        cursor: str | None = None,
-        assistance_type: str | None = None,
-        award_key: str | None = None,
-        fiscal_year: int | None = None,
-        fiscal_year_gte: int | None = None,
-        fiscal_year_lte: int | None = None,
-        highly_compensated_officers: str | None = None,
-        recipient: str | None = None,
-        recipient_address: str | None = None,
-        search: str | None = None,
-    ) -> PaginatedResponse:
-        """List assistance (financial assistance) transactions (`/api/assistance/`). Keyset pagination."""
-        params: dict[str, Any] = {"limit": min(limit, 100)}
-        if cursor:
-            params["cursor"] = cursor
-        for key, val in (
-            ("assistance_type", assistance_type),
-            ("award_key", award_key),
-            ("fiscal_year", fiscal_year),
-            ("fiscal_year_gte", fiscal_year_gte),
-            ("fiscal_year_lte", fiscal_year_lte),
-            ("highly_compensated_officers", highly_compensated_officers),
-            ("recipient", recipient),
-            ("recipient_address", recipient_address),
-            ("search", search),
-        ):
-            if val is not None:
-                params[key] = val
-        data = self._get("/api/assistance/", params)
-        return PaginatedResponse(
-            count=int(data.get("count") or len(data.get("results") or [])),
-            next=data.get("next"),
-            previous=data.get("previous"),
-            results=data.get("results", []),
-            cursor=data.get("cursor"),
-            page_metadata=data.get("page_metadata"),
         )
 
     # ============================================================================

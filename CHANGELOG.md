@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Docs: `SHAPES.md` documents `federal_obligations(*)` as an expansion for entity shaping.
 - Integration tests: `test_parsing_nested_objects_with_missing_data` accepts award office fields (`office_code`, `agency_code`, `department_code`) and empty nested objects when the API returns partial data.
 
+### Removed
+- Assistance: `list_assistance` endpoint and all related tests, docs, and references.
+- IDV summaries: `get_idv_summary` and `list_idv_summary_awards` endpoints and related integration tests, cassettes, and API reference section.
+
 ## [0.4.1] - 2026-03-03
 
 ### Added

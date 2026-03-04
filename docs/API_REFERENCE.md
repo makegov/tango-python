@@ -19,7 +19,6 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Opportunities](#opportunities)
 - [Notices](#notices)
 - [Grants](#grants)
-- [Assistance](#assistance)
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
 - [Business Types](#business-types)
@@ -602,13 +601,6 @@ children = client.list_idv_child_idvs("SOME_IDV_KEY", limit=25)
 tx = client.list_idv_transactions("SOME_IDV_KEY", limit=100)
 ```
 
-### get_idv_summary() / list_idv_summary_awards()
-
-```python
-summary = client.get_idv_summary("SOLICITATION_IDENTIFIER")
-awards = client.list_idv_summary_awards("SOLICITATION_IDENTIFIER", limit=25)
-```
-
 ---
 
 ## Entities
@@ -1035,48 +1027,6 @@ for grant in grants.results:
         for cfda in grant['cfda_numbers']:
             print(f"CFDA: {cfda.get('number')} - {cfda.get('title')}")
 ```
-
----
-
-## Assistance
-
-Financial assistance transactions (grants, direct payments, etc.).
-
-### list_assistance()
-
-List assistance transactions with keyset pagination.
-
-```python
-assistance = client.list_assistance(
-    limit=25,
-    cursor=None,
-    # Filter parameters (all optional)
-    assistance_type=None,
-    award_key=None,
-    fiscal_year=None,
-    fiscal_year_gte=None,
-    fiscal_year_lte=None,
-    highly_compensated_officers=None,
-    recipient=None,
-    recipient_address=None,
-    search=None,
-)
-```
-
-**Notes:**
-- Uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
-
-**Filter Parameters:**
-- `assistance_type` - Filter by assistance type
-- `award_key` - Filter by award key
-- `fiscal_year` - Exact fiscal year
-- `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
-- `highly_compensated_officers` - Filter by highly compensated officers
-- `recipient` - Search by recipient name
-- `recipient_address` - Filter by recipient address
-- `search` - Full-text search
-
-**Returns:** [PaginatedResponse](#paginatedresponse) with assistance dictionaries
 
 ---
 

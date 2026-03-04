@@ -225,12 +225,11 @@ contract = client.get_gsa_elibrary_contract("UUID")
 ### Reference Data
 
 ```python
-# Offices, organizations, NAICS, subawards, assistance, business types
+# Offices, organizations, NAICS, subawards, business types
 offices = client.list_offices(search="acquisitions")
 organizations = client.list_organizations(level=1)
 naics = client.list_naics(search="software")
 subawards = client.list_subawards(prime_uei="UEI123")
-assistance = client.list_assistance(fiscal_year=2025)
 business_types = client.list_business_types()
 ```
 
@@ -439,7 +438,6 @@ tango-python/
 │       ├── conftest.py      # Integration test fixtures
 │       ├── validation.py    # Validation utilities
 │       ├── test_agencies_integration.py
-│       ├── test_assistance_integration.py
 │       ├── test_contracts_integration.py
 │       ├── test_entities_integration.py
 │       ├── test_forecasts_integration.py

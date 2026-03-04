@@ -51,7 +51,6 @@ RESOURCE_TO_METHOD: dict[str, str] = {
     "naics": "list_naics",
     "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
     # Resources not yet implemented in SDK
-    "assistance": None,
     "offices": None,
 }
 

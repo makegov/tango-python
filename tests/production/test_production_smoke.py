@@ -577,27 +577,6 @@ class TestProductionSmoke:
     # Assistance Endpoints
     # ============================================================================
 
-    @pytest.mark.skip(reason="Assistance endpoint not yet implemented in client")
-    @handle_rate_limit
-    @handle_auth_error
-    def test_list_assistance(self, production_client):
-        """Test assistance listing
-
-        Validates:
-        - Assistance listing works
-        - Response parsing is correct
-        - Pagination structure is valid
-        """
-        response = production_client.list_assistance(limit=5)
-
-        validate_pagination(response)
-        assert response.count >= 0, "Count should be non-negative"
-
-        if len(response.results) > 0:
-            assistance = response.results[0]
-            # Assistance records are returned as raw dicts
-            assert isinstance(assistance, dict), "Assistance should be a dict"
-
     # ============================================================================
     # Forecast Endpoints
     # ============================================================================
