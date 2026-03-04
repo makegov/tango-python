@@ -208,4 +208,3 @@ class TestGrantsIntegration:
                 else getattr(page2.results[0], "grant_id", None)
             )
             assert grant1_id != grant2_id, "Different pages should have different results"
-

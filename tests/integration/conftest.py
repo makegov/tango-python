@@ -22,54 +22,54 @@ API_KEY = os.getenv("TANGO_API_KEY")
 def path_transformer(path: str) -> str:
     """
     Transform cassette path to shorten long filenames for Windows compatibility.
-    
+
     Windows has a 260 character path limit. This function shortens long parameter
     values in test names by replacing them with a hash, keeping the filename
     under the limit while maintaining uniqueness.
-    
+
     Args:
         path: Original cassette path (e.g., "tests/cassettes/TestClass.test_method[param1-param2].yaml")
-        
+
     Returns:
         Shortened path with long parameters replaced by hash
     """
     # Maximum safe filename length (accounting for path prefix)
     MAX_FILENAME_LENGTH = 200
-    
+
     path_obj = Path(path)
     filename = path_obj.name
     directory = path_obj.parent
-    
+
     # If filename is already short enough, return as-is
     if len(filename) <= MAX_FILENAME_LENGTH:
         return path
-    
+
     # Extract base name and extension
-    if filename.endswith('.yaml'):
+    if filename.endswith(".yaml"):
         base_name = filename[:-5]  # Remove .yaml
-        ext = '.yaml'
-    elif filename.endswith('.yml'):
+        ext = ".yaml"
+    elif filename.endswith(".yml"):
         base_name = filename[:-4]  # Remove .yml
-        ext = '.yml'
+        ext = ".yml"
     else:
         # Unknown extension, return as-is
         return path
-    
+
     # Check if this is a parameterized test (has brackets)
-    if '[' not in base_name or ']' not in base_name:
+    if "[" not in base_name or "]" not in base_name:
         # Not parameterized, just truncate if needed
         if len(filename) > MAX_FILENAME_LENGTH:
-            truncated = base_name[:MAX_FILENAME_LENGTH - len(ext) - 8] + ext
+            truncated = base_name[: MAX_FILENAME_LENGTH - len(ext) - 8] + ext
             return str(directory / truncated)
         return path
-    
+
     # Split into test name and parameters
-    test_name, params = base_name.split('[', 1)
-    if not params.endswith(']'):
+    test_name, params = base_name.split("[", 1)
+    if not params.endswith("]"):
         return path  # Malformed, return as-is
-    
+
     params = params[:-1]  # Remove trailing ]
-    
+
     # If parameters are too long, hash them
     if len(params) > 100:  # Threshold for hashing
         # Create a hash of the parameters (first 8 chars for readability)
@@ -87,8 +87,8 @@ def path_transformer(path: str) -> str:
             else:
                 # Even test name is too long, use hash
                 param_hash = hashlib.md5(params.encode()).hexdigest()[:8]
-                new_filename = f"{test_name[:MAX_FILENAME_LENGTH - 15]}[{param_hash}]{ext}"
-    
+                new_filename = f"{test_name[: MAX_FILENAME_LENGTH - 15]}[{param_hash}]{ext}"
+
     return str(directory / new_filename)
 
 

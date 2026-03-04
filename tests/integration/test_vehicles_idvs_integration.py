@@ -302,7 +302,9 @@ class TestIDVsIntegration:
             if award.get("award_date") is not None or (
                 hasattr(award, "award_date") and award.award_date is not None
             ):
-                award_date = award.get("award_date") if isinstance(award, dict) else award.award_date
+                award_date = (
+                    award.get("award_date") if isinstance(award, dict) else award.award_date
+                )
                 assert isinstance(award_date, date), "award_date should be date"
 
             if award.get("award_amount") is not None or (
