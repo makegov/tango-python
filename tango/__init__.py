@@ -11,6 +11,7 @@ from .exceptions import (
 from .models import (
     GsaElibraryContract,
     PaginatedResponse,
+    RateLimitInfo,
     SearchFilters,
     ShapeConfig,
     WebhookEndpoint,
@@ -27,7 +28,7 @@ from .shapes import (
     TypeGenerator,
 )
 
-__version__ = "0.4.1"
+__version__ = "0.4.3"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -35,6 +36,7 @@ __all__ = [
     "TangoNotFoundError",
     "TangoValidationError",
     "TangoRateLimitError",
+    "RateLimitInfo",
     "GsaElibraryContract",
     "PaginatedResponse",
     "SearchFilters",

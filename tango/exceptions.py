@@ -39,7 +39,34 @@ class TangoValidationError(TangoAPIError):
 class TangoRateLimitError(TangoAPIError):
     """Rate limit exceeded error"""
 
-    pass
+    @property
+    def wait_in_seconds(self) -> int | None:
+        """Seconds to wait before retrying, from API response."""
+        val = self.response_data.get("wait_in_seconds")
+        if val is not None:
+            try:
+                return int(val)
+            except (ValueError, TypeError):
+                return None
+        return None
+
+    @property
+    def detail(self) -> str | None:
+        """Human-readable detail from API response."""
+        return self.response_data.get("detail")
+
+    @property
+    def limit_type(self) -> str | None:
+        """Which limit was hit: 'burst' or 'daily', parsed from detail."""
+        d = self.detail
+        if not d:
+            return None
+        lower = d.lower()
+        if "burst" in lower or "minute" in lower:
+            return "burst"
+        if "daily" in lower or "day" in lower:
+            return "daily"
+        return None
 
 
 class ShapeError(TangoAPIError):

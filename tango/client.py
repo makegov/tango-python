@@ -32,6 +32,7 @@ from tango.models import (
     Organization,
     PaginatedResponse,
     Protest,
+    RateLimitInfo,
     SearchFilters,
     ShapeConfig,
     Subaward,
@@ -77,6 +78,7 @@ class TangoClient:
             headers["X-API-KEY"] = self.api_key
 
         self.client = httpx.Client(headers=headers, timeout=30.0)
+        self._last_rate_limit_info: RateLimitInfo | None = None
 
         # Use hardcoded sensible defaults
         cache_size = 100
@@ -98,6 +100,34 @@ class TangoClient:
     # Core HTTP Request Utilities
     # ============================================================================
 
+    @property
+    def rate_limit_info(self) -> RateLimitInfo | None:
+        """Rate limit info from the most recent API response."""
+        return self._last_rate_limit_info
+
+    @staticmethod
+    def _parse_rate_limit_headers(headers: httpx.Headers) -> RateLimitInfo:
+        """Extract rate limit info from response headers."""
+        def _int_or_none(val: str | None) -> int | None:
+            if val is None:
+                return None
+            try:
+                return int(val)
+            except (ValueError, TypeError):
+                return None
+
+        return RateLimitInfo(
+            limit=_int_or_none(headers.get("X-RateLimit-Limit")),
+            remaining=_int_or_none(headers.get("X-RateLimit-Remaining")),
+            reset=_int_or_none(headers.get("X-RateLimit-Reset")),
+            daily_limit=_int_or_none(headers.get("X-RateLimit-Daily-Limit")),
+            daily_remaining=_int_or_none(headers.get("X-RateLimit-Daily-Remaining")),
+            daily_reset=_int_or_none(headers.get("X-RateLimit-Daily-Reset")),
+            burst_limit=_int_or_none(headers.get("X-RateLimit-Burst-Limit")),
+            burst_remaining=_int_or_none(headers.get("X-RateLimit-Burst-Remaining")),
+            burst_reset=_int_or_none(headers.get("X-RateLimit-Burst-Reset")),
+        )
+
     def _request(
         self,
         method: str,
@@ -110,6 +140,7 @@ class TangoClient:
 
         try:
             response = self.client.request(method=method, url=url, params=params, json=json_data)
+            self._last_rate_limit_info = self._parse_rate_limit_headers(response.headers)
 
             if response.status_code == 401:
                 raise TangoAuthError(
@@ -136,7 +167,9 @@ class TangoClient:
                     error_data,
                 )
             elif response.status_code == 429:
-                raise TangoRateLimitError("Rate limit exceeded", response.status_code)
+                error_data = response.json() if response.content else {}
+                detail = error_data.get("detail", "Rate limit exceeded")
+                raise TangoRateLimitError(detail, response.status_code, error_data)
             elif not response.is_success:
                 raise TangoAPIError(
                     f"API request failed with status {response.status_code}", response.status_code

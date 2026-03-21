@@ -24,6 +24,21 @@ T = TypeVar("T")
 
 
 @dataclass
+class RateLimitInfo:
+    """Rate limit information from API response headers."""
+
+    limit: int | None = None
+    remaining: int | None = None
+    reset: int | None = None
+    daily_limit: int | None = None
+    daily_remaining: int | None = None
+    daily_reset: int | None = None
+    burst_limit: int | None = None
+    burst_remaining: int | None = None
+    burst_reset: int | None = None
+
+
+@dataclass
 class SearchFilters:
     """Search filter parameters for contract search
 

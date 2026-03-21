@@ -1065,10 +1065,16 @@ class TestErrorHandling:
 
     @patch("tango.client.httpx.Client.request")
     def test_429_rate_limit_error(self, mock_request):
-        """Test 429 Rate Limit raises TangoRateLimitError"""
+        """Test 429 Rate Limit raises TangoRateLimitError with parsed body"""
         mock_response = Mock()
         mock_response.is_success = False
         mock_response.status_code = 429
+        mock_response.content = b'{"detail": "Rate limit exceeded for burst. Please try again in 45 seconds.", "wait_in_seconds": 45}'
+        mock_response.json.return_value = {
+            "detail": "Rate limit exceeded for burst. Please try again in 45 seconds.",
+            "wait_in_seconds": 45,
+        }
+        mock_response.headers = {}
         mock_request.return_value = mock_response
 
         client = TangoClient(api_key="test-key")
@@ -1077,6 +1083,85 @@ class TestErrorHandling:
             client.list_agencies()
 
         assert exc_info.value.status_code == 429
+        assert exc_info.value.wait_in_seconds == 45
+        assert "burst" in exc_info.value.detail
+        assert exc_info.value.limit_type == "burst"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_429_daily_limit_error(self, mock_request):
+        """Test 429 for daily limit includes correct limit_type"""
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 429
+        mock_response.content = b'{"detail": "Rate limit exceeded for daily. Please try again in 3600 seconds.", "wait_in_seconds": 3600}'
+        mock_response.json.return_value = {
+            "detail": "Rate limit exceeded for daily. Please try again in 3600 seconds.",
+            "wait_in_seconds": 3600,
+        }
+        mock_response.headers = {}
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoRateLimitError) as exc_info:
+            client.list_agencies()
+
+        assert exc_info.value.limit_type == "daily"
+        assert exc_info.value.wait_in_seconds == 3600
+
+    @patch("tango.client.httpx.Client.request")
+    def test_429_empty_body(self, mock_request):
+        """Test 429 with no content body still works"""
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 429
+        mock_response.content = None
+        mock_response.headers = {}
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoRateLimitError) as exc_info:
+            client.list_agencies()
+
+        assert exc_info.value.status_code == 429
+        assert exc_info.value.wait_in_seconds is None
+        assert exc_info.value.limit_type is None
+
+    @patch("tango.client.httpx.Client.request")
+    def test_rate_limit_headers_parsed(self, mock_request):
+        """Test rate limit headers are parsed from successful responses"""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.status_code = 200
+        mock_response.content = b'{"results": []}'
+        mock_response.json.return_value = {"results": []}
+        mock_response.headers = {
+            "X-RateLimit-Limit": "100",
+            "X-RateLimit-Remaining": "95",
+            "X-RateLimit-Reset": "45",
+            "X-RateLimit-Daily-Limit": "2400",
+            "X-RateLimit-Daily-Remaining": "2350",
+            "X-RateLimit-Daily-Reset": "86400",
+            "X-RateLimit-Burst-Limit": "100",
+            "X-RateLimit-Burst-Remaining": "95",
+            "X-RateLimit-Burst-Reset": "45",
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        assert client.rate_limit_info is None
+
+        client._request("GET", "/api/agencies/")
+
+        info = client.rate_limit_info
+        assert info is not None
+        assert info.limit == 100
+        assert info.remaining == 95
+        assert info.reset == 45
+        assert info.daily_limit == 2400
+        assert info.daily_remaining == 2350
+        assert info.burst_remaining == 95
 
     @patch("tango.client.httpx.Client.request")
     def test_500_server_error(self, mock_request):
