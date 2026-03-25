@@ -59,6 +59,8 @@ class TangoClient:
         self,
         api_key: str | None = None,
         base_url: str = "https://tango.makegov.com",
+        user_agent: str | None = None,
+        extra_headers: dict[str, str] | None = None,
     ):
         """
         Initialize the Tango API client
@@ -67,6 +69,8 @@ class TangoClient:
             api_key: API key for authentication. If not provided, will attempt to load from
                     TANGO_API_KEY environment variable.
             base_url: Base URL for the API
+            user_agent: Custom User-Agent header value.
+            extra_headers: Additional headers to include in every request.
         """
         # Load API key from environment if not provided
         self.api_key = api_key or os.getenv("TANGO_API_KEY")
@@ -76,9 +80,14 @@ class TangoClient:
         headers = {}
         if self.api_key:
             headers["X-API-KEY"] = self.api_key
+        if user_agent:
+            headers["User-Agent"] = user_agent
+        if extra_headers:
+            headers.update(extra_headers)
 
         self.client = httpx.Client(headers=headers, timeout=30.0)
         self._last_rate_limit_info: RateLimitInfo | None = None
+        self._last_response_headers: httpx.Headers | None = None
 
         # Use hardcoded sensible defaults
         cache_size = 100
@@ -104,6 +113,11 @@ class TangoClient:
     def rate_limit_info(self) -> RateLimitInfo | None:
         """Rate limit info from the most recent API response."""
         return self._last_rate_limit_info
+
+    @property
+    def last_response_headers(self) -> httpx.Headers | None:
+        """Full HTTP headers from the most recent API response."""
+        return self._last_response_headers
 
     @staticmethod
     def _parse_rate_limit_headers(headers: httpx.Headers) -> RateLimitInfo:
@@ -140,6 +154,7 @@ class TangoClient:
 
         try:
             response = self.client.request(method=method, url=url, params=params, json=json_data)
+            self._last_response_headers = response.headers
             self._last_rate_limit_info = self._parse_rate_limit_headers(response.headers)
 
             if response.status_code == 401:
