@@ -10,6 +10,7 @@ from .exceptions import (
 )
 from .models import (
     GsaElibraryContract,
+    ITDashboardInvestment,
     PaginatedResponse,
     RateLimitInfo,
     SearchFilters,
@@ -28,7 +29,7 @@ from .shapes import (
     TypeGenerator,
 )
 
-__version__ = "0.4.3"
+__version__ = "0.5.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -38,6 +39,7 @@ __all__ = [
     "TangoRateLimitError",
     "RateLimitInfo",
     "GsaElibraryContract",
+    "ITDashboardInvestment",
     "PaginatedResponse",
     "SearchFilters",
     "ShapeConfig",

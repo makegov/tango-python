@@ -1,0 +1,182 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&search=cyber
+  response:
+    body:
+      string: '{"count":115,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&search=cyber&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"014-000000539","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Cyber Operations","type_of_investment":"Standard
+        IT Investments","part_of_it_portfolio":"Part 3. IT Standard IT Investments","updated_time":"2026-04-06T19:12:55+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000539"},{"uii":"014-000000501","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"AIS Security
+        Infrastructure Support Program","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T18:52:35+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000501"},{"uii":"029-666666400","agency_name":"Department
+        of Veterans Affairs","bureau_name":"Department of Veterans Affairs","investment_title":"Benefits
+        Appeals","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-03-18T20:24:46+00:00","url":"https://www.itdashboard.gov/investment-details/029-666666400"},{"uii":"011-000003581","agency_name":"Department
+        of Justice","bureau_name":"Drug Enforcement Administration","investment_title":"DEA
+        IT Security","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-02-13T18:02:29+00:00","url":"https://www.itdashboard.gov/investment-details/011-000003581"},{"uii":"007-000100706","agency_name":"Department
+        of Defense","bureau_name":"Navy, Marine Corps","investment_title":"Navy Continuous
+        Training Environment (NCTE)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2025-12-24T02:19:13+00:00","url":"https://www.itdashboard.gov/investment-details/007-000100706"}]}'
+    headers:
+      CF-RAY:
+      - 9e91ef8d888d10ae-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:24:28 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zohi3Odc0Qp7NW950p2nzTDtTT61v9z7S0Ygo8iYOZ4T%2Fg81RcMZRbz6%2BeUTXkhgsGmXKv4ySPQNpbLONwizqHgDicUj3aVNUO1XciHXNYzBrhJvWK61uYLcnf2o8utQhlQB"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2110'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.080s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '57'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999986'
+      x-ratelimit-daily-reset:
+      - '34532'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '57'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&search=cyber
+  response:
+    body:
+      string: '{"count":115,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&search=cyber&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"014-000000539","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Cyber Operations","type_of_investment":"Standard
+        IT Investments","part_of_it_portfolio":"Part 3. IT Standard IT Investments","updated_time":"2026-04-06T19:12:55+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000539"},{"uii":"014-000000501","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"AIS Security
+        Infrastructure Support Program","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T18:52:35+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000501"},{"uii":"029-666666400","agency_name":"Department
+        of Veterans Affairs","bureau_name":"Department of Veterans Affairs","investment_title":"Benefits
+        Appeals","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-03-18T20:24:46+00:00","url":"https://www.itdashboard.gov/investment-details/029-666666400"},{"uii":"011-000003581","agency_name":"Department
+        of Justice","bureau_name":"Drug Enforcement Administration","investment_title":"DEA
+        IT Security","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-02-13T18:02:29+00:00","url":"https://www.itdashboard.gov/investment-details/011-000003581"},{"uii":"007-000100706","agency_name":"Department
+        of Defense","bureau_name":"Navy, Marine Corps","investment_title":"Navy Continuous
+        Training Environment (NCTE)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2025-12-24T02:19:13+00:00","url":"https://www.itdashboard.gov/investment-details/007-000100706"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f4eecce8e1db-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:08 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mNCzvUPxahtp8m2vVFSxouYduSMZiPRDGPGH422kDUJShQta8Yj%2BPqJsynh1Md%2FHXxdR9fM5yEk2PKF3GoRUq2SZ17q6SfNRGx0NXETzSwBs7YScvw6BCRBdWJrNi19xNvQu"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2110'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.019s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '0'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999938'
+      x-ratelimit-daily-reset:
+      - '34311'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '0'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

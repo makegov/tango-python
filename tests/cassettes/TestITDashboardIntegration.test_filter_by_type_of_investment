@@ -1,0 +1,94 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&type_of_investment=Major+IT+Investments
+  response:
+    body:
+      string: '{"count":574,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&type_of_investment=Major+IT+Investments","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Joint Financial
+        Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"},{"uii":"014-000000021","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"IRMS Operations
+        and Maintenance","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T17:32:59+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000021"},{"uii":"014-000000377","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Integrated
+        Security and Suitability System (Ice Cubed)","type_of_investment":"Major IT
+        Investments","part_of_it_portfolio":"Part 2. IT Investments for Mission Support
+        Services","updated_time":"2026-04-06T17:31:56+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000377"},{"uii":"014-000000024","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Integrated
+        Personnel Management System (IPMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        2. IT Investments for Mission Support Services","updated_time":"2026-04-06T17:26:57+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000024"},{"uii":"014-000000012","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Integrated
+        Logistics Management System (ILMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        2. IT Investments for Mission Support Services","updated_time":"2026-04-06T17:14:32+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000012"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f5067ffbff59-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:11 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Z851vzeF0bFORakClQMzDagyG6FihdmnGIoonpyLPSBj09mVHbV17Fsbto%2Ft0S1Lo8ma5wt0aOC9wC77Qaspm%2FboIQ%2BrbEstPQGN5Nw7w71D5jBvKfZ0QyQyM9DUJo3zODaHAYode6f2mo3lwkmD"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2224'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '990'
+      x-ratelimit-burst-reset:
+      - '53'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999932'
+      x-ratelimit-daily-reset:
+      - '34308'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '990'
+      x-ratelimit-reset:
+      - '53'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

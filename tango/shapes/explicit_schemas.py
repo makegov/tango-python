@@ -1132,6 +1132,67 @@ GSA_ELIBRARY_CONTRACT_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+# IT Dashboard Investment
+ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
+    "uii": FieldSchema(name="uii", type=str, is_optional=False, is_list=False),
+    "agency_code": FieldSchema(
+        name="agency_code", type=int, is_optional=True, is_list=False
+    ),
+    "agency_name": FieldSchema(
+        name="agency_name", type=str, is_optional=True, is_list=False
+    ),
+    "bureau_code": FieldSchema(
+        name="bureau_code", type=int, is_optional=True, is_list=False
+    ),
+    "bureau_name": FieldSchema(
+        name="bureau_name", type=str, is_optional=True, is_list=False
+    ),
+    "investment_title": FieldSchema(
+        name="investment_title", type=str, is_optional=True, is_list=False
+    ),
+    "type_of_investment": FieldSchema(
+        name="type_of_investment", type=str, is_optional=True, is_list=False
+    ),
+    "part_of_it_portfolio": FieldSchema(
+        name="part_of_it_portfolio", type=str, is_optional=True, is_list=False
+    ),
+    "updated_time": FieldSchema(
+        name="updated_time", type=datetime, is_optional=True, is_list=False
+    ),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+    "business_case_html": FieldSchema(
+        name="business_case_html", type=str, is_optional=True, is_list=False
+    ),
+    # Expansions: dict (funding/details) and list-of-dict (nested sub-tables).
+    # Modeled as opaque dict/list since their inner shapes are dynamic.
+    "funding": FieldSchema(name="funding", type=dict, is_optional=True, is_list=False),
+    "details": FieldSchema(name="details", type=dict, is_optional=True, is_list=False),
+    "cio_evaluation": FieldSchema(
+        name="cio_evaluation", type=list, is_optional=True, is_list=True
+    ),
+    "contracts": FieldSchema(
+        name="contracts", type=list, is_optional=True, is_list=True
+    ),
+    "projects": FieldSchema(
+        name="projects", type=list, is_optional=True, is_list=True
+    ),
+    "cost_pools_towers": FieldSchema(
+        name="cost_pools_towers", type=list, is_optional=True, is_list=True
+    ),
+    "funding_sources": FieldSchema(
+        name="funding_sources", type=list, is_optional=True, is_list=True
+    ),
+    "performance_metrics": FieldSchema(
+        name="performance_metrics", type=list, is_optional=True, is_list=True
+    ),
+    "performance_actual": FieldSchema(
+        name="performance_actual", type=list, is_optional=True, is_list=True
+    ),
+    "operational_analysis": FieldSchema(
+        name="operational_analysis", type=list, is_optional=True, is_list=True
+    ),
+}
+
 # ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
@@ -1176,6 +1237,8 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     # GSA eLibrary
     "GsaElibraryContract": GSA_ELIBRARY_CONTRACT_SCHEMA,
     "GsaElibraryIdvRef": GSA_ELIBRARY_IDV_REF_SCHEMA,
+    # IT Dashboard
+    "ITDashboardInvestment": ITDASHBOARD_INVESTMENT_SCHEMA,
 }
 
 

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-04-08
+
+### Added
+- IT Dashboard investments: `list_itdashboard_investments`, `get_itdashboard_investment` (`/api/itdashboard/`) with shaping and filter params (`search`, `agency_code`, `agency_name`, `type_of_investment`, `updated_time_after`, `updated_time_before`, `cio_rating`, `cio_rating_max`, `performance_risk`). Tier-gated by the API: free tier gets `search`, pro adds structured filters, business+ adds CIO/performance analytics. New `ITDashboardInvestment` model and `ShapeConfig.ITDASHBOARD_INVESTMENTS_MINIMAL` / `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` defaults.
+
+## [0.4.4] - 2026-03-25
+
+### Added
+- `parent_piid` filter parameter on `list_contracts` for filtering orders under a specific parent IDV PIID.
+- `user_agent` and `extra_headers` parameters on `TangoClient` for custom request headers.
+- `TangoClient.last_response_headers` property for accessing full HTTP headers from the most recent API response.
+
 ## [0.4.3] - 2026-03-21
 
 ### Added

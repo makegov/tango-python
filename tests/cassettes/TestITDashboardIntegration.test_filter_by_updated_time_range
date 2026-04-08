@@ -1,0 +1,93 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&updated_time_after=2026-01-01&updated_time_before=2026-12-31
+  response:
+    body:
+      string: '{"count":355,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&updated_time_after=2026-01-01&updated_time_before=2026-12-31","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Joint Financial
+        Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"},{"uii":"014-000000538","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Security/Cybersecurity
+        Services","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T19:29:34+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000538"},{"uii":"014-000000498","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Information
+        Technology Acquisitions","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T19:28:31+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000498"},{"uii":"014-000000534","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"GDI-IoT
+        Network","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T19:27:40+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000534"},{"uii":"014-000000520","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"FSI Enterprise
+        Operations","type_of_investment":"Standard IT Investments","part_of_it_portfolio":"Part
+        3. IT Standard IT Investments","updated_time":"2026-04-06T19:27:03+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000520"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f50b4e2ee264-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:12 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=RoXyVG3phspQ%2BhsPxatOvLS71fGeQRlca9LkbmrjZHnymrlrhcROj4jNXKK7yAZnKej9syU%2FoiDz5X8y5hymNTRC9UqMjpV7i6Cp%2F4dq2ieJiplD2pK0RdPEfSrPPDPJhzC1SAe38MZUa1UlNuSE"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2128'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.017s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '989'
+      x-ratelimit-burst-reset:
+      - '52'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999931'
+      x-ratelimit-daily-reset:
+      - '34307'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '989'
+      x-ratelimit-reset:
+      - '52'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

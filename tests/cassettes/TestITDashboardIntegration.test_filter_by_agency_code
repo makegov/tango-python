@@ -1,0 +1,95 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&agency_code=21
+  response:
+    body:
+      string: '{"count":360,"next":"https://tango.makegov.com/api/itdashboard/?agency_code=21&limit=5&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"021-777552743","agency_name":"Department
+        of Transportation","bureau_name":"National Highway Traffic Safety Administration","investment_title":"NHTSA0020:
+        Artemis","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-03-27T12:45:58+00:00","url":"https://www.itdashboard.gov/investment-details/021-777552743"},{"uii":"021-302996650","agency_name":"Department
+        of Transportation","bureau_name":"National Highway Traffic Safety Administration","investment_title":"NHTSA0347:
+        CDAN Version 2.0","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-03-26T16:50:10+00:00","url":"https://www.itdashboard.gov/investment-details/021-302996650"},{"uii":"021-165719668","agency_name":"Department
+        of Transportation","bureau_name":"National Highway Traffic Safety Administration","investment_title":"NHTSA0301:
+        Teleprocessing and Timesharing Services for the NDR Program","type_of_investment":"Major
+        IT Investments","part_of_it_portfolio":"Part 1. IT Investments for Mission
+        Delivery","updated_time":"2026-03-26T16:49:35+00:00","url":"https://www.itdashboard.gov/investment-details/021-165719668"},{"uii":"021-700323071","agency_name":"Department
+        of Transportation","bureau_name":"Maritime Administration","investment_title":"MARAD0071:
+        National Security Multi-Mission Vessel (NSMV)","type_of_investment":"Major
+        IT Investments","part_of_it_portfolio":"Part 1. IT Investments for Mission
+        Delivery","updated_time":"2026-03-25T20:04:19+00:00","url":"https://www.itdashboard.gov/investment-details/021-700323071"},{"uii":"021-700323070","agency_name":"Department
+        of Transportation","bureau_name":"Maritime Administration","investment_title":"MARAD0070:
+        USMMA Campus Solutions (UCAS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-03-25T20:01:19+00:00","url":"https://www.itdashboard.gov/investment-details/021-700323070"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f5012a290a26-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:11 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=3I21M9xblZ6mvJlcfLRR%2BgHPPkc4av1Jh5BnY2zzrEEQYRrjfLQYZ4wTjxthr51w2nNIPM4ww3TdtKdPPM%2BaPRa4lwu7%2F7SO1IC%2FtbBfAEYkTD6KuUhLQTtsgw8tF%2BSst8l8wPVEBcI8NpySZKvr"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2305'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.024s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '991'
+      x-ratelimit-burst-reset:
+      - '54'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999933'
+      x-ratelimit-daily-reset:
+      - '34308'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '991'
+      x-ratelimit-reset:
+      - '54'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1
