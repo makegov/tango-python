@@ -368,6 +368,45 @@ class GsaElibraryContract:
 
 
 @dataclass
+class ITDashboardInvestment:
+    """Schema definition for IT Dashboard Investment (not used for instances)
+
+    Federal IT investment from itdashboard.gov, exposed at /api/itdashboard/.
+    Identified by ``uii`` (Unique Investment Identifier).
+
+    Tier-gated shape expansions:
+        Free        base fields only
+        Pro+        ``funding`` and ``details`` expansions
+        Business+   nested sub-tables (``cio_evaluation``, ``contracts``,
+                    ``projects``, ``cost_pools_towers``, ``funding_sources``,
+                    ``performance_metrics``, ``performance_actual``,
+                    ``operational_analysis``) and ``business_case_html``
+    """
+
+    uii: str
+    agency_code: int | None = None
+    agency_name: str | None = None
+    bureau_code: int | None = None
+    bureau_name: str | None = None
+    investment_title: str | None = None
+    type_of_investment: str | None = None
+    part_of_it_portfolio: str | None = None
+    updated_time: datetime | None = None
+    url: str | None = None
+    business_case_html: str | None = None
+    funding: dict[str, Any] | None = None
+    details: dict[str, Any] | None = None
+    cio_evaluation: list[dict[str, Any]] | None = None
+    contracts: list[dict[str, Any]] | None = None
+    projects: list[dict[str, Any]] | None = None
+    cost_pools_towers: list[dict[str, Any]] | None = None
+    funding_sources: list[dict[str, Any]] | None = None
+    performance_metrics: list[dict[str, Any]] | None = None
+    performance_actual: list[dict[str, Any]] | None = None
+    operational_analysis: list[dict[str, Any]] | None = None
+
+
+@dataclass
 class Vehicle:
     """Schema definition for Vehicle (not used for instances)"""
 
@@ -686,4 +725,19 @@ class ShapeConfig:
     # Default for list_gsa_elibrary_contracts()
     GSA_ELIBRARY_CONTRACTS_MINIMAL: Final = (
         "uuid,contract_number,schedule,recipient(display_name,uei),idv(key,award_date)"
+    )
+
+    # Default for list_itdashboard_investments()
+    # Free-tier safe: matches the API's INVESTMENT_LIST_DEFAULT_SHAPE.
+    ITDASHBOARD_INVESTMENTS_MINIMAL: Final = (
+        "uii,agency_name,bureau_name,investment_title,"
+        "type_of_investment,part_of_it_portfolio,updated_time,url"
+    )
+
+    # Default for get_itdashboard_investment()
+    # Free-tier safe: matches the API's INVESTMENT_RETRIEVE_DEFAULT_SHAPE.
+    ITDASHBOARD_INVESTMENTS_COMPREHENSIVE: Final = (
+        "uii,agency_code,agency_name,bureau_code,bureau_name,"
+        "investment_title,type_of_investment,part_of_it_portfolio,"
+        "updated_time,url"
     )

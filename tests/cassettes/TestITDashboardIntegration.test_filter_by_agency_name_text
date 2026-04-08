@@ -1,0 +1,93 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl&agency_name=defense
+  response:
+    body:
+      string: '{"count":2655,"next":"https://tango.makegov.com/api/itdashboard/?agency_name=defense&limit=5&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"007-000103860","agency_name":"Department
+        of Defense","bureau_name":"Army","investment_title":"ENTERPRISE BUSINESS SYSTEMS-CONVERGENCE","type_of_investment":"Major
+        IT Investments","part_of_it_portfolio":"Part 2. IT Investments for Mission
+        Support Services","updated_time":"2026-02-24T15:47:57+00:00","url":"https://www.itdashboard.gov/investment-details/007-000103860"},{"uii":"007-000103486","agency_name":"Department
+        of Defense","bureau_name":"Navy, Marine Corps","investment_title":"Naval -
+        Maintenance, Repair, and Overhaul","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        2. IT Investments for Mission Support Services","updated_time":"2026-02-24T15:47:56+00:00","url":"https://www.itdashboard.gov/investment-details/007-000103486"},{"uii":"007-000103389","agency_name":"Department
+        of Defense","bureau_name":"Navy, Marine Corps","investment_title":"Navy Personnel
+        and Pay","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        2. IT Investments for Mission Support Services","updated_time":"2026-02-24T15:47:55+00:00","url":"https://www.itdashboard.gov/investment-details/007-000103389"},{"uii":"007-000101162","agency_name":"Department
+        of Defense","bureau_name":"Defense-wide","investment_title":"DEFENSE AGENCIES
+        INITIATIVE","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        2. IT Investments for Mission Support Services","updated_time":"2026-02-24T15:47:53+00:00","url":"https://www.itdashboard.gov/investment-details/007-000101162"},{"uii":"007-000101099","agency_name":"Department
+        of Defense","bureau_name":"Defense-wide","investment_title":"Advancing Analytics","type_of_investment":"Major
+        IT Investments","part_of_it_portfolio":"Part 2. IT Investments for Mission
+        Support Services","updated_time":"2026-02-24T15:47:52+00:00","url":"https://www.itdashboard.gov/investment-details/007-000101099"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f50efa00eb60-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:13 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sVGRzZBXm8exykIK%2FejvOiYFHW4PdBAjQzVz8kFHaHvTKCThUTCPOdvSEmryfb1TOd2h6HWHaT4KLsBDgJFFcRVZqkYNjm32asNjoEnEg0wBrzakieSIJwfowtZYZjmpTn8HD%2BUTJzKIKlf6QARk"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2133'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.023s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '988'
+      x-ratelimit-burst-reset:
+      - '52'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999930'
+      x-ratelimit-daily-reset:
+      - '34306'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '988'
+      x-ratelimit-reset:
+      - '52'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

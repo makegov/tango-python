@@ -50,6 +50,7 @@ RESOURCE_TO_METHOD: dict[str, str] = {
     "agencies": "list_agencies",
     "naics": "list_naics",
     "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
+    "itdashboard": "list_itdashboard_investments",
     # Resources not yet implemented in SDK
     "offices": None,
 }
@@ -66,6 +67,7 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
         Forecast,
         Grant,
         GsaElibraryContract,
+        ITDashboardInvestment,
         Notice,
         Opportunity,
         Organization,
@@ -97,6 +99,16 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
             "GSA_ELIBRARY_CONTRACTS_MINIMAL",
             ShapeConfig.GSA_ELIBRARY_CONTRACTS_MINIMAL,
             GsaElibraryContract,
+        ),
+        (
+            "ITDASHBOARD_INVESTMENTS_MINIMAL",
+            ShapeConfig.ITDASHBOARD_INVESTMENTS_MINIMAL,
+            ITDashboardInvestment,
+        ),
+        (
+            "ITDASHBOARD_INVESTMENTS_COMPREHENSIVE",
+            ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE,
+            ITDashboardInvestment,
         ),
     ]
     for name, shape_str, model_cls in configs:

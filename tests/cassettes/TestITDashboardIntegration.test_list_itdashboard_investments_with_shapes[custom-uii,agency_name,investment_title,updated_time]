@@ -1,0 +1,164 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cinvestment_title%2Cupdated_time
+  response:
+    body:
+      string: '{"count":6710,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&shape=uii%2Cagency_name%2Cinvestment_title%2Cupdated_time","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","investment_title":"Joint Financial Management System (JFMS)","updated_time":"2026-04-06T20:01:15+00:00"},{"uii":"014-000000538","agency_name":"Department
+        of State","investment_title":"Security/Cybersecurity Services","updated_time":"2026-04-06T19:29:34+00:00"},{"uii":"014-000000498","agency_name":"Department
+        of State","investment_title":"Information Technology Acquisitions","updated_time":"2026-04-06T19:28:31+00:00"},{"uii":"014-000000534","agency_name":"Department
+        of State","investment_title":"GDI-IoT Network","updated_time":"2026-04-06T19:27:40+00:00"},{"uii":"014-000000520","agency_name":"Department
+        of State","investment_title":"FSI Enterprise Operations","updated_time":"2026-04-06T19:27:03+00:00"}]}'
+    headers:
+      CF-RAY:
+      - 9e91ef891c5aeac3-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:24:27 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xry4jogwpj%2F2XAQ642IeGuuPvVgazCuDSHinH4vc7OLqlig6BkdwCPqtlBXnS4%2BgTMg24tmwyBqTKBpCuJ2TWTZHng1i77zKhkYCDqpXCiMW0PHoR7JRbIjSWYaUpZ3Sia0G"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '938'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.027s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999987'
+      x-ratelimit-daily-reset:
+      - '34532'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '58'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=5&shape=uii%2Cagency_name%2Cinvestment_title%2Cupdated_time
+  response:
+    body:
+      string: '{"count":6710,"next":"https://tango.makegov.com/api/itdashboard/?limit=5&page=2&shape=uii%2Cagency_name%2Cinvestment_title%2Cupdated_time","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","investment_title":"Joint Financial Management System (JFMS)","updated_time":"2026-04-06T20:01:15+00:00"},{"uii":"014-000000538","agency_name":"Department
+        of State","investment_title":"Security/Cybersecurity Services","updated_time":"2026-04-06T19:29:34+00:00"},{"uii":"014-000000498","agency_name":"Department
+        of State","investment_title":"Information Technology Acquisitions","updated_time":"2026-04-06T19:28:31+00:00"},{"uii":"014-000000534","agency_name":"Department
+        of State","investment_title":"GDI-IoT Network","updated_time":"2026-04-06T19:27:40+00:00"},{"uii":"014-000000520","agency_name":"Department
+        of State","investment_title":"FSI Enterprise Operations","updated_time":"2026-04-06T19:27:03+00:00"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f4e8089132f4-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:07 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WqUPwYgFV7xLDsbHhTCkYqTp0m6c0s%2FJnWeS7R1xpAqvQmgt4vWPyalKBi7QBf8kYuBW0TjDxy%2BRGy1NKaYP7Xq0SfXWd3ZjxJ2Cn4inWa7ntzlQvrfvwd2PKaSeAXdYUa3e"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '938'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.028s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '0'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999939'
+      x-ratelimit-daily-reset:
+      - '34312'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '0'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

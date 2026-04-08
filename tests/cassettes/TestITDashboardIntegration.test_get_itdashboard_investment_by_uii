@@ -1,0 +1,314 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=1&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl
+  response:
+    body:
+      string: '{"count":6710,"next":"https://tango.makegov.com/api/itdashboard/?limit=1&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Joint Financial
+        Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"}]}'
+    headers:
+      CF-RAY:
+      - 9e91ef98cec286d8-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:24:29 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=suXvkskd%2B%2B2rF71WlDXTA1ElFfnu%2BOJDc7bC01Uo8O5D%2BjN6X0MT2M39nHwsg72EKvtKitDriLAa50pDmaRFiLJzvluTfxpugUH%2F1IegV1hkVcMQXxT1Wqc2ROmj1vRXWmeA"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '614'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '56'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999983'
+      x-ratelimit-daily-reset:
+      - '34530'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '56'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/014-000000018/?shape=uii%2Cagency_code%2Cagency_name%2Cbureau_code%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl
+  response:
+    body:
+      string: '{"uii":"014-000000018","agency_code":14,"agency_name":"Department of
+        State","bureau_code":0,"bureau_name":"Department of State","investment_title":"Joint
+        Financial Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"}'
+    headers:
+      CF-RAY:
+      - 9e91ef9ab80286d8-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:24:30 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=aFMGV8Hdzwv9MasMVneC1BySSDJOYBcgIAFNVylSsvq3NfxP2zq76Fwod%2Fi%2Bb6fkzAyQnEYzjyY9uGbpc5IAreSl7Mxb8uYdW8JW2KWe6Mqfdvy1gkl0fewY8Ar2dSDag%2Bfi"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '415'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.015s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999982'
+      x-ratelimit-daily-reset:
+      - '34530'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '55'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=1&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl
+  response:
+    body:
+      string: '{"count":6710,"next":"https://tango.makegov.com/api/itdashboard/?limit=1&page=2&shape=uii%2Cagency_name%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","bureau_name":"Department of State","investment_title":"Joint Financial
+        Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"}]}'
+    headers:
+      CF-RAY:
+      - 9e91f4f9fea8e8ea-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:10 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5aOMGQdmVI8Up3OMx%2FBx2RVJ788ePg3OPobgIPjQGCmDl4MQBbZnVi1qCPrRdVZ56eXNAdy3UejXzU1HE5nC6ufEudVGw3qsxAx0%2FwMnzinUmrpEiC54p%2Fends2JgG9Y41vdPMl%2FSbXRlvLlELoL"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '614'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '993'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999935'
+      x-ratelimit-daily-reset:
+      - '34309'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '993'
+      x-ratelimit-reset:
+      - '55'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/014-000000018/?shape=uii%2Cagency_code%2Cagency_name%2Cbureau_code%2Cbureau_name%2Cinvestment_title%2Ctype_of_investment%2Cpart_of_it_portfolio%2Cupdated_time%2Curl
+  response:
+    body:
+      string: '{"uii":"014-000000018","agency_code":14,"agency_name":"Department of
+        State","bureau_code":0,"bureau_name":"Department of State","investment_title":"Joint
+        Financial Management System (JFMS)","type_of_investment":"Major IT Investments","part_of_it_portfolio":"Part
+        1. IT Investments for Mission Delivery","updated_time":"2026-04-06T20:01:15+00:00","url":"https://www.itdashboard.gov/investment-details/014-000000018"}'
+    headers:
+      CF-RAY:
+      - 9e91f4fc3cd2e8ea-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:10 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=4eBA4RXG2uyY8hB2lxy4OIJ4MHPsyfiYK7npiwg16wmPV7Wd4UAtoNpGhl05fCd0%2BWwQhBumAhgDSDk8R5fCKKC150jwGyccckD9hgcEzC1XzFcowcZMJTNmiudBGLJalwz5YOUr1IqDnlMyYr0t"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '415'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.019s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '55'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999934'
+      x-ratelimit-daily-reset:
+      - '34309'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '55'
+    status:
+      code: 200
+      message: OK
+version: 1

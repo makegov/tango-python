@@ -26,6 +26,7 @@ from tango.models import (
     Forecast,
     Grant,
     GsaElibraryContract,
+    ITDashboardInvestment,
     Location,
     Notice,
     Opportunity,
@@ -1334,6 +1335,112 @@ class TangoClient:
         data = self._get(f"/api/gsa_elibrary_contracts/{uuid}/", params)
         return self._parse_response_with_shape(
             data, shape, GsaElibraryContract, flat, flat_lists, joiner=joiner
+        )
+
+    # ============================================================================
+    # IT Dashboard Investments
+    # ============================================================================
+
+    def list_itdashboard_investments(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        search: str | None = None,
+        agency_code: int | None = None,
+        agency_name: str | None = None,
+        type_of_investment: str | None = None,
+        updated_time_after: str | date | datetime | None = None,
+        updated_time_before: str | date | datetime | None = None,
+        cio_rating: int | None = None,
+        cio_rating_max: int | None = None,
+        performance_risk: bool | None = None,
+    ) -> PaginatedResponse:
+        """List federal IT investments from the IT Dashboard (`/api/itdashboard/`).
+
+        Filters are tier-gated by the API:
+
+        - **Free**: ``search`` (full-text across UII, title, description, agency, bureau)
+        - **Pro**: ``agency_code``, ``type_of_investment``,
+          ``updated_time_after`` / ``updated_time_before``
+        - **Business+**: ``agency_name`` (text), ``cio_rating``,
+          ``cio_rating_max``, ``performance_risk``
+
+        Hitting a gated filter on a lower tier returns a 403 with upgrade info.
+
+        CIO ratings: 1=High Risk, 2=Moderately High, 3=Medium, 4=Moderately Low, 5=Low.
+        ``performance_risk=True`` returns investments with at least one NOT MET metric.
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.ITDASHBOARD_INVESTMENTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for k, val in (
+            ("search", search),
+            ("agency_code", agency_code),
+            ("agency_name", agency_name),
+            ("type_of_investment", type_of_investment),
+            ("updated_time_after", updated_time_after),
+            ("updated_time_before", updated_time_before),
+            ("cio_rating", cio_rating),
+            ("cio_rating_max", cio_rating_max),
+            ("performance_risk", performance_risk),
+        ):
+            if val is None:
+                continue
+            if isinstance(val, bool):
+                params[k] = "true" if val else "false"
+            elif isinstance(val, (date, datetime)):
+                params[k] = val.isoformat()
+            else:
+                params[k] = val
+        data = self._get("/api/itdashboard/", params)
+        results = [
+            self._parse_response_with_shape(
+                obj, shape, ITDashboardInvestment, flat, flat_lists, joiner=joiner
+            )
+            for obj in data.get("results", [])
+        ]
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_itdashboard_investment(
+        self,
+        uii: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single IT Dashboard investment by UII (`/api/itdashboard/{uii}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/itdashboard/{uii}/", params)
+        return self._parse_response_with_shape(
+            data, shape, ITDashboardInvestment, flat, flat_lists, joiner=joiner
         )
 
     # ============================================================================

@@ -10,6 +10,7 @@ from .exceptions import (
 )
 from .models import (
     GsaElibraryContract,
+    ITDashboardInvestment,
     PaginatedResponse,
     RateLimitInfo,
     SearchFilters,
@@ -38,6 +39,7 @@ __all__ = [
     "TangoRateLimitError",
     "RateLimitInfo",
     "GsaElibraryContract",
+    "ITDashboardInvestment",
     "PaginatedResponse",
     "SearchFilters",
     "ShapeConfig",

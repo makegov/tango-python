@@ -336,6 +336,149 @@ class TestTangoClient:
         assert subawards.results[0]["award_key"] == "CONT_AWD_123"
 
     @patch("tango.client.httpx.Client.request")
+    def test_list_itdashboard_investments_with_default_shape(self, mock_request):
+        """Test list_itdashboard_investments uses default minimal shape and hits the right URL."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "uii": "021-000000001",
+                    "agency_name": "Department of Transportation",
+                    "bureau_name": "Federal Aviation Administration",
+                    "investment_title": "NextGen Air Traffic",
+                    "type_of_investment": "Major IT Investment",
+                    "part_of_it_portfolio": "Yes",
+                    "updated_time": "2024-01-15T12:00:00Z",
+                    "url": "https://www.itdashboard.gov/investment-details/021-000000001",
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        investments = client.list_itdashboard_investments(limit=10)
+
+        call_args = mock_request.call_args
+        # Hits /api/itdashboard/, not /api/itdashboard_investments/
+        assert call_args[1]["url"].endswith("/api/itdashboard/")
+        assert call_args[1]["params"]["shape"] == ShapeConfig.ITDASHBOARD_INVESTMENTS_MINIMAL
+        assert investments.count == 1
+        assert investments.results[0]["uii"] == "021-000000001"
+        assert isinstance(investments.results[0]["updated_time"], datetime)
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_itdashboard_investments_passes_filters(self, mock_request):
+        """Test that all filter params are forwarded with correct serialization."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_itdashboard_investments(
+            search="cyber",
+            agency_code=21,
+            agency_name="defense",
+            type_of_investment="Major IT Investment",
+            updated_time_after=date(2024, 1, 1),
+            updated_time_before="2024-12-31",
+            cio_rating=1,
+            cio_rating_max=2,
+            performance_risk=True,
+        )
+
+        params = mock_request.call_args[1]["params"]
+        assert params["search"] == "cyber"
+        assert params["agency_code"] == 21
+        assert params["agency_name"] == "defense"
+        assert params["type_of_investment"] == "Major IT Investment"
+        assert params["updated_time_after"] == "2024-01-01"
+        assert params["updated_time_before"] == "2024-12-31"
+        assert params["cio_rating"] == 1
+        assert params["cio_rating_max"] == 2
+        # Booleans are serialized as the lowercase strings the API expects.
+        assert params["performance_risk"] == "true"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_get_itdashboard_investment_by_uii(self, mock_request):
+        """Test get_itdashboard_investment uses UII in path and comprehensive default shape."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "uii": "021-000000001",
+            "agency_code": 21,
+            "agency_name": "DOT",
+            "bureau_code": 12,
+            "bureau_name": "FAA",
+            "investment_title": "NextGen",
+            "type_of_investment": "Major IT Investment",
+            "part_of_it_portfolio": "Yes",
+            "updated_time": "2024-01-15T12:00:00Z",
+            "url": "https://www.itdashboard.gov/investment-details/021-000000001",
+        }
+        mock_response.content = b'{"uii": "021-000000001"}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        investment = client.get_itdashboard_investment("021-000000001")
+
+        call_args = mock_request.call_args
+        assert call_args[1]["url"].endswith("/api/itdashboard/021-000000001/")
+        assert (
+            call_args[1]["params"]["shape"]
+            == ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE
+        )
+        assert investment["uii"] == "021-000000001"
+        assert investment["agency_code"] == 21
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_itdashboard_investments_funding_expansion(self, mock_request):
+        """Test that funding/details dict expansions and nested-list expansions parse through."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "uii": "021-X",
+                    "agency_name": "DOT",
+                    "funding": {
+                        "fy2024_internal_funding": "1000000.00",
+                        "fy2024_contribution": "50000.00",
+                    },
+                    "cio_evaluation": [
+                        {"cioRating": "3 - Medium Risk", "latestIndicator": "Y"}
+                    ],
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        investments = client.list_itdashboard_investments(
+            shape="uii,agency_name,funding(*),cio_evaluation(*)"
+        )
+
+        result = investments.results[0]
+        assert result["uii"] == "021-X"
+        assert result["funding"]["fy2024_internal_funding"] == "1000000.00"
+        assert result["cio_evaluation"][0]["latestIndicator"] == "Y"
+
+    @patch("tango.client.httpx.Client.request")
     def test_error_handling_401(self, mock_request):
         """Test 401 authentication error handling"""
         mock_response = Mock()

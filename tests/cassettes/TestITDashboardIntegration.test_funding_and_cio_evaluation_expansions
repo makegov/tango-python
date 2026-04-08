@@ -1,0 +1,88 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/itdashboard/?page=1&limit=3&shape=uii%2Cagency_name%2Cfunding%28%2A%29%2Ccio_evaluation%28%2A%29
+  response:
+    body:
+      string: '{"count":6710,"next":"https://tango.makegov.com/api/itdashboard/?limit=3&page=2&shape=uii%2Cagency_name%2Cfunding%28%2A%29%2Ccio_evaluation%28%2A%29","previous":null,"results":[{"uii":"014-000000018","agency_name":"Department
+        of State","funding":{"fy2020_contribution":0.0,"fy2021_contribution":0.0,"fy2022_contribution":0.0,"fy2023_contribution":0.0,"fy2024_contribution":7.013587,"fy2025_contribution":2.913587,"fy2020_internal_funding":0.0,"fy2021_internal_funding":39.214195,"fy2022_internal_funding":40.517195,"fy2023_internal_funding":40.723195,"fy2024_internal_funding":26.626865,"fy2025_internal_funding":31.200073},"cio_evaluation":[{"comment":"Updated
+        the CIO Risk Rating to 3- Medium Risk based on internal agency evaluation.","cioRating":"3
+        - Medium Risk","ratedDate":"2025-02-14","updatedTime":"2025-04-30 19:47:20","latestIndicator":"Y"}]},{"uii":"014-000000538","agency_name":"Department
+        of State","funding":{"fy2020_contribution":0.0,"fy2021_contribution":0.0,"fy2022_contribution":0.0,"fy2023_contribution":0.0,"fy2024_contribution":0.0,"fy2025_contribution":0.0,"fy2020_internal_funding":0.0,"fy2021_internal_funding":0.0,"fy2022_internal_funding":27.943398,"fy2023_internal_funding":20.375717,"fy2024_internal_funding":49.860823,"fy2025_internal_funding":43.509191},"cio_evaluation":[{"comment":"Our
+        CIO reviewed the current rating with no changes.","cioRating":"3 - Medium
+        Risk","ratedDate":"2025-02-14","updatedTime":"2025-03-31 19:51:18","latestIndicator":"Y"}]},{"uii":"014-000000498","agency_name":"Department
+        of State","funding":{"fy2020_contribution":0.0,"fy2021_contribution":0.0,"fy2022_contribution":6.169214,"fy2023_contribution":0.0,"fy2024_contribution":0.0,"fy2025_contribution":0.0,"fy2020_internal_funding":0.0,"fy2021_internal_funding":130.740066,"fy2022_internal_funding":175.482373,"fy2023_internal_funding":185.6068,"fy2024_internal_funding":185.556061,"fy2025_internal_funding":200.91797},"cio_evaluation":[{"comment":"Updated
+        the CIO Risk Rating to 4 - Moderately High Risk based on internal agency evaluation.","cioRating":"4
+        - Moderately Low Risk","ratedDate":"2025-02-14","updatedTime":"2025-03-31
+        19:48:16","latestIndicator":"Y"}]}]}'
+    headers:
+      CF-RAY:
+      - 9e91f5225a5b140a-ORD
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Apr 2026 14:28:16 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=c2Hjys4568Iyl5PfHEVFcJr70SSu11UDlnDRutwzxGt1vOVEzEX%2BRt9TYxSf3WYHxL%2FTotxnh9TSsUkZb2aVqbuitLi%2FHV6EAE1qUS6X%2F569Ql0ND01BSAqUbkFXQmh9R9W9"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '2178'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.028s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '984'
+      x-ratelimit-burst-reset:
+      - '49'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999926'
+      x-ratelimit-daily-reset:
+      - '34303'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '984'
+      x-ratelimit-reset:
+      - '49'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1
