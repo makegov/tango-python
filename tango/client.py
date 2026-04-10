@@ -1,6 +1,7 @@
 """Tango API Client"""
 
 import os
+import re
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
@@ -143,6 +144,28 @@ class TangoClient:
             burst_reset=_int_or_none(headers.get("X-RateLimit-Burst-Reset")),
         )
 
+    _SENSITIVE_PATTERNS = re.compile(
+        r"""
+        (?:api[_-]?key|token|secret|password|authorization|bearer|credential)
+        \s*[=:]\s*\S+
+        """,
+        re.IGNORECASE | re.VERBOSE,
+    )
+
+    @staticmethod
+    def _sanitize_error_detail(detail: Any, max_length: int = 200) -> str:
+        """Sanitize an error detail from an API response for safe inclusion in exception messages.
+
+        Redacts values that look like API keys, tokens, or credentials, and
+        truncates long messages to prevent information disclosure in logs
+        and error tracking systems.
+        """
+        text = str(detail)
+        text = TangoClient._SENSITIVE_PATTERNS.sub("[REDACTED]", text)
+        if len(text) > max_length:
+            text = text[:max_length] + "..."
+        return text
+
     def _request(
         self,
         method: str,
@@ -176,7 +199,10 @@ class TangoClient:
                             or error_data.get("error")
                         )
                         if detail:
-                            error_msg = f"Invalid request parameters: {detail}"
+                            error_msg = (
+                                f"Invalid request parameters: "
+                                f"{self._sanitize_error_detail(detail)}"
+                            )
                 raise TangoValidationError(
                     error_msg,
                     response.status_code,
@@ -185,7 +211,9 @@ class TangoClient:
             elif response.status_code == 429:
                 error_data = response.json() if response.content else {}
                 detail = error_data.get("detail", "Rate limit exceeded")
-                raise TangoRateLimitError(detail, response.status_code, error_data)
+                raise TangoRateLimitError(
+                    self._sanitize_error_detail(detail), response.status_code, error_data
+                )
             elif not response.is_success:
                 raise TangoAPIError(
                     f"API request failed with status {response.status_code}", response.status_code
@@ -194,7 +222,9 @@ class TangoClient:
             return response.json() if response.content else {}
 
         except httpx.HTTPError as e:
-            raise TangoAPIError(f"Request failed: {str(e)}") from e
+            raise TangoAPIError(
+                f"Request failed: {self._sanitize_error_detail(e)}"
+            ) from e
 
     def _get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         """Make a GET request"""

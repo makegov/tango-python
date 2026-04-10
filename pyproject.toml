@@ -36,6 +36,7 @@ dev = [
     "pytest-recording>=0.13.0",
     "python-dotenv>=1.0.0",
     "pyyaml>=6.0",
+    "bandit>=1.7.0",
 ]
 notebooks = [
     "jupyter>=1.0.0",
@@ -112,6 +113,10 @@ exclude_lines = [
     "raise NotImplementedError",
     "if __name__ == .__main__.:",
 ]
+
+[tool.bandit]
+exclude_dirs = ["tests", "scripts"]
+skips = []
 
 [tool.hatch.build.targets.wheel]
 packages = ["tango"]
