@@ -1337,6 +1337,70 @@ class TestErrorHandling:
         assert "Connection failed" in str(exc_info.value)
 
     @patch("tango.client.httpx.Client.request")
+    def test_400_error_redacts_api_key_in_detail(self, mock_request):
+        """Test that API keys echoed in error details are redacted"""
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 400
+        mock_response.content = b'{"detail": "Invalid api_key=fake_test_key_do_not_use_1234567890"}'
+        mock_response.json.return_value = {
+            "detail": "Invalid api_key=fake_test_key_do_not_use_1234567890"
+        }
+        mock_response.headers = {}
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoValidationError) as exc_info:
+            client.list_agencies()
+
+        assert "fake_test_key" not in str(exc_info.value)
+        assert "[REDACTED]" in str(exc_info.value)
+        # Raw response_data still has the original for programmatic access
+        assert "fake_test_key" in exc_info.value.response_data["detail"]
+
+    @patch("tango.client.httpx.Client.request")
+    def test_429_error_redacts_sensitive_values(self, mock_request):
+        """Test that sensitive values in rate limit error details are redacted"""
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 429
+        mock_response.content = b'{"detail": "Rate limited. token=sk-abc123secret"}'
+        mock_response.json.return_value = {
+            "detail": "Rate limited. token=sk-abc123secret"
+        }
+        mock_response.headers = {}
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoRateLimitError) as exc_info:
+            client.list_agencies()
+
+        assert "sk-abc123secret" not in str(exc_info.value)
+        assert "[REDACTED]" in str(exc_info.value)
+
+    def test_sanitize_error_detail_truncates_long_messages(self):
+        """Test that very long error details are truncated"""
+        long_detail = "A" * 300
+        result = TangoClient._sanitize_error_detail(long_detail)
+        assert len(result) == 203  # 200 + "..."
+        assert result.endswith("...")
+
+    def test_sanitize_error_detail_redacts_credentials(self):
+        """Test that various credential patterns are redacted"""
+        cases = [
+            ("Invalid api_key=abc123", "[REDACTED]"),
+            ("Bad token: secretvalue", "[REDACTED]"),
+            ("Error: password=hunter2", "[REDACTED]"),
+            ("Failed authorization: Bearer xyz", "[REDACTED]"),
+            ("secret=mysecretvalue in request", "[REDACTED]"),
+        ]
+        for input_text, expected_replacement in cases:
+            result = TangoClient._sanitize_error_detail(input_text)
+            assert expected_replacement in result, f"Failed to redact: {input_text}"
+
+    @patch("tango.client.httpx.Client.request")
     def test_empty_response_content(self, mock_request):
         """Test handling of empty response content"""
         mock_response = Mock()

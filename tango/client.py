@@ -1,6 +1,7 @@
 """Tango API Client"""
 
 import os
+import re
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
@@ -143,14 +144,24 @@ class TangoClient:
             burst_reset=_int_or_none(headers.get("X-RateLimit-Burst-Reset")),
         )
 
+    _SENSITIVE_PATTERNS = re.compile(
+        r"""
+        (?:api[_-]?key|token|secret|password|authorization|bearer|credential)
+        \s*[=:]\s*\S+
+        """,
+        re.IGNORECASE | re.VERBOSE,
+    )
+
     @staticmethod
     def _sanitize_error_detail(detail: Any, max_length: int = 200) -> str:
         """Sanitize an error detail from an API response for safe inclusion in exception messages.
 
-        Truncates long messages to prevent information disclosure in logs
+        Redacts values that look like API keys, tokens, or credentials, and
+        truncates long messages to prevent information disclosure in logs
         and error tracking systems.
         """
         text = str(detail)
+        text = TangoClient._SENSITIVE_PATTERNS.sub("[REDACTED]", text)
         if len(text) > max_length:
             text = text[:max_length] + "..."
         return text
@@ -211,7 +222,9 @@ class TangoClient:
             return response.json() if response.content else {}
 
         except httpx.HTTPError as e:
-            raise TangoAPIError(f"Request failed: {str(e)}") from e
+            raise TangoAPIError(
+                f"Request failed: {self._sanitize_error_detail(e)}"
+            ) from e
 
     def _get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         """Make a GET request"""
