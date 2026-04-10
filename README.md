@@ -346,7 +346,7 @@ print(contract["recipient"]["display_name"])  # Nested fields too
 
 ## Development
 
-This project uses [uv](https://docs.astral.sh/uv/) for dependency management and tooling.
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management and [just](https://github.com/casey/just) as a task runner. Integration tests use [1Password CLI](https://developer.1password.com/docs/cli/) (`op`) to inject the API key at runtime.
 
 ### Setup
 
@@ -357,10 +357,18 @@ cd tango-python
 
 # Install dependencies with uv
 uv sync --all-extras
-
-# Or install dev dependencies only
-uv sync --group dev
 ```
+
+### Secrets Management
+
+API keys are stored in 1Password and injected at runtime via `op run`. The `.env` file uses secret references instead of real values:
+
+```bash
+# .env
+TANGO_API_KEY=op://Vault/tango-api/credential
+```
+
+Recipes that need the API key (integration tests, live tests, cassette refresh) handle this automatically through `just`.
 
 ### Testing
 
@@ -370,23 +378,19 @@ The SDK includes a comprehensive test suite with:
 
 ```bash
 # Run all tests
-uv run pytest
+just test
 
 # Run only unit tests
-uv run pytest tests/ -m "not integration"
+just test-unit
 
-# Run only integration tests
-uv run pytest tests/integration/
+# Run integration tests (API key injected via 1Password)
+just test-integration
 
-# Run integration tests with live API (requires TANGO_API_KEY)
-export TANGO_API_KEY=your-api-key
-export TANGO_USE_LIVE_API=true
-uv run pytest tests/integration/
+# Run integration tests with live API
+just test-live
 
 # Refresh cassettes with fresh API responses
-export TANGO_API_KEY=your-api-key
-export TANGO_REFRESH_CASSETTES=true
-uv run pytest tests/integration/
+just refresh-cassettes
 ```
 
 See [tests/integration/README.md](tests/integration/README.md) for detailed testing documentation.
@@ -395,16 +399,19 @@ See [tests/integration/README.md](tests/integration/README.md) for detailed test
 
 ```bash
 # Format code
-uv run ruff format tango/
+just fmt
 
 # Lint code
-uv run ruff check tango/
+just lint
 
 # Type checking
-uv run mypy tango/
+just typecheck
 
-# Run all checks
-uv run ruff format tango/ && uv run ruff check tango/ && uv run mypy tango/
+# Security scan
+just bandit
+
+# Run all checks (format, lint, typecheck, bandit)
+just check
 ```
 
 ### Project Structure
@@ -482,6 +489,8 @@ tango-python/
 
 - Python 3.12 or higher
 - httpx >= 0.27.0
+- [just](https://github.com/casey/just) (for development task runner)
+- [1Password CLI](https://developer.1password.com/docs/cli/) (for integration tests)
 
 ## License
 
@@ -501,12 +510,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Run lint and format: `uv run ruff format tango/ && uv run ruff check tango/`
-4. Run type checking: `uv run mypy tango/`
-5. Run tests: `uv run pytest`
-6. (Optional) Run [filter and shape conformance](scripts/README.md#filter-and-shape-conformance) if you have the tango API manifest; CI will run it on push/PR
-7. Commit your changes (`git commit -m 'Add amazing feature'`)
-8. Push to the branch (`git push origin feature/amazing-feature`)
-9. Open a Pull Request
-
-For a single command that runs formatting, linting, type checking, and tests (and conformance when the manifest is present), use: `uv run python scripts/pr_review.py --mode full`
+3. Run all checks: `just check`
+4. Run tests: `just test`
+5. (Optional) Run full PR review: `just pr-review`
+6. Commit your changes (`git commit -m 'Add amazing feature'`)
+7. Push to the branch (`git push origin feature/amazing-feature`)
+8. Open a Pull Request
