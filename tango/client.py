@@ -143,6 +143,18 @@ class TangoClient:
             burst_reset=_int_or_none(headers.get("X-RateLimit-Burst-Reset")),
         )
 
+    @staticmethod
+    def _sanitize_error_detail(detail: Any, max_length: int = 200) -> str:
+        """Sanitize an error detail from an API response for safe inclusion in exception messages.
+
+        Truncates long messages to prevent information disclosure in logs
+        and error tracking systems.
+        """
+        text = str(detail)
+        if len(text) > max_length:
+            text = text[:max_length] + "..."
+        return text
+
     def _request(
         self,
         method: str,
@@ -176,7 +188,10 @@ class TangoClient:
                             or error_data.get("error")
                         )
                         if detail:
-                            error_msg = f"Invalid request parameters: {detail}"
+                            error_msg = (
+                                f"Invalid request parameters: "
+                                f"{self._sanitize_error_detail(detail)}"
+                            )
                 raise TangoValidationError(
                     error_msg,
                     response.status_code,
@@ -185,7 +200,9 @@ class TangoClient:
             elif response.status_code == 429:
                 error_data = response.json() if response.content else {}
                 detail = error_data.get("detail", "Rate limit exceeded")
-                raise TangoRateLimitError(detail, response.status_code, error_data)
+                raise TangoRateLimitError(
+                    self._sanitize_error_detail(detail), response.status_code, error_data
+                )
             elif not response.is_success:
                 raise TangoAPIError(
                     f"API request failed with status {response.status_code}", response.status_code
