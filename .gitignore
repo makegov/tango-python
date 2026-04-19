@@ -150,3 +150,16 @@ yoni/
 .cursor/*
 
 examples/
+
+# --- mg-tools (per-developer; re-run 'mg-tools install' after clone) ---
+.claude-plugin/
+.claude/settings.json
+.claude/settings.local.json
+.claude/mg-tools-integration.md
+.mcp.json
+.mcp.disabled.json
+.mg-tools/
+.claude.bak.*
+.cursor.bak.*
+.mcp.json.bak.*
+CLAUDE.md
