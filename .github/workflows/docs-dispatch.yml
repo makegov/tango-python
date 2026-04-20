@@ -1,0 +1,67 @@
+name: Docs dispatch
+
+# Fires on push to the repo's default branch when content that affects external
+# docs (or the public changelog) changes. Notifies the composer repo
+# (makegov/docs) via repository_dispatch so it rebuilds without waiting for
+# someone to push to docs directly.
+#
+# Installed by mg-tools into repos whose docsRole is `coloc-source` or
+# `editorial-split-source`. For editorial-split repos (e.g. tango), the
+# external paths watched are narrower — only docs/CHANGELOG.md and
+# docs/internal/** (since the rest of external docs lives in the composer).
+#
+# Required secrets:
+#   DOCS_DISPATCH_TOKEN — GitHub token with repo:write on makegov/docs
+#
+# Required variables (optional):
+#   DOCS_TARGET_REPO    — override target (default: makegov/docs)
+#
+# On install, mg-tools substitutes the path filters based on docsRole.
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - staging
+    paths:
+      - "docs/**"
+      - "docs/CHANGELOG.md"
+      - "README.md"
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          set -euo pipefail
+          # Default to all-on-first-commit if there's only one commit in the ref.
+          base=$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)
+          changed=$(git diff --name-only "$base" HEAD | paste -sd, -)
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          if [[ -n "$changed" ]]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Dispatch to docs composer
+        if: steps.changes.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+        run: |
+          gh api "repos/$TARGET/dispatches" \
+            -f event_type=external_updated \
+            -f "client_payload[source_repo]=${{ github.repository }}" \
+            -f "client_payload[source_ref]=${{ github.sha }}" \
+            -f "client_payload[changed_paths]=${{ steps.changes.outputs.changed }}"

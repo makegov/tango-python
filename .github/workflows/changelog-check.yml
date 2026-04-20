@@ -1,0 +1,30 @@
+name: changelog-check
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  changelog:
+    name: Verify CHANGELOG entry
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check for CHANGELOG diff
+        run: |
+          set -e
+          base="origin/${{ github.base_ref }}"
+          git fetch --no-tags --depth=50 origin "${{ github.base_ref }}"
+          changed=$(git diff --name-only "$base...HEAD")
+          echo "Changed files:"
+          echo "$changed"
+          # Skip if only docs/meta files changed.
+          if echo "$changed" | grep -vE '^(\.github/|docs/|README\.md$|CHANGELOG\.md$|\.gitignore$)' | grep -q .; then
+            if ! echo "$changed" | grep -qE '^(CHANGELOG\.md|docs/CHANGELOG\.md)$'; then
+              echo "::error::Source files changed but neither CHANGELOG.md nor docs/CHANGELOG.md updated."
+              exit 1
+            fi
+          fi
+          echo "OK."
