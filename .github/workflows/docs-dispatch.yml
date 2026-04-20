@@ -1,0 +1,88 @@
+name: Docs dispatch
+
+# Fires on push to the repo's default branch when content that affects
+# docs changes. Notifies the appropriate composer repo(s) via
+# repository_dispatch so they rebuild without waiting for someone to
+# push to the composer.
+#
+# Two targets:
+#   - external_updated → makegov/docs           (for docs/** minus internal)
+#   - internal_updated → makegov/internal-docs  (for docs/internal/**)
+#
+# Installed by mg-tools into repos whose docsRole is `coloc-source` or
+# `editorial-split-source`. For editorial-split repos (e.g. tango), the
+# external dispatch narrows to docs/CHANGELOG.md + README.md (since the
+# rest of external docs lives in the composer and gets authored there).
+#
+# Required secrets:
+#   DOCS_DISPATCH_TOKEN — GitHub token with contents:write on
+#                         makegov/docs + makegov/internal-docs
+#
+# Required variables (optional):
+#   DOCS_TARGET_REPO          — override external target (default: makegov/docs)
+#   INTERNAL_DOCS_TARGET_REPO — override internal target (default: makegov/internal-docs)
+#
+# On install, mg-tools substitutes the path filters based on docsRole.
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - staging
+    paths:
+      - "docs/**"
+      - "README.md"
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          set -euo pipefail
+          base=$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)
+          all_changed=$(git diff --name-only "$base" HEAD | paste -sd, -)
+          # External = docs/ files OR README.md, excluding docs/internal/.
+          external=$(git diff --name-only "$base" HEAD -- 'docs' 'README.md' ':!docs/internal' | paste -sd, -)
+          # Internal = docs/internal/ files.
+          internal=$(git diff --name-only "$base" HEAD -- 'docs/internal' | paste -sd, -)
+          {
+            echo "changed=$all_changed"
+            echo "external=$external"
+            echo "internal=$internal"
+            echo "has_external=$([ -n "$external" ] && echo true || echo false)"
+            echo "has_internal=$([ -n "$internal" ] && echo true || echo false)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch to external composer (makegov/docs)
+        if: steps.changes.outputs.has_external == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+        run: |
+          gh api "repos/$TARGET/dispatches" \
+            -f event_type=external_updated \
+            -f "client_payload[source_repo]=${{ github.repository }}" \
+            -f "client_payload[source_ref]=${{ github.sha }}" \
+            -f "client_payload[changed_paths]=${{ steps.changes.outputs.external }}"
+
+      - name: Dispatch to internal composer (makegov/internal-docs)
+        if: steps.changes.outputs.has_internal == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          TARGET: ${{ vars.INTERNAL_DOCS_TARGET_REPO || 'makegov/internal-docs' }}
+        run: |
+          gh api "repos/$TARGET/dispatches" \
+            -f event_type=internal_updated \
+            -f "client_payload[source_repo]=${{ github.repository }}" \
+            -f "client_payload[source_ref]=${{ github.sha }}" \
+            -f "client_payload[changed_paths]=${{ steps.changes.outputs.internal }}"
