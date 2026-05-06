@@ -62,9 +62,7 @@ def validate_investment_fields(investment, comprehensive: bool = False) -> None:
     ):
         value = _get(investment, field)
         if value is not None:
-            assert isinstance(value, str), (
-                f"Investment '{field}' must be string, got {type(value)}"
-            )
+            assert isinstance(value, str), f"Investment '{field}' must be string, got {type(value)}"
 
     updated_time = _get(investment, "updated_time")
     if updated_time is not None:
@@ -94,9 +92,7 @@ class TestITDashboardIntegration:
             ("custom", "uii,agency_name,investment_title,updated_time"),
         ],
     )
-    def test_list_itdashboard_investments_with_shapes(
-        self, tango_client, shape_name, shape_value
-    ):
+    def test_list_itdashboard_investments_with_shapes(self, tango_client, shape_name, shape_value):
         """Test listing investments with different shapes."""
         kwargs: dict = {"limit": 5}
         if shape_value is not None:
@@ -211,9 +207,7 @@ class TestITDashboardIntegration:
                 validate_no_parsing_errors(investment)
                 updated = _get(investment, "updated_time")
                 if updated is not None:
-                    assert updated.year == 2026, (
-                        f"Expected updated_time in 2026, got {updated!r}"
-                    )
+                    assert updated.year == 2026, f"Expected updated_time in 2026, got {updated!r}"
 
     # ------------------------------------------------------------------
     # Business+ filters
@@ -222,9 +216,7 @@ class TestITDashboardIntegration:
     @handle_api_exceptions("itdashboard")
     def test_filter_by_agency_name_text(self, tango_client):
         """Business+: text search across agency name (icontains)."""
-        response = tango_client.list_itdashboard_investments(
-            limit=5, agency_name="defense"
-        )
+        response = tango_client.list_itdashboard_investments(limit=5, agency_name="defense")
         validate_pagination(response)
 
         if response.results:
@@ -260,9 +252,7 @@ class TestITDashboardIntegration:
     @handle_api_exceptions("itdashboard")
     def test_filter_by_performance_risk(self, tango_client):
         """Business+: investments with at least one NOT MET performance metric."""
-        response = tango_client.list_itdashboard_investments(
-            limit=5, performance_risk=True
-        )
+        response = tango_client.list_itdashboard_investments(limit=5, performance_risk=True)
         validate_pagination(response)
         for investment in response.results:
             validate_investment_fields(investment)
@@ -288,9 +278,7 @@ class TestITDashboardIntegration:
             assert _get(investment, "uii") is not None
             funding = _get(investment, "funding")
             if funding is not None:
-                assert isinstance(funding, dict), (
-                    f"funding must be dict, got {type(funding)}"
-                )
+                assert isinstance(funding, dict), f"funding must be dict, got {type(funding)}"
             cio_eval = _get(investment, "cio_evaluation")
             if cio_eval is not None:
                 assert isinstance(cio_eval, list), (

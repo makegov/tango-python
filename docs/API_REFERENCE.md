@@ -503,13 +503,14 @@ Vehicles provide a solicitation-centric way to discover groups of related IDVs a
 
 ### list_vehicles()
 
-List vehicles with optional vehicle-level full-text search.
+List vehicles with optional vehicle-level full-text search and ordering.
 
 ```python
 vehicles = client.list_vehicles(
     page=1,
     limit=25,
     search="GSA schedule",
+    ordering="-vehicle_obligations",
     shape=ShapeConfig.VEHICLES_MINIMAL,
     flat=False,
     flat_lists=False,
@@ -520,6 +521,7 @@ vehicles = client.list_vehicles(
 - `page` (int): Page number (default: 1)
 - `limit` (int): Results per page (default: 25, max: 100)
 - `search` (str, optional): Vehicle-level search term
+- `ordering` (str, optional): Server-side sort. Allowed: `vehicle_obligations`, `latest_award_date`. Prefix with `-` for descending.
 - `shape` (str, optional): Shape string (defaults to `ShapeConfig.VEHICLES_MINIMAL`)
 - `flat` (bool): Flatten nested objects in shaped response
 - `flat_lists` (bool): Flatten arrays using indexed keys
@@ -551,6 +553,67 @@ awardees = client.list_vehicle_awardees(
     shape=ShapeConfig.VEHICLE_AWARDEES_MINIMAL,
 )
 ```
+
+### list_vehicle_orders()
+
+List task orders under a vehicle's IDVs (`/api/vehicles/{uuid}/orders/`). Backed by a denormalized lakehouse table for fast pagination over large vehicles.
+
+```python
+orders = client.list_vehicle_orders(
+    uuid="00000000-0000-0000-0000-000000000001",
+    limit=25,
+    ordering="-obligated",
+    shape=ShapeConfig.VEHICLE_ORDERS_MINIMAL,
+)
+```
+
+**Parameters:**
+- `uuid` (str): Vehicle UUID
+- `page` (int): Page number (default: 1)
+- `limit` (int): Results per page (default: 25, max: 100)
+- `ordering` (str, optional): Server-side sort. Allowed: `award_date` (default), `obligated`, `total_contract_value`. Prefix with `-` for descending.
+- `shape` (str, optional): Shape string (defaults to `ShapeConfig.VEHICLE_ORDERS_MINIMAL`)
+- `flat`, `flat_lists`, `joiner`: as on other vehicles methods
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with order (Contract) dictionaries
+
+### Vehicle response fields
+
+The post-cutover (May 2026) vehicle response includes these top-level fields, all addressable via the `shape` parameter:
+
+| Field | Type | Notes |
+| ----- | ---- | ----- |
+| `uuid` | str | Stable identifier. |
+| `solicitation_identifier` | str | Solicitation shared by underlying IDVs. |
+| `is_synthetic_solicitation` | bool | `True` for GWAC orphans recovered via `ACRO:` prefix. |
+| `agency_id` | str | From IDV award-key suffix. |
+| `program_acronym` | str \| None | New post-cutover field. |
+| `organization_id` | str \| None | Awarding organization. |
+| `organization` | dict \| None | Live awarding-org snapshot `{organization_id, office_code, office_name, agency_code, agency_name, department_code, department_name}`. Selected as a leaf field (`shape=...,organization`); not currently sub-selectable. |
+| `vehicle_type`, `who_can_use`, `type_of_idc`, `contract_type` | dict \| None | Returned as `{code, description}`. |
+| `description` | str \| None | Common text across IDV descriptions. |
+| `descriptions` | list[str] \| None | Distinct IDV descriptions. |
+| `idv_count`, `awardee_count`, `order_count` | int \| None | Denormalized rollups. |
+| `total_obligated`, `vehicle_obligations`, `vehicle_contracts_value` | Decimal \| None | Denormalized rollups. |
+| `award_date`, `latest_award_date`, `last_date_to_order` | date \| None | |
+| `solicitation_title`, `solicitation_description`, `solicitation_date`, `opportunity_id` | str / date / None | From SAM.gov via the linked Opportunity. |
+| `naics_code`, `psc_code`, `set_aside`, `fiscal_year` | int / str / None | |
+
+### Vehicle shape expansions
+
+- `awardees(...)` — underlying IDV awards. Supports nested `orders(...)`.
+- `metrics(*)` — bundled lakehouse metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Defaults included in `ShapeConfig.VEHICLES_COMPREHENSIVE`.
+- `organization` — live awarding-org snapshot (selected as a leaf field; not sub-selectable).
+
+### Deprecated shape fields
+
+The following fields and expansions are still served by the API (recomputed at request time from the underlying IDVs) but the API now returns a `Deprecation: true` response header for them. They will be removed in a future tango API release.
+
+- `agency_details` (top-level field and `agency_details(*)` expansion)
+- `competition_details` (top-level field and `competition_details(*)` expansion)
+- `opportunity(*)` expansion (use the new top-level `solicitation_*` and `opportunity_id` fields instead)
+
+If you pass any of these in `shape=...`, the SDK will emit a Python `DeprecationWarning`. The default shapes (`VEHICLES_MINIMAL`, `VEHICLES_COMPREHENSIVE`) no longer include them.
 
 ---
 

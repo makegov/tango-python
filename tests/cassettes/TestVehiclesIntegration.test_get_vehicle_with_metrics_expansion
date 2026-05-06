@@ -25,7 +25,7 @@ interactions:
         VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5116733.97,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
     headers:
       CF-RAY:
-      - 9f73b81ebb963d59-JAX
+      - 9f73b823692c60c7-JAX
       Connection:
       - keep-alive
       Content-Type:
@@ -35,7 +35,7 @@ interactions:
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=nlkDo84xSKlQqOxVMCULQpSFUr%2ByvNqk5clNAiAUG3P3v9GZj4sWYIijGnArPlv%2BaO9z%2B637EZfDn5VLkMykl6392hG%2BWNMYaI9%2B0cXLrEgfbcn12luHzYHEcVOIk2By9FZVYoJbO6CEhCeoeNzS"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=B6gMSdTzCoCyerbzAHIcVlqBefWD2yJM28l29mzuR4ye3cO5QBChXu%2Foof465c8FHkZe8jIIWNe9U9rJfvAMpvgPgzx8eLhyJYVdac5U3d9XyF0qKbxJt58%2FMsn51P4CcUG49wsHDkNwLfd7N8qo"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -55,27 +55,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.024s
+      - 0.021s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '986'
+      - '981'
       x-ratelimit-burst-reset:
-      - '29'
+      - '28'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999986'
+      - '1999981'
       x-ratelimit-daily-reset:
       - '86220'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '986'
+      - '981'
       x-ratelimit-reset:
-      - '29'
+      - '28'
       x-results-counttype:
       - exact
     status:
@@ -95,16 +95,13 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/?shape=uuid%2Corganization&flat=true&joiner=__&flat_lists=true
+    uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/?shape=uuid%2Cmetrics%28%2A%29
   response:
     body:
-      string: '{"organization__organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","organization__office_code":"126395","organization__office_name":"MRPBS
-        MINNEAPOLIS MN","organization__agency_code":"12K3","organization__agency_name":"ANIMAL
-        AND PLANT HEALTH INSPECTION SERVICE","organization__department_code":"012","organization__department_name":"AGRICULTURE,
-        DEPARTMENT OF","uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e"}'
+      string: '{"metrics":{"avg_offers_received":1.5,"award_concentration_hhi":6058.0,"order_concentration_hhi":5200.0,"competed_rate":0.88,"using_agency_count":1,"avg_order_value":215542.58759999997,"max_order_value":602601.6,"top_recipient_share":72.99,"recent_obligations_24mo":0.0,"recent_orders_24mo":0,"days_since_last_order":5710,"obligation_to_ceiling_ratio":1.053125826277812},"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e"}'
     headers:
       CF-RAY:
-      - 9f73b81f5ca93d59-JAX
+      - 9f73b823da9360c7-JAX
       Connection:
       - keep-alive
       Content-Type:
@@ -114,7 +111,7 @@ interactions:
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=CqJJ85Cgv80%2Fz2c7k61dXKeYrVFFz8RUxhtcsY3j86jFwjPcYo7xcPBjBH5cyohJxE%2FWeS%2Bdy2YWh1tWkStjis8jta9f%2BGiiyKyRqvQ3Zb3kzqFQwTGjXnTMPTW%2FNrzQ8shECys8DGoRPOZnWOab"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5i%2Bk54VkK%2FXROY20rDQl9Rsx8mWgHA2Cn8jk3aUms2rC%2FpUJW8g4ecY5n8OZlTXhCF%2B5a0kpjUoAXs7btqOqBrmtTDnAaKNTjRYKpz72at%2Bbcu8K%2BCcopKM7zRf7KdNL9q9hPXB01yre8vUVrCJ0"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -124,7 +121,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '413'
+      - '417'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -140,21 +137,21 @@ interactions:
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '985'
+      - '980'
       x-ratelimit-burst-reset:
-      - '29'
+      - '28'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999985'
+      - '1999980'
       x-ratelimit-daily-reset:
       - '86220'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '985'
+      - '980'
       x-ratelimit-reset:
-      - '29'
+      - '28'
     status:
       code: 200
       message: OK

@@ -1,0 +1,78 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Cvehicle_obligations&ordering=-vehicle_obligations
+  response:
+    body:
+      string: '{"count":20452,"next":"https://tango.makegov.com/api/vehicles/?limit=10&ordering=-vehicle_obligations&page=2&shape=uuid%2Cvehicle_obligations","previous":null,"results":[{"uuid":"d44a2444-0e5f-5dda-ac83-a950dd91beb3","vehicle_obligations":88745333134.01},{"uuid":"054a30f0-c047-5627-8a3f-814f4bdfa497","vehicle_obligations":76190247502.85},{"uuid":"3adb66a1-c2cb-5b0f-a16f-03fed8e47dff","vehicle_obligations":75840315414.76},{"uuid":"55395c6f-2158-5426-ba95-48fc151e513e","vehicle_obligations":55000151945.38},{"uuid":"045b7843-cbf0-5b53-896b-090001fd3e07","vehicle_obligations":53557899297.46},{"uuid":"87b8f04a-a351-592b-acff-158228b8ef8e","vehicle_obligations":46132104694.13},{"uuid":"d0d2a5f7-8396-5b6b-8ccf-708a4e004271","vehicle_obligations":40688569449.2},{"uuid":"84a7bd7f-dca6-5fa8-ac45-a66fc8abfe39","vehicle_obligations":36297028262.71},{"uuid":"afe27373-bd31-52e7-b513-a8a46f770bdf","vehicle_obligations":31965503650.4},{"uuid":"16506c41-d5ac-5359-8223-3680e1dfbb1b","vehicle_obligations":30876687828.34}]}'
+    headers:
+      CF-RAY:
+      - 9f73b821b997ae89-JAX
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 May 2026 00:02:59 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JRSGPXnHWe%2BJHnFlM9CPNQmPYaiea8E9NxE7EGsxyeoBsplHQSA71Sh86DZN6aMt4S188K3XPesAlQO9qTVHHhTa79Me0D8NYFtbgE6brma68SxKyKV0EEYdE2SdNXt1Bra9G6woqYqD8Sbfd4aP"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1019'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.141s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '982'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999982'
+      x-ratelimit-daily-reset:
+      - '86220'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '982'
+      x-ratelimit-reset:
+      - '28'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1
