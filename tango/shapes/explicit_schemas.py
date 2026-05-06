@@ -838,7 +838,7 @@ VEHICLE_COMPETITION_DETAILS_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
-# Vehicles expose a "metrics(...)" expansion bundling lakehouse-computed metrics.
+# Vehicles expose a "metrics(...)" expansion bundling computed metrics.
 VEHICLE_METRICS_SCHEMA: dict[str, FieldSchema] = {
     "avg_offers_received": FieldSchema(
         name="avg_offers_received", type=float, is_optional=True, is_list=False

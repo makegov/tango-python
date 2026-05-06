@@ -91,7 +91,7 @@ class TestVehiclesIntegration:
             )
             assert isinstance(solicitation_date, date), "solicitation_date should be date"
 
-        # Post-cutover (May 2026) lakehouse fields. All optional — only verify type when present.
+        # New vehicle fields. All optional — only verify type when present.
         is_synth = _field(vehicle, "is_synthetic_solicitation")
         if is_synth is not None:
             assert isinstance(is_synth, bool), "is_synthetic_solicitation should be bool"
@@ -254,7 +254,7 @@ class TestVehiclesIntegration:
 
     @handle_api_exceptions("vehicles")
     def test_get_vehicle_with_metrics_expansion(self, tango_client):
-        """`metrics(*)` expansion returns the 12 lakehouse metric fields with correct types."""
+        """`metrics(*)` expansion returns the 12 metric fields with correct types."""
         list_response = tango_client.list_vehicles(limit=1)
         if not list_response.results:
             pytest.skip("No vehicles available to test metrics expansion")
@@ -266,7 +266,7 @@ class TestVehiclesIntegration:
 
         metrics = _field(vehicle, "metrics")
         if metrics is None:
-            pytest.skip("Vehicle has no metrics row yet (lakehouse sync may be pending)")
+            pytest.skip("Vehicle has no metrics yet (upstream sync may be pending)")
 
         assert isinstance(metrics, dict), "metrics expansion should be a dict"
         # Float-typed metrics

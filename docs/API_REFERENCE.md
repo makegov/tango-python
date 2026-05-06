@@ -556,7 +556,7 @@ awardees = client.list_vehicle_awardees(
 
 ### list_vehicle_orders()
 
-List task orders under a vehicle's IDVs (`/api/vehicles/{uuid}/orders/`). Backed by a denormalized lakehouse table for fast pagination over large vehicles.
+List task orders under a vehicle's IDVs (`/api/vehicles/{uuid}/orders/`). Optimized for fast pagination over large vehicles.
 
 ```python
 orders = client.list_vehicle_orders(
@@ -602,7 +602,7 @@ The post-cutover (May 2026) vehicle response includes these top-level fields, al
 ### Vehicle shape expansions
 
 - `awardees(...)` — underlying IDV awards. Supports nested `orders(...)`.
-- `metrics(*)` — bundled lakehouse metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Defaults included in `ShapeConfig.VEHICLES_COMPREHENSIVE`.
+- `metrics(*)` — bundled computed metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Defaults included in `ShapeConfig.VEHICLES_COMPREHENSIVE`.
 - `organization` — live awarding-org snapshot (selected as a leaf field; not sub-selectable).
 
 ### Deprecated shape fields

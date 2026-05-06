@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Vehicles: new top-level fields `program_acronym`, `idv_count`, `total_obligated`, `is_synthetic_solicitation`, `latest_award_date`, `description`, `opportunity_id`, and a live nested `organization` object (office hierarchy) — reflecting the upstream tango lakehouse cutover (May 2026).
-- Vehicles: new `metrics(*)` shape expansion bundling 12 lakehouse metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Backed by a new `VehicleMetrics` schema.
+- Vehicles: new top-level fields `program_acronym`, `idv_count`, `total_obligated`, `is_synthetic_solicitation`, `latest_award_date`, `description`, `opportunity_id`, and a live nested `organization` object (awarding-org snapshot) — tracking the upstream tango vehicles surface.
+- Vehicles: new `metrics(*)` shape expansion bundling 12 computed metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Backed by a new `VehicleMetrics` schema.
 - `list_vehicle_orders(uuid, ...)` for the new `/api/vehicles/{uuid}/orders/` endpoint, returning task orders under the vehicle's IDVs with two-phase pagination.
 - `ordering` parameter on `list_vehicles` (whitelist: `vehicle_obligations`, `latest_award_date`; prefix `-` for descending) and on `list_vehicle_orders` (whitelist: `award_date`, `obligated`, `total_contract_value`).
 - `ShapeConfig.VEHICLE_ORDERS_MINIMAL` default for the new orders endpoint.
