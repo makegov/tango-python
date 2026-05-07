@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tango.webhooks` subpackage with HMAC-SHA256 signing helpers (`verify_signature`, `generate_signature`, `parse_signature_header`) that mirror the canonical Tango server scheme byte-for-byte. Importable from a default `pip install tango-python` (pure stdlib).
 - `WebhookReceiver`: a stdlib-based local HTTP listener for development and integration tests. Verifies signatures, optionally forwards each delivery to a downstream URL, and records deliveries in memory for inspection. Usable as a context manager (`with WebhookReceiver(secret=...).run() as rx: ...`).
 - `tango.webhooks.simulate.deliver(...)`: locally sign and POST a payload to any URL — no Tango involvement. Useful for offline iteration on receiver code.
-- New `tango[webhooks]` extra (adds `click`) ships a `tango` console script with full Stripe-CLI-style developer ergonomics for testing webhook integrations:
+- New `tango[webhooks]` extra (adds `click`) ships a `tango` console script covering the full webhook lifecycle for developer integrations:
   - `listen` — local receiver
   - `simulate` — sign a payload locally; with `--to`, also POST it
   - `trigger` — ask Tango to send a real test delivery

@@ -329,7 +329,7 @@ contracts = client.list_contracts(
 
 ### Webhook Tooling
 
-The SDK ships first-class tooling for **building and testing webhook integrations against the Tango API** — including signing helpers, a local receiver, and a Stripe-CLI-style command line:
+The SDK ships first-class tooling for **building and testing webhook integrations against the Tango API** — including signing helpers, a local receiver, and a command-line tool covering the full lifecycle:
 
 ```bash
 pip install 'tango-python[webhooks]'

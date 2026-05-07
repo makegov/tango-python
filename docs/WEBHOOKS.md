@@ -1,6 +1,6 @@
 # Webhooks Guide
 
-This guide covers everything `tango-python` provides for **building, testing, and operating webhook integrations against the Tango API**: signing helpers, a local receiver, a Stripe-CLI-style command-line tool, and management commands for the underlying endpoints and subscriptions.
+This guide covers everything `tango-python` provides for **building, testing, and operating webhook integrations against the Tango API**: signing helpers, a local receiver, a command-line tool, and management commands for the underlying endpoints and subscriptions.
 
 If you only need the SDK method signatures, see [`API_REFERENCE.md` § Webhooks](API_REFERENCE.md#webhooks). For the API-level contract (signing scheme, event taxonomy, retry behavior), see the [Tango Webhooks Partner Guide](https://docs.makegov.com/webhooks-user-guide/).
 
