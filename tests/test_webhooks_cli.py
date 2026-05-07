@@ -160,6 +160,166 @@ def test_cli_list_event_types_prints_table() -> None:
     assert "awards.created" in result.output
 
 
+def _mock_response(api_response: dict[str, object]) -> object:
+    from unittest.mock import Mock
+
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.headers = {}
+    mock_response.json.return_value = api_response
+    mock_response.raise_for_status = Mock()
+    return mock_response
+
+
+def test_cli_endpoints_list() -> None:
+    from unittest.mock import patch
+
+    api = {
+        "count": 1,
+        "next": None,
+        "previous": None,
+        "results": [
+            {
+                "id": "ep-1",
+                "name": "default",
+                "callback_url": "https://example/webhooks",
+                "is_active": True,
+                "created_at": "2026-01-01T00:00:00Z",
+                "updated_at": "2026-01-01T00:00:00Z",
+                "secret": None,
+            }
+        ],
+    }
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=_mock_response(api)):
+        result = runner.invoke(main, ["webhooks", "endpoints", "list", "--api-key", "k"])
+    assert result.exit_code == 0, result.output
+    body = json.loads(result.output)
+    assert body["count"] == 1
+    assert body["results"][0]["callback_url"] == "https://example/webhooks"
+
+
+def test_cli_endpoints_create_returns_secret() -> None:
+    from unittest.mock import patch
+
+    api = {
+        "id": "ep-2",
+        "name": "default",
+        "callback_url": "https://example/wh",
+        "is_active": True,
+        "created_at": "2026-05-07T00:00:00Z",
+        "updated_at": "2026-05-07T00:00:00Z",
+        "secret": "whsec_redacted_in_test",
+    }
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=_mock_response(api)):
+        result = runner.invoke(
+            main,
+            [
+                "webhooks",
+                "endpoints",
+                "create",
+                "--url",
+                "https://example/wh",
+                "--api-key",
+                "k",
+            ],
+        )
+    assert result.exit_code == 0, result.output
+    body = json.loads(result.output)
+    assert body["id"] == "ep-2"
+    assert body["secret"] == "whsec_redacted_in_test"
+
+
+def test_cli_endpoints_delete_requires_confirmation() -> None:
+    from unittest.mock import patch
+
+    api: dict[str, object] = {}
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=_mock_response(api)):
+        # Without --yes, abort if user says n.
+        result = runner.invoke(
+            main,
+            ["webhooks", "endpoints", "delete", "ep-1", "--api-key", "k"],
+            input="n\n",
+        )
+        assert result.exit_code != 0  # aborted
+        # With --yes, proceeds.
+        result = runner.invoke(
+            main,
+            ["webhooks", "endpoints", "delete", "ep-1", "--yes", "--api-key", "k"],
+        )
+        assert result.exit_code == 0, result.output
+        assert json.loads(result.output) == {"deleted": "ep-1"}
+
+
+def test_cli_subscriptions_create_builds_records_payload() -> None:
+    """Verify the `--event-type / --subject-type / --subject-id` flags get folded
+    into the right `payload.records[0]` shape Tango expects."""
+    from unittest.mock import patch
+
+    api = {
+        "id": "sub-1",
+        "endpoint": "ep-1",
+        "subscription_name": "ent-watch",
+        "payload": {
+            "records": [
+                {
+                    "event_type": "entities.updated",
+                    "subject_type": "entity",
+                    "subject_ids": ["UEI1", "UEI2"],
+                }
+            ]
+        },
+        "created_at": "2026-05-07T00:00:00Z",
+    }
+    runner = CliRunner()
+    with patch(
+        "tango.client.httpx.Client.request", return_value=_mock_response(api)
+    ) as mock_request:
+        result = runner.invoke(
+            main,
+            [
+                "webhooks",
+                "subscriptions",
+                "create",
+                "--name",
+                "ent-watch",
+                "--event-type",
+                "entities.updated",
+                "--subject-type",
+                "entity",
+                "--subject-id",
+                "UEI1",
+                "--subject-id",
+                "UEI2",
+                "--api-key",
+                "k",
+            ],
+        )
+    assert result.exit_code == 0, result.output
+    # The SDK was called with the constructed payload.
+    sent_json = mock_request.call_args.kwargs["json"]
+    assert sent_json["subscription_name"] == "ent-watch"
+    assert sent_json["payload"]["records"][0]["subject_ids"] == ["UEI1", "UEI2"]
+
+
+def test_cli_subscriptions_list() -> None:
+    from unittest.mock import patch
+
+    api = {
+        "count": 0,
+        "next": None,
+        "previous": None,
+        "results": [],
+    }
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=_mock_response(api)):
+        result = runner.invoke(main, ["webhooks", "subscriptions", "list", "--api-key", "k"])
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.output) == {"count": 0, "results": []}
+
+
 def test_cli_simulate_rejects_both_modes() -> None:
     runner = CliRunner()
     result = runner.invoke(
