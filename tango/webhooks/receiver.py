@@ -114,7 +114,7 @@ class WebhookReceiver:
 
             def do_POST(self) -> None:  # noqa: N802 (stdlib API)
                 if self.path != receiver.path:
-                    self.send_error(404, "Not Found")
+                    self._write_json(404, {"ok": False, "error": "not_found"})
                     return
                 length = int(self.headers.get("Content-Length", "0") or 0)
                 body = self.rfile.read(length) if length > 0 else b""
@@ -130,7 +130,7 @@ class WebhookReceiver:
                 )
                 if require and not verified:
                     self._record(body, signature, verified=False)
-                    self.send_error(401, "Invalid signature")
+                    self._write_json(401, {"ok": False, "error": "invalid_signature"})
                     return
 
                 forward_status: int | None = None
@@ -145,10 +145,15 @@ class WebhookReceiver:
                     forward_status=forward_status,
                     forward_error=forward_error,
                 )
-                self.send_response(200)
+                self._write_json(200, {"ok": True})
+
+            def _write_json(self, status: int, body: dict[str, Any]) -> None:
+                payload = json.dumps(body).encode("utf-8")
+                self.send_response(status)
                 self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(payload)))
                 self.end_headers()
-                self.wfile.write(b'{"ok": true}')
+                self.wfile.write(payload)
 
             def _record(
                 self,

@@ -32,6 +32,8 @@ def test_receiver_records_verified_delivery() -> None:
     with WebhookReceiver(secret=SECRET).run() as rx:
         resp = _post_signed(rx.url, body, SECRET)
         assert resp.status_code == 200
+        assert resp.headers["content-type"] == "application/json"
+        assert resp.json() == {"ok": True}
         assert rx.deliveries[0].verified is True
         assert rx.deliveries[0].body_bytes == body
         assert rx.deliveries[0].body_json == PAYLOAD
@@ -47,6 +49,8 @@ def test_receiver_rejects_bad_signature_with_401() -> None:
             timeout=5.0,
         )
         assert resp.status_code == 401
+        assert resp.headers["content-type"] == "application/json"
+        assert resp.json() == {"ok": False, "error": "invalid_signature"}
         # The bad delivery is still recorded, marked unverified, so devs
         # can debug what arrived.
         assert len(rx.deliveries) == 1
@@ -73,6 +77,8 @@ def test_receiver_404s_on_unknown_path() -> None:
         wrong = rx.url.replace("/tango/webhooks", "/elsewhere")
         resp = httpx.post(wrong, content=b"{}", timeout=5.0)
         assert resp.status_code == 404
+        assert resp.headers["content-type"] == "application/json"
+        assert resp.json() == {"ok": False, "error": "not_found"}
 
 
 def test_receiver_invokes_on_delivery_callback() -> None:
