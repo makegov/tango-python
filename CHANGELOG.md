@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Vehicles: `list_vehicles` gained 21 explicit filter parameters and `ordering` per API 4.3.0: `vehicle_type`, `type_of_idc`, `contract_type`, `set_aside` (multi-value via `|`), `who_can_use`, `naics_code`, `psc_code`, `program_acronym`, `agency`, `organization_id`, `total_obligated_min`/`max`, `idv_count_min`/`max`, `order_count_min`/`max`, `fiscal_year`, `award_date_after`/`before`, `last_date_to_order_after`/`before`, `ordering` (whitelist: `vehicle_obligations`, `latest_award_date`, `total_obligated`, `award_date`, `last_date_to_order`, `fiscal_year`, `idv_count`, `order_count`).
+- Vehicles: `list_vehicle_awardees` gained a `search` parameter for entity-aware full-text search across IDV fields and recipient entity details (API 4.3.0).
+- Vehicles: New top-level fields on `Vehicle` shape — `is_synthetic_solicitation`, `program_acronym`, `idv_count`, `total_obligated`, `latest_award_date` — plus a bundled `metrics` expansion (12 lakehouse rollups) on detail (API 4.2.1).
+- Shaping: New `organization(*)` expand on `Vehicle`, `Forecast`, `Grant`, `ITDashboardInvestment`, and `Protest` schemas — returns the canonical 7-key office payload (`organization_id`, `office_code`, `office_name`, `agency_code`, `agency_name`, `department_code`, `department_name`).
+- Shaping: New `vehicle(*)` expand on `Contract` — request the parent vehicle inline from `/api/contracts/` (API 4.2.0).
+
+### Changed
+- Default vehicle shapes (`ShapeConfig.VEHICLES_MINIMAL` / `VEHICLES_COMPREHENSIVE`) updated to surface the new top-level fields; comprehensive default now includes `organization(*)` and `metrics(*)`.
+
 ## [0.5.0] - 2026-04-08
 
 ### Added

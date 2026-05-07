@@ -690,16 +690,19 @@ class ShapeConfig:
 
     # Default for list_vehicles()
     VEHICLES_MINIMAL: Final = (
-        "uuid,solicitation_identifier,organization_id,awardee_count,order_count,"
+        "uuid,solicitation_identifier,is_synthetic_solicitation,program_acronym,"
+        "organization_id,idv_count,awardee_count,order_count,total_obligated,"
         "vehicle_obligations,vehicle_contracts_value,solicitation_title,solicitation_date"
     )
 
     # Default for get_vehicle()
     VEHICLES_COMPREHENSIVE: Final = (
-        "uuid,solicitation_identifier,agency_id,organization_id,vehicle_type,who_can_use,"
+        "uuid,solicitation_identifier,is_synthetic_solicitation,program_acronym,"
+        "agency_id,organization_id,vehicle_type,who_can_use,"
         "solicitation_title,solicitation_description,solicitation_date,naics_code,psc_code,set_aside,"
-        "fiscal_year,award_date,last_date_to_order,awardee_count,order_count,vehicle_obligations,vehicle_contracts_value,"
-        "type_of_idc,contract_type,competition_details(*)"
+        "fiscal_year,award_date,last_date_to_order,idv_count,awardee_count,order_count,"
+        "total_obligated,vehicle_obligations,vehicle_contracts_value,"
+        "type_of_idc,contract_type,competition_details(*),organization(*),metrics(*)"
     )
 
     # Default for list_vehicle_awardees()

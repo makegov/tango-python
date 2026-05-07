@@ -123,6 +123,7 @@ class TangoClient:
     @staticmethod
     def _parse_rate_limit_headers(headers: httpx.Headers) -> RateLimitInfo:
         """Extract rate limit info from response headers."""
+
         def _int_or_none(val: str | None) -> int | None:
             if val is None:
                 return None
@@ -1456,8 +1457,40 @@ class TangoClient:
         flat_lists: bool = False,
         joiner: str = ".",
         search: str | None = None,
+        vehicle_type: str | None = None,
+        type_of_idc: str | None = None,
+        contract_type: str | None = None,
+        set_aside: str | None = None,
+        who_can_use: str | None = None,
+        naics_code: int | None = None,
+        psc_code: str | None = None,
+        program_acronym: str | None = None,
+        agency: str | None = None,
+        organization_id: str | None = None,
+        total_obligated_min: float | int | Decimal | None = None,
+        total_obligated_max: float | int | Decimal | None = None,
+        idv_count_min: int | None = None,
+        idv_count_max: int | None = None,
+        order_count_min: int | None = None,
+        order_count_max: int | None = None,
+        fiscal_year: int | None = None,
+        award_date_after: str | date | datetime | None = None,
+        award_date_before: str | date | datetime | None = None,
+        last_date_to_order_after: str | date | datetime | None = None,
+        last_date_to_order_before: str | date | datetime | None = None,
+        ordering: str | None = None,
     ) -> PaginatedResponse:
-        """List Vehicles (solicitation-centric groupings of IDVs)."""
+        """List Vehicles (solicitation-centric groupings of IDVs).
+
+        Multi-value filters (``vehicle_type``, ``type_of_idc``, ``contract_type``,
+        ``set_aside``) accept pipe-separated values for OR semantics, e.g.
+        ``vehicle_type="A|B|C"``.
+
+        ``ordering`` accepts: ``vehicle_obligations``, ``latest_award_date``,
+        ``total_obligated``, ``award_date``, ``last_date_to_order``,
+        ``fiscal_year``, ``idv_count``, ``order_count``. Prefix with ``-`` for
+        descending.
+        """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         if shape is None:
@@ -1471,8 +1504,37 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        if search:
-            params["search"] = search
+        for k, val in (
+            ("search", search),
+            ("vehicle_type", vehicle_type),
+            ("type_of_idc", type_of_idc),
+            ("contract_type", contract_type),
+            ("set_aside", set_aside),
+            ("who_can_use", who_can_use),
+            ("naics_code", naics_code),
+            ("psc_code", psc_code),
+            ("program_acronym", program_acronym),
+            ("agency", agency),
+            ("organization_id", organization_id),
+            ("total_obligated_min", total_obligated_min),
+            ("total_obligated_max", total_obligated_max),
+            ("idv_count_min", idv_count_min),
+            ("idv_count_max", idv_count_max),
+            ("order_count_min", order_count_min),
+            ("order_count_max", order_count_max),
+            ("fiscal_year", fiscal_year),
+            ("award_date_after", award_date_after),
+            ("award_date_before", award_date_before),
+            ("last_date_to_order_after", last_date_to_order_after),
+            ("last_date_to_order_before", last_date_to_order_before),
+            ("ordering", ordering),
+        ):
+            if val is None:
+                continue
+            if isinstance(val, (date, datetime)):
+                params[k] = val.isoformat()
+            else:
+                params[k] = val
 
         data = self._get("/api/vehicles/", params)
 
@@ -1531,8 +1593,14 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         joiner: str = ".",
+        search: str | None = None,
     ) -> PaginatedResponse:
-        """List the IDV awardees for a Vehicle (`/api/vehicles/{uuid}/awardees/`)."""
+        """List the IDV awardees for a Vehicle (`/api/vehicles/{uuid}/awardees/`).
+
+        ``search`` runs entity-aware full-text search across IDV fields
+        (PIID, key, solicitation_identifier, NAICS, PSC, idv_type,
+        fiscal_year) and recipient entity details (name, address).
+        """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         if shape is None:
@@ -1545,6 +1613,9 @@ class TangoClient:
                     params["joiner"] = joiner
             if flat_lists:
                 params["flat_lists"] = "true"
+
+        if search:
+            params["search"] = search
 
         data = self._get(f"/api/vehicles/{uuid}/awardees/", params)
 
