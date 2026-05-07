@@ -143,7 +143,12 @@ def trigger_cmd(endpoint_id: str | None, api_key: str | None, base_url: str) -> 
 
 
 @webhooks.command("simulate")
-@click.option("--to", "target_url", required=True, help="Receiver URL to POST to.")
+@click.option(
+    "--to",
+    "target_url",
+    default=None,
+    help="Receiver URL to POST to. If omitted, the signed request is printed but not sent.",
+)
 @click.option(
     "--secret",
     envvar="TANGO_WEBHOOK_SECRET",
@@ -174,14 +179,14 @@ def trigger_cmd(endpoint_id: str | None, api_key: str | None, base_url: str) -> 
     help="Tango base URL, only needed with --event-type.",
 )
 def simulate_cmd(
-    target_url: str,
+    target_url: str | None,
     secret: str,
     payload_file: Path | None,
     event_type: str | None,
     api_key: str | None,
     base_url: str,
 ) -> None:
-    """Sign a payload locally and POST it to a receiver. No Tango call unless --event-type."""
+    """Sign a payload like Tango would. With --to, also POST it to a receiver."""
     if payload_file and event_type:
         raise click.UsageError("Use either --payload-file or --event-type, not both.")
 
@@ -196,10 +201,27 @@ def simulate_cmd(
     else:
         payload = {"events": [{"event_type": "tango.cli.simulated", "subject_ids": []}]}
 
+    if target_url is None:
+        signed = simulate.sign(payload, secret)
+        click.echo(
+            json.dumps(
+                {
+                    "delivered": False,
+                    "headers": signed.headers,
+                    "sent_payload": payload,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return
+
     result = simulate.deliver(target_url=target_url, payload=payload, secret=secret)
     click.echo(
         json.dumps(
             {
+                "delivered": True,
+                "target_url": target_url,
                 "status_code": result.status_code,
                 "signature": f"sha256={result.signature}",
                 "sent_payload": payload,

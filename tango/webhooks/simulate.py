@@ -27,6 +27,15 @@ from tango.webhooks.signing import SIGNATURE_HEADER, SIGNATURE_PREFIX, generate_
 
 
 @dataclass(frozen=True)
+class SignedRequest:
+    """A Tango-shaped signed request, ready to be POSTed."""
+
+    body: bytes
+    signature: str  # bare lowercase hex
+    headers: dict[str, str]  # includes Content-Type and X-Tango-Signature
+
+
+@dataclass(frozen=True)
 class SimulationResult:
     """Outcome of a simulated delivery."""
 
@@ -34,6 +43,24 @@ class SimulationResult:
     response_body: str
     signature: str
     sent_bytes: bytes
+
+
+def sign(payload: dict[str, Any] | list[Any] | bytes | str, secret: str) -> SignedRequest:
+    """Serialize and sign ``payload`` without sending it.
+
+    Useful for showing devs the exact wire form their handler would
+    receive, or for hand-rolling deliveries with a custom HTTP client.
+    """
+    body = _to_bytes(payload)
+    signature_hex = generate_signature(body, secret)
+    return SignedRequest(
+        body=body,
+        signature=signature_hex,
+        headers={
+            "Content-Type": "application/json",
+            SIGNATURE_HEADER: f"{SIGNATURE_PREFIX}{signature_hex}",
+        },
+    )
 
 
 def deliver(
@@ -53,21 +80,17 @@ def deliver(
     """
     import httpx
 
-    body = _to_bytes(payload)
-    signature_hex = generate_signature(body, secret)
-    headers = {
-        "Content-Type": "application/json",
-        SIGNATURE_HEADER: f"{SIGNATURE_PREFIX}{signature_hex}",
-    }
+    signed = sign(payload, secret)
+    headers = dict(signed.headers)
     if extra_headers:
         headers.update(extra_headers)
 
-    resp = httpx.post(target_url, content=body, headers=headers, timeout=timeout)
+    resp = httpx.post(target_url, content=signed.body, headers=headers, timeout=timeout)
     return SimulationResult(
         status_code=resp.status_code,
         response_body=resp.text,
-        signature=signature_hex,
-        sent_bytes=body,
+        signature=signed.signature,
+        sent_bytes=signed.body,
     )
 
 

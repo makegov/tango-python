@@ -21,6 +21,21 @@ def test_cli_help() -> None:
     assert "list-event-types" in result.output
 
 
+def test_cli_simulate_without_to_prints_signed_request() -> None:
+    """Without --to, simulate signs and prints — no POST, no listener required."""
+    runner = CliRunner()
+    result = runner.invoke(
+        main,
+        ["webhooks", "simulate", "--secret", "dev"],
+    )
+    assert result.exit_code == 0, result.output
+    body = json.loads(result.output)
+    assert body["delivered"] is False
+    assert body["headers"]["Content-Type"] == "application/json"
+    assert body["headers"]["X-Tango-Signature"].startswith("sha256=")
+    assert "events" in body["sent_payload"]
+
+
 def test_cli_simulate_signs_and_posts(tmp_path: object) -> None:
     runner = CliRunner()
     secret = "cli-secret"
@@ -43,8 +58,10 @@ def test_cli_simulate_signs_and_posts(tmp_path: object) -> None:
         assert len(rx.deliveries) == 1
         assert rx.deliveries[0].verified is True
         body = json.loads(result.output)
+        assert body["delivered"] is True
         assert body["status_code"] == 200
         assert body["signature"].startswith("sha256=")
+        assert body["target_url"] == rx.url
         # Output now includes the actual payload that was sent (the dev's
         # main artifact of interest), not just its byte length.
         assert isinstance(body["sent_payload"], dict)

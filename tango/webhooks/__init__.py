@@ -14,11 +14,14 @@ from tango.webhooks.signing import (
     parse_signature_header,
     verify_signature,
 )
+from tango.webhooks.simulate import SignedRequest, sign
 
 __all__ = [
     "SIGNATURE_HEADER",
     "SIGNATURE_PREFIX",
+    "SignedRequest",
     "generate_signature",
     "parse_signature_header",
+    "sign",
     "verify_signature",
 ]
