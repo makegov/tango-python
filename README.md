@@ -169,9 +169,14 @@ otidvs = client.list_otidvs(limit=25)
 ### Vehicles
 
 ```python
-vehicles = client.list_vehicles(search="GSA schedule", shape=ShapeConfig.VEHICLES_MINIMAL)
+vehicles = client.list_vehicles(
+    search="GSA schedule",
+    ordering="-vehicle_obligations",
+    shape=ShapeConfig.VEHICLES_MINIMAL,
+)
 vehicle = client.get_vehicle("UUID", shape=ShapeConfig.VEHICLES_COMPREHENSIVE)
 awardees = client.list_vehicle_awardees("UUID")
+orders = client.list_vehicle_orders("UUID", ordering="-obligated")
 ```
 
 ### Entities (Vendors/Recipients)

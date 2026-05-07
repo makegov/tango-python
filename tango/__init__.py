@@ -15,6 +15,8 @@ from .models import (
     RateLimitInfo,
     SearchFilters,
     ShapeConfig,
+    Vehicle,
+    VehicleMetrics,
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
@@ -29,7 +31,7 @@ from .shapes import (
     TypeGenerator,
 )
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -43,6 +45,8 @@ __all__ = [
     "PaginatedResponse",
     "SearchFilters",
     "ShapeConfig",
+    "Vehicle",
+    "VehicleMetrics",
     "WebhookEndpoint",
     "WebhookEventType",
     "WebhookEventTypesResponse",

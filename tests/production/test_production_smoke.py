@@ -313,6 +313,25 @@ class TestProductionSmoke:
             "Vehicle uuid should be present"
         )
 
+    @handle_rate_limit
+    @handle_auth_error
+    def test_list_vehicle_orders_basic(self, production_client):
+        """Smoke test for `/api/vehicles/{uuid}/orders/` (post-cutover endpoint)."""
+        list_response = production_client.list_vehicles(limit=1)
+        if not list_response.results:
+            pytest.skip("No vehicles available to test list_vehicle_orders")
+
+        vehicle_uuid = (
+            list_response.results[0].get("uuid")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].uuid
+        )
+        assert vehicle_uuid is not None, "Vehicle UUID should be present"
+
+        response = production_client.list_vehicle_orders(vehicle_uuid, limit=5)
+        validate_pagination(response)
+        assert response.count >= 0, "Count should be non-negative"
+
     # ============================================================================
     # OTA Endpoints
     # ============================================================================

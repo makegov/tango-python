@@ -1,0 +1,184 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date
+  response:
+    body:
+      string: '{"count":20452,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"description":["CATTLE
+        AND SWINE BACKTAG CEMENT","CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED
+        ON AN IDIQ BASIS TO KS, MO."],"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2006-06-01","order_count":25,"organization":{"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","office_code":"126395","office_name":"MRPBS
+        MINNEAPOLIS MN","agency_code":"12K3","agency_name":"ANIMAL AND PLANT HEALTH
+        INSPECTION SERVICE","department_code":"012","department_name":"AGRICULTURE,
+        DEPARTMENT OF"},"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","program_acronym":"APHIS
+        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5116733.97,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
+    headers:
+      CF-RAY:
+      - 9f73b824ba669934-JAX
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 May 2026 00:03:00 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=AUn0qs38WwHOJZc2XMWR%2Bht6rOF8JGHTzt7H7Onn63UyHktmeiTCsvGECYxGJXUDVPZvvj%2FJkaol61cuC3dERnJJPBnV9ZzOkYSZzTB9cUsxcgF4Zbtq2gGEq0BiVAVqMTEb%2BC6U5WlFbqjvDxHC"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1333'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.040s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '979'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999979'
+      x-ratelimit-daily-reset:
+      - '86219'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '979'
+      x-ratelimit-reset:
+      - '28'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/orders/?page=1&limit=10&shape=key%2Cpiid%2Caward_date%2Cobligated%2Ctotal_contract_value%2Cdescription%2Crecipient%28display_name%2Cuei%29
+  response:
+    body:
+      string: '{"count":25,"next":"https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/orders/?limit=10&page=2&shape=key%2Cpiid%2Caward_date%2Cobligated%2Ctotal_contract_value%2Cdescription%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"award_date":"2010-09-16","description":"DELIVERY
+        ORDER FOR BACKTAG CEMENT.","key":"CONT_AWD_AG6395D100682_12K3_AG6395C060019_12K3","obligated":399827.2,"piid":"AG6395D100682","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":399827.2},{"award_date":"2010-08-03","description":"BACKTAG
+        CEMENT IN TUBES","key":"CONT_AWD_AG6395D100569_12K3_AG6395C060019_12K3","obligated":236160.0,"piid":"AG6395D100569","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":236160.0},{"award_date":"2010-03-17","description":"DELIVERY
+        ORDER FOR BACKTAG CEMENT.","key":"CONT_AWD_AG6395D100331_12K3_AG6395C060019_12K3","obligated":602601.6,"piid":"AG6395D100331","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":602601.6},{"award_date":"2009-12-16","description":"DELIVERY
+        ORDER FOR BACKTAG CEMENT.","key":"CONT_AWD_AG6395D100186_12K3_AG6395C060019_12K3","obligated":101683.2,"piid":"AG6395D100186","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":101683.2},{"award_date":"2009-08-04","description":"DELIVERY
+        ORDER FOR CLN#10, #11, #12 BACKTAG CEMENT IN TUBE, PINT, QUART SIZE CONTAINERS","key":"CONT_AWD_AG6395D090553_12K3_AG6395C060019_12K3","obligated":431080.0,"piid":"AG6395D090553","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":431080.0},{"award_date":"2009-04-23","description":"RUSCOE
+        MFG CTR#AG6395C060019, DELIVERY ORDER FOR CLN#10, #11, #12 BACKTAG CEMENT
+        IN TUBE, PINT, QUART SIZE CONTAINERS","key":"CONT_AWD_AG6395D090363_12K3_AG6395C060019_12K3","obligated":431080.0,"piid":"AG6395D090363","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":431080.0},{"award_date":"2008-10-23","description":"RUSCOE
+        MFG CTR#AG6395C060019, DELIVERY ORDER FOR CLN#10, #11, #12 BACKTAG CEMENT
+        IN TUBE, PINT, QUART SIZE CONTAINERS","key":"CONT_AWD_AG6395D090056_12K3_AG6395C060019_12K3","obligated":431082.24,"piid":"AG6395D090056","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":431082.24},{"award_date":"2008-05-13","description":"BACKTAG
+        CEMENT.","key":"CONT_AWD_AG6395D080395_12K3_AG6395C060018_12K3","obligated":61409.28,"piid":"AG6395D080395","recipient":{"uei":"GDVZPLNAKLL9","display_name":"STEVEN
+        INDUSTRIES INC"},"total_contract_value":61409.28},{"award_date":"2008-03-05","description":"RUSCOE
+        MFG CTR#AG6395C060019, DELIVERY ORDER FOR CLN#7 CEMENT IN TUBE SIZE CONTAINERS
+        PACKED 24/BX TOTAL 11,000 BXS INCLUDED 10 % OVERAGE. (1,320,000 OZ) WHSE STOCK
+        #Z888-00-000-0253","key":"CONT_AWD_AG6395D080271_12K3_AG6395C060019_12K3","obligated":329820.0,"piid":"AG6395D080271","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"total_contract_value":329820.0},{"award_date":"2008-01-25","description":"BACKTAG
+        CEMENT.","key":"CONT_AWD_AG6395D080197_12K3_AG6395C060018_12K3","obligated":288748.8,"piid":"AG6395D080197","recipient":{"uei":"GDVZPLNAKLL9","display_name":"STEVEN
+        INDUSTRIES INC"},"total_contract_value":288748.8}],"meta":{"vehicle_uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","solicitation_identifier":"002-M-APHIS-06"}}'
+    headers:
+      CF-RAY:
+      - 9f73b8255b6f9934-JAX
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 May 2026 00:03:00 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=HMF3PWMAqeXFo%2BwKj7LE49%2Fa5L0Xv8ItISm5Zfcn%2FKLUJZQlFzfYk1kIrU6EAyojStWx7tR02%2FGF83GVXSZ1kIRzeXR1FXLTIDkdPx%2BpA2kqnbtNw4Tmtg1A%2BHZvsu7ueiPRypEZlTSvYpKhzgz0"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '3442'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.090s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '978'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999978'
+      x-ratelimit-daily-reset:
+      - '86219'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '978'
+      x-ratelimit-reset:
+      - '28'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -57,7 +57,9 @@ idvs = client.list_idvs(shape=ShapeConfig.IDVS_MINIMAL)
 grants = client.list_grants(shape=ShapeConfig.GRANTS_MINIMAL)
 ```
 
-**Available constants:** Contracts (`CONTRACTS_MINIMAL`), Entities (`ENTITIES_MINIMAL`, `ENTITIES_COMPREHENSIVE`), Forecasts, Opportunities, Notices, Grants, IDVs, Vehicles, Organizations, OTAs, OTIDVs, Subawards. See [API Reference – ShapeConfig](API_REFERENCE.md#shapeconfig-predefined-shapes) for the full table and which method uses which constant.
+**Available constants:** Contracts (`CONTRACTS_MINIMAL`), Entities (`ENTITIES_MINIMAL`, `ENTITIES_COMPREHENSIVE`), Forecasts, Opportunities, Notices, Grants, IDVs, Vehicles (`VEHICLES_MINIMAL`, `VEHICLES_COMPREHENSIVE`, `VEHICLE_AWARDEES_MINIMAL`, `VEHICLE_ORDERS_MINIMAL`), Organizations, OTAs, OTIDVs, Subawards. See [API Reference – ShapeConfig](API_REFERENCE.md#shapeconfig-predefined-shapes) for the full table and which method uses which constant.
+
+> **Vehicles `metrics(*)` expansion:** The vehicles surface bundles 12 computed metrics under a single `metrics(*)` expansion (e.g. `award_concentration_hhi`, `competed_rate`, `top_recipient_share`). It is included in `VEHICLES_COMPREHENSIVE` by default. The `agency_details`, `competition_details`, and `opportunity` shape entries are deprecated and emit `DeprecationWarning` if requested explicitly.
 
 ## Basic Shaping
 
