@@ -724,7 +724,7 @@ class ShapeConfig:
     # Default for get_vehicle()
     VEHICLES_COMPREHENSIVE: Final = (
         "uuid,solicitation_identifier,is_synthetic_solicitation,agency_id,program_acronym,"
-        "organization_id,organization,vehicle_type,who_can_use,"
+        "organization_id,organization(*),vehicle_type,who_can_use,"
         "solicitation_title,solicitation_description,solicitation_date,opportunity_id,"
         "naics_code,psc_code,set_aside,"
         "fiscal_year,award_date,latest_award_date,last_date_to_order,"

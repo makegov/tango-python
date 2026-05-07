@@ -8,11 +8,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Vehicles: new top-level fields `program_acronym`, `idv_count`, `total_obligated`, `is_synthetic_solicitation`, `latest_award_date`, `description`, `opportunity_id`, and a live nested `organization` object (awarding-org snapshot) — tracking the upstream tango vehicles surface.
+- Vehicles: new top-level fields `program_acronym`, `idv_count`, `total_obligated`, `is_synthetic_solicitation`, `latest_award_date`, `description`, `opportunity_id`.
 - Vehicles: new `metrics(*)` shape expansion bundling 12 computed metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Backed by a new `VehicleMetrics` schema.
 - `list_vehicle_orders(uuid, ...)` for the new `/api/vehicles/{uuid}/orders/` endpoint, returning task orders under the vehicle's IDVs with two-phase pagination.
-- `ordering` parameter on `list_vehicles` (whitelist: `vehicle_obligations`, `latest_award_date`; prefix `-` for descending) and on `list_vehicle_orders` (whitelist: `award_date`, `obligated`, `total_contract_value`).
+- `list_vehicles` gained 21 explicit filter parameters per API 4.3.0: `vehicle_type`, `type_of_idc`, `contract_type`, `set_aside` (multi-value via `|`), `who_can_use`, `naics_code`, `psc_code`, `program_acronym`, `agency`, `organization_id`, `total_obligated_min`/`max`, `idv_count_min`/`max`, `order_count_min`/`max`, `fiscal_year`, `award_date_after`/`before`, `last_date_to_order_after`/`before`.
+- `list_vehicle_awardees` gained a `search` parameter for entity-aware full-text search across IDV fields and recipient entity details (API 4.3.0).
+- `ordering` parameter on `list_vehicles` (whitelist: `vehicle_obligations`, `latest_award_date`, `total_obligated`, `award_date`, `last_date_to_order`, `fiscal_year`, `idv_count`, `order_count`) and on `list_vehicle_orders` (whitelist: `award_date`, `obligated`, `total_contract_value`). Prefix with `-` for descending.
 - `ShapeConfig.VEHICLE_ORDERS_MINIMAL` default for the new orders endpoint.
+- Shaping: New `organization(*)` expand on `Vehicle`, `Forecast`, `Grant`, `ITDashboardInvestment`, and `Protest` schemas — returns the canonical 7-key office payload (`organization_id`, `office_code`, `office_name`, `agency_code`, `agency_name`, `department_code`, `department_name`). Selectable as the bare leaf (`shape=...,organization`) or as a sub-selectable expansion (`shape=...,organization(office_code,...)`).
+- Shaping: New `vehicle(*)` expand on `Contract` — request the parent vehicle inline from `/api/contracts/` (API 4.2.0).
 - `Vehicle` and `VehicleMetrics` are now exported from the top-level `tango` package.
 
 ### Changed

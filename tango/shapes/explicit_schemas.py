@@ -37,6 +37,25 @@ AWARD_OFFICE_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+# Canonical 7-key office payload returned by the `organization(...)` shape
+# expand on awards, vehicles, forecasts, grants, IT Dashboard, and protests.
+# Resolved deterministically from the resource's organization_id.
+ORGANIZATION_OFFICE_SCHEMA: dict[str, FieldSchema] = {
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
+    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=str, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+}
+
 PERIOD_OF_PERFORMANCE_IDV_SCHEMA: dict[str, FieldSchema] = {
     "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
     "last_date_to_order": FieldSchema(
@@ -396,6 +415,13 @@ CONTRACT_SCHEMA: dict[str, FieldSchema] = {
     "undefinitized_action": FieldSchema(
         name="undefinitized_action", type=str, is_optional=True, is_list=False
     ),
+    "vehicle": FieldSchema(
+        name="vehicle",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="Vehicle",
+    ),
 }
 
 
@@ -556,6 +582,13 @@ FORECAST_SCHEMA: dict[str, FieldSchema] = {
     "source_system": FieldSchema(name="source_system", type=str, is_optional=False, is_list=False),
     "status": FieldSchema(name="status", type=str, is_optional=True, is_list=False),
     "title": FieldSchema(name="title", type=str, is_optional=False, is_list=False),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 
@@ -685,6 +718,13 @@ PROTEST_SCHEMA: dict[str, FieldSchema] = {
     "dockets": FieldSchema(
         name="dockets", type=dict, is_optional=True, is_list=True, nested_model="ProtestDocket"
     ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 
@@ -784,6 +824,13 @@ GRANT_SCHEMA: dict[str, FieldSchema] = {
         is_optional=True,
         is_list=True,
         nested_model="GrantAttachment",
+    ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
     ),
 }
 
@@ -1004,6 +1051,48 @@ IDV_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+# Vehicle detail's bundled `metrics` object (12 lakehouse rollups from
+# awards_vehicle_stats). All fields nullable because the stats companion
+# is sparse during the bootstrap window between migrate and the first
+# sync_vehicle_stats run.
+VEHICLE_METRICS_SCHEMA: dict[str, FieldSchema] = {
+    "avg_offers_received": FieldSchema(
+        name="avg_offers_received", type=float, is_optional=True, is_list=False
+    ),
+    "award_concentration_hhi": FieldSchema(
+        name="award_concentration_hhi", type=float, is_optional=True, is_list=False
+    ),
+    "order_concentration_hhi": FieldSchema(
+        name="order_concentration_hhi", type=float, is_optional=True, is_list=False
+    ),
+    "competed_rate": FieldSchema(name="competed_rate", type=float, is_optional=True, is_list=False),
+    "using_agency_count": FieldSchema(
+        name="using_agency_count", type=int, is_optional=True, is_list=False
+    ),
+    "avg_order_value": FieldSchema(
+        name="avg_order_value", type=float, is_optional=True, is_list=False
+    ),
+    "max_order_value": FieldSchema(
+        name="max_order_value", type=float, is_optional=True, is_list=False
+    ),
+    "top_recipient_share": FieldSchema(
+        name="top_recipient_share", type=float, is_optional=True, is_list=False
+    ),
+    "recent_obligations_24mo": FieldSchema(
+        name="recent_obligations_24mo", type=float, is_optional=True, is_list=False
+    ),
+    "recent_orders_24mo": FieldSchema(
+        name="recent_orders_24mo", type=int, is_optional=True, is_list=False
+    ),
+    "days_since_last_order": FieldSchema(
+        name="days_since_last_order", type=int, is_optional=True, is_list=False
+    ),
+    "obligation_to_ceiling_ratio": FieldSchema(
+        name="obligation_to_ceiling_ratio", type=float, is_optional=True, is_list=False
+    ),
+}
+
+
 VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "uuid": FieldSchema(name="uuid", type=str, is_optional=False, is_list=False),
     "solicitation_identifier": FieldSchema(
@@ -1016,12 +1105,15 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "organization_id": FieldSchema(
         name="organization_id", type=str, is_optional=True, is_list=False
     ),
-    # Live awarding-org snapshot. Returned as a flat dict with keys:
-    # `organization_id`, `office_code`, `office_name`, `agency_code`,
-    # `agency_name`, `department_code`, `department_name`. Selected as a leaf
-    # token (`shape=...,organization`) — not as a sub-selectable expansion.
+    # Live awarding-org snapshot — canonical 7-key office payload. Selectable
+    # as the bare leaf (`shape=...,organization` returns the full dict) or as
+    # a sub-selectable expansion (`shape=...,organization(office_code,...)`).
     "organization": FieldSchema(
-        name="organization", type=dict, is_optional=True, is_list=False
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
     ),
     # Choice fields are returned as {code, description} objects.
     "vehicle_type": FieldSchema(name="vehicle_type", type=dict, is_optional=True, is_list=False),
@@ -1048,6 +1140,7 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     # Denormalized rollups
     "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
     "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
+    "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
     "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
     "total_obligated": FieldSchema(
         name="total_obligated", type=Decimal, is_optional=True, is_list=False
@@ -1086,6 +1179,20 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     # Deprecated expansions (upstream sends `Deprecation: true`).
     "opportunity": FieldSchema(
         name="opportunity", type=dict, is_optional=True, is_list=False, nested_model="Opportunity"
+    ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
+    "metrics": FieldSchema(
+        name="metrics",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="VehicleMetrics",
     ),
     "competition_details": FieldSchema(
         name="competition_details",
@@ -1256,6 +1363,13 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
     "operational_analysis": FieldSchema(
         name="operational_analysis", type=list, is_optional=True, is_list=True
     ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 # ============================================================================
@@ -1265,6 +1379,7 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
 EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Office": OFFICE_SCHEMA,
     "AwardOffice": AWARD_OFFICE_SCHEMA,
+    "OrganizationOffice": ORGANIZATION_OFFICE_SCHEMA,
     "Location": LOCATION_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "Competition": COMPETITION_SCHEMA,
