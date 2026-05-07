@@ -13,24 +13,40 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=20&shape=uuid%2Copportunity%28title%29
   response:
     body:
-      string: '{"count":5874,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
-        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+      string: '{"count":20457,"next":"https://tango.makegov.com/api/vehicles/?limit=20&page=2&shape=uuid%2Copportunity%28title%29","previous":null,"results":[{"opportunity":null,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e"},{"opportunity":{"title":"Region
+        Local Telephony Contract - for Upstate New York, Rochester New York, New Jersey,
+        and Puerto Rico"},"uuid":"62090454-1126-5f27-8aef-c39e6df5ee7f"},{"opportunity":{"title":"C
+        -- Indefinite Quantity Contract for A-E Services - Repair/Maintenance, Alteration,
+        and New Construction"},"uuid":"88f6c85b-b398-5396-808c-316f3f4394e3"},{"opportunity":{"title":"W
+        -- Aerial dispersal services which shall include aircraft, pilots, vaccine
+        delivery machinery, and flight engineers"},"uuid":"6b6148c8-8cf2-57f2-b23d-14497f6132e1"},{"opportunity":null,"uuid":"4ba4daee-34fe-5e71-8993-6ce6e564eb48"},{"opportunity":{"title":"C--Professional
+        Architect and Engineering Services"},"uuid":"664412e7-6833-5ff0-b0c0-5c4de8e9645c"},{"opportunity":{"title":"C--Requirement
+        for Architectural and Engineering Services."},"uuid":"76d34d0f-6f3d-52c4-a591-ad1830ca8282"},{"opportunity":{"title":"66--66-
+        Seismometers"},"uuid":"d7a26fbc-76bb-5839-b75b-7fb13f2b5a00"},{"opportunity":{"title":"T--Indefinite
+        Delivery, Indefinite Quantity contract for furnishign various Aerial Photogrammetry
+        Services"},"uuid":"dc95647f-ed2a-540f-bd43-2553438eb56c"},{"opportunity":{"title":"F--F--IDIQ
+        Stockpiling Riprap and Gravel for the Yuma Area Office, Base Year with 2 Option
+        Years"},"uuid":"f38faccb-d4ab-5886-9490-f7b403469471"},{"opportunity":{"title":"B
+        -- Nutrient Analysis for the Agricultural Research Service"},"uuid":"0aada776-5b10-51b8-8246-9b84ef8d20ad"},{"opportunity":null,"uuid":"fad73227-c71a-52a1-86dc-afaa19f24d5e"},{"opportunity":null,"uuid":"a8775381-0a49-54aa-954f-5afcda32b0de"},{"opportunity":{"title":"SOLICITATION
+        - GAO IDIQ CONSTRUCTION SERVICES"},"uuid":"ef62a4f0-080a-503f-adbe-a1705ae410c0"},{"opportunity":null,"uuid":"15a432e6-e692-599b-9815-585eb62adb0e"},{"opportunity":null,"uuid":"6e548ccd-73cd-5aea-be4b-72ca776ece20"},{"opportunity":{"title":"B--Professional
+        Services IDIQ Contract"},"uuid":"09850593-da36-57c5-abf5-f78d49cf6a22"},{"opportunity":null,"uuid":"508d5921-182f-52a8-aaeb-2afc0432eb50"},{"opportunity":null,"uuid":"b18958ca-9647-57ed-8134-9259f58edd33"},{"opportunity":{"title":"76--Commercial
+        Satellite Data"},"uuid":"8a4e1e44-9be0-515e-b02b-6ec1db728f32"}]}'
     headers:
       CF-RAY:
-      - 9d71a79d1e69ace2-MSP
+      - 9f8300911ae0eb68-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Mar 2026 14:43:42 GMT
+      - Thu, 07 May 2026 20:33:53 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=foISsWd3o4Crwk58iKLLuBVkQFtC11yIJkhkCK4vC%2F0w4I28Kbk4j%2FWdF2Z4gVU3QAwqVjUkR9L3KC6Sa4dIYTFIEYgsuvxpb5FBysskgBHHwX4lRUqueUSX"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=cIEJq5J9Gv812rH4c3dzT4m2XnOQsHhZ00XTFnQY8PrjjwAhnIZkmZZuWDNbbC68kD6M6uCIWASlYj4XzQ%2BujVZkfNI8rIKhB3vhzFiRgy6HxkVPeXGWNRcPqw3q1pQ1Xp7O"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -40,7 +56,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '668'
+      - '2407'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -50,27 +66,29 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.021s
+      - 0.107s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '910'
+      - '998'
       x-ratelimit-burst-reset:
-      - '6'
+      - '59'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999670'
+      - '1999837'
       x-ratelimit-daily-reset:
-      - '84966'
+      - '12367'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '910'
+      - '998'
       x-ratelimit-reset:
-      - '6'
+      - '59'
+      x-results-counttype:
+      - exact
     status:
       code: 200
       message: OK
@@ -88,24 +106,24 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/?shape=uuid%2Copportunity%28title%29&flat=true&joiner=__&flat_lists=true
+    uri: https://tango.makegov.com/api/vehicles/62090454-1126-5f27-8aef-c39e6df5ee7f/?shape=uuid%2Copportunity%28title%29&flat=true&joiner=__&flat_lists=true
   response:
     body:
-      string: '{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","opportunity__title":"X1LZ--618-20-2-6190-0007
-        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS"}'
+      string: '{"opportunity__title":"Region Local Telephony Contract - for Upstate
+        New York, Rochester New York, New Jersey, and Puerto Rico","uuid":"62090454-1126-5f27-8aef-c39e6df5ee7f"}'
     headers:
       CF-RAY:
-      - 9d71a79de845ace2-MSP
+      - 9f830092af71eb68-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Mar 2026 14:43:42 GMT
+      - Thu, 07 May 2026 20:33:53 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fTIzuP10eNwQ3RQvXSnqPSyKJ%2F0GkCtQtRiwPTkcg7j62kkVcPa6owX9t2k8dFjcoroz4y6rj8b251WYX0UtASQXH3CIXIV2MxlJ6CzJ9%2FUD%2FcYSU6Ckn1vO"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=xtRSfhVoii188PnTYsknN%2BQ8CcYClzGWfplQLUGSyqBtCcxCzCTpeYFQwUlNeaRX0HQFKv2jZxGF8xhFNiGDPCtr0Uv7vj9mQCMILB%2F7QelTyGTy7MEyuHjR6BcndLydmiDd"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -115,7 +133,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '161'
+      - '174'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -125,27 +143,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.032s
+      - 0.025s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '909'
+      - '997'
       x-ratelimit-burst-reset:
-      - '6'
+      - '59'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999669'
+      - '1999836'
       x-ratelimit-daily-reset:
-      - '84966'
+      - '12366'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '909'
+      - '997'
       x-ratelimit-reset:
-      - '6'
+      - '59'
     status:
       code: 200
       message: OK

@@ -13,24 +13,24 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date
   response:
     body:
-      string: '{"count":5874,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Corganization_id%2Cawardee_count%2Corder_count%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"uuid":"84d76669-61d8-5938-83fb-2d6f8a6c85b7","solicitation_identifier":"0","organization_id":"f6c88e61-3d34-5685-a5ab-670858289883","awardee_count":38,"order_count":65,"vehicle_obligations":8876449.66,"vehicle_contracts_value":9688796.56,"solicitation_title":"X1LZ--618-20-2-6190-0007
-        - Service - Minneapolis VA CRRC Parking, 33 Parking Spaces - MPLS","solicitation_date":"2020-03-02"}]}'
+      string: '{"count":20457,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"idv_count":2,"is_synthetic_solicitation":false,"order_count":25,"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","program_acronym":"APHIS
+        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5116733.97,"vehicle_obligations":5388564.6899999995}]}'
     headers:
       CF-RAY:
-      - 9d71a79f4d4ba1c9-MSP
+      - 9f8300941801f4ae-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Mar 2026 14:43:42 GMT
+      - Thu, 07 May 2026 20:33:53 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=g0j44m3AvOYMt1ZDTnMMFZ2MIbXGngySfFBMATk3ynlDhde23D0RJVscwUPb6%2FacawtgKkwd%2Bq2ufXW62HT1tqPmdW1YWEDTq8jkHS7HBqy1vBy1fFH36z7q"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=uTPbt8NMccR4JfW1yfvwE9RwkNUgkl5gXUTzGyd4%2FT8Mj%2BtA95KV72jcJo2bUtRonvNdcUJ999fR5k5EBLnLz3oe51beVriLg0JGvCsvqkdMS2YTjXgIXmLir2%2F3K%2FrIOxzo"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -40,7 +40,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '668'
+      - '775'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -50,27 +50,29 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.022s
+      - 0.023s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '908'
+      - '996'
       x-ratelimit-burst-reset:
-      - '6'
+      - '59'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999668'
+      - '1999835'
       x-ratelimit-daily-reset:
-      - '84966'
+      - '12366'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '908'
+      - '996'
       x-ratelimit-reset:
-      - '6'
+      - '59'
+      x-results-counttype:
+      - exact
     status:
       code: 200
       message: OK
@@ -88,41 +90,26 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
+    uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
   response:
     body:
-      string: '{"count":38,"next":"https://tango.makegov.com/api/vehicles/84d76669-61d8-5938-83fb-2d6f8a6c85b7/awardees/?limit=10&page=2&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29","previous":null,"results":[{"uuid":"d3eec2d2-f46d-5f3a-a2b3-da474202982d","key":"CONT_IDV_36C24925A0044_3600","piid":"36C24925A0044","award_date":"2025-02-26","title":null,"order_count":2,"idv_obligations":97177.1,"idv_contracts_value":97177.1,"recipient":{"uei":"HPNGJJKW7NZ3","display_name":"MIM
-        SOFTWARE INC"}},{"uuid":"6b35e54e-cdd7-547a-9912-4f32889904ee","key":"CONT_IDV_36C24923A0055_3600","piid":"36C24923A0055","award_date":"2023-09-21","title":"LEXINGTON
-        VAMC AMOS CONSIGNMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
-        SALES AND SERVICE, INC."}},{"uuid":"4734026e-f902-5e4d-ae05-2625e9ee09b3","key":"CONT_IDV_36C10X23A0024_3600","piid":"36C10X23A0024","award_date":"2023-09-19","title":"HR
-        SUPPORT SERVICES","order_count":2,"idv_obligations":929714.8,"idv_contracts_value":931419.55,"recipient":{"uei":"WRHHNUK5YBN1","display_name":"RIVIDIUM
-        INC."}},{"uuid":"a2304733-ca28-5157-b800-ace63deb1f79","key":"CONT_IDV_36C24723A0033_3600","piid":"36C24723A0033","award_date":"2023-06-23","title":"CONSIGNMENT
-        INVENTORY","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"KP5EVFMHUAN1","display_name":"ABBOTT
-        LABORATORIES INC."}},{"uuid":"8a721329-40f9-5ca3-858d-ed9a067371f2","key":"CONT_IDV_36C26022A0045_3600","piid":"36C26022A0045","award_date":"2022-09-12","title":"INTRA
-        OCULAR LENSE CONSIGNMENT AGREEMENT","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"G8XGKTUWPM14","display_name":"AMO
-        SALES AND SERVICE, INC."}},{"uuid":"113dac46-3903-5889-9fc1-d4a58c01c591","key":"CONT_IDV_36C24122A0070_3600","piid":"36C24122A0070","award_date":"2022-03-17","title":"BLANKET
-        PURCHASE AGREEMENT FOR SUPPLIES NATIONWIDE VHA","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"L3CLKHB2VE24","display_name":"Sage
-        Products, LLC"}},{"uuid":"040283f5-ed08-5434-9df4-907c7af62e4f","key":"CONT_IDV_36C25022A0009_3600","piid":"36C25022A0009","award_date":"2021-10-01","title":"COOK
-        MEDICAL LLC CONSIGNMENT - IMPLANTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"GG39AE315NK5","display_name":"COOK
-        MEDICAL LLC"}},{"uuid":"7fe6ae99-081f-5be6-bd03-6a9bbf354980","key":"CONT_IDV_36C25021A0056_3600","piid":"36C25021A0056","award_date":"2021-03-23","title":null,"order_count":5,"idv_obligations":128048.14,"idv_contracts_value":164888.14,"recipient":{"uei":"STNDUK44ENE8","display_name":"POLYMEDCO
-        LLC"}},{"uuid":"3ab4321d-76a5-58c2-aaf6-85321ccd1bc1","key":"CONT_IDV_36C24821A0018_3600","piid":"36C24821A0018","award_date":"2021-03-17","title":"STERNAL
-        PLATES AND SCREWS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"JB1EA2TU8V88","display_name":"BIOMET
-        MICROFIXATION, LLC"}},{"uuid":"141b0632-e12b-5ac8-a862-869bc1bd9f87","key":"CONT_IDV_36C24821A0016_3600","piid":"36C24821A0016","award_date":"2021-02-15","title":"CONSIGNMENT
-        AGREEMENT - PERIPHERAL VASCULAR EMBOLIZATION PRODUCTS","order_count":0,"idv_obligations":0.0,"idv_contracts_value":0.0,"recipient":{"uei":"QLC9LYKADGX5","display_name":"PENUMBRA,
-        INC."}}]}'
+      string: '{"count":2,"next":null,"previous":null,"results":[{"award_date":"2006-06-01","idv_contracts_value":1183372.8,"idv_obligations":1455203.52,"key":"CONT_IDV_AG6395C060018_12K3","order_count":10,"piid":"AG6395C060018","recipient":{"uei":"GDVZPLNAKLL9","display_name":"STEVEN
+        INDUSTRIES INC"},"title":"CATTLE AND SWINE BACKTAG CEMENT","uuid":"af5f3527-b51b-55d8-9c6f-2d6aad936d31"},{"award_date":"2006-06-01","idv_contracts_value":3933361.17,"idv_obligations":3933361.17,"key":"CONT_IDV_AG6395C060019_12K3","order_count":15,"piid":"AG6395C060019","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
+        J RUSCOE"},"title":"CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED ON AN
+        IDIQ BASIS TO KS, MO.","uuid":"55cdcfa5-9b94-5aa5-8a8b-7a291d675e20"}]}'
     headers:
       CF-RAY:
-      - 9d71a7a00eb0a1c9-MSP
+      - 9f8300952b6ff4ae-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 04 Mar 2026 14:43:42 GMT
+      - Thu, 07 May 2026 20:33:53 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=PA0MWV3V4YvOgApvlK%2B30Y0fxb8uTbbVuL9VqVukOJLOvEMUylvJhadJX%2BuzJ2P7b5Nd8l6H5tYqYB%2FRfPaJao1Je5g32SIOLm0i2Ohjsm7hv1lGzYI6qyl2"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=PE6q1a8YczuiMmH0spHUNUtnHFOuMZxj6ojehjdW1WVv7Ed8PtJJWn1OsPvuDJW4xOfEadqYE%2B25TyIVe6MUMCz2h7yWDHXHlrFDE1u6spv1%2BuSY9B1o9tuvSAMSU0awObb0"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -132,7 +119,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '3418'
+      - '739'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -142,27 +129,27 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.087s
+      - 0.032s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '907'
+      - '995'
       x-ratelimit-burst-reset:
-      - '6'
+      - '59'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999667'
+      - '1999834'
       x-ratelimit-daily-reset:
-      - '84966'
+      - '12366'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '907'
+      - '995'
       x-ratelimit-reset:
-      - '6'
+      - '59'
     status:
       code: 200
       message: OK
