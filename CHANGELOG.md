@@ -24,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Notes
 - Console script name `tango` may be revisited before the next release if it conflicts with sibling tooling (`tango-scripts` reuses the bare name).
 
+### Documentation
+- New `docs/WEBHOOKS.md` — comprehensive guide covering install, concepts, a zero-to-receiving quickstart, full CLI reference, and programmatic patterns for `WebhookReceiver` / `simulate.sign` / `simulate.deliver` in pytest fixtures.
+- `docs/API_REFERENCE.md`: filled in `get_webhook_subscription`, replaced the hand-rolled signature-verification snippet with a pointer to `tango.webhooks.verify_signature`, and added a new "Webhook tooling (`tango.webhooks`)" section that documents every importable from the new subpackage.
+- `README.md`: new "Webhook Tooling" section under Advanced Features, plus the new guide is linked from the Documentation index.
+
 ## [0.5.0] - 2026-04-08
 
 ### Added

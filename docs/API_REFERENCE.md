@@ -1227,6 +1227,8 @@ for code in naics.results:
 
 Webhook APIs let **Large / Enterprise** users manage subscription filters for outbound Tango webhooks.
 
+> **For testing, signing, and a CLI tool**, see [`docs/WEBHOOKS.md`](WEBHOOKS.md). This section covers SDK method signatures only.
+
 ### list_webhook_event_types()
 
 Discover supported `event_type` values and subject types.
@@ -1245,6 +1247,12 @@ subs = client.list_webhook_subscriptions(page=1, page_size=25)
 Notes:
 
 - This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
+
+### get_webhook_subscription()
+
+```python
+sub = client.get_webhook_subscription("SUBSCRIPTION_UUID")
+```
 
 ### create_webhook_subscription()
 
@@ -1335,20 +1343,88 @@ Every delivery includes an HMAC signature header:
 
 Compute the digest over the **raw request body bytes** using your shared secret.
 
+The SDK ships a stdlib-only verifier that mirrors the Tango server's signing scheme byte-for-byte. Use it instead of hand-rolling — it's importable from a default install (no extras needed):
+
 ```python
-import hashlib
-import hmac
+from tango.webhooks import verify_signature
 
-
-def verify_tango_webhook_signature(secret: str, raw_body: bytes, signature_header: str | None) -> bool:
-    if not signature_header:
-        return False
-    sig = signature_header.strip()
-    if sig.startswith("sha256="):
-        sig = sig[len("sha256=") :]
-    expected = hmac.new(secret.encode(), raw_body, hashlib.sha256).hexdigest()
-    return hmac.compare_digest(expected, sig)
+if not verify_signature(raw_body, secret, request.headers.get("X-Tango-Signature")):
+    return 401
 ```
+
+`verify_signature` returns `False` for missing/empty/malformed headers — it never raises. Comparison is constant-time.
+
+---
+
+## Webhook tooling (`tango.webhooks`)
+
+The `tango.webhooks` subpackage adds testing and developer-tooling primitives on top of the API methods above. Signing helpers ship with the default install; the receiver and CLI ship with `pip install 'tango-python[webhooks]'`. See [`docs/WEBHOOKS.md`](WEBHOOKS.md) for usage guides; this section is the import-level reference.
+
+### Signing (default install)
+
+```python
+from tango.webhooks import (
+    verify_signature,        # (body: bytes, secret: str, header: str | None) -> bool
+    generate_signature,      # (body: bytes, secret: str) -> str (lowercase hex)
+    parse_signature_header,  # (header: str | None) -> str | None  (strips "sha256=")
+    SIGNATURE_HEADER,        # "X-Tango-Signature"
+    SIGNATURE_PREFIX,        # "sha256="
+)
+```
+
+### `WebhookReceiver` (with `[webhooks]` extra)
+
+A stdlib-based local HTTP receiver, useful in tests and during local development.
+
+```python
+from tango.webhooks import WebhookReceiver, Delivery
+
+with WebhookReceiver(secret="dev").run() as rx:
+    # ... cause something to POST to rx.url ...
+    deliveries: list[Delivery] = rx.deliveries
+```
+
+Constructor (all keyword arguments):
+
+| Arg | Default | Meaning |
+|---|---|---|
+| `secret` | `""` | Shared secret. Empty means signatures are not verified. |
+| `path` | `/tango/webhooks` | URL path to accept POSTs on. |
+| `host` | `127.0.0.1` | Bind address. |
+| `port` | `0` | TCP port. `0` = OS picks a free port. |
+| `forward_to` | `None` | Optional URL to mirror each delivery to. |
+| `max_history` | `256` | Cap on the in-memory `deliveries` deque. |
+| `on_delivery` | `None` | Callback fired for every delivery (verified or not). |
+| `require_signature` | `None` | Override default (require iff `secret` is set). |
+
+Each `Delivery` is a dataclass: `received_at`, `path`, `signature_header`, `body_bytes`, `body_json`, `verified`, `remote_addr`, `forward_status`, `forward_error`.
+
+### `simulate.sign` and `simulate.deliver`
+
+```python
+from tango.webhooks import sign, SignedRequest
+from tango.webhooks import simulate
+
+# Offline — produce the signed wire form without POSTing:
+signed: SignedRequest = sign({"events": [{"event_type": "..."}]}, secret="s")
+signed.body         # bytes you would put on the wire
+signed.signature    # bare lowercase hex
+signed.headers      # {"Content-Type": ..., "X-Tango-Signature": "sha256=..."}
+
+# With delivery — sign and POST to a target URL:
+result = simulate.deliver(target_url="http://localhost:8011/tango/webhooks",
+                          payload={...}, secret="s")
+result.status_code   # status from the receiver
+result.signature     # bare hex
+result.sent_bytes    # exact bytes that were POSTed
+result.response_body # body the receiver returned
+```
+
+`simulate.deliver` and `simulate.sign` accept payloads as `dict`, `list`, `str`, or raw `bytes`. Dicts/lists are serialized via `json.dumps(..., sort_keys=True, separators=(",", ":"))` so signatures are reproducible across runs.
+
+### CLI entry point
+
+The `tango[webhooks]` extra also installs a `tango` console script. See [`docs/WEBHOOKS.md` § CLI reference](WEBHOOKS.md#cli-reference) for the full command list.
 
 ---
 
