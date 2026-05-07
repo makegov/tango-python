@@ -202,14 +202,67 @@ def simulate_cmd(
             {
                 "status_code": result.status_code,
                 "signature": f"sha256={result.signature}",
-                "sent_bytes": len(result.sent_bytes),
-                "response_body": result.response_body[:500],
+                "sent_payload": payload,
+                "receiver_response": result.response_body[:500],
             },
             indent=2,
+            sort_keys=True,
         )
     )
     if result.status_code >= 400:
         raise SystemExit(1)
+
+
+@webhooks.command("fetch-sample")
+@click.option(
+    "--event-type",
+    default=None,
+    help="If set, fetch the canonical sample for that event type. "
+    "Otherwise return the full samples mapping for every event type.",
+)
+@click.option(
+    "--api-key",
+    envvar="TANGO_API_KEY",
+    help="Tango API key (or TANGO_API_KEY).",
+)
+@click.option(
+    "--base-url",
+    envvar="TANGO_BASE_URL",
+    default="https://tango.makegov.com",
+    show_default=True,
+    help="Tango base URL (or TANGO_BASE_URL).",
+)
+def fetch_sample_cmd(event_type: str | None, api_key: str | None, base_url: str) -> None:
+    """Print the canonical sample payload Tango emits for a given event type."""
+    from tango import TangoClient
+
+    client = TangoClient(api_key=api_key, base_url=base_url)
+    payload = client.get_webhook_sample_payload(event_type=event_type)
+    click.echo(json.dumps(payload, indent=2, sort_keys=True))
+
+
+@webhooks.command("list-event-types")
+@click.option(
+    "--api-key",
+    envvar="TANGO_API_KEY",
+    help="Tango API key (or TANGO_API_KEY).",
+)
+@click.option(
+    "--base-url",
+    envvar="TANGO_BASE_URL",
+    default="https://tango.makegov.com",
+    show_default=True,
+    help="Tango base URL (or TANGO_BASE_URL).",
+)
+def list_event_types_cmd(api_key: str | None, base_url: str) -> None:
+    """List webhook event types Tango supports, with descriptions."""
+    from tango import TangoClient
+
+    client = TangoClient(api_key=api_key, base_url=base_url)
+    response = client.list_webhook_event_types()
+    width = max((len(et.event_type) for et in response.event_types), default=0)
+    for et in response.event_types:
+        click.echo(f"{et.event_type:<{width}}  {et.description}")
 
 
 def _print_delivery(delivery: Delivery) -> None:

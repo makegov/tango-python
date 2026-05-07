@@ -17,6 +17,8 @@ def test_cli_help() -> None:
     assert "listen" in result.output
     assert "trigger" in result.output
     assert "simulate" in result.output
+    assert "fetch-sample" in result.output
+    assert "list-event-types" in result.output
 
 
 def test_cli_simulate_signs_and_posts(tmp_path: object) -> None:
@@ -43,6 +45,11 @@ def test_cli_simulate_signs_and_posts(tmp_path: object) -> None:
         body = json.loads(result.output)
         assert body["status_code"] == 200
         assert body["signature"].startswith("sha256=")
+        # Output now includes the actual payload that was sent (the dev's
+        # main artifact of interest), not just its byte length.
+        assert isinstance(body["sent_payload"], dict)
+        assert "events" in body["sent_payload"]
+        assert body["receiver_response"] == '{"ok": true}'
 
 
 def test_cli_simulate_with_payload_file(tmp_path: object) -> None:
@@ -70,6 +77,70 @@ def test_cli_simulate_with_payload_file(tmp_path: object) -> None:
         )
         assert result.exit_code == 0, result.output
         assert rx.deliveries[0].body_json == payload
+
+
+def test_cli_fetch_sample_prints_payload() -> None:
+    """fetch-sample hits the SDK's get_webhook_sample_payload and pretty-prints."""
+    from unittest.mock import Mock, patch
+
+    sample = {"events": [{"event_type": "entities.updated", "uei": "ABC"}]}
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.headers = {}
+    mock_response.json.return_value = sample
+    mock_response.raise_for_status = Mock()
+
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=mock_response):
+        result = runner.invoke(
+            main,
+            [
+                "webhooks",
+                "fetch-sample",
+                "--event-type",
+                "entities.updated",
+                "--api-key",
+                "k",
+            ],
+        )
+    assert result.exit_code == 0, result.output
+    assert json.loads(result.output) == sample
+
+
+def test_cli_list_event_types_prints_table() -> None:
+    from unittest.mock import Mock, patch
+
+    api_response = {
+        "event_types": [
+            {
+                "event_type": "entities.updated",
+                "default_subject_type": "entity",
+                "description": "Entity updated",
+                "schema_version": 1,
+            },
+            {
+                "event_type": "awards.created",
+                "default_subject_type": "award",
+                "description": "New award",
+                "schema_version": 1,
+            },
+        ],
+        "subject_types": [],
+        "subject_type_definitions": [],
+    }
+    mock_response = Mock()
+    mock_response.status_code = 200
+    mock_response.headers = {}
+    mock_response.json.return_value = api_response
+    mock_response.raise_for_status = Mock()
+
+    runner = CliRunner()
+    with patch("tango.client.httpx.Client.request", return_value=mock_response):
+        result = runner.invoke(main, ["webhooks", "list-event-types", "--api-key", "k"])
+    assert result.exit_code == 0, result.output
+    assert "entities.updated" in result.output
+    assert "Entity updated" in result.output
+    assert "awards.created" in result.output
 
 
 def test_cli_simulate_rejects_both_modes() -> None:
