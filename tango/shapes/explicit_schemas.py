@@ -1051,48 +1051,6 @@ IDV_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
-# Vehicle detail's bundled `metrics` object (12 lakehouse rollups from
-# awards_vehicle_stats). All fields nullable because the stats companion
-# is sparse during the bootstrap window between migrate and the first
-# sync_vehicle_stats run.
-VEHICLE_METRICS_SCHEMA: dict[str, FieldSchema] = {
-    "avg_offers_received": FieldSchema(
-        name="avg_offers_received", type=float, is_optional=True, is_list=False
-    ),
-    "award_concentration_hhi": FieldSchema(
-        name="award_concentration_hhi", type=float, is_optional=True, is_list=False
-    ),
-    "order_concentration_hhi": FieldSchema(
-        name="order_concentration_hhi", type=float, is_optional=True, is_list=False
-    ),
-    "competed_rate": FieldSchema(name="competed_rate", type=float, is_optional=True, is_list=False),
-    "using_agency_count": FieldSchema(
-        name="using_agency_count", type=int, is_optional=True, is_list=False
-    ),
-    "avg_order_value": FieldSchema(
-        name="avg_order_value", type=float, is_optional=True, is_list=False
-    ),
-    "max_order_value": FieldSchema(
-        name="max_order_value", type=float, is_optional=True, is_list=False
-    ),
-    "top_recipient_share": FieldSchema(
-        name="top_recipient_share", type=float, is_optional=True, is_list=False
-    ),
-    "recent_obligations_24mo": FieldSchema(
-        name="recent_obligations_24mo", type=float, is_optional=True, is_list=False
-    ),
-    "recent_orders_24mo": FieldSchema(
-        name="recent_orders_24mo", type=int, is_optional=True, is_list=False
-    ),
-    "days_since_last_order": FieldSchema(
-        name="days_since_last_order", type=int, is_optional=True, is_list=False
-    ),
-    "obligation_to_ceiling_ratio": FieldSchema(
-        name="obligation_to_ceiling_ratio", type=float, is_optional=True, is_list=False
-    ),
-}
-
-
 VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "uuid": FieldSchema(name="uuid", type=str, is_optional=False, is_list=False),
     "solicitation_identifier": FieldSchema(
@@ -1140,7 +1098,6 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     # Denormalized rollups
     "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
     "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
-    "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
     "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
     "total_obligated": FieldSchema(
         name="total_obligated", type=Decimal, is_optional=True, is_list=False
@@ -1179,20 +1136,6 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     # Deprecated expansions (upstream sends `Deprecation: true`).
     "opportunity": FieldSchema(
         name="opportunity", type=dict, is_optional=True, is_list=False, nested_model="Opportunity"
-    ),
-    "organization": FieldSchema(
-        name="organization",
-        type=dict,
-        is_optional=True,
-        is_list=False,
-        nested_model="OrganizationOffice",
-    ),
-    "metrics": FieldSchema(
-        name="metrics",
-        type=dict,
-        is_optional=True,
-        is_list=False,
-        nested_model="VehicleMetrics",
     ),
     "competition_details": FieldSchema(
         name="competition_details",
