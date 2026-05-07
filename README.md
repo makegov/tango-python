@@ -332,6 +332,46 @@ contracts = client.list_contracts(
 # Returns: {"key": "...", "transactions.0.action_date": "...", "transactions.0.obligated": "..."}
 ```
 
+### Webhook Tooling
+
+The SDK ships first-class tooling for **building and testing webhook integrations against the Tango API** — including signing helpers, a local receiver, and a command-line tool covering the full lifecycle:
+
+```bash
+pip install 'tango-python[webhooks]'
+```
+
+This adds a `tango` console script with subcommands for the full webhook lifecycle:
+
+```bash
+# Discover what's available
+tango webhooks list-event-types
+tango webhooks fetch-sample --event-type entities.updated
+
+# Local development
+tango webhooks listen --port 8011 --secret $SECRET    # receiver
+tango webhooks simulate --secret $SECRET --event-type entities.updated  # sign + print
+tango webhooks simulate --secret $SECRET --event-type entities.updated \
+    --to http://127.0.0.1:8011/tango/webhooks         # also POST
+
+# Manage real subscriptions and endpoints
+tango webhooks endpoints     create|list|get|delete
+tango webhooks subscriptions create|list|get|delete
+
+# Force a real test delivery from Tango
+tango webhooks trigger
+```
+
+The signing helpers (`verify_signature`, `generate_signature`) are pure stdlib and importable from the default install — your receiver code doesn't need the extra:
+
+```python
+from tango.webhooks import verify_signature
+
+if not verify_signature(raw_body, secret, request.headers.get("X-Tango-Signature")):
+    return 401, "invalid signature"
+```
+
+For the full guide — workflow, CLI reference, and programmatic patterns for pytest fixtures — see [`docs/WEBHOOKS.md`](docs/WEBHOOKS.md).
+
 ### Type Hints with IDE Support
 
 Import TypedDict types for IDE autocomplete:
@@ -481,6 +521,7 @@ tango-python/
 - [Shape System Guide](docs/SHAPES.md) - Comprehensive guide to response shaping
 - [API Reference](docs/API_REFERENCE.md) - Detailed API documentation
 - [Developer Guide](docs/DEVELOPERS.md) - Technical documentation for developers
+- [Webhooks Guide](docs/WEBHOOKS.md) - Workflow, CLI reference, and programmatic patterns for webhook integrations
 - [Quick Start Notebook](docs/quick_start.ipynb) - Interactive Jupyter notebook with examples
 
 ## Requirements
