@@ -320,7 +320,14 @@ def test_cli_subscriptions_list() -> None:
     assert json.loads(result.output) == {"count": 0, "results": []}
 
 
-def test_cli_simulate_rejects_both_modes() -> None:
+def test_cli_simulate_rejects_both_modes(tmp_path: object) -> None:
+    import pathlib
+
+    # Click validates --payload-file exists before the command body runs, so
+    # we need a real path here. /dev/null worked on POSIX but not Windows CI.
+    p = pathlib.Path(str(tmp_path)) / "p.json"
+    p.write_text("{}", encoding="utf-8")
+
     runner = CliRunner()
     result = runner.invoke(
         main,
@@ -332,7 +339,7 @@ def test_cli_simulate_rejects_both_modes() -> None:
             "--secret",
             "x",
             "--payload-file",
-            "/dev/null",
+            str(p),
             "--event-type",
             "entities.updated",
         ],
