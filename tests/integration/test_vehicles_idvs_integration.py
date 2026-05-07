@@ -133,23 +133,17 @@ class TestVehiclesIntegration:
         - flat, flat_lists, and joiner parameters work correctly
         - Vehicle is parsed correctly
         """
-        # Find a vehicle that has an opportunity so the joiner/flat_lists
-        # behavior is meaningfully exercised below. Vehicle ordering is
-        # not guaranteed, and some vehicles legitimately have no opportunity.
-        list_response = tango_client.list_vehicles(limit=20, shape="uuid,opportunity(title)")
+        # First, get a vehicle UUID from listing
+        list_response = tango_client.list_vehicles(limit=1)
         if not list_response.results:
             pytest.skip("No vehicles available to test get_vehicle")
 
-        vehicle_uuid = None
-        for result in list_response.results:
-            opp = result.get("opportunity") if isinstance(result, dict) else result.opportunity
-            if opp is None:
-                continue
-            vehicle_uuid = result.get("uuid") if isinstance(result, dict) else result.uuid
-            break
-
-        if vehicle_uuid is None:
-            pytest.skip("No vehicle with an opportunity available to test joiner")
+        vehicle_uuid = (
+            list_response.results[0].get("uuid")
+            if isinstance(list_response.results[0], dict)
+            else list_response.results[0].uuid
+        )
+        assert vehicle_uuid is not None, "Vehicle UUID should be present"
 
         # Test with flat, flat_lists, and joiner. Uses the post-cutover `organization`
         # leaf field (the prior `opportunity(...)` expansion is now deprecated).
