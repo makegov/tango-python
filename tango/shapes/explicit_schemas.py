@@ -37,6 +37,25 @@ AWARD_OFFICE_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+# Canonical 7-key office payload returned by the `organization(...)` shape
+# expand on awards, vehicles, forecasts, grants, IT Dashboard, and protests.
+# Resolved deterministically from the resource's organization_id.
+ORGANIZATION_OFFICE_SCHEMA: dict[str, FieldSchema] = {
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
+    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=str, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+}
+
 PERIOD_OF_PERFORMANCE_IDV_SCHEMA: dict[str, FieldSchema] = {
     "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
     "last_date_to_order": FieldSchema(
@@ -396,6 +415,13 @@ CONTRACT_SCHEMA: dict[str, FieldSchema] = {
     "undefinitized_action": FieldSchema(
         name="undefinitized_action", type=str, is_optional=True, is_list=False
     ),
+    "vehicle": FieldSchema(
+        name="vehicle",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="Vehicle",
+    ),
 }
 
 
@@ -556,6 +582,13 @@ FORECAST_SCHEMA: dict[str, FieldSchema] = {
     "source_system": FieldSchema(name="source_system", type=str, is_optional=False, is_list=False),
     "status": FieldSchema(name="status", type=str, is_optional=True, is_list=False),
     "title": FieldSchema(name="title", type=str, is_optional=False, is_list=False),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 
@@ -685,6 +718,13 @@ PROTEST_SCHEMA: dict[str, FieldSchema] = {
     "dockets": FieldSchema(
         name="dockets", type=dict, is_optional=True, is_list=True, nested_model="ProtestDocket"
     ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 
@@ -785,6 +825,13 @@ GRANT_SCHEMA: dict[str, FieldSchema] = {
         is_list=True,
         nested_model="GrantAttachment",
     ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 
@@ -834,6 +881,45 @@ VEHICLE_COMPETITION_DETAILS_SCHEMA: dict[str, FieldSchema] = {
     ),
     "solicitation_procedures": FieldSchema(
         name="solicitation_procedures", type=dict, is_optional=True, is_list=False
+    ),
+}
+
+
+# Vehicles expose a "metrics(...)" expansion bundling computed metrics.
+VEHICLE_METRICS_SCHEMA: dict[str, FieldSchema] = {
+    "avg_offers_received": FieldSchema(
+        name="avg_offers_received", type=float, is_optional=True, is_list=False
+    ),
+    "award_concentration_hhi": FieldSchema(
+        name="award_concentration_hhi", type=float, is_optional=True, is_list=False
+    ),
+    "order_concentration_hhi": FieldSchema(
+        name="order_concentration_hhi", type=float, is_optional=True, is_list=False
+    ),
+    "competed_rate": FieldSchema(name="competed_rate", type=float, is_optional=True, is_list=False),
+    "using_agency_count": FieldSchema(
+        name="using_agency_count", type=int, is_optional=True, is_list=False
+    ),
+    "avg_order_value": FieldSchema(
+        name="avg_order_value", type=float, is_optional=True, is_list=False
+    ),
+    "max_order_value": FieldSchema(
+        name="max_order_value", type=float, is_optional=True, is_list=False
+    ),
+    "top_recipient_share": FieldSchema(
+        name="top_recipient_share", type=float, is_optional=True, is_list=False
+    ),
+    "recent_obligations_24mo": FieldSchema(
+        name="recent_obligations_24mo", type=float, is_optional=True, is_list=False
+    ),
+    "recent_orders_24mo": FieldSchema(
+        name="recent_orders_24mo", type=int, is_optional=True, is_list=False
+    ),
+    "days_since_last_order": FieldSchema(
+        name="days_since_last_order", type=int, is_optional=True, is_list=False
+    ),
+    "obligation_to_ceiling_ratio": FieldSchema(
+        name="obligation_to_ceiling_ratio", type=float, is_optional=True, is_list=False
     ),
 }
 
@@ -970,26 +1056,52 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "solicitation_identifier": FieldSchema(
         name="solicitation_identifier", type=str, is_optional=False, is_list=False
     ),
+    "is_synthetic_solicitation": FieldSchema(
+        name="is_synthetic_solicitation", type=bool, is_optional=True, is_list=False
+    ),
     "agency_id": FieldSchema(name="agency_id", type=str, is_optional=False, is_list=False),
     "organization_id": FieldSchema(
         name="organization_id", type=str, is_optional=True, is_list=False
     ),
+    # Live awarding-org snapshot — canonical 7-key office payload. Selectable
+    # as the bare leaf (`shape=...,organization` returns the full dict) or as
+    # a sub-selectable expansion (`shape=...,organization(office_code,...)`).
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
     # Choice fields are returned as {code, description} objects.
     "vehicle_type": FieldSchema(name="vehicle_type", type=dict, is_optional=True, is_list=False),
+    "program_acronym": FieldSchema(
+        name="program_acronym", type=str, is_optional=True, is_list=False
+    ),
     "who_can_use": FieldSchema(name="who_can_use", type=dict, is_optional=True, is_list=False),
     "type_of_idc": FieldSchema(name="type_of_idc", type=dict, is_optional=True, is_list=False),
     "contract_type": FieldSchema(name="contract_type", type=dict, is_optional=True, is_list=False),
+    # Deprecated: recomputed from IDVs at request time. Upstream sends `Deprecation: true`.
     "agency_details": FieldSchema(
         name="agency_details", type=dict, is_optional=True, is_list=False
     ),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
     "descriptions": FieldSchema(name="descriptions", type=str, is_optional=True, is_list=True),
     "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
     "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "latest_award_date": FieldSchema(
+        name="latest_award_date", type=date, is_optional=True, is_list=False
+    ),
     "last_date_to_order": FieldSchema(
         name="last_date_to_order", type=date, is_optional=True, is_list=False
     ),
+    # Denormalized rollups
+    "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
     "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
     "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
+    "total_obligated": FieldSchema(
+        name="total_obligated", type=Decimal, is_optional=True, is_list=False
+    ),
     "vehicle_obligations": FieldSchema(
         name="vehicle_obligations", type=Decimal, is_optional=True, is_list=False
     ),
@@ -1006,6 +1118,7 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "solicitation_date": FieldSchema(
         name="solicitation_date", type=date, is_optional=True, is_list=False
     ),
+    "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
     "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
     "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
     "set_aside": FieldSchema(name="set_aside", type=str, is_optional=True, is_list=False),
@@ -1013,6 +1126,14 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     "awardees": FieldSchema(
         name="awardees", type=dict, is_optional=True, is_list=True, nested_model="IDV"
     ),
+    "metrics": FieldSchema(
+        name="metrics",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="VehicleMetrics",
+    ),
+    # Deprecated expansions (upstream sends `Deprecation: true`).
     "opportunity": FieldSchema(
         name="opportunity", type=dict, is_optional=True, is_list=False, nested_model="Opportunity"
     ),
@@ -1024,6 +1145,14 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
         nested_model="VehicleCompetitionDetails",
     ),
 }
+
+
+# Top-level vehicle shape fields that upstream marks deprecated (the API sends
+# `Deprecation: true` and recomputes them from IDVs at request time). The client
+# emits a `DeprecationWarning` when callers explicitly include these in `shape`.
+DEPRECATED_VEHICLE_SHAPE_FIELDS: frozenset[str] = frozenset(
+    {"agency_details", "competition_details", "opportunity"}
+)
 
 
 # Organization (agencies hierarchy)
@@ -1135,18 +1264,10 @@ GSA_ELIBRARY_CONTRACT_SCHEMA: dict[str, FieldSchema] = {
 # IT Dashboard Investment
 ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
     "uii": FieldSchema(name="uii", type=str, is_optional=False, is_list=False),
-    "agency_code": FieldSchema(
-        name="agency_code", type=int, is_optional=True, is_list=False
-    ),
-    "agency_name": FieldSchema(
-        name="agency_name", type=str, is_optional=True, is_list=False
-    ),
-    "bureau_code": FieldSchema(
-        name="bureau_code", type=int, is_optional=True, is_list=False
-    ),
-    "bureau_name": FieldSchema(
-        name="bureau_name", type=str, is_optional=True, is_list=False
-    ),
+    "agency_code": FieldSchema(name="agency_code", type=int, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "bureau_code": FieldSchema(name="bureau_code", type=int, is_optional=True, is_list=False),
+    "bureau_name": FieldSchema(name="bureau_name", type=str, is_optional=True, is_list=False),
     "investment_title": FieldSchema(
         name="investment_title", type=str, is_optional=True, is_list=False
     ),
@@ -1167,15 +1288,9 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
     # Modeled as opaque dict/list since their inner shapes are dynamic.
     "funding": FieldSchema(name="funding", type=dict, is_optional=True, is_list=False),
     "details": FieldSchema(name="details", type=dict, is_optional=True, is_list=False),
-    "cio_evaluation": FieldSchema(
-        name="cio_evaluation", type=list, is_optional=True, is_list=True
-    ),
-    "contracts": FieldSchema(
-        name="contracts", type=list, is_optional=True, is_list=True
-    ),
-    "projects": FieldSchema(
-        name="projects", type=list, is_optional=True, is_list=True
-    ),
+    "cio_evaluation": FieldSchema(name="cio_evaluation", type=list, is_optional=True, is_list=True),
+    "contracts": FieldSchema(name="contracts", type=list, is_optional=True, is_list=True),
+    "projects": FieldSchema(name="projects", type=list, is_optional=True, is_list=True),
     "cost_pools_towers": FieldSchema(
         name="cost_pools_towers", type=list, is_optional=True, is_list=True
     ),
@@ -1191,6 +1306,13 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
     "operational_analysis": FieldSchema(
         name="operational_analysis", type=list, is_optional=True, is_list=True
     ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
 }
 
 # ============================================================================
@@ -1200,6 +1322,7 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
 EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Office": OFFICE_SCHEMA,
     "AwardOffice": AWARD_OFFICE_SCHEMA,
+    "OrganizationOffice": ORGANIZATION_OFFICE_SCHEMA,
     "Location": LOCATION_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "Competition": COMPETITION_SCHEMA,
@@ -1225,6 +1348,7 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Vehicle": VEHICLE_SCHEMA,
     "IDV": IDV_SCHEMA,
     "VehicleCompetitionDetails": VEHICLE_COMPETITION_DETAILS_SCHEMA,
+    "VehicleMetrics": VEHICLE_METRICS_SCHEMA,
     # Nested schemas for Grant fields
     "CFDANumber": CFDA_NUMBER_SCHEMA,
     "CodeDescription": CODE_DESCRIPTION_SCHEMA,

@@ -413,11 +413,35 @@ class Vehicle:
     uuid: str
     solicitation_identifier: str
     agency_id: str
+    is_synthetic_solicitation: bool | None = None
+    program_acronym: str | None = None
+    description: str | None = None
+    idv_count: int | None = None
+    total_obligated: Decimal | None = None
+    latest_award_date: date | None = None
     solicitation_title: str | None = None
     solicitation_date: date | None = None
     award_date: date | None = None
     last_date_to_order: date | None = None
     fiscal_year: int | None = None
+
+
+@dataclass
+class VehicleMetrics:
+    """Schema definition for the Vehicle `metrics(*)` expansion (not used for instances)"""
+
+    avg_offers_received: float | None = None
+    award_concentration_hhi: float | None = None
+    order_concentration_hhi: float | None = None
+    competed_rate: float | None = None
+    using_agency_count: int | None = None
+    avg_order_value: float | None = None
+    max_order_value: float | None = None
+    top_recipient_share: float | None = None
+    recent_obligations_24mo: float | None = None
+    recent_orders_24mo: int | None = None
+    days_since_last_order: int | None = None
+    obligation_to_ceiling_ratio: float | None = None
 
 
 @dataclass
@@ -690,20 +714,33 @@ class ShapeConfig:
 
     # Default for list_vehicles()
     VEHICLES_MINIMAL: Final = (
-        "uuid,solicitation_identifier,organization_id,awardee_count,order_count,"
-        "vehicle_obligations,vehicle_contracts_value,solicitation_title,solicitation_date"
+        "uuid,solicitation_identifier,is_synthetic_solicitation,program_acronym,"
+        "organization_id,organization,vehicle_type,description,"
+        "idv_count,awardee_count,order_count,total_obligated,"
+        "vehicle_obligations,vehicle_contracts_value,latest_award_date,"
+        "solicitation_title,solicitation_date"
     )
 
     # Default for get_vehicle()
     VEHICLES_COMPREHENSIVE: Final = (
-        "uuid,solicitation_identifier,agency_id,organization_id,vehicle_type,who_can_use,"
-        "solicitation_title,solicitation_description,solicitation_date,naics_code,psc_code,set_aside,"
-        "fiscal_year,award_date,last_date_to_order,awardee_count,order_count,vehicle_obligations,vehicle_contracts_value,"
-        "type_of_idc,contract_type,competition_details(*)"
+        "uuid,solicitation_identifier,is_synthetic_solicitation,agency_id,program_acronym,"
+        "organization_id,organization(*),vehicle_type,who_can_use,"
+        "solicitation_title,solicitation_description,solicitation_date,opportunity_id,"
+        "naics_code,psc_code,set_aside,"
+        "fiscal_year,award_date,latest_award_date,last_date_to_order,"
+        "description,idv_count,awardee_count,order_count,total_obligated,"
+        "vehicle_obligations,vehicle_contracts_value,"
+        "type_of_idc,contract_type,metrics(*)"
     )
 
     # Default for list_vehicle_awardees()
     VEHICLE_AWARDEES_MINIMAL: Final = "uuid,key,piid,award_date,title,order_count,idv_obligations,idv_contracts_value,recipient(display_name,uei)"
+
+    # Default for list_vehicle_orders()
+    VEHICLE_ORDERS_MINIMAL: Final = (
+        "key,piid,award_date,obligated,total_contract_value,description,"
+        "recipient(display_name,uei)"
+    )
 
     # Default for list_organizations()
     ORGANIZATIONS_MINIMAL: Final = "key,fh_key,name,level,type,short_name"

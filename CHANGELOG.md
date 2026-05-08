@@ -5,7 +5,45 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.6.0] - 2026-05-07
+
+### Added
+- Vehicles: new top-level fields `program_acronym`, `idv_count`, `total_obligated`, `is_synthetic_solicitation`, `latest_award_date`, `description`, `opportunity_id`.
+- Vehicles: new `metrics(*)` shape expansion bundling 12 computed metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Backed by a new `VehicleMetrics` schema.
+- `list_vehicle_orders(uuid, ...)` for the new `/api/vehicles/{uuid}/orders/` endpoint, returning task orders under the vehicle's IDVs with two-phase pagination.
+- `list_vehicles` gained 21 explicit filter parameters per API 4.3.0: `vehicle_type`, `type_of_idc`, `contract_type`, `set_aside` (multi-value via `|`), `who_can_use`, `naics_code`, `psc_code`, `program_acronym`, `agency`, `organization_id`, `total_obligated_min`/`max`, `idv_count_min`/`max`, `order_count_min`/`max`, `fiscal_year`, `award_date_after`/`before`, `last_date_to_order_after`/`before`.
+- `list_vehicle_awardees` gained a `search` parameter for entity-aware full-text search across IDV fields and recipient entity details (API 4.3.0).
+- `ordering` parameter on `list_vehicles` (whitelist: `vehicle_obligations`, `latest_award_date`, `total_obligated`, `award_date`, `last_date_to_order`, `fiscal_year`, `idv_count`, `order_count`) and on `list_vehicle_orders` (whitelist: `award_date`, `obligated`, `total_contract_value`). Prefix with `-` for descending.
+- `ShapeConfig.VEHICLE_ORDERS_MINIMAL` default for the new orders endpoint.
+- Shaping: New `organization(*)` expand on `Vehicle`, `Forecast`, `Grant`, `ITDashboardInvestment`, and `Protest` schemas — returns the canonical 7-key office payload (`organization_id`, `office_code`, `office_name`, `agency_code`, `agency_name`, `department_code`, `department_name`). Selectable as the bare leaf (`shape=...,organization`) or as a sub-selectable expansion (`shape=...,organization(office_code,...)`).
+- Shaping: New `vehicle(*)` expand on `Contract` — request the parent vehicle inline from `/api/contracts/` (API 4.2.0).
+- `Vehicle` and `VehicleMetrics` are now exported from the top-level `tango` package.
+- `tango.webhooks` subpackage with HMAC-SHA256 signing helpers (`verify_signature`, `generate_signature`, `parse_signature_header`) that mirror the canonical Tango server scheme byte-for-byte. Importable from a default `pip install tango-python` (pure stdlib).
+- `WebhookReceiver`: a stdlib-based local HTTP listener for development and integration tests. Verifies signatures, optionally forwards each delivery to a downstream URL, and records deliveries in memory for inspection. Usable as a context manager (`with WebhookReceiver(secret=...).run() as rx: ...`).
+- `tango.webhooks.simulate.deliver(...)`: locally sign and POST a payload to any URL — no Tango involvement. Useful for offline iteration on receiver code.
+- New `tango[webhooks]` extra (adds `click`) ships a `tango` console script covering the full webhook lifecycle for developer integrations:
+  - `listen` — local receiver
+  - `simulate` — sign a payload locally; with `--to`, also POST it
+  - `trigger` — ask Tango to send a real test delivery
+  - `fetch-sample` — print the canonical payload Tango emits for an event type
+  - `list-event-types` — discover what's subscribable
+  - `endpoints list|get|create|delete` — manage delivery endpoints
+  - `subscriptions list|get|create|delete` — manage what events you receive
+  Together these let a developer go from zero to receiving real Tango webhooks without leaving the shell or dropping into Python.
+
+### Changed
+- `ShapeConfig.VEHICLES_MINIMAL` and `VEHICLES_COMPREHENSIVE` now include the new top-level fields and the `organization` expansion. `VEHICLES_COMPREHENSIVE` defaults to `metrics(*)` and no longer pulls the deprecated `competition_details(*)` blob.
+
+### Deprecated
+- Vehicles shape fields `agency_details`, `competition_details`, and the `opportunity` expansion. The upstream API now sends a `Deprecation: true` header for these and recomputes them at request time. Explicit use in `shape=...` emits a Python `DeprecationWarning`. Sunset timeline TBD upstream.
+
+### Notes
+- Console script name `tango` may be revisited in a future release if it conflicts with sibling tooling (`tango-scripts` reuses the bare name).
+
+### Documentation
+- New `docs/WEBHOOKS.md` — comprehensive guide covering install, concepts, a zero-to-receiving quickstart, full CLI reference, and programmatic patterns for `WebhookReceiver` / `simulate.sign` / `simulate.deliver` in pytest fixtures.
+- `docs/API_REFERENCE.md`: filled in `get_webhook_subscription`, replaced the hand-rolled signature-verification snippet with a pointer to `tango.webhooks.verify_signature`, and added a new "Webhook tooling (`tango.webhooks`)" section that documents every importable from the new subpackage.
+- `README.md`: new "Webhook Tooling" section under Advanced Features, plus the new guide is linked from the Documentation index.
 
 ## [0.5.0] - 2026-04-08
 

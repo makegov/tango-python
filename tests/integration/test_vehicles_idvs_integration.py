@@ -21,6 +21,7 @@ Usage:
     TANGO_REFRESH_CASSETTES=true TANGO_API_KEY=xxx pytest tests/integration/test_vehicles_idvs_integration.py
 """
 
+import warnings
 from datetime import date
 from decimal import Decimal
 
@@ -28,6 +29,13 @@ import pytest
 
 from tests.integration.conftest import handle_api_exceptions
 from tests.integration.validation import validate_no_parsing_errors, validate_pagination
+
+
+def _field(obj, name):
+    """Read a field by name from a dict-or-attr-style shaped instance."""
+    if isinstance(obj, dict):
+        return obj.get(name)
+    return getattr(obj, name, None)
 
 
 @pytest.mark.vcr()
@@ -83,6 +91,39 @@ class TestVehiclesIntegration:
             )
             assert isinstance(solicitation_date, date), "solicitation_date should be date"
 
+        # New vehicle fields. All optional — only verify type when present.
+        is_synth = _field(vehicle, "is_synthetic_solicitation")
+        if is_synth is not None:
+            assert isinstance(is_synth, bool), "is_synthetic_solicitation should be bool"
+
+        idv_count = _field(vehicle, "idv_count")
+        if idv_count is not None:
+            assert isinstance(idv_count, int), "idv_count should be int"
+
+        total_obligated = _field(vehicle, "total_obligated")
+        if total_obligated is not None:
+            assert isinstance(total_obligated, Decimal), "total_obligated should be Decimal"
+
+        latest_award_date = _field(vehicle, "latest_award_date")
+        if latest_award_date is not None:
+            assert isinstance(latest_award_date, date), "latest_award_date should be date"
+
+        organization = _field(vehicle, "organization")
+        if organization is not None:
+            assert isinstance(organization, dict), "organization should be a dict"
+            allowed = {
+                "organization_id",
+                "office_code",
+                "office_name",
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+            }
+            assert set(organization).issubset(allowed), (
+                f"organization keys outside allowed set: {set(organization) - allowed}"
+            )
+
     @handle_api_exceptions("vehicles")
     def test_get_vehicle_supports_joiner_and_flat_lists(self, tango_client):
         """Test getting a single vehicle with joiner and flat_lists parameters
@@ -104,10 +145,11 @@ class TestVehiclesIntegration:
         )
         assert vehicle_uuid is not None, "Vehicle UUID should be present"
 
-        # Test with flat, flat_lists, and joiner
+        # Test with flat, flat_lists, and joiner. Uses the post-cutover `organization`
+        # leaf field (the prior `opportunity(...)` expansion is now deprecated).
         vehicle = tango_client.get_vehicle(
             vehicle_uuid,
-            shape="uuid,opportunity(title)",
+            shape="uuid,organization",
             flat=True,
             flat_lists=True,
             joiner="__",
@@ -118,15 +160,15 @@ class TestVehiclesIntegration:
             "Vehicle uuid should be present"
         )
 
-        # If opportunity is present, verify it's accessible
-        if vehicle.get("opportunity") is not None or (
-            hasattr(vehicle, "opportunity") and vehicle.opportunity is not None
-        ):
-            opportunity = (
-                vehicle.get("opportunity") if isinstance(vehicle, dict) else vehicle.opportunity
-            )
-            if isinstance(opportunity, dict):
-                assert "title" in opportunity or hasattr(opportunity, "title")
+        # When flattened with joiner="__", organization fields surface as
+        # `organization__office_code` / `organization__office_name`. Assert no
+        # dotted keys leaked through (organization may be null on this UUID, in
+        # which case flattening produces no organization-prefixed keys at all).
+        keys = list(vehicle) if isinstance(vehicle, dict) else []
+        org_keys = [k for k in keys if k.startswith("organization")]
+        assert all("." not in k for k in org_keys), (
+            f"flattened keys should use joiner='__', not '.': {org_keys}"
+        )
 
     @handle_api_exceptions("vehicles")
     def test_list_vehicle_awardees_uses_default_shape(self, tango_client):
@@ -191,6 +233,109 @@ class TestVehiclesIntegration:
                 )
                 if isinstance(recipient, dict):
                     assert "display_name" in recipient or hasattr(recipient, "display_name")
+
+    @handle_api_exceptions("vehicles")
+    def test_list_vehicles_with_ordering(self, tango_client):
+        """`ordering=-vehicle_obligations` returns vehicles sorted descending."""
+        response = tango_client.list_vehicles(
+            limit=10,
+            ordering="-vehicle_obligations",
+            shape="uuid,vehicle_obligations",
+        )
+        validate_pagination(response)
+
+        obligations = [
+            v for v in (_field(r, "vehicle_obligations") for r in response.results) if v is not None
+        ]
+        if len(obligations) >= 2:
+            assert obligations == sorted(obligations, reverse=True), (
+                f"Expected descending sort by vehicle_obligations, got {obligations}"
+            )
+
+    @handle_api_exceptions("vehicles")
+    def test_get_vehicle_with_metrics_expansion(self, tango_client):
+        """`metrics(*)` expansion returns the 12 metric fields with correct types."""
+        list_response = tango_client.list_vehicles(limit=1)
+        if not list_response.results:
+            pytest.skip("No vehicles available to test metrics expansion")
+        vehicle_uuid = _field(list_response.results[0], "uuid")
+        assert vehicle_uuid, "Vehicle UUID should be present"
+
+        vehicle = tango_client.get_vehicle(vehicle_uuid, shape="uuid,metrics(*)")
+        validate_no_parsing_errors(vehicle)
+
+        metrics = _field(vehicle, "metrics")
+        if metrics is None:
+            pytest.skip("Vehicle has no metrics yet (upstream sync may be pending)")
+
+        assert isinstance(metrics, dict), "metrics expansion should be a dict"
+        # Float-typed metrics
+        for fname in (
+            "avg_offers_received",
+            "award_concentration_hhi",
+            "order_concentration_hhi",
+            "competed_rate",
+            "avg_order_value",
+            "max_order_value",
+            "top_recipient_share",
+            "recent_obligations_24mo",
+            "obligation_to_ceiling_ratio",
+        ):
+            value = metrics.get(fname)
+            if value is not None:
+                assert isinstance(value, float), f"{fname} should be float"
+        # Int-typed metrics
+        for fname in ("using_agency_count", "recent_orders_24mo", "days_since_last_order"):
+            value = metrics.get(fname)
+            if value is not None:
+                assert isinstance(value, int), f"{fname} should be int"
+
+    @handle_api_exceptions("vehicles")
+    def test_list_vehicle_orders_uses_default_shape(self, tango_client):
+        """`/api/vehicles/{uuid}/orders/` returns task orders with the default shape applied."""
+        list_response = tango_client.list_vehicles(limit=1)
+        if not list_response.results:
+            pytest.skip("No vehicles available to test list_vehicle_orders")
+        vehicle_uuid = _field(list_response.results[0], "uuid")
+        assert vehicle_uuid, "Vehicle UUID should be present"
+
+        response = tango_client.list_vehicle_orders(vehicle_uuid, limit=10)
+        validate_pagination(response)
+
+        if response.results:
+            order = response.results[0]
+            validate_no_parsing_errors(order)
+            assert _field(order, "key") is not None, "Order key should be present"
+
+            award_date = _field(order, "award_date")
+            if award_date is not None:
+                assert isinstance(award_date, date), "award_date should be date"
+
+            obligated = _field(order, "obligated")
+            if obligated is not None:
+                assert isinstance(obligated, Decimal), "obligated should be Decimal"
+
+    def test_deprecated_shape_field_warns(self, tango_client):
+        """Explicitly requesting a deprecated shape field emits a DeprecationWarning."""
+        # Pure unit-style assertion on the helper — no HTTP call needed, so no
+        # cassette / @vcr / @handle_api_exceptions decoration. Cheap to run.
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            tango_client._warn_deprecated_vehicle_shape(
+                "uuid,solicitation_identifier,agency_details(*)"
+            )
+        deprecations = [w for w in caught if issubclass(w.category, DeprecationWarning)]
+        assert deprecations, "Expected a DeprecationWarning for `agency_details`"
+        message = str(deprecations[0].message)
+        assert "agency_details" in message
+
+        # Sanity check: the default shape (no deprecated tokens) does NOT warn.
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            tango_client._warn_deprecated_vehicle_shape("uuid,solicitation_identifier,metrics(*)")
+        assert not [w for w in caught if issubclass(w.category, DeprecationWarning)], (
+            "Non-deprecated shape should not emit DeprecationWarning"
+        )
 
 
 @pytest.mark.vcr()

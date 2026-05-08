@@ -1,6 +1,7 @@
 """Tango API Client"""
 
 import os
+import warnings
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any
@@ -123,6 +124,7 @@ class TangoClient:
     @staticmethod
     def _parse_rate_limit_headers(headers: httpx.Headers) -> RateLimitInfo:
         """Extract rate limit info from response headers."""
+
         def _int_or_none(val: str | None) -> int | None:
             if val is None:
                 return None
@@ -1447,6 +1449,40 @@ class TangoClient:
     # Vehicles (Awards)
     # ============================================================================
 
+    @staticmethod
+    def _warn_deprecated_vehicle_shape(shape: str | None) -> None:
+        # Upstream sends `Deprecation: true` for these fields/expansions; warn
+        # callers who request them explicitly so they have time to migrate
+        # before tango publishes a Sunset timeline.
+        from tango.shapes.explicit_schemas import DEPRECATED_VEHICLE_SHAPE_FIELDS
+
+        if not shape:
+            return
+        # Match top-level field tokens, ignoring nesting inside parentheses.
+        depth = 0
+        token = ""
+        tokens: list[str] = []
+        for ch in shape:
+            if ch == "(":
+                depth += 1
+            elif ch == ")":
+                depth = max(0, depth - 1)
+            elif ch == "," and depth == 0:
+                tokens.append(token.strip())
+                token = ""
+                continue
+            token += ch
+        tokens.append(token.strip())
+        used = {t.split("(", 1)[0] for t in tokens} & DEPRECATED_VEHICLE_SHAPE_FIELDS
+        if used:
+            warnings.warn(
+                f"Vehicle shape field(s) {sorted(used)!r} are deprecated upstream "
+                "and may be removed in a future tango API version. The API currently "
+                "returns a `Deprecation: true` header for these.",
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
     def list_vehicles(
         self,
         page: int = 1,
@@ -1456,12 +1492,46 @@ class TangoClient:
         flat_lists: bool = False,
         joiner: str = ".",
         search: str | None = None,
+        vehicle_type: str | None = None,
+        type_of_idc: str | None = None,
+        contract_type: str | None = None,
+        set_aside: str | None = None,
+        who_can_use: str | None = None,
+        naics_code: int | None = None,
+        psc_code: str | None = None,
+        program_acronym: str | None = None,
+        agency: str | None = None,
+        organization_id: str | None = None,
+        total_obligated_min: float | int | Decimal | None = None,
+        total_obligated_max: float | int | Decimal | None = None,
+        idv_count_min: int | None = None,
+        idv_count_max: int | None = None,
+        order_count_min: int | None = None,
+        order_count_max: int | None = None,
+        fiscal_year: int | None = None,
+        award_date_after: str | date | datetime | None = None,
+        award_date_before: str | date | datetime | None = None,
+        last_date_to_order_after: str | date | datetime | None = None,
+        last_date_to_order_before: str | date | datetime | None = None,
+        ordering: str | None = None,
     ) -> PaginatedResponse:
-        """List Vehicles (solicitation-centric groupings of IDVs)."""
+        """List Vehicles (solicitation-centric groupings of IDVs).
+
+        Multi-value filters (``vehicle_type``, ``type_of_idc``, ``contract_type``,
+        ``set_aside``) accept pipe-separated values for OR semantics, e.g.
+        ``vehicle_type="A|B|C"``.
+
+        ``ordering`` accepts: ``vehicle_obligations``, ``latest_award_date``,
+        ``total_obligated``, ``award_date``, ``last_date_to_order``,
+        ``fiscal_year``, ``idv_count``, ``order_count``. Prefix with ``-`` for
+        descending.
+        """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         if shape is None:
             shape = ShapeConfig.VEHICLES_MINIMAL
+        else:
+            self._warn_deprecated_vehicle_shape(shape)
         if shape:
             params["shape"] = shape
             if flat:
@@ -1471,8 +1541,37 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
-        if search:
-            params["search"] = search
+        for k, val in (
+            ("search", search),
+            ("vehicle_type", vehicle_type),
+            ("type_of_idc", type_of_idc),
+            ("contract_type", contract_type),
+            ("set_aside", set_aside),
+            ("who_can_use", who_can_use),
+            ("naics_code", naics_code),
+            ("psc_code", psc_code),
+            ("program_acronym", program_acronym),
+            ("agency", agency),
+            ("organization_id", organization_id),
+            ("total_obligated_min", total_obligated_min),
+            ("total_obligated_max", total_obligated_max),
+            ("idv_count_min", idv_count_min),
+            ("idv_count_max", idv_count_max),
+            ("order_count_min", order_count_min),
+            ("order_count_max", order_count_max),
+            ("fiscal_year", fiscal_year),
+            ("award_date_after", award_date_after),
+            ("award_date_before", award_date_before),
+            ("last_date_to_order_after", last_date_to_order_after),
+            ("last_date_to_order_before", last_date_to_order_before),
+            ("ordering", ordering),
+        ):
+            if val is None:
+                continue
+            if isinstance(val, (date, datetime)):
+                params[k] = val.isoformat()
+            else:
+                params[k] = val
 
         data = self._get("/api/vehicles/", params)
 
@@ -1504,6 +1603,8 @@ class TangoClient:
 
         if shape is None:
             shape = ShapeConfig.VEHICLES_COMPREHENSIVE
+        else:
+            self._warn_deprecated_vehicle_shape(shape)
         if shape:
             params["shape"] = shape
             if flat:
@@ -1531,8 +1632,14 @@ class TangoClient:
         flat: bool = False,
         flat_lists: bool = False,
         joiner: str = ".",
+        search: str | None = None,
     ) -> PaginatedResponse:
-        """List the IDV awardees for a Vehicle (`/api/vehicles/{uuid}/awardees/`)."""
+        """List the IDV awardees for a Vehicle (`/api/vehicles/{uuid}/awardees/`).
+
+        ``search`` runs entity-aware full-text search across IDV fields
+        (PIID, key, solicitation_identifier, NAICS, PSC, idv_type,
+        fiscal_year) and recipient entity details (name, address).
+        """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
         if shape is None:
@@ -1546,11 +1653,62 @@ class TangoClient:
             if flat_lists:
                 params["flat_lists"] = "true"
 
+        if search:
+            params["search"] = search
+
         data = self._get(f"/api/vehicles/{uuid}/awardees/", params)
 
         results = [
             self._parse_response_with_shape(awardee, shape, IDV, flat, flat_lists, joiner=joiner)
             for awardee in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def list_vehicle_orders(
+        self,
+        uuid: str,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List task orders under a Vehicle's IDVs (``/api/vehicles/{uuid}/orders/``).
+
+        Args:
+            ordering: Server-side sort. Allowed: ``award_date`` (default),
+                ``obligated``, ``total_contract_value``. Prefix with ``-`` for
+                descending.
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.VEHICLE_ORDERS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        if ordering:
+            params["ordering"] = ordering
+
+        data = self._get(f"/api/vehicles/{uuid}/orders/", params)
+
+        results = [
+            self._parse_response_with_shape(order, shape, Contract, flat, flat_lists, joiner=joiner)
+            for order in data["results"]
         ]
 
         return PaginatedResponse(

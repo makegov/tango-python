@@ -503,13 +503,14 @@ Vehicles provide a solicitation-centric way to discover groups of related IDVs a
 
 ### list_vehicles()
 
-List vehicles with optional vehicle-level full-text search.
+List vehicles with optional vehicle-level full-text search and ordering.
 
 ```python
 vehicles = client.list_vehicles(
     page=1,
     limit=25,
     search="GSA schedule",
+    ordering="-vehicle_obligations",
     shape=ShapeConfig.VEHICLES_MINIMAL,
     flat=False,
     flat_lists=False,
@@ -520,6 +521,7 @@ vehicles = client.list_vehicles(
 - `page` (int): Page number (default: 1)
 - `limit` (int): Results per page (default: 25, max: 100)
 - `search` (str, optional): Vehicle-level search term
+- `ordering` (str, optional): Server-side sort. Allowed: `vehicle_obligations`, `latest_award_date`. Prefix with `-` for descending.
 - `shape` (str, optional): Shape string (defaults to `ShapeConfig.VEHICLES_MINIMAL`)
 - `flat` (bool): Flatten nested objects in shaped response
 - `flat_lists` (bool): Flatten arrays using indexed keys
@@ -551,6 +553,67 @@ awardees = client.list_vehicle_awardees(
     shape=ShapeConfig.VEHICLE_AWARDEES_MINIMAL,
 )
 ```
+
+### list_vehicle_orders()
+
+List task orders under a vehicle's IDVs (`/api/vehicles/{uuid}/orders/`). Optimized for fast pagination over large vehicles.
+
+```python
+orders = client.list_vehicle_orders(
+    uuid="00000000-0000-0000-0000-000000000001",
+    limit=25,
+    ordering="-obligated",
+    shape=ShapeConfig.VEHICLE_ORDERS_MINIMAL,
+)
+```
+
+**Parameters:**
+- `uuid` (str): Vehicle UUID
+- `page` (int): Page number (default: 1)
+- `limit` (int): Results per page (default: 25, max: 100)
+- `ordering` (str, optional): Server-side sort. Allowed: `award_date` (default), `obligated`, `total_contract_value`. Prefix with `-` for descending.
+- `shape` (str, optional): Shape string (defaults to `ShapeConfig.VEHICLE_ORDERS_MINIMAL`)
+- `flat`, `flat_lists`, `joiner`: as on other vehicles methods
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with order (Contract) dictionaries
+
+### Vehicle response fields
+
+The post-cutover (May 2026) vehicle response includes these top-level fields, all addressable via the `shape` parameter:
+
+| Field | Type | Notes |
+| ----- | ---- | ----- |
+| `uuid` | str | Stable identifier. |
+| `solicitation_identifier` | str | Solicitation shared by underlying IDVs. |
+| `is_synthetic_solicitation` | bool | `True` for GWAC orphans recovered via `ACRO:` prefix. |
+| `agency_id` | str | From IDV award-key suffix. |
+| `program_acronym` | str \| None | New post-cutover field. |
+| `organization_id` | str \| None | Awarding organization. |
+| `organization` | dict \| None | Live awarding-org snapshot `{organization_id, office_code, office_name, agency_code, agency_name, department_code, department_name}`. Selected as a leaf field (`shape=...,organization`); not currently sub-selectable. |
+| `vehicle_type`, `who_can_use`, `type_of_idc`, `contract_type` | dict \| None | Returned as `{code, description}`. |
+| `description` | str \| None | Common text across IDV descriptions. |
+| `descriptions` | list[str] \| None | Distinct IDV descriptions. |
+| `idv_count`, `awardee_count`, `order_count` | int \| None | Denormalized rollups. |
+| `total_obligated`, `vehicle_obligations`, `vehicle_contracts_value` | Decimal \| None | Denormalized rollups. |
+| `award_date`, `latest_award_date`, `last_date_to_order` | date \| None | |
+| `solicitation_title`, `solicitation_description`, `solicitation_date`, `opportunity_id` | str / date / None | From SAM.gov via the linked Opportunity. |
+| `naics_code`, `psc_code`, `set_aside`, `fiscal_year` | int / str / None | |
+
+### Vehicle shape expansions
+
+- `awardees(...)` — underlying IDV awards. Supports nested `orders(...)`.
+- `metrics(*)` — bundled computed metrics: `avg_offers_received`, `award_concentration_hhi`, `order_concentration_hhi`, `competed_rate`, `using_agency_count`, `avg_order_value`, `max_order_value`, `top_recipient_share`, `recent_obligations_24mo`, `recent_orders_24mo`, `days_since_last_order`, `obligation_to_ceiling_ratio`. Defaults included in `ShapeConfig.VEHICLES_COMPREHENSIVE`.
+- `organization` — live awarding-org snapshot (selected as a leaf field; not sub-selectable).
+
+### Deprecated shape fields
+
+The following fields and expansions are still served by the API (recomputed at request time from the underlying IDVs) but the API now returns a `Deprecation: true` response header for them. They will be removed in a future tango API release.
+
+- `agency_details` (top-level field and `agency_details(*)` expansion)
+- `competition_details` (top-level field and `competition_details(*)` expansion)
+- `opportunity(*)` expansion (use the new top-level `solicitation_*` and `opportunity_id` fields instead)
+
+If you pass any of these in `shape=...`, the SDK will emit a Python `DeprecationWarning`. The default shapes (`VEHICLES_MINIMAL`, `VEHICLES_COMPREHENSIVE`) no longer include them.
 
 ---
 
@@ -1227,6 +1290,8 @@ for code in naics.results:
 
 Webhook APIs let **Large / Enterprise** users manage subscription filters for outbound Tango webhooks.
 
+> **For testing, signing, and a CLI tool**, see [`docs/WEBHOOKS.md`](WEBHOOKS.md). This section covers SDK method signatures only.
+
 ### list_webhook_event_types()
 
 Discover supported `event_type` values and subject types.
@@ -1245,6 +1310,12 @@ subs = client.list_webhook_subscriptions(page=1, page_size=25)
 Notes:
 
 - This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
+
+### get_webhook_subscription()
+
+```python
+sub = client.get_webhook_subscription("SUBSCRIPTION_UUID")
+```
 
 ### create_webhook_subscription()
 
@@ -1335,20 +1406,88 @@ Every delivery includes an HMAC signature header:
 
 Compute the digest over the **raw request body bytes** using your shared secret.
 
+The SDK ships a stdlib-only verifier that mirrors the Tango server's signing scheme byte-for-byte. Use it instead of hand-rolling — it's importable from a default install (no extras needed):
+
 ```python
-import hashlib
-import hmac
+from tango.webhooks import verify_signature
 
-
-def verify_tango_webhook_signature(secret: str, raw_body: bytes, signature_header: str | None) -> bool:
-    if not signature_header:
-        return False
-    sig = signature_header.strip()
-    if sig.startswith("sha256="):
-        sig = sig[len("sha256=") :]
-    expected = hmac.new(secret.encode(), raw_body, hashlib.sha256).hexdigest()
-    return hmac.compare_digest(expected, sig)
+if not verify_signature(raw_body, secret, request.headers.get("X-Tango-Signature")):
+    return 401
 ```
+
+`verify_signature` returns `False` for missing/empty/malformed headers — it never raises. Comparison is constant-time.
+
+---
+
+## Webhook tooling (`tango.webhooks`)
+
+The `tango.webhooks` subpackage adds testing and developer-tooling primitives on top of the API methods above. Signing helpers ship with the default install; the receiver and CLI ship with `pip install 'tango-python[webhooks]'`. See [`docs/WEBHOOKS.md`](WEBHOOKS.md) for usage guides; this section is the import-level reference.
+
+### Signing (default install)
+
+```python
+from tango.webhooks import (
+    verify_signature,        # (body: bytes, secret: str, header: str | None) -> bool
+    generate_signature,      # (body: bytes, secret: str) -> str (lowercase hex)
+    parse_signature_header,  # (header: str | None) -> str | None  (strips "sha256=")
+    SIGNATURE_HEADER,        # "X-Tango-Signature"
+    SIGNATURE_PREFIX,        # "sha256="
+)
+```
+
+### `WebhookReceiver` (with `[webhooks]` extra)
+
+A stdlib-based local HTTP receiver, useful in tests and during local development.
+
+```python
+from tango.webhooks import WebhookReceiver, Delivery
+
+with WebhookReceiver(secret="dev").run() as rx:
+    # ... cause something to POST to rx.url ...
+    deliveries: list[Delivery] = rx.deliveries
+```
+
+Constructor (all keyword arguments):
+
+| Arg | Default | Meaning |
+|---|---|---|
+| `secret` | `""` | Shared secret. Empty means signatures are not verified. |
+| `path` | `/tango/webhooks` | URL path to accept POSTs on. |
+| `host` | `127.0.0.1` | Bind address. |
+| `port` | `0` | TCP port. `0` = OS picks a free port. |
+| `forward_to` | `None` | Optional URL to mirror each delivery to. |
+| `max_history` | `256` | Cap on the in-memory `deliveries` deque. |
+| `on_delivery` | `None` | Callback fired for every delivery (verified or not). |
+| `require_signature` | `None` | Override default (require iff `secret` is set). |
+
+Each `Delivery` is a dataclass: `received_at`, `path`, `signature_header`, `body_bytes`, `body_json`, `verified`, `remote_addr`, `forward_status`, `forward_error`.
+
+### `simulate.sign` and `simulate.deliver`
+
+```python
+from tango.webhooks import sign, SignedRequest
+from tango.webhooks import simulate
+
+# Offline — produce the signed wire form without POSTing:
+signed: SignedRequest = sign({"events": [{"event_type": "..."}]}, secret="s")
+signed.body         # bytes you would put on the wire
+signed.signature    # bare lowercase hex
+signed.headers      # {"Content-Type": ..., "X-Tango-Signature": "sha256=..."}
+
+# With delivery — sign and POST to a target URL:
+result = simulate.deliver(target_url="http://localhost:8011/tango/webhooks",
+                          payload={...}, secret="s")
+result.status_code   # status from the receiver
+result.signature     # bare hex
+result.sent_bytes    # exact bytes that were POSTed
+result.response_body # body the receiver returned
+```
+
+`simulate.deliver` and `simulate.sign` accept payloads as `dict`, `list`, `str`, or raw `bytes`. Dicts/lists are serialized via `json.dumps(..., sort_keys=True, separators=(",", ":"))` so signatures are reproducible across runs.
+
+### CLI entry point
+
+The `tango[webhooks]` extra also installs a `tango` console script. See [`docs/WEBHOOKS.md` § CLI reference](WEBHOOKS.md#cli-reference) for the full command list.
 
 ---
 

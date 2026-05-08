@@ -435,10 +435,7 @@ class TestTangoClient:
 
         call_args = mock_request.call_args
         assert call_args[1]["url"].endswith("/api/itdashboard/021-000000001/")
-        assert (
-            call_args[1]["params"]["shape"]
-            == ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE
-        )
+        assert call_args[1]["params"]["shape"] == ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE
         assert investment["uii"] == "021-000000001"
         assert investment["agency_code"] == 21
 
@@ -459,9 +456,7 @@ class TestTangoClient:
                         "fy2024_internal_funding": "1000000.00",
                         "fy2024_contribution": "50000.00",
                     },
-                    "cio_evaluation": [
-                        {"cioRating": "3 - Medium Risk", "latestIndicator": "Y"}
-                    ],
+                    "cio_evaluation": [{"cioRating": "3 - Medium Risk", "latestIndicator": "Y"}],
                 }
             ],
         }
