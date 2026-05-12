@@ -365,16 +365,23 @@ def endpoints_get_cmd(endpoint_id: str, api_key: str | None, base_url: str) -> N
 
 @endpoints_group.command("create")
 @click.option("--url", "callback_url", required=True, help="Receiver URL Tango will POST to.")
+@click.option(
+    "--name",
+    required=True,
+    help="Human-readable name for this endpoint. Must be unique per account (server enforces unique(user, name)).",
+)
 @click.option("--inactive", is_flag=True, default=False, help="Create the endpoint disabled.")
 @_common_api_options
 def endpoints_create_cmd(
-    callback_url: str, inactive: bool, api_key: str | None, base_url: str
+    callback_url: str, name: str, inactive: bool, api_key: str | None, base_url: str
 ) -> None:
     """Create a webhook endpoint. Output includes the generated secret — save it."""
     from dataclasses import asdict
 
     client = _tango_client(api_key, base_url)
-    endpoint = client.create_webhook_endpoint(callback_url=callback_url, is_active=not inactive)
+    endpoint = client.create_webhook_endpoint(
+        callback_url=callback_url, name=name, is_active=not inactive
+    )
     click.echo(json.dumps(asdict(endpoint), indent=2, sort_keys=True))
 
 

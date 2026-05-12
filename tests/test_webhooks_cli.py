@@ -217,6 +217,8 @@ def test_cli_endpoints_create_returns_secret() -> None:
                 "create",
                 "--url",
                 "https://example/wh",
+                "--name",
+                "default",
                 "--api-key",
                 "k",
             ],
