@@ -181,7 +181,7 @@ Sign a payload locally with the same scheme Tango uses, then either print the si
 **Without `--to`** — just print the headers + body a real Tango delivery would have:
 
 ```bash
-tango webhooks simulate --secret dev_secret --event-type entities.updated
+tango webhooks simulate --secret dev_secret --event-type alerts.entity.match
 ```
 
 Output includes `delivered: false`, the headers (`Content-Type`, `X-Tango-Signature`), and the JSON payload.
@@ -191,7 +191,7 @@ Output includes `delivered: false`, the headers (`Content-Type`, `X-Tango-Signat
 ```bash
 tango webhooks simulate \
   --secret dev_secret \
-  --event-type entities.updated \
+  --event-type alerts.entity.match \
   --to http://127.0.0.1:8011/tango/webhooks
 ```
 
@@ -221,7 +221,7 @@ Output is JSON: `success`, `status_code` (the HTTP code Tango got from your endp
 Print the canonical sample payload for one event type, or the full mapping if `--event-type` is omitted. Wraps `GET /api/webhooks/endpoints/sample-payload/`. Read-only.
 
 ```bash
-tango webhooks fetch-sample --event-type entities.updated
+tango webhooks fetch-sample --event-type alerts.entity.match
 tango webhooks fetch-sample  # all event types
 ```
 
