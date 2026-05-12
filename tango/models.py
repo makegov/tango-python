@@ -13,7 +13,7 @@ registry purposes and are NOT used for creating instances. All instances are cre
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Final, Literal, TypeVar
+from typing import Any, Final, Literal, TypedDict, TypeVar
 
 T = TypeVar("T")
 
@@ -578,6 +578,30 @@ class WebhookEventType:
 @dataclass
 class WebhookEventTypesResponse:
     event_types: list[WebhookEventType]
+
+
+class WebhookSampleDelivery(TypedDict):
+    timestamp: str
+    events: list[dict[str, Any]]
+
+
+class WebhookSamplePayloadSingleResponse(TypedDict):
+    event_type: str
+    sample_delivery: WebhookSampleDelivery
+    signature_header: str
+    note: str
+
+
+class WebhookSamplePayloadAllResponse(TypedDict):
+    samples: dict[str, dict[str, Any]]
+    usage: str
+    signature_header: str
+    note: str
+
+
+WebhookSamplePayloadResponse = (
+    WebhookSamplePayloadSingleResponse | WebhookSamplePayloadAllResponse
+)
 
 
 @dataclass

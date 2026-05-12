@@ -46,6 +46,7 @@ from tango.models import (
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
+    WebhookSamplePayloadResponse,
     WebhookTestDeliveryResult,
 )
 from tango.shapes import (
@@ -2592,17 +2593,20 @@ class TangoClient:
             test_payload=data.get("test_payload"),
         )
 
-    def get_webhook_sample_payload(self, event_type: str | None = None) -> dict[str, Any]:
+    def get_webhook_sample_payload(
+        self, event_type: str | None = None
+    ) -> WebhookSamplePayloadResponse:
         """
         Fetch Tango-shaped sample webhook deliveries.
 
-        - If event_type is provided, returns the single-event response.
-        - Otherwise returns a `samples` mapping for all supported event types.
+        - If ``event_type`` is provided, returns a :class:`WebhookSamplePayloadSingleResponse`.
+        - Otherwise returns a :class:`WebhookSamplePayloadAllResponse` with a ``samples``
+          mapping keyed by event type.
         """
         params: dict[str, Any] = {}
         if event_type:
             params["event_type"] = event_type
-        return self._get("/api/webhooks/endpoints/sample-payload/", params)
+        return self._get("/api/webhooks/endpoints/sample-payload/", params)  # type: ignore[return-value]
 
     # ============================================================================
     # Webhook Alerts (filter-based subscriptions)
