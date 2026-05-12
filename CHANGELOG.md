@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-> Combined release: API parity (formerly tracked as PR #25) + subject-based
-> webhook removal (formerly tracked as PR #27 / issue #2275). Bumped to
+> Combined release: API parity (formerly tracked as PR #25), subject-based
+> webhook removal (formerly tracked as PR #27 / issue #2275), and shape-validator
+> alias support (formerly tracked as PR #28 / issue #2266). Bumped to
 > `0.7.0` because removing `create_webhook_subscription` /
 > `update_webhook_subscription` / `delete_webhook_subscription` /
 > `list_webhook_subscriptions` / `get_webhook_subscription` and the
@@ -45,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `TangoClient._post()` and `_patch()` now accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`.
 - `tango webhooks endpoints create` CLI now accepts and requires `--name` (passed through to `create_webhook_endpoint(name=...)`). Previously the option was absent, meaning the CLI could never set a custom endpoint name and every call would 400 server-side (the server enforces `unique(user, name)`).
 - `WebhookAlert.query_type` and `WebhookAlert.filters` tightened from `Optional` to non-optional (`str` and `dict[str, Any]` respectively). Legacy nullable rows were purged by the tango#2275 migration; the server model and serializer guarantee non-null values for all current data. `WebhookAlert.status` narrowed from `str` to `Literal["active", "paused"]` — the server serializer produces exactly those two values.
+- **Shape validator agrees with server on `naics(...)` / `psc(...)` expansions.** The client-side `ShapeParser.validate()` previously rejected the canonical `shape=naics(code,description)` form (which the server has always accepted) and also rejected the alias `shape=naics_code(code,description)`. The parser now mirrors the server's `_EXPAND_ALIASES` (introduced in Tango PR makegov/tango#2259) and rewrites `naics_code(...)` / `psc_code(...)` to their canonical `naics(...)` / `psc(...)` form at parse time. Bare scalar leaves (`shape=naics_code` / `shape=psc_code`) are left untouched and still return the raw column value, matching the server. Schemas for `Contract`, `Forecast`, `Opportunity`, `Notice`, and `Vehicle` gained explicit `naics` / `psc` expand entries backed by the existing `CodeDescription` nested model. Fixes makegov/tango#2266.
 
 ## [0.6.0] - 2026-05-07
 
