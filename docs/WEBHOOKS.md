@@ -1,6 +1,6 @@
 # Webhooks Guide
 
-This guide covers everything `tango-python` provides for **building, testing, and operating webhook integrations against the Tango API**: signing helpers, a local receiver, a command-line tool, and management commands for the underlying endpoints and subscriptions.
+This guide covers everything `tango-python` provides for **building, testing, and operating webhook integrations against the Tango API**: signing helpers, a local receiver, a command-line tool, and management commands for delivery endpoints.
 
 If you only need the SDK method signatures, see [`API_REFERENCE.md` § Webhooks](API_REFERENCE.md#webhooks). For the API-level contract (signing scheme, event taxonomy, retry behavior), see the [Tango Webhooks Partner Guide](https://docs.makegov.com/webhooks-user-guide/).
 
@@ -18,7 +18,6 @@ If you only need the SDK method signatures, see [`API_REFERENCE.md` § Webhooks]
   - [`tango webhooks fetch-sample`](#tango-webhooks-fetch-sample)
   - [`tango webhooks list-event-types`](#tango-webhooks-list-event-types)
   - [`tango webhooks endpoints`](#tango-webhooks-endpoints)
-  - [`tango webhooks subscriptions`](#tango-webhooks-subscriptions)
 - [Programmatic use](#programmatic-use)
   - [Signature verification in your handler](#signature-verification-in-your-handler)
   - [`WebhookReceiver` in pytest fixtures](#webhookreceiver-in-pytest-fixtures)
@@ -54,26 +53,24 @@ tango webhooks --help
 
 ## Concepts in 60 seconds
 
-Tango webhooks have three pieces of state:
+Tango webhooks have two pieces of state:
 
 | Concept | What it is | Tango term |
 |---|---|---|
 | **Endpoint** | The URL Tango POSTs to, plus a generated signing secret | `WebhookEndpoint` |
-| **Subscription** | A filter saying *which events* you want delivered to that endpoint | `WebhookSubscription` |
-| **Delivery** | A single signed POST Tango makes when a matching event fires | (the request itself) |
+| **Delivery** | A single signed POST Tango makes when an event fires | (the request itself) |
 
 A typical setup:
 
 1. **Create an endpoint** (`POST /api/webhooks/endpoints/`) with the public URL of your handler. Tango returns a `secret` — save it; it's used to sign every delivery.
-2. **Create one or more subscriptions** (`POST /api/webhooks/subscriptions/`) describing the events your handler cares about (e.g. `entities.updated` for specific UEIs).
-3. **Tango POSTs** to your endpoint when matching events fire. The body is JSON; the header `X-Tango-Signature: sha256=<hex>` is the HMAC-SHA256 of the raw body bytes keyed by your endpoint's secret.
-4. **Your handler verifies the signature**, parses the body, and acts on it.
+2. **Tango POSTs** to your endpoint when events fire. The body is JSON; the header `X-Tango-Signature: sha256=<hex>` is the HMAC-SHA256 of the raw body bytes keyed by your endpoint's secret.
+3. **Your handler verifies the signature**, parses the body, and acts on it.
 
 ---
 
 ## Quickstart: zero to receiving
 
-Assumes you have a `TANGO_API_KEY` and want to receive entity-update webhooks for a specific UEI.
+Assumes you have a `TANGO_API_KEY` and want to receive webhooks.
 
 ### 1. See what you can subscribe to
 
@@ -121,12 +118,6 @@ When you're ready for end-to-end testing against Tango itself, expose your local
 # Use the public URL the tunnel gave you.
 tango webhooks endpoints create --url https://<your-tunnel>.ngrok.io/tango/webhooks
 # Save the `secret` from the response — that's what your handler uses to verify.
-
-tango webhooks subscriptions create \
-  --name "watch UEI ABC123" \
-  --event-type entities.updated \
-  --subject-type entity \
-  --subject-id ABC123
 ```
 
 To force a real test delivery from Tango (without waiting for an actual event):
@@ -194,7 +185,7 @@ Three sources for the payload (mutually exclusive):
 
 | Flag | Source | When to use |
 |---|---|---|
-| `--event-type X` | Fetches the canonical sample for `X` from Tango | You want a realistic body without setting up a subscription |
+| `--event-type X` | Fetches the canonical sample for `X` from Tango | You want a realistic body without waiting for a real delivery |
 | `--payload-file PATH` | Reads a JSON file | You're testing a specific shape (regression, edge case) |
 | *(neither)* | A built-in placeholder envelope | Smoke-testing the wiring |
 
@@ -238,23 +229,6 @@ tango webhooks endpoints delete ENDPOINT_ID [--yes]
 ```
 
 `create` returns the generated `secret` once — save it. `delete` prompts for confirmation; `--yes` skips. `--inactive` registers the endpoint disabled (no deliveries until you re-enable it).
-
-### `tango webhooks subscriptions`
-
-Manage **what Tango delivers**.
-
-```bash
-tango webhooks subscriptions list [--page N] [--page-size N]
-tango webhooks subscriptions get  SUBSCRIPTION_ID
-tango webhooks subscriptions create \
-  --name "watch UEI ABC123" \
-  --event-type entities.updated \
-  --subject-type entity \
-  --subject-id ABC123
-tango webhooks subscriptions delete SUBSCRIPTION_ID [--yes]
-```
-
-`create` builds a single-record subscription (one event type, one subject type, one or more subject IDs). For multi-record subscriptions, call `client.create_webhook_subscription(...)` directly with a hand-crafted `payload` dict.
 
 ---
 
@@ -346,7 +320,7 @@ with WebhookReceiver(secret="s").run() as rx:
 
 ## Common workflows
 
-### "I'm starting fresh — set me up to receive entity updates"
+### "I'm starting fresh — set me up to receive webhooks"
 
 ```bash
 export TANGO_API_KEY=...
@@ -354,12 +328,9 @@ export TANGO_API_KEY=...
 tango webhooks list-event-types
 # 2. Stand up a tunnel so Tango can reach you
 ngrok http 8011 &
-# 3. Register your endpoint and subscription
+# 3. Register your endpoint
 tango webhooks endpoints create --url https://<id>.ngrok.io/tango/webhooks
 # (save the `secret` from the response into TANGO_WEBHOOK_SECRET)
-tango webhooks subscriptions create \
-  --name "entities" --event-type entities.updated \
-  --subject-type entity --subject-id <UEI>
 # 4. Run the listener pointed at your downstream handler
 tango webhooks listen --port 8011 --secret $TANGO_WEBHOOK_SECRET \
   --forward-to http://localhost:4242/wh

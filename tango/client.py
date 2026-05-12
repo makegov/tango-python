@@ -42,8 +42,6 @@ from tango.models import (
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
-    WebhookSubjectTypeDefinition,
-    WebhookSubscription,
     WebhookTestDeliveryResult,
 )
 from tango.shapes import (
@@ -2361,13 +2359,12 @@ class TangoClient:
     # ============================================================================
 
     def list_webhook_event_types(self) -> WebhookEventTypesResponse:
-        """Discover supported webhook event types and subject types."""
+        """Discover supported webhook event types."""
         data = self._get("/api/webhooks/event-types/")
 
         event_types = [
             WebhookEventType(
                 event_type=str(e.get("event_type", "")),
-                default_subject_type=str(e.get("default_subject_type", "")),
                 description=str(e.get("description", "")),
                 schema_version=int(e.get("schema_version", 1)),
             )
@@ -2375,123 +2372,7 @@ class TangoClient:
             if isinstance(e, dict)
         ]
 
-        subject_types = [str(x) for x in (data.get("subject_types") or [])]
-
-        subject_type_definitions = [
-            WebhookSubjectTypeDefinition(
-                subject_type=str(d.get("subject_type", "")),
-                description=str(d.get("description", "")),
-                id_format=str(d.get("id_format", "")),
-                status=str(d.get("status", "active")),
-            )
-            for d in (data.get("subject_type_definitions") or [])
-            if isinstance(d, dict)
-        ]
-
-        return WebhookEventTypesResponse(
-            event_types=event_types,
-            subject_types=subject_types,
-            subject_type_definitions=subject_type_definitions,
-        )
-
-    def list_webhook_subscriptions(
-        self, page: int = 1, page_size: int | None = None
-    ) -> PaginatedResponse[WebhookSubscription]:
-        """
-        List webhook subscriptions for the authenticated user's endpoint.
-
-        Notes:
-        - This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
-        """
-        params: dict[str, Any] = {"page": page}
-        if page_size is not None:
-            params["page_size"] = page_size
-
-        data = self._get("/api/webhooks/subscriptions/", params)
-        results = [
-            WebhookSubscription(
-                id=str(item.get("id", "")),
-                endpoint=str(item.get("endpoint")) if item.get("endpoint") is not None else None,
-                subscription_name=str(item.get("subscription_name", "")),
-                payload=item.get("payload"),
-                created_at=str(item.get("created_at", "")),
-            )
-            for item in (data.get("results") or [])
-            if isinstance(item, dict)
-        ]
-
-        return PaginatedResponse(
-            count=int(data.get("count", len(results))),
-            next=data.get("next"),
-            previous=data.get("previous"),
-            results=results,
-        )
-
-    def get_webhook_subscription(self, subscription_id: str) -> WebhookSubscription:
-        """Get a single webhook subscription by id (UUID)."""
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-
-        data = self._get(f"/api/webhooks/subscriptions/{subscription_id}/")
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def create_webhook_subscription(
-        self, subscription_name: str, payload: dict[str, Any]
-    ) -> WebhookSubscription:
-        """Create a webhook subscription."""
-        if not subscription_name:
-            raise TangoValidationError("Webhook subscription_name is required")
-
-        data = self._post(
-            "/api/webhooks/subscriptions/",
-            {"subscription_name": subscription_name, "payload": payload},
-        )
-
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def update_webhook_subscription(
-        self,
-        subscription_id: str,
-        *,
-        subscription_name: str | None = None,
-        payload: dict[str, Any] | None = None,
-    ) -> WebhookSubscription:
-        """Patch a webhook subscription."""
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-
-        body: dict[str, Any] = {}
-        if subscription_name is not None:
-            body["subscription_name"] = subscription_name
-        if payload is not None:
-            body["payload"] = payload
-
-        data = self._patch(f"/api/webhooks/subscriptions/{subscription_id}/", body)
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def delete_webhook_subscription(self, subscription_id: str) -> None:
-        """Delete a webhook subscription."""
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-        self._delete(f"/api/webhooks/subscriptions/{subscription_id}/")
+        return WebhookEventTypesResponse(event_types=event_types)
 
     def get_webhook_endpoint(self, endpoint_id: str) -> WebhookEndpoint:
         """Get a webhook endpoint by id (UUID)."""

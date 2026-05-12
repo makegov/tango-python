@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-05-12
+
+### Removed
+- **Subject-based webhook subscriptions.** Mirrors the Tango API deprecation of subject-based subscriptions (see [makegov/tango#2267](https://github.com/makegov/tango/issues/2267)). Removed:
+  - `TangoClient.list_webhook_subscriptions()`, `get_webhook_subscription()`, `create_webhook_subscription()`, `update_webhook_subscription()`, `delete_webhook_subscription()`.
+  - `WebhookSubscription` and `WebhookSubjectTypeDefinition` dataclasses (and their `tango` package re-exports).
+  - `subject_types` and `subject_type_definitions` fields from `WebhookEventTypesResponse`; `default_subject_type` from `WebhookEventType`.
+  - `tango webhooks subscriptions` CLI group (`list` / `get` / `create` / `delete`).
+- Endpoint CRUD, signing helpers, `WebhookReceiver`, `test_webhook_delivery`, `get_webhook_sample_payload`, and `list_webhook_event_types` are unaffected.
+
+### Notes
+- SemVer-major bump (still pre-1.0). Users who were calling `*_webhook_subscription` against an already-migrated tango will see `AttributeError`; against an older tango, the methods were removed before tango's API was. If you need to reach `/api/webhooks/subscriptions/` directly during a migration window, call `client._get` / `_post` / `_patch` / `_delete` with the path explicitly.
+
 ## [0.6.0] - 2026-05-07
 
 ### Added

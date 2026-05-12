@@ -571,33 +571,13 @@ class APIKey:
 @dataclass
 class WebhookEventType:
     event_type: str
-    default_subject_type: str
     description: str
     schema_version: int
 
 
 @dataclass
-class WebhookSubjectTypeDefinition:
-    subject_type: str
-    description: str
-    id_format: str
-    status: str
-
-
-@dataclass
 class WebhookEventTypesResponse:
     event_types: list[WebhookEventType]
-    subject_types: list[str]
-    subject_type_definitions: list[WebhookSubjectTypeDefinition]
-
-
-@dataclass
-class WebhookSubscription:
-    id: str
-    subscription_name: str
-    payload: dict[str, Any] | None
-    created_at: str
-    endpoint: str | None = None
 
 
 @dataclass
@@ -738,8 +718,7 @@ class ShapeConfig:
 
     # Default for list_vehicle_orders()
     VEHICLE_ORDERS_MINIMAL: Final = (
-        "key,piid,award_date,obligated,total_contract_value,description,"
-        "recipient(display_name,uei)"
+        "key,piid,award_date,obligated,total_contract_value,description,recipient(display_name,uei)"
     )
 
     # Default for list_organizations()
