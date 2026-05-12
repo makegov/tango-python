@@ -202,13 +202,39 @@ class TangoClient:
         """Make a GET request"""
         return self._request("GET", endpoint, params=params)
 
-    def _post(self, endpoint: str, json_data: dict[str, Any]) -> dict[str, Any]:
-        """Make a POST request"""
-        return self._request("POST", endpoint, json_data=json_data)
+    def _post(
+        self,
+        endpoint: str,
+        json_data: dict[str, Any] | None = None,
+        *,
+        json: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Make a POST request.
 
-    def _patch(self, endpoint: str, json_data: dict[str, Any]) -> dict[str, Any]:
-        """Make a PATCH request"""
-        return self._request("PATCH", endpoint, json_data=json_data)
+        Accepts either ``json_data`` (positional) or ``json=`` (keyword) for
+        backward compatibility with internal callers and docs examples.
+        """
+        body = json_data if json_data is not None else json
+        if body is None:
+            body = {}
+        return self._request("POST", endpoint, json_data=body)
+
+    def _patch(
+        self,
+        endpoint: str,
+        json_data: dict[str, Any] | None = None,
+        *,
+        json: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Make a PATCH request.
+
+        Accepts either ``json_data`` (positional) or ``json=`` (keyword) for
+        backward compatibility with internal callers and docs examples.
+        """
+        body = json_data if json_data is not None else json
+        if body is None:
+            body = {}
+        return self._request("PATCH", endpoint, json_data=body)
 
     def _delete(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         """Make a DELETE request"""
