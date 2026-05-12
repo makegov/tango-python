@@ -15,14 +15,15 @@ import hmac
 from tango.webhooks import generate_signature, parse_signature_header, verify_signature
 
 KNOWN_VECTORS: list[tuple[bytes, str, str]] = [
-    # (body_bytes, secret, expected_lowercase_hex_hmac_sha256)
-    (b"", "dev_secret", hmac.new(b"dev_secret", b"", hashlib.sha256).hexdigest()),
+    # (body_bytes, secret, expected_wire_signature) — full sha256=<hex> form
+    (b"", "dev_secret", "sha256=" + hmac.new(b"dev_secret", b"", hashlib.sha256).hexdigest()),
     (
-        b'{"events":[{"event_type":"entities.updated","uei":"ABC123"}]}',
+        b'{"events":[{"event_type":"alerts.entity.match","alert_id":"ABC"}]}',
         "shh",
-        hmac.new(
+        "sha256="
+        + hmac.new(
             b"shh",
-            b'{"events":[{"event_type":"entities.updated","uei":"ABC123"}]}',
+            b'{"events":[{"event_type":"alerts.entity.match","alert_id":"ABC"}]}',
             hashlib.sha256,
         ).hexdigest(),
     ),
@@ -34,29 +35,50 @@ def test_generate_signature_matches_reference_algorithm() -> None:
         assert generate_signature(body, secret) == expected
 
 
-def test_generate_signature_is_lowercase_hex() -> None:
+def test_generate_signature_returns_prefixed_wire_form() -> None:
+    """generate_signature returns the full ``sha256=<hex>`` header value, so
+    callers can assign it directly to X-Tango-Signature without wrapping."""
     sig = generate_signature(b"payload", "secret")
-    assert sig == sig.lower()
-    int(sig, 16)  # must parse as hex
+    assert sig.startswith("sha256=")
+    bare = sig[len("sha256=") :]
+    assert bare == bare.lower()
+    int(bare, 16)  # must parse as hex
 
 
 def test_verify_signature_round_trip() -> None:
-    body = b'{"events":[{"event_type":"awards.created"}]}'
+    body = b'{"events":[{"event_type":"alerts.contract.match"}]}'
     secret = "rotating-secret"
     sig = generate_signature(body, secret)
-    assert verify_signature(body, secret, f"sha256={sig}") is True
-    assert verify_signature(body, secret, sig) is True  # bare hex also accepted
+    # Prefixed form (what generate_signature returns and what Tango sends)
+    assert verify_signature(body, secret, sig) is True
+    # Bare-hex form (callers passing pre-stripped headers)
+    bare = parse_signature_header(sig)
+    assert bare is not None
+    assert verify_signature(body, secret, bare) is True
+
+
+def test_verify_signature_accepts_both_prefixed_and_bare_hex() -> None:
+    """Regression test: verify_signature must accept BOTH the wire form
+    (sha256=<hex>) and the pre-stripped bare-hex form. Callers that strip
+    the prefix themselves before passing in must keep working."""
+    body = b"hello"
+    secret = "k"
+    sig = generate_signature(body, secret)
+    bare = parse_signature_header(sig)
+    assert bare is not None and bare != sig  # sanity: they really differ
+    assert verify_signature(body, secret, sig) is True
+    assert verify_signature(body, secret, bare) is True
 
 
 def test_verify_signature_rejects_tampered_body() -> None:
     secret = "secret"
     sig = generate_signature(b"original", secret)
-    assert verify_signature(b"tampered", secret, f"sha256={sig}") is False
+    assert verify_signature(b"tampered", secret, sig) is False
 
 
 def test_verify_signature_rejects_wrong_secret() -> None:
     sig = generate_signature(b"body", "right")
-    assert verify_signature(b"body", "wrong", f"sha256={sig}") is False
+    assert verify_signature(b"body", "wrong", sig) is False
 
 
 def test_verify_signature_handles_missing_or_empty_header() -> None:

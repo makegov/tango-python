@@ -217,13 +217,17 @@ def simulate_cmd(
         return
 
     result = simulate.deliver(target_url=target_url, payload=payload, secret=secret)
+    # `result.signature` is the bare hex on the SimulationResult dataclass;
+    # render the prefixed wire form (matches X-Tango-Signature exactly).
+    from tango.webhooks.signing import SIGNATURE_PREFIX
+
     click.echo(
         json.dumps(
             {
                 "delivered": True,
                 "target_url": target_url,
                 "status_code": result.status_code,
-                "signature": f"sha256={result.signature}",
+                "signature": f"{SIGNATURE_PREFIX}{result.signature}",
                 "sent_payload": payload,
                 "receiver_response": result.response_body[:500],
             },

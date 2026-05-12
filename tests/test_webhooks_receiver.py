@@ -15,13 +15,14 @@ PAYLOAD = {"events": [{"event_type": "entities.updated", "uei": "TEST123"}]}
 
 
 def _post_signed(url: str, body: bytes, secret: str) -> httpx.Response:
-    sig = generate_signature(body, secret)
+    # generate_signature returns the wire form ("sha256=<hex>") so it can
+    # be assigned to the header directly with no wrapping.
     return httpx.post(
         url,
         content=body,
         headers={
             "Content-Type": "application/json",
-            "X-Tango-Signature": f"sha256={sig}",
+            "X-Tango-Signature": generate_signature(body, secret),
         },
         timeout=5.0,
     )

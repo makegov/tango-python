@@ -307,9 +307,11 @@ def test_my_handler_processes_entity_update():
     with WebhookReceiver(secret="test_secret").run() as rx:
         # Trigger whatever in your code-under-test should send a webhook
         # (e.g. a publisher, or in this case a manual POST).
-        body = b'{"events":[{"event_type":"entities.updated","uei":"ABC"}]}'
+        body = b'{"events":[{"event_type":"alerts.entity.match","alert_id":"ABC"}]}'
         sig = generate_signature(body, "test_secret")
-        httpx.post(rx.url, content=body, headers={"X-Tango-Signature": f"sha256={sig}"})
+        # generate_signature returns the wire form ("sha256=<hex>") — assign
+        # directly to the header without wrapping.
+        httpx.post(rx.url, content=body, headers={"X-Tango-Signature": sig})
 
         assert len(rx.deliveries) == 1
         assert rx.deliveries[0].verified
@@ -335,7 +337,7 @@ Each `Delivery` has: `received_at`, `path`, `signature_header`, `body_bytes`, `b
 ```python
 from tango.webhooks import sign
 
-signed = sign({"events": [{"event_type": "entities.updated"}]}, secret="s")
+signed = sign({"events": [{"event_type": "alerts.entity.match"}]}, secret="s")
 assert signed.headers["X-Tango-Signature"].startswith("sha256=")
 
 # Use `signed.body` as the raw bytes and `signed.headers` directly:

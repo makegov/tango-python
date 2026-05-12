@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `create_webhook_alert` accepts `endpoint=` (keyword-only). Required for accounts with multiple webhook endpoints; auto-resolves for single-endpoint accounts. Closes the multi-endpoint smoke-test gap (tango#2256).
 - `test_webhook_delivery` now sends the canonical `endpoint` body key instead of the deprecated `endpoint_id` alias (tango#2252). The Python kwarg name stays `endpoint_id=` for backwards compatibility; the wire payload is what changed.
+- **`generate_signature(body, secret)` now returns the full wire form `"sha256=<hex>"`** instead of bare hex. Callers can assign the return value directly to the `X-Tango-Signature` header without wrapping in a format string. This is a breaking change for code that relied on the bare-hex return; pass it through `parse_signature_header()` to recover the previous form. `verify_signature` accepts both prefixed and bare-hex inputs (unchanged), so receivers continue to work either way.
 
 ### Removed
 - **Subject-based webhook subscription surface** (tango#2275). Migrate to `create_webhook_alert(...)` and the alerts API.

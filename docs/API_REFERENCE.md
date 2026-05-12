@@ -1717,7 +1717,7 @@ The `tango.webhooks` subpackage adds testing and developer-tooling primitives on
 ```python
 from tango.webhooks import (
     verify_signature,        # (body: bytes, secret: str, header: str | None) -> bool
-    generate_signature,      # (body: bytes, secret: str) -> str (lowercase hex)
+    generate_signature,      # (body: bytes, secret: str) -> str  ("sha256=<hex>" wire form)
     parse_signature_header,  # (header: str | None) -> str | None  (strips "sha256=")
     SIGNATURE_HEADER,        # "X-Tango-Signature"
     SIGNATURE_PREFIX,        # "sha256="
