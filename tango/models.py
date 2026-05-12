@@ -738,8 +738,7 @@ class ShapeConfig:
 
     # Default for list_vehicle_orders()
     VEHICLE_ORDERS_MINIMAL: Final = (
-        "key,piid,award_date,obligated,total_contract_value,description,"
-        "recipient(display_name,uei)"
+        "key,piid,award_date,obligated,total_contract_value,description,recipient(display_name,uei)"
     )
 
     # Default for list_organizations()

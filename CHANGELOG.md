@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **Shape validator agrees with server on `naics(...)` / `psc(...)` expansions.** The client-side `ShapeParser.validate()` previously rejected the canonical `shape=naics(code,description)` form (which the server has always accepted) and also rejected the alias `shape=naics_code(code,description)`. The parser now mirrors the server's `_EXPAND_ALIASES` (introduced in Tango PR makegov/tango#2259) and rewrites `naics_code(...)` / `psc_code(...)` to their canonical `naics(...)` / `psc(...)` form at parse time. Bare scalar leaves (`shape=naics_code` / `shape=psc_code`) are left untouched and still return the raw column value, matching the server. Schemas for `Contract`, `Forecast`, `Opportunity`, `Notice`, and `Vehicle` gained explicit `naics` / `psc` expand entries backed by the existing `CodeDescription` nested model. Fixes makegov/tango#2266.
+
 ## [0.6.0] - 2026-05-07
 
 ### Added

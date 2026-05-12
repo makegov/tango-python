@@ -327,6 +327,11 @@ CONTRACT_SCHEMA: dict[str, FieldSchema] = {
     ),
     "major_program": FieldSchema(name="major_program", type=str, is_optional=True, is_list=False),
     "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
+    # Expand form: shape=naics(code,description). Server PR #2259 also accepts
+    # naics_code(...) as an alias which the SDK parser normalizes to naics.
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "number_of_actions": FieldSchema(
         name="number_of_actions", type=int, is_optional=True, is_list=False
     ),
@@ -355,6 +360,11 @@ CONTRACT_SCHEMA: dict[str, FieldSchema] = {
         name="price_evaluation_percent_difference", type=str, is_optional=True, is_list=False
     ),
     "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
+    # Expand form: shape=psc(code,description). Server PR #2259 also accepts
+    # psc_code(...) as an alias which the SDK parser normalizes to psc.
+    "psc": FieldSchema(
+        name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "purchase_card_as_payment_method": FieldSchema(
         name="purchase_card_as_payment_method", type=str, is_optional=True, is_list=False
     ),
@@ -572,6 +582,11 @@ FORECAST_SCHEMA: dict[str, FieldSchema] = {
     "id": FieldSchema(name="id", type=int, is_optional=False, is_list=False),
     "is_active": FieldSchema(name="is_active", type=bool, is_optional=True, is_list=False),
     "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+    # Expand form: shape=naics(code,description). Server PR #2259 also accepts
+    # naics_code(...) as an alias which the SDK parser normalizes to naics.
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "place_of_performance": FieldSchema(
         name="place_of_performance", type=str, is_optional=False, is_list=False
     ),
@@ -611,6 +626,11 @@ OPPORTUNITY_SCHEMA: dict[str, FieldSchema] = {
     ),
     "meta": FieldSchema(name="meta", type=dict, is_optional=False, is_list=False),
     "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
+    # Expand form: shape=naics(code,description). Server PR #2259 also accepts
+    # naics_code(...) as an alias which the SDK parser normalizes to naics.
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "notice_history": FieldSchema(
         name="notice_history",
         type=dict,
@@ -631,6 +651,11 @@ OPPORTUNITY_SCHEMA: dict[str, FieldSchema] = {
         name="primary_contact", type=dict, is_optional=True, is_list=False, nested_model="Contact"
     ),
     "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
+    # Expand form: shape=psc(code,description). Server PR #2259 also accepts
+    # psc_code(...) as an alias which the SDK parser normalizes to psc.
+    "psc": FieldSchema(
+        name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "response_deadline": FieldSchema(
         name="response_deadline", type=datetime, is_optional=False, is_list=False
     ),
@@ -654,10 +679,20 @@ NOTICE_SCHEMA: dict[str, FieldSchema] = {
         name="last_updated", type=datetime, is_optional=False, is_list=False
     ),
     "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+    # Expand form: shape=naics(code,description). Server PR #2259 also accepts
+    # naics_code(...) as an alias which the SDK parser normalizes to naics.
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "notice_id": FieldSchema(name="notice_id", type=str, is_optional=False, is_list=False),
     "opportunity": FieldSchema(name="opportunity", type=dict, is_optional=False, is_list=False),
     "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=False, is_list=False),
     "psc_code": FieldSchema(name="psc_code", type=str, is_optional=False, is_list=False),
+    # Expand form: shape=psc(code,description). Server PR #2259 also accepts
+    # psc_code(...) as an alias which the SDK parser normalizes to psc.
+    "psc": FieldSchema(
+        name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "response_deadline": FieldSchema(
         name="response_deadline", type=datetime, is_optional=False, is_list=False
     ),
@@ -1120,7 +1155,17 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     ),
     "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
     "naics_code": FieldSchema(name="naics_code", type=int, is_optional=True, is_list=False),
+    # Expand form: shape=naics(code,description). Server PR #2259 also accepts
+    # naics_code(...) as an alias which the SDK parser normalizes to naics.
+    "naics": FieldSchema(
+        name="naics", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "psc_code": FieldSchema(name="psc_code", type=str, is_optional=True, is_list=False),
+    # Expand form: shape=psc(code,description). Server PR #2259 also accepts
+    # psc_code(...) as an alias which the SDK parser normalizes to psc.
+    "psc": FieldSchema(
+        name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
+    ),
     "set_aside": FieldSchema(name="set_aside", type=str, is_optional=True, is_list=False),
     # Shaping expansions
     "awardees": FieldSchema(
