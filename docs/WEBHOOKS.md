@@ -120,7 +120,7 @@ When you're ready for end-to-end testing against Tango itself, expose your local
 
 ```bash
 # Use the public URL the tunnel gave you.
-tango webhooks endpoints create --url https://<your-tunnel>.ngrok.io/tango/webhooks
+tango webhooks endpoints create --name dev --url https://<your-tunnel>.ngrok.io/tango/webhooks
 # Save the `secret` from the response — that's what your handler uses to verify.
 ```
 
@@ -240,11 +240,11 @@ Manage **where Tango delivers**.
 ```bash
 tango webhooks endpoints list [--page N] [--limit N]
 tango webhooks endpoints get  ENDPOINT_ID
-tango webhooks endpoints create --url URL [--inactive]
+tango webhooks endpoints create --name NAME --url URL [--inactive]
 tango webhooks endpoints delete ENDPOINT_ID [--yes]
 ```
 
-`create` returns the generated `secret` once — save it. `delete` prompts for confirmation; `--yes` skips. `--inactive` registers the endpoint disabled (no deliveries until you re-enable it).
+`create` returns the generated `secret` once — save it. `--name` is required and must be unique per user (uniqueness is enforced on `(user, name)`, so you can have multiple endpoints with distinct names). `delete` prompts for confirmation; `--yes` skips. `--inactive` registers the endpoint disabled (no deliveries until you re-enable it).
 
 ### Managing alerts
 
@@ -370,7 +370,7 @@ tango webhooks list-event-types
 # 2. Stand up a tunnel so Tango can reach you
 ngrok http 8011 &
 # 3. Register your endpoint
-tango webhooks endpoints create --url https://<id>.ngrok.io/tango/webhooks
+tango webhooks endpoints create --name dev --url https://<id>.ngrok.io/tango/webhooks
 # (save the `secret` from the response into TANGO_WEBHOOK_SECRET)
 # 4. Create an alert via the SDK
 python -c '
@@ -442,7 +442,7 @@ This is the shape your handler will receive — including the exact `X-Tango-Sig
 
 **`fetch-sample` returns 401.** Set `TANGO_API_KEY` (or pass `--api-key`). `fetch-sample` reads from Tango's API.
 
-**`endpoints create` returns 403 or "endpoint already exists".** Tango limits one endpoint per user. Use `endpoints list` to find the existing one, then either reuse it or delete it first.
+**`endpoints create` returns 400 or "endpoint already exists".** Endpoint names are unique per user — if you've already created one with that `--name`, either pick a different name or use `endpoints list` to find the existing one and reuse it.
 
 **`simulate --event-type X` fails with HTTP 4xx.** Tango doesn't recognize the event type. Run `list-event-types` to see the current list.
 
