@@ -35,10 +35,14 @@ from tango.models import (
     PaginatedResponse,
     Protest,
     RateLimitInfo,
+    ResolveCandidate,
+    ResolveResult,
     SearchFilters,
     ShapeConfig,
     Subaward,
+    ValidateResult,
     Vehicle,
+    WebhookAlert,
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
@@ -2511,7 +2515,9 @@ class TangoClient:
                 to. The server now requires this for users who own more than
                 one endpoint; for single-endpoint users it auto-resolves.
                 Pass it explicitly to be safe.
-            subscription_type: ``"subject"`` (default) or ``"filter"``.
+            subscription_type: ``"subject"`` (default) or ``"filter"``. Use
+                ``"filter"`` together with ``query_type`` + ``filter_definition``
+                to create a saved-search alert subscription.
             query_type: Resource type for filter subscriptions (one of
                 ``opportunity``, ``contract``, ``idv``, ``ota``, ``otidv``,
                 ``entity``, ``grant``, ``forecast``).
@@ -2521,6 +2527,12 @@ class TangoClient:
             cron_expression: 5-field cron expression, required when
                 ``frequency="custom"`` (Pro+ tiers only).
             is_active: Whether the subscription is enabled.
+
+        Notes:
+            The ``/api/webhooks/alerts/`` convenience API
+            (:meth:`create_webhook_alert`) is generally easier for filter
+            subscriptions — this lower-level method mirrors the raw
+            ``/api/webhooks/subscriptions/`` shape.
         """
         if not subscription_name:
             raise TangoValidationError("Webhook subscription_name is required")
@@ -2776,3 +2788,797 @@ class TangoClient:
         if event_type:
             params["event_type"] = event_type
         return self._get("/api/webhooks/endpoints/sample-payload/", params)
+
+    # ============================================================================
+    # Webhook Alerts (filter-based subscriptions)
+    # ============================================================================
+
+    @staticmethod
+    def _parse_webhook_alert(data: dict[str, Any]) -> WebhookAlert:
+        """Hydrate an Alert dict from /api/webhooks/alerts/ into a WebhookAlert."""
+        return WebhookAlert(
+            alert_id=str(data.get("alert_id") or data.get("id") or ""),
+            name=str(data.get("name") or data.get("subscription_name") or ""),
+            query_type=(str(data["query_type"]) if data.get("query_type") is not None else None),
+            filters=data.get("filters") or data.get("filter_definition"),
+            frequency=str(data.get("frequency", "realtime")),
+            cron_expression=(
+                str(data["cron_expression"]) if data.get("cron_expression") is not None else None
+            ),
+            status=str(data.get("status", "active")),
+            created_at=str(data.get("created_at", "")),
+            last_checked_at=(
+                str(data["last_checked_at"]) if data.get("last_checked_at") is not None else None
+            ),
+            match_count=int(data.get("match_count", 0) or 0),
+        )
+
+    def list_webhook_alerts(
+        self, page: int = 1, page_size: int | None = None
+    ) -> PaginatedResponse[WebhookAlert]:
+        """List filter-based webhook subscriptions (alerts).
+
+        Backed by ``GET /api/webhooks/alerts/`` — a convenience over
+        ``WebhookSubscription(subscription_type="filter")`` with a cleaner
+        shape (``alert_id``, ``name``, ``filters``, etc.).
+        """
+        params: dict[str, Any] = {"page": page}
+        if page_size is not None:
+            params["page_size"] = page_size
+        data = self._get("/api/webhooks/alerts/", params)
+        results = [
+            self._parse_webhook_alert(item)
+            for item in (data.get("results") or [])
+            if isinstance(item, dict)
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count", len(results))),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_webhook_alert(self, alert_id: str) -> WebhookAlert:
+        """Get a single filter-based webhook subscription by alert_id (UUID)."""
+        if not alert_id:
+            raise TangoValidationError("Webhook alert_id is required")
+        data = self._get(f"/api/webhooks/alerts/{alert_id}/")
+        return self._parse_webhook_alert(data)
+
+    def create_webhook_alert(
+        self,
+        name: str,
+        query_type: str,
+        filters: dict[str, Any],
+        *,
+        frequency: str = "realtime",
+        cron_expression: str | None = None,
+    ) -> WebhookAlert:
+        """Create a filter-based webhook subscription (alert).
+
+        Args:
+            name: Human-readable name for this alert.
+            query_type: One of ``opportunity``, ``contract``, ``idv``, ``ota``,
+                ``otidv``, ``entity``, ``grant``, ``forecast``.
+            filters: Dict of query parameters that the alert matches against
+                (e.g. ``{"naics": "541330", "set_aside": "SBA"}``).
+            frequency: ``realtime`` | ``daily`` | ``weekly`` | ``custom``.
+                ``custom`` requires ``cron_expression`` and Pro+ tier.
+            cron_expression: 5-field cron expression, only valid when
+                ``frequency="custom"``.
+
+        Returns:
+            The created (or, if a dedup-matched alert already exists, the
+            existing) :class:`WebhookAlert`. Both 201-Created and 200-OK
+            (dedup) responses are normalized to the same shape.
+        """
+        if not name:
+            raise TangoValidationError("Webhook alert name is required")
+        if not query_type:
+            raise TangoValidationError("Webhook alert query_type is required")
+        if not filters or not isinstance(filters, dict):
+            raise TangoValidationError(
+                "Webhook alert filters must be a non-empty dict of query params"
+            )
+
+        body: dict[str, Any] = {
+            "name": name,
+            "query_type": query_type,
+            "filters": filters,
+            "frequency": frequency,
+        }
+        if cron_expression is not None:
+            body["cron_expression"] = cron_expression
+
+        data = self._post("/api/webhooks/alerts/", body)
+        return self._parse_webhook_alert(data)
+
+    def update_webhook_alert(
+        self,
+        alert_id: str,
+        *,
+        name: str | None = None,
+        frequency: str | None = None,
+        cron_expression: str | None = None,
+        is_active: bool | None = None,
+    ) -> WebhookAlert:
+        """Patch a webhook alert (filter subscription).
+
+        Only ``name``, ``frequency``, ``cron_expression``, and ``is_active``
+        are writable — ``query_type`` and ``filters`` are read-only after
+        creation (the server treats them as part of the alert's identity
+        via ``filter_hash``).
+        """
+        if not alert_id:
+            raise TangoValidationError("Webhook alert_id is required")
+
+        body: dict[str, Any] = {}
+        if name is not None:
+            body["name"] = name
+        if frequency is not None:
+            body["frequency"] = frequency
+        if cron_expression is not None:
+            body["cron_expression"] = cron_expression
+        if is_active is not None:
+            body["is_active"] = is_active
+
+        data = self._patch(f"/api/webhooks/alerts/{alert_id}/", body)
+        return self._parse_webhook_alert(data)
+
+    def delete_webhook_alert(self, alert_id: str) -> None:
+        """Delete a webhook alert (filter subscription)."""
+        if not alert_id:
+            raise TangoValidationError("Webhook alert_id is required")
+        self._delete(f"/api/webhooks/alerts/{alert_id}/")
+
+    # ============================================================================
+    # Resolve & Validate (POST endpoints)
+    # ============================================================================
+
+    def resolve(
+        self,
+        name: str,
+        target_type: str,
+        *,
+        state: str | None = None,
+        city: str | None = None,
+        context: str | None = None,
+    ) -> ResolveResult:
+        """Resolve a free-text name to ranked entity or organization candidates.
+
+        ``POST /api/resolve/``
+
+        Args:
+            name: Name to resolve.
+            target_type: ``"entity"`` or ``"organization"``.
+            state: Optional 2-letter US state code to bias matching.
+            city: Optional city name to bias matching.
+            context: Optional freeform additional context for better matching.
+
+        Returns:
+            :class:`ResolveResult` with ranked candidates. Free-tier callers
+            get up to 3 candidates with ``identifier`` and ``display_name``;
+            Pro+ callers get up to 5 with an additional ``match_tier`` field.
+            Other server-returned fields are preserved on each candidate's
+            ``extra`` dict.
+        """
+        if not name:
+            raise TangoValidationError("resolve(): name is required")
+        if target_type not in ("entity", "organization"):
+            raise TangoValidationError("resolve(): target_type must be 'entity' or 'organization'")
+
+        body: dict[str, Any] = {"name": name, "target_type": target_type}
+        if state is not None:
+            body["state"] = state
+        if city is not None:
+            body["city"] = city
+        if context is not None:
+            body["context"] = context
+
+        data = self._post("/api/resolve/", body)
+        candidates: list[ResolveCandidate] = []
+        for raw in data.get("candidates") or []:
+            if not isinstance(raw, dict):
+                continue
+            extras = {
+                k: v
+                for k, v in raw.items()
+                if k not in {"identifier", "display_name", "match_tier"}
+            }
+            candidates.append(
+                ResolveCandidate(
+                    identifier=raw.get("identifier"),
+                    display_name=raw.get("display_name"),
+                    match_tier=raw.get("match_tier"),
+                    extra=extras or None,
+                )
+            )
+        return ResolveResult(
+            candidates=candidates,
+            count=int(data.get("count", len(candidates))),
+        )
+
+    def validate(self, identifier_type: str, value: str) -> ValidateResult:
+        """Validate the format of a PIID, solicitation number, or UEI.
+
+        ``POST /api/validate/``
+
+        Args:
+            identifier_type: One of ``"piid"``, ``"solicitation"``, ``"uei"``.
+                (Maps to the API's ``type`` field — ``identifier_type`` here
+                avoids shadowing the Python builtin.)
+            value: The identifier value to validate.
+
+        Returns:
+            :class:`ValidateResult` with ``result`` in ``{"valid",
+            "not_valid", "low_confidence"}``. ``low_confidence`` applies only
+            to solicitation numbers that pass basic checks but don't match a
+            named pattern.
+        """
+        if identifier_type not in ("piid", "solicitation", "uei"):
+            raise TangoValidationError(
+                "validate(): identifier_type must be 'piid', 'solicitation', or 'uei'"
+            )
+        if not value:
+            raise TangoValidationError("validate(): value is required")
+
+        data = self._post("/api/validate/", {"type": identifier_type, "value": value})
+        return ValidateResult(
+            result=str(data.get("result", "")),
+            type=str(data.get("type", identifier_type)),
+            value=str(data.get("value", value)),
+            errors=list(data.get("errors") or []) or None,
+        )
+
+    # ============================================================================
+    # Reference data
+    # ============================================================================
+
+    def list_departments(self, page: int = 1, limit: int = 25) -> PaginatedResponse[dict[str, Any]]:
+        """List departments (`/api/departments/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        data = self._get("/api/departments/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    def get_department(self, code: str) -> dict[str, Any]:
+        """Get a department by code (`/api/departments/{code}/`)."""
+        if not code:
+            raise TangoValidationError("Department code is required")
+        return self._get(f"/api/departments/{code}/")
+
+    def list_psc(self, page: int = 1, limit: int = 25) -> PaginatedResponse[dict[str, Any]]:
+        """List Product Service Codes (`/api/psc/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        data = self._get("/api/psc/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    def get_psc(self, code: str) -> dict[str, Any]:
+        """Get a Product Service Code by code (`/api/psc/{code}/`)."""
+        if not code:
+            raise TangoValidationError("PSC code is required")
+        return self._get(f"/api/psc/{code}/")
+
+    def get_psc_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
+        """Get rolling PSC metrics (`/api/psc/{code}/metrics/{months}/{period_grouping}/`).
+
+        Args:
+            code: PSC code.
+            months: Window size in months (e.g. 6, 12, 24, 36).
+            period_grouping: ``monthly``, ``quarterly``, etc.
+        """
+        if not code:
+            raise TangoValidationError("PSC code is required")
+        return self._get(f"/api/psc/{code}/metrics/{months}/{period_grouping}/")
+
+    def get_naics(self, code: str) -> dict[str, Any]:
+        """Get a NAICS code by code (`/api/naics/{code}/`)."""
+        if not code:
+            raise TangoValidationError("NAICS code is required")
+        return self._get(f"/api/naics/{code}/")
+
+    def get_naics_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
+        """Get rolling NAICS metrics (`/api/naics/{code}/metrics/{months}/{period_grouping}/`)."""
+        if not code:
+            raise TangoValidationError("NAICS code is required")
+        return self._get(f"/api/naics/{code}/metrics/{months}/{period_grouping}/")
+
+    def get_business_type(self, code: str) -> dict[str, Any]:
+        """Get a business type by code (`/api/business_types/{code}/`)."""
+        if not code:
+            raise TangoValidationError("Business type code is required")
+        return self._get(f"/api/business_types/{code}/")
+
+    def list_assistance_listings(
+        self, page: int = 1, limit: int = 25
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List Assistance Listings (CFDA programs) (`/api/assistance_listings/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        data = self._get("/api/assistance_listings/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    def get_assistance_listing(self, number: str) -> dict[str, Any]:
+        """Get an Assistance Listing by CFDA number (`/api/assistance_listings/{number}/`)."""
+        if not number:
+            raise TangoValidationError("Assistance listing number is required")
+        return self._get(f"/api/assistance_listings/{number}/")
+
+    def list_mas_sins(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        search: str | None = None,
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List GSA MAS SINs (`/api/mas_sins/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if search is not None:
+            params["search"] = search
+        data = self._get("/api/mas_sins/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    def get_mas_sin(self, sin: str) -> dict[str, Any]:
+        """Get a MAS SIN by code (`/api/mas_sins/{sin}/`)."""
+        if not sin:
+            raise TangoValidationError("MAS SIN is required")
+        return self._get(f"/api/mas_sins/{sin}/")
+
+    # ============================================================================
+    # Entity sub-resources
+    # ============================================================================
+
+    def _entity_subresource_contracts(
+        self,
+        uei: str,
+        endpoint_segment: str,
+        model: type,
+        *,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """Shared helper for /api/entities/{uei}/{contracts,idvs,otas,otidvs}/."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            # Conservative minimal default — caller can override per-call.
+            shape = "key,piid,award_date,recipient(display_name)"
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for k, v in filters.items():
+            if v is not None:
+                params[k] = v
+        data = self._get(f"/api/entities/{uei}/{endpoint_segment}/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, model, flat, flat_lists, joiner=joiner)
+            for obj in (data.get("results") or [])
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def list_entity_contracts(
+        self,
+        uei: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List contracts awarded to an entity (`/api/entities/{uei}/contracts/`).
+
+        Supports the same filter set as /api/contracts/ scoped to the recipient.
+        """
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        if shape is None:
+            shape = ShapeConfig.CONTRACTS_MINIMAL
+        return self._entity_subresource_contracts(
+            uei,
+            "contracts",
+            Contract,
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    def list_entity_idvs(
+        self,
+        uei: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List IDVs held by an entity (`/api/entities/{uei}/idvs/`)."""
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        if shape is None:
+            shape = ShapeConfig.IDVS_MINIMAL
+        return self._entity_subresource_contracts(
+            uei,
+            "idvs",
+            IDV,
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    def list_entity_otas(
+        self,
+        uei: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List OTAs held by an entity (`/api/entities/{uei}/otas/`)."""
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        if shape is None:
+            shape = ShapeConfig.OTAS_MINIMAL
+        return self._entity_subresource_contracts(
+            uei,
+            "otas",
+            OTA,
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    def list_entity_otidvs(
+        self,
+        uei: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List OTIDVs held by an entity (`/api/entities/{uei}/otidvs/`)."""
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        if shape is None:
+            shape = ShapeConfig.OTIDVS_MINIMAL
+        return self._entity_subresource_contracts(
+            uei,
+            "otidvs",
+            OTIDV,
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    def list_entity_subawards(
+        self,
+        uei: str,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        ordering: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List subawards for an entity (`/api/entities/{uei}/subawards/`)."""
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.SUBAWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        if ordering:
+            params["ordering"] = ordering
+        for k, v in filters.items():
+            if v is not None:
+                params[k] = v
+        data = self._get(f"/api/entities/{uei}/subawards/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, Subaward, flat, flat_lists)
+            for obj in (data.get("results") or [])
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def list_entity_lcats(
+        self,
+        uei: str,
+        page: int = 1,
+        limit: int = 25,
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List GSA-eLibrary Labor Categories (LCATs) for an entity
+        (`/api/entities/{uei}/lcats/`).
+        """
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if ordering:
+            params["ordering"] = ordering
+        if search is not None:
+            params["search"] = search
+        for k, v in filters.items():
+            if v is not None:
+                params[k] = v
+        data = self._get(f"/api/entities/{uei}/lcats/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    def get_entity_metrics(self, uei: str, months: int, period_grouping: str) -> dict[str, Any]:
+        """Get rolling metrics for an entity
+        (`/api/entities/{uei}/metrics/{months}/{period_grouping}/`).
+        """
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        return self._get(f"/api/entities/{uei}/metrics/{months}/{period_grouping}/")
+
+    # ============================================================================
+    # IDV sub-resources
+    # ============================================================================
+
+    def list_idv_lcats(
+        self,
+        key: str,
+        page: int = 1,
+        limit: int = 25,
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List Labor Categories under an IDV (`/api/idvs/{key}/lcats/`)."""
+        if not key:
+            raise TangoValidationError("IDV key is required")
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if ordering:
+            params["ordering"] = ordering
+        if search is not None:
+            params["search"] = search
+        for k, v in filters.items():
+            if v is not None:
+                params[k] = v
+        data = self._get(f"/api/idvs/{key}/lcats/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
+
+    # ============================================================================
+    # Agency sub-resources
+    # ============================================================================
+
+    def _agency_contracts(
+        self,
+        code: str,
+        which: str,
+        *,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        if not code:
+            raise TangoValidationError("Agency code is required")
+        if which not in ("awarding", "funding"):
+            raise TangoValidationError("Agency contracts which= must be 'awarding' or 'funding'")
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            shape = ShapeConfig.CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        if ordering:
+            params["ordering"] = ordering
+        if search is not None:
+            params["search"] = search
+        for k, v in filters.items():
+            if v is not None:
+                params[k] = v
+        data = self._get(f"/api/agencies/{code}/contracts/{which}/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, Contract, flat, flat_lists, joiner=joiner)
+            for obj in (data.get("results") or [])
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
+        )
+
+    def list_agency_awarding_contracts(
+        self,
+        code: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List contracts where this agency is the awarding agency
+        (`/api/agencies/{code}/contracts/awarding/`).
+        """
+        return self._agency_contracts(
+            code,
+            "awarding",
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    def list_agency_funding_contracts(
+        self,
+        code: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+        search: str | None = None,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """List contracts where this agency is the funding agency
+        (`/api/agencies/{code}/contracts/funding/`).
+        """
+        return self._agency_contracts(
+            code,
+            "funding",
+            limit=limit,
+            cursor=cursor,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            ordering=ordering,
+            search=search,
+            **filters,
+        )
+
+    # ============================================================================
+    # Opportunity attachment search & misc
+    # ============================================================================
+
+    def search_opportunity_attachments(
+        self,
+        q: str,
+        top_k: int | None = None,
+        include_extracted_text: bool | None = None,
+    ) -> dict[str, Any]:
+        """Semantic search over opportunity attachments
+        (`/api/opportunities/attachment-search/`).
+        """
+        if not q:
+            raise TangoValidationError("search_opportunity_attachments(): q is required")
+        params: dict[str, Any] = {"q": q}
+        if top_k is not None:
+            params["top_k"] = top_k
+        if include_extracted_text is not None:
+            params["include_extracted_text"] = "true" if include_extracted_text else "false"
+        return self._get("/api/opportunities/attachment-search/", params)
+
+    def get_version(self) -> dict[str, Any]:
+        """Get the Tango API version info (`/api/version/`)."""
+        return self._get("/api/version/")
+
+    def list_api_keys(self) -> dict[str, Any]:
+        """List the authenticated user's API keys (`/api/api-keys/`)."""
+        return self._get("/api/api-keys/")

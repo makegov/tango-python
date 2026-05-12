@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `create_webhook_subscription` accepts `endpoint=`, `subscription_type=`, `query_type=`, `filter_definition=`, `frequency=`, `cron_expression=`, `is_active=` (keyword-only). Lets callers target a specific endpoint and create filter subscriptions through the canonical API.
 - `update_webhook_subscription` accepts `frequency=`, `cron_expression=`, `is_active=` for filter-subscription updates.
 - `update_webhook_endpoint` accepts `name=` for renaming an endpoint.
+- Webhook alerts (filter subscriptions): `list_webhook_alerts`, `get_webhook_alert`, `create_webhook_alert`, `update_webhook_alert`, `delete_webhook_alert` — the convenience layer over `/api/webhooks/alerts/`. New `WebhookAlert` dataclass exported from the top-level package.
+- `resolve(name, target_type, ...)` — POST `/api/resolve/` to rank entity / organization candidates from a free-text name. Returns `ResolveResult` with `ResolveCandidate` entries (both exported).
+- `validate(identifier_type, value)` — POST `/api/validate/` to validate the format of a PIID, solicitation number, or UEI. Returns `ValidateResult` (exported).
+- Reference data: `list_departments`, `get_department`, `list_psc`, `get_psc`, `get_psc_metrics`, `get_naics`, `get_naics_metrics`, `get_business_type`, `list_assistance_listings`, `get_assistance_listing`, `list_mas_sins`, `get_mas_sin`.
+- Entity sub-resources: `list_entity_contracts`, `list_entity_idvs`, `list_entity_otas`, `list_entity_otidvs`, `list_entity_subawards`, `list_entity_lcats`, `get_entity_metrics`. All shape-aware where the underlying endpoint supports shaping.
+- IDV sub-resources: `list_idv_lcats`.
+- Agency sub-resources: `list_agency_awarding_contracts`, `list_agency_funding_contracts`.
+- Misc: `search_opportunity_attachments(q, top_k, include_extracted_text)` for `/api/opportunities/attachment-search/`; `get_version()` for `/api/version/`; `list_api_keys()` for `/api/api-keys/`.
 
 ### Fixed
 - `TangoClient._post()` and `_patch()` now accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`.

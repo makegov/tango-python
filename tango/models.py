@@ -624,6 +624,54 @@ class WebhookTestDeliveryResult:
 
 
 @dataclass
+class WebhookAlert:
+    """Filter-based webhook subscription (alert), backed by
+    ``/api/webhooks/alerts/``.
+
+    Convenience shape over ``WebhookSubscription(subscription_type="filter")``.
+    """
+
+    alert_id: str
+    name: str
+    query_type: str | None
+    filters: dict[str, Any] | None
+    frequency: str
+    cron_expression: str | None
+    status: str
+    created_at: str
+    last_checked_at: str | None = None
+    match_count: int = 0
+
+
+@dataclass
+class ResolveCandidate:
+    """A single ranked candidate from /api/resolve/."""
+
+    identifier: str | None = None
+    display_name: str | None = None
+    match_tier: str | None = None
+    extra: dict[str, Any] | None = None
+
+
+@dataclass
+class ResolveResult:
+    """Result of POST /api/resolve/ — ranked entity/organization candidates."""
+
+    candidates: list[ResolveCandidate]
+    count: int
+
+
+@dataclass
+class ValidateResult:
+    """Result of POST /api/validate/ — identifier format validation."""
+
+    result: str  # "valid" | "not_valid" | "low_confidence"
+    type: str
+    value: str
+    errors: list[str] | None = None
+
+
+@dataclass
 class PaginatedResponse[T]:
     """Paginated API response
 
