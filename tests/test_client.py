@@ -768,7 +768,7 @@ class TestWebhooksEndpoints:
         assert endpoints.results[0].name == "yoni"
 
         created = client.create_webhook_endpoint(
-            "https://example.com/tango/webhooks", is_active=True
+            "https://example.com/tango/webhooks", is_active=True, name="primary"
         )
         assert created.secret == "secret"
 
@@ -785,6 +785,7 @@ class TestWebhooksEndpoints:
         assert calls[1][1]["method"] == "POST"
         assert calls[1][1]["json"]["callback_url"] == "https://example.com/tango/webhooks"
         assert calls[1][1]["json"]["is_active"] is True
+        assert calls[1][1]["json"]["name"] == "primary"
 
         assert calls[2][1]["method"] == "PATCH"
         assert calls[2][1]["json"]["is_active"] is False

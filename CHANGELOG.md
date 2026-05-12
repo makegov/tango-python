@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `ordering` parameter on `list_forecasts`, `list_grants`, `list_subawards`, `list_gsa_elibrary_contracts`, `list_opportunities`, `list_notices`, and `list_protests`. Prefix with `-` for descending. Closes a parity gap with the API surface (these endpoints all accept `?ordering=` server-side).
+- `create_webhook_endpoint` accepts `name=` (keyword-only). Required by the Tango API since multi-endpoint support landed; omitting it now emits a `DeprecationWarning` and will become an error in a future major version.
+- `create_webhook_subscription` accepts `endpoint=`, `subscription_type=`, `query_type=`, `filter_definition=`, `frequency=`, `cron_expression=`, `is_active=` (keyword-only). Lets callers target a specific endpoint and create filter subscriptions through the canonical API.
+- `update_webhook_subscription` accepts `frequency=`, `cron_expression=`, `is_active=` for filter-subscription updates.
+- `update_webhook_endpoint` accepts `name=` for renaming an endpoint.
 
 ### Fixed
 - `TangoClient._post()` and `_patch()` now accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`.

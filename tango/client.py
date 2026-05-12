@@ -2487,16 +2487,64 @@ class TangoClient:
         )
 
     def create_webhook_subscription(
-        self, subscription_name: str, payload: dict[str, Any]
+        self,
+        subscription_name: str,
+        payload: dict[str, Any],
+        *,
+        endpoint: str | None = None,
+        subscription_type: str | None = None,
+        query_type: str | None = None,
+        filter_definition: dict[str, Any] | None = None,
+        frequency: str | None = None,
+        cron_expression: str | None = None,
+        is_active: bool | None = None,
     ) -> WebhookSubscription:
-        """Create a webhook subscription."""
+        """Create a webhook subscription.
+
+        Args:
+            subscription_name: Human-readable name for the subscription.
+            payload: Subscription payload (records list with event_type +
+                subject_type + subject_ids). Pass ``{"records": []}`` for
+                filter-based subscriptions; the server reads filter fields
+                directly.
+            endpoint: UUID of the WebhookEndpoint this subscription delivers
+                to. The server now requires this for users who own more than
+                one endpoint; for single-endpoint users it auto-resolves.
+                Pass it explicitly to be safe.
+            subscription_type: ``"subject"`` (default) or ``"filter"``.
+            query_type: Resource type for filter subscriptions (one of
+                ``opportunity``, ``contract``, ``idv``, ``ota``, ``otidv``,
+                ``entity``, ``grant``, ``forecast``).
+            filter_definition: Dict of query params to match for filter
+                subscriptions.
+            frequency: ``realtime`` | ``daily`` | ``weekly`` | ``custom``.
+            cron_expression: 5-field cron expression, required when
+                ``frequency="custom"`` (Pro+ tiers only).
+            is_active: Whether the subscription is enabled.
+        """
         if not subscription_name:
             raise TangoValidationError("Webhook subscription_name is required")
 
-        data = self._post(
-            "/api/webhooks/subscriptions/",
-            {"subscription_name": subscription_name, "payload": payload},
-        )
+        body: dict[str, Any] = {
+            "subscription_name": subscription_name,
+            "payload": payload,
+        }
+        if endpoint is not None:
+            body["endpoint"] = endpoint
+        if subscription_type is not None:
+            body["subscription_type"] = subscription_type
+        if query_type is not None:
+            body["query_type"] = query_type
+        if filter_definition is not None:
+            body["filter_definition"] = filter_definition
+        if frequency is not None:
+            body["frequency"] = frequency
+        if cron_expression is not None:
+            body["cron_expression"] = cron_expression
+        if is_active is not None:
+            body["is_active"] = is_active
+
+        data = self._post("/api/webhooks/subscriptions/", body)
 
         return WebhookSubscription(
             id=str(data.get("id", "")),
@@ -2512,8 +2560,16 @@ class TangoClient:
         *,
         subscription_name: str | None = None,
         payload: dict[str, Any] | None = None,
+        frequency: str | None = None,
+        cron_expression: str | None = None,
+        is_active: bool | None = None,
     ) -> WebhookSubscription:
-        """Patch a webhook subscription."""
+        """Patch a webhook subscription.
+
+        For filter subscriptions, ``frequency``, ``cron_expression``, and
+        ``is_active`` are also writable; subject-based subscriptions
+        typically only patch ``subscription_name`` and ``payload``.
+        """
         if not subscription_id:
             raise TangoValidationError("Webhook subscription_id is required")
 
@@ -2522,6 +2578,12 @@ class TangoClient:
             body["subscription_name"] = subscription_name
         if payload is not None:
             body["payload"] = payload
+        if frequency is not None:
+            body["frequency"] = frequency
+        if cron_expression is not None:
+            body["cron_expression"] = cron_expression
+        if is_active is not None:
+            body["is_active"] = is_active
 
         data = self._patch(f"/api/webhooks/subscriptions/{subscription_id}/", body)
         return WebhookSubscription(
@@ -2587,21 +2649,48 @@ class TangoClient:
             results=results,
         )
 
-    def create_webhook_endpoint(self, callback_url: str, is_active: bool = True) -> WebhookEndpoint:
+    def create_webhook_endpoint(
+        self,
+        callback_url: str,
+        is_active: bool = True,
+        *,
+        name: str | None = None,
+    ) -> WebhookEndpoint:
         """
         Create a webhook endpoint for the authenticated user.
 
+        Args:
+            callback_url: HTTPS URL to receive POSTed webhook events.
+            is_active: Whether deliveries are enabled.
+            name: Human-readable name for this endpoint. Required by the
+                Tango API (the server enforces ``unique(user, name)``).
+                Currently keyword-optional in the SDK for backward
+                compatibility — passing it explicitly is strongly
+                recommended; a future major version will make it required.
+                When omitted, callers will see a server-side 400
+                ``"name: This field is required"``.
+
         Note:
-        - The server generates `secret` and manages `name`.
-        - Only one endpoint per user is allowed; if one already exists, this will fail.
+            The server generates ``secret``. A user may have multiple
+            endpoints (unique on ``(user, name)``).
         """
         if not callback_url:
             raise TangoValidationError("Webhook callback_url is required")
+        if name is None:
+            warnings.warn(
+                "create_webhook_endpoint() called without name=; the Tango "
+                "API requires `name` and this call will fail server-side. "
+                "Pass name='your-endpoint-name'. This will become a required "
+                "argument in a future major version.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
 
-        data = self._post(
-            "/api/webhooks/endpoints/",
-            {"callback_url": callback_url, "is_active": is_active},
-        )
+        body: dict[str, Any] = {"callback_url": callback_url, "is_active": is_active}
+        if name is not None:
+            body["name"] = name
+
+        data = self._post("/api/webhooks/endpoints/", body)
         return WebhookEndpoint(
             id=str(data.get("id", "")),
             name=str(data.get("name", "")),
@@ -2616,6 +2705,7 @@ class TangoClient:
         self,
         endpoint_id: str,
         *,
+        name: str | None = None,
         callback_url: str | None = None,
         is_active: bool | None = None,
     ) -> WebhookEndpoint:
@@ -2624,6 +2714,8 @@ class TangoClient:
             raise TangoValidationError("Webhook endpoint_id is required")
 
         body: dict[str, Any] = {}
+        if name is not None:
+            body["name"] = name
         if callback_url is not None:
             body["callback_url"] = callback_url
         if is_active is not None:
