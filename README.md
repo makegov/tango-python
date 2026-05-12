@@ -45,6 +45,8 @@ print(f"Agency: {agency['name']}")
 contracts = client.list_contracts(
     limit=10
 )
+```
+
 ## Authentication
 
 Most endpoints require an API key. You can obtain one from the [Tango API portal](https://tango.makegov.com).
@@ -204,13 +206,13 @@ opportunities = client.list_opportunities(agency="DOD", active=True, limit=25)
 ### Notices
 
 ```python
-notices = client.list_notices(agency="DOD", notice_type="award", limit=25)
+notices = client.list_notices(agency="DOD", notice_type="Presolicitation", limit=25)
 ```
 
 ### Grants
 
 ```python
-grants = client.list_grants(agency="HHS", status="forecasted", limit=25)
+grants = client.list_grants(agency="HHS", status="F", limit=25)  # F = Forecasted
 ```
 
 ### Protests
@@ -230,12 +232,45 @@ contract = client.get_gsa_elibrary_contract("UUID")
 ### Reference Data
 
 ```python
-# Offices, organizations, NAICS, subawards, business types
+# Offices, organizations, NAICS, PSC, subawards, business types
 offices = client.list_offices(search="acquisitions")
 organizations = client.list_organizations(level=1)
 naics = client.list_naics(search="software")
+get_naics = client.get_naics("541511")
+psc = client.list_psc()
 subawards = client.list_subawards(prime_uei="UEI123")
 business_types = client.list_business_types()
+mas_sins = client.list_mas_sins()
+assistance = client.list_assistance_listings()
+departments = client.list_departments()
+```
+
+### Resolve / Validate
+
+```python
+# Resolve a name to entity/org candidates
+result = client.resolve(name="Lockheed Martin", target_type="entity")
+for c in result.candidates:
+    print(c.identifier, c.display_name)
+
+# Validate an identifier
+result = client.validate(identifier_type="uei", value="ABCDEF123456")
+```
+
+### IT Dashboard
+
+```python
+investments = client.list_itdashboard_investments(search="cloud", limit=25)
+investment = client.get_itdashboard_investment("023-000001234")
+```
+
+### Entity Sub-resources
+
+```python
+contracts = client.list_entity_contracts("ABCDEF123456", limit=25)
+idvs = client.list_entity_idvs("ABCDEF123456")
+otas = client.list_entity_otas("ABCDEF123456")
+metrics = client.get_entity_metrics("ABCDEF123456", months=12, period_grouping="month")
 ```
 
 ## Pagination
@@ -253,9 +288,9 @@ print(f"Previous page URL: {response.previous}")
 for contract in response.results:
     print(contract['description'])
 
-# Get next page
+# Get next page (contracts use keyset/cursor pagination)
 if response.next:
-    next_response = client.list_contracts(page=2, limit=25)
+    next_response = client.list_contracts(cursor=response.cursor, limit=25)
 ```
 
 ## Error Handling
@@ -282,7 +317,7 @@ except TangoNotFoundError:
     print("Resource not found")
 except TangoValidationError as e:
     print(f"Invalid parameters: {e.message}")
-    print(f"Details: {e.details}")
+    print(f"Details: {e.response_data}")
 except TangoRateLimitError:
     print("Rate limit exceeded")
 except TangoAPIError as e:
@@ -314,22 +349,18 @@ contracts = client.list_contracts(
 
 ### Flattened Responses
 
-Enable flattening to get dot-notation field names:
+The `flat=True` parameter is passed to the API, which returns dot-notation keys in the raw response. The SDK still wraps the result in a `ShapedModel` — access nested fields via attribute or dict syntax, not dot-notation string keys:
 
 ```python
 contracts = client.list_contracts(
     shape="key,piid,recipient(display_name,uei)",
     flat=True
 )
-# Returns: {"key": "...", "piid": "...", "recipient.display_name": "...", "recipient.uei": "..."}
-
-# Flatten arrays with indexed keys
-contracts = client.list_contracts(
-    shape="key,transactions(*)",
-    flat=True,
-    flat_lists=True
-)
-# Returns: {"key": "...", "transactions.0.action_date": "...", "transactions.0.obligated": "..."}
+for contract in contracts.results:
+    # Attribute access
+    print(contract.recipient.display_name)
+    # Dict access (nested, not flat string keys)
+    print(contract['recipient']['display_name'])
 ```
 
 ### Webhook Tooling

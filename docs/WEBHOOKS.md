@@ -287,7 +287,8 @@ def handle_webhook(request):
 The CLI's `listen` command is a thin wrapper around `tango.webhooks.WebhookReceiver`, which is a context-manager-friendly local HTTP server. Use it directly in tests to verify your code emits webhook calls correctly, or to drive your handler with realistic deliveries.
 
 ```python
-from tango.webhooks import WebhookReceiver, verify_signature
+from tango import WebhookReceiver  # WebhookReceiver is exported from the top-level tango package
+from tango.webhooks import generate_signature, verify_signature
 import httpx
 
 def test_my_handler_processes_entity_update():
@@ -295,7 +296,6 @@ def test_my_handler_processes_entity_update():
         # Trigger whatever in your code-under-test should send a webhook
         # (e.g. a publisher, or in this case a manual POST).
         body = b'{"events":[{"event_type":"entities.updated","uei":"ABC"}]}'
-        from tango.webhooks import generate_signature
         sig = generate_signature(body, "test_secret")
         httpx.post(rx.url, content=body, headers={"X-Tango-Signature": f"sha256={sig}"})
 
@@ -335,7 +335,8 @@ response = my_app.test_client().post(
 `simulate.deliver` does the same but POSTs the result to a URL — `WebhookReceiver` works as a target:
 
 ```python
-from tango.webhooks import simulate, WebhookReceiver
+from tango.webhooks import simulate
+from tango import WebhookReceiver
 
 with WebhookReceiver(secret="s").run() as rx:
     result = simulate.deliver(target_url=rx.url, payload={...}, secret="s")
@@ -389,7 +390,8 @@ tango webhooks simulate --secret dev --payload-file ./fixtures/edge.json \
 In pytest, use `WebhookReceiver` and `simulate.deliver` together — both are pure-Python and don't talk to Tango:
 
 ```python
-from tango.webhooks import simulate, WebhookReceiver
+from tango.webhooks import simulate
+from tango import WebhookReceiver
 
 def test_handler_round_trip():
     with WebhookReceiver(secret="s").run() as rx:

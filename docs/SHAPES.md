@@ -99,18 +99,18 @@ for contract in contracts.results:
 
 ### Multiple Levels
 
-You can nest as deeply as needed:
+You can nest as deeply as needed. Contract location information is on `place_of_performance` (not nested inside `recipient`):
 
 ```python
-# Get location details from recipient
+# Get place of performance details
 contracts = client.list_contracts(
-    shape="key,recipient(display_name,location(city,state_code,zip_code))",
+    shape="key,recipient(display_name),place_of_performance(city_name,state_code,zip_code)",
     limit=10
 )
 
 for contract in contracts.results:
-    location = contract['recipient']['location']
-    print(f"{location['city']}, {location['state_code']} {location['zip_code']}")
+    location = contract['place_of_performance']
+    print(f"{location['city_name']}, {location['state_code']} {location['zip_code']}")
 ```
 
 ## Common Use Cases
@@ -138,13 +138,13 @@ When analyzing contracts, focus on the metrics:
 ```python
 # Get financial and timing data
 contracts = client.list_contracts(
-    shape="key,piid,award_date,fiscal_year,total_contract_value,total_obligated",
+    shape="key,piid,award_date,fiscal_year,total_contract_value,obligated",
     awarding_agency="GSA",
     limit=1000
 )
 
 # Analyze
-total_value = sum(c.get('total_contract_value', 0) for c in contracts.results)
+total_value = sum(c.get('total_contract_value', 0) or 0 for c in contracts.results)
 print(f"Total contract value: ${total_value:,.2f}")
 ```
 
@@ -154,14 +154,15 @@ When you need location data:
 
 ```python
 # Get place of performance details
+# Note: use city_name (not city); congressional_district is not a shape field
 contracts = client.list_contracts(
-    shape="key,piid,place_of_performance(city,state_code,congressional_district)",
+    shape="key,piid,place_of_performance(city_name,state_code)",
     limit=100
 )
 
 # Group by state
 from collections import Counter
-states = Counter(c['place_of_performance']['state_code'] for c in contracts.results)
+states = Counter(c['place_of_performance']['state_code'] for c in contracts.results if c.get('place_of_performance') and c['place_of_performance'].get('state_code'))
 print(f"Top states: {states.most_common(5)}")
 ```
 
@@ -171,17 +172,19 @@ When researching vendors and recipients:
 
 ```python
 # Get detailed vendor information
+# Note: entity physical_address uses 'city' and 'state_or_province_code'
+# business_types is a list of dicts with 'code' and 'description'
 entities = client.list_entities(
-    shape="uei,legal_business_name,dba_name,business_types,physical_address(city,state_code)",
+    shape="uei,legal_business_name,dba_name,business_types,physical_address(city,state_or_province_code)",
     limit=50
 )
 
 for entity in entities.results:
     print(f"{entity['legal_business_name']}")
-    print(f"Business Types: {', '.join(entity.get('business_types', []))}")
+    print(f"Business Types: {', '.join(bt['code'] for bt in entity.get('business_types', []))}")
     if entity.get('physical_address'):
         addr = entity['physical_address']
-        print(f"Location: {addr.get('city')}, {addr.get('state_code')}")
+        print(f"Location: {addr.get('city')}, {addr.get('state_or_province_code')}")
 ```
 
 ### 5. Agency Research
@@ -190,8 +193,9 @@ When analyzing agency activity:
 
 ```python
 # Get agency and classification details
+# Note: use awarding_office (not awarding_agency) for agency name/code sub-fields
 contracts = client.list_contracts(
-    shape="key,awarding_agency(name,code),naics(code,description),psc(code,description),total_contract_value",
+    shape="key,awarding_office(agency_name,agency_code),naics(code,description),psc(code,description),total_contract_value",
     fiscal_year=2024,
     limit=500
 )
@@ -200,9 +204,9 @@ contracts = client.list_contracts(
 from collections import defaultdict
 by_agency = defaultdict(float)
 for contract in contracts.results:
-    if contract.get('awarding_agency'):
-        agency = contract['awarding_agency']['name']
-        value = contract.get('total_contract_value', 0)
+    if contract.get('awarding_office'):
+        agency = contract['awarding_office']['agency_name']
+        value = float(contract.get('total_contract_value', 0) or 0)
         by_agency[agency] += value
 
 # Top agencies by value
@@ -295,9 +299,9 @@ Define shapes as constants for reuse:
 # Define your common shapes
 SHAPES = {
     'list': "key,piid,recipient(display_name),total_contract_value",
-    'detail': "key,piid,description,recipient(*),awarding_agency(*),total_contract_value,award_date",
-    'analysis': "key,fiscal_year,total_contract_value,total_obligated,award_date",
-    'geographic': "key,piid,place_of_performance(city,state_code,congressional_district)"
+    'detail': "key,piid,description,recipient(*),awarding_office(*),total_contract_value,award_date",
+    'analysis': "key,fiscal_year,total_contract_value,obligated,award_date",
+    'geographic': "key,piid,place_of_performance(city_name,state_code)"
 }
 
 # Use them
@@ -336,7 +340,7 @@ contracts = client.list_contracts(shape=DASHBOARD_SHAPE, limit=50)
 
 **Financial:**
 - `total_contract_value` - Total contract value
-- `total_obligated` - Total obligated amount
+- `obligated` - Total obligated amount (note: field is `obligated`, not `total_obligated`)
 - `award_amount` - Initial award amount
 
 **Parties:**
@@ -433,14 +437,14 @@ display_name = contract.get('recipient', {}).get('display_name', 'Unknown')
 # Minimal for lists
 "key,piid,recipient(display_name),total_contract_value"
 
-# For analysis
-"key,fiscal_year,award_date,total_contract_value,total_obligated,naics(code)"
+# For analysis (use 'obligated', not 'total_obligated')
+"key,fiscal_year,award_date,total_contract_value,obligated,naics(code)"
 
-# For geographic analysis
-"key,piid,place_of_performance(city,state_code,congressional_district)"
+# For geographic analysis (use city_name; congressional_district not available)
+"key,piid,place_of_performance(city_name,state_code)"
 
-# Full detail
-"key,piid,description,recipient(*),awarding_agency(*),total_contract_value,award_date,naics(*),psc(*)"
+# Full detail (use awarding_office for agency breakdown)
+"key,piid,description,recipient(*),awarding_office(*),total_contract_value,award_date,naics(*),psc(*)"
 ```
 
 ### Entities
@@ -449,8 +453,8 @@ display_name = contract.get('recipient', {}).get('display_name', 'Unknown')
 # Minimal for lookups
 "uei,legal_business_name,cage_code,business_types"
 
-# For vendor research
-"uei,legal_business_name,dba_name,business_types,physical_address(city,state_code),primary_naics"
+# For vendor research (entity physical_address uses state_or_province_code, not state_code)
+"uei,legal_business_name,dba_name,business_types,physical_address(city,state_or_province_code),primary_naics"
 
 # Full profile
 "uei,legal_business_name,dba_name,cage_code,business_types,physical_address(*),email_address,entity_url"
