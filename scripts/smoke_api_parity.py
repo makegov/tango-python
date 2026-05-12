@@ -344,61 +344,18 @@ if created_endpoint:
         lambda: client.update_webhook_endpoint(ep_id, is_active=False),
     )
 
-    # Subscription tied to this endpoint
-    sub_id: str | None = None
-
-    def _create_sub() -> Any:
-        sub = client.create_webhook_subscription(
-            subscription_name="smoke-sub",
-            payload={
-                "records": [
-                    {"event_type": "awards.new_award", "subject_ids": []},
-                ]
-            },
-            endpoint=ep_id,
-        )
-        return sub
-
-    sub = run("create_webhook_subscription(endpoint=...)", _create_sub)
-    if sub:
-        sub_id = sub.id
-        run(
-            "update_webhook_subscription(subscription_name='updated')",
-            lambda: client.update_webhook_subscription(sub_id, subscription_name="updated"),
-        )
-        run(
-            "delete_webhook_subscription(...)",
-            lambda: client.delete_webhook_subscription(sub_id),
-        )
-
-    # Alert (filter subscription)
-    alert: WebhookAlert | None = None
-    alert_label = "create_webhook_alert(...)"
-    try:
-        alert = client.create_webhook_alert(
+    # Alert (filter subscription) — pass endpoint explicitly so this works
+    # for multi-endpoint accounts as well as single-endpoint ones.
+    alert: WebhookAlert | None = run(
+        "create_webhook_alert(endpoint=...)",
+        lambda: client.create_webhook_alert(
             name=f"smoke-alert-{int(time.time())}",
             query_type="opportunity",
             filters={"naics": "541511"},
             frequency="daily",
-        )
-        results.append((alert_label, True, "ok"))
-        print(f"  PASS  {alert_label}")
-    except Exception as exc:  # noqa: BLE001
-        msg = f"{type(exc).__name__}: {exc}"
-        # The alerts route refuses to auto-resolve the endpoint for users
-        # with multiple endpoints. That's expected after we just created one
-        # above — record as SKIP, not FAIL.
-        response_data = getattr(exc, "response_data", None) or {}
-        non_field = []
-        if isinstance(response_data, dict):
-            non_field = response_data.get("non_field_errors") or []
-        haystack = str(non_field) + " " + str(exc)
-        if "multiple webhook endpoints" in haystack.lower() or "multiple" in haystack.lower():
-            results.append((alert_label, True, f"skipped: {msg}"))
-            print(f"  SKIP  {alert_label} — {msg}")
-        else:
-            results.append((alert_label, False, msg))
-            print(f"  FAIL  {alert_label} — {msg}")
+            endpoint=ep_id,
+        ),
+    )
 
     if alert:
         aid = alert.alert_id

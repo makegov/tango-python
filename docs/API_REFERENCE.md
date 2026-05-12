@@ -1554,7 +1554,7 @@ results = client.search_opportunity_attachments(
 
 ## Webhook Alerts
 
-The Alerts API is a filter-subscription convenience layer on top of subscriptions.
+The Alerts API is the canonical (and only) write surface for webhook subscriptions. Every alert maps to one of the five `alerts.*.match` event types and delivers when its saved-search filters match new or modified records.
 
 ### list_webhook_alerts()
 
@@ -1578,9 +1578,20 @@ alert = client.create_webhook_alert(
 )
 ```
 
+For multi-endpoint accounts, pin the delivery target with `endpoint=`:
+
+```python
+alert = client.create_webhook_alert(
+    name="New cloud IT contracts",
+    query_type="contract",
+    filters={"naics": "541511"},
+    endpoint="ENDPOINT_UUID",
+)
+```
+
 **Notes:**
 - `name` and `query_type` are required. `query_type` is **singular** (e.g. `"contract"`, not `"contracts"`).
-- Field naming differs from `create_webhook_subscription`: `name` / `filters` here vs `subscription_name` / `filter_definition`.
+- `endpoint=` is optional and only required when the account has multiple webhook endpoints; for single-endpoint accounts the server auto-resolves.
 
 ### update_webhook_alert()
 
@@ -1614,65 +1625,17 @@ keys = client.list_api_keys()
 
 ## Webhooks
 
-Webhook APIs let **Large / Enterprise** users manage subscription filters for outbound Tango webhooks.
+Webhook APIs let **Large / Enterprise** users manage delivery endpoints and discover the supported event-type catalog. Filter subscriptions (alerts) live in the [Webhook Alerts](#webhook-alerts) section above.
 
 > **For testing, signing, and a CLI tool**, see [`docs/WEBHOOKS.md`](WEBHOOKS.md). This section covers SDK method signatures only.
 
 ### list_webhook_event_types()
 
-Discover supported `event_type` values and subject types.
+Discover supported `event_type` values.
 
 ```python
 info = client.list_webhook_event_types()
 print(info.event_types[0].event_type)
-```
-
-### list_webhook_subscriptions()
-
-```python
-subs = client.list_webhook_subscriptions(page=1, page_size=25)
-```
-
-Notes:
-
-- This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
-
-### get_webhook_subscription()
-
-```python
-sub = client.get_webhook_subscription("SUBSCRIPTION_UUID")
-```
-
-### create_webhook_subscription()
-
-```python
-sub = client.create_webhook_subscription(
-    "Track specific vendors",
-    {
-        "records": [
-            {"event_type": "awards.new_award", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
-            {"event_type": "awards.new_transaction", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
-        ]
-    },
-)
-```
-
-Notes:
-
-- Prefer v2 fields: `subject_type` + `subject_ids`.
-- Legacy compatibility: `resource_ids` is accepted as an alias for `subject_ids` (don’t send both).
-- Catch-all: `subject_ids: []` means “all subjects” for that record and is **Enterprise-only**. Large tier users must list specific IDs.
-
-### update_webhook_subscription()
-
-```python
-sub = client.update_webhook_subscription("SUBSCRIPTION_UUID", subscription_name="Updated name")
-```
-
-### delete_webhook_subscription()
-
-```python
-client.delete_webhook_subscription("SUBSCRIPTION_UUID")
 ```
 
 ### list_webhook_endpoints()
@@ -1710,10 +1673,10 @@ print(result.success, result.status_code)
 
 ### get_webhook_sample_payload()
 
-Fetch Tango-shaped sample deliveries (and sample subscription request bodies).
+Fetch Tango-shaped sample deliveries.
 
 ```python
-sample = client.get_webhook_sample_payload(event_type="awards.new_award")
+sample = client.get_webhook_sample_payload(event_type="alerts.contract.match")
 print(sample["event_type"])
 ```
 
@@ -1722,7 +1685,7 @@ print(sample["event_type"])
 The API does not currently expose a public `/api/webhooks/deliveries/` or redelivery endpoint. Use:
 
 - `test_webhook_delivery()` for connectivity checks
-- `get_webhook_sample_payload()` for building handlers + subscription payloads
+- `get_webhook_sample_payload()` for building handlers
 
 ### Receiving webhooks (signature verification)
 

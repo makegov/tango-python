@@ -286,61 +286,39 @@ class TestWebhookEndpointWriteFixes:
 
 
 @patch("tango.client.httpx.Client.request")
-class TestWebhookSubscriptionWriteFixes:
-    def test_create_subscription_passes_endpoint(self, mock_request: Mock) -> None:
+class TestWebhookAlertEndpointKwarg:
+    def test_create_alert_passes_endpoint(self, mock_request: Mock) -> None:
         mock_request.return_value = _mock_response(
             {
-                "id": "sub-1",
-                "endpoint": "ep-1",
-                "subscription_name": "my-sub",
-                "payload": {"records": []},
+                "alert_id": "alert-1",
+                "name": "ep-pinned",
+                "query_type": "opportunity",
+                "filters": {"naics": "541511"},
+                "frequency": "realtime",
+                "cron_expression": None,
+                "status": "active",
                 "created_at": "2026-01-01",
+                "last_checked_at": None,
+                "match_count": 0,
             }
         )
         client = TangoClient(api_key="x", base_url="https://t.example")
-        client.create_webhook_subscription(
-            "my-sub",
-            {"records": []},
+        client.create_webhook_alert(
+            name="ep-pinned",
+            query_type="opportunity",
+            filters={"naics": "541511"},
             endpoint="ep-1",
-            subscription_type="subject",
         )
         body = mock_request.call_args[1]["json"]
         assert body["endpoint"] == "ep-1"
-        assert body["subscription_type"] == "subject"
-        assert body["subscription_name"] == "my-sub"
-
-    def test_create_filter_subscription_fields(self, mock_request: Mock) -> None:
-        mock_request.return_value = _mock_response(
-            {
-                "id": "sub-1",
-                "endpoint": "ep-1",
-                "subscription_name": "filter-sub",
-                "payload": {"records": []},
-                "created_at": "2026-01-01",
-            }
-        )
-        client = TangoClient(api_key="x", base_url="https://t.example")
-        client.create_webhook_subscription(
-            "filter-sub",
-            {"records": []},
-            endpoint="ep-1",
-            subscription_type="filter",
-            query_type="opportunity",
-            filter_definition={"naics": "541511"},
-            frequency="custom",
-            cron_expression="0 9 * * 1",
-        )
-        body = mock_request.call_args[1]["json"]
-        assert body["subscription_type"] == "filter"
-        assert body["query_type"] == "opportunity"
-        assert body["filter_definition"] == {"naics": "541511"}
-        assert body["frequency"] == "custom"
-        assert body["cron_expression"] == "0 9 * * 1"
+        assert body["name"] == "ep-pinned"
 
 
 @patch("tango.client.httpx.Client.request")
 class TestOrderingParam:
-    """Verify ordering kwarg lands in query params on the seven list_* methods."""
+    """Verify ordering kwarg lands in query params on the five list_* methods
+    that the server actually accepts ordering on (notices/protests rejected
+    every value at runtime, so no kwarg is exposed for them)."""
 
     @pytest.mark.parametrize(
         "method,path,extra_kwargs",
@@ -350,8 +328,6 @@ class TestOrderingParam:
             ("list_subawards", "/api/subawards/", {}),
             ("list_gsa_elibrary_contracts", "/api/gsa_elibrary_contracts/", {}),
             ("list_opportunities", "/api/opportunities/", {}),
-            ("list_notices", "/api/notices/", {}),
-            ("list_protests", "/api/protests/", {}),
         ],
     )
     def test_ordering_threads_through(

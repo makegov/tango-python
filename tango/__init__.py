@@ -24,8 +24,6 @@ from .models import (
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
-    WebhookSubjectTypeDefinition,
-    WebhookSubscription,
     WebhookTestDeliveryResult,
 )
 from .shapes import (
@@ -41,7 +39,7 @@ from .webhooks import (
 )
 from .webhooks.receiver import Delivery, WebhookReceiver
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -64,8 +62,6 @@ __all__ = [
     "WebhookEndpoint",
     "WebhookEventType",
     "WebhookEventTypesResponse",
-    "WebhookSubscription",
-    "WebhookSubjectTypeDefinition",
     "WebhookTestDeliveryResult",
     "ShapeParser",
     "ModelFactory",

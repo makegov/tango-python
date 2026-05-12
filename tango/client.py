@@ -46,8 +46,6 @@ from tango.models import (
     WebhookEndpoint,
     WebhookEventType,
     WebhookEventTypesResponse,
-    WebhookSubjectTypeDefinition,
-    WebhookSubscription,
     WebhookTestDeliveryResult,
 )
 from tango.shapes import (
@@ -2113,7 +2111,6 @@ class TangoClient:
         agency: str | None = None,
         naics: str | None = None,
         notice_type: str | None = None,
-        ordering: str | None = None,
         posted_date_after: str | None = None,
         posted_date_before: str | None = None,
         psc: str | None = None,
@@ -2126,6 +2123,9 @@ class TangoClient:
         """
         List contract notices
 
+        Note: the notices viewset rejects every ``?ordering=`` value at
+        runtime, so this method does not expose an ``ordering`` kwarg.
+
         Args:
             page: Page number
             limit: Results per page (max 100)
@@ -2136,7 +2136,6 @@ class TangoClient:
             agency: Agency filter
             naics: NAICS code filter
             notice_type: Notice type filter
-            ordering: Sort field (prefix with '-' for descending)
             posted_date_after: Posted date after
             posted_date_before: Posted date before
             psc: PSC code filter
@@ -2162,7 +2161,6 @@ class TangoClient:
             ("agency", agency),
             ("naics", naics),
             ("notice_type", notice_type),
-            ("ordering", ordering),
             ("posted_date_after", posted_date_after),
             ("posted_date_before", posted_date_before),
             ("psc", psc),
@@ -2212,7 +2210,6 @@ class TangoClient:
         filed_date_before: str | None = None,
         decision_date_after: str | None = None,
         decision_date_before: str | None = None,
-        ordering: str | None = None,
         search: str | None = None,
     ) -> PaginatedResponse:
         """
@@ -2220,6 +2217,10 @@ class TangoClient:
 
         Returns case-level protest records. Use shape=...,dockets(...) to include
         nested dockets. API reference: https://tango.makegov.com/docs/api-reference/protests.md
+
+        Note: the protests viewset does not advertise ``ordering`` and
+        rejects every value at runtime, so this method does not expose an
+        ``ordering`` kwarg.
 
         Args:
             page: Page number
@@ -2238,7 +2239,6 @@ class TangoClient:
             filed_date_before: Filed date on or before
             decision_date_after: Decision date on or after
             decision_date_before: Decision date on or before
-            ordering: Sort field (prefix with '-' for descending)
             search: Full-text search over protest searchable fields
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
@@ -2264,7 +2264,6 @@ class TangoClient:
             ("filed_date_before", filed_date_before),
             ("decision_date_after", decision_date_after),
             ("decision_date_before", decision_date_before),
-            ("ordering", ordering),
             ("search", search),
         ):
             if val is not None:
@@ -2410,13 +2409,12 @@ class TangoClient:
     # ============================================================================
 
     def list_webhook_event_types(self) -> WebhookEventTypesResponse:
-        """Discover supported webhook event types and subject types."""
+        """Discover supported webhook event types."""
         data = self._get("/api/webhooks/event-types/")
 
         event_types = [
             WebhookEventType(
                 event_type=str(e.get("event_type", "")),
-                default_subject_type=str(e.get("default_subject_type", "")),
                 description=str(e.get("description", "")),
                 schema_version=int(e.get("schema_version", 1)),
             )
@@ -2424,193 +2422,7 @@ class TangoClient:
             if isinstance(e, dict)
         ]
 
-        subject_types = [str(x) for x in (data.get("subject_types") or [])]
-
-        subject_type_definitions = [
-            WebhookSubjectTypeDefinition(
-                subject_type=str(d.get("subject_type", "")),
-                description=str(d.get("description", "")),
-                id_format=str(d.get("id_format", "")),
-                status=str(d.get("status", "active")),
-            )
-            for d in (data.get("subject_type_definitions") or [])
-            if isinstance(d, dict)
-        ]
-
-        return WebhookEventTypesResponse(
-            event_types=event_types,
-            subject_types=subject_types,
-            subject_type_definitions=subject_type_definitions,
-        )
-
-    def list_webhook_subscriptions(
-        self, page: int = 1, page_size: int | None = None
-    ) -> PaginatedResponse[WebhookSubscription]:
-        """
-        List webhook subscriptions for the authenticated user's endpoint.
-
-        Notes:
-        - This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
-        """
-        params: dict[str, Any] = {"page": page}
-        if page_size is not None:
-            params["page_size"] = page_size
-
-        data = self._get("/api/webhooks/subscriptions/", params)
-        results = [
-            WebhookSubscription(
-                id=str(item.get("id", "")),
-                endpoint=str(item.get("endpoint")) if item.get("endpoint") is not None else None,
-                subscription_name=str(item.get("subscription_name", "")),
-                payload=item.get("payload"),
-                created_at=str(item.get("created_at", "")),
-            )
-            for item in (data.get("results") or [])
-            if isinstance(item, dict)
-        ]
-
-        return PaginatedResponse(
-            count=int(data.get("count", len(results))),
-            next=data.get("next"),
-            previous=data.get("previous"),
-            results=results,
-        )
-
-    def get_webhook_subscription(self, subscription_id: str) -> WebhookSubscription:
-        """Get a single webhook subscription by id (UUID)."""
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-
-        data = self._get(f"/api/webhooks/subscriptions/{subscription_id}/")
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def create_webhook_subscription(
-        self,
-        subscription_name: str,
-        payload: dict[str, Any],
-        *,
-        endpoint: str | None = None,
-        subscription_type: str | None = None,
-        query_type: str | None = None,
-        filter_definition: dict[str, Any] | None = None,
-        frequency: str | None = None,
-        cron_expression: str | None = None,
-        is_active: bool | None = None,
-    ) -> WebhookSubscription:
-        """Create a webhook subscription.
-
-        Args:
-            subscription_name: Human-readable name for the subscription.
-            payload: Subscription payload (records list with event_type +
-                subject_type + subject_ids). Pass ``{"records": []}`` for
-                filter-based subscriptions; the server reads filter fields
-                directly.
-            endpoint: UUID of the WebhookEndpoint this subscription delivers
-                to. The server now requires this for users who own more than
-                one endpoint; for single-endpoint users it auto-resolves.
-                Pass it explicitly to be safe.
-            subscription_type: ``"subject"`` (default) or ``"filter"``. Use
-                ``"filter"`` together with ``query_type`` + ``filter_definition``
-                to create a saved-search alert subscription.
-            query_type: Resource type for filter subscriptions (one of
-                ``opportunity``, ``contract``, ``idv``, ``ota``, ``otidv``,
-                ``entity``, ``grant``, ``forecast``).
-            filter_definition: Dict of query params to match for filter
-                subscriptions.
-            frequency: ``realtime`` | ``daily`` | ``weekly`` | ``custom``.
-            cron_expression: 5-field cron expression, required when
-                ``frequency="custom"`` (Pro+ tiers only).
-            is_active: Whether the subscription is enabled.
-
-        Notes:
-            The ``/api/webhooks/alerts/`` convenience API
-            (:meth:`create_webhook_alert`) is generally easier for filter
-            subscriptions — this lower-level method mirrors the raw
-            ``/api/webhooks/subscriptions/`` shape.
-        """
-        if not subscription_name:
-            raise TangoValidationError("Webhook subscription_name is required")
-
-        body: dict[str, Any] = {
-            "subscription_name": subscription_name,
-            "payload": payload,
-        }
-        if endpoint is not None:
-            body["endpoint"] = endpoint
-        if subscription_type is not None:
-            body["subscription_type"] = subscription_type
-        if query_type is not None:
-            body["query_type"] = query_type
-        if filter_definition is not None:
-            body["filter_definition"] = filter_definition
-        if frequency is not None:
-            body["frequency"] = frequency
-        if cron_expression is not None:
-            body["cron_expression"] = cron_expression
-        if is_active is not None:
-            body["is_active"] = is_active
-
-        data = self._post("/api/webhooks/subscriptions/", body)
-
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def update_webhook_subscription(
-        self,
-        subscription_id: str,
-        *,
-        subscription_name: str | None = None,
-        payload: dict[str, Any] | None = None,
-        frequency: str | None = None,
-        cron_expression: str | None = None,
-        is_active: bool | None = None,
-    ) -> WebhookSubscription:
-        """Patch a webhook subscription.
-
-        For filter subscriptions, ``frequency``, ``cron_expression``, and
-        ``is_active`` are also writable; subject-based subscriptions
-        typically only patch ``subscription_name`` and ``payload``.
-        """
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-
-        body: dict[str, Any] = {}
-        if subscription_name is not None:
-            body["subscription_name"] = subscription_name
-        if payload is not None:
-            body["payload"] = payload
-        if frequency is not None:
-            body["frequency"] = frequency
-        if cron_expression is not None:
-            body["cron_expression"] = cron_expression
-        if is_active is not None:
-            body["is_active"] = is_active
-
-        data = self._patch(f"/api/webhooks/subscriptions/{subscription_id}/", body)
-        return WebhookSubscription(
-            id=str(data.get("id", "")),
-            endpoint=str(data.get("endpoint")) if data.get("endpoint") is not None else None,
-            subscription_name=str(data.get("subscription_name", "")),
-            payload=data.get("payload"),
-            created_at=str(data.get("created_at", "")),
-        )
-
-    def delete_webhook_subscription(self, subscription_id: str) -> None:
-        """Delete a webhook subscription."""
-        if not subscription_id:
-            raise TangoValidationError("Webhook subscription_id is required")
-        self._delete(f"/api/webhooks/subscriptions/{subscription_id}/")
+        return WebhookEventTypesResponse(event_types=event_types)
 
     def get_webhook_endpoint(self, endpoint_id: str) -> WebhookEndpoint:
         """Get a webhook endpoint by id (UUID)."""
@@ -2754,11 +2566,14 @@ class TangoClient:
         """
         Send an immediate test webhook to your endpoint.
 
-        If endpoint_id is not provided, the server will use your default endpoint.
+        If endpoint_id is not provided, the server will use your default
+        endpoint. The kwarg is named ``endpoint_id`` for backwards-compat;
+        the wire payload uses the canonical ``endpoint`` key (the server
+        still accepts ``endpoint_id`` as a deprecated alias on this route).
         """
         body: dict[str, Any] = {}
         if endpoint_id:
-            body["endpoint_id"] = endpoint_id
+            body["endpoint"] = endpoint_id
         data = self._post("/api/webhooks/endpoints/test-delivery/", body)
         return WebhookTestDeliveryResult(
             success=bool(data.get("success", False)),
@@ -2818,9 +2633,10 @@ class TangoClient:
     ) -> PaginatedResponse[WebhookAlert]:
         """List filter-based webhook subscriptions (alerts).
 
-        Backed by ``GET /api/webhooks/alerts/`` — a convenience over
-        ``WebhookSubscription(subscription_type="filter")`` with a cleaner
-        shape (``alert_id``, ``name``, ``filters``, etc.).
+        Backed by ``GET /api/webhooks/alerts/`` — the canonical (and only)
+        write surface for webhook subscriptions. Uses the cleaner ``alert_id``
+        / ``name`` / ``filters`` shape rather than the raw subscriptions
+        model fields.
         """
         params: dict[str, Any] = {"page": page}
         if page_size is not None:
@@ -2853,6 +2669,7 @@ class TangoClient:
         *,
         frequency: str = "realtime",
         cron_expression: str | None = None,
+        endpoint: str | None = None,
     ) -> WebhookAlert:
         """Create a filter-based webhook subscription (alert).
 
@@ -2866,6 +2683,10 @@ class TangoClient:
                 ``custom`` requires ``cron_expression`` and Pro+ tier.
             cron_expression: 5-field cron expression, only valid when
                 ``frequency="custom"``.
+            endpoint: Optional UUID of the :class:`WebhookEndpoint` this
+                alert delivers to. Required when the account has multiple
+                endpoints (the server returns 400 otherwise); for
+                single-endpoint accounts the server auto-resolves.
 
         Returns:
             The created (or, if a dedup-matched alert already exists, the
@@ -2889,6 +2710,8 @@ class TangoClient:
         }
         if cron_expression is not None:
             body["cron_expression"] = cron_expression
+        if endpoint is not None:
+            body["endpoint"] = endpoint
 
         data = self._post("/api/webhooks/alerts/", body)
         return self._parse_webhook_alert(data)

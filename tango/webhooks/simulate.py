@@ -2,7 +2,7 @@
 
 This module is the offline counterpart to ``test_webhook_delivery``: it
 never talks to the Tango API. Use it when you want to drive a downstream
-receiver without provisioning a real subscription, or when you want to
+receiver without provisioning a real alert, or when you want to
 fuzz event shapes that Tango wouldn't naturally emit.
 
 Example::

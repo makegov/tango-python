@@ -571,33 +571,13 @@ class APIKey:
 @dataclass
 class WebhookEventType:
     event_type: str
-    default_subject_type: str
     description: str
     schema_version: int
 
 
 @dataclass
-class WebhookSubjectTypeDefinition:
-    subject_type: str
-    description: str
-    id_format: str
-    status: str
-
-
-@dataclass
 class WebhookEventTypesResponse:
     event_types: list[WebhookEventType]
-    subject_types: list[str]
-    subject_type_definitions: list[WebhookSubjectTypeDefinition]
-
-
-@dataclass
-class WebhookSubscription:
-    id: str
-    subscription_name: str
-    payload: dict[str, Any] | None
-    created_at: str
-    endpoint: str | None = None
 
 
 @dataclass
@@ -628,7 +608,9 @@ class WebhookAlert:
     """Filter-based webhook subscription (alert), backed by
     ``/api/webhooks/alerts/``.
 
-    Convenience shape over ``WebhookSubscription(subscription_type="filter")``.
+    The canonical (and only) write surface for webhook subscriptions —
+    every delivery is filter-driven; subject-based subscriptions were
+    removed in v0.7.0.
     """
 
     alert_id: str

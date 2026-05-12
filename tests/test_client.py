@@ -537,19 +537,9 @@ class TestWebhooksEndpoints:
         mock_response.json.return_value = {
             "event_types": [
                 {
-                    "event_type": "awards.new_award",
-                    "default_subject_type": "entity",
+                    "event_type": "alerts.contract.match",
                     "description": "",
                     "schema_version": 1,
-                }
-            ],
-            "subject_types": ["entity"],
-            "subject_type_definitions": [
-                {
-                    "subject_type": "entity",
-                    "description": "Entity UEI",
-                    "id_format": "UEI",
-                    "status": "active",
                 }
             ],
         }
@@ -559,103 +549,11 @@ class TestWebhooksEndpoints:
         client = TangoClient(api_key="test-key")
         resp = client.list_webhook_event_types()
 
-        assert resp.event_types[0].event_type == "awards.new_award"
-        assert resp.subject_types == ["entity"]
-        assert resp.subject_type_definitions[0].subject_type == "entity"
+        assert resp.event_types[0].event_type == "alerts.contract.match"
 
         call_args = mock_request.call_args
         assert call_args[1]["method"] == "GET"
         assert call_args[1]["url"].endswith("/api/webhooks/event-types/")
-
-    @patch("tango.client.httpx.Client.request")
-    def test_webhook_subscriptions_crud(self, mock_request):
-        client = TangoClient(api_key="test-key", base_url="https://example.test")
-
-        # list
-        list_response = Mock()
-        list_response.is_success = True
-        list_response.status_code = 200
-        list_response.json.return_value = {
-            "count": 1,
-            "next": None,
-            "previous": None,
-            "results": [
-                {
-                    "id": "sub-1",
-                    "endpoint": "endpoint-1",
-                    "subscription_name": "My sub",
-                    "payload": {"records": []},
-                    "created_at": "2026-01-01T00:00:00Z",
-                }
-            ],
-        }
-        list_response.content = b'{"count": 1}'
-
-        # create
-        create_response = Mock()
-        create_response.is_success = True
-        create_response.status_code = 201
-        create_response.json.return_value = {
-            "id": "sub-1",
-            "endpoint": "endpoint-1",
-            "subscription_name": "My sub",
-            "payload": {"records": []},
-            "created_at": "2026-01-01T00:00:00Z",
-        }
-        create_response.content = b'{"id": "sub-1"}'
-
-        # update
-        update_response = Mock()
-        update_response.is_success = True
-        update_response.status_code = 200
-        update_response.json.return_value = {
-            "id": "sub-1",
-            "endpoint": "endpoint-1",
-            "subscription_name": "Updated",
-            "payload": {"records": []},
-            "created_at": "2026-01-01T00:00:00Z",
-        }
-        update_response.content = b'{"id": "sub-1"}'
-
-        # delete (204, empty content)
-        delete_response = Mock()
-        delete_response.is_success = True
-        delete_response.status_code = 204
-        delete_response.content = b""
-
-        mock_request.side_effect = [
-            list_response,
-            create_response,
-            update_response,
-            delete_response,
-        ]
-
-        subs = client.list_webhook_subscriptions(page=2, page_size=25)
-        assert subs.count == 1
-        assert subs.results[0].subscription_name == "My sub"
-
-        created = client.create_webhook_subscription("My sub", {"records": []})
-        assert created.id == "sub-1"
-
-        updated = client.update_webhook_subscription("sub-1", subscription_name="Updated")
-        assert updated.subscription_name == "Updated"
-
-        client.delete_webhook_subscription("sub-1")
-
-        # Ensure correct request params/bodies were used
-        calls = mock_request.call_args_list
-        assert calls[0][1]["method"] == "GET"
-        assert calls[0][1]["params"]["page"] == 2
-        assert calls[0][1]["params"]["page_size"] == 25
-
-        assert calls[1][1]["method"] == "POST"
-        assert calls[1][1]["json"]["subscription_name"] == "My sub"
-        assert calls[1][1]["json"]["payload"] == {"records": []}
-
-        assert calls[2][1]["method"] == "PATCH"
-        assert calls[2][1]["json"]["subscription_name"] == "Updated"
-
-        assert calls[3][1]["method"] == "DELETE"
 
     @patch("tango.client.httpx.Client.request")
     def test_webhook_test_delivery_and_sample_payload(self, mock_request):

@@ -684,10 +684,6 @@ class TestProductionSmoke:
         assert hasattr(response, "event_types"), "Response should have event_types"
         assert isinstance(response.event_types, list), "event_types should be a list"
 
-        # Response should have subject_types list
-        assert hasattr(response, "subject_types"), "Response should have subject_types"
-        assert isinstance(response.subject_types, list), "subject_types should be a list"
-
     @handle_rate_limit
     @handle_auth_error
     def test_list_webhook_endpoints(self, production_client):
@@ -704,14 +700,14 @@ class TestProductionSmoke:
 
     @handle_rate_limit
     @handle_auth_error
-    def test_list_webhook_subscriptions(self, production_client):
-        """Test webhook subscriptions listing
+    def test_list_webhook_alerts(self, production_client):
+        """Test webhook alerts listing
 
         Validates:
-        - Webhook subscriptions listing works
+        - Webhook alerts listing works (canonical filter-subscription path)
         - Response parsing is correct
         """
-        response = production_client.list_webhook_subscriptions()
+        response = production_client.list_webhook_alerts()
 
         validate_pagination(response)
         assert response.count >= 0, "Count should be non-negative"

@@ -384,9 +384,8 @@ tango webhooks simulate --secret $SECRET --event-type entities.updated  # sign +
 tango webhooks simulate --secret $SECRET --event-type entities.updated \
     --to http://127.0.0.1:8011/tango/webhooks         # also POST
 
-# Manage real subscriptions and endpoints
-tango webhooks endpoints     create|list|get|delete
-tango webhooks subscriptions create|list|get|delete
+# Manage delivery endpoints
+tango webhooks endpoints create|list|get|delete
 
 # Force a real test delivery from Tango
 tango webhooks trigger

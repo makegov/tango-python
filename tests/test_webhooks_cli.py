@@ -73,7 +73,7 @@ def test_cli_simulate_with_payload_file(tmp_path: object) -> None:
     import pathlib
 
     p = pathlib.Path(str(tmp_path)) / "payload.json"
-    payload = {"events": [{"event_type": "from.file", "subject_ids": ["S1"]}]}
+    payload = {"events": [{"event_type": "from.file"}]}
     p.write_text(json.dumps(payload), encoding="utf-8")
 
     runner = CliRunner()
@@ -130,20 +130,16 @@ def test_cli_list_event_types_prints_table() -> None:
     api_response = {
         "event_types": [
             {
-                "event_type": "entities.updated",
-                "default_subject_type": "entity",
-                "description": "Entity updated",
+                "event_type": "alerts.entity.match",
+                "description": "Entity match",
                 "schema_version": 1,
             },
             {
-                "event_type": "awards.created",
-                "default_subject_type": "award",
-                "description": "New award",
+                "event_type": "alerts.contract.match",
+                "description": "Contract match",
                 "schema_version": 1,
             },
         ],
-        "subject_types": [],
-        "subject_type_definitions": [],
     }
     mock_response = Mock()
     mock_response.status_code = 200
@@ -155,9 +151,9 @@ def test_cli_list_event_types_prints_table() -> None:
     with patch("tango.client.httpx.Client.request", return_value=mock_response):
         result = runner.invoke(main, ["webhooks", "list-event-types", "--api-key", "k"])
     assert result.exit_code == 0, result.output
-    assert "entities.updated" in result.output
-    assert "Entity updated" in result.output
-    assert "awards.created" in result.output
+    assert "alerts.entity.match" in result.output
+    assert "Entity match" in result.output
+    assert "alerts.contract.match" in result.output
 
 
 def _mock_response(api_response: dict[str, object]) -> object:
@@ -251,73 +247,6 @@ def test_cli_endpoints_delete_requires_confirmation() -> None:
         )
         assert result.exit_code == 0, result.output
         assert json.loads(result.output) == {"deleted": "ep-1"}
-
-
-def test_cli_subscriptions_create_builds_records_payload() -> None:
-    """Verify the `--event-type / --subject-type / --subject-id` flags get folded
-    into the right `payload.records[0]` shape Tango expects."""
-    from unittest.mock import patch
-
-    api = {
-        "id": "sub-1",
-        "endpoint": "ep-1",
-        "subscription_name": "ent-watch",
-        "payload": {
-            "records": [
-                {
-                    "event_type": "entities.updated",
-                    "subject_type": "entity",
-                    "subject_ids": ["UEI1", "UEI2"],
-                }
-            ]
-        },
-        "created_at": "2026-05-07T00:00:00Z",
-    }
-    runner = CliRunner()
-    with patch(
-        "tango.client.httpx.Client.request", return_value=_mock_response(api)
-    ) as mock_request:
-        result = runner.invoke(
-            main,
-            [
-                "webhooks",
-                "subscriptions",
-                "create",
-                "--name",
-                "ent-watch",
-                "--event-type",
-                "entities.updated",
-                "--subject-type",
-                "entity",
-                "--subject-id",
-                "UEI1",
-                "--subject-id",
-                "UEI2",
-                "--api-key",
-                "k",
-            ],
-        )
-    assert result.exit_code == 0, result.output
-    # The SDK was called with the constructed payload.
-    sent_json = mock_request.call_args.kwargs["json"]
-    assert sent_json["subscription_name"] == "ent-watch"
-    assert sent_json["payload"]["records"][0]["subject_ids"] == ["UEI1", "UEI2"]
-
-
-def test_cli_subscriptions_list() -> None:
-    from unittest.mock import patch
-
-    api = {
-        "count": 0,
-        "next": None,
-        "previous": None,
-        "results": [],
-    }
-    runner = CliRunner()
-    with patch("tango.client.httpx.Client.request", return_value=_mock_response(api)):
-        result = runner.invoke(main, ["webhooks", "subscriptions", "list", "--api-key", "k"])
-    assert result.exit_code == 0, result.output
-    assert json.loads(result.output) == {"count": 0, "results": []}
 
 
 def test_cli_simulate_rejects_both_modes(tmp_path: object) -> None:
