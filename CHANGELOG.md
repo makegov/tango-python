@@ -43,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - `TangoClient._post()` and `_patch()` now accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`.
+- `tango webhooks endpoints create` CLI now accepts and requires `--name` (passed through to `create_webhook_endpoint(name=...)`). Previously the option was absent, meaning the CLI could never set a custom endpoint name and every call would 400 server-side (the server enforces `unique(user, name)`).
+- `WebhookAlert.query_type` and `WebhookAlert.filters` tightened from `Optional` to non-optional (`str` and `dict[str, Any]` respectively). Legacy nullable rows were purged by the tango#2275 migration; the server model and serializer guarantee non-null values for all current data. `WebhookAlert.status` narrowed from `str` to `Literal["active", "paused"]` — the server serializer produces exactly those two values.
 
 ## [0.6.0] - 2026-05-07
 

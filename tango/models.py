@@ -13,7 +13,7 @@ registry purposes and are NOT used for creating instances. All instances are cre
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Final, TypeVar
+from typing import Any, Final, Literal, TypeVar
 
 T = TypeVar("T")
 
@@ -611,15 +611,24 @@ class WebhookAlert:
     The canonical (and only) write surface for webhook subscriptions —
     every delivery is filter-driven; subject-based subscriptions were
     removed in v0.7.0.
+
+    Field notes:
+        query_type: Always non-null on current data. Legacy subject-based rows
+            (which had null query_type) were purged in the tango#2275 migration
+            (``webhooks/migrations/0019_drop_subject_webhooks.py``).
+        filters: Always non-null on current data; ``filter_definition`` is a
+            non-nullable JSONField on the server model after migration 0019.
+        status: Exactly ``"active"`` or ``"paused"`` — the server serializer
+            maps ``is_active=True`` → ``"active"`` and ``False`` → ``"paused"``.
     """
 
     alert_id: str
     name: str
-    query_type: str | None
-    filters: dict[str, Any] | None
+    query_type: str
+    filters: dict[str, Any]
     frequency: str
     cron_expression: str | None
-    status: str
+    status: Literal["active", "paused"]
     created_at: str
     last_checked_at: str | None = None
     match_count: int = 0
