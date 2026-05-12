@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `ordering` parameter on `list_forecasts`, `list_grants`, `list_subawards`, `list_gsa_elibrary_contracts`, `list_opportunities`, `list_notices`, and `list_protests`. Prefix with `-` for descending. Closes a parity gap with the API surface (these endpoints all accept `?ordering=` server-side).
+
 ### Fixed
 - `TangoClient._post()` and `_patch()` now accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`.
 

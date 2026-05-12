@@ -1244,6 +1244,7 @@ class TangoClient:
         fiscal_year_gte: int | None = None,
         fiscal_year_lte: int | None = None,
         funding_agency: str | None = None,
+        ordering: str | None = None,
         prime_uei: str | None = None,
         recipient: str | None = None,
         sub_uei: str | None = None,
@@ -1265,6 +1266,7 @@ class TangoClient:
             ("fiscal_year_gte", fiscal_year_gte),
             ("fiscal_year_lte", fiscal_year_lte),
             ("funding_agency", funding_agency),
+            ("ordering", ordering),
             ("prime_uei", prime_uei),
             ("recipient", recipient),
             ("sub_uei", sub_uei),
@@ -1297,6 +1299,7 @@ class TangoClient:
         joiner: str = ".",
         contract_number: str | None = None,
         key: str | None = None,
+        ordering: str | None = None,
         piid: str | None = None,
         schedule: str | None = None,
         search: str | None = None,
@@ -1318,6 +1321,7 @@ class TangoClient:
         for k, val in (
             ("contract_number", contract_number),
             ("key", key),
+            ("ordering", ordering),
             ("piid", piid),
             ("schedule", schedule),
             ("search", search),
@@ -1921,6 +1925,7 @@ class TangoClient:
         modified_before: str | None = None,
         naics_code: str | None = None,
         naics_starts_with: str | None = None,
+        ordering: str | None = None,
         search: str | None = None,
         source_system: str | None = None,
         status: str | None = None,
@@ -1944,6 +1949,7 @@ class TangoClient:
             modified_before: Modified before date
             naics_code: NAICS code filter
             naics_starts_with: NAICS code prefix filter
+            ordering: Sort field (prefix with '-' for descending)
             search: Search query
             source_system: Source system filter
             status: Status filter
@@ -1970,6 +1976,7 @@ class TangoClient:
             ("modified_before", modified_before),
             ("naics_code", naics_code),
             ("naics_starts_with", naics_starts_with),
+            ("ordering", ordering),
             ("search", search),
             ("source_system", source_system),
             ("status", status),
@@ -2008,6 +2015,7 @@ class TangoClient:
         last_notice_date_before: str | None = None,
         naics: str | None = None,
         notice_type: str | None = None,
+        ordering: str | None = None,
         place_of_performance: str | None = None,
         psc: str | None = None,
         response_deadline_after: str | None = None,
@@ -2033,6 +2041,7 @@ class TangoClient:
             last_notice_date_before: Last notice date before
             naics: NAICS code filter
             notice_type: Notice type filter
+            ordering: Sort field (prefix with '-' for descending)
             place_of_performance: Place of performance filter
             psc: PSC code filter
             response_deadline_after: Response deadline after
@@ -2061,6 +2070,7 @@ class TangoClient:
             ("last_notice_date_before", last_notice_date_before),
             ("naics", naics),
             ("notice_type", notice_type),
+            ("ordering", ordering),
             ("place_of_performance", place_of_performance),
             ("psc", psc),
             ("response_deadline_after", response_deadline_after),
@@ -2099,6 +2109,7 @@ class TangoClient:
         agency: str | None = None,
         naics: str | None = None,
         notice_type: str | None = None,
+        ordering: str | None = None,
         posted_date_after: str | None = None,
         posted_date_before: str | None = None,
         psc: str | None = None,
@@ -2121,6 +2132,7 @@ class TangoClient:
             agency: Agency filter
             naics: NAICS code filter
             notice_type: Notice type filter
+            ordering: Sort field (prefix with '-' for descending)
             posted_date_after: Posted date after
             posted_date_before: Posted date before
             psc: PSC code filter
@@ -2146,6 +2158,7 @@ class TangoClient:
             ("agency", agency),
             ("naics", naics),
             ("notice_type", notice_type),
+            ("ordering", ordering),
             ("posted_date_after", posted_date_after),
             ("posted_date_before", posted_date_before),
             ("psc", psc),
@@ -2195,6 +2208,7 @@ class TangoClient:
         filed_date_before: str | None = None,
         decision_date_after: str | None = None,
         decision_date_before: str | None = None,
+        ordering: str | None = None,
         search: str | None = None,
     ) -> PaginatedResponse:
         """
@@ -2220,6 +2234,7 @@ class TangoClient:
             filed_date_before: Filed date on or before
             decision_date_after: Decision date on or after
             decision_date_before: Decision date on or before
+            ordering: Sort field (prefix with '-' for descending)
             search: Full-text search over protest searchable fields
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
@@ -2245,6 +2260,7 @@ class TangoClient:
             ("filed_date_before", filed_date_before),
             ("decision_date_after", decision_date_after),
             ("decision_date_before", decision_date_before),
+            ("ordering", ordering),
             ("search", search),
         ):
             if val is not None:
@@ -2310,6 +2326,7 @@ class TangoClient:
         funding_categories: str | None = None,
         funding_instruments: str | None = None,
         opportunity_number: str | None = None,
+        ordering: str | None = None,
         posted_date_after: str | None = None,
         posted_date_before: str | None = None,
         response_date_after: str | None = None,
@@ -2332,6 +2349,7 @@ class TangoClient:
             funding_categories: Funding categories filter
             funding_instruments: Funding instruments filter
             opportunity_number: Opportunity number filter
+            ordering: Sort field (prefix with '-' for descending)
             posted_date_after: Posted date after
             posted_date_before: Posted date before
             response_date_after: Response date after
@@ -2357,6 +2375,7 @@ class TangoClient:
             ("funding_categories", funding_categories),
             ("funding_instruments", funding_instruments),
             ("opportunity_number", opportunity_number),
+            ("ordering", ordering),
             ("posted_date_after", posted_date_after),
             ("posted_date_before", posted_date_before),
             ("response_date_after", response_date_after),
