@@ -345,13 +345,40 @@ class OTIDV:
 
 @dataclass
 class Subaward:
-    """Schema definition for Subaward (not used for instances)"""
+    """Schema definition for Subaward (not used for instances)
 
-    id: str | None = None
+    Mirrors the server's ``SubawardSerializer``. Fields are:
+
+    - ``key`` / ``award_key`` / ``piid`` — identifiers (the prime award PIID is
+      denormalized onto the subaward row).
+    - ``prime_awardee_*`` and ``recipient_*`` — denormalized lookup fields the
+      API exposes alongside ``prime_recipient`` / ``subaward_recipient``
+      expansions for filter parity.
+    - ``usaspending_permalink`` — direct USAspending URL for the subaward.
+
+    Expandable objects (request via ``shape="..."``):
+        ``awarding_office``, ``funding_office`` — AwardOffice payload
+        ``prime_recipient``, ``subaward_recipient`` — RecipientProfile
+        ``place_of_performance`` — city/state/zip/country_code
+        ``subaward_details`` — action_date/amount/fiscal_year/number/type/description
+        ``fsrs_details`` — FSRS submission provenance
+        ``highly_compensated_officers`` — list of {name, amount}
+    """
+
+    key: str | None = None
     award_key: str | None = None
-    prime_uei: str | None = None
-    sub_uei: str | None = None
-    amount: Decimal | None = None
+    piid: str | None = None
+    usaspending_permalink: str | None = None
+    prime_awardee_name: str | None = None
+    prime_awardee_uei: str | None = None
+    recipient_business_types: list[str] | None = None
+    recipient_dba_name: str | None = None
+    recipient_duns: str | None = None
+    recipient_name: str | None = None
+    recipient_parent_duns: str | None = None
+    recipient_parent_name: str | None = None
+    recipient_parent_uei: str | None = None
+    recipient_uei: str | None = None
 
 
 @dataclass

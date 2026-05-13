@@ -1250,16 +1250,138 @@ OTIDV_SCHEMA: dict[str, FieldSchema] = {
 }
 
 # Subaward (prime/sub awards)
-SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
-    "id": FieldSchema(name="id", type=str, is_optional=True, is_list=False),
-    "award_key": FieldSchema(name="award_key", type=str, is_optional=True, is_list=False),
+#
+# Mirrors awards.serializers.subawards.SubawardSerializer on the server. The
+# top-level field list is the canonical `Meta.fields` plus the denormalized
+# lookup fields the API exposes for filter parity (prime_awardee_*,
+# recipient_*, usaspending_permalink). Expandable objects are modeled with
+# `nested_model` so callers can request, e.g. `awarding_office(office_code)`.
+
+# `subaward_details` payload (action_date, amount, fiscal_year, ...).
+SUBAWARD_DETAILS_SCHEMA: dict[str, FieldSchema] = {
+    "action_date": FieldSchema(name="action_date", type=date, is_optional=True, is_list=False),
     "amount": FieldSchema(name="amount", type=Decimal, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "number": FieldSchema(name="number", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+}
+
+# `fsrs_details` payload — provenance for the underlying FSRS submission.
+FSRS_DETAILS_SCHEMA: dict[str, FieldSchema] = {
+    "id": FieldSchema(name="id", type=str, is_optional=True, is_list=False),
+    "last_modified_date": FieldSchema(
+        name="last_modified_date", type=date, is_optional=True, is_list=False
+    ),
+    "month": FieldSchema(name="month", type=int, is_optional=True, is_list=False),
+    "year": FieldSchema(name="year", type=int, is_optional=True, is_list=False),
+}
+
+# Subaward-specific place_of_performance — flat 4-key payload (city/state/zip/
+# country_code), distinct from the richer PLACE_OF_PERFORMANCE_SCHEMA used by
+# contracts/IDVs/vehicles.
+SUBAWARD_PLACE_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "country_code": FieldSchema(name="country_code", type=str, is_optional=True, is_list=False),
+    "state": FieldSchema(name="state", type=str, is_optional=True, is_list=False),
+    "zip": FieldSchema(name="zip", type=str, is_optional=True, is_list=False),
+}
+
+# `highly_compensated_officers` element shape (list-of-dict expansion).
+HIGHLY_COMPENSATED_OFFICER_SCHEMA: dict[str, FieldSchema] = {
+    "amount": FieldSchema(name="amount", type=Decimal, is_optional=True, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+}
+
+SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
+    # Core identifiers
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "award_key": FieldSchema(name="award_key", type=str, is_optional=True, is_list=False),
+    "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
+    "usaspending_permalink": FieldSchema(
+        name="usaspending_permalink", type=str, is_optional=True, is_list=False
+    ),
+    # Denormalized prime-awardee lookup fields (mirrored from prime_awardee_uei)
+    "prime_awardee_name": FieldSchema(
+        name="prime_awardee_name", type=str, is_optional=True, is_list=False
+    ),
+    "prime_awardee_uei": FieldSchema(
+        name="prime_awardee_uei", type=str, is_optional=True, is_list=False
+    ),
+    # Denormalized subaward-recipient lookup fields (mirrored from recipient_uei)
+    "recipient_business_types": FieldSchema(
+        name="recipient_business_types", type=str, is_optional=True, is_list=True
+    ),
+    "recipient_dba_name": FieldSchema(
+        name="recipient_dba_name", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_duns": FieldSchema(
+        name="recipient_duns", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_name": FieldSchema(
+        name="recipient_name", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_parent_duns": FieldSchema(
+        name="recipient_parent_duns", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_parent_name": FieldSchema(
+        name="recipient_parent_name", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_parent_uei": FieldSchema(
+        name="recipient_parent_uei", type=str, is_optional=True, is_list=False
+    ),
+    "recipient_uei": FieldSchema(
+        name="recipient_uei", type=str, is_optional=True, is_list=False
+    ),
+    # Expandable nested objects
+    "awarding_office": FieldSchema(
+        name="awarding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AwardOffice",
+    ),
+    "funding_office": FieldSchema(
+        name="funding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AwardOffice",
+    ),
+    "fsrs_details": FieldSchema(
+        name="fsrs_details",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="FsrsDetails",
+    ),
+    "highly_compensated_officers": FieldSchema(
+        name="highly_compensated_officers",
+        type=list,
+        is_optional=True,
+        is_list=True,
+        nested_model="HighlyCompensatedOfficer",
+    ),
+    "place_of_performance": FieldSchema(
+        name="place_of_performance",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="SubawardPlaceOfPerformance",
+    ),
     "prime_recipient": FieldSchema(
         name="prime_recipient",
         type=dict,
         is_optional=True,
         is_list=False,
         nested_model="RecipientProfile",
+    ),
+    "subaward_details": FieldSchema(
+        name="subaward_details",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="SubawardDetails",
     ),
     "subaward_recipient": FieldSchema(
         name="subaward_recipient",
@@ -1403,6 +1525,10 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "OTA": OTA_SCHEMA,
     "OTIDV": OTIDV_SCHEMA,
     "Subaward": SUBAWARD_SCHEMA,
+    "SubawardDetails": SUBAWARD_DETAILS_SCHEMA,
+    "FsrsDetails": FSRS_DETAILS_SCHEMA,
+    "SubawardPlaceOfPerformance": SUBAWARD_PLACE_OF_PERFORMANCE_SCHEMA,
+    "HighlyCompensatedOfficer": HIGHLY_COMPENSATED_OFFICER_SCHEMA,
     # GSA eLibrary
     "GsaElibraryContract": GSA_ELIBRARY_CONTRACT_SCHEMA,
     "GsaElibraryIdvRef": GSA_ELIBRARY_IDV_REF_SCHEMA,
