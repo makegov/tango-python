@@ -7,14 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-> Combined release: API parity (formerly tracked as PR #25), subject-based
-> webhook removal (formerly tracked as PR #27 / issue #2275), and shape-validator
-> alias support (formerly tracked as PR #28 / issue #2266). Bumped to
-> `0.7.0` because removing `create_webhook_subscription` /
-> `update_webhook_subscription` / `delete_webhook_subscription` /
-> `list_webhook_subscriptions` / `get_webhook_subscription` and the
-> `WebhookSubscription` + `WebhookSubjectTypeDefinition` dataclasses is a
-> breaking change.
+## [1.0.0] - 2026-05-13
+
+> First stable release. `tango-python` is now at full API parity with the
+> Tango HTTP surface, the legacy subject-based webhook subscription
+> mechanism has been removed in favor of filter alerts, the shape parser
+> agrees byte-for-byte with the server's expand-alias handling, and the
+> SDK's docs are auto-published to `docs.makegov.com/sdks/python/` via the
+> composer pipeline (makegov/docs#15 / makegov/docs#16). From `1.x` on,
+> we'll only do breaking changes on a major bump.
+>
+> Originally tracked as: API parity (PR #25), subject-based webhook
+> removal (PR #27 / issue #2275), shape-validator alias support (PR #28 /
+> issue #2266), and the docs-only content port (makegov/docs#16).
 
 ### Added
 - `ordering` parameter on `list_forecasts`, `list_grants`, `list_subawards`, `list_gsa_elibrary_contracts`, and `list_opportunities`. Prefix with `-` for descending. Closes a parity gap with the API surface (these endpoints all accept `?ordering=` server-side).
@@ -53,6 +58,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New `docs/ERRORS.md` — full exception hierarchy, recovery patterns, and the shape-error classes (`ShapeValidationError`, `ShapeParseError`, `TypeGenerationError`, `ModelInstantiationError`). Ported from `docs.makegov.com/sdks/python/errors.md` ahead of the docs-site auto-pull cutover (makegov/docs#15 / makegov/docs#16).
 - New `docs/PAGINATION.md` — page-based vs cursor-based strategies, iteration patterns, and the `PaginatedResponse` field reference. Ported from `docs.makegov.com/sdks/python/pagination.md`.
 - New `docs/CLIENT.md` — `TangoClient` constructor reference, `rate_limit_info` / `last_response_headers` properties, and retry-semantics note (the SDK has no built-in retry). Ported from `docs.makegov.com/sdks/python/client.md`.
+
+### CI
+- New `.github/workflows/docs-dispatch.yml` — fires on push to `main` when `docs/**`, `README.md`, or `CHANGELOG.md` changes and dispatches `external_updated` at `makegov/docs` so the public docs site rebuilds with the latest SDK content. Required for the makegov/docs#15 auto-pull pipeline.
 
 ## [0.6.0] - 2026-05-07
 
