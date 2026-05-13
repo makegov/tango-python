@@ -5,6 +5,67 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [1.0.0] - 2026-05-13
+
+> First stable release. `tango-python` is now at full API parity with the
+> Tango HTTP surface, the legacy subject-based webhook subscription
+> mechanism has been removed in favor of filter alerts, the shape parser
+> agrees byte-for-byte with the server's expand-alias handling, and the
+> SDK's docs are auto-published to `docs.makegov.com/sdks/python/` via the
+> composer pipeline (makegov/docs#15 / makegov/docs#16). From `1.x` on,
+> we'll only do breaking changes on a major bump.
+>
+> Originally tracked as: API parity (PR #25), subject-based webhook
+> removal (PR #27 / issue #2275), shape-validator alias support (PR #28 /
+> issue #2266), and the docs-only content port (makegov/docs#16).
+
+### Added
+- `ordering` parameter on `list_forecasts`, `list_grants`, `list_subawards`, `list_gsa_elibrary_contracts`, and `list_opportunities`. Prefix with `-` for descending. Closes a parity gap with the API surface (these endpoints all accept `?ordering=` server-side).
+- `create_webhook_endpoint` accepts `name=` (keyword-only) and now **requires** it. The Tango API enforces unique `(user, name)` on endpoints; omitting `name` returns a 400 server-side, so the SDK raises `TangoValidationError` client-side instead of round-tripping. (0.7.0 — never publicly released — emitted a `DeprecationWarning` instead.)
+- `update_webhook_endpoint` accepts `name=` for renaming an endpoint.
+- Webhook alerts (filter subscriptions): `list_webhook_alerts`, `get_webhook_alert`, `create_webhook_alert`, `update_webhook_alert`, `delete_webhook_alert` — the canonical write surface over `/api/webhooks/alerts/`. New `WebhookAlert` dataclass exported from the top-level package.
+- `resolve(name, target_type, ...)` — POST `/api/resolve/` to rank entity / organization candidates from a free-text name. Returns `ResolveResult` with `ResolveCandidate` entries (both exported).
+- `validate(identifier_type, value)` — POST `/api/validate/` to validate the format of a PIID, solicitation number, or UEI. Returns `ValidateResult` (exported).
+- Reference data: `list_departments`, `get_department`, `list_psc`, `get_psc`, `get_psc_metrics`, `get_naics`, `get_naics_metrics`, `get_business_type`, `list_assistance_listings`, `get_assistance_listing`, `list_mas_sins`, `get_mas_sin`.
+- Entity sub-resources: `list_entity_contracts`, `list_entity_idvs`, `list_entity_otas`, `list_entity_otidvs`, `list_entity_subawards`, `list_entity_lcats`, `get_entity_metrics`. All shape-aware where the underlying endpoint supports shaping.
+- IDV sub-resources: `list_idv_lcats`.
+- Agency sub-resources: `list_agency_awarding_contracts`, `list_agency_funding_contracts`.
+- Misc: `search_opportunity_attachments(q, top_k, include_extracted_text)` for `/api/opportunities/attachment-search/`; `get_version()` for `/api/version/`; `list_api_keys()` for `/api/api-keys/`.
+
+### Changed
+- `create_webhook_alert` accepts `endpoint=` (keyword-only). Required for accounts with multiple webhook endpoints; auto-resolves for single-endpoint accounts. Closes the multi-endpoint smoke-test gap (tango#2256).
+- `test_webhook_delivery` now sends the canonical `endpoint` body key instead of the deprecated `endpoint_id` alias (tango#2252). The Python kwarg name stays `endpoint_id=` for backwards compatibility; the wire payload is what changed.
+- **`generate_signature(body, secret)` now returns the full wire form `"sha256=<hex>"`** instead of bare hex. Callers can assign the return value directly to the `X-Tango-Signature` header without wrapping in a format string. This is a breaking change for code that relied on the bare-hex return; pass it through `parse_signature_header()` to recover the previous form. `verify_signature` accepts both prefixed and bare-hex inputs (unchanged), so receivers continue to work either way.
+
+### Removed
+- **Subject-based webhook subscription surface** (tango#2275). Migrate to `create_webhook_alert(...)` and the alerts API.
+  - Methods: `list_webhook_subscriptions`, `get_webhook_subscription`, `create_webhook_subscription`, `update_webhook_subscription`, `delete_webhook_subscription`.
+  - Dataclasses: `WebhookSubscription`, `WebhookSubjectTypeDefinition`. Both are no longer exported from the top-level `tango` package — importing them raises `ImportError`.
+  - Fields: `default_subject_type` removed from `WebhookEventType`; `subject_types` and `subject_type_definitions` removed from `WebhookEventTypesResponse`. The server's `/api/webhooks/event-types/` response no longer carries these.
+  - CLI: the entire `tango webhooks subscriptions` Click subgroup (`list` / `get` / `create` / `delete`). Use the SDK's `client.create_webhook_alert(...)` etc. directly — there is no CLI subgroup for alerts.
+- `ordering` kwarg from `list_notices` and `list_protests`. The notices and protests viewsets reject every `?ordering=` value at runtime (tango#2254); the kwarg silently sent unsupported values. Other five list methods retain `ordering`.
+
+### Fixed
+- `TangoClient._post()` and `_patch()` accept both `json_data=` (positional) and `json=` (keyword) for backward compatibility. Internal callers and docs examples that use `json=` no longer fail with `TypeError`. Passing **both** now raises `TangoValidationError` rather than silently preferring one — that ambiguity would hide caller bugs.
+- `get_psc_metrics` / `get_naics_metrics` / `get_entity_metrics` docstrings — `period_grouping` values are `"month"` / `"quarter"` / `"year"` (the path-segment values the API accepts), not `"monthly"` / `"quarterly"`.
+- `docs/API_REFERENCE.md#get_agency` — example uses `client.get_agency("GSA")` consistently and notes the parameter accepts CGAC / FPDS / short code / abbreviation / canonical name.
+- `README.md` Quick Start — `get_agency()` returns an `Agency` dataclass, so the example uses attribute access (`agency.name`) instead of `agency['name']` which would `TypeError`.
+- `scripts/smoke_api_parity.py` — `list_business_types(limit=1)` is now wrapped in the `run(...)` helper so a failure on that call records FAIL instead of aborting the smoke run.
+- `tango webhooks endpoints create` CLI now accepts and requires `--name` (passed through to `create_webhook_endpoint(name=...)`). Previously the option was absent, meaning the CLI could never set a custom endpoint name and every call would 400 server-side (the server enforces `unique(user, name)`).
+- `WebhookAlert.query_type` and `WebhookAlert.filters` tightened from `Optional` to non-optional (`str` and `dict[str, Any]` respectively). Legacy nullable rows were purged by the tango#2275 migration; the server model and serializer guarantee non-null values for all current data. `WebhookAlert.status` narrowed from `str` to `Literal["active", "paused"]` — the server serializer produces exactly those two values.
+- **Shape validator agrees with server on `naics(...)` / `psc(...)` expansions.** The client-side `ShapeParser.validate()` previously rejected the canonical `shape=naics(code,description)` form (which the server has always accepted) and also rejected the alias `shape=naics_code(code,description)`. The parser now mirrors the server's `_EXPAND_ALIASES` (introduced in Tango PR makegov/tango#2259) and rewrites `naics_code(...)` / `psc_code(...)` to their canonical `naics(...)` / `psc(...)` form at parse time. Bare scalar leaves (`shape=naics_code` / `shape=psc_code`) are left untouched and still return the raw column value, matching the server. Schemas for `Contract`, `Forecast`, `Opportunity`, `Notice`, and `Vehicle` gained explicit `naics` / `psc` expand entries backed by the existing `CodeDescription` nested model. Fixes makegov/tango#2266.
+- **`Subaward` schema matches the server's `SubawardSerializer`.** The previous `SUBAWARD_SCHEMA` declared two fields the server has never exposed (`id`, `amount`) and was missing every real field on the resource — including `piid`, `key`, `awarding_office` / `funding_office` / `place_of_performance` / `subaward_details` / `fsrs_details` / `highly_compensated_officers` / `usaspending_permalink`, and the denormalized `prime_awardee_*` / `recipient_*` lookup columns. Shape strings that referenced any real field (e.g. `shape="piid"`) would fail client-side validation with `unknown_field`, and conversely the SDK happily passed `shape="id"` / `shape="amount"` through to the server, where they were rejected. `SUBAWARD_SCHEMA` is now derived directly from `awards.serializers.subawards.SubawardSerializer` and the resource's runtime `available_fields`. The `Subaward` dataclass in `tango/models.py` was updated to match. New nested schemas `SubawardDetails`, `FsrsDetails`, `SubawardPlaceOfPerformance`, and `HighlyCompensatedOfficer` are registered so the corresponding shape expansions validate end-to-end.
+
+### Documentation
+- New `docs/ERRORS.md` — full exception hierarchy, recovery patterns, and the shape-error classes (`ShapeValidationError`, `ShapeParseError`, `TypeGenerationError`, `ModelInstantiationError`). Ported from `docs.makegov.com/sdks/python/errors.md` ahead of the docs-site auto-pull cutover (makegov/docs#15 / makegov/docs#16).
+- New `docs/PAGINATION.md` — page-based vs cursor-based strategies, iteration patterns, and the `PaginatedResponse` field reference. Ported from `docs.makegov.com/sdks/python/pagination.md`.
+- New `docs/CLIENT.md` — `TangoClient` constructor reference, `rate_limit_info` / `last_response_headers` properties, and retry-semantics note (the SDK has no built-in retry). Ported from `docs.makegov.com/sdks/python/client.md`.
+
+### CI
+- New `.github/workflows/docs-dispatch.yml` — fires on push to `main` when `docs/**`, `README.md`, or `CHANGELOG.md` changes and dispatches `external_updated` at `makegov/docs` so the public docs site rebuilds with the latest SDK content. Required for the makegov/docs#15 auto-pull pipeline.
+
 ## [0.6.0] - 2026-05-07
 
 ### Added

@@ -113,11 +113,18 @@ class WebhookReceiver:
                 return
 
             def do_POST(self) -> None:  # noqa: N802 (stdlib API)
+                # Always drain the request body before responding, even on
+                # error paths. Windows surfaces an undrained body as
+                # `WinError 10053` (connection aborted by the host) when
+                # the server closes the socket mid-request; Linux/macOS
+                # absorb it silently. Reading first keeps the response
+                # cycle clean across platforms.
+                length = int(self.headers.get("Content-Length", "0") or 0)
+                body = self.rfile.read(length) if length > 0 else b""
+
                 if self.path != receiver.path:
                     self._write_json(404, {"ok": False, "error": "not_found"})
                     return
-                length = int(self.headers.get("Content-Length", "0") or 0)
-                body = self.rfile.read(length) if length > 0 else b""
                 signature = self.headers.get(SIGNATURE_HEADER)
                 verified = bool(receiver.secret) and verify_signature(
                     body, receiver.secret, signature

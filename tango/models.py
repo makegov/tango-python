@@ -13,7 +13,7 @@ registry purposes and are NOT used for creating instances. All instances are cre
 from dataclasses import dataclass
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any, Final, TypeVar
+from typing import Any, Final, Literal, TypedDict, TypeVar
 
 T = TypeVar("T")
 
@@ -345,13 +345,40 @@ class OTIDV:
 
 @dataclass
 class Subaward:
-    """Schema definition for Subaward (not used for instances)"""
+    """Schema definition for Subaward (not used for instances)
 
-    id: str | None = None
+    Mirrors the server's ``SubawardSerializer``. Fields are:
+
+    - ``key`` / ``award_key`` / ``piid`` — identifiers (the prime award PIID is
+      denormalized onto the subaward row).
+    - ``prime_awardee_*`` and ``recipient_*`` — denormalized lookup fields the
+      API exposes alongside ``prime_recipient`` / ``subaward_recipient``
+      expansions for filter parity.
+    - ``usaspending_permalink`` — direct USAspending URL for the subaward.
+
+    Expandable objects (request via ``shape="..."``):
+        ``awarding_office``, ``funding_office`` — AwardOffice payload
+        ``prime_recipient``, ``subaward_recipient`` — RecipientProfile
+        ``place_of_performance`` — city/state/zip/country_code
+        ``subaward_details`` — action_date/amount/fiscal_year/number/type/description
+        ``fsrs_details`` — FSRS submission provenance
+        ``highly_compensated_officers`` — list of {name, amount}
+    """
+
+    key: str | None = None
     award_key: str | None = None
-    prime_uei: str | None = None
-    sub_uei: str | None = None
-    amount: Decimal | None = None
+    piid: str | None = None
+    usaspending_permalink: str | None = None
+    prime_awardee_name: str | None = None
+    prime_awardee_uei: str | None = None
+    recipient_business_types: list[str] | None = None
+    recipient_dba_name: str | None = None
+    recipient_duns: str | None = None
+    recipient_name: str | None = None
+    recipient_parent_duns: str | None = None
+    recipient_parent_name: str | None = None
+    recipient_parent_uei: str | None = None
+    recipient_uei: str | None = None
 
 
 @dataclass
@@ -571,33 +598,37 @@ class APIKey:
 @dataclass
 class WebhookEventType:
     event_type: str
-    default_subject_type: str
     description: str
     schema_version: int
 
 
 @dataclass
-class WebhookSubjectTypeDefinition:
-    subject_type: str
-    description: str
-    id_format: str
-    status: str
-
-
-@dataclass
 class WebhookEventTypesResponse:
     event_types: list[WebhookEventType]
-    subject_types: list[str]
-    subject_type_definitions: list[WebhookSubjectTypeDefinition]
 
 
-@dataclass
-class WebhookSubscription:
-    id: str
-    subscription_name: str
-    payload: dict[str, Any] | None
-    created_at: str
-    endpoint: str | None = None
+class WebhookSampleDelivery(TypedDict):
+    timestamp: str
+    events: list[dict[str, Any]]
+
+
+class WebhookSamplePayloadSingleResponse(TypedDict):
+    event_type: str
+    sample_delivery: WebhookSampleDelivery
+    signature_header: str
+    note: str
+
+
+class WebhookSamplePayloadAllResponse(TypedDict):
+    samples: dict[str, dict[str, Any]]
+    usage: str
+    signature_header: str
+    note: str
+
+
+WebhookSamplePayloadResponse = (
+    WebhookSamplePayloadSingleResponse | WebhookSamplePayloadAllResponse
+)
 
 
 @dataclass
@@ -621,6 +652,65 @@ class WebhookTestDeliveryResult:
     error: str | None = None
     response_body: str | None = None
     test_payload: dict[str, Any] | None = None
+
+
+@dataclass
+class WebhookAlert:
+    """Filter-based webhook subscription (alert), backed by
+    ``/api/webhooks/alerts/``.
+
+    The canonical (and only) write surface for webhook subscriptions —
+    every delivery is filter-driven; subject-based subscriptions were
+    removed in v0.7.0.
+
+    Field notes:
+        query_type: Always non-null on current data. Legacy subject-based rows
+            (which had null query_type) were purged in the tango#2275 migration
+            (``webhooks/migrations/0019_drop_subject_webhooks.py``).
+        filters: Always non-null on current data; ``filter_definition`` is a
+            non-nullable JSONField on the server model after migration 0019.
+        status: Exactly ``"active"`` or ``"paused"`` — the server serializer
+            maps ``is_active=True`` → ``"active"`` and ``False`` → ``"paused"``.
+    """
+
+    alert_id: str
+    name: str
+    query_type: str
+    filters: dict[str, Any]
+    frequency: str
+    cron_expression: str | None
+    status: Literal["active", "paused"]
+    created_at: str
+    last_checked_at: str | None = None
+    match_count: int = 0
+
+
+@dataclass
+class ResolveCandidate:
+    """A single ranked candidate from /api/resolve/."""
+
+    identifier: str | None = None
+    display_name: str | None = None
+    match_tier: str | None = None
+    extra: dict[str, Any] | None = None
+
+
+@dataclass
+class ResolveResult:
+    """Result of POST /api/resolve/ — ranked entity/organization candidates."""
+
+    candidates: list[ResolveCandidate]
+    count: int
+
+
+@dataclass
+class ValidateResult:
+    """Result of POST /api/validate/ — identifier format validation."""
+
+    result: str  # "valid" | "not_valid" | "low_confidence"
+    type: str
+    value: str
+    errors: list[str] | None = None
 
 
 @dataclass
@@ -738,8 +828,7 @@ class ShapeConfig:
 
     # Default for list_vehicle_orders()
     VEHICLE_ORDERS_MINIMAL: Final = (
-        "key,piid,award_date,obligated,total_contract_value,description,"
-        "recipient(display_name,uei)"
+        "key,piid,award_date,obligated,total_contract_value,description,recipient(display_name,uei)"
     )
 
     # Default for list_organizations()

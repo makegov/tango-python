@@ -52,7 +52,6 @@ Get accurate autocomplete suggestions for only the fields in your shape:
 ```python
 contracts = client.list_contracts(
     shape=ShapeConfig.CONTRACTS_MINIMAL,
-    use_dynamic=True
 )
 contract = contracts.results[0]
 # Typing "contract[" shows only: key, piid, award_date, award_type,
@@ -75,7 +74,6 @@ Catch shape mismatches early with clear error messages:
 # If you request a field that doesn't exist
 contracts = client.list_contracts(
     shape="key,invalid_field",
-    use_dynamic=True
 )
 # ShapeValidationError: Field 'invalid_field' does not exist in Contract
 ```
@@ -134,70 +132,41 @@ from tango import TangoClient, ShapeConfig
 
 client = TangoClient(api_key="your-key")
 
-# Ultra-minimal for dropdowns
-contracts = client.list_contracts(
-    shape=ShapeConfig.CONTRACTS_SUMMARY,
-    limit=100
-)
-# Fields: key, piid, recipient(display_name), total_contract_value
-
-# Balanced for lists (recommended default)
+# Default minimal shape for lists
 contracts = client.list_contracts(
     shape=ShapeConfig.CONTRACTS_MINIMAL,
     limit=100
 )
-# Fields: key, piid, award_date, award_type, recipient(display_name),
-#         description, total_contract_value
+# Fields: key, piid, award_date, recipient(display_name), description, total_contract_value
 
-# Detailed with context
+# Or use a custom shape for specific needs
 contracts = client.list_contracts(
-    shape=ShapeConfig.CONTRACTS_COMPREHENSIVE,
+    shape="key,piid,recipient(display_name),total_contract_value",
     limit=100
 )
-# Fields: 16 fields including agencies, location, classification
-
-# Optimized for data analysis
-contracts = client.list_contracts(
-    shape=ShapeConfig.CONTRACTS_FOR_ANALYSIS,
-    limit=1000
-)
-# Fields: 13 analytical fields for research and statistics
 ```
 
 ### Entities
 
 ```python
-# Fast lookups
+# Fast lookups (default for list_entities)
 entities = client.list_entities(
     shape=ShapeConfig.ENTITIES_MINIMAL,
     limit=50
 )
-# Fields: uei, display_name, cage_code, business_types
+# Fields: uei, legal_business_name, cage_code, business_types
 # Note: Entities do NOT have a 'key' field - use 'uei' as identifier
 
-# Balanced profile info
-entities = client.list_entities(
-    shape=ShapeConfig.ENTITIES_STANDARD,
-    limit=50
-)
-# Fields: uei, display_name, legal_business_name, cage_code,
-#         business_types, physical_address(city,country_code)
-
-# Full vendor details
+# Full vendor details (default for get_entity)
 entities = client.list_entities(
     shape=ShapeConfig.ENTITIES_COMPREHENSIVE,
     limit=50
 )
-# Fields: All entity fields including:
-#         - Core: uei, display_name, legal_business_name, dba_name, cage_code
-#         - Registration: registered, registration_status, purpose_of_registration_code
-#         - Classification: primary_naics, naics_codes, psc_codes, business_types, sba_business_types
-#         - Contact: email_address, entity_url
-#         - Metadata: description, capabilities, keywords
-#         - Addresses: physical_address(*), mailing_address(*)
-#         - Dates: sam_activation_date, sam_registration_date, sam_expiration_date
-#         - Financial: federal_obligations, congressional_district
-#         - Relationships: relationships(relation,type,uei,display_name)
+# Fields: uei, legal_business_name, dba_name, cage_code,
+#         business_types, primary_naics, naics_codes, psc_codes,
+#         email_address, entity_url, description, capabilities, keywords,
+#         physical_address, mailing_address,
+#         federal_obligations(*), congressional_district
 ```
 
 ### Forecasts, Opportunities, Notices
@@ -248,12 +217,15 @@ for contract in contracts.results:
 ### Multiple Nested Objects
 
 ```python
-# Select from multiple nested relations with enhanced fields
+# Select from multiple nested relations
+# Note: awarding_office(*) returns organization_id, office_code, office_name,
+#       agency_code, agency_name, department_code, department_name
+# Note: place_of_performance uses city_name (not city); no congressional_district
 custom_shape = (
     "key,piid,award_date,"
     "recipient(display_name,uei),"
     "awarding_office(office_code,office_name,agency_code,agency_name,department_code,department_name),"
-    "place_of_performance(city,city_name,state_code,state_name,country_code,country_name)"
+    "place_of_performance(city_name,state_code,state_name,country_code,country_name)"
 )
 contracts = client.list_contracts(shape=custom_shape)
 
@@ -264,7 +236,7 @@ for contract in contracts.results:
     print(f"Agency: {office.get('agency_name')} ({office.get('agency_code')})")
     print(f"Department: {office.get('department_name')}")
     location = contract.get('place_of_performance', {})
-    print(f"Location: {location.get('city_name') or location.get('city')}, "
+    print(f"Location: {location.get('city_name')}, "
           f"{location.get('state_name') or location.get('state_code')}, "
           f"{location.get('country_name') or location.get('country_code')}")
 ```
@@ -411,8 +383,8 @@ For performance-critical applications, pre-generate types:
 # Pre-warm cache with common shapes
 common_shapes = [
     ShapeConfig.CONTRACTS_MINIMAL,
-    ShapeConfig.CONTRACTS_COMPREHENSIVE,
     ShapeConfig.ENTITIES_MINIMAL,
+    ShapeConfig.IDVS_MINIMAL,
 ]
 
 for shape in common_shapes:
@@ -439,94 +411,6 @@ contracts = client.list_contracts(
 ## Troubleshooting
 
 ### Common Issues
-
-#### Issue: "Field 'X' does not exist in Model"
-
-**Cause:** You requested a field that doesn't exist in the model schema.
-
-**Solution:** Check the field name spelling and refer to the API documentation.
-
-```python
-# ✗ Wrong
-contracts = client.list_contracts(
-    shape="key,piid,invalid_field",
-    use_dynamic=True
-)
-# ShapeValidationError: Field 'invalid_field' does not exist in Contract
-
-# ✓ Correct
-contracts = client.list_contracts(
-    shape="key,piid,award_date",
-    use_dynamic=True
-)
-```
-
-#### Issue: KeyError when accessing fields
-
-**Cause:** Trying to access a field that wasn't included in the shape.
-
-**Solution:** Add the field to your shape or check if the field exists before accessing.
-
-```python
-# ✗ Wrong
-contracts = client.list_contracts(
-    shape="key,piid",
-    use_dynamic=True
-)
-contract = contracts.results[0]
-print(contract["award_date"])  # KeyError: 'award_date'
-
-# ✓ Correct - include field in shape
-contracts = client.list_contracts(
-    shape="key,piid,award_date",
-    use_dynamic=True
-)
-contract = contracts.results[0]
-print(contract["award_date"])  # Works
-
-# ✓ Correct - check before accessing
-contract = contracts.results[0]
-if "award_date" in contract:
-    print(contract["award_date"])
-```
-
-#### Issue: Type checker doesn't recognize fields
-
-**Cause:** Using custom shapes without type annotations.
-
-**Solution:** Add type annotations for custom shapes or use predefined shapes.
-
-```python
-from typing import TypedDict
-
-# Define your shape type
-class MyCustomShape(TypedDict):
-    key: str
-    piid: str | None
-    award_date: str | None
-
-# Use type annotation
-contracts = client.list_contracts(
-    shape="key,piid,award_date",
-    use_dynamic=True
-)
-contract: MyCustomShape = contracts.results[0]
-# Now type checker understands the structure
-```
-
-#### Issue: Performance slower than expected
-
-**Cause:** Shapes not being reused or cache thrashing.
-
-**Solution:** Reuse shapes consistently.
-
-```python
-# Reuse shapes
-COMMON_SHAPE = "key,piid,recipient(display_name)"
-contracts1 = client.list_contracts(shape=COMMON_SHAPE)
-contracts2 = client.list_contracts(shape=COMMON_SHAPE)
-# Second request uses cached type
-```
 
 #### Issue: "Field 'X' does not exist in Model"
 

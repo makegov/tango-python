@@ -68,8 +68,9 @@ agencies = client.list_agencies(page=1, limit=25)
 **Parameters:**
 - `page` (int): Page number (default: 1)
 - `limit` (int): Results per page (default: 25, max: 100)
+- `search` (str, optional): Search term to filter agencies by name
 
-**Returns:** [PaginatedResponse](#paginatedresponse) with agency dictionaries
+**Returns:** [PaginatedResponse](#paginatedresponse) with `Agency` dataclass objects
 
 **Example:**
 ```python
@@ -77,7 +78,7 @@ agencies = client.list_agencies(limit=10)
 print(f"Found {agencies.count} total agencies")
 
 for agency in agencies.results:
-    print(f"{agency['code']}: {agency['name']}")
+    print(f"{agency.code}: {agency.name}")
 ```
 
 ### get_agency()
@@ -85,21 +86,21 @@ for agency in agencies.results:
 Get a specific agency by code.
 
 ```python
-agency = client.get_agency(code="GSA")
+agency = client.get_agency("GSA")
 ```
 
 **Parameters:**
-- `code` (str): Agency code (e.g., "GSA", "DOD", "HHS")
+- `code` (str): Agency identifier. Accepts CGAC ("097"), FPDS code ("4712"), short code ("GSA"), abbreviation, or canonical name. See [Federal agency hierarchy](https://docs.makegov.com/api-reference/concepts/federal-agency-hierarchy/) for code semantics.
 
-**Returns:** Dictionary with agency details
+**Returns:** `Agency` dataclass with agency details
 
 **Example:**
 ```python
 gsa = client.get_agency("GSA")
-print(f"Name: {gsa['name']}")
-print(f"Abbreviation: {gsa.get('abbreviation', 'N/A')}")
-if gsa.get('department'):
-    print(f"Department: {gsa['department']['name']}")
+print(f"Name: {gsa.name}")
+print(f"Abbreviation: {gsa.abbreviation or 'N/A'}")
+if gsa.department:
+    print(f"Department: {gsa.department.name}")
 ```
 
 **Agency Fields:**
@@ -212,7 +213,7 @@ Search and filter contracts with extensive options.
 
 ```python
 contracts = client.list_contracts(
-    page=1,
+    cursor=None,  # keyset pagination token (not page number)
     limit=25,
     shape=None,
     flat=False,
@@ -253,7 +254,7 @@ contracts = client.list_contracts(
 ```
 
 **Common Parameters:**
-- `page` (int): Page number
+- `cursor` (str, optional): Keyset pagination token from `response.next` (contracts use keyset pagination, not page numbers)
 - `limit` (int): Results per page (max: 100)
 - `shape` (str): Fields to return (see [Shaping Guide](SHAPES.md))
 - `flat` (bool): Flatten nested objects to dot-notation keys
@@ -724,10 +725,10 @@ entities = client.list_entities(
 entities = client.list_entities(search="Booz Allen", limit=20)
 
 for entity in entities.results:
-    print(f"{entity['display_name']}")
+    print(f"{entity['legal_business_name']}")
     print(f"UEI: {entity.get('uei', 'N/A')}")
     if entity.get('business_types'):
-        print(f"Types: {', '.join(entity['business_types'])}")
+        print(f"Types: {', '.join(bt['code'] for bt in entity['business_types'])}")
 ```
 
 ### get_entity()
@@ -978,7 +979,7 @@ notices = client.list_notices(
 
 **Example:**
 ```python
-notices = client.list_notices(agency="GSA", notice_type="award", limit=20)
+notices = client.list_notices(agency="GSA", notice_type="Presolicitation", limit=20)
 
 for notice in notices.results:
     print(f"{notice['title']}")
@@ -1050,7 +1051,7 @@ grants = client.list_grants(
 
 **Example:**
 ```python
-grants = client.list_grants(agency="HHS", status="forecasted", limit=20)
+grants = client.list_grants(agency="HHS", status="F", limit=20)  # F = Forecasted, P = Posted
 
 for grant in grants.results:
     print(f"{grant['title']}")
@@ -1234,7 +1235,7 @@ business_types = client.list_business_types(page=1, limit=25)
 business_types = client.list_business_types(limit=50)
 
 for biz_type in business_types.results:
-    print(f"{biz_type['code']}: {biz_type['name']}")
+    print(f"{biz_type.code}: {biz_type.name}")
 ```
 
 **Business Type Fields:**
@@ -1281,72 +1282,360 @@ naics = client.list_naics(
 naics = client.list_naics(search="software", limit=10)
 
 for code in naics.results:
-    print(f"{code['code']}: {code['title']}")
+    print(f"{code['code']}: {code['description']}")
+```
+
+### get_naics()
+
+Get a single NAICS code by code string.
+
+```python
+naics = client.get_naics("541511")
+```
+
+**Returns:** Dictionary with NAICS code details.
+
+### get_naics_metrics()
+
+Get computed metrics for a NAICS code.
+
+```python
+metrics = client.get_naics_metrics(code="541511", months=12, period_grouping="month")
+```
+
+---
+
+## PSC
+
+Product and Service Codes.
+
+### list_psc()
+
+```python
+psc = client.list_psc(page=1, limit=25)
+```
+
+### get_psc()
+
+```python
+psc = client.get_psc("D302")
+```
+
+### get_psc_metrics()
+
+```python
+metrics = client.get_psc_metrics(code="D302", months=12, period_grouping="month")
+```
+
+---
+
+## MAS SINs
+
+GSA Multiple Award Schedule Special Item Numbers.
+
+### list_mas_sins()
+
+```python
+sins = client.list_mas_sins(page=1, limit=25)
+```
+
+### get_mas_sin()
+
+```python
+sin = client.get_mas_sin("54151S")
+```
+
+---
+
+## Assistance Listings (CFDA)
+
+Catalog of Federal Domestic Assistance listings.
+
+### list_assistance_listings()
+
+```python
+listings = client.list_assistance_listings(page=1, limit=25)
+```
+
+### get_assistance_listing()
+
+```python
+listing = client.get_assistance_listing("10.310")
+```
+
+---
+
+## Departments
+
+### list_departments()
+
+```python
+depts = client.list_departments(page=1, limit=25)
+```
+
+### get_department()
+
+```python
+dept = client.get_department("097")
+```
+
+---
+
+## Business Types (by code)
+
+### get_business_type()
+
+Get a single business type by code.
+
+```python
+bt = client.get_business_type("A6")
+```
+
+---
+
+## IT Dashboard
+
+Federal IT investments from the OMB IT Dashboard.
+
+### list_itdashboard_investments()
+
+```python
+investments = client.list_itdashboard_investments(
+    page=1,
+    limit=25,
+    search=None,
+    agency_code=None,
+    type_of_investment=None,
+    # Pro/Business+ tier-gated filters available
+)
+```
+
+**Notes:**
+- Filter tier-gating: `search` is free; `agency_code`, `type_of_investment` require Pro; `agency_name`, `cio_rating`, `performance_risk` require Business+.
+- Shape defaults to `ShapeConfig.ITDASHBOARD_INVESTMENTS_MINIMAL`.
+
+### get_itdashboard_investment()
+
+```python
+investment = client.get_itdashboard_investment("023-000001234")
+```
+
+---
+
+## Entity Sub-resources
+
+### list_entity_contracts()
+
+```python
+contracts = client.list_entity_contracts("ABCDEF123456", limit=25)
+```
+
+### list_entity_idvs()
+
+```python
+idvs = client.list_entity_idvs("ABCDEF123456", limit=25)
+```
+
+### list_entity_otas() / list_entity_otidvs()
+
+```python
+otas = client.list_entity_otas("ABCDEF123456", limit=25)
+otidvs = client.list_entity_otidvs("ABCDEF123456", limit=25)
+```
+
+### list_entity_subawards()
+
+```python
+subawards = client.list_entity_subawards("ABCDEF123456", limit=25)
+```
+
+### list_entity_lcats()
+
+```python
+lcats = client.list_entity_lcats("ABCDEF123456", limit=25)
+```
+
+### get_entity_metrics()
+
+```python
+metrics = client.get_entity_metrics("ABCDEF123456", months=12, period_grouping="month")
+```
+
+---
+
+## IDV LCATs
+
+### list_idv_lcats()
+
+```python
+lcats = client.list_idv_lcats("GS-00F-XXXX", limit=25)
+```
+
+---
+
+## Agency Sub-resources
+
+### list_agency_awarding_contracts()
+
+List contracts where the agency is the awarding agency.
+
+```python
+contracts = client.list_agency_awarding_contracts("4700", limit=25)
+```
+
+### list_agency_funding_contracts()
+
+List contracts where the agency is the funding agency.
+
+```python
+contracts = client.list_agency_funding_contracts("4700", limit=25)
+```
+
+---
+
+## Resolve / Validate
+
+### resolve()
+
+Resolve a free-text name to ranked entity or organization candidates.
+
+```python
+result = client.resolve(
+    name="Lockheed Martin",
+    target_type="entity",  # or "organization"
+    state="MD",     # optional
+    city="Bethesda", # optional
+    context="defense contractor",  # optional
+)
+
+for candidate in result.candidates:
+    print(candidate.identifier, candidate.display_name)
+```
+
+**Notes:**
+- Free-tier: up to 3 candidates with `identifier` and `display_name`.
+- Pro+: up to 5 candidates with additional `match_tier` field.
+
+### validate()
+
+Validate the format of a PIID, solicitation number, or UEI.
+
+```python
+result = client.validate(identifier_type="uei", value="ABCDEF123456")
+# identifier_type is one of: "piid", "solicitation", "uei"
+```
+
+**Note:** The parameter is named `identifier_type` (not `type`) to avoid shadowing the Python builtin.
+
+---
+
+## Opportunities (attachments)
+
+### search_opportunity_attachments()
+
+Semantic search over opportunity attachments. `q` is required.
+
+```python
+results = client.search_opportunity_attachments(
+    q="cybersecurity",
+    top_k=10,
+    include_extracted_text=False,
+)
+```
+
+**Parameters:**
+- `q` (str): Search query (required)
+- `top_k` (int, optional): Number of top results to return
+- `include_extracted_text` (bool, optional): Whether to include extracted text from attachments in results
+
+**Returns:** dict with search results
+
+---
+
+## Webhook Alerts
+
+The Alerts API is the canonical (and only) write surface for webhook subscriptions. Every alert maps to one of the five `alerts.*.match` event types and delivers when its saved-search filters match new or modified records.
+
+### list_webhook_alerts()
+
+```python
+alerts = client.list_webhook_alerts(page=1, page_size=25)
+```
+
+### get_webhook_alert()
+
+```python
+alert = client.get_webhook_alert("ALERT_UUID")
+```
+
+### create_webhook_alert()
+
+```python
+alert = client.create_webhook_alert(
+    name="New cloud IT contracts",
+    query_type="contract",
+    filters={"naics": "541511"},
+)
+```
+
+For multi-endpoint accounts, pin the delivery target with `endpoint=`:
+
+```python
+alert = client.create_webhook_alert(
+    name="New cloud IT contracts",
+    query_type="contract",
+    filters={"naics": "541511"},
+    endpoint="ENDPOINT_UUID",
+)
+```
+
+**Notes:**
+- `name` and `query_type` are required. `query_type` is **singular** (e.g. `"contract"`, not `"contracts"`).
+- `endpoint=` is optional and only required when the account has multiple webhook endpoints; for single-endpoint accounts the server auto-resolves.
+
+### update_webhook_alert()
+
+```python
+alert = client.update_webhook_alert("ALERT_UUID", name="Updated name")
+```
+
+### delete_webhook_alert()
+
+```python
+client.delete_webhook_alert("ALERT_UUID")
+```
+
+---
+
+## Utility
+
+### get_version()
+
+```python
+version = client.get_version()
+```
+
+### list_api_keys()
+
+```python
+keys = client.list_api_keys()
 ```
 
 ---
 
 ## Webhooks
 
-Webhook APIs let **Large / Enterprise** users manage subscription filters for outbound Tango webhooks.
+Webhook APIs let **Large / Enterprise** users manage delivery endpoints and discover the supported event-type catalog. Filter subscriptions (alerts) live in the [Webhook Alerts](#webhook-alerts) section above.
 
 > **For testing, signing, and a CLI tool**, see [`docs/WEBHOOKS.md`](WEBHOOKS.md). This section covers SDK method signatures only.
 
 ### list_webhook_event_types()
 
-Discover supported `event_type` values and subject types.
+Discover supported `event_type` values.
 
 ```python
 info = client.list_webhook_event_types()
 print(info.event_types[0].event_type)
-```
-
-### list_webhook_subscriptions()
-
-```python
-subs = client.list_webhook_subscriptions(page=1, page_size=25)
-```
-
-Notes:
-
-- This endpoint uses `page` + `page_size` (tier-capped) rather than `limit`.
-
-### get_webhook_subscription()
-
-```python
-sub = client.get_webhook_subscription("SUBSCRIPTION_UUID")
-```
-
-### create_webhook_subscription()
-
-```python
-sub = client.create_webhook_subscription(
-    "Track specific vendors",
-    {
-        "records": [
-            {"event_type": "awards.new_award", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
-            {"event_type": "awards.new_transaction", "subject_type": "entity", "subject_ids": ["UEI123ABC"]},
-        ]
-    },
-)
-```
-
-Notes:
-
-- Prefer v2 fields: `subject_type` + `subject_ids`.
-- Legacy compatibility: `resource_ids` is accepted as an alias for `subject_ids` (don’t send both).
-- Catch-all: `subject_ids: []` means “all subjects” for that record and is **Enterprise-only**. Large tier users must list specific IDs.
-
-### update_webhook_subscription()
-
-```python
-sub = client.update_webhook_subscription("SUBSCRIPTION_UUID", subscription_name="Updated name")
-```
-
-### delete_webhook_subscription()
-
-```python
-client.delete_webhook_subscription("SUBSCRIPTION_UUID")
 ```
 
 ### list_webhook_endpoints()
@@ -1384,10 +1673,10 @@ print(result.success, result.status_code)
 
 ### get_webhook_sample_payload()
 
-Fetch Tango-shaped sample deliveries (and sample subscription request bodies).
+Fetch Tango-shaped sample deliveries.
 
 ```python
-sample = client.get_webhook_sample_payload(event_type="awards.new_award")
+sample = client.get_webhook_sample_payload(event_type="alerts.contract.match")
 print(sample["event_type"])
 ```
 
@@ -1396,7 +1685,7 @@ print(sample["event_type"])
 The API does not currently expose a public `/api/webhooks/deliveries/` or redelivery endpoint. Use:
 
 - `test_webhook_delivery()` for connectivity checks
-- `get_webhook_sample_payload()` for building handlers + subscription payloads
+- `get_webhook_sample_payload()` for building handlers
 
 ### Receiving webhooks (signature verification)
 
@@ -1428,7 +1717,7 @@ The `tango.webhooks` subpackage adds testing and developer-tooling primitives on
 ```python
 from tango.webhooks import (
     verify_signature,        # (body: bytes, secret: str, header: str | None) -> bool
-    generate_signature,      # (body: bytes, secret: str) -> str (lowercase hex)
+    generate_signature,      # (body: bytes, secret: str) -> str  ("sha256=<hex>" wire form)
     parse_signature_header,  # (header: str | None) -> str | None  (strips "sha256=")
     SIGNATURE_HEADER,        # "X-Tango-Signature"
     SIGNATURE_PREFIX,        # "sha256="
@@ -1440,7 +1729,8 @@ from tango.webhooks import (
 A stdlib-based local HTTP receiver, useful in tests and during local development.
 
 ```python
-from tango.webhooks import WebhookReceiver, Delivery
+from tango import WebhookReceiver, Delivery  # exported from top-level tango package
+# or: from tango.webhooks.receiver import WebhookReceiver, Delivery
 
 with WebhookReceiver(secret="dev").run() as rx:
     # ... cause something to POST to rx.url ...
@@ -1518,26 +1808,28 @@ print(f"Results on this page: {len(contracts.results)}")
 for contract in contracts.results:
     print(contract['piid'])
 
-# Check for more pages
+# Check for more pages (contracts use keyset pagination via cursor)
 if contracts.next:
-    next_page = client.list_contracts(page=2, limit=25)
+    next_page = client.list_contracts(cursor=contracts.cursor, limit=25)
 ```
 
-**Pagination Example:**
+**Pagination Example (contracts use keyset pagination, not page numbers):**
 ```python
-page = 1
+cursor = None
 all_results = []
+page_num = 1
 
 while True:
-    response = client.list_contracts(page=page, limit=100)
+    response = client.list_contracts(cursor=cursor, limit=100)
     all_results.extend(response.results)
 
-    print(f"Page {page}: {len(response.results)} results")
+    print(f"Batch {page_num}: {len(response.results)} results")
 
     if not response.next:
         break
 
-    page += 1
+    cursor = response.cursor  # use cursor for next page
+    page_num += 1
 
 print(f"Total collected: {len(all_results)} results")
 ```
@@ -1565,7 +1857,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 
 | Constant | Used by | Description |
 |----------|---------|-------------|
-| `CONTRACTS_MINIMAL` | `list_contracts`, `search_contracts` | key, piid, award_date, recipient(display_name), description, total_contract_value |
+| `CONTRACTS_MINIMAL` | `list_contracts` | key, piid, award_date, recipient(display_name), description, total_contract_value |
 | `ENTITIES_MINIMAL` | `list_entities` | uei, legal_business_name, cage_code, business_types |
 | `ENTITIES_COMPREHENSIVE` | `get_entity` | Full entity profile (addresses, naics, psc, obligations, etc.) |
 | `FORECASTS_MINIMAL` | `list_forecasts` | id, title, anticipated_award_date, fiscal_year, naics_code, status |
@@ -1574,15 +1866,18 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `GRANTS_MINIMAL` | `list_grants` | grant_id, opportunity_number, title, status(*), agency_code |
 | `IDVS_MINIMAL` | `list_idvs`, `list_vehicle_awardees` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `IDVS_COMPREHENSIVE` | `get_idv` | Full IDV with offices, place_of_performance, competition, transactions, etc. |
-| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, organization_id, awardee_count, order_count, vehicle_obligations, vehicle_contracts_value, solicitation_title, solicitation_date |
+| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |
 | `VEHICLES_COMPREHENSIVE` | `get_vehicle` | Full vehicle with competition_details, fiscal_year, set_aside, etc. |
 | `VEHICLE_AWARDEES_MINIMAL` | `list_vehicle_awardees` | uuid, key, piid, award_date, title, order_count, idv_obligations, idv_contracts_value, recipient(display_name,uei) |
-| `ORGANIZATIONS_MINIMAL` | `list_organizations`, `list_organization_offices` | key, fh_key, name, level, type, short_name |
+| `ORGANIZATIONS_MINIMAL` | `list_organizations` | key, fh_key, name, level, type, short_name |
 | `OTAS_MINIMAL` | `list_otas` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated |
 | `OTIDVS_MINIMAL` | `list_otidvs` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `SUBAWARDS_MINIMAL` | `list_subawards` | award_key, prime_recipient(uei,display_name), subaward_recipient(uei,display_name) |
 | `GSA_ELIBRARY_CONTRACTS_MINIMAL` | `list_gsa_elibrary_contracts` | uuid, contract_number, schedule, recipient(display_name,uei), idv(key,award_date) |
 | `PROTESTS_MINIMAL` | `list_protests` | case_id, case_number, title, source_system, outcome, filed_date |
+| `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
+| `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
+| `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |
 
 All predefined shapes are validated at SDK release time (see [Developer Guide](DEVELOPERS.md#sdk-conformance-maintainers)). For custom shapes, see the [Shaping Guide](SHAPES.md).
 
@@ -1674,8 +1969,8 @@ try:
     )
 except TangoValidationError as e:
     print(f"Validation error: {e.message}")
-    if e.details:
-        print(f"Details: {e.details}")
+    if e.response_data:
+        print(f"Details: {e.response_data}")
 
 # Handle rate limiting
 try:
@@ -1719,15 +2014,17 @@ See [Shaping Guide](SHAPES.md) for details.
 Don't fetch all results at once - paginate responsibly:
 
 ```python
-# ✅ Good - process page by page
-page = 1
-while page <= 10:  # Limit to 10 pages
-    contracts = client.list_contracts(page=page, limit=100)
+# ✅ Good - process batch by batch (contracts use keyset/cursor pagination)
+cursor = None
+batches = 0
+while batches < 10:  # Limit to 10 batches
+    contracts = client.list_contracts(cursor=cursor, limit=100)
     process_contracts(contracts.results)
 
     if not contracts.next:
         break
-    page += 1
+    cursor = contracts.cursor
+    batches += 1
 ```
 
 ### 3. Use Filters to Narrow Results

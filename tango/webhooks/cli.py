@@ -199,7 +199,7 @@ def simulate_cmd(
         client = TangoClient(api_key=api_key, base_url=base_url)
         payload = client.get_webhook_sample_payload(event_type=event_type)
     else:
-        payload = {"events": [{"event_type": "tango.cli.simulated", "subject_ids": []}]}
+        payload = {"events": [{"event_type": "tango.cli.simulated"}]}
 
     if target_url is None:
         signed = simulate.sign(payload, secret)
@@ -217,13 +217,17 @@ def simulate_cmd(
         return
 
     result = simulate.deliver(target_url=target_url, payload=payload, secret=secret)
+    # `result.signature` is the bare hex on the SimulationResult dataclass;
+    # render the prefixed wire form (matches X-Tango-Signature exactly).
+    from tango.webhooks.signing import SIGNATURE_PREFIX
+
     click.echo(
         json.dumps(
             {
                 "delivered": True,
                 "target_url": target_url,
                 "status_code": result.status_code,
-                "signature": f"sha256={result.signature}",
+                "signature": f"{SIGNATURE_PREFIX}{result.signature}",
                 "sent_payload": payload,
                 "receiver_response": result.response_body[:500],
             },
@@ -288,7 +292,7 @@ def list_event_types_cmd(api_key: str | None, base_url: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Endpoint and subscription management
+# Endpoint management
 # ---------------------------------------------------------------------------
 #
 # These commands wrap the SDK's CRUD methods. Common --api-key / --base-url
@@ -361,16 +365,23 @@ def endpoints_get_cmd(endpoint_id: str, api_key: str | None, base_url: str) -> N
 
 @endpoints_group.command("create")
 @click.option("--url", "callback_url", required=True, help="Receiver URL Tango will POST to.")
+@click.option(
+    "--name",
+    required=True,
+    help="Human-readable name for this endpoint. Must be unique per account (server enforces unique(user, name)).",
+)
 @click.option("--inactive", is_flag=True, default=False, help="Create the endpoint disabled.")
 @_common_api_options
 def endpoints_create_cmd(
-    callback_url: str, inactive: bool, api_key: str | None, base_url: str
+    callback_url: str, name: str, inactive: bool, api_key: str | None, base_url: str
 ) -> None:
     """Create a webhook endpoint. Output includes the generated secret — save it."""
     from dataclasses import asdict
 
     client = _tango_client(api_key, base_url)
-    endpoint = client.create_webhook_endpoint(callback_url=callback_url, is_active=not inactive)
+    endpoint = client.create_webhook_endpoint(
+        callback_url=callback_url, name=name, is_active=not inactive
+    )
     click.echo(json.dumps(asdict(endpoint), indent=2, sort_keys=True))
 
 
@@ -385,109 +396,6 @@ def endpoints_delete_cmd(endpoint_id: str, yes: bool, api_key: str | None, base_
     client = _tango_client(api_key, base_url)
     client.delete_webhook_endpoint(endpoint_id)
     click.echo(json.dumps({"deleted": endpoint_id}))
-
-
-@webhooks.group("subscriptions")
-def subscriptions_group() -> None:
-    """Manage webhook subscriptions (what Tango delivers)."""
-
-
-@subscriptions_group.command("list")
-@click.option("--page", type=int, default=1, show_default=True)
-@click.option("--page-size", type=int, default=None)
-@_common_api_options
-def subscriptions_list_cmd(
-    page: int, page_size: int | None, api_key: str | None, base_url: str
-) -> None:
-    """List webhook subscriptions configured for your account."""
-    from dataclasses import asdict
-
-    client = _tango_client(api_key, base_url)
-    resp = client.list_webhook_subscriptions(page=page, page_size=page_size)
-    click.echo(
-        json.dumps(
-            {
-                "count": resp.count,
-                "results": [asdict(s) for s in resp.results],
-            },
-            indent=2,
-            sort_keys=True,
-        )
-    )
-
-
-@subscriptions_group.command("get")
-@click.argument("subscription_id")
-@_common_api_options
-def subscriptions_get_cmd(subscription_id: str, api_key: str | None, base_url: str) -> None:
-    """Show one subscription by id."""
-    from dataclasses import asdict
-
-    client = _tango_client(api_key, base_url)
-    sub = client.get_webhook_subscription(subscription_id)
-    click.echo(json.dumps(asdict(sub), indent=2, sort_keys=True))
-
-
-@subscriptions_group.command("create")
-@click.option("--name", "subscription_name", required=True, help="Human-readable name.")
-@click.option("--event-type", required=True, help="Event type to subscribe to.")
-@click.option(
-    "--subject-type",
-    required=True,
-    help="Subject type (e.g. 'entity', 'opportunity'). See `list-event-types`.",
-)
-@click.option(
-    "--subject-id",
-    "subject_ids",
-    multiple=True,
-    required=True,
-    help="One or more subject ids. Repeat the flag for multiple.",
-)
-@_common_api_options
-def subscriptions_create_cmd(
-    subscription_name: str,
-    event_type: str,
-    subject_type: str,
-    subject_ids: tuple[str, ...],
-    api_key: str | None,
-    base_url: str,
-) -> None:
-    """Create a webhook subscription with a single records[] entry.
-
-    For multi-record subscriptions, use the SDK's
-    `create_webhook_subscription` directly with a custom payload.
-    """
-    from dataclasses import asdict
-
-    client = _tango_client(api_key, base_url)
-    sub = client.create_webhook_subscription(
-        subscription_name=subscription_name,
-        payload={
-            "records": [
-                {
-                    "event_type": event_type,
-                    "subject_type": subject_type,
-                    "subject_ids": list(subject_ids),
-                }
-            ]
-        },
-    )
-    click.echo(json.dumps(asdict(sub), indent=2, sort_keys=True))
-
-
-@subscriptions_group.command("delete")
-@click.argument("subscription_id")
-@click.option("--yes", is_flag=True, help="Skip the confirmation prompt.")
-@_common_api_options
-def subscriptions_delete_cmd(
-    subscription_id: str, yes: bool, api_key: str | None, base_url: str
-) -> None:
-    """Delete a webhook subscription."""
-    if not yes:
-        click.confirm(f"Delete subscription {subscription_id}?", abort=True)
-    client = _tango_client(api_key, base_url)
-    client.delete_webhook_subscription(subscription_id)
-    click.echo(json.dumps({"deleted": subscription_id}))
 
 
 def _print_delivery(delivery: Delivery) -> None:

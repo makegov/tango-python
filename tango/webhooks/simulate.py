@@ -2,7 +2,7 @@
 
 This module is the offline counterpart to ``test_webhook_delivery``: it
 never talks to the Tango API. Use it when you want to drive a downstream
-receiver without provisioning a real subscription, or when you want to
+receiver without provisioning a real alert, or when you want to
 fuzz event shapes that Tango wouldn't naturally emit.
 
 Example::
@@ -23,7 +23,7 @@ import json
 from dataclasses import dataclass
 from typing import Any
 
-from tango.webhooks.signing import SIGNATURE_HEADER, SIGNATURE_PREFIX, generate_signature
+from tango.webhooks.signing import SIGNATURE_HEADER, generate_signature, parse_signature_header
 
 
 @dataclass(frozen=True)
@@ -31,7 +31,7 @@ class SignedRequest:
     """A Tango-shaped signed request, ready to be POSTed."""
 
     body: bytes
-    signature: str  # bare lowercase hex
+    signature: str  # bare lowercase hex (header-prefix stripped)
     headers: dict[str, str]  # includes Content-Type and X-Tango-Signature
 
 
@@ -52,13 +52,14 @@ def sign(payload: dict[str, Any] | list[Any] | bytes | str, secret: str) -> Sign
     receive, or for hand-rolling deliveries with a custom HTTP client.
     """
     body = _to_bytes(payload)
-    signature_hex = generate_signature(body, secret)
+    header_value = generate_signature(body, secret)
+    bare_hex = parse_signature_header(header_value) or ""
     return SignedRequest(
         body=body,
-        signature=signature_hex,
+        signature=bare_hex,
         headers={
             "Content-Type": "application/json",
-            SIGNATURE_HEADER: f"{SIGNATURE_PREFIX}{signature_hex}",
+            SIGNATURE_HEADER: header_value,
         },
     )
 

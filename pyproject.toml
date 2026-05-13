@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "tango-python"
-version = "0.6.0"
+version = "1.0.0"
 description = "Python SDK for the Tango API"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -121,6 +121,34 @@ exclude_lines = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["tango"]
+
+# Sdist whitelist — `uv build` / `hatch build sdist` only includes these.
+#
+# Hatchling's default behavior packs everything in the project root that
+# isn't matched by .gitignore, which is fine in CI (clean checkout) but
+# leaks per-developer state (`.mg-tools/`, `.claude/`, `CLAUDE.md`, work
+# diaries, scratch reports, etc.) when anyone runs `uv publish` locally.
+# The explicit whitelist is belt-and-suspenders for that foot-gun: even
+# from a developer laptop, only these paths can ever end up on PyPI.
+[tool.hatch.build.targets.sdist]
+include = [
+    "/tango",
+    "/tests",
+    "/docs",
+    "/scripts",
+    "/.github/workflows",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+    "/pyproject.toml",
+]
+exclude = [
+    # Internal-only docs / artifacts that exist inside the included dirs.
+    "/docs/DEVELOPERS.md",
+    "/docs/quick_start.ipynb",
+    "**/__pycache__",
+    "**/*.pyc",
+]
 
 [[tool.mypy.overrides]]
 module = "tango.webhooks.cli"

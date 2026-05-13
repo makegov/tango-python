@@ -465,6 +465,142 @@ class TestShapeParserValidation:
         parser.validate(spec, MockModel)  # Should not raise
 
 
+class TestShapeParserExpandAliases:
+    """Test naics_code/psc_code -> naics/psc expand-alias normalization.
+
+    Mirrors the server's `_EXPAND_ALIASES` map (Tango PR #2259, issue #2266):
+    when used as an expansion (with parens / wildcard), `naics_code(...)` is
+    rewritten to `naics(...)` and `psc_code(...)` to `psc(...)`. Bare scalar
+    leaves are left alone so `shape=naics_code` still returns the raw column.
+    """
+
+    def test_canonical_naics_expand_accepted_on_contract(self):
+        """Canonical `naics(code,description)` validates against Contract."""
+        parser = ShapeParser()
+        spec = parser.parse("naics(code,description)")
+
+        assert spec.fields[0].name == "naics"
+        assert spec.fields[0].nested_fields is not None
+        assert [f.name for f in spec.fields[0].nested_fields] == ["code", "description"]
+
+        parser.validate(spec, Contract)  # Should not raise
+
+    def test_alias_naics_code_expand_rewritten_to_naics(self):
+        """Alias form `naics_code(code,description)` is rewritten to `naics`."""
+        parser = ShapeParser()
+        spec = parser.parse("naics_code(code,description)")
+
+        # Name is rewritten at parse time so downstream type generation and
+        # factory parsing see the canonical key the server returns.
+        assert spec.fields[0].name == "naics"
+        assert [f.name for f in spec.fields[0].nested_fields] == ["code", "description"]
+
+        parser.validate(spec, Contract)  # Should not raise
+
+    def test_canonical_psc_expand_accepted_on_contract(self):
+        """Canonical `psc(code,description)` validates against Contract."""
+        parser = ShapeParser()
+        spec = parser.parse("psc(code,description)")
+
+        assert spec.fields[0].name == "psc"
+        parser.validate(spec, Contract)  # Should not raise
+
+    def test_alias_psc_code_expand_rewritten_to_psc(self):
+        """Alias form `psc_code(code,description)` is rewritten to `psc`."""
+        parser = ShapeParser()
+        spec = parser.parse("psc_code(code,description)")
+
+        assert spec.fields[0].name == "psc"
+        parser.validate(spec, Contract)  # Should not raise
+
+    def test_bare_naics_code_scalar_is_not_rewritten(self):
+        """Bare scalar `naics_code` keeps its name (returns raw column)."""
+        parser = ShapeParser()
+        spec = parser.parse("naics_code")
+
+        # Scalar form is NOT touched — the alias only fires for expansions.
+        assert spec.fields[0].name == "naics_code"
+        assert spec.fields[0].nested_fields is None
+        assert spec.fields[0].is_wildcard is False
+
+        parser.validate(spec, Contract)  # naics_code is a real scalar field
+
+    def test_bare_psc_code_scalar_is_not_rewritten(self):
+        """Bare scalar `psc_code` keeps its name (returns raw column)."""
+        parser = ShapeParser()
+        spec = parser.parse("psc_code")
+
+        assert spec.fields[0].name == "psc_code"
+        assert spec.fields[0].nested_fields is None
+
+        parser.validate(spec, Contract)
+
+    def test_alias_naics_code_wildcard_expand_rewritten(self):
+        """Wildcard expansion `naics_code(*)` is rewritten to `naics(*)`."""
+        parser = ShapeParser()
+        spec = parser.parse("naics_code(*)")
+
+        assert spec.fields[0].name == "naics"
+        assert spec.fields[0].is_wildcard is True
+
+        parser.validate(spec, Contract)  # Should not raise
+
+    def test_alias_collision_drops_alias_keeps_canonical(self):
+        """When both `naics(...)` and `naics_code(...)` appear, canonical wins.
+
+        Matches server behavior — emitting two output keys for the same data
+        would surprise callers, so the alias entry is dropped silently.
+        """
+        parser = ShapeParser()
+        spec = parser.parse("naics(code),naics_code(description)")
+
+        # Only one entry should remain — the canonical `naics` one.
+        names = [f.name for f in spec.fields]
+        assert names == ["naics"]
+        assert [f.name for f in spec.fields[0].nested_fields] == ["code"]
+
+    def test_scalar_and_expand_alias_coexist(self):
+        """Scalar `naics_code` and expand `naics_code(...)` both survive.
+
+        The expand gets rewritten to `naics`; the scalar stays as
+        `naics_code`. They're now distinct keys with distinct meanings —
+        the scalar returns the raw int/str, the expand returns the dict.
+        """
+        parser = ShapeParser()
+        spec = parser.parse("key,naics_code,naics_code(code,description)")
+
+        names = [f.name for f in spec.fields]
+        assert names == ["key", "naics_code", "naics"]
+        assert spec.fields[1].nested_fields is None  # scalar
+        assert spec.fields[2].nested_fields is not None  # expand
+
+    def test_alias_rewrite_applies_in_nested_expansions(self):
+        """Aliases nested inside another expansion are also rewritten.
+
+        The parent expansion field is unrelated; we just want to confirm the
+        normalization walks recursively through ``nested_fields``.
+        """
+        parser = ShapeParser()
+        # `recipient` is a valid expansion on Contract; nest a naics_code
+        # alias inside to confirm the walk recurses.
+        spec = parser.parse("recipient(uei,display_name),naics_code(code)")
+
+        assert [f.name for f in spec.fields] == ["recipient", "naics"]
+        assert spec.fields[1].nested_fields[0].name == "code"
+
+    def test_alias_accepted_on_opportunity(self):
+        """Server accepts the alias on opportunities too — schema covers it."""
+        # Use a model class that exists; Contract is already covered above.
+        # Smoke-test that the validator finds `naics` on a couple of schemas
+        # that previously only had `naics_code`.
+        from tango.models import Opportunity
+
+        parser = ShapeParser()
+        spec = parser.parse("naics_code(code,description)")
+        assert spec.fields[0].name == "naics"
+        parser.validate(spec, Opportunity)  # Should not raise
+
+
 class TestShapeParserCaching:
     """Test shape parser caching"""
 

@@ -1,0 +1,58 @@
+name: Docs dispatch
+
+# Fires on push to main when content that affects the published docs site
+# changes (docs/, README, or CHANGELOG). Notifies makegov/docs via
+# repository_dispatch so the docs site rebuilds without waiting for someone
+# to push to the composer.
+#
+# tango-python is a `coloc-source` repo: its docs/ folder is the authoritative
+# source for the Python SDK pages on docs.makegov.com (see makegov/docs#15).
+#
+# Required secrets:
+#   DOCS_DISPATCH_TOKEN — GitHub token with contents:write on makegov/docs.
+#
+# Required variables (optional):
+#   DOCS_TARGET_REPO — override the dispatch target (default: makegov/docs).
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+      - "README.md"
+      - "CHANGELOG.md"
+  workflow_dispatch:
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed paths
+        id: changes
+        run: |
+          set -euo pipefail
+          base=$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)
+          external=$(git diff --name-only "$base" HEAD -- 'docs' 'README.md' 'CHANGELOG.md' | paste -sd, -)
+          {
+            echo "external=$external"
+            echo "has_external=$([ -n "$external" ] && echo true || echo false)"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch to docs composer (makegov/docs)
+        if: steps.changes.outputs.has_external == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+        run: |
+          gh api "repos/$TARGET/dispatches" \
+            -f event_type=external_updated \
+            -f "client_payload[source_repo]=${{ github.repository }}" \
+            -f "client_payload[source_ref]=${{ github.sha }}" \
+            -f "client_payload[changed_paths]=${{ steps.changes.outputs.external }}"

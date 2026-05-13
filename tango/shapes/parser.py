@@ -26,6 +26,62 @@ from tango.exceptions import ShapeParseError, ShapeValidationError
 from tango.shapes.models import FieldSpec, ShapeSpec
 from tango.shapes.schema import SchemaRegistry
 
+# Global expand-name aliases. Mirrors the server's `_EXPAND_ALIASES` in
+# `api/shaping/grammar.py` (Tango PR #2259, issue #2266). Keys are user-typed
+# alias names; values are the canonical names returned by the API and used by
+# the schema registry. The rewrite only fires when the alias is used as an
+# *expansion* (has nested fields or a wildcard) — bare scalars like
+# `shape=naics_code` are left alone and continue to return the raw column.
+#
+# The canonical name (``naics`` / ``psc``) becomes the output key on the
+# response regardless of which spelling the caller used. Keep this list short:
+# aliases are for well-known historical spellings, not naming inconsistencies.
+_EXPAND_ALIASES: dict[str, str] = {
+    "naics_code": "naics",
+    "psc_code": "psc",
+}
+
+
+def _normalize_expand_aliases(fields: list[FieldSpec]) -> None:
+    """Rewrite expand-form alias names to their canonical form, in place.
+
+    Walks ``fields`` recursively. A field is treated as an "expansion" (and
+    therefore eligible for alias rewriting) when it has ``nested_fields`` or
+    ``is_wildcard`` set. Bare scalar leaves are left untouched so callers can
+    still request the raw column value via ``shape=naics_code``.
+
+    If both the alias and its canonical name appear as expansions at the same
+    level (e.g. ``shape=naics(code),naics_code(description)``), the canonical
+    wins and the alias entry is dropped silently — this matches the server's
+    behavior and avoids emitting two output keys for the same data.
+
+    Args:
+        fields: List of FieldSpec objects to normalize (mutated in place).
+    """
+    # First pass: collect names of expand-form fields at this level so we can
+    # detect canonical/alias collisions before rewriting.
+    expand_names = {f.name for f in fields if f.nested_fields or f.is_wildcard}
+
+    # Second pass: rewrite or drop aliases, then recurse into nested fields.
+    rewritten: list[FieldSpec] = []
+    for field in fields:
+        is_expand = bool(field.nested_fields) or field.is_wildcard
+        canonical = _EXPAND_ALIASES.get(field.name) if is_expand else None
+
+        if canonical is not None:
+            if canonical in expand_names and canonical != field.name:
+                # Canonical already requested at this level — drop the alias.
+                continue
+            field.name = canonical
+
+        if field.nested_fields:
+            _normalize_expand_aliases(field.nested_fields)
+
+        rewritten.append(field)
+
+    # Replace the contents of the input list (caller holds the reference).
+    fields[:] = rewritten
+
 
 def _suggest_field_correction(invalid_field: str, valid_fields: list[str]) -> str | None:
     """Suggest a correction for an invalid field name
@@ -148,6 +204,10 @@ class ShapeParser:
         # Parse the shape
         try:
             fields = self._parse_field_list(shape, 0)[0]
+            # Rewrite expand-form aliases (e.g. naics_code(...) -> naics(...))
+            # to their canonical names. Mirrors server's `_EXPAND_ALIASES` so
+            # both spellings are accepted client-side. See issue #2266.
+            _normalize_expand_aliases(fields)
             shape_spec = ShapeSpec(fields=fields)
 
             # Cache the result
