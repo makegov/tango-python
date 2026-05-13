@@ -39,7 +39,7 @@ print(f"Found {agencies.count} agencies")
 
 # Get specific agency
 agency = client.get_agency("GSA")
-print(f"Agency: {agency['name']}")
+print(f"Agency: {agency.name}")
 
 # Search contracts
 contracts = client.list_contracts(

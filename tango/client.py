@@ -216,7 +216,13 @@ class TangoClient:
 
         Accepts either ``json_data`` (positional) or ``json=`` (keyword) for
         backward compatibility with internal callers and docs examples.
+        Passing both raises ``TangoValidationError`` rather than silently
+        picking one — that ambiguity would hide caller bugs.
         """
+        if json_data is not None and json is not None:
+            raise TangoValidationError(
+                "_post: pass `json_data` or `json`, not both."
+            )
         body = json_data if json_data is not None else json
         if body is None:
             body = {}
@@ -233,7 +239,13 @@ class TangoClient:
 
         Accepts either ``json_data`` (positional) or ``json=`` (keyword) for
         backward compatibility with internal callers and docs examples.
+        Passing both raises ``TangoValidationError`` rather than silently
+        picking one — that ambiguity would hide caller bugs.
         """
+        if json_data is not None and json is not None:
+            raise TangoValidationError(
+                "_patch: pass `json_data` or `json`, not both."
+            )
         body = json_data if json_data is not None else json
         if body is None:
             body = {}
@@ -2502,18 +2514,18 @@ class TangoClient:
         if not callback_url:
             raise TangoValidationError("Webhook callback_url is required")
         if name is None:
-            warnings.warn(
-                "create_webhook_endpoint() called without name=; the Tango "
-                "API requires `name` and this call will fail server-side. "
-                "Pass name='your-endpoint-name'. This will become a required "
-                "argument in a future major version.",
-                DeprecationWarning,
-                stacklevel=2,
+            # `name` was a deprecation warning in 0.7.0 (never publicly
+            # released). 1.0.0 makes it a hard error since the server
+            # enforces unique(user, name) and the warn-then-400 path
+            # was a worse DX than just raising client-side.
+            raise TangoValidationError(
+                "create_webhook_endpoint(): `name=` is required. "
+                "The Tango API enforces unique(user, name) on endpoints; "
+                "omitting it would return a 400 server-side. "
+                "Pass name='your-endpoint-name'."
             )
 
-        body: dict[str, Any] = {"callback_url": callback_url, "is_active": is_active}
-        if name is not None:
-            body["name"] = name
+        body: dict[str, Any] = {"callback_url": callback_url, "is_active": is_active, "name": name}
 
         data = self._post("/api/webhooks/endpoints/", body)
         return WebhookEndpoint(
@@ -2901,7 +2913,8 @@ class TangoClient:
         Args:
             code: PSC code.
             months: Window size in months (e.g. 6, 12, 24, 36).
-            period_grouping: ``monthly``, ``quarterly``, etc.
+            period_grouping: ``"month"``, ``"quarter"``, or ``"year"`` (the
+                values the API accepts on the path segment).
         """
         if not code:
             raise TangoValidationError("PSC code is required")

@@ -253,20 +253,17 @@ class TestWebhookEndpointWriteFixes:
         assert body["name"] == "primary"
         assert body["callback_url"] == "https://x/"
 
-    def test_create_endpoint_without_name_warns(self, mock_request: Mock) -> None:
-        mock_request.return_value = _mock_response(
-            {
-                "id": "ep-1",
-                "name": "",
-                "callback_url": "https://x/",
-                "is_active": True,
-                "created_at": "2026-01-01",
-                "updated_at": "2026-01-01",
-            }
-        )
+    def test_create_endpoint_without_name_raises(self, mock_request: Mock) -> None:
+        # 1.0.0 turned the 0.7.0 DeprecationWarning into a hard error: the
+        # server enforces unique(user, name), so omitting name would 400
+        # anyway. Raising client-side gives a better error message and
+        # avoids the wasted round-trip.
+        mock_request.return_value = _mock_response({})
         client = TangoClient(api_key="x", base_url="https://t.example")
-        with pytest.warns(DeprecationWarning, match="name"):
+        with pytest.raises(TangoValidationError, match="name"):
             client.create_webhook_endpoint("https://x/")
+        # And the request never went out.
+        mock_request.assert_not_called()
 
     def test_update_endpoint_passes_name(self, mock_request: Mock) -> None:
         mock_request.return_value = _mock_response(

@@ -86,17 +86,17 @@ for agency in agencies.results:
 Get a specific agency by code.
 
 ```python
-agency = client.get_agency(code="GSA")
+agency = client.get_agency("GSA")
 ```
 
 **Parameters:**
-- `code` (str): Agency code (e.g., "GSA", "DOD", "HHS")
+- `code` (str): Agency identifier. Accepts CGAC ("097"), FPDS code ("4712"), short code ("GSA"), abbreviation, or canonical name. See [Federal agency hierarchy](https://docs.makegov.com/api-reference/concepts/federal-agency-hierarchy/) for code semantics.
 
 **Returns:** `Agency` dataclass with agency details
 
 **Example:**
 ```python
-gsa = client.get_agency("4712")
+gsa = client.get_agency("GSA")
 print(f"Name: {gsa.name}")
 print(f"Abbreviation: {gsa.abbreviation or 'N/A'}")
 if gsa.department:

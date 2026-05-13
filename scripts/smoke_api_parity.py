@@ -96,9 +96,9 @@ run(
     lambda: client.get_naics_metrics(NAICS_CODE, 12, "month"),
 )
 
-bt_pager = client.list_business_types(limit=1)
+bt_pager = run("list_business_types(limit=1)", lambda: client.list_business_types(limit=1))
 bt_code = ""
-if bt_pager.results:
+if bt_pager and bt_pager.results:
     bt_code = str(bt_pager.results[0].code or "")
 run(
     f"get_business_type({bt_code!r})",
