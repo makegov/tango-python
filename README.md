@@ -1,5 +1,9 @@
 # Tango Python SDK
 
+[![PyPI](https://img.shields.io/pypi/v/tango-python.svg)](https://pypi.org/project/tango-python/)
+[![Python Versions](https://img.shields.io/pypi/pyversions/tango-python.svg)](https://pypi.org/project/tango-python/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, featuring dynamic response shaping and comprehensive type hints.
 
 ## Features
