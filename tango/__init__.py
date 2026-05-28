@@ -9,6 +9,7 @@ from .exceptions import (
     TangoValidationError,
 )
 from .models import (
+    BudgetAccount,
     GsaElibraryContract,
     ITDashboardInvestment,
     PaginatedResponse,
@@ -43,7 +44,7 @@ from .webhooks import (
 )
 from .webhooks.receiver import Delivery, WebhookReceiver
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -54,6 +55,7 @@ __all__ = [
     "RateLimitInfo",
     "ResolveCandidate",
     "ResolveResult",
+    "BudgetAccount",
     "GsaElibraryContract",
     "ITDashboardInvestment",
     "PaginatedResponse",

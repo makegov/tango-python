@@ -282,20 +282,65 @@ class AwardTransaction:
 
 
 @dataclass
-class Contract:
-    """Schema definition for Contract (not used for instances)"""
+class OrganizationOfficePayload:
+    """Schema definition for OrganizationOfficePayload (not used for instances).
 
-    id: str
-    award_id: str
-    recipient_name: str
-    description: str
-    award_amount: Decimal | None = None
+    Returned for a contract's ``awarding_office`` / ``funding_office``.
+    """
+
+    organization_id: str | None = None
+    office_code: str | None = None
+    office_name: str | None = None
+    agency_code: str | None = None
+    agency_name: str | None = None
+    department_code: int | None = None
+    department_name: str | None = None
+
+
+@dataclass
+class Contract:
+    """Schema definition for Contract (not used for instances).
+
+    Mirrors the API ``ContractList`` schema (``ContractListSerializer``).
+    ``/api/contracts/`` is shape-on-demand: which fields appear in a response
+    depends on the ``?shape=`` query param, so every field is optional.
+    """
+
+    key: str | None = None
+    piid: str | None = None
     award_date: date | None = None
     fiscal_year: int | None = None
+    obligated: Decimal | None = None
+    base_and_exercised_options_value: Decimal | None = None
+    total_contract_value: Decimal | None = None
+    naics_code: int | None = None
+    psc_code: str | None = None
+    set_aside: str | None = None
+    solicitation_identifier: str | None = None
+    description: str | None = None
+    awarding_office: OrganizationOfficePayload | None = None
+    funding_office: OrganizationOfficePayload | None = None
     recipient: RecipientProfile | None = None
+    parent_award: ParentAward | None = None
+    legislative_mandates: LegislativeMandates | None = None
+    place_of_performance: PlaceOfPerformance | None = None
+    subawards_summary: SubawardsSummary | None = None
+
+    # --- Deprecated fields (never returned by the API; removed in 2.0.0) ---
+    # Declared with None defaults so existing consumers reading these do not
+    # raise AttributeError; they always resolve to None.
+    id: str | None = None
+    """.. deprecated:: Never returned by the API. Removed in 2.0.0."""
+    award_id: str | None = None
+    """.. deprecated:: Never returned by the API. Removed in 2.0.0."""
+    recipient_name: str | None = None
+    """.. deprecated:: Use ``recipient.display_name``. Removed in 2.0.0."""
+    award_amount: Decimal | None = None
+    """.. deprecated:: Use ``obligated`` / ``total_contract_value``. Removed in 2.0.0."""
     awarding_agency: Agency | None = None
+    """.. deprecated:: Use ``awarding_office``. Removed in 2.0.0."""
     funding_agency: Agency | None = None
-    place_of_performance: Location | None = None
+    """.. deprecated:: Use ``funding_office``. Removed in 2.0.0."""
 
 
 @dataclass
@@ -626,9 +671,7 @@ class WebhookSamplePayloadAllResponse(TypedDict):
     note: str
 
 
-WebhookSamplePayloadResponse = (
-    WebhookSamplePayloadSingleResponse | WebhookSamplePayloadAllResponse
-)
+WebhookSamplePayloadResponse = WebhookSamplePayloadSingleResponse | WebhookSamplePayloadAllResponse
 
 
 @dataclass
@@ -711,6 +754,90 @@ class ValidateResult:
     type: str
     value: str
     errors: list[str] | None = None
+
+
+@dataclass
+class BudgetAccount:
+    """Schema definition for BudgetAccount (not used for instances).
+
+    Federal account x fiscal year budget rollup. ``/api/budget/accounts/`` is
+    shape-on-demand: which fields appear depends on the ``?shape=`` query param,
+    so every field is optional. Mirrors the API ``BudgetAccount`` schema.
+    """
+
+    id: int | None = None
+    federal_account_symbol: str | None = None
+    fiscal_year: int | None = None
+    agency_code: str | None = None
+    agency_name: str | None = None
+    bureau_name: str | None = None
+    account_title: str | None = None
+    bea_category: str | None = None
+    on_off_budget: str | None = None
+    subfunction_code: str | None = None
+    # Lifecycle
+    requested_ba: Decimal | None = None
+    enacted_ba: Decimal | None = None
+    apportioned: Decimal | None = None
+    obligated_total: Decimal | None = None
+    outlayed_total: Decimal | None = None
+    unobligated_balance: Decimal | None = None
+    # Contract / assistance / unlinked breakdown
+    contract_obligated: Decimal | None = None
+    contract_outlayed: Decimal | None = None
+    n_contracts: int | None = None
+    n_unique_contract_recipients: int | None = None
+    assistance_obligated: Decimal | None = None
+    assistance_outlayed: Decimal | None = None
+    n_grants: int | None = None
+    n_unique_grant_recipients: int | None = None
+    unlinked_obligated: Decimal | None = None
+    contract_share_of_obligated: Decimal | None = None
+    contract_share_of_obligated_capped: Decimal | None = None
+    contract_share_capped_flag: bool | None = None
+    assistance_share_of_obligated: Decimal | None = None
+    assistance_share_of_obligated_capped: Decimal | None = None
+    assistance_share_capped_flag: bool | None = None
+    # Forward-look
+    next_year_requested_ba: Decimal | None = None
+    ba_growth_next_year: Decimal | None = None
+    ba_growth_next_year_pct: Decimal | None = None
+    # Ratios
+    enacted_to_requested_pct: Decimal | None = None
+    enacted_to_requested_pct_capped: Decimal | None = None
+    enacted_to_requested_pct_capped_flag: bool | None = None
+    apportioned_to_enacted_pct: Decimal | None = None
+    apportioned_to_enacted_pct_capped: Decimal | None = None
+    apportioned_to_enacted_pct_capped_flag: bool | None = None
+    obligated_to_apportioned_pct: Decimal | None = None
+    obligated_to_apportioned_pct_capped: Decimal | None = None
+    obligated_to_apportioned_pct_capped_flag: bool | None = None
+    obligated_to_enacted_pct: Decimal | None = None
+    obligated_to_enacted_pct_capped: Decimal | None = None
+    obligated_to_enacted_pct_capped_flag: bool | None = None
+    outlayed_to_obligated_pct: Decimal | None = None
+    outlayed_to_obligated_pct_capped: Decimal | None = None
+    outlayed_to_obligated_pct_capped_flag: bool | None = None
+    unobligated_pct: Decimal | None = None
+    # Trends
+    enacted_ba_yoy_pct: Decimal | None = None
+    obligated_yoy_pct: Decimal | None = None
+    contract_obligated_yoy_pct: Decimal | None = None
+    enacted_ba_5yr_cagr: Decimal | None = None
+    contract_obligated_5yr_cagr: Decimal | None = None
+    # Request-vs-actual
+    requested_contractual_services: Decimal | None = None
+    requested_personnel_share: Decimal | None = None
+    actual_vs_requested_contract: Decimal | None = None
+    actual_vs_requested_contract_capped: Decimal | None = None
+    actual_vs_requested_contract_capped_flag: bool | None = None
+    # Provenance + narrative
+    appendix_pdf_url: str | None = None
+    account_narrative_excerpt: str | None = None
+    top_contract_recipients: list[Any] | None = None
+    top_grant_recipients: list[Any] | None = None
+    created: str | None = None
+    modified: str | None = None
 
 
 @dataclass
@@ -829,6 +956,18 @@ class ShapeConfig:
     # Default for list_vehicle_orders()
     VEHICLE_ORDERS_MINIMAL: Final = (
         "key,piid,award_date,obligated,total_contract_value,description,recipient(display_name,uei)"
+    )
+
+    # Default for list_budget_accounts() / get_budget_account()
+    # Mirrors the API's BUDGET_ACCOUNT_DEFAULT_SHAPE.
+    BUDGET_ACCOUNTS_MINIMAL: Final = (
+        "id,federal_account_symbol,fiscal_year,agency_code,agency_name,bureau_name,"
+        "account_title,bea_category,on_off_budget,subfunction_code,"
+        "requested_ba,enacted_ba,apportioned,obligated_total,outlayed_total,"
+        "unobligated_balance,contract_obligated,contract_share_of_obligated_capped,"
+        "assistance_obligated,obligated_to_apportioned_pct_capped,"
+        "obligated_to_enacted_pct_capped,outlayed_to_obligated_pct_capped,"
+        "ba_growth_next_year_pct"
     )
 
     # Default for list_organizations()

@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- `Contract` model: removed dead fields (`id`, `award_id`, `recipient_name`,
+  `award_amount`, `awarding_agency`, `funding_agency`) and added the real API
+  fields (`key`, `piid`, `obligated`, `total_contract_value`,
+  `base_and_exercised_options_value`, `awarding_office`, `funding_office`,
+  `naics_code`, `psc_code`, `set_aside`, `solicitation_identifier`,
+  `parent_award`, `legislative_mandates`, `subawards_summary`,
+  `place_of_performance`). The deprecated fields remain declared with `None`
+  defaults for one minor cycle (they never returned data) and will be removed
+  in `2.0.0`. New `OrganizationOfficePayload` dataclass for the office fields.
+  (`Contract` is a documentation-only dataclass — not instantiated or exported
+  — so there is no runtime impact.)
+- `list_contracts`: no longer sends `page=1` to the cursor-only `/api/contracts/`
+  endpoint. When no cursor is supplied, neither `page` nor `cursor` is sent and
+  the API returns the first page by default.
+
+### Added
+- Budget accounts surface (tango v4.6.8): `list_budget_accounts`,
+  `get_budget_account`, `get_budget_account_quarters`,
+  `get_budget_account_recipients`. New `BudgetAccount` dataclass exported from
+  the top-level package, plus `ShapeConfig.BUDGET_ACCOUNTS_MINIMAL`.
+- Singleton detail GETs: `get_contract`, `get_contract_subawards`,
+  `get_contract_transactions`, `get_forecast`, `get_grant`, `get_notice`,
+  `get_opportunity`, `get_subaward`.
+- `get_entity_budget_flows(uei)` for `/api/entities/{uei}/budget-flows/`.
+- `list_otidv_awards(key)` for `/api/otidvs/{key}/awards/` (parity with Node).
+- `grant_id` filter kwarg on `list_grants` (supports multi-value OR via `|`).
+
+### CI
+- Re-enabled `lint.yml` as a PR + push-to-main gate (ruff format, ruff check,
+  mypy). The filter/shape conformance check is split into a separate
+  non-blocking job pending a token for the private manifest repo.
+
 ## [1.0.0] - 2026-05-13
 
 > First stable release. `tango-python` is now at full API parity with the

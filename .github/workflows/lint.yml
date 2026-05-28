@@ -1,18 +1,53 @@
 name: Linting
 
-# Disabled: requires checkout of private makegov/tango repo for filter_shape conformance check.
-# Re-enable when that repo is accessible (e.g. add TANGO_API_REPO_ACCESS_TOKEN secret).
+# Lint gate (ruff format + ruff check + mypy) runs on every PR and push to main.
+#
+# The SDK filter/shape conformance check needs the canonical manifest from the
+# private makegov/tango repo. That checkout requires a token the public CI does
+# not have, so the conformance step is kept separate and non-blocking
+# (continue-on-error) until a TANGO_API_REPO_ACCESS_TOKEN secret is wired up.
+# The lint gate below is fully self-contained and blocks the PR on failure.
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ main, develop ]
-  # pull_request:
-  #   branches: [ main, develop ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install uv
+      uses: astral-sh/setup-uv@v4
+      with:
+        version: "latest"
+
+    - name: Set up Python
+      run: uv python install 3.12
+
+    - name: Install dependencies
+      run: uv sync --all-extras
+
+    - name: Check formatting with ruff
+      run: uv run ruff format --check tango/
+
+    - name: Lint with ruff
+      run: uv run ruff check tango/
+
+    - name: Type check with mypy
+      run: uv run mypy tango/
+
+  conformance:
+    # Non-blocking: requires checkout of the private makegov/tango repo for the
+    # canonical filter_shape manifest. Wire a TANGO_API_REPO_ACCESS_TOKEN secret
+    # and flip continue-on-error to make this a hard gate.
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
     steps:
     - uses: actions/checkout@v4
 
@@ -21,23 +56,18 @@ jobs:
       with:
         repository: makegov/tango
         path: tango-api
-    
+        token: ${{ secrets.TANGO_API_REPO_ACCESS_TOKEN }}
+
     - name: Install uv
       uses: astral-sh/setup-uv@v4
       with:
         version: "latest"
-    
+
     - name: Set up Python
       run: uv python install 3.12
-    
+
     - name: Install dependencies
       run: uv sync --all-extras
-    
-    - name: Check formatting with ruff
-      run: uv run ruff format --check tango/
-    
-    - name: Lint with ruff
-      run: uv run ruff check tango/
 
     - name: Check SDK filter/shape conformance
       run: uv run python scripts/check_filter_shape_conformance.py --manifest tango-api/contracts/filter_shape_contract.json

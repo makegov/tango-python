@@ -51,6 +51,7 @@ RESOURCE_TO_METHOD: dict[str, str] = {
     "naics": "list_naics",
     "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
     "itdashboard": "list_itdashboard_investments",
+    "budget_accounts": "list_budget_accounts",
     # Resources not yet implemented in SDK
     "offices": None,
 }
@@ -62,6 +63,7 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
         IDV,
         OTA,
         OTIDV,
+        BudgetAccount,
         Contract,
         Entity,
         Forecast,
@@ -110,6 +112,7 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
             ShapeConfig.ITDASHBOARD_INVESTMENTS_COMPREHENSIVE,
             ITDashboardInvestment,
         ),
+        ("BUDGET_ACCOUNTS_MINIMAL", ShapeConfig.BUDGET_ACCOUNTS_MINIMAL, BudgetAccount),
     ]
     for name, shape_str, model_cls in configs:
         entries.append((name, shape_str, model_cls))
