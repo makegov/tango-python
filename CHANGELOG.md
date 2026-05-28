@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `list_contracts`: no longer sends `page=1` to the cursor-only `/api/contracts/`
   endpoint. When no cursor is supplied, neither `page` nor `cursor` is sent and
   the API returns the first page by default.
+- Shape validation: registered the `ContractOrIDVCompetition` nested schema
+  (alias of `Competition`) so nested selections like
+  `competition(extent_competed,number_of_offers_received)` on contract / IDV
+  shapes validate instead of raising `ShapeValidationError`.
 
 ### Added
 - Budget accounts surface (tango v4.6.8): `list_budget_accounts`,

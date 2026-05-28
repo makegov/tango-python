@@ -1487,6 +1487,10 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Location": LOCATION_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "Competition": COMPETITION_SCHEMA,
+    # Alias: CONTRACT_SCHEMA/IDV_SCHEMA reference the competition leaf as
+    # "ContractOrIDVCompetition" (the models.py dataclass name); it is the same
+    # field set as Competition. Register both so nested shape selection resolves.
+    "ContractOrIDVCompetition": COMPETITION_SCHEMA,
     "ParentAward": PARENT_AWARD_SCHEMA,
     "LegislativeMandates": LEGISLATIVE_MANDATES_SCHEMA,
     "SubawardsSummary": SUBAWARDS_SUMMARY_SCHEMA,
