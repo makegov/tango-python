@@ -40,9 +40,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `grant_id` filter kwarg on `list_grants` (supports multi-value OR via `|`).
 
 ### CI
-- Re-enabled `lint.yml` as a PR + push-to-main gate (ruff format, ruff check,
-  mypy). The filter/shape conformance check is split into a separate
-  non-blocking job pending a token for the private manifest repo.
+- Re-enabled `lint.yml` as a PR + push-to-main gate. `ruff format` and
+  `ruff check` are hard gates; `mypy` runs advisory (continue-on-error) pending
+  burn-down of ~28 pre-existing type errors. The filter/shape conformance check
+  is a separate job that skips cleanly until a `TANGO_API_REPO_ACCESS_TOKEN`
+  secret for the private manifest repo is configured, at which point it becomes
+  a hard gate.
 
 ## [1.0.0] - 2026-05-13
 
