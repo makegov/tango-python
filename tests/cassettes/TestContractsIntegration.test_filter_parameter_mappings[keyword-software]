@@ -91,4 +91,91 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software
+  response:
+    body:
+      string: '{"count":333925,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&search=software&cursor=WyIyMDI2LTA1LTI2IiwgImI1NzQ3MGZkLTI0MWUtNTBiZS1hODllLWNmZGFkYmNhMzVmMiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImI1NzQ3MGZkLTI0MWUtNTBiZS1hODllLWNmZGFkYmNhMzVmMiJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","description":"TENEBALE
+        SOFTWARE","key":"CONT_AWD_89603026F0034_8960_NNG15SD76B_8000","piid":"89603026F0034","recipient":{"display_name":"ENTERPRISE
+        TECHNOLOGY SOLUTIONS, INC."},"total_contract_value":96427.99},{"award_date":"2026-05-26","description":"CENSITRAC
+        AND RELATED CENSIS SOFTWARE IDIQ","key":"CONT_AWD_36C10B26F0145_3600_36C10B26D0007_3600","piid":"36C10B26F0145","recipient":{"display_name":"CENSIS
+        TECHNOLOGIES, INC."},"total_contract_value":61818.8},{"award_date":"2026-05-26","description":"CENSITRAC
+        AND RELATED CENSIS SOFTWARE IDIQ","key":"CONT_AWD_36C10B26F0135_3600_36C10B26D0007_3600","piid":"36C10B26F0135","recipient":{"display_name":"CENSIS
+        TECHNOLOGIES, INC."},"total_contract_value":650552.8},{"award_date":"2026-05-26","description":"NHLBI:
+        SUPPLY: AGILENT 8850 GC SYSTEM, 7650 ALS SAMPLER, OPENLAB CDS WORKSTATION/SOFTWARE
+        BUNDLE","key":"CONT_AWD_75N98026F00154_7529_GS07F0564X_4732","piid":"75N98026F00154","recipient":{"display_name":"AGILENT
+        TECHNOLOGIES INC"},"total_contract_value":41265.64},{"award_date":"2026-05-26","description":"PCARE
+        TRUTHPOINT ROUNDING SOLUTION SOFTWARE","key":"CONT_AWD_36C24926N0536_3600_NNG15SD24B_8000","piid":"36C24926N0536","recipient":{"display_name":"TECHANAX
+        LLC"},"total_contract_value":84872.0}]}'
+    headers:
+      CF-RAY:
+      - a02d53510ab8ae26-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ldsFHSfmEs%2FDSQYrW7NqD31vUzc%2BSGERdSNR01gbnf%2FQ%2B30tEOA5KenxFYxUc48fbs9jtwLI%2FvJ2nbMgM2AB1scedVmSnD5P3ShaIgoBXSsIIITdBOFXjqZofaHW1Z%2BhchTBFXXmJK%2FYnveMwd36"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1691'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 19.935s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '987'
+      x-ratelimit-burst-reset:
+      - '16'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999919'
+      x-ratelimit-daily-reset:
+      - '40778'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '987'
+      x-ratelimit-reset:
+      - '16'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

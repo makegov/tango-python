@@ -118,4 +118,93 @@ interactions:
     status:
       code: 504
       message: Gateway Timeout
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&fiscal_year_gte=2020&fiscal_year_lte=2024
+  response:
+    body:
+      string: '{"count":26413890,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&fiscal_year_gte=2020&fiscal_year_lte=2024&cursor=WyIyMDI0LTA5LTMwIiwgImZmZTRmMmUxLTE3NDUtNTgzNi05MTAzLTNkNmNiZjkwOGNkNSJd","previous":null,"cursor":"WyIyMDI0LTA5LTMwIiwgImZmZTRmMmUxLTE3NDUtNTgzNi05MTAzLTNkNmNiZjkwOGNkNSJd","previous_cursor":null,"results":[{"award_date":"2024-09-30","description":"4565982784!PEARS,
+        FRESH,","key":"CONT_AWD_SPE3SU24FJJFB_9700_SPE30020DS351_9700","piid":"SPE3SU24FJJFB","recipient":{"display_name":"CHICO
+        PRODUCE, INC."},"total_contract_value":814.4},{"award_date":"2024-09-30","description":"BAG
+        PLASTIC","key":"CONT_AWD_47QSSC24FFYM4_4732_GS02FW0003_4730","piid":"47QSSC24FFYM4","recipient":{"display_name":"NATIONAL
+        INDUSTRIES FOR THE BLIND"},"total_contract_value":178.9},{"award_date":"2024-09-30","description":"2024
+        COMM PROJECTS ATTACH 1A - SOW-CN 317 TO CN 797 V2 21DEC23ATTACH 2 - SOW-CN
+        317 TO CN 799, 11 APR 24 ATTACH 3 - SOW-CN 317 TO B800 11 APR 2024ATTACH 4A
+        - SOW-CN 317 TO B802 V2 REV 21DEC23 ATTACH 5 - SOW-B618 PREMISES WIRING 29
+        MARCH 2024","key":"CONT_AWD_FA667024C0005_9700_-NONE-_-NONE-","piid":"FA667024C0005","recipient":{"display_name":"DMYLES
+        INC."},"total_contract_value":348798.51},{"award_date":"2024-09-30","description":"FBC
+        FY24 - GIS DESKTOP","key":"CONT_AWD_12FPC224F0082_12D0_12314424A0016_1205","piid":"12FPC224F0082","recipient":{"display_name":"PANAMERICA
+        COMPUTERS, INC."},"total_contract_value":10132.46},{"award_date":"2024-09-30","description":"TENNSCO
+        JAN6618DHBK JANITORIAL CABINET,","key":"CONT_AWD_47QSWA24F2Y64_4732_47QSWA23A0024_4732","piid":"47QSWA24F2Y64","recipient":{"display_name":"MONO
+        MACHINES LLC"},"total_contract_value":730.97}]}'
+    headers:
+      CF-RAY:
+      - a02d53d8cfcd4ca0-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=dW%2BeStIrVavoZ93a0VYhE279rHa4RVteKFeAduR46CW3TycXKUB0LsX4LxOTDeOzcc8%2F1dhrys8ngq%2BoH1mLYgQxhcrBvFrtz8JxUI7gcA3ma8DPbwfX1F%2BuAPg4KKHU2gEVKhSYo1NZXzD12xX5"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1793'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.092s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '982'
+      x-ratelimit-burst-reset:
+      - '14'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999914'
+      x-ratelimit-daily-reset:
+      - '40776'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '982'
+      x-ratelimit-reset:
+      - '14'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

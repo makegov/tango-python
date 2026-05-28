@@ -83,4 +83,90 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=10&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=10&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%2Cuei%29%2Ctotal_contract_value%2Cbase_and_exercised_options_value%2Cplace_of_performance%28state_code%2Ccountry_code%29%2Cnaics_code%2Cset_aside&cursor=WyIyMDI2LTA1LTI2IiwgImY5ZDc4OTJmLTI1MGItNTcxYy04ZjI2LTlhMjYwMDBhYTk1NCJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImY5ZDc4OTJmLTI1MGItNTcxYy04ZjI2LTlhMjYwMDBhYTk1NCJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","base_and_exercised_options_value":13450.82,"fiscal_year":2026,"key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","naics_code":811210,"piid":"36C26126P0571","place_of_performance":{"country_code":"USA","state_code":"CA"},"recipient":{"uei":"R8CPTNLLAJJ7","display_name":"CARDIOQUIP,
+        LLC"},"set_aside":null,"total_contract_value":26901.64},{"award_date":"2026-05-26","base_and_exercised_options_value":369600.0,"fiscal_year":2026,"key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","naics_code":541370,"piid":"693JJ326P000012","place_of_performance":{"country_code":"USA","state_code":"IN"},"recipient":{"uei":"ZR6EPV2TYJS1","display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC"},"set_aside":"SBA","total_contract_value":369600.0},{"award_date":"2026-05-26","base_and_exercised_options_value":27500.0,"fiscal_year":2026,"key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","naics_code":561210,"piid":"47PE5226F0113","place_of_performance":{"country_code":"USA","state_code":"DC"},"recipient":{"uei":"ZVX7ZJ5WZ576","display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC."},"set_aside":null,"total_contract_value":27500.0},{"award_date":"2026-05-26","base_and_exercised_options_value":83384.92,"fiscal_year":2026,"key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","naics_code":541519,"piid":"89503026FWA401176","place_of_performance":{"country_code":"USA","state_code":"CO"},"recipient":{"uei":"CGE8ABMZLZN9","display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC."},"set_aside":"SBA","total_contract_value":83384.92},{"award_date":"2026-05-26","base_and_exercised_options_value":68000.0,"fiscal_year":2026,"key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","naics_code":339113,"piid":"36C24126P0441","place_of_performance":{"country_code":"USA","state_code":"CA"},"recipient":{"uei":"MR4FCKSNGRC1","display_name":"Edwards
+        Lifesciences LLC"},"set_aside":null,"total_contract_value":68000.0},{"award_date":"2026-05-26","base_and_exercised_options_value":96427.99,"fiscal_year":2026,"key":"CONT_AWD_89603026F0034_8960_NNG15SD76B_8000","naics_code":541519,"piid":"89603026F0034","place_of_performance":{"country_code":"USA","state_code":"DC"},"recipient":{"uei":"FBRMCGPMN963","display_name":"ENTERPRISE
+        TECHNOLOGY SOLUTIONS, INC."},"set_aside":null,"total_contract_value":96427.99},{"award_date":"2026-05-26","base_and_exercised_options_value":105000.9,"fiscal_year":2026,"key":"CONT_AWD_47PC5226F0297_4740_47PN0423A0004_4740","naics_code":561210,"piid":"47PC5226F0297","place_of_performance":{"country_code":"USA","state_code":"NC"},"recipient":{"uei":"X6E8D5J5BZF7","display_name":"DAE
+        SUNG LLC"},"set_aside":null,"total_contract_value":105000.9},{"award_date":"2026-05-26","base_and_exercised_options_value":49851.72,"fiscal_year":2026,"key":"CONT_AWD_1331L526FNB160100_1341_1331L521A13ES0015_1301","naics_code":541519,"piid":"1331L526FNB160100","place_of_performance":{"country_code":"USA","state_code":"MD"},"recipient":{"uei":"R98MW4ZKUUK3","display_name":"GOVERNMENT
+        ACQUISITIONS INC"},"set_aside":"SBA","total_contract_value":49851.72},{"award_date":"2026-05-26","base_and_exercised_options_value":35000.0,"fiscal_year":2026,"key":"CONT_AWD_36C24626P0712_3600_-NONE-_-NONE-","naics_code":221320,"piid":"36C24626P0712","place_of_performance":{"country_code":"USA","state_code":"NC"},"recipient":{"uei":"KT5TXCYQQ4U5","display_name":"Kokowski
+        Plumbing LLC"},"set_aside":null,"total_contract_value":35000.0},{"award_date":"2026-05-26","base_and_exercised_options_value":45058.8,"fiscal_year":2026,"key":"CONT_AWD_80NSSC26FA425_8000_NNG15SD42B_8000","naics_code":541519,"piid":"80NSSC26FA425","place_of_performance":{"country_code":"USA","state_code":"MD"},"recipient":{"uei":"HQAJMSZDK666","display_name":"ARCHITECHTURE
+        SOLUTIONS LLC"},"set_aside":"SBA","total_contract_value":45058.8}]}'
+    headers:
+      CF-RAY:
+      - a02d546df957a22a-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:47 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Dg2WqehWaC3yr%2BCS9sJlbHMaGztztkXAfzV%2BidWK89V%2BgRLi8aorsijEX7YNK9a%2BwA7AF%2BG9hprcC04CEr4qsao5Ty9W111cp9p0QsXBAYKNxj5c4UJjQk21wH2eTZpCwqy7KZEnJPMxrGmeRM4%2B"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4322'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.056s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '979'
+      x-ratelimit-burst-reset:
+      - '12'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999905'
+      x-ratelimit-daily-reset:
+      - '40752'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '979'
+      x-ratelimit-reset:
+      - '12'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

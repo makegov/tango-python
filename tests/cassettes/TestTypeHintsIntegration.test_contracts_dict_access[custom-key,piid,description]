@@ -78,4 +78,87 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Cdescription
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Cdescription&cursor=WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous_cursor":null,"results":[{"description":"CARDIOQUIP
+        SERVICES","key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","piid":"36C26126P0571"},{"description":"NON-PERSONAL
+        SERVICES TO DEFINE A PRODUCT SPECIFICATION AND CREATE A CONCEPTUAL MODEL OF
+        THE NATIONAL ROAD NETWORK (NRN).","key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","piid":"693JJ326P000012"},{"description":"URGENT
+        REPLACE RECESSED LED PULSATING LIGHTING, U.S. SECRET SERVICES (USSS) HEADQUARTERS
+        BUILDING, 950 H STREET, NW, WASHINGTON, DC 20223.","key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","piid":"47PE5226F0113"},{"description":"ESRI
+        ARCGIS MAINTENANCE","key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","piid":"89503026FWA401176"},{"description":"SURGICAL
+        IMPLANT - HEART TAVR","key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","piid":"36C24126P0441"}]}'
+    headers:
+      CF-RAY:
+      - a02d5478cfc36abb-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=uEggDyORxsbHZ7k4eMFwwghVM8QhLnMM0djoxU6KXc%2FmDtHHKq%2FBJ9YJyNl3JYKCoSfkK8wAlRUq7mSYTfMJyFhIo6LEm27C9wfflvYOWKxVexSAhE3%2Fblby1TZpbCU0u60YFjqfKqAXsdFEA7zu"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1131'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '973'
+      x-ratelimit-burst-reset:
+      - '11'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999899'
+      x-ratelimit-daily-reset:
+      - '40751'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '973'
+      x-ratelimit-reset:
+      - '11'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -83,4 +83,91 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&expiring_gte=2025-01-01&expiring_lte=2025-12-31
+  response:
+    body:
+      string: '{"count":5245796,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&expiring_gte=2025-01-01&expiring_lte=2025-12-31&cursor=WyIyMDI2LTA1LTIwIiwgIjZmMGE4Y2RhLTM4ZjEtNWQ2ZS1iNDUyLTY2MmQwMjJlYmY0YyJd","previous":null,"cursor":"WyIyMDI2LTA1LTIwIiwgIjZmMGE4Y2RhLTM4ZjEtNWQ2ZS1iNDUyLTY2MmQwMjJlYmY0YyJd","previous_cursor":null,"results":[{"award_date":"2026-05-21","description":"EXPRESS
+        REPORT:  COR SPEND REPORT","key":"CONT_AWD_36C25726K0201_3600_36C25720D0099_3600","piid":"36C25726K0201","recipient":{"display_name":"DEWITT
+        MEDICAL DISTRICT"},"total_contract_value":44370.53},{"award_date":"2026-05-21","description":"EXPRESS
+        REPORT: COR SPEND REPORT","key":"CONT_AWD_36C25726K0203_3600_36C25720D0099_3600","piid":"36C25726K0203","recipient":{"display_name":"DEWITT
+        MEDICAL DISTRICT"},"total_contract_value":18168.23},{"award_date":"2026-05-21","description":"EXPRESS
+        REPORT: COR SPEND REPORT","key":"CONT_AWD_36C25726K0202_3600_36C25720D0099_3600","piid":"36C25726K0202","recipient":{"display_name":"DEWITT
+        MEDICAL DISTRICT"},"total_contract_value":18453.26},{"award_date":"2026-05-20","description":"EXPRESS
+        REPORT: MIAMI & WEST PALM DME: QUARTERLY REPORT POP: SEPTEMBER 2025-NOVEMBER
+        2025","key":"CONT_AWD_36C24826K0005_3600_36C24825D0036_3600","piid":"36C24826K0005","recipient":{"display_name":"MEDICAL
+        EQUIPMENT & SUPPLIES OF AMERICA LLC"},"total_contract_value":282038.62},{"award_date":"2026-05-20","description":"CONTROL
+        MEDICATION - OCT FY26","key":"CONT_AWD_15B31026F00000058_1540_36W79720D0001_3600","piid":"15B31026F00000058","recipient":{"display_name":"MCKESSON
+        CORPORATION"},"total_contract_value":320.33}]}'
+    headers:
+      CF-RAY:
+      - a02d53d38f77ff48-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:23 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=zF4jObKyQiwDmia4Hea0L2sY6uQ5AZ8fuDdxy4g9d9NP7qM%2BgEW7SBAc86QOzQ6FDG%2FKO%2FM7wYJ%2FbvAs42rUij1qXOW7yAkK4pyAAD3pxBP1eFb4iMFjt4ZcEdUKOkrIynGbTwgjiedmhP%2Br7SYS"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1724'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.679s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '983'
+      x-ratelimit-burst-reset:
+      - '15'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999915'
+      x-ratelimit-daily-reset:
+      - '40776'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '983'
+      x-ratelimit-reset:
+      - '15'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

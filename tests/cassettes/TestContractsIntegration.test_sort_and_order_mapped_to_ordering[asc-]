@@ -83,4 +83,85 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&ordering=award_date&cursor=WyIxOTc4LTEyLTE1IiwgIjNlNjY5YmJkLTQxMWUtNTllZS04MmFlLWNhNGJiYzI5MDExOSJd","previous":null,"cursor":"WyIxOTc4LTEyLTE1IiwgIjNlNjY5YmJkLTQxMWUtNTllZS04MmFlLWNhNGJiYzI5MDExOSJd","previous_cursor":null,"results":[{"award_date":"1967-01-01","description":null,"key":"CONT_AWD_N6871167C0149_9700_-NONE-_-NONE-","piid":"N6871167C0149","recipient":{"display_name":"NV
+        ENERGY INC"},"total_contract_value":35397.0},{"award_date":"1970-06-07","description":null,"key":"CONT_AWD_N6871170C1205_9700_-NONE-_-NONE-","piid":"N6871170C1205","recipient":{"display_name":"IMPERIAL
+        IRRIGATION DISTRICT"},"total_contract_value":1644571.58},{"award_date":"1977-06-01","description":null,"key":"CONT_AWD_N6871177F7668_9700_-NONE-_-NONE-","piid":"N6871177F7668","recipient":{"display_name":"SOUTHWEST
+        GAS CORPORATION"},"total_contract_value":62000.0},{"award_date":"1978-10-15","description":null,"key":"CONT_AWD_00001197810D1416000179004_142F_-NONE-_-NONE-","piid":"00001197810D1416000179004","recipient":{"display_name":"NELSON
+        & SONS INC"},"total_contract_value":0.0},{"award_date":"1978-12-15","description":null,"key":"CONT_AWD_00006197812D1416000679007_142F_-NONE-_-NONE-","piid":"00006197812D1416000679007","recipient":{"display_name":"625
+        ORLEANS PLACE"},"total_contract_value":0.0}]}'
+    headers:
+      CF-RAY:
+      - a02d53d07d0da21e-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=BmkIxjySUBgN4OzWZ29%2BuHdgkAYZOIvReMp6iLsk%2BjUw4XNc%2FSI%2F1sFL3LEH7DxapK21ireXd4qPa6x0Bf9bOAW80IORLI6rXtj1tkrXGKviXGG1NNFDYjP%2BcnFqPk9%2FuaP18Z9DMVpLVsX7%2FjBT"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1466'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.039s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '985'
+      x-ratelimit-burst-reset:
+      - '16'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999917'
+      x-ratelimit-daily-reset:
+      - '40778'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '985'
+      x-ratelimit-reset:
+      - '16'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

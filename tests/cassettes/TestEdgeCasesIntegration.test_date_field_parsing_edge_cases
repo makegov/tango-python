@@ -128,4 +128,141 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=25&shape=key%2Cpiid%2Caward_date%2Cfiscal_year%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI2LTA1LTI2IiwgImYxMDE2N2E1LTkzMTItNTc5OS1hNDU1LTUyOTU5Yzg2MTY0MyJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImYxMDE2N2E1LTkzMTItNTc5OS1hNDU1LTUyOTU5Yzg2MTY0MyJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","description":"CARDIOQUIP
+        SERVICES","fiscal_year":2026,"key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","piid":"36C26126P0571","recipient":{"display_name":"CARDIOQUIP,
+        LLC"},"total_contract_value":26901.64},{"award_date":"2026-05-26","description":"NON-PERSONAL
+        SERVICES TO DEFINE A PRODUCT SPECIFICATION AND CREATE A CONCEPTUAL MODEL OF
+        THE NATIONAL ROAD NETWORK (NRN).","fiscal_year":2026,"key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","piid":"693JJ326P000012","recipient":{"display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC"},"total_contract_value":369600.0},{"award_date":"2026-05-26","description":"URGENT
+        REPLACE RECESSED LED PULSATING LIGHTING, U.S. SECRET SERVICES (USSS) HEADQUARTERS
+        BUILDING, 950 H STREET, NW, WASHINGTON, DC 20223.","fiscal_year":2026,"key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","piid":"47PE5226F0113","recipient":{"display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC."},"total_contract_value":27500.0},{"award_date":"2026-05-26","description":"ESRI
+        ARCGIS MAINTENANCE","fiscal_year":2026,"key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","piid":"89503026FWA401176","recipient":{"display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC."},"total_contract_value":83384.92},{"award_date":"2026-05-26","description":"SURGICAL
+        IMPLANT - HEART TAVR","fiscal_year":2026,"key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","piid":"36C24126P0441","recipient":{"display_name":"Edwards
+        Lifesciences LLC"},"total_contract_value":68000.0},{"award_date":"2026-05-26","description":"TENEBALE
+        SOFTWARE","fiscal_year":2026,"key":"CONT_AWD_89603026F0034_8960_NNG15SD76B_8000","piid":"89603026F0034","recipient":{"display_name":"ENTERPRISE
+        TECHNOLOGY SOLUTIONS, INC."},"total_contract_value":96427.99},{"award_date":"2026-05-26","description":"TSFB
+        SOFT PRESSURE WASH LOCATED IN RALEIGH, NC AT THE TERRY SANFORD FEDERAL BUILDING","fiscal_year":2026,"key":"CONT_AWD_47PC5226F0297_4740_47PN0423A0004_4740","piid":"47PC5226F0297","recipient":{"display_name":"DAE
+        SUNG LLC"},"total_contract_value":105000.9},{"award_date":"2026-05-26","description":"UIPATH","fiscal_year":2026,"key":"CONT_AWD_1331L526FNB160100_1341_1331L521A13ES0015_1301","piid":"1331L526FNB160100","recipient":{"display_name":"GOVERNMENT
+        ACQUISITIONS INC"},"total_contract_value":49851.72},{"award_date":"2026-05-26","description":"EMERGENCY
+        SEWER REPAIR","fiscal_year":2026,"key":"CONT_AWD_36C24626P0712_3600_-NONE-_-NONE-","piid":"36C24626P0712","recipient":{"display_name":"Kokowski
+        Plumbing LLC"},"total_contract_value":35000.0},{"award_date":"2026-05-26","description":"HBG-21171-C--G-LIHT
+        PROCUREMENT","fiscal_year":2026,"key":"CONT_AWD_80NSSC26FA425_8000_NNG15SD42B_8000","piid":"80NSSC26FA425","recipient":{"display_name":"ARCHITECHTURE
+        SOLUTIONS LLC"},"total_contract_value":45058.8},{"award_date":"2026-05-26","description":"MANLIFT
+        RENTAL","fiscal_year":2026,"key":"CONT_AWD_70Z08026PMECP0119_7008_-NONE-_-NONE-","piid":"70Z08026PMECP0119","recipient":{"display_name":"BSE
+        PERFORMANCE, LLC"},"total_contract_value":3864.0},{"award_date":"2026-05-26","description":"MEDICAL
+        AIR LIFT TRANSPORTATION SERVICES FOR INMATE MOORE, KOREY 29390-009 TO THE
+        FMC BUTNER.","fiscal_year":2026,"key":"CONT_AWD_15B31526F00000067_1540_47QMCB23D0009_4732","piid":"15B31526F00000067","recipient":{"display_name":"INFLIGHT
+        MEDICAL SERVICES INTERNATIONAL, INC."},"total_contract_value":33963.0},{"award_date":"2026-05-26","description":"BACKFLOW
+        PREVENTION REPAIR AND INSPECTION SERVICE.","fiscal_year":2026,"key":"CONT_AWD_70Z03126PALAM0064_7008_-NONE-_-NONE-","piid":"70Z03126PALAM0064","recipient":{"display_name":"BACKFLOW
+        PREVENTION SPECIALISTS, INC."},"total_contract_value":3647.52},{"award_date":"2026-05-26","description":"MOTORIZED
+        WHEELCHAIR","fiscal_year":2026,"key":"CONT_AWD_36C24426F0298_3600_36F79718D0437_3600","piid":"36C24426F0298","recipient":{"display_name":"PERMOBIL
+        INC"},"total_contract_value":15359.45},{"award_date":"2026-05-26","description":"JULY
+        MONTHLY MEDICATIONS","fiscal_year":2026,"key":"CONT_AWD_15B51926F00000118_1540_36W79720D0001_3600","piid":"15B51926F00000118","recipient":{"display_name":"MCKESSON
+        CORPORATION"},"total_contract_value":500000.0},{"award_date":"2026-05-26","description":"THIS
+        PROJECT IS TO INSULATE THE CHILLED WATER PIPES IN THE AGRICULTURE TUNNEL LOCATED
+        AT THE HOTD DC0296ZZ WASHINGTON, DC.","fiscal_year":2026,"key":"CONT_AWD_47PE5326F0160_4740_47PM0024D0007_4740","piid":"47PE5326F0160","recipient":{"display_name":"CAPITAL
+        BRAND GROUP LLC"},"total_contract_value":6640.0},{"award_date":"2026-05-26","description":"STAB/PUNCTURE
+        RESISTANT VESTS MULTIPLE INSTITUTIONS.","fiscal_year":2026,"key":"CONT_AWD_15B10626F00000129_1540_15BNAS23A00000008_1540","piid":"15B10626F00000129","recipient":{"display_name":"ASPETTO
+        INC"},"total_contract_value":47563.4},{"award_date":"2026-05-26","description":"REPLACE
+        THE LEGACY LOAN PROCESSING SYSTEM AND REPLACE THE LEGACY FINANCIAL SYSTEMS
+        FUNCTIONALITIES WITH THE DEPARTMENT''S FINANCIAL MANAGEMENT MODERNIZATION
+        INITIATIVE (FMMI) PLATFORM.","fiscal_year":2026,"key":"CONT_AWD_12314426F0181_1205_12314426A0007_1205","piid":"12314426F0181","recipient":{"display_name":"SUMMIT
+        TECHNOLOGY CONSULTING GROUP, LLC"},"total_contract_value":4895725.15},{"award_date":"2026-05-26","description":"HAZARDOUS
+        MATERIALS DISPOSAL","fiscal_year":2026,"key":"CONT_AWD_15F06726P0000490_1549_-NONE-_-NONE-","piid":"15F06726P0000490","recipient":{"display_name":"ENVIRONMENTAL
+        MANAGEMENT INC"},"total_contract_value":29521.6},{"award_date":"2026-05-26","description":"BPA
+        CALL FOR EYEWEAR - FCI SCHUYLKILL - QUOTE #20226848","fiscal_year":2026,"key":"CONT_AWD_15B21326F00000048_1540_15BFA025A00000039_1540","piid":"15B21326F00000048","recipient":{"display_name":"Federal
+        Prison Industries, Inc"},"total_contract_value":526.0},{"award_date":"2026-05-26","description":"PROJECT
+        TN ERFO FS CHRKE804 2020-2(3):\n\nTHIS PROJECT CONSISTS OF REPAIRING STORM
+        AND FLOOD DAMAGE ON PEAVINE SHEEDS CREEK ROAD (FS 221). PROJECT WORK INCLUDES
+        GRADING, ROADWAY RESURFACING, DRAIN DIP CONSTRUCTION, REPLACEMENT OF DRAINAGE
+        CULVERTS, S","fiscal_year":2026,"key":"CONT_AWD_693C7326C000010_6925_-NONE-_-NONE-","piid":"693C7326C000010","recipient":{"display_name":"APEX
+        CONSTRUCTION GROUP, LLC"},"total_contract_value":7278652.0},{"award_date":"2026-05-26","description":"C201714-
+        LUBE OIL BANK BATTERY REPLACEMENT FOR COGEN OPERATION POWER BACKUP SYSTEM","fiscal_year":2026,"key":"CONT_AWD_75N98026F00004_7529_75N99024D00016_7529","piid":"75N98026F00004","recipient":{"display_name":"TREON
+        SUPPORT SERVICES JV, LLC"},"total_contract_value":71018.58},{"award_date":"2026-05-26","description":"PCS
+        AND ACCESSORIES ORDER","fiscal_year":2026,"key":"CONT_AWD_1331L526F0143_1301_1331L523A13ES0062_1301","piid":"1331L526F0143","recipient":{"display_name":"CSP
+        ENTERPRISES, LLC"},"total_contract_value":30143.74},{"award_date":"2026-05-26","description":"REPLACE
+        BROKEN WINDOWS AT RICHARD SHEPPARD ARNOLD ANNEX 600 W CAPITOL AVE, LITTLE
+        ROCK, AR 72201 LITTLE ROCK FEDERAL BUILDING 700 W CAPITOL AVE, LITTLE ROCK,
+        AR 72201, AND RICHARD SHEPPARD ARNOLD ANNEX 600 W CAPITOL AVE, LITTLE ROCK,
+        AR 72201","fiscal_year":2026,"key":"CONT_AWD_47PD5326F0188_4740_47PH0224A0004_4740","piid":"47PD5326F0188","recipient":{"display_name":"SOUTH
+        DADE AIR CONDITIONING & REFRIGERATION INC"},"total_contract_value":19588.45},{"award_date":"2026-05-26","description":"INSPIRED
+        FLIGHT DRONES PURCHASE","fiscal_year":2026,"key":"CONT_AWD_80NSSC26P0699_8000_-NONE-_-NONE-","piid":"80NSSC26P0699","recipient":{"display_name":"B
+        & H FOTO & ELECTRONICS CORP."},"total_contract_value":50000.0}]}'
+    headers:
+      CF-RAY:
+      - a02d5474191ead20-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=io%2BbhtW3WQk%2BmtqDKqoB%2F593KeOl1JcrWrrr%2FzIhrnt8QULV2X%2FQCzo2uyoZIvo7QGgQiRbcQVKwuS98Ai7urLyuTPHsOlKC2Ao0Qfjyki250LswuzCa1%2FeR0JUmO6meHwbYRKciGgsL7%2Bfuzlpv"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '8036'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.080s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '976'
+      x-ratelimit-burst-reset:
+      - '11'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999902'
+      x-ratelimit-daily-reset:
+      - '40751'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '976'
+      x-ratelimit-reset:
+      - '11'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

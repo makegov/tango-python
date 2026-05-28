@@ -171,4 +171,177 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&cursor=WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","description":"CARDIOQUIP
+        SERVICES","key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","piid":"36C26126P0571","recipient":{"display_name":"CARDIOQUIP,
+        LLC"},"total_contract_value":26901.64},{"award_date":"2026-05-26","description":"NON-PERSONAL
+        SERVICES TO DEFINE A PRODUCT SPECIFICATION AND CREATE A CONCEPTUAL MODEL OF
+        THE NATIONAL ROAD NETWORK (NRN).","key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","piid":"693JJ326P000012","recipient":{"display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC"},"total_contract_value":369600.0},{"award_date":"2026-05-26","description":"URGENT
+        REPLACE RECESSED LED PULSATING LIGHTING, U.S. SECRET SERVICES (USSS) HEADQUARTERS
+        BUILDING, 950 H STREET, NW, WASHINGTON, DC 20223.","key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","piid":"47PE5226F0113","recipient":{"display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC."},"total_contract_value":27500.0},{"award_date":"2026-05-26","description":"ESRI
+        ARCGIS MAINTENANCE","key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","piid":"89503026FWA401176","recipient":{"display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC."},"total_contract_value":83384.92},{"award_date":"2026-05-26","description":"SURGICAL
+        IMPLANT - HEART TAVR","key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","piid":"36C24126P0441","recipient":{"display_name":"Edwards
+        Lifesciences LLC"},"total_contract_value":68000.0}]}'
+    headers:
+      CF-RAY:
+      - a02d54649a12511a-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:45 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=841HljoWP2Hh5y3rYLmitigLJNzUZafDczTD57vtjDLOkzmWNPhRanGHUOcpVlzNj01EamXD0%2FQxvm3z39ZDuYeXW%2BgQBvJNPsk39hE2HqbcTZa6QS%2FhkZxIJJcsvePgeEBg7qCrVuBvW07G993H"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1793'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.039s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '984'
+      x-ratelimit-burst-reset:
+      - '14'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999910'
+      x-ratelimit-daily-reset:
+      - '40754'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '984'
+      x-ratelimit-reset:
+      - '14'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&cursor=WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&cursor=WyIyMDI2LTA1LTI2IiwgImY5ZDc4OTJmLTI1MGItNTcxYy04ZjI2LTlhMjYwMDBhYTk1NCJd&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value","previous":"https://tango.makegov.com/api/contracts/?limit=5&cursor=eyJ2IjogWyIyMDI2LTA1LTI2IiwgImZkMzQ5OTVkLTM4ZmItNTNmYy1hYjYxLThjYjU5MGI5ZDkyNiJdLCAiZCI6ICJwcmV2In0%3D&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value","cursor":"WyIyMDI2LTA1LTI2IiwgImY5ZDc4OTJmLTI1MGItNTcxYy04ZjI2LTlhMjYwMDBhYTk1NCJd","previous_cursor":"eyJ2IjogWyIyMDI2LTA1LTI2IiwgImZkMzQ5OTVkLTM4ZmItNTNmYy1hYjYxLThjYjU5MGI5ZDkyNiJdLCAiZCI6ICJwcmV2In0=","results":[{"award_date":"2026-05-26","description":"TENEBALE
+        SOFTWARE","key":"CONT_AWD_89603026F0034_8960_NNG15SD76B_8000","piid":"89603026F0034","recipient":{"display_name":"ENTERPRISE
+        TECHNOLOGY SOLUTIONS, INC."},"total_contract_value":96427.99},{"award_date":"2026-05-26","description":"TSFB
+        SOFT PRESSURE WASH LOCATED IN RALEIGH, NC AT THE TERRY SANFORD FEDERAL BUILDING","key":"CONT_AWD_47PC5226F0297_4740_47PN0423A0004_4740","piid":"47PC5226F0297","recipient":{"display_name":"DAE
+        SUNG LLC"},"total_contract_value":105000.9},{"award_date":"2026-05-26","description":"UIPATH","key":"CONT_AWD_1331L526FNB160100_1341_1331L521A13ES0015_1301","piid":"1331L526FNB160100","recipient":{"display_name":"GOVERNMENT
+        ACQUISITIONS INC"},"total_contract_value":49851.72},{"award_date":"2026-05-26","description":"EMERGENCY
+        SEWER REPAIR","key":"CONT_AWD_36C24626P0712_3600_-NONE-_-NONE-","piid":"36C24626P0712","recipient":{"display_name":"Kokowski
+        Plumbing LLC"},"total_contract_value":35000.0},{"award_date":"2026-05-26","description":"HBG-21171-C--G-LIHT
+        PROCUREMENT","key":"CONT_AWD_80NSSC26FA425_8000_NNG15SD42B_8000","piid":"80NSSC26FA425","recipient":{"display_name":"ARCHITECHTURE
+        SOLUTIONS LLC"},"total_contract_value":45058.8}]}'
+    headers:
+      CF-RAY:
+      - a02d54654afc511a-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:45 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=1XK8b52tTUDHkwa2VTkS0JhL6YGA1puktffJaRcOkEvnSZs6dETPuUj4ld90oQG1fA%2FJBmLoMyB%2FiF4Ktjwm1wNiHuc0kjrz9oiRyhTn6a7jdV%2B04Nug5htp9VYn9norX7hklKdVLBjj1BDC5n0Y"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1957'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.038s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '983'
+      x-ratelimit-burst-reset:
+      - '14'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999909'
+      x-ratelimit-daily-reset:
+      - '40754'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '983'
+      x-ratelimit-reset:
+      - '14'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1
