@@ -23,7 +23,7 @@ import logging
 from collections.abc import Callable
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, cast
 
 from tango.exceptions import ModelInstantiationError
 from tango.shapes.generator import TypeGenerator
@@ -542,38 +542,6 @@ class ModelFactory:
                             # Value is not a dict - might be a primitive or None
                             result[result_field_name] = value
 
-                elif field_spec.is_wildcard:
-                    # Wildcard on nested field - use full model type
-                    # This is handled at the top level, but we need to handle it here too
-                    # for nested wildcards like recipient(*)
-                    if field_schema.nested_model:
-                        if field_schema.is_list:
-                            if isinstance(value, list):
-                                nested_instances = []
-                                for item in value:
-                                    if isinstance(item, dict):
-                                        # Parse all fields from the nested model
-                                        nested_instance = self._parse_nested_wildcard(
-                                            item, field_schema.nested_model
-                                        )
-                                        nested_instances.append(nested_instance)
-                                    else:
-                                        nested_instances.append(item)
-                                result[result_field_name] = nested_instances
-                            else:
-                                result[result_field_name] = value
-                        else:
-                            if isinstance(value, dict):
-                                nested_instance = self._parse_nested_wildcard(
-                                    value, field_schema.nested_model
-                                )
-                                result[result_field_name] = nested_instance
-                            else:
-                                result[result_field_name] = value
-                    else:
-                        # Not a nested model, just use the value
-                        result[result_field_name] = value
-
                 else:
                     # Simple field - parse using appropriate parser
                     parsed_value = self._parse_field(
@@ -661,7 +629,7 @@ class ModelFactory:
                     raise ModelInstantiationError(
                         f"Could not resolve nested model '{nested_model}'"
                     )
-                return model_class
+                return cast(type, model_class)
             except ImportError as err:
                 raise ModelInstantiationError(
                     f"Could not import models module to resolve '{nested_model}'"
@@ -704,41 +672,6 @@ class ModelFactory:
         # Recursively create nested instance
         return self.create_instance(data, nested_shape, resolved_model, nested_type)
 
-    def _parse_nested_wildcard(
-        self, data: dict[str, Any], nested_model: type | str
-    ) -> dict[str, Any]:
-        """Parse nested object with wildcard (all fields)
-
-        Args:
-            data: Nested object data
-            nested_model: Model class or string name for the nested object
-
-        Returns:
-            Dictionary with all parsed fields
-        """
-        # Resolve nested model if it's a string
-        resolved_model = self._resolve_nested_model(nested_model)
-
-        # Ensure model is registered
-        if not self.schema_registry.is_registered(resolved_model):
-            self.schema_registry.register(resolved_model)
-
-        # Get model schema
-        model_schema = self.schema_registry.get_schema(resolved_model)
-
-        # Parse all fields
-        result: dict[str, Any] = {}
-        for field_name, value in data.items():
-            if field_name in model_schema:
-                field_schema = model_schema[field_name]
-                parsed_value = self._parse_field(field_name, value, field_schema.type, field_schema)
-                result[field_name] = parsed_value
-            else:
-                # Field not in schema, include as-is
-                result[field_name] = value
-
-        return result
-
     def _parse_field(self, field_name: str, value: Any, field_type: type, field_schema: Any) -> Any:
         """Parse a single field value using appropriate parser
 
@@ -778,7 +711,7 @@ class ModelFactory:
         return value
 
     def validate_data(
-        self, data: dict[str, Any], shape_spec: ShapeSpec, base_model: type
+        self, data: dict[str, Any], shape_spec: ShapeSpec, base_model: type | str
     ) -> list[str]:
         """Validate that data matches the shape specification
 
@@ -803,11 +736,15 @@ class ModelFactory:
         errors: list[str] = []
 
         if not isinstance(data, dict):
-            errors.append(f"Expected dictionary data, got {type(data).__name__}")
+            errors.append(  # type: ignore[unreachable]
+                f"Expected dictionary data, got {type(data).__name__}"
+            )
             return errors
 
-        # Ensure model is registered
-        if not self.schema_registry.is_registered(base_model):
+        # Ensure model is registered. String model names are expected to be
+        # pre-registered (explicit schemas); only concrete classes can be
+        # auto-registered via introspection.
+        if isinstance(base_model, type) and not self.schema_registry.is_registered(base_model):
             self.schema_registry.register(base_model)
 
         # Get model schema
@@ -826,9 +763,8 @@ class ModelFactory:
 
             # Check if field exists in schema
             if field_spec.name not in model_schema:
-                errors.append(
-                    f"Field '{field_spec.name}' does not exist in {base_model.__name__} schema"
-                )
+                model_name = base_model.__name__ if isinstance(base_model, type) else base_model
+                errors.append(f"Field '{field_spec.name}' does not exist in {model_name} schema")
                 continue
 
             field_schema = model_schema[field_spec.name]

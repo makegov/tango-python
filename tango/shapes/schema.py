@@ -8,6 +8,7 @@ the dynamic-only model approach. These schemas define field types, nested models
 list indicators independently of the dataclass definitions.
 """
 
+import builtins
 from dataclasses import dataclass
 from typing import Any, get_args, get_origin, get_type_hints
 
@@ -33,10 +34,10 @@ class FieldSchema:
     """
 
     name: str
-    type: type
+    type: builtins.type
     is_optional: bool
     is_list: bool
-    nested_model: type | None = None
+    nested_model: builtins.type | str | None = None
 
     def __repr__(self) -> str:
         """String representation for debugging"""

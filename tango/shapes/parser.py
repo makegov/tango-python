@@ -110,7 +110,7 @@ def _suggest_field_correction(invalid_field: str, valid_fields: list[str]) -> st
 
     # Check for common prefix
     best_match = None
-    best_score = 0
+    best_score = 0.0
 
     for field in valid_fields:
         # Count common prefix length
@@ -166,6 +166,13 @@ class ShapeParser:
         # Lazy initialization of schema registry for performance
         self._schema_registry = schema_registry
         self._schema_registry_initialized = schema_registry is not None
+
+    def _ensure_registry(self) -> SchemaRegistry:
+        """Return the schema registry, lazily creating it on first use."""
+        if self._schema_registry is None:
+            self._schema_registry = SchemaRegistry()
+            self._schema_registry_initialized = True
+        return self._schema_registry
 
     def parse(self, shape: str) -> ShapeSpec:
         """Parse a shape string into a ShapeSpec
@@ -544,25 +551,22 @@ class ShapeParser:
             >>> spec = parser.parse("invalid_field")
             >>> parser.validate(spec, Contract)  # Raises ShapeValidationError
         """
-        # Lazy initialize schema registry
-        if not self._schema_registry_initialized:
-            self._schema_registry = SchemaRegistry()
-            self._schema_registry_initialized = True
+        registry = self._ensure_registry()
 
         # Ensure model is registered
-        if not self._schema_registry.is_registered(model_class):
-            self._schema_registry.register(model_class)
+        if not registry.is_registered(model_class):
+            registry.register(model_class)
 
         # Validate each field
         for field_spec in shape_spec.fields:
             self._validate_field_spec(field_spec, model_class)
 
-    def _validate_field_spec(self, field_spec: FieldSpec, model_class: type) -> None:
+    def _validate_field_spec(self, field_spec: FieldSpec, model_class: type | str) -> None:
         """Validate a single field specification against a model
 
         Args:
             field_spec: Field specification to validate
-            model_class: Model class to validate against
+            model_class: Model class (or registered model name) to validate against
 
         Raises:
             ShapeValidationError: If field is invalid
@@ -571,20 +575,17 @@ class ShapeParser:
         if field_spec.is_wildcard:
             return
 
-        # Lazy initialize schema registry if needed
-        if not self._schema_registry_initialized:
-            self._schema_registry = SchemaRegistry()
-            self._schema_registry_initialized = True
+        registry = self._ensure_registry()
 
         # Validate field exists in model
         try:
-            field_schema = self._schema_registry.validate_field(model_class, field_spec.name)
+            field_schema = registry.validate_field(model_class, field_spec.name)
         except ShapeValidationError as e:
             # Enhance error message with suggestions
             model_name = (
                 model_class.__name__ if hasattr(model_class, "__name__") else str(model_class)
             )
-            model_schema = self._schema_registry.get_schema(model_class)
+            model_schema = registry.get_schema(model_class)
             valid_fields = list(model_schema.keys())
 
             error_msg = f"Field '{field_spec.name}' does not exist in {model_name}."
@@ -630,7 +631,7 @@ class ShapeParser:
                 error_msg += "\n\nNested selections are only valid for object fields like 'recipient', 'agency', 'location', etc."
 
                 # Find some nested fields as examples
-                model_schema = self._schema_registry.get_schema(model_class)
+                model_schema = registry.get_schema(model_class)
                 nested_examples = [
                     name for name, schema in model_schema.items() if schema.nested_model
                 ]
