@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-05-29
+
+### Removed
+- The `notebooks` optional extra (`jupyter`, `ipykernel`). It only powered local
+  editing of `docs/quick_start.ipynb`, which still renders on GitHub/PyPI without
+  it, and its transitive tree (jupyter-server, jupyterlab, nbconvert, tornado,
+  etc.) accounted for the bulk of the repo's open Dependabot alerts. Contributors
+  who want to re-run the notebook can `pip install jupyter` directly. The shipped
+  SDK is unaffected — its only runtime dependency remains `httpx`.
+
+### Changed
+- Refreshed the dev/test dependency lock to clear the remaining Dependabot
+  alerts (patched `idna`, `pygments`, `pytest`, `python-dotenv`; dropped
+  `urllib3`/`requests` transitives). Dev-tool majors moved forward
+  (`mypy` 1.18→2.1, `pytest` 8→9, `ruff` 0.14→0.15, `vcrpy` 7→8); all lint,
+  type, and test gates stay green. No change to the shipped SDK's runtime deps.
+
 ## [1.1.0] - 2026-05-29
 
 ### Fixed
