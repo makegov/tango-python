@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### CI
 - Bumped GitHub Actions off the deprecated Node 20 runtime (forced off
-  2026-06-02): `actions/checkout` v4→v6, `astral-sh/setup-uv` v4→v8, and
+  2026-06-02): `actions/checkout` v4→v6, `astral-sh/setup-uv` v4→v8.1.0
+  (pinned exact — no floating `v8` major tag is published yet), and
   `codecov/codecov-action` v3→v5 (with the renamed `files:` input).
 
 ## [1.1.1] - 2026-05-29
