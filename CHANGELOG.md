@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-05-29
+
 ### Fixed
 - `_parse_webhook_alert`: aligned the parser output with the `WebhookAlert`
   type contract. Sparse server payloads now hydrate `query_type` and `filters`
