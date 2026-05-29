@@ -20,7 +20,7 @@ Examples:
 import logging
 import threading
 from collections import OrderedDict
-from typing import Any, get_args, get_origin, get_type_hints
+from typing import Any, cast, get_args, get_origin, get_type_hints
 
 from tango.exceptions import TypeGenerationError
 from tango.shapes.models import ShapeSpec
@@ -250,7 +250,10 @@ class TypeGenerator:
 
                 field_schema = model_schema[field_spec.name]
 
-                # Determine field type
+                # Determine field type. The value is a heterogeneous mix of type
+                # objects, parameterized generics (list[...]), and union objects,
+                # so it is intentionally typed as Any.
+                field_type: Any
                 if field_spec.nested_fields:
                     # Generate nested type
                     if not field_schema.nested_model:
@@ -275,25 +278,7 @@ class TypeGenerator:
 
                     # Handle optional types
                     if field_schema.is_optional:
-                        field_type = field_type | None  # type: ignore
-
-                    annotations[field_name] = field_type
-
-                elif field_spec.is_wildcard:
-                    # Wildcard on nested field - use full model type
-                    if field_schema.nested_model:
-                        # Resolve nested model if it's a string
-                        field_type = self._resolve_nested_model(field_schema.nested_model)
-                    else:
-                        field_type = field_schema.type
-
-                    # Handle list types
-                    if field_schema.is_list:
-                        field_type = list[field_type]  # type: ignore
-
-                    # Handle optional types
-                    if field_schema.is_optional:
-                        field_type = field_type | None  # type: ignore
+                        field_type = field_type | None
 
                     annotations[field_name] = field_type
 
@@ -303,11 +288,11 @@ class TypeGenerator:
 
                     # Handle list types
                     if field_schema.is_list:
-                        field_type = list[field_type]  # type: ignore
+                        field_type = list[field_type]
 
                     # Handle optional types
                     if field_schema.is_optional:
-                        field_type = field_type | None  # type: ignore
+                        field_type = field_type | None
 
                     annotations[field_name] = field_type
 
@@ -329,7 +314,7 @@ class TypeGenerator:
                     field_type = field_schema.type
                     # Handle optional types
                     if field_schema.is_optional:
-                        field_type = field_type | None  # type: ignore
+                        field_type = field_type | None
                     annotations[auto_field] = field_type
 
             # Create TypedDict dynamically
@@ -414,7 +399,7 @@ class TypeGenerator:
                 model_class = getattr(models, nested_model, None)
                 if model_class is None:
                     raise TypeGenerationError(f"Could not resolve nested model '{nested_model}'")
-                return model_class
+                return cast(type, model_class)
             except ImportError as err:
                 raise TypeGenerationError(
                     f"Could not import models module to resolve '{nested_model}'"
@@ -555,7 +540,7 @@ class TypeGenerator:
 
         # Handle basic types
         if hasattr(type_annotation, "__name__"):
-            type_name = type_annotation.__name__
+            type_name = str(type_annotation.__name__)
         else:
             type_name = str(type_annotation)
 
@@ -576,7 +561,7 @@ class TypeGenerator:
                 if args:
                     formatted_args = [self._format_type_annotation(arg) for arg in args]
                     return f"{origin.__name__}[{', '.join(formatted_args)}]"
-                return origin.__name__
+                return str(origin.__name__)
 
         return type_name
 

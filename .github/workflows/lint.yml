@@ -3,9 +3,8 @@ name: Linting
 # Lint gate runs on every PR and push to main.
 #
 # - ruff format + ruff check are HARD gates (block the PR).
-# - mypy is ADVISORY for now (continue-on-error): the package carries ~28
-#   pre-existing type errors that predate CI enforcement. Tracked for burn-down
-#   in makegov/tango-python; flip `continue-on-error` off once that's clear.
+# - mypy is a HARD gate: the package type-checks cleanly under strict mypy.
+#   (The earlier ~28-error burn-down is complete.)
 # - The SDK filter/shape conformance check needs the canonical manifest from the
 #   private makegov/tango repo, which requires a TANGO_API_REPO_ACCESS_TOKEN
 #   secret the public CI does not have. The conformance job SKIPS cleanly when
@@ -42,8 +41,7 @@ jobs:
     - name: Lint with ruff
       run: uv run ruff check tango/
 
-    - name: Type check with mypy (advisory)
-      continue-on-error: true
+    - name: Type check with mypy
       run: uv run mypy tango/
 
   conformance:
