@@ -83,4 +83,93 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425
+  response:
+    body:
+      string: '{"count":194236,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&psc=R425&cursor=WyIyMDI2LTA1LTI1IiwgImQ1NmEzYWY1LTY2OWYtNTVkZS05YWRhLTQzODQ4YWFiNjVjZiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI1IiwgImQ1NmEzYWY1LTY2OWYtNTVkZS05YWRhLTQzODQ4YWFiNjVjZiJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","description":"REA
+        CONSULTANT REVIEW SERVICES","key":"CONT_AWD_36C77626F0019_3600_36C10F24A0003_3600","piid":"36C77626F0019","recipient":{"display_name":"Summit
+        Federal, LLC"},"total_contract_value":39875.4},{"award_date":"2026-05-26","description":"EARTH
+        RESOURCES OBSERVATION AND SCIENCE CENTER (EROS) LANDSAT MISSION OPERATIONS
+        PROJECT","key":"CONT_AWD_140G0126C0008_1434_-NONE-_-NONE-","piid":"140G0126C0008","recipient":{"display_name":"THE
+        AEROSPACE CORPORATION"},"total_contract_value":14681664.45},{"award_date":"2026-05-26","description":"THE
+        TSA HEREBY ISSUES THIS FFP TASK ORDER 70T01026F7672N002 UNDER THE PELSS BPA
+        70T05021A7672N001 IN SUPPORT OF SECURITY TECHNOLOGY INTEGRATION PROGRAM BRIDGE
+        OPERATIONS AND MAINTENANCE SUPPORT.","key":"CONT_AWD_70T01026F7672N003_7013_70T01026A7672N001_7013","piid":"70T01026F7672N003","recipient":{"display_name":"Global
+        Systems Technologies, LLC"},"total_contract_value":4228217.06},{"award_date":"2026-05-25","description":"ERMS
+        PANEL INSTALLATION VARIOUS SITES VENDOR: OCEUS NETWORKS LLC","key":"CONT_AWD_693KA826F00183_6920_693KA820D00011_6920","piid":"693KA826F00183","recipient":{"display_name":"OCEUS
+        NETWORKS, LLC"},"total_contract_value":28588.42},{"award_date":"2026-05-25","description":"EG
+        QXV & QJX SITE SURVEY FUNDING FOR DC BUS SYSTEM","key":"CONT_AWD_693KA826F00075_6920_693KA820D00011_6920","piid":"693KA826F00075","recipient":{"display_name":"OCEUS
+        NETWORKS, LLC"},"total_contract_value":15065.88}]}'
+    headers:
+      CF-RAY:
+      - a02d53ceba51ad17-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:21 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=sC12ramKYwiloiQfpiXI0fWgfhy%2FN%2B8bxRSrCBA30WOn1uhZmYEExL7xLgNO212pT2C1jWySz9Y3%2FQiCs03E6eUWTSWMk6AURP4Vo4hyL3xPafPDI3jHWSD6LXA%2Fn5TjGbjlGoJrYESmOXkyEW6S"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1887'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.042s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '986'
+      x-ratelimit-burst-reset:
+      - '16'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999918'
+      x-ratelimit-daily-reset:
+      - '40778'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '986'
+      x-ratelimit-reset:
+      - '16'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -13,7 +13,7 @@ interactions:
       user-agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700
   response:
     body:
       string: '{"count":438863,"next":"https://tango.makegov.com/api/contracts/?limit=5&page=1&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&awarding_agency=4700&cursor=WyIyMDI2LTAzLTAzIiwgImQ4MGViMDdkLTRlNjktNTEwNS04NmQ1LWU5NTI4MTJhMTRlNSJd","previous":null,"cursor":"WyIyMDI2LTAzLTAzIiwgImQ4MGViMDdkLTRlNjktNTEwNS04NmQ1LWU5NTI4MTJhMTRlNSJd","previous_cursor":null,"results":[{"key":"CONT_AWD_47PC5226F0162_4740_47PN0323A0001_4740","piid":"47PC5226F0162","award_date":"2026-03-03","description":"THIS

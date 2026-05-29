@@ -1315,12 +1315,8 @@ SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
     "recipient_dba_name": FieldSchema(
         name="recipient_dba_name", type=str, is_optional=True, is_list=False
     ),
-    "recipient_duns": FieldSchema(
-        name="recipient_duns", type=str, is_optional=True, is_list=False
-    ),
-    "recipient_name": FieldSchema(
-        name="recipient_name", type=str, is_optional=True, is_list=False
-    ),
+    "recipient_duns": FieldSchema(name="recipient_duns", type=str, is_optional=True, is_list=False),
+    "recipient_name": FieldSchema(name="recipient_name", type=str, is_optional=True, is_list=False),
     "recipient_parent_duns": FieldSchema(
         name="recipient_parent_duns", type=str, is_optional=True, is_list=False
     ),
@@ -1330,9 +1326,7 @@ SUBAWARD_SCHEMA: dict[str, FieldSchema] = {
     "recipient_parent_uei": FieldSchema(
         name="recipient_parent_uei", type=str, is_optional=True, is_list=False
     ),
-    "recipient_uei": FieldSchema(
-        name="recipient_uei", type=str, is_optional=True, is_list=False
-    ),
+    "recipient_uei": FieldSchema(name="recipient_uei", type=str, is_optional=True, is_list=False),
     # Expandable nested objects
     "awarding_office": FieldSchema(
         name="awarding_office",
@@ -1493,6 +1487,10 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Location": LOCATION_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "Competition": COMPETITION_SCHEMA,
+    # Alias: CONTRACT_SCHEMA/IDV_SCHEMA reference the competition leaf as
+    # "ContractOrIDVCompetition" (the models.py dataclass name); it is the same
+    # field set as Competition. Register both so nested shape selection resolves.
+    "ContractOrIDVCompetition": COMPETITION_SCHEMA,
     "ParentAward": PARENT_AWARD_SCHEMA,
     "LegislativeMandates": LEGISLATIVE_MANDATES_SCHEMA,
     "SubawardsSummary": SUBAWARDS_SUMMARY_SCHEMA,

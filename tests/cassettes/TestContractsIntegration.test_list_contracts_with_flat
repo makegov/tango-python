@@ -83,4 +83,92 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&flat=true
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&flat=true&cursor=WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","description":"CARDIOQUIP
+        SERVICES","key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","piid":"36C26126P0571","recipient.display_name":"CARDIOQUIP,
+        LLC","total_contract_value":26901.64},{"award_date":"2026-05-26","description":"NON-PERSONAL
+        SERVICES TO DEFINE A PRODUCT SPECIFICATION AND CREATE A CONCEPTUAL MODEL OF
+        THE NATIONAL ROAD NETWORK (NRN).","key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","piid":"693JJ326P000012","recipient.display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC","total_contract_value":369600.0},{"award_date":"2026-05-26","description":"URGENT
+        REPLACE RECESSED LED PULSATING LIGHTING, U.S. SECRET SERVICES (USSS) HEADQUARTERS
+        BUILDING, 950 H STREET, NW, WASHINGTON, DC 20223.","key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","piid":"47PE5226F0113","recipient.display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC.","total_contract_value":27500.0},{"award_date":"2026-05-26","description":"ESRI
+        ARCGIS MAINTENANCE","key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","piid":"89503026FWA401176","recipient.display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC.","total_contract_value":83384.92},{"award_date":"2026-05-26","description":"SURGICAL
+        IMPLANT - HEART TAVR","key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","piid":"36C24126P0441","recipient.display_name":"Edwards
+        Lifesciences LLC","total_contract_value":68000.0}]}'
+    headers:
+      CF-RAY:
+      - a02d52c53ed8179d-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:39:39 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=R6q111LWBZXdrfxaUXgo0cP77ne0M2rEvYUPhyXwq0Fa8%2F3q33or0VpongepZNjjzKLrNNlytyTAUYeVZ4PdZuTHSCCebtmdOFs90jRHgqsFZaZC0M%2FxCH8DbUjeAjC0WTQKNF9ByIwPdAwqseh%2F"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1783'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.031s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '995'
+      x-ratelimit-burst-reset:
+      - '58'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999927'
+      x-ratelimit-daily-reset:
+      - '40820'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '995'
+      x-ratelimit-reset:
+      - '58'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -1,43 +1,96 @@
 name: Linting
 
-# Disabled: requires checkout of private makegov/tango repo for filter_shape conformance check.
-# Re-enable when that repo is accessible (e.g. add TANGO_API_REPO_ACCESS_TOKEN secret).
+# Lint gate runs on every PR and push to main.
+#
+# - ruff format + ruff check are HARD gates (block the PR).
+# - mypy is ADVISORY for now (continue-on-error): the package carries ~28
+#   pre-existing type errors that predate CI enforcement. Tracked for burn-down
+#   in makegov/tango-python; flip `continue-on-error` off once that's clear.
+# - The SDK filter/shape conformance check needs the canonical manifest from the
+#   private makegov/tango repo, which requires a TANGO_API_REPO_ACCESS_TOKEN
+#   secret the public CI does not have. The conformance job SKIPS cleanly when
+#   the token is absent (rather than failing red) and becomes a real gate the
+#   moment the secret is configured.
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ main, develop ]
-  # pull_request:
-  #   branches: [ main, develop ]
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Checkout tango API repo (manifest source)
-      uses: actions/checkout@v4
-      with:
-        repository: makegov/tango
-        path: tango-api
-    
     - name: Install uv
       uses: astral-sh/setup-uv@v4
       with:
         version: "latest"
-    
+
     - name: Set up Python
       run: uv python install 3.12
-    
+
     - name: Install dependencies
       run: uv sync --all-extras
-    
+
     - name: Check formatting with ruff
       run: uv run ruff format --check tango/
-    
+
     - name: Lint with ruff
       run: uv run ruff check tango/
 
+    - name: Type check with mypy (advisory)
+      continue-on-error: true
+      run: uv run mypy tango/
+
+  conformance:
+    # Requires the canonical filter_shape manifest from the private makegov/tango
+    # repo. When TANGO_API_REPO_ACCESS_TOKEN is not configured, every real step
+    # is skipped and the job passes (rather than failing on an empty token).
+    # Configure the secret to turn this into a hard gate automatically.
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Determine token availability
+      id: gate
+      env:
+        TANGO_API_REPO_ACCESS_TOKEN: ${{ secrets.TANGO_API_REPO_ACCESS_TOKEN }}
+      run: |
+        if [ -n "$TANGO_API_REPO_ACCESS_TOKEN" ]; then
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+        else
+          echo "ready=false" >> "$GITHUB_OUTPUT"
+          echo "::notice::Skipping SDK conformance check — TANGO_API_REPO_ACCESS_TOKEN not configured."
+        fi
+
+    - uses: actions/checkout@v4
+      if: steps.gate.outputs.ready == 'true'
+
+    - name: Checkout tango API repo (manifest source)
+      if: steps.gate.outputs.ready == 'true'
+      uses: actions/checkout@v4
+      with:
+        repository: makegov/tango
+        path: tango-api
+        token: ${{ secrets.TANGO_API_REPO_ACCESS_TOKEN }}
+
+    - name: Install uv
+      if: steps.gate.outputs.ready == 'true'
+      uses: astral-sh/setup-uv@v4
+      with:
+        version: "latest"
+
+    - name: Set up Python
+      if: steps.gate.outputs.ready == 'true'
+      run: uv python install 3.12
+
+    - name: Install dependencies
+      if: steps.gate.outputs.ready == 'true'
+      run: uv sync --all-extras
+
     - name: Check SDK filter/shape conformance
+      if: steps.gate.outputs.ready == 'true'
       run: uv run python scripts/check_filter_shape_conformance.py --manifest tango-api/contracts/filter_shape_contract.json

@@ -97,4 +97,107 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cfiscal_year%2Cset_aside%2Crecipient%28display_name%2Cuei%29%2Cawarding_office%28%2A%29%2Cplace_of_performance%28city_name%2Cstate_code%2Cstate_name%2Ccountry_code%2Ccountry_name%29%2Cnaics_code%2Cpsc_code
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Cdescription%2Ctotal_contract_value%2Cobligated%2Cfiscal_year%2Cset_aside%2Crecipient%28display_name%2Cuei%29%2Cawarding_office%28%2A%29%2Cplace_of_performance%28city_name%2Cstate_code%2Cstate_name%2Ccountry_code%2Ccountry_name%29%2Cnaics_code%2Cpsc_code&cursor=WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImZkNGYxMzA4LTY0NzUtNWViOS05ZTQzLTFmZDNiYTA5ZGYzNiJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","awarding_office":{"organization_id":"2c45fd53-3590-5589-a188-1f34917b3de5","office_code":"36C261","office_name":"261-NETWORK
+        CONTRACT OFFICE 21 (36C261)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"description":"CARDIOQUIP SERVICES","fiscal_year":2026,"key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","naics_code":811210,"obligated":13450.82,"piid":"36C26126P0571","place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"CA","state_name":"CALIFORNIA","city_name":"SAN FRANCISCO"},"psc_code":"J065","recipient":{"uei":"R8CPTNLLAJJ7","display_name":"CARDIOQUIP,
+        LLC"},"set_aside":null,"total_contract_value":26901.64},{"award_date":"2026-05-26","awarding_office":{"organization_id":"bb941157-db91-59e5-9a2b-bd50ebf75b2b","office_code":"693JJ3","office_name":"693JJ3
+        ACQUISITION AND GRANTS MGT","agency_code":"6925","agency_name":"FEDERAL HIGHWAY
+        ADMINISTRATION","department_code":"069","department_name":"TRANSPORTATION,
+        DEPARTMENT OF"},"description":"NON-PERSONAL SERVICES TO DEFINE A PRODUCT SPECIFICATION
+        AND CREATE A CONCEPTUAL MODEL OF THE NATIONAL ROAD NETWORK (NRN).","fiscal_year":2026,"key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","naics_code":541370,"obligated":369600.0,"piid":"693JJ326P000012","place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"IN","state_name":"INDIANA","city_name":"INDIANAPOLIS"},"psc_code":"C215","recipient":{"uei":"ZR6EPV2TYJS1","display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC"},"set_aside":"SBA","total_contract_value":369600.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"828b5738-4ca2-5644-bbd4-6b0acae5746a","office_code":"47PE52","office_name":"PBS
+        PROJECT DELIVERY CENTRAL - BRANCH B","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"description":"URGENT REPLACE RECESSED LED PULSATING LIGHTING,
+        U.S. SECRET SERVICES (USSS) HEADQUARTERS BUILDING, 950 H STREET, NW, WASHINGTON,
+        DC 20223.","fiscal_year":2026,"key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","naics_code":561210,"obligated":27500.0,"piid":"47PE5226F0113","place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"DC","state_name":"DISTRICT OF COLUMBIA","city_name":"WASHINGTON"},"psc_code":"Z1AA","recipient":{"uei":"ZVX7ZJ5WZ576","display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC."},"set_aside":null,"total_contract_value":27500.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"430af738-027d-5243-9d57-7c1ee23abe15","office_code":"895030","office_name":"WESTERN-CORPORATE
+        SERVICES OFFICE","agency_code":"8900","agency_name":"ENERGY, DEPARTMENT OF","department_code":"089","department_name":"ENERGY,
+        DEPARTMENT OF"},"description":"ESRI ARCGIS MAINTENANCE","fiscal_year":2026,"key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","naics_code":541519,"obligated":83384.92,"piid":"89503026FWA401176","place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"CO","state_name":"COLORADO","city_name":"LAKEWOOD"},"psc_code":"7A21","recipient":{"uei":"CGE8ABMZLZN9","display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC."},"set_aside":"SBA","total_contract_value":83384.92},{"award_date":"2026-05-26","awarding_office":{"organization_id":"41755914-5162-5f81-bc5e-ceafc6c3beae","office_code":"36C241","office_name":"241-NETWORK
+        CONTRACT OFFICE 01 (36C241)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"description":"SURGICAL IMPLANT - HEART TAVR","fiscal_year":2026,"key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","naics_code":339113,"obligated":68000.0,"piid":"36C24126P0441","place_of_performance":{"country_code":"USA","country_name":"UNITED
+        STATES","state_code":"CA","state_name":"CALIFORNIA","city_name":"IRVINE"},"psc_code":"6515","recipient":{"uei":"MR4FCKSNGRC1","display_name":"Edwards
+        Lifesciences LLC"},"set_aside":null,"total_contract_value":68000.0}]}'
+    headers:
+      CF-RAY:
+      - a02d52c38f37511c-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:39:38 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V9OhSRL3H%2Bo%2BDGOmt0YZVO1JaWC6bo4gB%2BejpbjQJdNRPy3hidnwQh39AJSR5jIX0EGlVJinjUFdZwNl3LA4kFZj4akp7OmfQQG44WbVchRq%2F7eew4ceZ86h0pxmPFsnAo6PJj8fEWFxAZKhr5u7"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4759'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.040s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '996'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999928'
+      x-ratelimit-daily-reset:
+      - '40821'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '996'
+      x-ratelimit-reset:
+      - '59'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

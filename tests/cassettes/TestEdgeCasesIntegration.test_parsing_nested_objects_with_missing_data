@@ -221,4 +221,262 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=25&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29
+  response:
+    body:
+      string: '{"count":84625240,"next":"https://tango.makegov.com/api/contracts/?limit=25&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29&cursor=WyIyMDI2LTA1LTI2IiwgImYxMDE2N2E1LTkzMTItNTc5OS1hNDU1LTUyOTU5Yzg2MTY0MyJd","previous":null,"cursor":"WyIyMDI2LTA1LTI2IiwgImYxMDE2N2E1LTkzMTItNTc5OS1hNDU1LTUyOTU5Yzg2MTY0MyJd","previous_cursor":null,"results":[{"award_date":"2026-05-26","awarding_office":{"organization_id":"2c45fd53-3590-5589-a188-1f34917b3de5","office_code":"36C261","office_name":"261-NETWORK
+        CONTRACT OFFICE 21 (36C261)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"description":"CARDIOQUIP SERVICES","funding_office":{"organization_id":"2c45fd53-3590-5589-a188-1f34917b3de5","office_code":"00261","office_name":"261-NETWORK
+        CONTRACT OFFICE 21 (36C261)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"key":"CONT_AWD_36C26126P0571_3600_-NONE-_-NONE-","piid":"36C26126P0571","recipient":{"display_name":"CARDIOQUIP,
+        LLC"},"total_contract_value":26901.64},{"award_date":"2026-05-26","awarding_office":{"organization_id":"bb941157-db91-59e5-9a2b-bd50ebf75b2b","office_code":"693JJ3","office_name":"693JJ3
+        ACQUISITION AND GRANTS MGT","agency_code":"6925","agency_name":"FEDERAL HIGHWAY
+        ADMINISTRATION","department_code":"069","department_name":"TRANSPORTATION,
+        DEPARTMENT OF"},"description":"NON-PERSONAL SERVICES TO DEFINE A PRODUCT SPECIFICATION
+        AND CREATE A CONCEPTUAL MODEL OF THE NATIONAL ROAD NETWORK (NRN).","funding_office":{"organization_id":"c62185c4-7e9a-523a-bb84-18bd8fd6c9ba","office_code":"693JH8","office_name":"FHWA
+        OF OF POLICY  GOVERNMENTAL AF","agency_code":"6925","agency_name":"FEDERAL
+        HIGHWAY ADMINISTRATION","department_code":"069","department_name":"TRANSPORTATION,
+        DEPARTMENT OF"},"key":"CONT_AWD_693JJ326P000012_6925_-NONE-_-NONE-","piid":"693JJ326P000012","recipient":{"display_name":"CULTIVATE
+        GEOSPATIAL SOLUTIONS LLC"},"total_contract_value":369600.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"828b5738-4ca2-5644-bbd4-6b0acae5746a","office_code":"47PE52","office_name":"PBS
+        PROJECT DELIVERY CENTRAL - BRANCH B","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"description":"URGENT REPLACE RECESSED LED PULSATING LIGHTING,
+        U.S. SECRET SERVICES (USSS) HEADQUARTERS BUILDING, 950 H STREET, NW, WASHINGTON,
+        DC 20223.","funding_office":{"organization_id":"828b5738-4ca2-5644-bbd4-6b0acae5746a","office_code":"47PE52","office_name":"PBS
+        PROJECT DELIVERY CENTRAL - BRANCH B","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"key":"CONT_AWD_47PE5226F0113_4740_47PF5126D0008_4740","piid":"47PE5226F0113","recipient":{"display_name":"MELWOOD
+        HORTICULTURAL TRAINING CENTER, INC."},"total_contract_value":27500.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"430af738-027d-5243-9d57-7c1ee23abe15","office_code":"895030","office_name":"WESTERN-CORPORATE
+        SERVICES OFFICE","agency_code":"8900","agency_name":"ENERGY, DEPARTMENT OF","department_code":"089","department_name":"ENERGY,
+        DEPARTMENT OF"},"description":"ESRI ARCGIS MAINTENANCE","funding_office":{"organization_id":"d0c9cdc6-65c0-5a07-aa60-8b2ad68618d3","office_code":"895005","office_name":"WESTERN
+        AREA POWER ADMINISTRATION","agency_code":"8900","agency_name":"ENERGY, DEPARTMENT
+        OF","department_code":"089","department_name":"ENERGY, DEPARTMENT OF"},"key":"CONT_AWD_89503026FWA401176_8900_NNG15SD60B_8000","piid":"89503026FWA401176","recipient":{"display_name":"ADVANCED
+        COMPUTER CONCEPTS, INC."},"total_contract_value":83384.92},{"award_date":"2026-05-26","awarding_office":{"organization_id":"41755914-5162-5f81-bc5e-ceafc6c3beae","office_code":"36C241","office_name":"241-NETWORK
+        CONTRACT OFFICE 01 (36C241)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"description":"SURGICAL IMPLANT - HEART TAVR","funding_office":{"organization_id":"2c55b1eb-31c7-5a0d-a1af-7df16d769c15","office_code":"00689","office_name":"689-WEST
+        HAVEN (00689)(36C689)","agency_code":"3600","agency_name":"VETERANS AFFAIRS,
+        DEPARTMENT OF","department_code":"036","department_name":"VETERANS AFFAIRS,
+        DEPARTMENT OF"},"key":"CONT_AWD_36C24126P0441_3600_-NONE-_-NONE-","piid":"36C24126P0441","recipient":{"display_name":"Edwards
+        Lifesciences LLC"},"total_contract_value":68000.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"c207a43b-ebd0-59cf-bb47-75d28c3b0269","office_code":"896030","office_name":"FEDERAL
+        ENERGY REGULATORY COMM","agency_code":"8960","agency_name":"FEDERAL ENERGY
+        REGULATORY COMMISSION","department_code":"089","department_name":"ENERGY,
+        DEPARTMENT OF"},"description":"TENEBALE SOFTWARE","funding_office":{"organization_id":"c207a43b-ebd0-59cf-bb47-75d28c3b0269","office_code":"FERC1","office_name":"FEDERAL
+        ENERGY REGULATORY COMM","agency_code":"8960","agency_name":"FEDERAL ENERGY
+        REGULATORY COMMISSION","department_code":"089","department_name":"ENERGY,
+        DEPARTMENT OF"},"key":"CONT_AWD_89603026F0034_8960_NNG15SD76B_8000","piid":"89603026F0034","recipient":{"display_name":"ENTERPRISE
+        TECHNOLOGY SOLUTIONS, INC."},"total_contract_value":96427.99},{"award_date":"2026-05-26","awarding_office":{"organization_id":"8882f3fc-9e82-51b8-b100-b67598ecb718","office_code":"47PC52","office_name":"PBS
+        PROJECT DELIVERY EAST - BRANCH B","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"description":"TSFB SOFT PRESSURE WASH LOCATED IN RALEIGH,
+        NC AT THE TERRY SANFORD FEDERAL BUILDING","funding_office":{"organization_id":"e3bdc84a-67c4-597a-99fc-ab8eac96cbcf","office_code":"CX000","office_name":"PBS
+        R4 AMD BLUE RIDGE EAST BRANCH","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"key":"CONT_AWD_47PC5226F0297_4740_47PN0423A0004_4740","piid":"47PC5226F0297","recipient":{"display_name":"DAE
+        SUNG LLC"},"total_contract_value":105000.9},{"award_date":"2026-05-26","awarding_office":{"organization_id":"fe5594f3-1af8-590c-b79f-574de586b7f5","office_code":"1331L5","office_name":"DEPT
+        OF COMMERCE SSPO","agency_code":"1301","agency_name":"OFFICE OF THE SECRETARY","department_code":"013","department_name":"COMMERCE,
+        DEPARTMENT OF"},"description":"UIPATH","funding_office":{"organization_id":"a650f112-9017-51dc-9f3d-d317e7e08ecd","office_code":"000SB","office_name":"DEPT
+        OF COMMERCE NIST","agency_code":"1341","agency_name":"NATIONAL INSTITUTE OF
+        STANDARDS AND TECHNOLOGY","department_code":"013","department_name":"COMMERCE,
+        DEPARTMENT OF"},"key":"CONT_AWD_1331L526FNB160100_1341_1331L521A13ES0015_1301","piid":"1331L526FNB160100","recipient":{"display_name":"GOVERNMENT
+        ACQUISITIONS INC"},"total_contract_value":49851.72},{"award_date":"2026-05-26","awarding_office":{"organization_id":"8121825a-560d-58d4-a1e0-9834701e8c4d","office_code":"36C246","office_name":"246-NETWORK
+        CONTRACTING OFFICE 6 (36C246)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"description":"EMERGENCY SEWER REPAIR","funding_office":{"organization_id":"8121825a-560d-58d4-a1e0-9834701e8c4d","office_code":"00246","office_name":"246-NETWORK
+        CONTRACTING OFFICE 6 (36C246)","agency_code":"3600","agency_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
+        AFFAIRS, DEPARTMENT OF"},"key":"CONT_AWD_36C24626P0712_3600_-NONE-_-NONE-","piid":"36C24626P0712","recipient":{"display_name":"Kokowski
+        Plumbing LLC"},"total_contract_value":35000.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"a96cb76d-64bf-58f9-b239-80819ee43691","office_code":"80NSSC","office_name":"NASA
+        SHARED SERVICES CENTER","agency_code":"8000","agency_name":"NATIONAL AERONAUTICS
+        AND SPACE ADMINISTRATION","department_code":"080","department_name":"NATIONAL
+        AERONAUTICS AND SPACE ADMINISTRATION"},"description":"HBG-21171-C--G-LIHT
+        PROCUREMENT","funding_office":{"organization_id":"a96cb76d-64bf-58f9-b239-80819ee43691","office_code":"NSSC0","office_name":"NASA
+        SHARED SERVICES CENTER","agency_code":"8000","agency_name":"NATIONAL AERONAUTICS
+        AND SPACE ADMINISTRATION","department_code":"080","department_name":"NATIONAL
+        AERONAUTICS AND SPACE ADMINISTRATION"},"key":"CONT_AWD_80NSSC26FA425_8000_NNG15SD42B_8000","piid":"80NSSC26FA425","recipient":{"display_name":"ARCHITECHTURE
+        SOLUTIONS LLC"},"total_contract_value":45058.8},{"award_date":"2026-05-26","awarding_office":{"organization_id":"f999f429-24fb-597b-8e39-02606718f27e","office_code":"70Z080","office_name":"SFLC
+        PROCUREMENT BRANCH 1(00080)","agency_code":"7008","agency_name":"US COAST
+        GUARD","department_code":"070","department_name":"HOMELAND SECURITY, DEPARTMENT
+        OF"},"description":"MANLIFT RENTAL","funding_office":{"organization_id":"5be81e88-58fc-50b7-b1fb-fa7251cf9668","office_code":"70Z00F","office_name":"USCG
+        FINANCE CENTER","agency_code":"7008","agency_name":"US COAST GUARD","department_code":"070","department_name":"HOMELAND
+        SECURITY, DEPARTMENT OF"},"key":"CONT_AWD_70Z08026PMECP0119_7008_-NONE-_-NONE-","piid":"70Z08026PMECP0119","recipient":{"display_name":"BSE
+        PERFORMANCE, LLC"},"total_contract_value":3864.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"5fc480a9-bad4-5b58-818f-ba9b9cc5d779","office_code":"15B315","office_name":"FCC
+        YAZOO CITY","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"description":"MEDICAL AIR LIFT TRANSPORTATION SERVICES FOR INMATE MOORE,
+        KOREY 29390-009 TO THE FMC BUTNER.","funding_office":{"organization_id":"5fc480a9-bad4-5b58-818f-ba9b9cc5d779","office_code":"15B315","office_name":"FCC
+        YAZOO CITY","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"key":"CONT_AWD_15B31526F00000067_1540_47QMCB23D0009_4732","piid":"15B31526F00000067","recipient":{"display_name":"INFLIGHT
+        MEDICAL SERVICES INTERNATIONAL, INC."},"total_contract_value":33963.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"3d027f57-c8f9-54eb-9d9e-87530aecbd9c","office_code":"70Z031","office_name":"BASE
+        ALAMEDA(00031)","agency_code":"7008","agency_name":"US COAST GUARD","department_code":"070","department_name":"HOMELAND
+        SECURITY, DEPARTMENT OF"},"description":"BACKFLOW PREVENTION REPAIR AND INSPECTION
+        SERVICE.","funding_office":{"organization_id":"b36ab5f3-bf63-5f8d-aa95-026a7262dd6e","office_code":"70Z00L","office_name":"11TH
+        COAST GUARD DISTRICT OFFICE","agency_code":"7008","agency_name":"US COAST
+        GUARD","department_code":"070","department_name":"HOMELAND SECURITY, DEPARTMENT
+        OF"},"key":"CONT_AWD_70Z03126PALAM0064_7008_-NONE-_-NONE-","piid":"70Z03126PALAM0064","recipient":{"display_name":"BACKFLOW
+        PREVENTION SPECIALISTS, INC."},"total_contract_value":3647.52},{"award_date":"2026-05-26","awarding_office":{"organization_id":"ca386d2c-b2f2-52ad-88bf-28590d787224","office_code":"36C244","office_name":"244-NETWORK
+        CONTRACT OFFICE 4 (36C244)","agency_code":"3600","agency_name":"VETERANS AFFAIRS,
+        DEPARTMENT OF","department_code":"036","department_name":"VETERANS AFFAIRS,
+        DEPARTMENT OF"},"description":"MOTORIZED WHEELCHAIR","funding_office":{"organization_id":"3b2b9eb1-42dc-5bcc-a07c-aeaf9f9e283e","office_code":"00646","office_name":"646-PITTSBURGH
+        (00646)(36C646)","agency_code":"3600","agency_name":"VETERANS AFFAIRS, DEPARTMENT
+        OF","department_code":"036","department_name":"VETERANS AFFAIRS, DEPARTMENT
+        OF"},"key":"CONT_AWD_36C24426F0298_3600_36F79718D0437_3600","piid":"36C24426F0298","recipient":{"display_name":"PERMOBIL
+        INC"},"total_contract_value":15359.45},{"award_date":"2026-05-26","awarding_office":{"organization_id":"9244ae61-79ff-5a30-bdec-5d31af97f8e9","office_code":"15B519","office_name":"FCC
+        POLLOCK","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"description":"JULY MONTHLY MEDICATIONS","funding_office":{"organization_id":"9244ae61-79ff-5a30-bdec-5d31af97f8e9","office_code":"51911","office_name":"FCC
+        POLLOCK","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"key":"CONT_AWD_15B51926F00000118_1540_36W79720D0001_3600","piid":"15B51926F00000118","recipient":{"display_name":"MCKESSON
+        CORPORATION"},"total_contract_value":500000.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"3de70e4f-abca-5379-b19b-80843beba710","office_code":"47PE53","office_name":"PBS
+        PROJECT DELIVERY CENTRAL - BRANCH C","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"description":"THIS PROJECT IS TO INSULATE THE CHILLED WATER
+        PIPES IN THE AGRICULTURE TUNNEL LOCATED AT THE HOTD DC0296ZZ WASHINGTON, DC.","funding_office":{"organization_id":"3de70e4f-abca-5379-b19b-80843beba710","office_code":"47PE53","office_name":"PBS
+        PROJECT DELIVERY CENTRAL - BRANCH C","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"key":"CONT_AWD_47PE5326F0160_4740_47PM0024D0007_4740","piid":"47PE5326F0160","recipient":{"display_name":"CAPITAL
+        BRAND GROUP LLC"},"total_contract_value":6640.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"aa27a03c-1028-5c13-85e8-980b1691495d","office_code":"15B106","office_name":"FMC
+        BUTNER","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"description":"STAB/PUNCTURE RESISTANT VESTS MULTIPLE INSTITUTIONS.","funding_office":{"organization_id":"aa27a03c-1028-5c13-85e8-980b1691495d","office_code":"10502","office_name":"FMC
+        BUTNER","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"key":"CONT_AWD_15B10626F00000129_1540_15BNAS23A00000008_1540","piid":"15B10626F00000129","recipient":{"display_name":"ASPETTO
+        INC"},"total_contract_value":47563.4},{"award_date":"2026-05-26","awarding_office":{"organization_id":"9913639c-be79-53e5-9dc6-68ee8bc1bb9b","office_code":"123144","office_name":"USDA,
+        OCP-POD-ACQ-MGMT-BRANCH-FTC","agency_code":"1205","agency_name":"USDA, DEPARTMENTAL
+        ADMINISTRATION","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"description":"REPLACE THE LEGACY LOAN PROCESSING SYSTEM AND REPLACE
+        THE LEGACY FINANCIAL SYSTEMS FUNCTIONALITIES WITH THE DEPARTMENT''S FINANCIAL
+        MANAGEMENT MODERNIZATION INITIATIVE (FMMI) PLATFORM.","funding_office":{},"key":"CONT_AWD_12314426F0181_1205_12314426A0007_1205","piid":"12314426F0181","recipient":{"display_name":"SUMMIT
+        TECHNOLOGY CONSULTING GROUP, LLC"},"total_contract_value":4895725.15},{"award_date":"2026-05-26","awarding_office":{"organization_id":"ea1c7a92-5838-5641-99ba-1527f4524306","office_code":"15F067","office_name":"FBI-JEH","agency_code":"1549","agency_name":"FEDERAL
+        BUREAU OF INVESTIGATION","department_code":"015","department_name":"JUSTICE,
+        DEPARTMENT OF"},"description":"HAZARDOUS MATERIALS DISPOSAL","funding_office":{"organization_id":"59501cd3-cf6c-5445-a7e0-ea22719cc766","office_code":"15F040","office_name":"OKLAHOMA
+        CITY FIELD OFFICE","agency_code":"1549","agency_name":"FEDERAL BUREAU OF INVESTIGATION","department_code":"015","department_name":"JUSTICE,
+        DEPARTMENT OF"},"key":"CONT_AWD_15F06726P0000490_1549_-NONE-_-NONE-","piid":"15F06726P0000490","recipient":{"display_name":"ENVIRONMENTAL
+        MANAGEMENT INC"},"total_contract_value":29521.6},{"award_date":"2026-05-26","awarding_office":{"organization_id":"833645a6-93ba-50ef-b885-80f5ef62d820","office_code":"15B213","office_name":"FCI
+        SCHUYLKILL","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"description":"BPA CALL FOR EYEWEAR - FCI SCHUYLKILL - QUOTE #20226848","funding_office":{"organization_id":"833645a6-93ba-50ef-b885-80f5ef62d820","office_code":"21303","office_name":"FCI
+        SCHUYLKILL","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM / BUREAU
+        OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"key":"CONT_AWD_15B21326F00000048_1540_15BFA025A00000039_1540","piid":"15B21326F00000048","recipient":{"display_name":"Federal
+        Prison Industries, Inc"},"total_contract_value":526.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"54f7d5b5-db76-58ea-a9bc-c0caeba97600","office_code":"693C73","office_name":"693C73
+        EASTERN FED LANDS DIVISION","agency_code":"6925","agency_name":"FEDERAL HIGHWAY
+        ADMINISTRATION","department_code":"069","department_name":"TRANSPORTATION,
+        DEPARTMENT OF"},"description":"PROJECT TN ERFO FS CHRKE804 2020-2(3):\n\nTHIS
+        PROJECT CONSISTS OF REPAIRING STORM AND FLOOD DAMAGE ON PEAVINE SHEEDS CREEK
+        ROAD (FS 221). PROJECT WORK INCLUDES GRADING, ROADWAY RESURFACING, DRAIN DIP
+        CONSTRUCTION, REPLACEMENT OF DRAINAGE CULVERTS, S","funding_office":{"organization_id":"1bf67b18-3c9e-5856-aefd-41609adfdc0a","office_code":"00071","office_name":"FHWA
+        - EASTERN FEDERAL LANDS DIVISI","agency_code":"6925","agency_name":"FEDERAL
+        HIGHWAY ADMINISTRATION","department_code":"069","department_name":"TRANSPORTATION,
+        DEPARTMENT OF"},"key":"CONT_AWD_693C7326C000010_6925_-NONE-_-NONE-","piid":"693C7326C000010","recipient":{"display_name":"APEX
+        CONSTRUCTION GROUP, LLC"},"total_contract_value":7278652.0},{"award_date":"2026-05-26","awarding_office":{"organization_id":"201820a2-ac25-5873-a0e0-cdb8bb8f3c46","office_code":"75N980","office_name":"NATIONAL
+        INSTITUTES OF HEALTH OLAO","agency_code":"7529","agency_name":"NATIONAL INSTITUTES
+        OF HEALTH","department_code":"075","department_name":"HEALTH AND HUMAN SERVICES,
+        DEPARTMENT OF"},"description":"C201714- LUBE OIL BANK BATTERY REPLACEMENT
+        FOR COGEN OPERATION POWER BACKUP SYSTEM","funding_office":{"organization_id":"201820a2-ac25-5873-a0e0-cdb8bb8f3c46","office_code":"75N980","office_name":"NATIONAL
+        INSTITUTES OF HEALTH OLAO","agency_code":"7529","agency_name":"NATIONAL INSTITUTES
+        OF HEALTH","department_code":"075","department_name":"HEALTH AND HUMAN SERVICES,
+        DEPARTMENT OF"},"key":"CONT_AWD_75N98026F00004_7529_75N99024D00016_7529","piid":"75N98026F00004","recipient":{"display_name":"TREON
+        SUPPORT SERVICES JV, LLC"},"total_contract_value":71018.58},{"award_date":"2026-05-26","awarding_office":{"organization_id":"fe5594f3-1af8-590c-b79f-574de586b7f5","office_code":"1331L5","office_name":"DEPT
+        OF COMMERCE SSPO","agency_code":"1301","agency_name":"OFFICE OF THE SECRETARY","department_code":"013","department_name":"COMMERCE,
+        DEPARTMENT OF"},"description":"PCS AND ACCESSORIES ORDER","funding_office":{"organization_id":"b9e73bed-4a0b-501b-a1e1-e35ed0e59526","office_code":"NW","office_name":"NATIONAL
+        WEATHER SERVICE","agency_code":"1330","agency_name":"NATIONAL OCEANIC AND
+        ATMOSPHERIC ADMINISTRATION","department_code":"013","department_name":"COMMERCE,
+        DEPARTMENT OF"},"key":"CONT_AWD_1331L526F0143_1301_1331L523A13ES0062_1301","piid":"1331L526F0143","recipient":{"display_name":"CSP
+        ENTERPRISES, LLC"},"total_contract_value":30143.74},{"award_date":"2026-05-26","awarding_office":{"organization_id":"f968a1d8-6dbf-5e67-b5a6-0dda38aec933","office_code":"47PD53","office_name":"PBS
+        PROJECT DELIVERY WEST - BRANCH C","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"description":"REPLACE BROKEN WINDOWS AT RICHARD SHEPPARD
+        ARNOLD ANNEX 600 W CAPITOL AVE, LITTLE ROCK, AR 72201 LITTLE ROCK FEDERAL
+        BUILDING 700 W CAPITOL AVE, LITTLE ROCK, AR 72201, AND RICHARD SHEPPARD ARNOLD
+        ANNEX 600 W CAPITOL AVE, LITTLE ROCK, AR 72201","funding_office":{"organization_id":"fe54d20d-6c1c-52ff-9a85-8829c21b97cc","office_code":"47PF00","office_name":"PBS
+        R5 ACQUISITION MANAGEMENT DIVISION","agency_code":"4740","agency_name":"PUBLIC
+        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
+        ADMINISTRATION"},"key":"CONT_AWD_47PD5326F0188_4740_47PH0224A0004_4740","piid":"47PD5326F0188","recipient":{"display_name":"SOUTH
+        DADE AIR CONDITIONING & REFRIGERATION INC"},"total_contract_value":19588.45},{"award_date":"2026-05-26","awarding_office":{"organization_id":"a96cb76d-64bf-58f9-b239-80819ee43691","office_code":"80NSSC","office_name":"NASA
+        SHARED SERVICES CENTER","agency_code":"8000","agency_name":"NATIONAL AERONAUTICS
+        AND SPACE ADMINISTRATION","department_code":"080","department_name":"NATIONAL
+        AERONAUTICS AND SPACE ADMINISTRATION"},"description":"INSPIRED FLIGHT DRONES
+        PURCHASE","funding_office":{"organization_id":"a96cb76d-64bf-58f9-b239-80819ee43691","office_code":"NSSC0","office_name":"NASA
+        SHARED SERVICES CENTER","agency_code":"8000","agency_name":"NATIONAL AERONAUTICS
+        AND SPACE ADMINISTRATION","department_code":"080","department_name":"NATIONAL
+        AERONAUTICS AND SPACE ADMINISTRATION"},"key":"CONT_AWD_80NSSC26P0699_8000_-NONE-_-NONE-","piid":"80NSSC26P0699","recipient":{"display_name":"B
+        & H FOTO & ELECTRONICS CORP."},"total_contract_value":50000.0}]}'
+    headers:
+      CF-RAY:
+      - a02d546a7e0ead0c-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:46 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fGuk2mL36EtvsSdn9mnQLIcSSGwCj3WzDlXd%2BsCtVpCmTsae1O3%2F7YlDA5%2BWAdSsHQA8bEG2KF0p7aiDApkNmAGl6S2l4BhHWDb4ArJl9bqj0TMCxD2kNIfSlZIDWM%2FLVikGf9N4pqlCbfFhLfNN"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '21717'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.103s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '981'
+      x-ratelimit-burst-reset:
+      - '13'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999907'
+      x-ratelimit-daily-reset:
+      - '40753'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '981'
+      x-ratelimit-reset:
+      - '13'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

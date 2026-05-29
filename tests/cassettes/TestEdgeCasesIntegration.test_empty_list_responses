@@ -73,4 +73,80 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2099-01-01
+  response:
+    body:
+      string: '{"count":0,"next":null,"previous":null,"cursor":null,"previous_cursor":null,"results":[]}'
+    headers:
+      CF-RAY:
+      - a02d5475a916a1d1-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:48 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=MoSF3zCIGTD%2BcLBGNG1E2dyeZPfMt1FpdzfSRbMLDEK6UNHKpISGtrEzlMJVbyAFYaIHVnU43jaClBHK0IporOwmuLzN67QGtGGgl%2B7aYhXoE3tLFlg4JHhpdOAQ2LD7gjFaixbaQh%2F17Sm0GPb3"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '89'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '975'
+      x-ratelimit-burst-reset:
+      - '11'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999901'
+      x-ratelimit-daily-reset:
+      - '40751'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '975'
+      x-ratelimit-reset:
+      - '11'
+      x-results-counttype:
+      - exact
+    status:
+      code: 200
+      message: OK
 version: 1

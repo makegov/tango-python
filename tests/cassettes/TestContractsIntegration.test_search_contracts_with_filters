@@ -83,4 +83,90 @@ interactions:
     status:
       code: 200
       message: OK
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - tango.makegov.com
+      user-agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2023-01-01&award_date_lte=2023-12-31
+  response:
+    body:
+      string: '{"count":704561,"next":"https://tango.makegov.com/api/contracts/?limit=5&shape=key%2Cpiid%2Caward_date%2Crecipient%28display_name%29%2Cdescription%2Ctotal_contract_value&award_date_gte=2023-01-01&award_date_lte=2023-12-31&cursor=WyIyMDIzLTEyLTMxIiwgImZlMDM5MzUxLWNkYzMtNWEyOC05OTc4LTc5NmIyYTIwZTM5YSJd","previous":null,"cursor":"WyIyMDIzLTEyLTMxIiwgImZlMDM5MzUxLWNkYzMtNWEyOC05OTc4LTc5NmIyYTIwZTM5YSJd","previous_cursor":null,"results":[{"award_date":"2023-12-31","description":"4563205804!DOUGHNUTS,
+        FRESH, VARIETY PACK,","key":"CONT_AWD_SPE30024FHDVS_9700_SPE30022DA000_9700","piid":"SPE30024FHDVS","recipient":{"display_name":"GLOBAL
+        FOOD SERVICES COMPANY"},"total_contract_value":185.92},{"award_date":"2023-12-31","description":"4563205985!KIT
+        FOL CATH TMM-FC 1S","key":"CONT_AWD_SPE2DV24FTNFB_9700_SPE2DV17D0200_9700","piid":"SPE2DV24FTNFB","recipient":{"display_name":"CARDINAL
+        HEALTH 200, LLC"},"total_contract_value":242.16},{"award_date":"2023-12-31","description":"4563205978!INSOLE
+        CUST SZ A 2S","key":"CONT_AWD_SPE2DV24FTNFT_9700_SPE2DV17D0200_9700","piid":"SPE2DV24FTNFT","recipient":{"display_name":"CARDINAL
+        HEALTH 200, LLC"},"total_contract_value":468.0},{"award_date":"2023-12-31","description":"8510360826!ASPIRIN
+        TABLETS,USP","key":"CONT_AWD_SPE2D924F1092_9700_SPE2DX15D0022_9700","piid":"SPE2D924F1092","recipient":{"display_name":"Cardinal
+        Health, Inc."},"total_contract_value":1.22},{"award_date":"2023-12-31","description":"CEILING
+        TILE 24 W 24 L 5/8 THICK PK16","key":"CONT_AWD_47QSSC24F23L7_4732_47QSHA21A0017_4732","piid":"47QSSC24F23L7","recipient":{"display_name":"W.W.
+        GRAINGER, INC."},"total_contract_value":1400.4}]}'
+    headers:
+      CF-RAY:
+      - a02d5348aba5ae26-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 28 May 2026 12:40:00 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Tbx4UGwimJ7W61tTg9QeO1hJ0vbdTXPFhNY5UK9Rl2HunBY%2F9btqfr5BIY6L5g8b7ZmKWuC6Xv%2BLDug55Z%2B5ILU0FeTfYOBdYtd8Qdqp5a4gpZza0EwmzsC9Brc1lkPh9KKsM6dkpr8xguXiOPCG"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1648'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.043s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '992'
+      x-ratelimit-burst-reset:
+      - '37'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999924'
+      x-ratelimit-daily-reset:
+      - '40799'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '992'
+      x-ratelimit-reset:
+      - '37'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
 version: 1

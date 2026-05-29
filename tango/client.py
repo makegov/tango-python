@@ -4,7 +4,7 @@ import os
 import warnings
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, Literal, cast
 from urllib.parse import urljoin
 
 import httpx
@@ -21,6 +21,7 @@ from tango.models import (
     OTA,
     OTIDV,
     Agency,
+    BudgetAccount,
     BusinessType,
     Contract,
     Entity,
@@ -220,9 +221,7 @@ class TangoClient:
         picking one — that ambiguity would hide caller bugs.
         """
         if json_data is not None and json is not None:
-            raise TangoValidationError(
-                "_post: pass `json_data` or `json`, not both."
-            )
+            raise TangoValidationError("_post: pass `json_data` or `json`, not both.")
         body = json_data if json_data is not None else json
         if body is None:
             body = {}
@@ -243,9 +242,7 @@ class TangoClient:
         picking one — that ambiguity would hide caller bugs.
         """
         if json_data is not None and json is not None:
-            raise TangoValidationError(
-                "_patch: pass `json_data` or `json`, not both."
-            )
+            raise TangoValidationError("_patch: pass `json_data` or `json`, not both.")
         body = json_data if json_data is not None else json
         if body is None:
             body = {}
@@ -673,8 +670,9 @@ class TangoClient:
         params: dict[str, Any] = {"limit": min(limit, 100)}
         if cursor:
             params["cursor"] = cursor
-        else:
-            params["page"] = 1
+        # /api/contracts/ is cursor-only (KeysetPagination). When no cursor is
+        # supplied, send neither page nor cursor — the API returns the first
+        # page by default. (Previously sent page=1, which the endpoint ignores.)
 
         # Handle legacy filters parameter (backward compatibility)
         filter_dict: dict[str, Any] = {}
@@ -769,6 +767,89 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            cursor=data.get("cursor"),
+        )
+
+    def get_contract(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single contract by key (`/api/contracts/{key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/contracts/{key}/", params)
+        return self._parse_response_with_shape(
+            data, shape, Contract, flat, flat_lists, joiner=joiner
+        )
+
+    def get_contract_subawards(
+        self,
+        key: str,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List subawards under a contract (`/api/contracts/{key}/subawards/`)."""
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.SUBAWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        if ordering:
+            params["ordering"] = ordering
+        data = self._get(f"/api/contracts/{key}/subawards/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, Subaward, flat, flat_lists)
+            for obj in raw_results
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+        )
+
+    def get_contract_transactions(
+        self,
+        key: str,
+        limit: int = 100,
+        cursor: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List transactions under a contract (`/api/contracts/{key}/transactions/`)."""
+        params: dict[str, Any] = {"limit": min(limit, 500)}
+        if cursor:
+            params["cursor"] = cursor
+        if ordering:
+            params["ordering"] = ordering
+        data = self._get(f"/api/contracts/{key}/transactions/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results") or [],
             cursor=data.get("cursor"),
         )
 
@@ -1246,6 +1327,59 @@ class TangoClient:
         data = self._get(f"/api/otidvs/{key}/", params)
         return self._parse_response_with_shape(data, shape, OTIDV, flat, flat_lists, joiner=joiner)
 
+    def list_otidv_awards(
+        self,
+        key: str,
+        limit: int = 25,
+        cursor: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List child awards under an OTIDV (`/api/otidvs/{key}/awards/`).
+
+        Args:
+            key: The OTIDV key.
+            limit: Results per page (max 100).
+            cursor: Cursor token for keyset pagination.
+            shape: Response shape string (defaults to minimal contract shape).
+            flat: If True, flatten nested objects using dot notation.
+            flat_lists: If True, flatten arrays using indexed keys.
+            joiner: Separator used when flattening.
+            ordering: Server-side sort (prefix with '-' for descending).
+        """
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            shape = ShapeConfig.CONTRACTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        if ordering:
+            params["ordering"] = ordering
+        data = self._get(f"/api/otidvs/{key}/awards/", params)
+        raw_results = data.get("results") or []
+        results = [
+            self._parse_response_with_shape(obj, shape, Contract, flat, flat_lists, joiner=joiner)
+            for obj in raw_results
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            page_metadata=data.get("page_metadata"),
+        )
+
     def list_subawards(
         self,
         page: int = 1,
@@ -1298,6 +1432,31 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+        )
+
+    def get_subaward(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single subaward by key (`/api/subawards/{key}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.SUBAWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/subawards/{key}/", params)
+        return self._parse_response_with_shape(
+            data, shape, Subaward, flat, flat_lists, joiner=joiner
         )
 
     # ============================================================================
@@ -1922,6 +2081,12 @@ class TangoClient:
         data = self._get(f"/api/entities/{key}/", params)
         return self._parse_response_with_shape(data, shape, Entity, flat, flat_lists)
 
+    def get_entity_budget_flows(self, uei: str) -> dict[str, Any]:
+        """Get budget flows for an entity (`/api/entities/{uei}/budget-flows/`)."""
+        if not uei:
+            raise TangoValidationError("UEI is required")
+        return self._get(f"/api/entities/{uei}/budget-flows/")
+
     # Forecast endpoints
     def list_forecasts(
         self,
@@ -2012,6 +2177,31 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+        )
+
+    def get_forecast(
+        self,
+        id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single forecast by id (`/api/forecasts/{id}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.FORECASTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/forecasts/{id}/", params)
+        return self._parse_response_with_shape(
+            data, shape, Forecast, flat, flat_lists, joiner=joiner
         )
 
     # Opportunity endpoints
@@ -2112,6 +2302,31 @@ class TangoClient:
             results=results,
         )
 
+    def get_opportunity(
+        self,
+        opportunity_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single opportunity by id (`/api/opportunities/{opportunity_id}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.OPPORTUNITIES_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/opportunities/{opportunity_id}/", params)
+        return self._parse_response_with_shape(
+            data, shape, Opportunity, flat, flat_lists, joiner=joiner
+        )
+
     # Notice endpoints
     def list_notices(
         self,
@@ -2200,6 +2415,29 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
         )
+
+    def get_notice(
+        self,
+        notice_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single notice by id (`/api/notices/{notice_id}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.NOTICES_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/notices/{notice_id}/", params)
+        return self._parse_response_with_shape(data, shape, Notice, flat, flat_lists, joiner=joiner)
 
     # Protest endpoints
     # See https://tango.makegov.com/docs/api-reference/protests.md
@@ -2328,6 +2566,170 @@ class TangoClient:
         data = self._get(f"/api/protests/{case_id}/", params)
         return self._parse_response_with_shape(data, shape, Protest, flat, flat_lists)
 
+    # ============================================================================
+    # Budget (federal account x fiscal year rollups)
+    # ============================================================================
+
+    def list_budget_accounts(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        federal_account_symbol: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        agency_code: str | None = None,
+        bureau_name: str | None = None,
+        account_title: str | None = None,
+        bea_category: str | None = None,
+        on_off_budget: str | None = None,
+        subfunction_code: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """List budget accounts (`/api/budget/accounts/`).
+
+        One row per ``(federal_account_symbol, fiscal_year)`` covering the full
+        budget lifecycle, pre-computed ratios + trends, the
+        contract/assistance/unlinked breakdown, and request-vs-actual spend.
+
+        Args:
+            page: Page number.
+            limit: Results per page (max 100).
+            shape: Response shape string (defaults to minimal shape).
+            flat: If True, flatten nested objects using dot notation.
+            flat_lists: If True, flatten arrays using indexed keys.
+            federal_account_symbol: Exact federal account symbol.
+            fiscal_year: Fiscal year (exact).
+            fiscal_year_gte: Fiscal year >=.
+            fiscal_year_lte: Fiscal year <=.
+            agency_code: Agency code (exact).
+            bureau_name: Bureau name (exact).
+            account_title: Account title (icontains).
+            bea_category: BEA category (exact).
+            on_off_budget: On/off budget flag (exact).
+            subfunction_code: Subfunction code (exact).
+            search: Full-text search over account_title/agency_name/bureau_name.
+            ordering: Sort field (prefix with '-' for descending).
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape is None:
+            shape = ShapeConfig.BUDGET_ACCOUNTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        for key, val in (
+            ("federal_account_symbol", federal_account_symbol),
+            ("fiscal_year", fiscal_year),
+            ("fiscal_year__gte", fiscal_year_gte),
+            ("fiscal_year__lte", fiscal_year_lte),
+            ("agency_code", agency_code),
+            ("bureau_name", bureau_name),
+            ("account_title__icontains", account_title),
+            ("bea_category", bea_category),
+            ("on_off_budget", on_off_budget),
+            ("subfunction_code", subfunction_code),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+        data = self._get("/api/budget/accounts/", params)
+        results = [
+            self._parse_response_with_shape(obj, shape, BudgetAccount, flat, flat_lists)
+            for obj in data.get("results", [])
+        ]
+        return PaginatedResponse(
+            count=data.get("count", 0),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_budget_account(
+        self,
+        id: str | int,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single budget account by id (`/api/budget/accounts/{id}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.BUDGET_ACCOUNTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/budget/accounts/{id}/", params)
+        return self._parse_response_with_shape(
+            data, shape, BudgetAccount, flat, flat_lists, joiner=joiner
+        )
+
+    def get_budget_account_quarters(
+        self,
+        id: str | int,
+        tas: str | None = None,
+        limit: int = 25,
+    ) -> PaginatedResponse:
+        """Get quarterly TAS-grain flow for a budget account.
+
+        (`/api/budget/accounts/{id}/quarters/`). FY21+ only.
+
+        Args:
+            id: Budget account id.
+            tas: Narrow to a single Treasury Account Symbol.
+            limit: Results per page (max 100).
+        """
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if tas:
+            params["tas"] = tas
+        data = self._get(f"/api/budget/accounts/{id}/quarters/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results") or [],
+        )
+
+    def get_budget_account_recipients(
+        self,
+        id: str | int,
+        funding_organization_id: str | None = None,
+        limit: int = 25,
+    ) -> PaginatedResponse:
+        """Get funding-office x recipient contract-flow detail for a budget account.
+
+        (`/api/budget/accounts/{id}/recipients/`).
+
+        Args:
+            id: Budget account id.
+            funding_organization_id: Narrow to a single funding office
+                (Organization UUID).
+            limit: Results per page (max 100).
+        """
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if funding_organization_id:
+            params["funding_organization_id"] = funding_organization_id
+        data = self._get(f"/api/budget/accounts/{id}/recipients/", params)
+        return PaginatedResponse(
+            count=int(data.get("count") or len(data.get("results") or [])),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=data.get("results") or [],
+        )
+
     # Grant endpoints
     def list_grants(
         self,
@@ -2341,6 +2743,7 @@ class TangoClient:
         cfda_number: str | None = None,
         funding_categories: str | None = None,
         funding_instruments: str | None = None,
+        grant_id: str | None = None,
         opportunity_number: str | None = None,
         ordering: str | None = None,
         posted_date_after: str | None = None,
@@ -2364,6 +2767,8 @@ class TangoClient:
             cfda_number: CFDA number filter
             funding_categories: Funding categories filter
             funding_instruments: Funding instruments filter
+            grant_id: Filter by grant ID (matches the detail-endpoint
+                identifier). Supports multi-value OR via '|' (e.g. "123|456").
             opportunity_number: Opportunity number filter
             ordering: Sort field (prefix with '-' for descending)
             posted_date_after: Posted date after
@@ -2390,6 +2795,7 @@ class TangoClient:
             ("cfda_number", cfda_number),
             ("funding_categories", funding_categories),
             ("funding_instruments", funding_instruments),
+            ("grant_id", grant_id),
             ("opportunity_number", opportunity_number),
             ("ordering", ordering),
             ("posted_date_after", posted_date_after),
@@ -2416,6 +2822,29 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
         )
+
+    def get_grant(
+        self,
+        grant_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get a single grant by its grant id (`/api/grants/{grant_id}/`)."""
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.GRANTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/grants/{grant_id}/", params)
+        return self._parse_response_with_shape(data, shape, Grant, flat, flat_lists, joiner=joiner)
 
     # ============================================================================
     # Webhooks (v2)
@@ -2630,13 +3059,13 @@ class TangoClient:
         return WebhookAlert(
             alert_id=str(data.get("alert_id") or data.get("id") or ""),
             name=str(data.get("name") or data.get("subscription_name") or ""),
-            query_type=(str(data["query_type"]) if data.get("query_type") is not None else None),
-            filters=data.get("filters") or data.get("filter_definition"),
+            query_type=str(data.get("query_type") or ""),
+            filters=data.get("filters") or data.get("filter_definition") or {},
             frequency=str(data.get("frequency", "realtime")),
             cron_expression=(
                 str(data["cron_expression"]) if data.get("cron_expression") is not None else None
             ),
-            status=str(data.get("status", "active")),
+            status=cast("Literal['active', 'paused']", data.get("status", "active")),
             created_at=str(data.get("created_at", "")),
             last_checked_at=(
                 str(data["last_checked_at"]) if data.get("last_checked_at") is not None else None

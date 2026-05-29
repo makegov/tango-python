@@ -926,6 +926,25 @@ class TestFieldValidation:
         assert "nam" in error_msg
         assert "Did you mean" in error_msg or "name" in error_msg
 
+    def test_competition_nested_shape_on_contract(self):
+        """Regression (tango-python#29 item 1): CONTRACT_SCHEMA/IDV_SCHEMA
+        reference the competition leaf as ``ContractOrIDVCompetition``, which
+        must be registered in EXPLICIT_SCHEMAS so nested field selection like
+        ``competition(extent_competed,...)`` validates instead of raising
+        ShapeValidationError."""
+        from tango.shapes.explicit_schemas import EXPLICIT_SCHEMAS
+
+        assert "ContractOrIDVCompetition" in EXPLICIT_SCHEMAS
+        assert "extent_competed" in EXPLICIT_SCHEMAS["ContractOrIDVCompetition"]
+
+        parser = ShapeParser()
+        spec = parser.parse(
+            "key,piid,competition(extent_competed,number_of_offers_received)"
+        )
+        # Must not raise — resolves the competition leaf via the alias.
+        parser.validate(spec, "Contract")
+        parser.validate(spec, "IDV")
+
 
 class TestBuiltinModelsRegistration:
     """Test registration of built-in Tango models"""
