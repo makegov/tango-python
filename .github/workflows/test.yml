@@ -20,10 +20,10 @@ jobs:
       if: matrix.os == 'windows-latest'
       run: git config --global core.longpaths true
     
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Install uv
-      uses: astral-sh/setup-uv@v4
+      uses: astral-sh/setup-uv@v8.1.0
       with:
         version: "latest"
     
@@ -37,8 +37,8 @@ jobs:
       run: uv run pytest
     
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
-        file: ./coverage.xml
+        files: ./coverage.xml
         flags: unittests
         name: codecov-${{ matrix.os }}-py${{ matrix.python-version }}
