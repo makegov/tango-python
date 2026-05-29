@@ -4,7 +4,7 @@ import os
 import warnings
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, Literal, cast
 from urllib.parse import urljoin
 
 import httpx
@@ -3059,13 +3059,13 @@ class TangoClient:
         return WebhookAlert(
             alert_id=str(data.get("alert_id") or data.get("id") or ""),
             name=str(data.get("name") or data.get("subscription_name") or ""),
-            query_type=(str(data["query_type"]) if data.get("query_type") is not None else None),
-            filters=data.get("filters") or data.get("filter_definition"),
+            query_type=str(data.get("query_type") or ""),
+            filters=data.get("filters") or data.get("filter_definition") or {},
             frequency=str(data.get("frequency", "realtime")),
             cron_expression=(
                 str(data["cron_expression"]) if data.get("cron_expression") is not None else None
             ),
-            status=str(data.get("status", "active")),
+            status=cast("Literal['active', 'paused']", data.get("status", "active")),
             created_at=str(data.get("created_at", "")),
             last_checked_at=(
                 str(data["last_checked_at"]) if data.get("last_checked_at") is not None else None

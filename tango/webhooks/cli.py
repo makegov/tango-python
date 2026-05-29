@@ -12,7 +12,7 @@ import json
 import sys
 import threading
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 try:
     import click
@@ -197,7 +197,7 @@ def simulate_cmd(
         from tango import TangoClient
 
         client = TangoClient(api_key=api_key, base_url=base_url)
-        payload = client.get_webhook_sample_payload(event_type=event_type)
+        payload = cast("dict[str, Any]", client.get_webhook_sample_payload(event_type=event_type))
     else:
         payload = {"events": [{"event_type": "tango.cli.simulated"}]}
 

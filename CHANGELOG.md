@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- `_parse_webhook_alert`: aligned the parser output with the `WebhookAlert`
+  type contract. Sparse server payloads now hydrate `query_type` and `filters`
+  as `""` / `{}` (matching their declared non-null types) rather than `None`,
+  and `status` is typed as the `Literal["active", "paused"]` the model promises.
+  Clears the four type-check errors this introduced; no change for full payloads.
 - `Contract` model: removed dead fields (`id`, `award_id`, `recipient_name`,
   `award_amount`, `awarding_agency`, `funding_agency`) and added the real API
   fields (`key`, `piid`, `obligated`, `total_contract_value`,
