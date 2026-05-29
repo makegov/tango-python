@@ -23,10 +23,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Install uv
-      uses: astral-sh/setup-uv@v4
+      uses: astral-sh/setup-uv@v8
       with:
         version: "latest"
 
@@ -66,12 +66,12 @@ jobs:
           echo "::notice::Skipping SDK conformance check — TANGO_API_REPO_ACCESS_TOKEN not configured."
         fi
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       if: steps.gate.outputs.ready == 'true'
 
     - name: Checkout tango API repo (manifest source)
       if: steps.gate.outputs.ready == 'true'
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         repository: makegov/tango
         path: tango-api
@@ -79,7 +79,7 @@ jobs:
 
     - name: Install uv
       if: steps.gate.outputs.ready == 'true'
-      uses: astral-sh/setup-uv@v4
+      uses: astral-sh/setup-uv@v8
       with:
         version: "latest"
 
