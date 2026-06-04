@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-06-04
+
 ### Changed
 - `get_entity_budget_flows()` now exposes the backend's standard page/limit
   pagination and `fiscal_year` filter, and returns
@@ -16,6 +18,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   to narrow by fiscal year. Callers that were indexing `result["results"]`
   on the old return value should switch to `result.results` (and can now use
   `result.next` / `page=` to walk further pages).
+- Completed the strict-`mypy` burn-down across `tango/shapes/` (parser,
+  generator, factory, schema). All changes are type-annotation/typing
+  corrections with no runtime behavior change, except:
+  - `FieldSchema.nested_model` is now typed `type | str | None` (it always
+    accepted string model names from the explicit schemas; the annotation was
+    wrong). `ModelFactory.validate_data` and `ShapeParser._validate_field_spec`
+    likewise accept `type | str` for the model argument.
+  - Removed two dead `elif field_spec.is_wildcard:` branches (in
+    `TypeGenerator.generate_type` and `ModelFactory.create_instance`) and the
+    now-orphaned `_parse_nested_wildcard` helper. These were unreachable —
+    wildcard field specs are fully handled by the top-of-loop branch that
+    `continue`s before reaching them — so removal is behavior-preserving.
 
 ### Docs
 - `docs/API_REFERENCE.md` now documents the Budget surface that shipped in
@@ -32,20 +46,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `codecov/codecov-action` v3→v5 (with the renamed `files:` input).
 - `mypy` is now a **hard gate** in `lint.yml` (no longer advisory). The
   `tango/` package type-checks cleanly under strict mypy.
-
-### Changed
-- Completed the strict-`mypy` burn-down across `tango/shapes/` (parser,
-  generator, factory, schema). All changes are type-annotation/typing
-  corrections with no runtime behavior change, except:
-  - `FieldSchema.nested_model` is now typed `type | str | None` (it always
-    accepted string model names from the explicit schemas; the annotation was
-    wrong). `ModelFactory.validate_data` and `ShapeParser._validate_field_spec`
-    likewise accept `type | str` for the model argument.
-  - Removed two dead `elif field_spec.is_wildcard:` branches (in
-    `TypeGenerator.generate_type` and `ModelFactory.create_instance`) and the
-    now-orphaned `_parse_nested_wildcard` helper. These were unreachable —
-    wildcard field specs are fully handled by the top-of-loop branch that
-    `continue`s before reaching them — so removal is behavior-preserving.
 
 ## [1.1.1] - 2026-05-29
 
