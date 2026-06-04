@@ -1923,15 +1923,37 @@ class TangoClient:
         )
 
     # Business Types endpoints
-    def list_business_types(self, page: int = 1, limit: int = 25) -> PaginatedResponse:
-        """List business types"""
-        params = {"page": page, "limit": min(limit, 100)}
+    def list_business_types(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> PaginatedResponse:
+        """List business types.
+
+        When ``shape`` is omitted the API applies its own default
+        (``name,code``) and results are returned as :class:`BusinessType`
+        instances. When ``shape`` is provided, raw dicts are returned so the
+        caller can rely on the exact shape requested.
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
         data = self._get("/api/business_types/", params)
+        results: list[Any] = (
+            list(data["results"]) if shape else [BusinessType(**btype) for btype in data["results"]]
+        )
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
             previous=data.get("previous"),
-            results=[BusinessType(**btype) for btype in data["results"]],
+            results=results,
         )
 
     def list_naics(
@@ -1945,8 +1967,17 @@ class TangoClient:
         revenue_limit_gte: int | None = None,
         revenue_limit_lte: int | None = None,
         search: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
     ) -> PaginatedResponse:
-        """List NAICS codes (`/api/naics/`)."""
+        """List NAICS codes (`/api/naics/`).
+
+        When ``shape`` is omitted the API applies its own default. Passing any
+        of the ``revenue_limit*`` / ``employee_limit*`` filters causes the API
+        to widen the default shape to include ``size_standards`` and
+        ``federal_obligations``.
+        """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
         if employee_limit is not None:
             params["employee_limit"] = employee_limit
@@ -1962,6 +1993,12 @@ class TangoClient:
             params["revenue_limit_lte"] = revenue_limit_lte
         if search is not None:
             params["search"] = search
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
         data = self._get("/api/naics/", params)
         return PaginatedResponse(
             count=data.get("count", 0),
@@ -3344,9 +3381,22 @@ class TangoClient:
             raise TangoValidationError("Department code is required")
         return self._get(f"/api/departments/{code}/")
 
-    def list_psc(self, page: int = 1, limit: int = 25) -> PaginatedResponse[dict[str, Any]]:
+    def list_psc(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> PaginatedResponse[dict[str, Any]]:
         """List Product Service Codes (`/api/psc/`)."""
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
         data = self._get("/api/psc/", params)
         return PaginatedResponse(
             count=int(data.get("count", 0)),
@@ -3355,11 +3405,24 @@ class TangoClient:
             results=list(data.get("results") or []),
         )
 
-    def get_psc(self, code: str) -> dict[str, Any]:
+    def get_psc(
+        self,
+        code: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> dict[str, Any]:
         """Get a Product Service Code by code (`/api/psc/{code}/`)."""
         if not code:
             raise TangoValidationError("PSC code is required")
-        return self._get(f"/api/psc/{code}/")
+        params: dict[str, Any] = {}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        return self._get(f"/api/psc/{code}/", params)
 
     def get_psc_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
         """Get rolling PSC metrics (`/api/psc/{code}/metrics/{months}/{period_grouping}/`).
@@ -3374,11 +3437,24 @@ class TangoClient:
             raise TangoValidationError("PSC code is required")
         return self._get(f"/api/psc/{code}/metrics/{months}/{period_grouping}/")
 
-    def get_naics(self, code: str) -> dict[str, Any]:
+    def get_naics(
+        self,
+        code: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> dict[str, Any]:
         """Get a NAICS code by code (`/api/naics/{code}/`)."""
         if not code:
             raise TangoValidationError("NAICS code is required")
-        return self._get(f"/api/naics/{code}/")
+        params: dict[str, Any] = {}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        return self._get(f"/api/naics/{code}/", params)
 
     def get_naics_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
         """Get rolling NAICS metrics (`/api/naics/{code}/metrics/{months}/{period_grouping}/`)."""
@@ -3386,17 +3462,41 @@ class TangoClient:
             raise TangoValidationError("NAICS code is required")
         return self._get(f"/api/naics/{code}/metrics/{months}/{period_grouping}/")
 
-    def get_business_type(self, code: str) -> dict[str, Any]:
+    def get_business_type(
+        self,
+        code: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> dict[str, Any]:
         """Get a business type by code (`/api/business_types/{code}/`)."""
         if not code:
             raise TangoValidationError("Business type code is required")
-        return self._get(f"/api/business_types/{code}/")
+        params: dict[str, Any] = {}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        return self._get(f"/api/business_types/{code}/", params)
 
     def list_assistance_listings(
-        self, page: int = 1, limit: int = 25
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
     ) -> PaginatedResponse[dict[str, Any]]:
         """List Assistance Listings (CFDA programs) (`/api/assistance_listings/`)."""
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
         data = self._get("/api/assistance_listings/", params)
         return PaginatedResponse(
             count=int(data.get("count", 0)),
@@ -3405,22 +3505,44 @@ class TangoClient:
             results=list(data.get("results") or []),
         )
 
-    def get_assistance_listing(self, number: str) -> dict[str, Any]:
+    def get_assistance_listing(
+        self,
+        number: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> dict[str, Any]:
         """Get an Assistance Listing by CFDA number (`/api/assistance_listings/{number}/`)."""
         if not number:
             raise TangoValidationError("Assistance listing number is required")
-        return self._get(f"/api/assistance_listings/{number}/")
+        params: dict[str, Any] = {}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        return self._get(f"/api/assistance_listings/{number}/", params)
 
     def list_mas_sins(
         self,
         page: int = 1,
         limit: int = 25,
         search: str | None = None,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
     ) -> PaginatedResponse[dict[str, Any]]:
         """List GSA MAS SINs (`/api/mas_sins/`)."""
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
         if search is not None:
             params["search"] = search
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
         data = self._get("/api/mas_sins/", params)
         return PaginatedResponse(
             count=int(data.get("count", 0)),
@@ -3429,11 +3551,24 @@ class TangoClient:
             results=list(data.get("results") or []),
         )
 
-    def get_mas_sin(self, sin: str) -> dict[str, Any]:
+    def get_mas_sin(
+        self,
+        sin: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> dict[str, Any]:
         """Get a MAS SIN by code (`/api/mas_sins/{sin}/`)."""
         if not sin:
             raise TangoValidationError("MAS SIN is required")
-        return self._get(f"/api/mas_sins/{sin}/")
+        params: dict[str, Any] = {}
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+        return self._get(f"/api/mas_sins/{sin}/", params)
 
     # ============================================================================
     # Entity sub-resources
