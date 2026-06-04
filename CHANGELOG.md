@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-06-04
+
 ### Added
 - Reference-data list/get methods now accept `shape` (and the associated
   `flat` / `flat_lists`) parameters, matching the underlying API which has
