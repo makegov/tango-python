@@ -2081,11 +2081,36 @@ class TangoClient:
         data = self._get(f"/api/entities/{key}/", params)
         return self._parse_response_with_shape(data, shape, Entity, flat, flat_lists)
 
-    def get_entity_budget_flows(self, uei: str) -> dict[str, Any]:
-        """Get budget flows for an entity (`/api/entities/{uei}/budget-flows/`)."""
+    def get_entity_budget_flows(
+        self,
+        uei: str,
+        page: int = 1,
+        limit: int = 25,
+        fiscal_year: int | None = None,
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """Get budget flows for an entity (`/api/entities/{uei}/budget-flows/`).
+
+        Standard page/limit pagination (default 25, max 100). Each result row
+        is a hand-built dict from the backend (no shape system).
+
+        Args:
+            uei: Entity UEI. Required.
+            page: Page number.
+            limit: Results per page (max 100).
+            fiscal_year: Optional fiscal year filter.
+        """
         if not uei:
             raise TangoValidationError("UEI is required")
-        return self._get(f"/api/entities/{uei}/budget-flows/")
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+        if fiscal_year is not None:
+            params["fiscal_year"] = fiscal_year
+        data = self._get(f"/api/entities/{uei}/budget-flows/", params)
+        return PaginatedResponse(
+            count=int(data.get("count", 0)),
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=list(data.get("results") or []),
+        )
 
     # Forecast endpoints
     def list_forecasts(

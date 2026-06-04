@@ -400,6 +400,64 @@ class TestEntitiesIntegration:
         assert legal_business_name is not None, "Entity legal_business_name should be present"
 
     @handle_api_exceptions("entities")
+    def test_get_entity_budget_flows(self, tango_client):
+        """Test get_entity_budget_flows() pagination + fiscal_year filter
+
+        Validates:
+        - Returns a PaginatedResponse (count / next / previous / results)
+        - page and limit query params flow through
+        - fiscal_year filter narrows results to that year
+        - Result rows carry the documented backend keys
+        """
+        # Pick any entity from the list — budget-flows may be empty for many
+        # UEIs, but the response structure is still validated.
+        list_response = tango_client.list_entities(limit=5, shape=ShapeConfig.ENTITIES_MINIMAL)
+        assert len(list_response.results) > 0, "Expected at least one entity"
+
+        test_entity = next(
+            (
+                e
+                for e in list_response.results
+                if (e.get("uei") if isinstance(e, dict) else getattr(e, "uei", None))
+            ),
+            None,
+        )
+        assert test_entity is not None, "Need a UEI to query budget-flows"
+        test_uei = test_entity.get("uei") if isinstance(test_entity, dict) else test_entity.uei
+
+        # Default call: page=1, limit=25, no fiscal_year
+        flows = tango_client.get_entity_budget_flows(test_uei)
+
+        # PaginatedResponse shape (matches validate_pagination minus the
+        # cursor field — budget-flows uses page/limit, not cursor).
+        assert hasattr(flows, "count")
+        assert hasattr(flows, "next")
+        assert hasattr(flows, "previous")
+        assert hasattr(flows, "results")
+        assert isinstance(flows.count, int) and flows.count >= 0
+        assert isinstance(flows.results, list)
+
+        # If any rows came back, they should carry the documented keys.
+        if flows.results:
+            row = flows.results[0]
+            assert isinstance(row, dict)
+            for required_key in (
+                "federal_account_symbol",
+                "fiscal_year",
+                "contract_obligated",
+            ):
+                assert required_key in row, f"row missing {required_key!r}"
+
+        # fiscal_year filter: any returned rows must match the requested year.
+        filtered = tango_client.get_entity_budget_flows(test_uei, fiscal_year=2024, limit=10)
+        assert hasattr(filtered, "count")
+        assert isinstance(filtered.results, list)
+        for row in filtered.results:
+            assert row["fiscal_year"] == 2024, (
+                f"fiscal_year filter leaked year {row['fiscal_year']!r}"
+            )
+
+    @handle_api_exceptions("entities")
     def test_entity_with_various_identifiers(self, tango_client):
         """Test entities with different identifier types (UEI, CAGE)
 

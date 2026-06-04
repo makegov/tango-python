@@ -1,0 +1,229 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/?page=1&limit=5&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types
+  response:
+    body:
+      string: '{"count":1794591,"next":"https://tango.makegov.com/api/entities/?limit=5&page=2&shape=uei%2Clegal_business_name%2Ccage_code%2Cbusiness_types","previous":null,"results":[{"business_types":[{"code":"A2"},{"code":"23"},{"code":"OY"},{"code":"2X"}],"cage_code":null,"legal_business_name":"!SCITAMEHTAM","uei":"JNSXDDCLHRM8"},{"business_types":[{"code":"A8"}],"cage_code":"393W6","legal_business_name":"!YOUTHWORKS!","uei":"NLQ3EMTUVAT4"},{"business_types":[{"code":"2X"},{"code":"XS"}],"cage_code":"4WBT9","legal_business_name":"\"
+        HALL''S PUMP & WELL, INC.\"","uei":"XKJXMX585A76"},{"business_types":[{"code":"A8"}],"cage_code":"SNEE6","legal_business_name":"\"24.KG\"
+        NEWS AGENCY LIMITED LIABILITY COMPANY","uei":"G47KDFCCLRQ3"},{"business_types":[{"code":"A8"}],"cage_code":"4N1M7","legal_business_name":"\"A
+        KID''S PLACE\" SOUTHERN MIDDLE TENNESSEE CHILD ADVOCACY CENTER, INC.","uei":"GHUMPKK5VRK5"}]}'
+    headers:
+      CF-RAY:
+      - a067d476b9fea1e8-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 04 Jun 2026 15:04:25 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=QjOntGQK9NGj0pXrnRrzSOTY0Rc77FlHu3EpYe%2FAJ0%2F4HIa7vb37hFtP8KRXrToGPtM8FL6v9c3ctYL3eWKKg4dQHyNmoQ%2FrhEy2ltgUHmtE1boDckbHHe8h5ec6xmyenStYTeOHfHssuWKva8Y3"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '899'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.017s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '999'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999921'
+      x-ratelimit-daily-reset:
+      - '32134'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '999'
+      x-ratelimit-reset:
+      - '59'
+      x-results-counttype:
+      - approximate
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/JNSXDDCLHRM8/budget-flows/?page=1&limit=25
+  response:
+    body:
+      string: '{"count":0,"next":null,"previous":null,"results":[],"uei":"JNSXDDCLHRM8","fiscal_year":null}'
+    headers:
+      CF-RAY:
+      - a067d478dfb9b45f-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 04 Jun 2026 15:04:25 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=hEV9I2kPu8jfaECemhJ6a4ksou5rqEOBmHbDTDv%2FBIiPqfvzF9vMzI5JeTKz9i9z1%2FjVlPItIL3RzU6jKfCeNJ01fy5Nr2RgNwl%2F1M9ZJNEAvFmthpi9%2BuQOvD%2FkXWxS%2FBcDHHHUOqv91Tn4QvQ1"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '92'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '998'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999920'
+      x-ratelimit-daily-reset:
+      - '32134'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '998'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/entities/JNSXDDCLHRM8/budget-flows/?page=1&limit=10&fiscal_year=2024
+  response:
+    body:
+      string: '{"count":0,"next":null,"previous":null,"results":[],"uei":"JNSXDDCLHRM8","fiscal_year":2024}'
+    headers:
+      CF-RAY:
+      - a067d47a0dbfa1fa-MSP
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 04 Jun 2026 15:04:25 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rs1t88JDTfQw%2BSAh2raEKfBh%2F8s7xXnTefjWQeqdiSa70ttfsjspOS9szRkiRZ4S9%2BsXyebq%2FlTli43UwW1caOQyqWSJzJCVBanjoGzFuRs8%2BWyS3Kgaj8A6SasH8bmVt43O6j88LAn45BLpZN2N"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '92'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.018s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '997'
+      x-ratelimit-burst-reset:
+      - '59'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999919'
+      x-ratelimit-daily-reset:
+      - '32134'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '997'
+      x-ratelimit-reset:
+      - '59'
+    status:
+      code: 200
+      message: OK
+version: 1

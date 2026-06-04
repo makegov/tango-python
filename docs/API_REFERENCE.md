@@ -21,6 +21,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Grants](#grants)
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
+- [Budget](#budget)
 - [Business Types](#business-types)
 - [NAICS](#naics)
 - [Webhooks](#webhooks)
@@ -1212,6 +1213,118 @@ protest = client.get_protest(
 
 ---
 
+## Budget
+
+Federal account × fiscal year budget rollups, covering the full budget lifecycle (requested → enacted → apportioned → obligated → outlayed), pre-computed ratios and trends, the contract / assistance / unlinked breakdown, and request-vs-actual spend.
+
+### list_budget_accounts()
+
+List budget accounts. One row per `(federal_account_symbol, fiscal_year)`.
+
+```python
+accounts = client.list_budget_accounts(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.BUDGET_ACCOUNTS_MINIMAL,
+    # Filter parameters (all optional)
+    federal_account_symbol=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    agency_code=None,
+    bureau_name=None,
+    account_title=None,
+    bea_category=None,
+    on_off_budget=None,
+    subfunction_code=None,
+    search=None,
+    ordering=None,
+)
+```
+
+**Filter Parameters:**
+- `federal_account_symbol` - Exact federal account symbol (e.g., `"097-0100"`)
+- `fiscal_year` - Fiscal year (exact)
+- `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
+- `agency_code` - Agency code (exact)
+- `bureau_name` - Bureau name (exact)
+- `account_title` - Account title (case-insensitive substring match)
+- `bea_category` - BEA category (exact)
+- `on_off_budget` - On/off budget flag (exact)
+- `subfunction_code` - Subfunction code (exact)
+- `search` - Full-text search over `account_title`, `agency_name`, `bureau_name`
+- `ordering` - Sort field; prefix with `-` for descending
+
+**Returns:** [PaginatedResponse](#paginatedresponse) of `BudgetAccount` records (see [ShapeConfig](#shapeconfig-predefined-shapes) for the default shape).
+
+**Example:**
+```python
+accounts = client.list_budget_accounts(
+    agency_code="097",
+    fiscal_year_gte=2023,
+    ordering="-enacted_ba",
+    limit=10,
+)
+
+for acct in accounts.results:
+    print(f"{acct.federal_account_symbol} FY{acct.fiscal_year}: "
+          f"enacted ${acct.enacted_ba:,}")
+```
+
+### get_budget_account()
+
+Get a single budget account by id.
+
+```python
+account = client.get_budget_account(
+    12345,
+    shape=ShapeConfig.BUDGET_ACCOUNTS_MINIMAL,
+)
+```
+
+**Parameters:**
+- `id` (str | int): Budget account id.
+- `shape` (str, optional): Response shape. Defaults to `BUDGET_ACCOUNTS_MINIMAL`.
+- `flat` / `flat_lists` / `joiner`: See [Shaping Guide](SHAPES.md).
+
+**Returns:** A `BudgetAccount` record.
+
+### get_budget_account_quarters()
+
+Get quarterly TAS-grain flow for a budget account. FY21+ only.
+
+```python
+quarters = client.get_budget_account_quarters(12345, limit=25)
+```
+
+**Parameters:**
+- `id` (str | int): Budget account id.
+- `tas` (str, optional): Narrow to a single Treasury Account Symbol.
+- `limit` (int): Results per page (max 100).
+
+**Returns:** [PaginatedResponse](#paginatedresponse) of quarterly flow records.
+
+### get_budget_account_recipients()
+
+Get funding-office × recipient contract-flow detail for a budget account.
+
+```python
+recipients = client.get_budget_account_recipients(
+    12345,
+    funding_organization_id=None,
+    limit=25,
+)
+```
+
+**Parameters:**
+- `id` (str | int): Budget account id.
+- `funding_organization_id` (str, optional): Narrow to a single funding office (Organization UUID).
+- `limit` (int): Results per page (max 100).
+
+**Returns:** [PaginatedResponse](#paginatedresponse) of `(funding_office, recipient)` flow records.
+
+---
+
 ## Business Types
 
 Business type classifications.
@@ -1460,6 +1573,26 @@ lcats = client.list_entity_lcats("ABCDEF123456", limit=25)
 ```python
 metrics = client.get_entity_metrics("ABCDEF123456", months=12, period_grouping="month")
 ```
+
+### get_entity_budget_flows()
+
+Get budget flows for an entity (`/api/entities/{uei}/budget-flows/`) — the federal accounts that funded contracts and assistance awarded to this entity.
+
+```python
+flows = client.get_entity_budget_flows("ABCDEF123456", fiscal_year=2024)
+for row in flows.results:
+    print(row["federal_account_symbol"], row["contract_obligated"])
+# next page
+more = client.get_entity_budget_flows("ABCDEF123456", page=2, fiscal_year=2024)
+```
+
+**Parameters:**
+- `uei` (str): Entity UEI. Required.
+- `page` (int): Page number. Default 1.
+- `limit` (int): Results per page. Default 25, max 100.
+- `fiscal_year` (int | None): Optional fiscal year filter.
+
+**Returns:** `PaginatedResponse[dict[str, Any]]` — standard `count / next / previous / results`. Result rows are raw dicts from the API (not shape-controlled).
 
 ---
 
@@ -1875,6 +2008,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `SUBAWARDS_MINIMAL` | `list_subawards` | award_key, prime_recipient(uei,display_name), subaward_recipient(uei,display_name) |
 | `GSA_ELIBRARY_CONTRACTS_MINIMAL` | `list_gsa_elibrary_contracts` | uuid, contract_number, schedule, recipient(display_name,uei), idv(key,award_date) |
 | `PROTESTS_MINIMAL` | `list_protests` | case_id, case_number, title, source_system, outcome, filed_date |
+| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |
