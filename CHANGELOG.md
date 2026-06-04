@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Reference-data list/get methods now accept `shape` (and the associated
+  `flat` / `flat_lists`) parameters, matching the underlying API which has
+  always supported the shape system via `ShapeOnDemandMixin`. Affected:
+  `list_naics` / `get_naics`, `list_psc` / `get_psc`,
+  `list_assistance_listings` / `get_assistance_listing`,
+  `list_business_types` / `get_business_type`,
+  `list_mas_sins` / `get_mas_sin`. When `shape` is omitted, behavior is
+  unchanged — the API applies its own per-resource default.
+  `list_business_types` returns raw dicts (instead of `BusinessType`
+  instances) when a `shape` is supplied so the caller gets exactly the
+  shape requested.
+
 ## [1.1.2] - 2026-06-04
 
 ### Changed
