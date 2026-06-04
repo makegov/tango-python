@@ -1507,6 +1507,65 @@ class TestAdditionalEndpoints:
         assert entity.uei == "ABC123"
 
     @patch("tango.client.httpx.Client.request")
+    def test_get_entity_budget_flows_defaults(self, mock_request):
+        """Default call uses page=1, limit=25, no fiscal_year, and returns
+        a PaginatedResponse."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 1}'
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "federal_account_symbol": "075-0140",
+                    "fiscal_year": 2024,
+                    "contract_obligated": "1000.00",
+                }
+            ],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        flows = client.get_entity_budget_flows("ABC123")
+
+        params = mock_request.call_args[1]["params"]
+        assert params == {"page": 1, "limit": 25}
+
+        assert flows.count == 1
+        assert flows.next is None
+        assert flows.previous is None
+        assert flows.results[0]["federal_account_symbol"] == "075-0140"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_get_entity_budget_flows_with_params(self, mock_request):
+        """page, limit, and fiscal_year flow through; limit caps at 100."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.content = b'{"count": 0}'
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": "https://example/next",
+            "previous": None,
+            "results": [],
+        }
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        flows = client.get_entity_budget_flows("ABC123", page=2, limit=500, fiscal_year=2024)
+
+        params = mock_request.call_args[1]["params"]
+        assert params == {"page": 2, "limit": 100, "fiscal_year": 2024}
+        assert flows.next == "https://example/next"
+
+    def test_get_entity_budget_flows_requires_uei(self):
+        """Empty UEI raises TangoValidationError without issuing a request."""
+        client = TangoClient(api_key="test-key")
+        with pytest.raises(TangoValidationError):
+            client.get_entity_budget_flows("")
+
+    @patch("tango.client.httpx.Client.request")
     def test_list_forecasts(self, mock_request):
         """Test list_forecasts endpoint"""
         mock_response = Mock()

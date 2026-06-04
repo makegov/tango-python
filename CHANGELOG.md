@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- `get_entity_budget_flows()` now exposes the backend's standard page/limit
+  pagination and `fiscal_year` filter, and returns
+  `PaginatedResponse[dict[str, Any]]` instead of a raw dict. The backend has
+  always paginated this endpoint via `StandardResultsSetPagination`; the
+  previous signature gave callers no way to reach pages beyond the first or
+  to narrow by fiscal year. Callers that were indexing `result["results"]`
+  on the old return value should switch to `result.results` (and can now use
+  `result.next` / `page=` to walk further pages).
+
+### Docs
+- `docs/API_REFERENCE.md` now documents the Budget surface that shipped in
+  v1.1.0: a new `## Budget` section covering `list_budget_accounts`,
+  `get_budget_account`, `get_budget_account_quarters`, and
+  `get_budget_account_recipients`; a `get_entity_budget_flows()` entry under
+  Entity Sub-resources; a `BUDGET_ACCOUNTS_MINIMAL` row in the ShapeConfig
+  table; and a Budget entry in the table of contents.
+
 ### CI
 - Bumped GitHub Actions off the deprecated Node 20 runtime (forced off
   2026-06-02): `actions/checkout` v4→v6, `astral-sh/setup-uv` v4→v8.1.0
