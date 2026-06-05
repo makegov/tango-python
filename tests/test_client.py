@@ -505,6 +505,74 @@ class TestTangoClient:
 
         assert exc_info.value.status_code == 404
 
+    @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_range_filters(self, mock_request):
+        """Range filters serialize to the API's ``field__gte`` / ``field__lte`` form."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0, "results": []}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_budget_accounts(
+            fiscal_year=2024,
+            contract_share_of_obligated_capped_gte=0.6,
+            ba_growth_next_year_pct_gte=0.15,
+            unobligated_balance_gte=200_000_000,
+            unobligated_balance_lte=10_000_000_000,
+            enacted_ba=3_135_000_000,
+            ordering="-unobligated_balance",
+        )
+
+        params = mock_request.call_args[1]["params"]
+        # Exact-match scalar filter still works.
+        assert params["fiscal_year"] == 2024
+        # Range filters use the API's double-underscore form.
+        assert params["contract_share_of_obligated_capped__gte"] == 0.6
+        assert params["ba_growth_next_year_pct__gte"] == 0.15
+        assert params["unobligated_balance__gte"] == 200_000_000
+        assert params["unobligated_balance__lte"] == 10_000_000_000
+        # Range fields also accept exact-match.
+        assert params["enacted_ba"] == 3_135_000_000
+        # Ordering passes through untouched (callers prefix with '-' for desc).
+        assert params["ordering"] == "-unobligated_balance"
+        # Unspecified filters are not sent.
+        assert "apportioned__gte" not in params
+        assert "obligated_yoy_pct__lte" not in params
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_no_filters_sends_only_pagination_and_shape(self, mock_request):
+        """With no filter args, the request carries only paging + default shape."""
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0, "results": []}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_budget_accounts()
+
+        params = mock_request.call_args[1]["params"]
+        assert params["page"] == 1
+        assert params["limit"] == 25
+        assert "shape" in params
+        # None of the new range filters leak through as null.
+        leaked = [
+            k for k in params if k.endswith("__gte") or k.endswith("__lte") or k == "fiscal_year"
+        ]
+        assert leaked == [], f"unexpected filter keys sent: {leaked}"
+
 
 class TestShapeConfig:
     """Test ShapeConfig class"""

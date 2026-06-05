@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-06-05
+
+### Added
+- `list_budget_accounts()` now exposes the full range-filter surface that the
+  REST endpoint has always supported. Every numeric metric on
+  `/api/budget/accounts/` — the 26 fields in the backend's
+  `RANGE_NUMERIC_FIELDS` list (`enacted_ba`, `apportioned`, `obligated_total`,
+  `unobligated_balance`, `contract_obligated`,
+  `contract_share_of_obligated_capped`, `ba_growth_next_year_pct`,
+  `actual_vs_requested_contract`, all the ratio fields and their `_capped`
+  variants, etc.) — is now accepted in three forms: exact match (`field=`),
+  greater-or-equal (`field_gte=`), and less-or-equal (`field_lte=`).
+  Previously only the identity / taxonomy filters were exposed, which forced
+  callers to discover accounts by exact symbol lookup; the new surface makes
+  pipeline-style queries (e.g. "all FY24 accounts where contract share ≥ 60%,
+  unobligated balance ≥ $200M, and next-year growth ≥ 15%, sorted by largest
+  headroom first") a single SDK call. The new params map to the API's
+  `field__gte` / `field__lte` form; `ordering=` already accepted any of these
+  fields and continues to.
+
 ## [1.1.3] - 2026-06-04
 
 ### Added
