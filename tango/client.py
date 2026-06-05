@@ -2649,6 +2649,85 @@ class TangoClient:
         bea_category: str | None = None,
         on_off_budget: str | None = None,
         subfunction_code: str | None = None,
+        # Range-numeric filters: each field also accepts ``__gte`` / ``__lte``.
+        requested_ba: float | None = None,
+        requested_ba_gte: float | None = None,
+        requested_ba_lte: float | None = None,
+        enacted_ba: float | None = None,
+        enacted_ba_gte: float | None = None,
+        enacted_ba_lte: float | None = None,
+        apportioned: float | None = None,
+        apportioned_gte: float | None = None,
+        apportioned_lte: float | None = None,
+        obligated_total: float | None = None,
+        obligated_total_gte: float | None = None,
+        obligated_total_lte: float | None = None,
+        outlayed_total: float | None = None,
+        outlayed_total_gte: float | None = None,
+        outlayed_total_lte: float | None = None,
+        unobligated_balance: float | None = None,
+        unobligated_balance_gte: float | None = None,
+        unobligated_balance_lte: float | None = None,
+        contract_obligated: float | None = None,
+        contract_obligated_gte: float | None = None,
+        contract_obligated_lte: float | None = None,
+        contract_outlayed: float | None = None,
+        contract_outlayed_gte: float | None = None,
+        contract_outlayed_lte: float | None = None,
+        assistance_obligated: float | None = None,
+        assistance_obligated_gte: float | None = None,
+        assistance_obligated_lte: float | None = None,
+        assistance_outlayed: float | None = None,
+        assistance_outlayed_gte: float | None = None,
+        assistance_outlayed_lte: float | None = None,
+        contract_share_of_obligated_capped: float | None = None,
+        contract_share_of_obligated_capped_gte: float | None = None,
+        contract_share_of_obligated_capped_lte: float | None = None,
+        obligated_to_apportioned_pct: float | None = None,
+        obligated_to_apportioned_pct_gte: float | None = None,
+        obligated_to_apportioned_pct_lte: float | None = None,
+        obligated_to_apportioned_pct_capped: float | None = None,
+        obligated_to_apportioned_pct_capped_gte: float | None = None,
+        obligated_to_apportioned_pct_capped_lte: float | None = None,
+        apportioned_to_enacted_pct: float | None = None,
+        apportioned_to_enacted_pct_gte: float | None = None,
+        apportioned_to_enacted_pct_lte: float | None = None,
+        apportioned_to_enacted_pct_capped: float | None = None,
+        apportioned_to_enacted_pct_capped_gte: float | None = None,
+        apportioned_to_enacted_pct_capped_lte: float | None = None,
+        obligated_to_enacted_pct: float | None = None,
+        obligated_to_enacted_pct_gte: float | None = None,
+        obligated_to_enacted_pct_lte: float | None = None,
+        obligated_to_enacted_pct_capped: float | None = None,
+        obligated_to_enacted_pct_capped_gte: float | None = None,
+        obligated_to_enacted_pct_capped_lte: float | None = None,
+        outlayed_to_obligated_pct: float | None = None,
+        outlayed_to_obligated_pct_gte: float | None = None,
+        outlayed_to_obligated_pct_lte: float | None = None,
+        outlayed_to_obligated_pct_capped: float | None = None,
+        outlayed_to_obligated_pct_capped_gte: float | None = None,
+        outlayed_to_obligated_pct_capped_lte: float | None = None,
+        unobligated_pct: float | None = None,
+        unobligated_pct_gte: float | None = None,
+        unobligated_pct_lte: float | None = None,
+        enacted_ba_yoy_pct: float | None = None,
+        enacted_ba_yoy_pct_gte: float | None = None,
+        enacted_ba_yoy_pct_lte: float | None = None,
+        obligated_yoy_pct: float | None = None,
+        obligated_yoy_pct_gte: float | None = None,
+        obligated_yoy_pct_lte: float | None = None,
+        enacted_ba_5yr_cagr: float | None = None,
+        enacted_ba_5yr_cagr_gte: float | None = None,
+        enacted_ba_5yr_cagr_lte: float | None = None,
+        ba_growth_next_year_pct: float | None = None,
+        ba_growth_next_year_pct_gte: float | None = None,
+        ba_growth_next_year_pct_lte: float | None = None,
+        actual_vs_requested_contract: float | None = None,
+        actual_vs_requested_contract_gte: float | None = None,
+        actual_vs_requested_contract_lte: float | None = None,
+        actual_vs_requested_contract_capped: float | None = None,
+        actual_vs_requested_contract_capped_gte: float | None = None,
+        actual_vs_requested_contract_capped_lte: float | None = None,
         search: str | None = None,
         ordering: str | None = None,
     ) -> PaginatedResponse:
@@ -2674,8 +2753,49 @@ class TangoClient:
             bea_category: BEA category (exact).
             on_off_budget: On/off budget flag (exact).
             subfunction_code: Subfunction code (exact).
+            requested_ba: President's-budget requested BA (exact). Also
+                ``requested_ba_gte`` / ``requested_ba_lte`` for range queries.
+            enacted_ba: Enacted budget authority (exact / gte / lte).
+            apportioned: Apportioned amount (exact / gte / lte).
+            obligated_total: Total obligated (exact / gte / lte).
+            outlayed_total: Total outlayed (exact / gte / lte).
+            unobligated_balance: Apportioned minus obligated, in dollars
+                (exact / gte / lte). Use ``__gte`` to surface accounts with
+                appropriated headroom that hasn't yet hit contract.
+            contract_obligated: Contract-only obligated (exact / gte / lte).
+            contract_outlayed: Contract-only outlayed (exact / gte / lte).
+            assistance_obligated: Assistance-only obligated (exact / gte / lte).
+            assistance_outlayed: Assistance-only outlayed (exact / gte / lte).
+            contract_share_of_obligated_capped: Contracts as share of
+                obligated, capped at 1.0 (exact / gte / lte). Use ``__gte`` to
+                filter to contract-heavy accounts.
+            obligated_to_apportioned_pct: Burn ratio
+                (obligated / apportioned). Also ``_capped`` variant capped at
+                1.0. Both expose exact / gte / lte.
+            apportioned_to_enacted_pct: Apportionment ratio
+                (apportioned / enacted). Also ``_capped`` variant. Exact / gte / lte.
+            obligated_to_enacted_pct: Obligated-to-enacted ratio. Also
+                ``_capped`` variant. Exact / gte / lte.
+            outlayed_to_obligated_pct: Spendout ratio (outlayed / obligated).
+                Also ``_capped`` variant. Exact / gte / lte.
+            unobligated_pct: Unobligated share of apportioned (exact / gte / lte).
+            enacted_ba_yoy_pct: Year-over-year enacted BA growth
+                (exact / gte / lte).
+            obligated_yoy_pct: Year-over-year obligated growth
+                (exact / gte / lte).
+            enacted_ba_5yr_cagr: 5-year compound annual growth of enacted BA
+                (exact / gte / lte).
+            ba_growth_next_year_pct: Next-year requested BA growth
+                (exact / gte / lte). Use ``__gte`` for forward-looking
+                pipeline discovery.
+            actual_vs_requested_contract: Realization ratio of contract
+                obligated against the prior-year request (exact / gte / lte).
+                Also ``_capped`` variant.
             search: Full-text search over account_title/agency_name/bureau_name.
-            ordering: Sort field (prefix with '-' for descending).
+            ordering: Sort field (prefix with '-' for descending). Any of the
+                numeric fields above is a valid ordering target — e.g.
+                ``ordering="-unobligated_balance"`` to rank by largest
+                headroom first.
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
         if shape is None:
@@ -2686,7 +2806,7 @@ class TangoClient:
                 params["flat"] = "true"
             if flat_lists:
                 params["flat_lists"] = "true"
-        for key, val in (
+        scalar_filters: tuple[tuple[str, Any], ...] = (
             ("federal_account_symbol", federal_account_symbol),
             ("fiscal_year", fiscal_year),
             ("fiscal_year__gte", fiscal_year_gte),
@@ -2699,9 +2819,146 @@ class TangoClient:
             ("subfunction_code", subfunction_code),
             ("search", search),
             ("ordering", ordering),
-        ):
+        )
+        for key, val in scalar_filters:
             if val is not None:
                 params[key] = val
+        # Range-numeric filters: each field has exact / __gte / __lte forms.
+        range_filters: tuple[tuple[str, float | None, float | None, float | None], ...] = (
+            ("requested_ba", requested_ba, requested_ba_gte, requested_ba_lte),
+            ("enacted_ba", enacted_ba, enacted_ba_gte, enacted_ba_lte),
+            ("apportioned", apportioned, apportioned_gte, apportioned_lte),
+            ("obligated_total", obligated_total, obligated_total_gte, obligated_total_lte),
+            ("outlayed_total", outlayed_total, outlayed_total_gte, outlayed_total_lte),
+            (
+                "unobligated_balance",
+                unobligated_balance,
+                unobligated_balance_gte,
+                unobligated_balance_lte,
+            ),
+            (
+                "contract_obligated",
+                contract_obligated,
+                contract_obligated_gte,
+                contract_obligated_lte,
+            ),
+            (
+                "contract_outlayed",
+                contract_outlayed,
+                contract_outlayed_gte,
+                contract_outlayed_lte,
+            ),
+            (
+                "assistance_obligated",
+                assistance_obligated,
+                assistance_obligated_gte,
+                assistance_obligated_lte,
+            ),
+            (
+                "assistance_outlayed",
+                assistance_outlayed,
+                assistance_outlayed_gte,
+                assistance_outlayed_lte,
+            ),
+            (
+                "contract_share_of_obligated_capped",
+                contract_share_of_obligated_capped,
+                contract_share_of_obligated_capped_gte,
+                contract_share_of_obligated_capped_lte,
+            ),
+            (
+                "obligated_to_apportioned_pct",
+                obligated_to_apportioned_pct,
+                obligated_to_apportioned_pct_gte,
+                obligated_to_apportioned_pct_lte,
+            ),
+            (
+                "obligated_to_apportioned_pct_capped",
+                obligated_to_apportioned_pct_capped,
+                obligated_to_apportioned_pct_capped_gte,
+                obligated_to_apportioned_pct_capped_lte,
+            ),
+            (
+                "apportioned_to_enacted_pct",
+                apportioned_to_enacted_pct,
+                apportioned_to_enacted_pct_gte,
+                apportioned_to_enacted_pct_lte,
+            ),
+            (
+                "apportioned_to_enacted_pct_capped",
+                apportioned_to_enacted_pct_capped,
+                apportioned_to_enacted_pct_capped_gte,
+                apportioned_to_enacted_pct_capped_lte,
+            ),
+            (
+                "obligated_to_enacted_pct",
+                obligated_to_enacted_pct,
+                obligated_to_enacted_pct_gte,
+                obligated_to_enacted_pct_lte,
+            ),
+            (
+                "obligated_to_enacted_pct_capped",
+                obligated_to_enacted_pct_capped,
+                obligated_to_enacted_pct_capped_gte,
+                obligated_to_enacted_pct_capped_lte,
+            ),
+            (
+                "outlayed_to_obligated_pct",
+                outlayed_to_obligated_pct,
+                outlayed_to_obligated_pct_gte,
+                outlayed_to_obligated_pct_lte,
+            ),
+            (
+                "outlayed_to_obligated_pct_capped",
+                outlayed_to_obligated_pct_capped,
+                outlayed_to_obligated_pct_capped_gte,
+                outlayed_to_obligated_pct_capped_lte,
+            ),
+            ("unobligated_pct", unobligated_pct, unobligated_pct_gte, unobligated_pct_lte),
+            (
+                "enacted_ba_yoy_pct",
+                enacted_ba_yoy_pct,
+                enacted_ba_yoy_pct_gte,
+                enacted_ba_yoy_pct_lte,
+            ),
+            (
+                "obligated_yoy_pct",
+                obligated_yoy_pct,
+                obligated_yoy_pct_gte,
+                obligated_yoy_pct_lte,
+            ),
+            (
+                "enacted_ba_5yr_cagr",
+                enacted_ba_5yr_cagr,
+                enacted_ba_5yr_cagr_gte,
+                enacted_ba_5yr_cagr_lte,
+            ),
+            (
+                "ba_growth_next_year_pct",
+                ba_growth_next_year_pct,
+                ba_growth_next_year_pct_gte,
+                ba_growth_next_year_pct_lte,
+            ),
+            (
+                "actual_vs_requested_contract",
+                actual_vs_requested_contract,
+                actual_vs_requested_contract_gte,
+                actual_vs_requested_contract_lte,
+            ),
+            (
+                "actual_vs_requested_contract_capped",
+                actual_vs_requested_contract_capped,
+                actual_vs_requested_contract_capped_gte,
+                actual_vs_requested_contract_capped_lte,
+            ),
+        )
+        for field, exact, gte, lte in range_filters:
+            if exact is not None:
+                params[field] = exact
+            if gte is not None:
+                params[f"{field}__gte"] = gte
+            if lte is not None:
+                params[f"{field}__lte"] = lte
         data = self._get("/api/budget/accounts/", params)
         results = [
             self._parse_response_with_shape(obj, shape, BudgetAccount, flat, flat_lists)
