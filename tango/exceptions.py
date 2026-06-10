@@ -33,7 +33,24 @@ class TangoNotFoundError(TangoAPIError):
 class TangoValidationError(TangoAPIError):
     """Request validation error"""
 
-    pass
+    @property
+    def issues(self) -> list[dict[str, Any]]:
+        """Structured validation issues from the API response.
+
+        For shape errors the API returns entries like
+        ``{"path": "tradeoff_process", "reason": "unknown_field"}``.
+        Empty list when the response carried no structured issues.
+        """
+        val = self.response_data.get("issues")
+        if not isinstance(val, list):
+            return []
+        return [item for item in val if isinstance(item, dict)]
+
+    @property
+    def available_fields(self) -> dict[str, Any] | None:
+        """The endpoint's valid field set, when the API includes one."""
+        val = self.response_data.get("available_fields")
+        return val if isinstance(val, dict) else None
 
 
 class TangoRateLimitError(TangoAPIError):
