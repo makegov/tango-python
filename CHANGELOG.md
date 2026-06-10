@@ -8,6 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Contract-first conformance system.** The canonical API filter/shape
+  contract is now vendored at `contracts/filter_shape_contract.json` (refresh
+  with the new `scripts/refresh_contract.py`), so the conformance check runs
+  out of the box — locally, in CI, and on forks — with no tango checkout or
+  access token. `scripts/check_filter_shape_conformance.py` gained three new
+  checks on top of filter coverage: **staleness** (an SDK filter argument the
+  API no longer accepts is an error — it would silently no-op), **types**
+  (each argument's annotation is validated against the contract's
+  `schema_version: 2` per-filter type metadata), and a **known-gaps baseline**
+  (`contracts/conformance_baseline.json`) that downgrades accepted missing
+  params from errors to warnings so backlog is tracked instead of silent. A
+  new `--suggest` flag prints ready-to-paste typed parameter scaffolds for
+  any missing filters. The first run against the current API surface found 7
+  real coverage gaps, now baselined: `key` on contracts/IDVs/OTAs/OTIDVs,
+  `cage` on entities, `id` on forecasts, and `opportunity_id` on
+  opportunities.
 - `TangoValidationError` now exposes the API's structured validation details
   directly: `.issues` (the list of `{"path": ..., "reason": ...}` entries the
   server returns for shape errors) and `.available_fields` (the endpoint's
@@ -15,6 +31,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   digging through `.response_data`. ([#45](https://github.com/makegov/tango-python/issues/45))
 
 ### Changed
+- The CI conformance job (`lint.yml`) now runs unconditionally against the
+  vendored contract instead of silently skipping when
+  `TANGO_API_REPO_ACCESS_TOKEN` is absent; the token is only used for a
+  best-effort staleness notice comparing the vendored contract to tango HEAD.
+  `scripts/pr_review.py` likewise defaults its conformance step to the
+  vendored contract (override with `TANGO_CONTRACT_MANIFEST`).
 - 400 error messages now name the rejected field(s) and reason when the API
   returns structured `issues` — e.g.
   `Invalid request parameters: Invalid shape: tradeoff_process (unknown_field)`

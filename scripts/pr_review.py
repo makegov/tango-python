@@ -350,16 +350,17 @@ def run_production_tests() -> int:
 
 
 def run_conformance_check() -> int:
-    """Run filter and shape conformance. Skips if manifest not found."""
+    """Run filter and shape conformance against the vendored contract."""
     manifest_path = os.getenv("TANGO_CONTRACT_MANIFEST")
     if not manifest_path:
-        manifest_path = str(project_root / "tango-api" / "contracts" / "filter_shape_contract.json")
+        manifest_path = str(project_root / "contracts" / "filter_shape_contract.json")
     path = Path(manifest_path)
     if not path.exists():
         print_warning("Conformance manifest not found - skipping filter/shape conformance")
         print(f"  Expected: {path}")
         print(
-            "  Set TANGO_CONTRACT_MANIFEST or clone tango repo as tango-api/ (see scripts/README.md)"
+            "  Vendor it with: uv run python scripts/refresh_contract.py "
+            "(or set TANGO_CONTRACT_MANIFEST)"
         )
         return 0  # Don't fail when manifest is missing
 
