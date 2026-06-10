@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `TangoValidationError` now exposes the API's structured validation details
+  directly: `.issues` (the list of `{"path": ..., "reason": ...}` entries the
+  server returns for shape errors) and `.available_fields` (the endpoint's
+  valid field set, when included). Both were previously reachable only by
+  digging through `.response_data`. ([#45](https://github.com/makegov/tango-python/issues/45))
+
+### Changed
+- 400 error messages now name the rejected field(s) and reason when the API
+  returns structured `issues` — e.g.
+  `Invalid request parameters: Invalid shape: tradeoff_process (unknown_field)`
+  instead of just `Invalid request parameters: Invalid shape`. ([#45](https://github.com/makegov/tango-python/issues/45))
+
 ## [1.2.0] - 2026-06-05
 
 ### Added

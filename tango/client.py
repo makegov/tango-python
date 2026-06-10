@@ -183,6 +183,17 @@ class TangoClient:
                         )
                         if detail:
                             error_msg = f"Invalid request parameters: {detail}"
+                        issues = error_data.get("issues")
+                        if isinstance(issues, list):
+                            rejected = [
+                                f"{issue['path']} ({issue['reason']})"
+                                if issue.get("reason")
+                                else str(issue["path"])
+                                for issue in issues
+                                if isinstance(issue, dict) and issue.get("path")
+                            ]
+                            if rejected:
+                                error_msg = f"{error_msg}: {', '.join(rejected)}"
                 raise TangoValidationError(
                     error_msg,
                     response.status_code,

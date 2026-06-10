@@ -1153,6 +1153,55 @@ class TestErrorHandling:
         assert exc_info.value.response_data == {"error": "invalid params"}
 
     @patch("tango.client.httpx.Client.request")
+    def test_400_structured_shape_error(self, mock_request):
+        """Test 400 with structured shape-error body surfaces issues and available_fields"""
+        body = {
+            "error": "Invalid shape",
+            "issues": [{"path": "fair_opportunity_limited_sources", "reason": "unknown_field"}],
+            "available_fields": {"fields": ["piid", "competition"]},
+        }
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 400
+        mock_response.content = b"x"
+        mock_response.json.return_value = body
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoValidationError) as exc_info:
+            client.list_agencies()
+
+        err = exc_info.value
+        assert str(err) == (
+            "Invalid request parameters: Invalid shape: "
+            "fair_opportunity_limited_sources (unknown_field)"
+        )
+        assert err.issues == [
+            {"path": "fair_opportunity_limited_sources", "reason": "unknown_field"}
+        ]
+        assert err.available_fields == {"fields": ["piid", "competition"]}
+        assert err.response_data == body
+
+    @patch("tango.client.httpx.Client.request")
+    def test_400_validation_error_issues_accessors_empty(self, mock_request):
+        """Test issues/available_fields accessors on a plain 400 body"""
+        mock_response = Mock()
+        mock_response.is_success = False
+        mock_response.status_code = 400
+        mock_response.content = b'{"error": "invalid params"}'
+        mock_response.json.return_value = {"error": "invalid params"}
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoValidationError) as exc_info:
+            client.list_agencies()
+
+        assert exc_info.value.issues == []
+        assert exc_info.value.available_fields is None
+
+    @patch("tango.client.httpx.Client.request")
     def test_400_validation_error_no_content(self, mock_request):
         """Test 400 with no content"""
         mock_response = Mock()
