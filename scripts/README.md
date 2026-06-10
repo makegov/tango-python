@@ -60,7 +60,7 @@ uv run python scripts/pr_review.py --mode production --changed-files-only
 - `full` - All checks (linting + type checking + filter/shape conformance + all tests)
 - `production` - Linting + type checking + filter/shape conformance + production API smoke tests (default)
 
-When the conformance manifest is present (`tango-api/contracts/filter_shape_contract.json` or `TANGO_CONTRACT_MANIFEST`), both `full` and `production` run the [filter and shape conformance](#filter-and-shape-conformance) check. If the manifest is missing, that step is skipped with a warning.
+Both `full` and `production` run the [filter and shape conformance](#filter-and-shape-conformance) check against the vendored contract (`contracts/filter_shape_contract.json`, overridable via `TANGO_CONTRACT_MANIFEST`). If the contract is missing, that step is skipped with a warning.
 
 **PR Detection:**
 The script automatically detects PR information from:
@@ -75,24 +75,35 @@ When a PR is detected, the script displays PR information and automatically:
 
 ### Filter and shape conformance
 
-The SDK is validated against a canonical manifest (from the [tango](https://github.com/makegov/tango) API repo) for **filter conformance** and against its own schemas for **shape conformance**:
+The SDK is validated against the canonical API contract — vendored at
+`contracts/filter_shape_contract.json` and refreshed with
+`scripts/refresh_contract.py` — for **filter conformance**, and against its own
+schemas for **shape conformance**:
 
-1. **Filter conformance** – Ensures every list/get method exposes the filter parameters defined in the manifest (e.g. `award_date`, `naics_code`, `agency`). Methods that use `**kwargs` for filters are reported as warnings because their filter names cannot be verified.
-2. **Shape conformance** – Ensures every `ShapeConfig` constant (e.g. `CONTRACTS_MINIMAL`, `IDVS_MINIMAL`) parses correctly and only references fields that exist in the SDK’s explicit schemas for that model. Invalid or unknown fields in default shapes are reported as errors.
+1. **Filter coverage** – Every list/get method exposes the filter parameters defined in the contract (explicit argument or `api_param_mapping`). Missing params are errors unless accepted in `contracts/conformance_baseline.json`, where each entry is tracked backlog (remove the entry in the same PR that adds the param). Methods that use `**kwargs` for filters are reported as warnings because their filter names cannot be verified.
+2. **Staleness** – Every filter-like SDK argument resolves to a param the API actually accepts. A stale param silently no-ops for users, so this is always an error.
+3. **Types** – With a `schema_version >= 2` contract, each SDK argument's annotation must be compatible with the contract value type (e.g. a `date` param must be `str`, a `boolean` must be `bool`).
+4. **Shape conformance** – Every `ShapeConfig` constant (e.g. `CONTRACTS_MINIMAL`, `IDVS_MINIMAL`) parses correctly and only references fields that exist in the SDK’s explicit schemas for that model. Invalid or unknown fields in default shapes are reported as errors.
 
-This script runs in CI on every push/PR (see [Lint workflow](.github/workflows/lint.yml)). The manifest file is produced by the tango API repo and must be available for the full check.
+This script runs in CI on every push/PR (see [Lint workflow](.github/workflows/lint.yml)) against the vendored contract — no secrets or sibling checkout needed.
 
 ```bash
-# Full check (filter + shape). Requires manifest from tango API repo.
-uv run python scripts/check_filter_shape_conformance.py --manifest tango-api/contracts/filter_shape_contract.json
+# Full check (filter + shape) against the vendored contract.
+uv run python scripts/check_filter_shape_conformance.py
+
+# Ready-to-paste typed parameter scaffolds for any missing filters
+uv run python scripts/check_filter_shape_conformance.py --suggest
 
 # List resources that have no matching SDK method (for implementation checklist)
-uv run python scripts/check_filter_shape_conformance.py --manifest tango-api/contracts/filter_shape_contract.json --list-missing
+uv run python scripts/check_filter_shape_conformance.py --list-unmapped
+
+# Refresh the vendored contract (sibling ../tango checkout, or GitHub via gh)
+uv run python scripts/refresh_contract.py
 ```
 
-**Output:** JSON with `manifest`, `errors`, and `warnings`. Exit code 1 if there are any errors (missing filters, invalid shapes, or missing SDK methods for manifest resources).
+**Output:** JSON with `manifest`, `errors`, and `warnings`. Exit code 1 if there are any errors (missing or stale filters, type mismatches, invalid shapes, or missing SDK methods for manifest resources).
 
-**Local runs:** To run the full check locally, you need a copy of `filter_shape_contract.json` (from the [tango](https://github.com/makegov/tango) repo’s `contracts/` directory—wherever you keep that repo). Pass it with `--manifest` or set `TANGO_CONTRACT_MANIFEST`. The script runs both filter and shape conformance; shape conformance validates all `ShapeConfig` defaults against `tango/shapes/explicit_schemas.py`.
+**Local runs:** The vendored contract makes the full check work out of the box. To check against a different contract (e.g. an unreleased tango branch), pass `--manifest /path/to/filter_shape_contract.json` or set `TANGO_CONTRACT_MANIFEST` (honored by `pr_review.py`).
 
 ## Requirements
 

@@ -938,9 +938,7 @@ class TestFieldValidation:
         assert "extent_competed" in EXPLICIT_SCHEMAS["ContractOrIDVCompetition"]
 
         parser = ShapeParser()
-        spec = parser.parse(
-            "key,piid,competition(extent_competed,number_of_offers_received)"
-        )
+        spec = parser.parse("key,piid,competition(extent_competed,number_of_offers_received)")
         # Must not raise — resolves the competition leaf via the alias.
         parser.validate(spec, "Contract")
         parser.validate(spec, "IDV")

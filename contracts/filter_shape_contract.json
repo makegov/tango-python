@@ -1,0 +1,6091 @@
+{
+  "meta": {
+    "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
+    "generated_from": "scripts/filter_shape_conformance.py",
+    "schema_version": 2
+  },
+  "policy": {
+    "critical_runtime_swagger_resources": []
+  },
+  "resources": {
+    "agencies": {
+      "basename": "agency",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "agencies",
+      "resource_key": "agencies",
+      "runtime": {
+        "filter_params": [
+          "search"
+        ],
+        "filter_params_detail": {
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "department": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "cgac",
+                "code",
+                "congressional_justification",
+                "description",
+                "name",
+                "website"
+              ]
+            }
+          },
+          "fields": [
+            "abbreviation",
+            "code",
+            "name"
+          ]
+        },
+        "shape_flat_paths": [
+          "abbreviation",
+          "code",
+          "department",
+          "department.abbreviation",
+          "department.cgac",
+          "department.code",
+          "department.congressional_justification",
+          "department.description",
+          "department.name",
+          "department.website",
+          "name"
+        ],
+        "viewset": "agencies.views.AgencyViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "search",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "assistance_listings": {
+      "basename": "assistancelisting",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "assistance_listings",
+      "resource_key": "assistance_listings",
+      "runtime": {
+        "filter_params": [],
+        "filter_params_detail": {},
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StaticModelCachedPagination",
+          "max_page_size": 10000
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "applicant_eligibility",
+            "archived_date",
+            "benefit_eligibility",
+            "number",
+            "objectives",
+            "popular_name",
+            "published_date",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "applicant_eligibility",
+          "archived_date",
+          "benefit_eligibility",
+          "number",
+          "objectives",
+          "popular_name",
+          "published_date",
+          "title"
+        ],
+        "viewset": "shared.views.AssistanceListingViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "business_types": {
+      "basename": "businesstype",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "business_types",
+      "resource_key": "business_types",
+      "runtime": {
+        "filter_params": [],
+        "filter_params_detail": {},
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StaticModelCachedPagination",
+          "max_page_size": 10000
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "code",
+            "name"
+          ]
+        },
+        "shape_flat_paths": [
+          "code",
+          "name"
+        ],
+        "viewset": "shared.views.BusinessTypesViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "contracts": {
+      "basename": "contract",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "contracts",
+      "resource_key": "contracts",
+      "runtime": {
+        "filter_params": [
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "award_type",
+          "awarding_agency",
+          "expiring_gte",
+          "expiring_lte",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "key",
+          "naics",
+          "obligated_gte",
+          "obligated_lte",
+          "ordering",
+          "piid",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "psc",
+          "recipient",
+          "search",
+          "set_aside",
+          "solicitation_identifier",
+          "uei"
+        ],
+        "filter_params_detail": {
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_type": {
+            "choices": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "choices_count": 8,
+            "filter_class": "UppercaseCodeChoiceFilter",
+            "type": "choice"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "expiring_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "expiring_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "naics": {
+            "filter_class": "CustomNAICSFilter",
+            "type": "string"
+          },
+          "obligated_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-total_contract_value",
+              "award_date",
+              "obligated",
+              "total_contract_value"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "piid": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "CustomSetAsideFilter",
+            "type": "string"
+          },
+          "solicitation_identifier": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "total_contract_value"
+        ],
+        "pagination": {
+          "class": "KeysetPagination",
+          "max_page_size": null
+        },
+        "shape": {
+          "expands": {
+            "award_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "commercial_item_acquisition_procedures": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "competition": {
+              "expands": {},
+              "fields": [
+                "contract_type",
+                "extent_competed",
+                "number_of_offers_received",
+                "other_than_full_and_open_competition",
+                "solicitation_date",
+                "solicitation_identifier",
+                "solicitation_procedures"
+              ]
+            },
+            "consolidated_contract": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "contingency_humanitarian_or_peacekeeping_operation": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "contract_bundling": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "cost_accounting_standards_clause": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "cost_or_pricing_data": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "domestic_or_foreign_entity": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "epa_designated_product": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "evaluated_preference": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "fair_opportunity_limited_sources": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "fed_biz_opps": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "foreign_funding": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "information_technology_commercial_item_category": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "inherently_governmental_functions": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "legislative_mandates": {
+              "expands": {},
+              "fields": [
+                "clinger_cohen_act_planning",
+                "construction_wage_rate_requirements",
+                "employment_eligibility_verification",
+                "interagency_contracting_authority",
+                "labor_standards",
+                "materials_supplies_articles_equipment",
+                "other_statutory_authority",
+                "service_contract_inventory"
+              ]
+            },
+            "naics": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "parent_award": {
+              "expands": {},
+              "fields": [
+                "key",
+                "piid"
+              ]
+            },
+            "performance_based_service_acquisition": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date",
+                "ultimate_completion_date"
+              ]
+            },
+            "place_of_manufacture": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "country_code",
+                "country_name",
+                "state_code",
+                "state_name",
+                "zip_code"
+              ]
+            },
+            "psc": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "cage",
+                "cage_code",
+                "display_name",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "recovered_materials_sustainability": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "research": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "sam_exception": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "set_aside": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "subawards_summary": {
+              "expands": {},
+              "fields": [
+                "count",
+                "total_amount"
+              ]
+            },
+            "subcontracting_plan": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "tradeoff_process": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_type",
+                "description",
+                "modification_number",
+                "obligated",
+                "transaction_date"
+              ]
+            },
+            "undefinitized_action": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "vehicle": {
+              "expands": {},
+              "fields": [
+                "agency_id",
+                "award_date",
+                "contract_type",
+                "description",
+                "fiscal_year",
+                "last_date_to_order",
+                "naics_code",
+                "psc_code",
+                "set_aside",
+                "solicitation_date",
+                "solicitation_description",
+                "solicitation_identifier",
+                "solicitation_title",
+                "type_of_idc",
+                "uuid",
+                "vehicle_type",
+                "who_can_use"
+              ]
+            }
+          },
+          "fields": [
+            "award_date",
+            "award_type",
+            "base_and_exercised_options_value",
+            "contract_financing",
+            "description",
+            "dod_acquisition_program",
+            "dod_transaction_number",
+            "fiscal_year",
+            "government_furnished_property",
+            "key",
+            "local_area_set_aside",
+            "major_program",
+            "naics_code",
+            "number_of_actions",
+            "number_of_offers_source",
+            "obligated",
+            "piid",
+            "price_evaluation_percent_difference",
+            "psc_code",
+            "purchase_card_as_payment_method",
+            "set_aside",
+            "simplified_procedures_for_certain_commercial_items",
+            "small_business_competitiveness_demonstration_program",
+            "solicitation_identifier",
+            "subawards_summary",
+            "total_contract_value",
+            "transactions",
+            "type_of_set_aside_source"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_date",
+          "award_type",
+          "award_type.code",
+          "award_type.description",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "base_and_exercised_options_value",
+          "commercial_item_acquisition_procedures",
+          "commercial_item_acquisition_procedures.code",
+          "commercial_item_acquisition_procedures.description",
+          "competition",
+          "competition.contract_type",
+          "competition.extent_competed",
+          "competition.number_of_offers_received",
+          "competition.other_than_full_and_open_competition",
+          "competition.solicitation_date",
+          "competition.solicitation_identifier",
+          "competition.solicitation_procedures",
+          "consolidated_contract",
+          "consolidated_contract.code",
+          "consolidated_contract.description",
+          "contingency_humanitarian_or_peacekeeping_operation",
+          "contingency_humanitarian_or_peacekeeping_operation.code",
+          "contingency_humanitarian_or_peacekeeping_operation.description",
+          "contract_bundling",
+          "contract_bundling.code",
+          "contract_bundling.description",
+          "contract_financing",
+          "cost_accounting_standards_clause",
+          "cost_accounting_standards_clause.code",
+          "cost_accounting_standards_clause.description",
+          "cost_or_pricing_data",
+          "cost_or_pricing_data.code",
+          "cost_or_pricing_data.description",
+          "description",
+          "dod_acquisition_program",
+          "dod_transaction_number",
+          "domestic_or_foreign_entity",
+          "domestic_or_foreign_entity.code",
+          "domestic_or_foreign_entity.description",
+          "epa_designated_product",
+          "epa_designated_product.code",
+          "epa_designated_product.description",
+          "evaluated_preference",
+          "evaluated_preference.code",
+          "evaluated_preference.description",
+          "fair_opportunity_limited_sources",
+          "fair_opportunity_limited_sources.code",
+          "fair_opportunity_limited_sources.description",
+          "fed_biz_opps",
+          "fed_biz_opps.code",
+          "fed_biz_opps.description",
+          "fiscal_year",
+          "foreign_funding",
+          "foreign_funding.code",
+          "foreign_funding.description",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "government_furnished_property",
+          "information_technology_commercial_item_category",
+          "information_technology_commercial_item_category.code",
+          "information_technology_commercial_item_category.description",
+          "inherently_governmental_functions",
+          "inherently_governmental_functions.code",
+          "inherently_governmental_functions.description",
+          "key",
+          "legislative_mandates",
+          "legislative_mandates.clinger_cohen_act_planning",
+          "legislative_mandates.construction_wage_rate_requirements",
+          "legislative_mandates.employment_eligibility_verification",
+          "legislative_mandates.interagency_contracting_authority",
+          "legislative_mandates.labor_standards",
+          "legislative_mandates.materials_supplies_articles_equipment",
+          "legislative_mandates.other_statutory_authority",
+          "legislative_mandates.service_contract_inventory",
+          "local_area_set_aside",
+          "major_program",
+          "naics",
+          "naics.code",
+          "naics.description",
+          "naics_code",
+          "number_of_actions",
+          "number_of_offers_source",
+          "obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "parent_award",
+          "parent_award.key",
+          "parent_award.piid",
+          "performance_based_service_acquisition",
+          "performance_based_service_acquisition.code",
+          "performance_based_service_acquisition.description",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "period_of_performance.ultimate_completion_date",
+          "piid",
+          "place_of_manufacture",
+          "place_of_manufacture.code",
+          "place_of_manufacture.description",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.country_code",
+          "place_of_performance.country_name",
+          "place_of_performance.state_code",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "price_evaluation_percent_difference",
+          "psc",
+          "psc.code",
+          "psc.description",
+          "psc_code",
+          "purchase_card_as_payment_method",
+          "recipient",
+          "recipient.cage",
+          "recipient.cage_code",
+          "recipient.display_name",
+          "recipient.legal_business_name",
+          "recipient.uei",
+          "recovered_materials_sustainability",
+          "recovered_materials_sustainability.code",
+          "recovered_materials_sustainability.description",
+          "research",
+          "research.code",
+          "research.description",
+          "sam_exception",
+          "sam_exception.code",
+          "sam_exception.description",
+          "set_aside",
+          "set_aside.code",
+          "set_aside.description",
+          "simplified_procedures_for_certain_commercial_items",
+          "small_business_competitiveness_demonstration_program",
+          "solicitation_identifier",
+          "subawards_summary",
+          "subawards_summary.count",
+          "subawards_summary.total_amount",
+          "subcontracting_plan",
+          "subcontracting_plan.code",
+          "subcontracting_plan.description",
+          "total_contract_value",
+          "tradeoff_process",
+          "tradeoff_process.code",
+          "tradeoff_process.description",
+          "transactions",
+          "transactions.action_type",
+          "transactions.description",
+          "transactions.modification_number",
+          "transactions.obligated",
+          "transactions.transaction_date",
+          "type_of_set_aside_source",
+          "undefinitized_action",
+          "undefinitized_action.code",
+          "undefinitized_action.description",
+          "vehicle",
+          "vehicle.agency_id",
+          "vehicle.award_date",
+          "vehicle.contract_type",
+          "vehicle.description",
+          "vehicle.fiscal_year",
+          "vehicle.last_date_to_order",
+          "vehicle.naics_code",
+          "vehicle.psc_code",
+          "vehicle.set_aside",
+          "vehicle.solicitation_date",
+          "vehicle.solicitation_description",
+          "vehicle.solicitation_identifier",
+          "vehicle.solicitation_title",
+          "vehicle.type_of_idc",
+          "vehicle.uuid",
+          "vehicle.vehicle_type",
+          "vehicle.who_can_use"
+        ],
+        "viewset": "awards.views.contracts.ContractViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "award_date",
+        "award_date_gte",
+        "award_date_lte",
+        "award_type",
+        "awarding_agency",
+        "cursor",
+        "expiring_gte",
+        "expiring_lte",
+        "fiscal_year",
+        "fiscal_year_gte",
+        "fiscal_year_lte",
+        "flat",
+        "flat_lists",
+        "funding_agency",
+        "joiner",
+        "limit",
+        "naics",
+        "obligated_gte",
+        "obligated_lte",
+        "ordering",
+        "piid",
+        "pop_end_date_gte",
+        "pop_end_date_lte",
+        "pop_start_date_gte",
+        "pop_start_date_lte",
+        "psc",
+        "recipient",
+        "set_aside",
+        "shape",
+        "uei"
+      ]
+    },
+    "departments": {
+      "basename": "department",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "departments",
+      "resource_key": "departments",
+      "runtime": {
+        "filter_params": [],
+        "filter_params_detail": {},
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "abbreviation",
+            "cgac",
+            "code",
+            "congressional_justification",
+            "description",
+            "name",
+            "website"
+          ]
+        },
+        "shape_flat_paths": [
+          "abbreviation",
+          "cgac",
+          "code",
+          "congressional_justification",
+          "description",
+          "name",
+          "website"
+        ],
+        "viewset": "agencies.views.DepartmentViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "entities": {
+      "basename": "entity",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "entities",
+      "resource_key": "entities",
+      "runtime": {
+        "filter_params": [
+          "cage",
+          "cage_code",
+          "naics",
+          "name",
+          "psc",
+          "purpose_of_registration_code",
+          "search",
+          "socioeconomic",
+          "state",
+          "total_awards_obligated_gte",
+          "total_awards_obligated_lte",
+          "uei",
+          "zip_code"
+        ],
+        "filter_params_detail": {
+          "cage": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "cage_code": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "naics": {
+            "filter_class": "EntityNAICSFilter",
+            "type": "string"
+          },
+          "name": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "purpose_of_registration_code": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CustomEntityFilter",
+            "type": "string"
+          },
+          "socioeconomic": {
+            "filter_class": "CustomBusinessTypeFilter",
+            "type": "string"
+          },
+          "state": {
+            "filter_class": "CharFilter",
+            "lookup": "state_or_province_code__contains",
+            "type": "string"
+          },
+          "total_awards_obligated_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "total_awards_obligated_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "uei": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "zip_code": {
+            "filter_class": "CharFilter",
+            "lookup": "zip_code__exact",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "entities.views.EntityViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "events": {
+      "basename": "g2x-events",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "events",
+      "resource_key": "events",
+      "runtime": {
+        "filter_params": [
+          "is_free",
+          "is_virtual",
+          "organizer",
+          "search",
+          "source",
+          "start_date_after",
+          "start_date_before",
+          "state"
+        ],
+        "filter_params_detail": {
+          "is_free": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "is_virtual": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "organizer": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "source": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "start_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "start_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "state": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "g2x.views.content.EventsViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "forecasts": {
+      "basename": "forecast",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "forecasts",
+      "resource_key": "forecasts",
+      "runtime": {
+        "filter_params": [
+          "agency",
+          "award_date_after",
+          "award_date_before",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "id",
+          "modified_after",
+          "modified_before",
+          "naics_code",
+          "naics_starts_with",
+          "search",
+          "source_system",
+          "status"
+        ],
+        "filter_params_detail": {
+          "agency": {
+            "filter_class": "OrganizationScopeAgencyFilter",
+            "type": "string"
+          },
+          "award_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "award_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "id": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "modified_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "modified_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "naics_code": {
+            "filter_class": "CustomNAICSFilter",
+            "type": "string"
+          },
+          "naics_starts_with": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "source_system": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "status": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "anticipated_award_date",
+          "fiscal_year",
+          "title"
+        ],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "display": {
+              "expands": {},
+              "fields": [
+                "agency",
+                "anticipated_award_date",
+                "contract_vehicle",
+                "description",
+                "estimated_period",
+                "fiscal_year",
+                "naics_code",
+                "place_of_performance",
+                "primary_contact",
+                "set_aside",
+                "status",
+                "title"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "raw_data": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            }
+          },
+          "fields": [
+            "agency",
+            "anticipated_award_date",
+            "contract_vehicle",
+            "created",
+            "description",
+            "estimated_period",
+            "external_id",
+            "fiscal_year",
+            "id",
+            "is_active",
+            "modified",
+            "naics_code",
+            "organization_id",
+            "place_of_performance",
+            "primary_contact",
+            "raw_data",
+            "set_aside",
+            "source_system",
+            "status",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "agency",
+          "anticipated_award_date",
+          "contract_vehicle",
+          "created",
+          "description",
+          "display",
+          "display.agency",
+          "display.anticipated_award_date",
+          "display.contract_vehicle",
+          "display.description",
+          "display.estimated_period",
+          "display.fiscal_year",
+          "display.naics_code",
+          "display.place_of_performance",
+          "display.primary_contact",
+          "display.set_aside",
+          "display.status",
+          "display.title",
+          "estimated_period",
+          "external_id",
+          "fiscal_year",
+          "id",
+          "is_active",
+          "modified",
+          "naics_code",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "organization_id",
+          "place_of_performance",
+          "primary_contact",
+          "raw_data",
+          "raw_data.*",
+          "set_aside",
+          "source_system",
+          "status",
+          "title"
+        ],
+        "viewset": "forecasts.views.ForecastViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "ordering",
+        "page",
+        "shape"
+      ]
+    },
+    "grants": {
+      "basename": "grantopportunity",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "grants",
+      "resource_key": "grants",
+      "runtime": {
+        "filter_params": [
+          "agency",
+          "applicant_types",
+          "cfda_number",
+          "funding_categories",
+          "funding_instruments",
+          "grant_id",
+          "opportunity_number",
+          "posted_date_after",
+          "posted_date_before",
+          "response_date_after",
+          "response_date_before",
+          "search",
+          "status"
+        ],
+        "filter_params_detail": {
+          "agency": {
+            "filter_class": "OrganizationScopeAgencyFilter",
+            "type": "string"
+          },
+          "applicant_types": {
+            "choices": [
+              "00",
+              "01",
+              "02",
+              "04",
+              "05",
+              "06",
+              "07",
+              "08",
+              "11",
+              "12",
+              "13",
+              "20",
+              "21",
+              "22",
+              "23",
+              "25",
+              "99",
+              "DESCRIPTION"
+            ],
+            "choices_count": 18,
+            "filter_class": "CaseInsensitiveChoiceFilter",
+            "lookup": "icontains",
+            "type": "choice"
+          },
+          "cfda_number": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "funding_categories": {
+            "choices": [
+              "AG",
+              "AR",
+              "BC",
+              "CD",
+              "CP",
+              "DESCRIPTION",
+              "DPR",
+              "ED",
+              "EL",
+              "ELT",
+              "EN",
+              "ENV",
+              "FN",
+              "HE",
+              "HL",
+              "HO",
+              "HU",
+              "IE",
+              "IIJ",
+              "IS",
+              "ISS",
+              "LJ",
+              "LJL",
+              "MH",
+              "NR",
+              "O",
+              "OZ",
+              "RA",
+              "RD",
+              "ST",
+              "T",
+              "TR"
+            ],
+            "choices_count": 32,
+            "filter_class": "CaseInsensitiveChoiceFilter",
+            "lookup": "icontains",
+            "type": "choice"
+          },
+          "funding_instruments": {
+            "choices": [
+              "CA",
+              "D",
+              "DESCRIPTION",
+              "G",
+              "L",
+              "O",
+              "PC",
+              "S",
+              "U",
+              "V"
+            ],
+            "choices_count": 10,
+            "filter_class": "CaseInsensitiveChoiceFilter",
+            "lookup": "icontains",
+            "type": "choice"
+          },
+          "grant_id": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "opportunity_number": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "posted_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "posted_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "response_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "response_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "status": {
+            "choices": [
+              "F",
+              "P"
+            ],
+            "choices_count": 2,
+            "filter_class": "CaseInsensitiveChoiceFilter",
+            "type": "choice"
+          }
+        },
+        "ordering_aliases": [
+          "last_updated"
+        ],
+        "ordering_fields": [
+          "deadline_current",
+          "posted_date",
+          "rank"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "additional_info": {
+              "expands": {},
+              "fields": [
+                "description",
+                "link"
+              ]
+            },
+            "applicant_types": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "attachments": {
+              "expands": {},
+              "fields": [
+                "mime_type",
+                "name",
+                "posted_date",
+                "resource_id",
+                "type",
+                "url"
+              ]
+            },
+            "category": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "cfda_numbers": {
+              "expands": {},
+              "fields": [
+                "number",
+                "title"
+              ]
+            },
+            "funding_categories": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "funding_details": {
+              "expands": {},
+              "fields": [
+                "award_ceiling",
+                "award_floor",
+                "estimated_total_funding",
+                "expected_number_of_awards"
+              ]
+            },
+            "funding_instruments": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "grantor_contact": {
+              "expands": {},
+              "fields": [
+                "email",
+                "name",
+                "phone"
+              ]
+            },
+            "important_dates": {
+              "expands": {},
+              "fields": [
+                "estimated_application_response_date",
+                "estimated_application_response_date_description",
+                "estimated_project_start_date",
+                "estimated_synopsis_post_date",
+                "posted_date",
+                "response_date",
+                "response_date_description"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "status": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "agency_code",
+            "applicant_eligibility_description",
+            "description",
+            "forecast",
+            "funding_activity_category_description",
+            "grant_id",
+            "grantor_contact",
+            "last_updated",
+            "opportunity_history",
+            "opportunity_number",
+            "organization_id",
+            "status",
+            "synopsis",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "additional_info",
+          "additional_info.description",
+          "additional_info.link",
+          "agency_code",
+          "applicant_eligibility_description",
+          "applicant_types",
+          "applicant_types.code",
+          "applicant_types.description",
+          "attachments",
+          "attachments.mime_type",
+          "attachments.name",
+          "attachments.posted_date",
+          "attachments.resource_id",
+          "attachments.type",
+          "attachments.url",
+          "category",
+          "category.code",
+          "category.description",
+          "cfda_numbers",
+          "cfda_numbers.number",
+          "cfda_numbers.title",
+          "description",
+          "forecast",
+          "funding_activity_category_description",
+          "funding_categories",
+          "funding_categories.code",
+          "funding_categories.description",
+          "funding_details",
+          "funding_details.award_ceiling",
+          "funding_details.award_floor",
+          "funding_details.estimated_total_funding",
+          "funding_details.expected_number_of_awards",
+          "funding_instruments",
+          "funding_instruments.code",
+          "funding_instruments.description",
+          "grant_id",
+          "grantor_contact",
+          "grantor_contact.email",
+          "grantor_contact.name",
+          "grantor_contact.phone",
+          "important_dates",
+          "important_dates.estimated_application_response_date",
+          "important_dates.estimated_application_response_date_description",
+          "important_dates.estimated_project_start_date",
+          "important_dates.estimated_synopsis_post_date",
+          "important_dates.posted_date",
+          "important_dates.response_date",
+          "important_dates.response_date_description",
+          "last_updated",
+          "opportunity_history",
+          "opportunity_number",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "organization_id",
+          "status",
+          "status.code",
+          "status.description",
+          "synopsis",
+          "title"
+        ],
+        "viewset": "grants.views.GrantOpportunityViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "gsa_elibrary_contracts": {
+      "basename": "gsa-elibrary-contract",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "gsa_elibrary_contracts",
+      "resource_key": "gsa_elibrary_contracts",
+      "runtime": {
+        "filter_params": [
+          "contract_number",
+          "key",
+          "piid",
+          "schedule",
+          "search",
+          "sin",
+          "uei"
+        ],
+        "filter_params_detail": {
+          "contract_number": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "piid": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "schedule": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "sin": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "contract_number",
+          "last_updated",
+          "schedule"
+        ],
+        "pagination": {
+          "class": "ExactCountPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "idv": {
+              "expands": {},
+              "fields": [
+                "award_date",
+                "key"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "display_name",
+                "uei"
+              ]
+            }
+          },
+          "fields": [
+            "contract_number",
+            "cooperative_purchasing",
+            "disaster_recovery_purchasing",
+            "file_urls",
+            "schedule",
+            "sins",
+            "uei",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "contract_number",
+          "cooperative_purchasing",
+          "disaster_recovery_purchasing",
+          "file_urls",
+          "idv",
+          "idv.award_date",
+          "idv.key",
+          "recipient",
+          "recipient.display_name",
+          "recipient.uei",
+          "schedule",
+          "sins",
+          "uei",
+          "uuid"
+        ],
+        "viewset": "awards.views.gsa_elibrary.GsaELibraryContractViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "contract_number",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "key",
+        "limit",
+        "ordering",
+        "page",
+        "piid",
+        "schedule",
+        "search",
+        "shape",
+        "show_shapes",
+        "sin",
+        "uei"
+      ]
+    },
+    "idvs": {
+      "basename": "idv",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "idvs",
+      "resource_key": "idvs",
+      "runtime": {
+        "filter_params": [
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "expiring_gte",
+          "expiring_lte",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "idv_type",
+          "key",
+          "last_date_to_order_gte",
+          "last_date_to_order_lte",
+          "naics",
+          "ordering",
+          "piid",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "psc",
+          "recipient",
+          "search",
+          "set_aside",
+          "solicitation_identifier",
+          "uei"
+        ],
+        "filter_params_detail": {
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "expiring_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "expiring_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "idv_type": {
+            "choices": [
+              "A",
+              "B",
+              "C",
+              "D",
+              "E",
+              "a",
+              "b",
+              "c",
+              "d",
+              "e"
+            ],
+            "choices_count": 10,
+            "filter_class": "UppercaseCodeChoiceFilter",
+            "type": "choice"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "last_date_to_order_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "last_date_to_order_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "naics": {
+            "filter_class": "CustomNAICSFilter",
+            "type": "string"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-total_contract_value",
+              "award_date",
+              "obligated",
+              "total_contract_value"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "piid": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "CustomSetAsideFilter",
+            "type": "string"
+          },
+          "solicitation_identifier": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "total_contract_value"
+        ],
+        "pagination": {
+          "class": "KeysetPagination",
+          "max_page_size": null
+        },
+        "shape": {
+          "expands": {
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "awards": {
+              "expands": {},
+              "fields": [
+                "award_date",
+                "base_and_exercised_options_value",
+                "description",
+                "fiscal_year",
+                "key",
+                "naics_code",
+                "obligated",
+                "piid",
+                "psc_code",
+                "total_contract_value",
+                "transactions"
+              ]
+            },
+            "competition": {
+              "expands": {},
+              "fields": [
+                "contract_type",
+                "extent_competed",
+                "number_of_offers_received",
+                "other_than_full_and_open_competition",
+                "solicitation_date",
+                "solicitation_identifier",
+                "solicitation_procedures"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "gsa_elibrary": {
+              "expands": {},
+              "fields": [
+                "contract_number",
+                "cooperative_purchasing",
+                "disaster_recovery_purchasing",
+                "external_id",
+                "extracted_text",
+                "file_urls",
+                "schedule",
+                "sins",
+                "source_data",
+                "uei"
+              ]
+            },
+            "idv_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "legislative_mandates": {
+              "expands": {},
+              "fields": [
+                "clinger_cohen_act_planning",
+                "construction_wage_rate_requirements",
+                "employment_eligibility_verification",
+                "interagency_contracting_authority",
+                "labor_standards",
+                "materials_supplies_articles_equipment",
+                "other_statutory_authority",
+                "service_contract_inventory"
+              ]
+            },
+            "multiple_or_single_award_idv": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "naics": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "parent_award": {
+              "expands": {},
+              "fields": [
+                "key",
+                "piid"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "last_date_to_order",
+                "start_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "country_code",
+                "country_name",
+                "state_code",
+                "state_name",
+                "zip_code"
+              ]
+            },
+            "psc": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "cage",
+                "cage_code",
+                "display_name",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "set_aside": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "subawards_summary": {
+              "expands": {},
+              "fields": [
+                "count",
+                "total_amount"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_type",
+                "description",
+                "modification_number",
+                "obligated",
+                "transaction_date"
+              ]
+            },
+            "type_of_idc": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "award_date",
+            "commercial_item_acquisition_procedures",
+            "consolidated_contract",
+            "contingency_humanitarian_or_peacekeeping_operation",
+            "contract_bundling",
+            "contract_financing",
+            "cost_accounting_standards_clause",
+            "cost_or_pricing_data",
+            "description",
+            "dod_acquisition_program",
+            "dod_transaction_number",
+            "domestic_or_foreign_entity",
+            "email_address",
+            "epa_designated_product",
+            "evaluated_preference",
+            "fair_opportunity_limited_sources",
+            "fed_biz_opps",
+            "fee_range_lower_value",
+            "fee_range_upper_value",
+            "fiscal_year",
+            "fixed_fee_value",
+            "foreign_funding",
+            "government_furnished_property",
+            "idv_type",
+            "idv_website",
+            "inherently_governmental_functions",
+            "key",
+            "local_area_set_aside",
+            "major_program",
+            "multiple_or_single_award_idv",
+            "naics_code",
+            "number_of_actions",
+            "number_of_offers_source",
+            "obligated",
+            "ordering_procedure",
+            "performance_based_service_acquisition",
+            "piid",
+            "program_acronym",
+            "psc_code",
+            "recovered_materials_sustainability",
+            "research",
+            "sam_exception",
+            "set_aside",
+            "simplified_procedures_for_certain_commercial_items",
+            "small_business_competitiveness_demonstration_program",
+            "solicitation_identifier",
+            "subawards_summary",
+            "subcontracting_plan",
+            "total_contract_value",
+            "total_estimated_order_value",
+            "tradeoff_process",
+            "transactions",
+            "type_of_fee_for_use_of_service",
+            "type_of_idc",
+            "undefinitized_action",
+            "vehicle_uuid",
+            "who_can_use"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_date",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "awards",
+          "awards.award_date",
+          "awards.base_and_exercised_options_value",
+          "awards.description",
+          "awards.fiscal_year",
+          "awards.key",
+          "awards.naics_code",
+          "awards.obligated",
+          "awards.piid",
+          "awards.psc_code",
+          "awards.total_contract_value",
+          "awards.transactions",
+          "commercial_item_acquisition_procedures",
+          "competition",
+          "competition.contract_type",
+          "competition.extent_competed",
+          "competition.number_of_offers_received",
+          "competition.other_than_full_and_open_competition",
+          "competition.solicitation_date",
+          "competition.solicitation_identifier",
+          "competition.solicitation_procedures",
+          "consolidated_contract",
+          "contingency_humanitarian_or_peacekeeping_operation",
+          "contract_bundling",
+          "contract_financing",
+          "cost_accounting_standards_clause",
+          "cost_or_pricing_data",
+          "description",
+          "dod_acquisition_program",
+          "dod_transaction_number",
+          "domestic_or_foreign_entity",
+          "email_address",
+          "epa_designated_product",
+          "evaluated_preference",
+          "fair_opportunity_limited_sources",
+          "fed_biz_opps",
+          "fee_range_lower_value",
+          "fee_range_upper_value",
+          "fiscal_year",
+          "fixed_fee_value",
+          "foreign_funding",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "government_furnished_property",
+          "gsa_elibrary",
+          "gsa_elibrary.contract_number",
+          "gsa_elibrary.cooperative_purchasing",
+          "gsa_elibrary.disaster_recovery_purchasing",
+          "gsa_elibrary.external_id",
+          "gsa_elibrary.extracted_text",
+          "gsa_elibrary.file_urls",
+          "gsa_elibrary.schedule",
+          "gsa_elibrary.sins",
+          "gsa_elibrary.source_data",
+          "gsa_elibrary.uei",
+          "idv_type",
+          "idv_type.code",
+          "idv_type.description",
+          "idv_website",
+          "inherently_governmental_functions",
+          "key",
+          "legislative_mandates",
+          "legislative_mandates.clinger_cohen_act_planning",
+          "legislative_mandates.construction_wage_rate_requirements",
+          "legislative_mandates.employment_eligibility_verification",
+          "legislative_mandates.interagency_contracting_authority",
+          "legislative_mandates.labor_standards",
+          "legislative_mandates.materials_supplies_articles_equipment",
+          "legislative_mandates.other_statutory_authority",
+          "legislative_mandates.service_contract_inventory",
+          "local_area_set_aside",
+          "major_program",
+          "multiple_or_single_award_idv",
+          "multiple_or_single_award_idv.code",
+          "multiple_or_single_award_idv.description",
+          "naics",
+          "naics.code",
+          "naics.description",
+          "naics_code",
+          "number_of_actions",
+          "number_of_offers_source",
+          "obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "ordering_procedure",
+          "parent_award",
+          "parent_award.key",
+          "parent_award.piid",
+          "performance_based_service_acquisition",
+          "period_of_performance",
+          "period_of_performance.last_date_to_order",
+          "period_of_performance.start_date",
+          "piid",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.country_code",
+          "place_of_performance.country_name",
+          "place_of_performance.state_code",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "program_acronym",
+          "psc",
+          "psc.code",
+          "psc.description",
+          "psc_code",
+          "recipient",
+          "recipient.cage",
+          "recipient.cage_code",
+          "recipient.display_name",
+          "recipient.legal_business_name",
+          "recipient.uei",
+          "recovered_materials_sustainability",
+          "research",
+          "sam_exception",
+          "set_aside",
+          "set_aside.code",
+          "set_aside.description",
+          "simplified_procedures_for_certain_commercial_items",
+          "small_business_competitiveness_demonstration_program",
+          "solicitation_identifier",
+          "subawards_summary",
+          "subawards_summary.count",
+          "subawards_summary.total_amount",
+          "subcontracting_plan",
+          "total_contract_value",
+          "total_estimated_order_value",
+          "tradeoff_process",
+          "transactions",
+          "transactions.action_type",
+          "transactions.description",
+          "transactions.modification_number",
+          "transactions.obligated",
+          "transactions.transaction_date",
+          "type_of_fee_for_use_of_service",
+          "type_of_idc",
+          "type_of_idc.code",
+          "type_of_idc.description",
+          "undefinitized_action",
+          "vehicle_uuid",
+          "who_can_use"
+        ],
+        "viewset": "awards.views.idvs.IDVViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "award_date",
+        "award_date_gte",
+        "award_date_lte",
+        "awarding_agency",
+        "cursor",
+        "expiring_gte",
+        "expiring_lte",
+        "fiscal_year",
+        "fiscal_year_gte",
+        "fiscal_year_lte",
+        "flat",
+        "flat_lists",
+        "funding_agency",
+        "idv_type",
+        "joiner",
+        "last_date_to_order_gte",
+        "last_date_to_order_lte",
+        "limit",
+        "naics",
+        "ordering",
+        "piid",
+        "pop_start_date_gte",
+        "pop_start_date_lte",
+        "psc",
+        "recipient",
+        "set_aside",
+        "shape",
+        "show_shapes",
+        "uei"
+      ]
+    },
+    "itdashboard": {
+      "basename": "itdashboardinvestment",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "itdashboard",
+      "resource_key": "itdashboard",
+      "runtime": {
+        "filter_params": [
+          "agency_code",
+          "agency_name",
+          "cio_rating",
+          "cio_rating_max",
+          "performance_risk",
+          "search",
+          "type_of_investment",
+          "updated_time_after",
+          "updated_time_before"
+        ],
+        "filter_params_detail": {
+          "agency_code": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "agency_name": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "cio_rating": {
+            "filter_class": "CIORatingFilter",
+            "type": "number"
+          },
+          "cio_rating_max": {
+            "filter_class": "CIORatingMaxFilter",
+            "type": "number"
+          },
+          "performance_risk": {
+            "filter_class": "PerformanceRiskFilter",
+            "type": "boolean"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "type_of_investment": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "updated_time_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "updated_time_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "itdashboard.views.ITDashboardInvestmentViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "mas_sins": {
+      "basename": "massin",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "mas_sins",
+      "resource_key": "mas_sins",
+      "runtime": {
+        "filter_params": [],
+        "filter_params_detail": {},
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StaticModelCachedPagination",
+          "max_page_size": 10000
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "description",
+            "expiration_date",
+            "large_category_code",
+            "large_category_name",
+            "naics_codes",
+            "olm",
+            "psc_code",
+            "service_comm_code",
+            "set_aside_code",
+            "sin",
+            "state_local",
+            "sub_category_code",
+            "sub_category_name",
+            "tdr",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "description",
+          "expiration_date",
+          "large_category_code",
+          "large_category_name",
+          "naics_codes",
+          "olm",
+          "psc_code",
+          "service_comm_code",
+          "set_aside_code",
+          "sin",
+          "state_local",
+          "sub_category_code",
+          "sub_category_name",
+          "tdr",
+          "title"
+        ],
+        "viewset": "shared.views.MasSinsViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "search",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "naics": {
+      "basename": "naicscode",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "naics",
+      "resource_key": "naics",
+      "runtime": {
+        "filter_params": [
+          "employee_limit",
+          "employee_limit_gte",
+          "employee_limit_lte",
+          "revenue_limit",
+          "revenue_limit_gte",
+          "revenue_limit_lte",
+          "search"
+        ],
+        "filter_params_detail": {
+          "employee_limit": {
+            "filter_class": "SizeLimitFilter",
+            "type": "string"
+          },
+          "employee_limit_gte": {
+            "filter_class": "SizeLimitFilter",
+            "lookup": "gte",
+            "type": "string"
+          },
+          "employee_limit_lte": {
+            "filter_class": "SizeLimitFilter",
+            "lookup": "lte",
+            "type": "string"
+          },
+          "revenue_limit": {
+            "filter_class": "SizeLimitFilter",
+            "type": "string"
+          },
+          "revenue_limit_gte": {
+            "filter_class": "SizeLimitFilter",
+            "lookup": "gte",
+            "type": "string"
+          },
+          "revenue_limit_lte": {
+            "filter_class": "SizeLimitFilter",
+            "lookup": "lte",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StaticModelCachedPagination",
+          "max_page_size": 10000
+        },
+        "shape": {
+          "expands": {
+            "federal_obligations": {
+              "expands": {},
+              "fields": [
+                "active",
+                "total"
+              ]
+            },
+            "size_standards": {
+              "expands": {},
+              "fields": [
+                "employee_limit",
+                "revenue_limit"
+              ]
+            }
+          },
+          "fields": [
+            "code",
+            "description"
+          ]
+        },
+        "shape_flat_paths": [
+          "code",
+          "description",
+          "federal_obligations",
+          "federal_obligations.active",
+          "federal_obligations.total",
+          "size_standards",
+          "size_standards.employee_limit",
+          "size_standards.revenue_limit"
+        ],
+        "viewset": "shared.views.NaicsCodeViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "employee_limit",
+        "employee_limit_gte",
+        "employee_limit_lte",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "revenue_limit",
+        "revenue_limit_gte",
+        "revenue_limit_lte",
+        "search",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "news": {
+      "basename": "g2x-news",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "news",
+      "resource_key": "news",
+      "runtime": {
+        "filter_params": [
+          "published_after",
+          "published_before",
+          "search",
+          "source",
+          "tag",
+          "vertical"
+        ],
+        "filter_params_detail": {
+          "published_after": {
+            "filter_class": "DateTimeFilter",
+            "lookup": "gte",
+            "type": "datetime"
+          },
+          "published_before": {
+            "filter_class": "DateTimeFilter",
+            "lookup": "lte",
+            "type": "datetime"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "source": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "tag": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "vertical": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "g2x.views.content.NewsViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "notices": {
+      "basename": "notice",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "notices",
+      "resource_key": "notices",
+      "runtime": {
+        "filter_params": [
+          "active",
+          "agency",
+          "naics",
+          "notice_type",
+          "posted_date_after",
+          "posted_date_before",
+          "psc",
+          "response_deadline_after",
+          "response_deadline_before",
+          "search",
+          "set_aside",
+          "solicitation_number"
+        ],
+        "filter_params_detail": {
+          "active": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "naics": {
+            "filter_class": "CustomNAICSFilter",
+            "type": "string"
+          },
+          "notice_type": {
+            "filter_class": "NoticeTypeFilter",
+            "type": "string"
+          },
+          "posted_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "posted_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "response_deadline_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "response_deadline_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "CustomSetAsideFilter",
+            "type": "string"
+          },
+          "solicitation_number": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "opportunities.views.NoticeViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "agency",
+        "department",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "notice_id",
+        "notice_type",
+        "office",
+        "ordering",
+        "page",
+        "posted_date_after",
+        "posted_date_before",
+        "response_deadline_after",
+        "response_deadline_before",
+        "search",
+        "shape",
+        "show_shapes",
+        "solicitation_number"
+      ]
+    },
+    "offices": {
+      "basename": "office",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "offices",
+      "resource_key": "offices",
+      "runtime": {
+        "filter_params": [
+          "search"
+        ],
+        "filter_params_detail": {
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "agency": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "code",
+                "name"
+              ]
+            },
+            "department": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "cgac",
+                "code",
+                "congressional_justification",
+                "description",
+                "name",
+                "website"
+              ]
+            }
+          },
+          "fields": [
+            "agency_code",
+            "agency_name",
+            "code",
+            "department_code",
+            "department_name",
+            "name",
+            "office_code",
+            "office_name"
+          ]
+        },
+        "shape_flat_paths": [
+          "agency",
+          "agency.abbreviation",
+          "agency.code",
+          "agency.name",
+          "agency_code",
+          "agency_name",
+          "code",
+          "department",
+          "department.abbreviation",
+          "department.cgac",
+          "department.code",
+          "department.congressional_justification",
+          "department.description",
+          "department.name",
+          "department.website",
+          "department_code",
+          "department_name",
+          "name",
+          "office_code",
+          "office_name"
+        ],
+        "viewset": "agencies.views.OfficeViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "opportunities": {
+      "basename": "opportunity",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "opportunities",
+      "resource_key": "opportunities",
+      "runtime": {
+        "filter_params": [
+          "active",
+          "agency",
+          "first_notice_date_after",
+          "first_notice_date_before",
+          "last_notice_date_after",
+          "last_notice_date_before",
+          "naics",
+          "notice_type",
+          "opportunity_id",
+          "place_of_performance",
+          "psc",
+          "response_deadline_after",
+          "response_deadline_before",
+          "search",
+          "set_aside",
+          "solicitation_number"
+        ],
+        "filter_params_detail": {
+          "active": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "first_notice_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "first_notice_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "last_notice_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "last_notice_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "naics": {
+            "filter_class": "CustomNAICSFilter",
+            "type": "string"
+          },
+          "notice_type": {
+            "filter_class": "NoticeTypeFilter",
+            "type": "string"
+          },
+          "opportunity_id": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "place_of_performance": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "response_deadline_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "response_deadline_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "search": {
+            "filter_class": "OpportunitySearchFilter",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "CustomSetAsideFilter",
+            "type": "string"
+          },
+          "solicitation_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [
+          "posted_date"
+        ],
+        "ordering_fields": [
+          "first_notice_date",
+          "last_notice_date",
+          "response_deadline"
+        ],
+        "pagination": {
+          "class": "OpportunityPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "opportunities.views.OpportunityViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "agency",
+        "first_notice_date_after",
+        "first_notice_date_before",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "last_notice_date_after",
+        "last_notice_date_before",
+        "limit",
+        "naics",
+        "notice_type",
+        "ordering",
+        "page",
+        "place_of_performance",
+        "psc",
+        "response_deadline_after",
+        "response_deadline_before",
+        "search",
+        "set_aside",
+        "shape",
+        "show_shapes",
+        "solicitation_number"
+      ]
+    },
+    "organizations": {
+      "basename": "organization",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "organizations",
+      "resource_key": "organizations",
+      "runtime": {
+        "filter_params": [
+          "cgac",
+          "include_inactive",
+          "level",
+          "parent",
+          "search",
+          "type"
+        ],
+        "filter_params_detail": {
+          "cgac": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "include_inactive": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "level": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "parent": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "type": {
+            "choices": [
+              "AGENCY",
+              "DEPARTMENT",
+              "MAJOR COMMAND",
+              "OFFICE",
+              "SUB COMMAND"
+            ],
+            "choices_count": 5,
+            "filter_class": "LenientMultipleChoiceFilter",
+            "type": "choice"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "agency": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "code",
+                "name"
+              ]
+            },
+            "ancestors": {
+              "expands": {},
+              "fields": [
+                "fh_key",
+                "level",
+                "name",
+                "short_name"
+              ]
+            },
+            "budget_appropriation": {
+              "expands": {},
+              "fields": [
+                "cgac",
+                "fiscal_year",
+                "n_accounts",
+                "scope",
+                "summary",
+                "top_accounts"
+              ]
+            },
+            "budget_spending": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "n_orgs_in_rollup",
+                "organization_id",
+                "summary",
+                "top_accounts"
+              ]
+            },
+            "children": {
+              "expands": {},
+              "fields": [
+                "cgac",
+                "code",
+                "fh_key",
+                "is_active",
+                "key",
+                "level",
+                "name",
+                "short_name",
+                "type"
+              ]
+            },
+            "department": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "code",
+                "name"
+              ]
+            },
+            "parent": {
+              "expands": {},
+              "fields": [
+                "cgac",
+                "code",
+                "fh_key",
+                "is_active",
+                "key",
+                "level",
+                "name",
+                "short_name",
+                "type"
+              ]
+            }
+          },
+          "fields": [
+            "aac_code",
+            "canonical_code",
+            "cgac",
+            "code",
+            "description",
+            "end_date",
+            "fh_key",
+            "fpds_code",
+            "fpds_org_id",
+            "full_parent_path_name",
+            "is_active",
+            "key",
+            "l1_fh_key",
+            "l2_fh_key",
+            "l3_fh_key",
+            "l4_fh_key",
+            "l5_fh_key",
+            "l6_fh_key",
+            "l7_fh_key",
+            "l8_fh_key",
+            "level",
+            "logo",
+            "mod_status",
+            "name",
+            "obligation_rank",
+            "obligations",
+            "parent_fh_key",
+            "short_name",
+            "start_date",
+            "summary",
+            "total_obligations",
+            "tree_obligations",
+            "type"
+          ]
+        },
+        "shape_flat_paths": [
+          "aac_code",
+          "agency",
+          "agency.abbreviation",
+          "agency.code",
+          "agency.name",
+          "ancestors",
+          "ancestors.fh_key",
+          "ancestors.level",
+          "ancestors.name",
+          "ancestors.short_name",
+          "budget_appropriation",
+          "budget_appropriation.cgac",
+          "budget_appropriation.fiscal_year",
+          "budget_appropriation.n_accounts",
+          "budget_appropriation.scope",
+          "budget_appropriation.summary",
+          "budget_appropriation.top_accounts",
+          "budget_spending",
+          "budget_spending.fiscal_year",
+          "budget_spending.n_orgs_in_rollup",
+          "budget_spending.organization_id",
+          "budget_spending.summary",
+          "budget_spending.top_accounts",
+          "canonical_code",
+          "cgac",
+          "children",
+          "children.cgac",
+          "children.code",
+          "children.fh_key",
+          "children.is_active",
+          "children.key",
+          "children.level",
+          "children.name",
+          "children.short_name",
+          "children.type",
+          "code",
+          "department",
+          "department.abbreviation",
+          "department.code",
+          "department.name",
+          "description",
+          "end_date",
+          "fh_key",
+          "fpds_code",
+          "fpds_org_id",
+          "full_parent_path_name",
+          "is_active",
+          "key",
+          "l1_fh_key",
+          "l2_fh_key",
+          "l3_fh_key",
+          "l4_fh_key",
+          "l5_fh_key",
+          "l6_fh_key",
+          "l7_fh_key",
+          "l8_fh_key",
+          "level",
+          "logo",
+          "mod_status",
+          "name",
+          "obligation_rank",
+          "obligations",
+          "parent",
+          "parent.cgac",
+          "parent.code",
+          "parent.fh_key",
+          "parent.is_active",
+          "parent.key",
+          "parent.level",
+          "parent.name",
+          "parent.short_name",
+          "parent.type",
+          "parent_fh_key",
+          "short_name",
+          "start_date",
+          "summary",
+          "total_obligations",
+          "tree_obligations",
+          "type"
+        ],
+        "viewset": "agencies.views.OrganizationViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "cgac",
+        "flat",
+        "flat_lists",
+        "include_inactive",
+        "joiner",
+        "level",
+        "limit",
+        "page",
+        "parent",
+        "search",
+        "shape",
+        "show_shapes",
+        "type"
+      ]
+    },
+    "otas": {
+      "basename": "ota",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "otas",
+      "resource_key": "otas",
+      "runtime": {
+        "filter_params": [
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "expiring_gte",
+          "expiring_lte",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "key",
+          "ordering",
+          "piid",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "psc",
+          "recipient",
+          "search",
+          "uei"
+        ],
+        "filter_params_detail": {
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "expiring_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "expiring_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-total_contract_value",
+              "award_date",
+              "obligated",
+              "total_contract_value"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "piid": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "total_contract_value"
+        ],
+        "pagination": {
+          "class": "KeysetPagination",
+          "max_page_size": null
+        },
+        "shape": {
+          "expands": {
+            "award_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "extent_competed": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "parent_award": {
+              "expands": {},
+              "fields": [
+                "key",
+                "piid"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date",
+                "ultimate_completion_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "country_code",
+                "country_name",
+                "state_code",
+                "state_name",
+                "zip_code"
+              ]
+            },
+            "psc": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "cage",
+                "cage_code",
+                "display_name",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_type",
+                "description",
+                "modification_number",
+                "obligated",
+                "transaction_date"
+              ]
+            },
+            "type_of_ot_agreement": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "award_date",
+            "award_type",
+            "base_and_exercised_options_value",
+            "consortia",
+            "consortia_uei",
+            "description",
+            "dod_acquisition_program",
+            "extent_competed",
+            "fiscal_year",
+            "key",
+            "non_governmental_dollars",
+            "non_traditional_government_contractor_participation",
+            "obligated",
+            "parent_award_modification_number",
+            "piid",
+            "psc_code",
+            "total_contract_value",
+            "transactions",
+            "type_of_ot_agreement"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_date",
+          "award_type",
+          "award_type.code",
+          "award_type.description",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "base_and_exercised_options_value",
+          "consortia",
+          "consortia_uei",
+          "description",
+          "dod_acquisition_program",
+          "extent_competed",
+          "extent_competed.code",
+          "extent_competed.description",
+          "fiscal_year",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "key",
+          "non_governmental_dollars",
+          "non_traditional_government_contractor_participation",
+          "obligated",
+          "parent_award",
+          "parent_award.key",
+          "parent_award.piid",
+          "parent_award_modification_number",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "period_of_performance.ultimate_completion_date",
+          "piid",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.country_code",
+          "place_of_performance.country_name",
+          "place_of_performance.state_code",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "psc",
+          "psc.code",
+          "psc.description",
+          "psc_code",
+          "recipient",
+          "recipient.cage",
+          "recipient.cage_code",
+          "recipient.display_name",
+          "recipient.legal_business_name",
+          "recipient.uei",
+          "total_contract_value",
+          "transactions",
+          "transactions.action_type",
+          "transactions.description",
+          "transactions.modification_number",
+          "transactions.obligated",
+          "transactions.transaction_date",
+          "type_of_ot_agreement",
+          "type_of_ot_agreement.code",
+          "type_of_ot_agreement.description"
+        ],
+        "viewset": "awards.views.otas.OTAViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "cursor",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "otidvs": {
+      "basename": "otidv",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "otidvs",
+      "resource_key": "otidvs",
+      "runtime": {
+        "filter_params": [
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "expiring_gte",
+          "expiring_lte",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "key",
+          "ordering",
+          "piid",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "psc",
+          "recipient",
+          "search",
+          "uei"
+        ],
+        "filter_params_detail": {
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "expiring_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "expiring_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-total_contract_value",
+              "award_date",
+              "obligated",
+              "total_contract_value"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "piid": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "psc": {
+            "filter_class": "CustomPSCFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UppercaseCharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "total_contract_value"
+        ],
+        "pagination": {
+          "class": "KeysetPagination",
+          "max_page_size": null
+        },
+        "shape": {
+          "expands": {
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "extent_competed": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date",
+                "ultimate_completion_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "country_code",
+                "country_name",
+                "state_code",
+                "state_name",
+                "zip_code"
+              ]
+            },
+            "psc": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "cage",
+                "cage_code",
+                "display_name",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_type",
+                "description",
+                "modification_number",
+                "obligated",
+                "transaction_date"
+              ]
+            },
+            "type_of_ot_agreement": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "award_date",
+            "base_and_exercised_options_value",
+            "consortia",
+            "consortia_uei",
+            "description",
+            "dod_acquisition_program",
+            "extent_competed",
+            "fiscal_year",
+            "idv_type",
+            "key",
+            "non_governmental_dollars",
+            "non_traditional_government_contractor_participation",
+            "obligated",
+            "piid",
+            "psc_code",
+            "total_contract_value",
+            "transactions",
+            "type_of_ot_agreement"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_date",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "base_and_exercised_options_value",
+          "consortia",
+          "consortia_uei",
+          "description",
+          "dod_acquisition_program",
+          "extent_competed",
+          "extent_competed.code",
+          "extent_competed.description",
+          "fiscal_year",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "idv_type",
+          "key",
+          "non_governmental_dollars",
+          "non_traditional_government_contractor_participation",
+          "obligated",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "period_of_performance.ultimate_completion_date",
+          "piid",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.country_code",
+          "place_of_performance.country_name",
+          "place_of_performance.state_code",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "psc",
+          "psc.code",
+          "psc.description",
+          "psc_code",
+          "recipient",
+          "recipient.cage",
+          "recipient.cage_code",
+          "recipient.display_name",
+          "recipient.legal_business_name",
+          "recipient.uei",
+          "total_contract_value",
+          "transactions",
+          "transactions.action_type",
+          "transactions.description",
+          "transactions.modification_number",
+          "transactions.obligated",
+          "transactions.transaction_date",
+          "type_of_ot_agreement",
+          "type_of_ot_agreement.code",
+          "type_of_ot_agreement.description"
+        ],
+        "viewset": "awards.views.otidvs.OTIDVViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "cursor",
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "protests": {
+      "basename": "bidprotest",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "protests",
+      "resource_key": "protests",
+      "runtime": {
+        "filter_params": [
+          "agency",
+          "case_number",
+          "case_type",
+          "decision_date_after",
+          "decision_date_before",
+          "filed_date_after",
+          "filed_date_before",
+          "outcome",
+          "protester",
+          "search",
+          "solicitation_number",
+          "source_system"
+        ],
+        "filter_params_detail": {
+          "agency": {
+            "filter_class": "OrganizationScopeAgencyFilter",
+            "type": "string"
+          },
+          "case_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "case_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "decision_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "decision_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "filed_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "filed_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "outcome": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "protester": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "solicitation_number": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "source_system": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "BidProtestPagination",
+          "max_page_size": 100
+        },
+        "shape": null,
+        "shape_flat_paths": [],
+        "viewset": "protests.views.BidProtestViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "psc": {
+      "basename": "productservicecode",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "psc",
+      "resource_key": "psc",
+      "runtime": {
+        "filter_params": [],
+        "filter_params_detail": {},
+        "ordering_aliases": [],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "StaticModelCachedPagination",
+          "max_page_size": 10000
+        },
+        "shape": {
+          "expands": {
+            "current": {
+              "expands": {},
+              "fields": [
+                "active",
+                "description",
+                "end_date",
+                "excludes",
+                "includes",
+                "name",
+                "start_date"
+              ]
+            },
+            "historical": {
+              "expands": {},
+              "fields": [
+                "active",
+                "description",
+                "end_date",
+                "excludes",
+                "includes",
+                "name",
+                "start_date"
+              ]
+            }
+          },
+          "fields": [
+            "category",
+            "code",
+            "level_1_category",
+            "level_1_category_code",
+            "level_2_category",
+            "level_2_category_code",
+            "parent"
+          ]
+        },
+        "shape_flat_paths": [
+          "category",
+          "code",
+          "current",
+          "current.active",
+          "current.description",
+          "current.end_date",
+          "current.excludes",
+          "current.includes",
+          "current.name",
+          "current.start_date",
+          "historical",
+          "historical.active",
+          "historical.description",
+          "historical.end_date",
+          "historical.excludes",
+          "historical.includes",
+          "historical.name",
+          "historical.start_date",
+          "level_1_category",
+          "level_1_category_code",
+          "level_2_category",
+          "level_2_category_code",
+          "parent"
+        ],
+        "viewset": "shared.views.ProductServiceCodeViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "subawards": {
+      "basename": "subaward",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "subawards",
+      "resource_key": "subawards",
+      "runtime": {
+        "filter_params": [
+          "award_key",
+          "awarding_agency",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "prime_uei",
+          "recipient",
+          "sub_uei"
+        ],
+        "filter_params_detail": {
+          "award_key": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "awarding_agency": {
+            "filter_class": "SubawardAgencyFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "SubawardAgencyFilter",
+            "type": "string"
+          },
+          "prime_uei": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "sub_uei": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [
+          "last_modified_date"
+        ],
+        "ordering_fields": [],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name"
+              ]
+            },
+            "fsrs_details": {
+              "expands": {},
+              "fields": [
+                "id",
+                "last_modified_date",
+                "month",
+                "year"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name"
+              ]
+            },
+            "highly_compensated_officers": {
+              "expands": {},
+              "fields": [
+                "amount",
+                "name"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city",
+                "country_code",
+                "state",
+                "zip"
+              ]
+            },
+            "prime_recipient": {
+              "expands": {},
+              "fields": [
+                "display_name",
+                "uei"
+              ]
+            },
+            "subaward_details": {
+              "expands": {},
+              "fields": [
+                "action_date",
+                "amount",
+                "description",
+                "fiscal_year",
+                "number",
+                "type"
+              ]
+            },
+            "subaward_recipient": {
+              "expands": {},
+              "fields": [
+                "display_name",
+                "duns",
+                "uei"
+              ]
+            }
+          },
+          "fields": [
+            "award_key",
+            "key",
+            "piid",
+            "prime_awardee_name",
+            "prime_awardee_uei",
+            "recipient_business_types",
+            "recipient_dba_name",
+            "recipient_duns",
+            "recipient_name",
+            "recipient_parent_duns",
+            "recipient_parent_name",
+            "recipient_parent_uei",
+            "recipient_uei",
+            "usaspending_permalink"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_key",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "fsrs_details",
+          "fsrs_details.id",
+          "fsrs_details.last_modified_date",
+          "fsrs_details.month",
+          "fsrs_details.year",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "highly_compensated_officers",
+          "highly_compensated_officers.amount",
+          "highly_compensated_officers.name",
+          "key",
+          "piid",
+          "place_of_performance",
+          "place_of_performance.city",
+          "place_of_performance.country_code",
+          "place_of_performance.state",
+          "place_of_performance.zip",
+          "prime_awardee_name",
+          "prime_awardee_uei",
+          "prime_recipient",
+          "prime_recipient.display_name",
+          "prime_recipient.uei",
+          "recipient_business_types",
+          "recipient_dba_name",
+          "recipient_duns",
+          "recipient_name",
+          "recipient_parent_duns",
+          "recipient_parent_name",
+          "recipient_parent_uei",
+          "recipient_uei",
+          "subaward_details",
+          "subaward_details.action_date",
+          "subaward_details.amount",
+          "subaward_details.description",
+          "subaward_details.fiscal_year",
+          "subaward_details.number",
+          "subaward_details.type",
+          "subaward_recipient",
+          "subaward_recipient.display_name",
+          "subaward_recipient.duns",
+          "subaward_recipient.uei",
+          "usaspending_permalink"
+        ],
+        "viewset": "awards.views.subawards.SubawardViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "ordering",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
+    "vehicles": {
+      "basename": "vehicle",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "vehicles",
+      "resource_key": "vehicles",
+      "runtime": {
+        "filter_params": [
+          "agency",
+          "award_date_after",
+          "award_date_before",
+          "contract_type",
+          "fiscal_year",
+          "idv_count_max",
+          "idv_count_min",
+          "last_date_to_order_after",
+          "last_date_to_order_before",
+          "naics_code",
+          "order_count_max",
+          "order_count_min",
+          "organization_id",
+          "program_acronym",
+          "psc_code",
+          "search",
+          "set_aside",
+          "total_obligated_max",
+          "total_obligated_min",
+          "type_of_idc",
+          "vehicle_type",
+          "who_can_use"
+        ],
+        "filter_params_detail": {
+          "agency": {
+            "filter_class": "VehiclePerformantAgencyFilter",
+            "type": "string"
+          },
+          "award_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "award_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "contract_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "idv_count_max": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "idv_count_min": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "last_date_to_order_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "last_date_to_order_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "naics_code": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "order_count_max": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "order_count_min": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "organization_id": {
+            "filter_class": "UUIDFilter",
+            "type": "string"
+          },
+          "program_acronym": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "psc_code": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "ViewHandledSearch",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "CustomSetAsideFilter",
+            "type": "string"
+          },
+          "total_obligated_max": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "total_obligated_min": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "type_of_idc": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "vehicle_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "who_can_use": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "fiscal_year",
+          "idv_count",
+          "last_date_to_order",
+          "latest_award_date",
+          "order_count",
+          "total_obligated",
+          "vehicle_obligations"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "agency_details": {
+              "expands": {},
+              "fields": [
+                "*",
+                "awarding_office",
+                "funding_office"
+              ]
+            },
+            "awardees": {
+              "expands": {
+                "awarding_office": {
+                  "expands": {},
+                  "fields": [
+                    "agency_code",
+                    "agency_name",
+                    "department_code",
+                    "department_name",
+                    "office_code",
+                    "office_name",
+                    "organization_id"
+                  ]
+                },
+                "awards": {
+                  "expands": {},
+                  "fields": [
+                    "award_date",
+                    "base_and_exercised_options_value",
+                    "description",
+                    "fiscal_year",
+                    "key",
+                    "naics_code",
+                    "obligated",
+                    "piid",
+                    "psc_code",
+                    "total_contract_value",
+                    "transactions"
+                  ]
+                },
+                "competition": {
+                  "expands": {},
+                  "fields": [
+                    "contract_type",
+                    "extent_competed",
+                    "number_of_offers_received",
+                    "other_than_full_and_open_competition",
+                    "solicitation_date",
+                    "solicitation_identifier",
+                    "solicitation_procedures"
+                  ]
+                },
+                "funding_office": {
+                  "expands": {},
+                  "fields": [
+                    "agency_code",
+                    "agency_name",
+                    "department_code",
+                    "department_name",
+                    "office_code",
+                    "office_name",
+                    "organization_id"
+                  ]
+                },
+                "gsa_elibrary": {
+                  "expands": {},
+                  "fields": [
+                    "contract_number",
+                    "cooperative_purchasing",
+                    "disaster_recovery_purchasing",
+                    "external_id",
+                    "extracted_text",
+                    "file_urls",
+                    "schedule",
+                    "sins",
+                    "source_data",
+                    "uei"
+                  ]
+                },
+                "idv_type": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "legislative_mandates": {
+                  "expands": {},
+                  "fields": [
+                    "clinger_cohen_act_planning",
+                    "construction_wage_rate_requirements",
+                    "employment_eligibility_verification",
+                    "interagency_contracting_authority",
+                    "labor_standards",
+                    "materials_supplies_articles_equipment",
+                    "other_statutory_authority",
+                    "service_contract_inventory"
+                  ]
+                },
+                "multiple_or_single_award_idv": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "naics": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "officers": {
+                  "expands": {},
+                  "fields": [
+                    "highly_compensated_officer_1_amount",
+                    "highly_compensated_officer_1_name",
+                    "highly_compensated_officer_2_amount",
+                    "highly_compensated_officer_2_name",
+                    "highly_compensated_officer_3_amount",
+                    "highly_compensated_officer_3_name",
+                    "highly_compensated_officer_4_amount",
+                    "highly_compensated_officer_4_name",
+                    "highly_compensated_officer_5_amount",
+                    "highly_compensated_officer_5_name"
+                  ]
+                },
+                "orders": {
+                  "expands": {
+                    "award_type": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "awarding_office": {
+                      "expands": {},
+                      "fields": [
+                        "agency_code",
+                        "agency_name",
+                        "department_code",
+                        "department_name",
+                        "office_code",
+                        "office_name",
+                        "organization_id"
+                      ]
+                    },
+                    "commercial_item_acquisition_procedures": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "competition": {
+                      "expands": {},
+                      "fields": [
+                        "contract_type",
+                        "extent_competed",
+                        "number_of_offers_received",
+                        "other_than_full_and_open_competition",
+                        "solicitation_date",
+                        "solicitation_identifier",
+                        "solicitation_procedures"
+                      ]
+                    },
+                    "consolidated_contract": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "contingency_humanitarian_or_peacekeeping_operation": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "contract_bundling": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "cost_accounting_standards_clause": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "cost_or_pricing_data": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "domestic_or_foreign_entity": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "epa_designated_product": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "evaluated_preference": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "fair_opportunity_limited_sources": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "fed_biz_opps": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "foreign_funding": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "funding_office": {
+                      "expands": {},
+                      "fields": [
+                        "agency_code",
+                        "agency_name",
+                        "department_code",
+                        "department_name",
+                        "office_code",
+                        "office_name",
+                        "organization_id"
+                      ]
+                    },
+                    "information_technology_commercial_item_category": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "inherently_governmental_functions": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "legislative_mandates": {
+                      "expands": {},
+                      "fields": [
+                        "clinger_cohen_act_planning",
+                        "construction_wage_rate_requirements",
+                        "employment_eligibility_verification",
+                        "interagency_contracting_authority",
+                        "labor_standards",
+                        "materials_supplies_articles_equipment",
+                        "other_statutory_authority",
+                        "service_contract_inventory"
+                      ]
+                    },
+                    "naics": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "officers": {
+                      "expands": {},
+                      "fields": [
+                        "highly_compensated_officer_1_amount",
+                        "highly_compensated_officer_1_name",
+                        "highly_compensated_officer_2_amount",
+                        "highly_compensated_officer_2_name",
+                        "highly_compensated_officer_3_amount",
+                        "highly_compensated_officer_3_name",
+                        "highly_compensated_officer_4_amount",
+                        "highly_compensated_officer_4_name",
+                        "highly_compensated_officer_5_amount",
+                        "highly_compensated_officer_5_name"
+                      ]
+                    },
+                    "parent_award": {
+                      "expands": {},
+                      "fields": [
+                        "key",
+                        "piid"
+                      ]
+                    },
+                    "performance_based_service_acquisition": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "period_of_performance": {
+                      "expands": {},
+                      "fields": [
+                        "current_end_date",
+                        "start_date",
+                        "ultimate_completion_date"
+                      ]
+                    },
+                    "place_of_manufacture": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "place_of_performance": {
+                      "expands": {},
+                      "fields": [
+                        "city_name",
+                        "country_code",
+                        "country_name",
+                        "state_code",
+                        "state_name",
+                        "zip_code"
+                      ]
+                    },
+                    "psc": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "recipient": {
+                      "expands": {},
+                      "fields": [
+                        "cage",
+                        "cage_code",
+                        "display_name",
+                        "legal_business_name",
+                        "uei"
+                      ]
+                    },
+                    "recovered_materials_sustainability": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "research": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "sam_exception": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "set_aside": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "subawards_summary": {
+                      "expands": {},
+                      "fields": [
+                        "count",
+                        "total_amount"
+                      ]
+                    },
+                    "subcontracting_plan": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "tradeoff_process": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "transactions": {
+                      "expands": {},
+                      "fields": [
+                        "action_type",
+                        "description",
+                        "modification_number",
+                        "obligated",
+                        "transaction_date"
+                      ]
+                    },
+                    "undefinitized_action": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "description"
+                      ]
+                    },
+                    "vehicle": {
+                      "expands": {},
+                      "fields": [
+                        "agency_id",
+                        "award_date",
+                        "contract_type",
+                        "description",
+                        "fiscal_year",
+                        "last_date_to_order",
+                        "naics_code",
+                        "psc_code",
+                        "set_aside",
+                        "solicitation_date",
+                        "solicitation_description",
+                        "solicitation_identifier",
+                        "solicitation_title",
+                        "type_of_idc",
+                        "uuid",
+                        "vehicle_type",
+                        "who_can_use"
+                      ]
+                    }
+                  },
+                  "fields": [
+                    "award_date",
+                    "award_type",
+                    "base_and_exercised_options_value",
+                    "contract_financing",
+                    "description",
+                    "dod_acquisition_program",
+                    "dod_transaction_number",
+                    "fiscal_year",
+                    "government_furnished_property",
+                    "key",
+                    "local_area_set_aside",
+                    "major_program",
+                    "naics_code",
+                    "number_of_actions",
+                    "number_of_offers_source",
+                    "obligated",
+                    "piid",
+                    "price_evaluation_percent_difference",
+                    "psc_code",
+                    "purchase_card_as_payment_method",
+                    "set_aside",
+                    "simplified_procedures_for_certain_commercial_items",
+                    "small_business_competitiveness_demonstration_program",
+                    "solicitation_identifier",
+                    "subawards_summary",
+                    "total_contract_value",
+                    "transactions",
+                    "type_of_set_aside_source"
+                  ]
+                },
+                "parent_award": {
+                  "expands": {},
+                  "fields": [
+                    "key",
+                    "piid"
+                  ]
+                },
+                "period_of_performance": {
+                  "expands": {},
+                  "fields": [
+                    "last_date_to_order",
+                    "start_date"
+                  ]
+                },
+                "place_of_performance": {
+                  "expands": {},
+                  "fields": [
+                    "city_name",
+                    "country_code",
+                    "country_name",
+                    "state_code",
+                    "state_name",
+                    "zip_code"
+                  ]
+                },
+                "psc": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "recipient": {
+                  "expands": {},
+                  "fields": [
+                    "cage",
+                    "cage_code",
+                    "display_name",
+                    "legal_business_name",
+                    "uei"
+                  ]
+                },
+                "set_aside": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                },
+                "subawards_summary": {
+                  "expands": {},
+                  "fields": [
+                    "count",
+                    "total_amount"
+                  ]
+                },
+                "transactions": {
+                  "expands": {},
+                  "fields": [
+                    "action_type",
+                    "description",
+                    "modification_number",
+                    "obligated",
+                    "transaction_date"
+                  ]
+                },
+                "type_of_idc": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                }
+              },
+              "fields": [
+                "award_date",
+                "commercial_item_acquisition_procedures",
+                "consolidated_contract",
+                "contingency_humanitarian_or_peacekeeping_operation",
+                "contract_bundling",
+                "contract_financing",
+                "cost_accounting_standards_clause",
+                "cost_or_pricing_data",
+                "description",
+                "dod_acquisition_program",
+                "dod_transaction_number",
+                "domestic_or_foreign_entity",
+                "email_address",
+                "epa_designated_product",
+                "evaluated_preference",
+                "fair_opportunity_limited_sources",
+                "fed_biz_opps",
+                "fee_range_lower_value",
+                "fee_range_upper_value",
+                "fiscal_year",
+                "fixed_fee_value",
+                "foreign_funding",
+                "government_furnished_property",
+                "idv_type",
+                "idv_website",
+                "inherently_governmental_functions",
+                "key",
+                "local_area_set_aside",
+                "major_program",
+                "multiple_or_single_award_idv",
+                "naics_code",
+                "number_of_actions",
+                "number_of_offers_source",
+                "obligated",
+                "ordering_procedure",
+                "performance_based_service_acquisition",
+                "piid",
+                "program_acronym",
+                "psc_code",
+                "recovered_materials_sustainability",
+                "research",
+                "sam_exception",
+                "set_aside",
+                "simplified_procedures_for_certain_commercial_items",
+                "small_business_competitiveness_demonstration_program",
+                "solicitation_identifier",
+                "subawards_summary",
+                "subcontracting_plan",
+                "title",
+                "total_contract_value",
+                "total_estimated_order_value",
+                "tradeoff_process",
+                "transactions",
+                "type_of_fee_for_use_of_service",
+                "type_of_idc",
+                "undefinitized_action",
+                "uuid",
+                "vehicle_uuid",
+                "who_can_use"
+              ]
+            },
+            "competition_details": {
+              "expands": {},
+              "fields": [
+                "*",
+                "commercial_item_acquisition_procedures",
+                "evaluated_preference",
+                "extent_competed",
+                "most_recent_solicitation_date",
+                "number_of_offers_received",
+                "original_solicitation_date",
+                "other_than_full_and_open_competition",
+                "set_aside",
+                "simplified_procedures_for_certain_commercial_items",
+                "small_business_competitiveness_demonstration_program",
+                "solicitation_identifier",
+                "solicitation_procedures"
+              ]
+            },
+            "metrics": {
+              "expands": {},
+              "fields": [
+                "*",
+                "avg_offers_received",
+                "avg_order_value",
+                "award_concentration_hhi",
+                "competed_rate",
+                "days_since_last_order",
+                "max_order_value",
+                "obligation_to_ceiling_ratio",
+                "order_concentration_hhi",
+                "recent_obligations_24mo",
+                "recent_orders_24mo",
+                "top_recipient_share",
+                "using_agency_count"
+              ]
+            },
+            "opportunity": {
+              "expands": {
+                "agency": {
+                  "expands": {},
+                  "fields": [
+                    "abbreviation",
+                    "code",
+                    "name"
+                  ]
+                },
+                "attachments": {
+                  "expands": {},
+                  "fields": [
+                    "attachment_id",
+                    "extracted_text",
+                    "file_size",
+                    "mime_type",
+                    "name",
+                    "posted_date",
+                    "resource_id",
+                    "type",
+                    "url"
+                  ]
+                },
+                "department": {
+                  "expands": {},
+                  "fields": [
+                    "abbreviation",
+                    "cgac",
+                    "code",
+                    "congressional_justification",
+                    "description",
+                    "name",
+                    "website"
+                  ]
+                },
+                "latest_notice": {
+                  "expands": {},
+                  "fields": [
+                    "link",
+                    "notice_id"
+                  ]
+                },
+                "meta": {
+                  "expands": {
+                    "notice_type": {
+                      "expands": {},
+                      "fields": [
+                        "code",
+                        "type"
+                      ]
+                    }
+                  },
+                  "fields": [
+                    "attachments_count",
+                    "notice_type",
+                    "notices_count"
+                  ]
+                },
+                "notice_history": {
+                  "expands": {},
+                  "fields": [
+                    "deleted",
+                    "index",
+                    "latest",
+                    "notice_id",
+                    "notice_type_code",
+                    "parent_notice_id",
+                    "posted_date",
+                    "related_notice_id",
+                    "solicitation_number",
+                    "title"
+                  ]
+                },
+                "office": {
+                  "expands": {},
+                  "fields": [
+                    "agency_code",
+                    "agency_name",
+                    "department_code",
+                    "department_name",
+                    "office_code",
+                    "office_name",
+                    "organization_id"
+                  ]
+                },
+                "place_of_performance": {
+                  "expands": {},
+                  "fields": [
+                    "city",
+                    "country",
+                    "state",
+                    "street_address",
+                    "zip"
+                  ]
+                },
+                "primary_contact": {
+                  "expands": {},
+                  "fields": [
+                    "email",
+                    "fax",
+                    "full_name",
+                    "phone",
+                    "title"
+                  ]
+                },
+                "secondary_contact": {
+                  "expands": {},
+                  "fields": [
+                    "email",
+                    "fax",
+                    "full_name",
+                    "phone",
+                    "title"
+                  ]
+                },
+                "set_aside": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "description"
+                  ]
+                }
+              },
+              "fields": [
+                "active",
+                "agency",
+                "agency_id",
+                "archive_date",
+                "attachments",
+                "award_number",
+                "department",
+                "department_id",
+                "description",
+                "first_notice_date",
+                "last_notice_date",
+                "latest_notice",
+                "latest_notice_id",
+                "meta",
+                "naics_code",
+                "office",
+                "office_id",
+                "opportunity_id",
+                "place_of_performance",
+                "primary_contact",
+                "psc_code",
+                "response_deadline",
+                "sam_url",
+                "secondary_contact",
+                "set_aside",
+                "snippet",
+                "solicitation_number",
+                "title"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "agency_details",
+            "agency_id",
+            "award_date",
+            "awardee_count",
+            "contract_type",
+            "description",
+            "descriptions",
+            "fiscal_year",
+            "idv_count",
+            "is_synthetic_solicitation",
+            "last_date_to_order",
+            "latest_award_date",
+            "naics_code",
+            "opportunity_id",
+            "order_count",
+            "organization",
+            "organization_id",
+            "program_acronym",
+            "psc_code",
+            "set_aside",
+            "solicitation_date",
+            "solicitation_description",
+            "solicitation_identifier",
+            "solicitation_title",
+            "total_obligated",
+            "type_of_idc",
+            "uuid",
+            "vehicle_contracts_value",
+            "vehicle_obligations",
+            "vehicle_type",
+            "who_can_use"
+          ]
+        },
+        "shape_flat_paths": [
+          "agency_details",
+          "agency_details.*",
+          "agency_details.awarding_office",
+          "agency_details.funding_office",
+          "agency_id",
+          "award_date",
+          "awardee_count",
+          "awardees",
+          "awardees.award_date",
+          "awardees.awarding_office",
+          "awardees.awarding_office.agency_code",
+          "awardees.awarding_office.agency_name",
+          "awardees.awarding_office.department_code",
+          "awardees.awarding_office.department_name",
+          "awardees.awarding_office.office_code",
+          "awardees.awarding_office.office_name",
+          "awardees.awarding_office.organization_id",
+          "awardees.awards",
+          "awardees.awards.award_date",
+          "awardees.awards.base_and_exercised_options_value",
+          "awardees.awards.description",
+          "awardees.awards.fiscal_year",
+          "awardees.awards.key",
+          "awardees.awards.naics_code",
+          "awardees.awards.obligated",
+          "awardees.awards.piid",
+          "awardees.awards.psc_code",
+          "awardees.awards.total_contract_value",
+          "awardees.awards.transactions",
+          "awardees.commercial_item_acquisition_procedures",
+          "awardees.competition",
+          "awardees.competition.contract_type",
+          "awardees.competition.extent_competed",
+          "awardees.competition.number_of_offers_received",
+          "awardees.competition.other_than_full_and_open_competition",
+          "awardees.competition.solicitation_date",
+          "awardees.competition.solicitation_identifier",
+          "awardees.competition.solicitation_procedures",
+          "awardees.consolidated_contract",
+          "awardees.contingency_humanitarian_or_peacekeeping_operation",
+          "awardees.contract_bundling",
+          "awardees.contract_financing",
+          "awardees.cost_accounting_standards_clause",
+          "awardees.cost_or_pricing_data",
+          "awardees.description",
+          "awardees.dod_acquisition_program",
+          "awardees.dod_transaction_number",
+          "awardees.domestic_or_foreign_entity",
+          "awardees.email_address",
+          "awardees.epa_designated_product",
+          "awardees.evaluated_preference",
+          "awardees.fair_opportunity_limited_sources",
+          "awardees.fed_biz_opps",
+          "awardees.fee_range_lower_value",
+          "awardees.fee_range_upper_value",
+          "awardees.fiscal_year",
+          "awardees.fixed_fee_value",
+          "awardees.foreign_funding",
+          "awardees.funding_office",
+          "awardees.funding_office.agency_code",
+          "awardees.funding_office.agency_name",
+          "awardees.funding_office.department_code",
+          "awardees.funding_office.department_name",
+          "awardees.funding_office.office_code",
+          "awardees.funding_office.office_name",
+          "awardees.funding_office.organization_id",
+          "awardees.government_furnished_property",
+          "awardees.gsa_elibrary",
+          "awardees.gsa_elibrary.contract_number",
+          "awardees.gsa_elibrary.cooperative_purchasing",
+          "awardees.gsa_elibrary.disaster_recovery_purchasing",
+          "awardees.gsa_elibrary.external_id",
+          "awardees.gsa_elibrary.extracted_text",
+          "awardees.gsa_elibrary.file_urls",
+          "awardees.gsa_elibrary.schedule",
+          "awardees.gsa_elibrary.sins",
+          "awardees.gsa_elibrary.source_data",
+          "awardees.gsa_elibrary.uei",
+          "awardees.idv_type",
+          "awardees.idv_type.code",
+          "awardees.idv_type.description",
+          "awardees.idv_website",
+          "awardees.inherently_governmental_functions",
+          "awardees.key",
+          "awardees.legislative_mandates",
+          "awardees.legislative_mandates.clinger_cohen_act_planning",
+          "awardees.legislative_mandates.construction_wage_rate_requirements",
+          "awardees.legislative_mandates.employment_eligibility_verification",
+          "awardees.legislative_mandates.interagency_contracting_authority",
+          "awardees.legislative_mandates.labor_standards",
+          "awardees.legislative_mandates.materials_supplies_articles_equipment",
+          "awardees.legislative_mandates.other_statutory_authority",
+          "awardees.legislative_mandates.service_contract_inventory",
+          "awardees.local_area_set_aside",
+          "awardees.major_program",
+          "awardees.multiple_or_single_award_idv",
+          "awardees.multiple_or_single_award_idv.code",
+          "awardees.multiple_or_single_award_idv.description",
+          "awardees.naics",
+          "awardees.naics.code",
+          "awardees.naics.description",
+          "awardees.naics_code",
+          "awardees.number_of_actions",
+          "awardees.number_of_offers_source",
+          "awardees.obligated",
+          "awardees.officers",
+          "awardees.officers.highly_compensated_officer_1_amount",
+          "awardees.officers.highly_compensated_officer_1_name",
+          "awardees.officers.highly_compensated_officer_2_amount",
+          "awardees.officers.highly_compensated_officer_2_name",
+          "awardees.officers.highly_compensated_officer_3_amount",
+          "awardees.officers.highly_compensated_officer_3_name",
+          "awardees.officers.highly_compensated_officer_4_amount",
+          "awardees.officers.highly_compensated_officer_4_name",
+          "awardees.officers.highly_compensated_officer_5_amount",
+          "awardees.officers.highly_compensated_officer_5_name",
+          "awardees.ordering_procedure",
+          "awardees.orders",
+          "awardees.orders.award_date",
+          "awardees.orders.award_type",
+          "awardees.orders.award_type.code",
+          "awardees.orders.award_type.description",
+          "awardees.orders.awarding_office",
+          "awardees.orders.awarding_office.agency_code",
+          "awardees.orders.awarding_office.agency_name",
+          "awardees.orders.awarding_office.department_code",
+          "awardees.orders.awarding_office.department_name",
+          "awardees.orders.awarding_office.office_code",
+          "awardees.orders.awarding_office.office_name",
+          "awardees.orders.awarding_office.organization_id",
+          "awardees.orders.base_and_exercised_options_value",
+          "awardees.orders.commercial_item_acquisition_procedures",
+          "awardees.orders.commercial_item_acquisition_procedures.code",
+          "awardees.orders.commercial_item_acquisition_procedures.description",
+          "awardees.orders.competition",
+          "awardees.orders.competition.contract_type",
+          "awardees.orders.competition.extent_competed",
+          "awardees.orders.competition.number_of_offers_received",
+          "awardees.orders.competition.other_than_full_and_open_competition",
+          "awardees.orders.competition.solicitation_date",
+          "awardees.orders.competition.solicitation_identifier",
+          "awardees.orders.competition.solicitation_procedures",
+          "awardees.orders.consolidated_contract",
+          "awardees.orders.consolidated_contract.code",
+          "awardees.orders.consolidated_contract.description",
+          "awardees.orders.contingency_humanitarian_or_peacekeeping_operation",
+          "awardees.orders.contingency_humanitarian_or_peacekeeping_operation.code",
+          "awardees.orders.contingency_humanitarian_or_peacekeeping_operation.description",
+          "awardees.orders.contract_bundling",
+          "awardees.orders.contract_bundling.code",
+          "awardees.orders.contract_bundling.description",
+          "awardees.orders.contract_financing",
+          "awardees.orders.cost_accounting_standards_clause",
+          "awardees.orders.cost_accounting_standards_clause.code",
+          "awardees.orders.cost_accounting_standards_clause.description",
+          "awardees.orders.cost_or_pricing_data",
+          "awardees.orders.cost_or_pricing_data.code",
+          "awardees.orders.cost_or_pricing_data.description",
+          "awardees.orders.description",
+          "awardees.orders.dod_acquisition_program",
+          "awardees.orders.dod_transaction_number",
+          "awardees.orders.domestic_or_foreign_entity",
+          "awardees.orders.domestic_or_foreign_entity.code",
+          "awardees.orders.domestic_or_foreign_entity.description",
+          "awardees.orders.epa_designated_product",
+          "awardees.orders.epa_designated_product.code",
+          "awardees.orders.epa_designated_product.description",
+          "awardees.orders.evaluated_preference",
+          "awardees.orders.evaluated_preference.code",
+          "awardees.orders.evaluated_preference.description",
+          "awardees.orders.fair_opportunity_limited_sources",
+          "awardees.orders.fair_opportunity_limited_sources.code",
+          "awardees.orders.fair_opportunity_limited_sources.description",
+          "awardees.orders.fed_biz_opps",
+          "awardees.orders.fed_biz_opps.code",
+          "awardees.orders.fed_biz_opps.description",
+          "awardees.orders.fiscal_year",
+          "awardees.orders.foreign_funding",
+          "awardees.orders.foreign_funding.code",
+          "awardees.orders.foreign_funding.description",
+          "awardees.orders.funding_office",
+          "awardees.orders.funding_office.agency_code",
+          "awardees.orders.funding_office.agency_name",
+          "awardees.orders.funding_office.department_code",
+          "awardees.orders.funding_office.department_name",
+          "awardees.orders.funding_office.office_code",
+          "awardees.orders.funding_office.office_name",
+          "awardees.orders.funding_office.organization_id",
+          "awardees.orders.government_furnished_property",
+          "awardees.orders.information_technology_commercial_item_category",
+          "awardees.orders.information_technology_commercial_item_category.code",
+          "awardees.orders.information_technology_commercial_item_category.description",
+          "awardees.orders.inherently_governmental_functions",
+          "awardees.orders.inherently_governmental_functions.code",
+          "awardees.orders.inherently_governmental_functions.description",
+          "awardees.orders.key",
+          "awardees.orders.legislative_mandates",
+          "awardees.orders.legislative_mandates.clinger_cohen_act_planning",
+          "awardees.orders.legislative_mandates.construction_wage_rate_requirements",
+          "awardees.orders.legislative_mandates.employment_eligibility_verification",
+          "awardees.orders.legislative_mandates.interagency_contracting_authority",
+          "awardees.orders.legislative_mandates.labor_standards",
+          "awardees.orders.legislative_mandates.materials_supplies_articles_equipment",
+          "awardees.orders.legislative_mandates.other_statutory_authority",
+          "awardees.orders.legislative_mandates.service_contract_inventory",
+          "awardees.orders.local_area_set_aside",
+          "awardees.orders.major_program",
+          "awardees.orders.naics",
+          "awardees.orders.naics.code",
+          "awardees.orders.naics.description",
+          "awardees.orders.naics_code",
+          "awardees.orders.number_of_actions",
+          "awardees.orders.number_of_offers_source",
+          "awardees.orders.obligated",
+          "awardees.orders.officers",
+          "awardees.orders.officers.highly_compensated_officer_1_amount",
+          "awardees.orders.officers.highly_compensated_officer_1_name",
+          "awardees.orders.officers.highly_compensated_officer_2_amount",
+          "awardees.orders.officers.highly_compensated_officer_2_name",
+          "awardees.orders.officers.highly_compensated_officer_3_amount",
+          "awardees.orders.officers.highly_compensated_officer_3_name",
+          "awardees.orders.officers.highly_compensated_officer_4_amount",
+          "awardees.orders.officers.highly_compensated_officer_4_name",
+          "awardees.orders.officers.highly_compensated_officer_5_amount",
+          "awardees.orders.officers.highly_compensated_officer_5_name",
+          "awardees.orders.parent_award",
+          "awardees.orders.parent_award.key",
+          "awardees.orders.parent_award.piid",
+          "awardees.orders.performance_based_service_acquisition",
+          "awardees.orders.performance_based_service_acquisition.code",
+          "awardees.orders.performance_based_service_acquisition.description",
+          "awardees.orders.period_of_performance",
+          "awardees.orders.period_of_performance.current_end_date",
+          "awardees.orders.period_of_performance.start_date",
+          "awardees.orders.period_of_performance.ultimate_completion_date",
+          "awardees.orders.piid",
+          "awardees.orders.place_of_manufacture",
+          "awardees.orders.place_of_manufacture.code",
+          "awardees.orders.place_of_manufacture.description",
+          "awardees.orders.place_of_performance",
+          "awardees.orders.place_of_performance.city_name",
+          "awardees.orders.place_of_performance.country_code",
+          "awardees.orders.place_of_performance.country_name",
+          "awardees.orders.place_of_performance.state_code",
+          "awardees.orders.place_of_performance.state_name",
+          "awardees.orders.place_of_performance.zip_code",
+          "awardees.orders.price_evaluation_percent_difference",
+          "awardees.orders.psc",
+          "awardees.orders.psc.code",
+          "awardees.orders.psc.description",
+          "awardees.orders.psc_code",
+          "awardees.orders.purchase_card_as_payment_method",
+          "awardees.orders.recipient",
+          "awardees.orders.recipient.cage",
+          "awardees.orders.recipient.cage_code",
+          "awardees.orders.recipient.display_name",
+          "awardees.orders.recipient.legal_business_name",
+          "awardees.orders.recipient.uei",
+          "awardees.orders.recovered_materials_sustainability",
+          "awardees.orders.recovered_materials_sustainability.code",
+          "awardees.orders.recovered_materials_sustainability.description",
+          "awardees.orders.research",
+          "awardees.orders.research.code",
+          "awardees.orders.research.description",
+          "awardees.orders.sam_exception",
+          "awardees.orders.sam_exception.code",
+          "awardees.orders.sam_exception.description",
+          "awardees.orders.set_aside",
+          "awardees.orders.set_aside.code",
+          "awardees.orders.set_aside.description",
+          "awardees.orders.simplified_procedures_for_certain_commercial_items",
+          "awardees.orders.small_business_competitiveness_demonstration_program",
+          "awardees.orders.solicitation_identifier",
+          "awardees.orders.subawards_summary",
+          "awardees.orders.subawards_summary.count",
+          "awardees.orders.subawards_summary.total_amount",
+          "awardees.orders.subcontracting_plan",
+          "awardees.orders.subcontracting_plan.code",
+          "awardees.orders.subcontracting_plan.description",
+          "awardees.orders.total_contract_value",
+          "awardees.orders.tradeoff_process",
+          "awardees.orders.tradeoff_process.code",
+          "awardees.orders.tradeoff_process.description",
+          "awardees.orders.transactions",
+          "awardees.orders.transactions.action_type",
+          "awardees.orders.transactions.description",
+          "awardees.orders.transactions.modification_number",
+          "awardees.orders.transactions.obligated",
+          "awardees.orders.transactions.transaction_date",
+          "awardees.orders.type_of_set_aside_source",
+          "awardees.orders.undefinitized_action",
+          "awardees.orders.undefinitized_action.code",
+          "awardees.orders.undefinitized_action.description",
+          "awardees.orders.vehicle",
+          "awardees.orders.vehicle.agency_id",
+          "awardees.orders.vehicle.award_date",
+          "awardees.orders.vehicle.contract_type",
+          "awardees.orders.vehicle.description",
+          "awardees.orders.vehicle.fiscal_year",
+          "awardees.orders.vehicle.last_date_to_order",
+          "awardees.orders.vehicle.naics_code",
+          "awardees.orders.vehicle.psc_code",
+          "awardees.orders.vehicle.set_aside",
+          "awardees.orders.vehicle.solicitation_date",
+          "awardees.orders.vehicle.solicitation_description",
+          "awardees.orders.vehicle.solicitation_identifier",
+          "awardees.orders.vehicle.solicitation_title",
+          "awardees.orders.vehicle.type_of_idc",
+          "awardees.orders.vehicle.uuid",
+          "awardees.orders.vehicle.vehicle_type",
+          "awardees.orders.vehicle.who_can_use",
+          "awardees.parent_award",
+          "awardees.parent_award.key",
+          "awardees.parent_award.piid",
+          "awardees.performance_based_service_acquisition",
+          "awardees.period_of_performance",
+          "awardees.period_of_performance.last_date_to_order",
+          "awardees.period_of_performance.start_date",
+          "awardees.piid",
+          "awardees.place_of_performance",
+          "awardees.place_of_performance.city_name",
+          "awardees.place_of_performance.country_code",
+          "awardees.place_of_performance.country_name",
+          "awardees.place_of_performance.state_code",
+          "awardees.place_of_performance.state_name",
+          "awardees.place_of_performance.zip_code",
+          "awardees.program_acronym",
+          "awardees.psc",
+          "awardees.psc.code",
+          "awardees.psc.description",
+          "awardees.psc_code",
+          "awardees.recipient",
+          "awardees.recipient.cage",
+          "awardees.recipient.cage_code",
+          "awardees.recipient.display_name",
+          "awardees.recipient.legal_business_name",
+          "awardees.recipient.uei",
+          "awardees.recovered_materials_sustainability",
+          "awardees.research",
+          "awardees.sam_exception",
+          "awardees.set_aside",
+          "awardees.set_aside.code",
+          "awardees.set_aside.description",
+          "awardees.simplified_procedures_for_certain_commercial_items",
+          "awardees.small_business_competitiveness_demonstration_program",
+          "awardees.solicitation_identifier",
+          "awardees.subawards_summary",
+          "awardees.subawards_summary.count",
+          "awardees.subawards_summary.total_amount",
+          "awardees.subcontracting_plan",
+          "awardees.title",
+          "awardees.total_contract_value",
+          "awardees.total_estimated_order_value",
+          "awardees.tradeoff_process",
+          "awardees.transactions",
+          "awardees.transactions.action_type",
+          "awardees.transactions.description",
+          "awardees.transactions.modification_number",
+          "awardees.transactions.obligated",
+          "awardees.transactions.transaction_date",
+          "awardees.type_of_fee_for_use_of_service",
+          "awardees.type_of_idc",
+          "awardees.type_of_idc.code",
+          "awardees.type_of_idc.description",
+          "awardees.undefinitized_action",
+          "awardees.uuid",
+          "awardees.vehicle_uuid",
+          "awardees.who_can_use",
+          "competition_details",
+          "competition_details.*",
+          "competition_details.commercial_item_acquisition_procedures",
+          "competition_details.evaluated_preference",
+          "competition_details.extent_competed",
+          "competition_details.most_recent_solicitation_date",
+          "competition_details.number_of_offers_received",
+          "competition_details.original_solicitation_date",
+          "competition_details.other_than_full_and_open_competition",
+          "competition_details.set_aside",
+          "competition_details.simplified_procedures_for_certain_commercial_items",
+          "competition_details.small_business_competitiveness_demonstration_program",
+          "competition_details.solicitation_identifier",
+          "competition_details.solicitation_procedures",
+          "contract_type",
+          "description",
+          "descriptions",
+          "fiscal_year",
+          "idv_count",
+          "is_synthetic_solicitation",
+          "last_date_to_order",
+          "latest_award_date",
+          "metrics",
+          "metrics.*",
+          "metrics.avg_offers_received",
+          "metrics.avg_order_value",
+          "metrics.award_concentration_hhi",
+          "metrics.competed_rate",
+          "metrics.days_since_last_order",
+          "metrics.max_order_value",
+          "metrics.obligation_to_ceiling_ratio",
+          "metrics.order_concentration_hhi",
+          "metrics.recent_obligations_24mo",
+          "metrics.recent_orders_24mo",
+          "metrics.top_recipient_share",
+          "metrics.using_agency_count",
+          "naics_code",
+          "opportunity",
+          "opportunity.active",
+          "opportunity.agency",
+          "opportunity.agency.abbreviation",
+          "opportunity.agency.code",
+          "opportunity.agency.name",
+          "opportunity.agency_id",
+          "opportunity.archive_date",
+          "opportunity.attachments",
+          "opportunity.attachments.attachment_id",
+          "opportunity.attachments.extracted_text",
+          "opportunity.attachments.file_size",
+          "opportunity.attachments.mime_type",
+          "opportunity.attachments.name",
+          "opportunity.attachments.posted_date",
+          "opportunity.attachments.resource_id",
+          "opportunity.attachments.type",
+          "opportunity.attachments.url",
+          "opportunity.award_number",
+          "opportunity.department",
+          "opportunity.department.abbreviation",
+          "opportunity.department.cgac",
+          "opportunity.department.code",
+          "opportunity.department.congressional_justification",
+          "opportunity.department.description",
+          "opportunity.department.name",
+          "opportunity.department.website",
+          "opportunity.department_id",
+          "opportunity.description",
+          "opportunity.first_notice_date",
+          "opportunity.last_notice_date",
+          "opportunity.latest_notice",
+          "opportunity.latest_notice.link",
+          "opportunity.latest_notice.notice_id",
+          "opportunity.latest_notice_id",
+          "opportunity.meta",
+          "opportunity.meta.attachments_count",
+          "opportunity.meta.notice_type",
+          "opportunity.meta.notice_type.code",
+          "opportunity.meta.notice_type.type",
+          "opportunity.meta.notices_count",
+          "opportunity.naics_code",
+          "opportunity.notice_history",
+          "opportunity.notice_history.deleted",
+          "opportunity.notice_history.index",
+          "opportunity.notice_history.latest",
+          "opportunity.notice_history.notice_id",
+          "opportunity.notice_history.notice_type_code",
+          "opportunity.notice_history.parent_notice_id",
+          "opportunity.notice_history.posted_date",
+          "opportunity.notice_history.related_notice_id",
+          "opportunity.notice_history.solicitation_number",
+          "opportunity.notice_history.title",
+          "opportunity.office",
+          "opportunity.office.agency_code",
+          "opportunity.office.agency_name",
+          "opportunity.office.department_code",
+          "opportunity.office.department_name",
+          "opportunity.office.office_code",
+          "opportunity.office.office_name",
+          "opportunity.office.organization_id",
+          "opportunity.office_id",
+          "opportunity.opportunity_id",
+          "opportunity.place_of_performance",
+          "opportunity.place_of_performance.city",
+          "opportunity.place_of_performance.country",
+          "opportunity.place_of_performance.state",
+          "opportunity.place_of_performance.street_address",
+          "opportunity.place_of_performance.zip",
+          "opportunity.primary_contact",
+          "opportunity.primary_contact.email",
+          "opportunity.primary_contact.fax",
+          "opportunity.primary_contact.full_name",
+          "opportunity.primary_contact.phone",
+          "opportunity.primary_contact.title",
+          "opportunity.psc_code",
+          "opportunity.response_deadline",
+          "opportunity.sam_url",
+          "opportunity.secondary_contact",
+          "opportunity.secondary_contact.email",
+          "opportunity.secondary_contact.fax",
+          "opportunity.secondary_contact.full_name",
+          "opportunity.secondary_contact.phone",
+          "opportunity.secondary_contact.title",
+          "opportunity.set_aside",
+          "opportunity.set_aside.code",
+          "opportunity.set_aside.description",
+          "opportunity.snippet",
+          "opportunity.solicitation_number",
+          "opportunity.title",
+          "opportunity_id",
+          "order_count",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "organization_id",
+          "program_acronym",
+          "psc_code",
+          "set_aside",
+          "solicitation_date",
+          "solicitation_description",
+          "solicitation_identifier",
+          "solicitation_title",
+          "total_obligated",
+          "type_of_idc",
+          "uuid",
+          "vehicle_contracts_value",
+          "vehicle_obligations",
+          "vehicle_type",
+          "who_can_use"
+        ],
+        "viewset": "awards.views.vehicles.VehicleViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "agency",
+        "award_date_after",
+        "award_date_before",
+        "contract_type",
+        "fiscal_year",
+        "flat",
+        "flat_lists",
+        "idv_count_max",
+        "idv_count_min",
+        "joiner",
+        "last_date_to_order_after",
+        "last_date_to_order_before",
+        "limit",
+        "naics_code",
+        "order_count_max",
+        "order_count_min",
+        "ordering",
+        "organization_id",
+        "page",
+        "program_acronym",
+        "psc_code",
+        "search",
+        "set_aside",
+        "shape",
+        "show_shapes",
+        "total_obligated_max",
+        "total_obligated_min",
+        "type_of_idc",
+        "vehicle_type",
+        "who_can_use"
+      ]
+    }
+  },
+  "unmapped_resources": {
+    "no_docs_page": [
+      "agencies",
+      "assistance_listings",
+      "business_types",
+      "contracts",
+      "departments",
+      "entities",
+      "events",
+      "forecasts",
+      "grants",
+      "gsa_elibrary_contracts",
+      "idvs",
+      "itdashboard",
+      "mas_sins",
+      "naics",
+      "news",
+      "notices",
+      "offices",
+      "opportunities",
+      "organizations",
+      "otas",
+      "otidvs",
+      "protests",
+      "psc",
+      "subawards",
+      "vehicles"
+    ],
+    "no_swagger": [
+      "events",
+      "itdashboard",
+      "news",
+      "protests"
+    ]
+  }
+}
