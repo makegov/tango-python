@@ -727,6 +727,14 @@ PROTEST_DOCKET_SCHEMA: dict[str, FieldSchema] = {
     "docket_url": FieldSchema(name="docket_url", type=str, is_optional=True, is_list=False),
     "decision_url": FieldSchema(name="decision_url", type=str, is_optional=True, is_list=False),
     "digest": FieldSchema(name="digest", type=str, is_optional=True, is_list=False),
+    # SBA OHA only; null on gao/cofc rows. Opt-in via shape=, like digest.
+    "challenged_party": FieldSchema(
+        name="challenged_party", type=str, is_optional=True, is_list=False
+    ),
+    "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+    "size_standard": FieldSchema(name="size_standard", type=str, is_optional=True, is_list=False),
+    "outcome_reason": FieldSchema(name="outcome_reason", type=str, is_optional=True, is_list=False),
+    "judge": FieldSchema(name="judge", type=str, is_optional=True, is_list=False),
 }
 
 PROTEST_SCHEMA: dict[str, FieldSchema] = {
@@ -750,6 +758,14 @@ PROTEST_SCHEMA: dict[str, FieldSchema] = {
     "docket_url": FieldSchema(name="docket_url", type=str, is_optional=True, is_list=False),
     "decision_url": FieldSchema(name="decision_url", type=str, is_optional=True, is_list=False),
     "digest": FieldSchema(name="digest", type=str, is_optional=True, is_list=False),
+    # SBA OHA only; null on gao/cofc rows. Opt-in via shape=, like digest.
+    "challenged_party": FieldSchema(
+        name="challenged_party", type=str, is_optional=True, is_list=False
+    ),
+    "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+    "size_standard": FieldSchema(name="size_standard", type=str, is_optional=True, is_list=False),
+    "outcome_reason": FieldSchema(name="outcome_reason", type=str, is_optional=True, is_list=False),
+    "judge": FieldSchema(name="judge", type=str, is_optional=True, is_list=False),
     "dockets": FieldSchema(
         name="dockets", type=dict, is_optional=True, is_list=True, nested_model="ProtestDocket"
     ),

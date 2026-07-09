@@ -607,6 +607,12 @@ class Protest:
     docket_url: str | None = None
     decision_url: str | None = None
     digest: str | None = None
+    # SBA OHA only; null on gao/cofc rows. Opt-in via shape=, like digest.
+    challenged_party: str | None = None
+    naics_code: str | None = None
+    size_standard: str | None = None
+    outcome_reason: str | None = None
+    judge: str | None = None
     dockets: list[dict[str, Any]] | None = None
 
 

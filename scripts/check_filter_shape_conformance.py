@@ -65,6 +65,7 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
     "itdashboard": "list_itdashboard_investments",
     "budget_accounts": "list_budget_accounts",
+    "protests": "list_protests",
     # Resources not yet implemented in SDK
     "offices": None,
 }

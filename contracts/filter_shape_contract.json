@@ -350,7 +350,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -2039,7 +2039,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -2860,7 +2860,7 @@
             "type": "date"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
+            "filter_class": "NoticeSearchFilter",
             "type": "string"
           },
           "set_aside": {
@@ -3063,7 +3063,7 @@
             "type": "string"
           },
           "place_of_performance": {
-            "filter_class": "BaseSmartFilter",
+            "filter_class": "OpportunityPlaceOfPerformanceFilter",
             "type": "string"
           },
           "psc": {
@@ -3111,6 +3111,7 @@
       },
       "swagger_has_key": true,
       "swagger_params": [
+        "active",
         "agency",
         "first_notice_date_after",
         "first_notice_date_before",
@@ -3543,7 +3544,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -3891,7 +3892,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -4094,6 +4095,7 @@
           "decision_date_before",
           "filed_date_after",
           "filed_date_before",
+          "naics_code",
           "outcome",
           "protester",
           "search",
@@ -4132,6 +4134,11 @@
             "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
+          },
+          "naics_code": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
           },
           "outcome": {
             "filter_class": "BaseSmartFilter",
@@ -5474,6 +5481,7 @@
             "last_date_to_order",
             "latest_award_date",
             "naics_code",
+            "name",
             "opportunity_id",
             "order_count",
             "organization",
@@ -5900,6 +5908,7 @@
           "metrics.top_recipient_share",
           "metrics.using_agency_count",
           "naics_code",
+          "name",
           "opportunity",
           "opportunity.active",
           "opportunity.agency",

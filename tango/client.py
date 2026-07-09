@@ -2529,6 +2529,7 @@ class TangoClient:
         agency: str | None = None,
         case_number: str | None = None,
         solicitation_number: str | None = None,
+        naics_code: str | None = None,
         protester: str | None = None,
         filed_date_after: str | None = None,
         filed_date_before: str | None = None,
@@ -2552,12 +2553,16 @@ class TangoClient:
             shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            source_system: Filter by source system (e.g. gao)
-            outcome: Filter by outcome (e.g. Denied, Dismissed, Withdrawn, Sustained)
+            source_system: Filter by source system (gao, cofc, sba_oha)
+            outcome: Filter by outcome. GAO/CoFC use Denied, Dismissed,
+                Withdrawn, Sustained; SBA OHA adds Granted, Remanded,
+                Reversed, Vacated
             case_type: Filter by case type
             agency: Filter by protested agency text
             case_number: Filter by case number (e.g. b-423274)
             solicitation_number: Filter by exact solicitation number
+            naics_code: Filter by the NAICS code at issue (e.g. 541512).
+                Populated only on SBA OHA size and NAICS appeals
             protester: Filter by protester name text
             filed_date_after: Filed date on or after
             filed_date_before: Filed date on or before
@@ -2583,6 +2588,7 @@ class TangoClient:
             ("agency", agency),
             ("case_number", case_number),
             ("solicitation_number", solicitation_number),
+            ("naics_code", naics_code),
             ("protester", protester),
             ("filed_date_after", filed_date_after),
             ("filed_date_before", filed_date_before),

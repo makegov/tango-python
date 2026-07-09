@@ -574,6 +574,85 @@ class TestTangoClient:
         assert leaked == [], f"unexpected filter keys sent: {leaked}"
 
 
+class TestListProtestsNaicsCodeFilter:
+    """`naics_code` on protests is a literal query param, not the `naics` remap."""
+
+    @patch("tango.client.httpx.Client.request")
+    def test_naics_code_is_sent_verbatim(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0}'
+        mock_request.return_value = mock_response
+
+        TangoClient(api_key="test-key").list_protests(naics_code="541512")
+
+        params = mock_request.call_args[1]["params"]
+        # Contracts and opportunities remap naics_code -> `naics`; protests does not.
+        assert params["naics_code"] == "541512"
+        assert "naics" not in params
+
+    @patch("tango.client.httpx.Client.request")
+    def test_omitted_naics_code_sends_no_key(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0}'
+        mock_request.return_value = mock_response
+
+        TangoClient(api_key="test-key").list_protests(source_system="sba_oha")
+
+        params = mock_request.call_args[1]["params"]
+        assert params["source_system"] == "sba_oha"
+        assert "naics_code" not in params
+
+
+class TestProtestOhaShapeFields:
+    """The five SBA OHA fields round-trip through the shape parser."""
+
+    @patch("tango.client.httpx.Client.request")
+    def test_oha_fields_parse_off_a_shaped_response(self, mock_request):
+        shape = "case_id,challenged_party,naics_code,size_standard,outcome_reason,judge"
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "case_id": "0b6a1c9e-1f4d-4a2b-8c3d-5e6f7a8b9c0d",
+                    "challenged_party": "Acme Federal LLC",
+                    "naics_code": "541512",
+                    "size_standard": "$34.0 million",
+                    "outcome_reason": "untimely",
+                    "judge": "Christopher Holleman",
+                }
+            ],
+        }
+        mock_response.content = b'{"count": 1}'
+        mock_request.return_value = mock_response
+
+        result = TangoClient(api_key="test-key").list_protests(shape=shape)
+
+        (protest,) = result.results
+        assert protest.challenged_party == "Acme Federal LLC"
+        assert protest.naics_code == "541512"
+        assert protest.size_standard == "$34.0 million"
+        assert protest.outcome_reason == "untimely"
+        assert protest.judge == "Christopher Holleman"
+
+
 class TestShapeConfig:
     """Test ShapeConfig class"""
 

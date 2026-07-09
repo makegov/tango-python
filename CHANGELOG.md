@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **SBA OHA support on the protests endpoint.** The Tango API now serves SBA OHA (Office of Hearings and Appeals) decisions as a third `source_system`, alongside GAO and the Court of Federal Claims. `list_protests()` gains a `naics_code` filter, and `Protest` / `PROTEST_SCHEMA` / `PROTEST_DOCKET_SCHEMA` gain the five SBA OHA fields: `challenged_party`, `naics_code`, `size_standard`, `outcome_reason`, and `judge`. They are opt-in via `shape=` (null on GAO and CoFC rows, so they are absent from the default shape) and ungated by tier. Note that `naics_code` is sent to `/api/protests/` verbatim — unlike `list_contracts()` and `list_opportunities()`, which remap the same kwarg onto the API's `naics` param.
+- `protests` is now mapped in the conformance checker's `RESOURCE_TO_METHOD`. It had no entry, so the resource fell through to "no SDK method implemented" and its filters were never checked against the contract at all — which is how the `naics_code` gap went unnoticed. With the mapping in place, a protests filter that exists in the API but not in `list_protests()` is now a hard conformance error.
+
 - **Contract-first conformance system.** The canonical API filter/shape
   contract is now vendored at `contracts/filter_shape_contract.json` (refresh
   with the new `scripts/refresh_contract.py`), so the conformance check runs
