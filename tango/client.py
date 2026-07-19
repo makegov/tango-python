@@ -24,7 +24,11 @@ from tango.models import (
     BudgetAccount,
     BusinessType,
     Contract,
+    DibbsAward,
+    DibbsRfp,
+    DibbsRfq,
     Entity,
+    Exclusion,
     Forecast,
     Grant,
     GsaElibraryContract,
@@ -38,6 +42,8 @@ from tango.models import (
     RateLimitInfo,
     ResolveCandidate,
     ResolveResult,
+    SbirSolicitation,
+    SbirTopic,
     SearchFilters,
     ShapeConfig,
     Subaward,
@@ -2638,6 +2644,789 @@ class TangoClient:
 
         data = self._get(f"/api/protests/{case_id}/", params)
         return self._parse_response_with_shape(data, shape, Protest, flat, flat_lists)
+
+    # ============================================================================
+    # DLA DIBBS (RFQs, RFPs, awards)
+    # ============================================================================
+
+    def list_dibbs_rfqs(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        nsn: str | None = None,
+        part_number: str | None = None,
+        solicitation: str | None = None,
+        purchase_request: str | None = None,
+        organization: str | None = None,
+        status_code: str | None = None,
+        set_aside: str | None = None,
+        open: bool | None = None,
+        quantity_min: int | None = None,
+        quantity_max: int | None = None,
+        issue_date_after: str | None = None,
+        issue_date_before: str | None = None,
+        return_by_date_after: str | None = None,
+        return_by_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List DLA DIBBS request-for-quote solicitations.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            nsn: Filter by National Stock Number
+            part_number: Filter by manufacturer part number
+            solicitation: Filter by solicitation number
+            purchase_request: Filter by purchase request number
+            organization: Filter by buying organization id
+            status_code: Filter by DIBBS status code
+            set_aside: Filter by set-aside code
+            open: True returns only RFQs whose return_by_date has not passed.
+                ``is_open`` is derived at query time, so filter with this rather
+                than shaping on ``is_open``
+            quantity_min: Minimum quantity
+            quantity_max: Maximum quantity
+            issue_date_after: Issue date on or after (YYYY-MM-DD)
+            issue_date_before: Issue date on or before (YYYY-MM-DD)
+            return_by_date_after: Return-by date on or after (YYYY-MM-DD)
+            return_by_date_before: Return-by date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (issue_date, return_by_date, quantity, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.DIBBS_RFQS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("nsn", nsn),
+            ("part_number", part_number),
+            ("solicitation", solicitation),
+            ("purchase_request", purchase_request),
+            ("organization", organization),
+            ("status_code", status_code),
+            ("set_aside", set_aside),
+            ("open", open),
+            ("quantity_min", quantity_min),
+            ("quantity_max", quantity_max),
+            ("issue_date_after", issue_date_after),
+            ("issue_date_before", issue_date_before),
+            ("return_by_date_after", return_by_date_after),
+            ("return_by_date_before", return_by_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/dibbs/rfqs/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, DibbsRfq, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_dibbs_rfq(
+        self,
+        uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single DIBBS RFQ by uuid.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            uuid: RFQ UUID
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.DIBBS_RFQS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/dibbs/rfqs/{uuid}/", params)
+        return self._parse_response_with_shape(data, shape, DibbsRfq, flat, flat_lists)
+
+    def list_dibbs_rfps(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        nsn: str | None = None,
+        part_number: str | None = None,
+        solicitation: str | None = None,
+        organization: str | None = None,
+        buyer_code: str | None = None,
+        open: bool | None = None,
+        issued_date_after: str | None = None,
+        issued_date_before: str | None = None,
+        closes_date_after: str | None = None,
+        closes_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List DLA DIBBS request-for-proposal solicitations.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            nsn: Filter by National Stock Number
+            part_number: Filter by manufacturer part number
+            solicitation: Filter by solicitation number
+            organization: Filter by buying organization id
+            buyer_code: Filter by buyer code
+            open: True returns only RFPs whose closes_date has not passed.
+                ``is_open`` is derived at query time, so filter with this rather
+                than shaping on ``is_open``
+            issued_date_after: Issued date on or after (YYYY-MM-DD)
+            issued_date_before: Issued date on or before (YYYY-MM-DD)
+            closes_date_after: Closes date on or after (YYYY-MM-DD)
+            closes_date_before: Closes date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (issued_date, closes_date, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.DIBBS_RFPS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("nsn", nsn),
+            ("part_number", part_number),
+            ("solicitation", solicitation),
+            ("organization", organization),
+            ("buyer_code", buyer_code),
+            ("open", open),
+            ("issued_date_after", issued_date_after),
+            ("issued_date_before", issued_date_before),
+            ("closes_date_after", closes_date_after),
+            ("closes_date_before", closes_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/dibbs/rfps/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, DibbsRfp, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_dibbs_rfp(
+        self,
+        uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single DIBBS RFP by uuid.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            uuid: RFP UUID
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.DIBBS_RFPS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/dibbs/rfps/{uuid}/", params)
+        return self._parse_response_with_shape(data, shape, DibbsRfp, flat, flat_lists)
+
+    def list_dibbs_awards(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        award_number: str | None = None,
+        delivery_order_number: str | None = None,
+        solicitation: str | None = None,
+        purchase_request: str | None = None,
+        nsn: str | None = None,
+        part_number: str | None = None,
+        awardee_cage: str | None = None,
+        entity: str | None = None,
+        organization: str | None = None,
+        total_contract_price_min: float | None = None,
+        total_contract_price_max: float | None = None,
+        award_date_after: str | None = None,
+        award_date_before: str | None = None,
+        posted_date_after: str | None = None,
+        posted_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List DLA DIBBS awards.
+
+        WARNING: ``total_contract_price`` is the *order* total repeated on every
+        line item of the award. Never sum it across rows — doing so multiplies the
+        value by the line-item count. Deduplicate on ``award_number`` +
+        ``delivery_order_number`` first.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            award_number: Filter by award (contract) number
+            delivery_order_number: Filter by delivery order number
+            solicitation: Filter by solicitation number
+            purchase_request: Filter by purchase request number
+            nsn: Filter by National Stock Number
+            part_number: Filter by manufacturer part number
+            awardee_cage: Filter by awardee CAGE code
+            entity: Filter by awardee entity id
+            organization: Filter by buying organization id
+            total_contract_price_min: Minimum order total
+            total_contract_price_max: Maximum order total
+            award_date_after: Award date on or after (YYYY-MM-DD)
+            award_date_before: Award date on or before (YYYY-MM-DD)
+            posted_date_after: Posted date on or after (YYYY-MM-DD)
+            posted_date_before: Posted date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (award_date, posted_date, total_contract_price, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.DIBBS_AWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("award_number", award_number),
+            ("delivery_order_number", delivery_order_number),
+            ("solicitation", solicitation),
+            ("purchase_request", purchase_request),
+            ("nsn", nsn),
+            ("part_number", part_number),
+            ("awardee_cage", awardee_cage),
+            ("entity", entity),
+            ("organization", organization),
+            ("total_contract_price_min", total_contract_price_min),
+            ("total_contract_price_max", total_contract_price_max),
+            ("award_date_after", award_date_after),
+            ("award_date_before", award_date_before),
+            ("posted_date_after", posted_date_after),
+            ("posted_date_before", posted_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/dibbs/awards/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, DibbsAward, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_dibbs_award(
+        self,
+        uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single DIBBS award by uuid.
+
+        API reference: https://tango.makegov.com/docs/api-reference/dibbs.md
+
+        Args:
+            uuid: Award UUID
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.DIBBS_AWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/dibbs/awards/{uuid}/", params)
+        return self._parse_response_with_shape(data, shape, DibbsAward, flat, flat_lists)
+
+    # ============================================================================
+    # Exclusions (SAM.gov debarments)
+    # ============================================================================
+
+    def list_exclusions(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        uei: str | None = None,
+        entity_uei: str | None = None,
+        cage_code: str | None = None,
+        npi: str | None = None,
+        classification_type: str | None = None,
+        exclusion_type: str | None = None,
+        exclusion_program: str | None = None,
+        excluding_agency_code: str | None = None,
+        excluding_agency_name: str | None = None,
+        active: bool | None = None,
+        delisted: bool | None = None,
+        activate_date_after: str | None = None,
+        activate_date_before: str | None = None,
+        termination_date_after: str | None = None,
+        termination_date_before: str | None = None,
+        update_date_after: str | None = None,
+        update_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List SAM.gov exclusion (debarment) records.
+
+        API reference: https://tango.makegov.com/docs/api-reference/exclusions.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            uei: Filter by UEI
+            entity_uei: Filter by the linked entity's UEI
+            cage_code: Filter by CAGE code
+            npi: Filter by NPI (National Provider Identifier)
+            classification_type: Filter by classification (Firm, Individual, Vessel, ...)
+            exclusion_type: Filter by exclusion type
+            exclusion_program: Filter by exclusion program
+            excluding_agency_code: Filter by excluding agency code
+            excluding_agency_name: Filter by excluding agency name
+            active: True returns only records currently in effect.
+                ``is_currently_excluded`` is derived at query time, so filter with
+                this rather than shaping on ``is_currently_excluded``
+            delisted: Filter by delisted state
+            activate_date_after: Activate date on or after (YYYY-MM-DD)
+            activate_date_before: Activate date on or before (YYYY-MM-DD)
+            termination_date_after: Termination date on or after (YYYY-MM-DD)
+            termination_date_before: Termination date on or before (YYYY-MM-DD)
+            update_date_after: Update date on or after (YYYY-MM-DD)
+            update_date_before: Update date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (activate_date, termination_date, create_date,
+                update_date, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.EXCLUSIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("uei", uei),
+            ("entity_uei", entity_uei),
+            ("cage_code", cage_code),
+            ("npi", npi),
+            ("classification_type", classification_type),
+            ("exclusion_type", exclusion_type),
+            ("exclusion_program", exclusion_program),
+            ("excluding_agency_code", excluding_agency_code),
+            ("excluding_agency_name", excluding_agency_name),
+            ("active", active),
+            ("delisted", delisted),
+            ("activate_date_after", activate_date_after),
+            ("activate_date_before", activate_date_before),
+            ("termination_date_after", termination_date_after),
+            ("termination_date_before", termination_date_before),
+            ("update_date_after", update_date_after),
+            ("update_date_before", update_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/exclusions/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, Exclusion, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_exclusion(
+        self,
+        exclusion_key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single exclusion by exclusion_key.
+
+        API reference: https://tango.makegov.com/docs/api-reference/exclusions.md
+
+        Args:
+            exclusion_key: Deterministic exclusion key
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.EXCLUSIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/exclusions/{exclusion_key}/", params)
+        return self._parse_response_with_shape(data, shape, Exclusion, flat, flat_lists)
+
+    # ============================================================================
+    # SBIR/STTR (topics, DoD DSIP solicitations)
+    # ============================================================================
+
+    def list_sbir_topics(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        topic_number: str | None = None,
+        solicitation_number: str | None = None,
+        agency: str | None = None,
+        activity: str | None = None,
+        year: int | None = None,
+        doc_source: str | None = None,
+        open_date_after: str | None = None,
+        open_date_before: str | None = None,
+        close_date_after: str | None = None,
+        close_date_before: str | None = None,
+        release_date_after: str | None = None,
+        release_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List SBIR/STTR topics.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sbir.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            topic_number: Filter by topic number
+            solicitation_number: Filter by solicitation number
+            agency: Filter by agency
+            activity: Filter by activity (component/branch)
+            year: Filter by solicitation year
+            doc_source: Filter by document source
+            open_date_after: Open date on or after (YYYY-MM-DD)
+            open_date_before: Open date on or before (YYYY-MM-DD)
+            close_date_after: Close date on or after (YYYY-MM-DD)
+            close_date_before: Close date on or before (YYYY-MM-DD)
+            release_date_after: Release date on or after (YYYY-MM-DD)
+            release_date_before: Release date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (open_date, close_date, release_date, year, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.SBIR_TOPICS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("topic_number", topic_number),
+            ("solicitation_number", solicitation_number),
+            ("agency", agency),
+            ("activity", activity),
+            ("year", year),
+            ("doc_source", doc_source),
+            ("open_date_after", open_date_after),
+            ("open_date_before", open_date_before),
+            ("close_date_after", close_date_after),
+            ("close_date_before", close_date_before),
+            ("release_date_after", release_date_after),
+            ("release_date_before", release_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/sbir/topics/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, SbirTopic, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_sbir_topic(
+        self,
+        topic_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single SBIR/STTR topic by topic_id.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sbir.md
+
+        Args:
+            topic_id: Topic id
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.SBIR_TOPICS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/sbir/topics/{topic_id}/", params)
+        return self._parse_response_with_shape(data, shape, SbirTopic, flat, flat_lists)
+
+    def list_sbir_solicitations(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        solicitation_number: str | None = None,
+        solicitation_status: str | None = None,
+        program: str | None = None,
+        activity: str | None = None,
+        cycle_name: str | None = None,
+        out_of_cycle: bool | None = None,
+        year: int | None = None,
+        start_date_after: str | None = None,
+        start_date_before: str | None = None,
+        end_date_after: str | None = None,
+        end_date_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List DoD DSIP SBIR/STTR solicitations.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sbir.md
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            solicitation_number: Filter by solicitation number
+            solicitation_status: Filter by solicitation status
+            program: Filter by program (SBIR, STTR)
+            activity: Filter by activity (component/branch)
+            cycle_name: Filter by cycle name
+            out_of_cycle: Filter by out-of-cycle flag
+            year: Filter by solicitation year
+            start_date_after: Start date on or after (YYYY-MM-DD)
+            start_date_before: Start date on or before (YYYY-MM-DD)
+            end_date_after: End date on or after (YYYY-MM-DD)
+            end_date_before: End date on or before (YYYY-MM-DD)
+            search: Full-text search
+            ordering: Sort field (start_date, end_date, year, rank, modified)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.SBIR_SOLICITATIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("solicitation_number", solicitation_number),
+            ("solicitation_status", solicitation_status),
+            ("program", program),
+            ("activity", activity),
+            ("cycle_name", cycle_name),
+            ("out_of_cycle", out_of_cycle),
+            ("year", year),
+            ("start_date_after", start_date_after),
+            ("start_date_before", start_date_before),
+            ("end_date_after", end_date_after),
+            ("end_date_before", end_date_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/sbir/solicitations/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, SbirSolicitation, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+        )
+
+    def get_sbir_solicitation(
+        self,
+        solicitation_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single DoD DSIP SBIR/STTR solicitation by solicitation_id.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sbir.md
+
+        Args:
+            solicitation_id: Solicitation id
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.SBIR_SOLICITATIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/sbir/solicitations/{solicitation_id}/", params)
+        return self._parse_response_with_shape(data, shape, SbirSolicitation, flat, flat_lists)
 
     # ============================================================================
     # Budget (federal account x fiscal year rollups)

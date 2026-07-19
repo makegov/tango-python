@@ -37,6 +37,37 @@ ANCESTORS_SCHEMA: dict[str, FieldSchema] = {
     "short_name": FieldSchema(name="short_name", type=str, is_optional=True, is_list=False),
 }
 
+APPENDIX_SCHEMA: dict[str, FieldSchema] = {
+    "agency_code": FieldSchema(name="agency_code", type=int, is_optional=True, is_list=False),
+    "appendix_granule_id": FieldSchema(
+        name="appendix_granule_id", type=str, is_optional=True, is_list=False
+    ),
+    "appendix_pdf_url": FieldSchema(
+        name="appendix_pdf_url", type=str, is_optional=True, is_list=False
+    ),
+    "federal_account_symbol": FieldSchema(
+        name="federal_account_symbol", type=str, is_optional=True, is_list=False
+    ),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "has_object_classification": FieldSchema(
+        name="has_object_classification", type=bool, is_optional=True, is_list=False
+    ),
+    "has_program_financing": FieldSchema(
+        name="has_program_financing", type=bool, is_optional=True, is_list=False
+    ),
+    "n_program_activities": FieldSchema(
+        name="n_program_activities", type=int, is_optional=True, is_list=False
+    ),
+    "narrative_length": FieldSchema(
+        name="narrative_length", type=int, is_optional=True, is_list=False
+    ),
+    "on_off_budget": FieldSchema(name="on_off_budget", type=int, is_optional=True, is_list=False),
+    "request": FieldSchema(name="request", type=str, is_optional=True, is_list=False),
+    "subfunction_code": FieldSchema(
+        name="subfunction_code", type=int, is_optional=True, is_list=False
+    ),
+}
+
 ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
@@ -47,6 +78,14 @@ ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
     "resource_id": FieldSchema(name="resource_id", type=str, is_optional=True, is_list=False),
     "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+}
+
+AWARDEE_SCHEMA: dict[str, FieldSchema] = {
+    "cage_code": FieldSchema(name="cage_code", type=int, is_optional=True, is_list=False),
+    "legal_business_name": FieldSchema(
+        name="legal_business_name", type=str, is_optional=True, is_list=False
+    ),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
 }
 
 AWARDING_OFFICE_SCHEMA: dict[str, FieldSchema] = {
@@ -157,6 +196,19 @@ DISPLAY_SCHEMA: dict[str, FieldSchema] = {
     "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
 }
 
+DOCUMENTS_SCHEMA: dict[str, FieldSchema] = {
+    "cycle_name": FieldSchema(name="cycle_name", type=str, is_optional=True, is_list=False),
+    "document_id": FieldSchema(name="document_id", type=str, is_optional=True, is_list=False),
+    "extraction_status": FieldSchema(
+        name="extraction_status", type=str, is_optional=True, is_list=False
+    ),
+    "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
+    "filename": FieldSchema(name="filename", type=str, is_optional=True, is_list=False),
+    "n_chars": FieldSchema(name="n_chars", type=str, is_optional=True, is_list=False),
+    "n_pages": FieldSchema(name="n_pages", type=str, is_optional=True, is_list=False),
+    "s3_key": FieldSchema(name="s3_key", type=str, is_optional=True, is_list=False),
+}
+
 FEDERAL_OBLIGATIONS_SCHEMA: dict[str, FieldSchema] = {
     "active": FieldSchema(name="active", type=str, is_optional=True, is_list=False),
     "total": FieldSchema(name="total", type=str, is_optional=True, is_list=False),
@@ -171,6 +223,15 @@ FUNDING_DETAILS_SCHEMA: dict[str, FieldSchema] = {
     "expected_number_of_awards": FieldSchema(
         name="expected_number_of_awards", type=int, is_optional=True, is_list=False
     ),
+}
+
+GRANT_SCHEMA: dict[str, FieldSchema] = {
+    "grant_id": FieldSchema(name="grant_id", type=str, is_optional=True, is_list=False),
+    "opportunity_number": FieldSchema(
+        name="opportunity_number", type=str, is_optional=True, is_list=False
+    ),
+    "response_date": FieldSchema(name="response_date", type=date, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
 }
 
 GRANTOR_CONTACT_SCHEMA: dict[str, FieldSchema] = {
@@ -246,6 +307,45 @@ META_SCHEMA: dict[str, FieldSchema] = {
     "notices_count": FieldSchema(name="notices_count", type=int, is_optional=True, is_list=False),
 }
 
+NARRATIVES_SCHEMA: dict[str, FieldSchema] = {
+    "account_code": FieldSchema(name="account_code", type=int, is_optional=True, is_list=False),
+    "account_heading": FieldSchema(
+        name="account_heading", type=str, is_optional=True, is_list=False
+    ),
+    "agency_code": FieldSchema(name="agency_code", type=int, is_optional=True, is_list=False),
+    "agency_title": FieldSchema(name="agency_title", type=str, is_optional=True, is_list=False),
+    "appropriations_length": FieldSchema(
+        name="appropriations_length", type=int, is_optional=True, is_list=False
+    ),
+    "appropriations_text": FieldSchema(
+        name="appropriations_text", type=str, is_optional=True, is_list=False
+    ),
+    "budget_year": FieldSchema(name="budget_year", type=int, is_optional=True, is_list=False),
+    "bureau_title": FieldSchema(name="bureau_title", type=int, is_optional=True, is_list=False),
+    "date_issued": FieldSchema(name="date_issued", type=date, is_optional=True, is_list=False),
+    "federal_account_symbol": FieldSchema(
+        name="federal_account_symbol", type=str, is_optional=True, is_list=False
+    ),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "fund_type": FieldSchema(name="fund_type", type=str, is_optional=True, is_list=False),
+    "granule_id": FieldSchema(name="granule_id", type=str, is_optional=True, is_list=False),
+    "granule_title": FieldSchema(name="granule_title", type=str, is_optional=True, is_list=False),
+    "narrative_id": FieldSchema(name="narrative_id", type=str, is_optional=True, is_list=False),
+    "narrative_length": FieldSchema(
+        name="narrative_length", type=int, is_optional=True, is_list=False
+    ),
+    "narrative_text": FieldSchema(name="narrative_text", type=str, is_optional=True, is_list=False),
+    "notes": FieldSchema(name="notes", type=str, is_optional=True, is_list=True),
+    "on_off_budget": FieldSchema(name="on_off_budget", type=int, is_optional=True, is_list=False),
+    "source_url": FieldSchema(name="source_url", type=str, is_optional=True, is_list=False),
+    "subaccount_code": FieldSchema(
+        name="subaccount_code", type=int, is_optional=True, is_list=False
+    ),
+    "subfunction_code": FieldSchema(
+        name="subfunction_code", type=int, is_optional=True, is_list=False
+    ),
+}
+
 NOTICE_HISTORY_SCHEMA: dict[str, FieldSchema] = {
     "deleted": FieldSchema(name="deleted", type=str, is_optional=True, is_list=False),
     "index": FieldSchema(name="index", type=str, is_optional=True, is_list=False),
@@ -305,6 +405,33 @@ OFFICERS_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+OPPORTUNITY_SCHEMA: dict[str, FieldSchema] = {
+    "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
+    "response_deadline": FieldSchema(
+        name="response_deadline", type=datetime, is_optional=True, is_list=False
+    ),
+    "solicitation_number": FieldSchema(
+        name="solicitation_number", type=str, is_optional=True, is_list=False
+    ),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+}
+
+ORGANIZATION_SCHEMA: dict[str, FieldSchema] = {
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=int, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
+}
+
 PARENT_AWARD_SCHEMA: dict[str, FieldSchema] = {
     "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
     "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
@@ -350,6 +477,34 @@ SIZE_STANDARDS_SCHEMA: dict[str, FieldSchema] = {
     "revenue_limit": FieldSchema(name="revenue_limit", type=int, is_optional=True, is_list=False),
 }
 
+SOLICITATION_SCHEMA: dict[str, FieldSchema] = {
+    "cycle_name": FieldSchema(name="cycle_name", type=str, is_optional=True, is_list=False),
+    "end_date": FieldSchema(name="end_date", type=date, is_optional=True, is_list=False),
+    "out_of_cycle": FieldSchema(name="out_of_cycle", type=str, is_optional=True, is_list=False),
+    "program": FieldSchema(name="program", type=str, is_optional=True, is_list=False),
+    "solicitation_id": FieldSchema(
+        name="solicitation_id", type=str, is_optional=True, is_list=False
+    ),
+    "solicitation_number": FieldSchema(
+        name="solicitation_number", type=Decimal, is_optional=True, is_list=False
+    ),
+    "solicitation_status": FieldSchema(
+        name="solicitation_status", type=str, is_optional=True, is_list=False
+    ),
+    "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "year": FieldSchema(name="year", type=int, is_optional=True, is_list=False),
+}
+
+TOPICS_SCHEMA: dict[str, FieldSchema] = {
+    "agency": FieldSchema(name="agency", type=str, is_optional=True, is_list=False),
+    "close_date": FieldSchema(name="close_date", type=date, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "topic_id": FieldSchema(name="topic_id", type=str, is_optional=True, is_list=False),
+    "topic_number": FieldSchema(name="topic_number", type=str, is_optional=True, is_list=False),
+    "topic_url": FieldSchema(name="topic_url", type=str, is_optional=True, is_list=False),
+}
+
 TRANSACTIONS_SCHEMA: dict[str, FieldSchema] = {
     "action_type": FieldSchema(name="action_type", type=str, is_optional=True, is_list=False),
     "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
@@ -379,7 +534,9 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "Agency": AGENCY_SCHEMA,
     "Agency2": AGENCY2_SCHEMA,
     "Ancestors": ANCESTORS_SCHEMA,
+    "Appendix": APPENDIX_SCHEMA,
     "Attachments": ATTACHMENTS_SCHEMA,
+    "Awardee": AWARDEE_SCHEMA,
     "AwardingOffice": AWARDING_OFFICE_SCHEMA,
     "BudgetAppropriation": BUDGET_APPROPRIATION_SCHEMA,
     "BudgetSpending": BUDGET_SPENDING_SCHEMA,
@@ -388,23 +545,30 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "Department": DEPARTMENT_SCHEMA,
     "Department2": DEPARTMENT2_SCHEMA,
     "Display": DISPLAY_SCHEMA,
+    "Documents": DOCUMENTS_SCHEMA,
     "FederalObligations": FEDERAL_OBLIGATIONS_SCHEMA,
     "FundingDetails": FUNDING_DETAILS_SCHEMA,
+    "Grant": GRANT_SCHEMA,
     "GrantorContact": GRANTOR_CONTACT_SCHEMA,
     "GsaElibrary": GSA_ELIBRARY_SCHEMA,
     "Historical": HISTORICAL_SCHEMA,
     "ImportantDates": IMPORTANT_DATES_SCHEMA,
     "LatestNotice": LATEST_NOTICE_SCHEMA,
     "Meta": META_SCHEMA,
+    "Narratives": NARRATIVES_SCHEMA,
     "NoticeHistory": NOTICE_HISTORY_SCHEMA,
     "NoticeType": NOTICE_TYPE_SCHEMA,
     "Officers": OFFICERS_SCHEMA,
+    "Opportunity": OPPORTUNITY_SCHEMA,
+    "Organization": ORGANIZATION_SCHEMA,
     "ParentAward": PARENT_AWARD_SCHEMA,
     "PeriodOfPerformance": PERIOD_OF_PERFORMANCE_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "PlaceOfPerformance2": PLACE_OF_PERFORMANCE2_SCHEMA,
     "SecondaryContact": SECONDARY_CONTACT_SCHEMA,
     "SizeStandards": SIZE_STANDARDS_SCHEMA,
+    "Solicitation": SOLICITATION_SCHEMA,
+    "Topics": TOPICS_SCHEMA,
     "Transactions": TRANSACTIONS_SCHEMA,
     "Transactions2": TRANSACTIONS2_SCHEMA,
 }
@@ -437,6 +601,201 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
     "AwardOffice": {
         "organization_id": FieldSchema(
             name="organization_id", type=str, is_optional=True, is_list=False
+        ),
+    },
+    "BudgetAccount": {
+        "account_narrative_excerpt": FieldSchema(
+            name="account_narrative_excerpt", type=str, is_optional=True, is_list=False
+        ),
+        "account_title": FieldSchema(
+            name="account_title", type=str, is_optional=True, is_list=False
+        ),
+        "actual_vs_requested_contract": FieldSchema(
+            name="actual_vs_requested_contract", type=str, is_optional=True, is_list=False
+        ),
+        "actual_vs_requested_contract_capped": FieldSchema(
+            name="actual_vs_requested_contract_capped", type=str, is_optional=True, is_list=False
+        ),
+        "actual_vs_requested_contract_capped_flag": FieldSchema(
+            name="actual_vs_requested_contract_capped_flag",
+            type=str,
+            is_optional=True,
+            is_list=False,
+        ),
+        "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+        "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+        "appendix": FieldSchema(
+            name="appendix", type=dict, is_optional=True, is_list=False, nested_model="Appendix"
+        ),
+        "appendix_pdf_url": FieldSchema(
+            name="appendix_pdf_url", type=str, is_optional=True, is_list=False
+        ),
+        "apportioned": FieldSchema(name="apportioned", type=str, is_optional=True, is_list=False),
+        "apportioned_to_enacted_pct": FieldSchema(
+            name="apportioned_to_enacted_pct", type=str, is_optional=True, is_list=False
+        ),
+        "apportioned_to_enacted_pct_capped": FieldSchema(
+            name="apportioned_to_enacted_pct_capped", type=str, is_optional=True, is_list=False
+        ),
+        "apportioned_to_enacted_pct_capped_flag": FieldSchema(
+            name="apportioned_to_enacted_pct_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "assistance_obligated": FieldSchema(
+            name="assistance_obligated", type=str, is_optional=True, is_list=False
+        ),
+        "assistance_outlayed": FieldSchema(
+            name="assistance_outlayed", type=str, is_optional=True, is_list=False
+        ),
+        "assistance_share_capped_flag": FieldSchema(
+            name="assistance_share_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "assistance_share_of_obligated": FieldSchema(
+            name="assistance_share_of_obligated", type=str, is_optional=True, is_list=False
+        ),
+        "assistance_share_of_obligated_capped": FieldSchema(
+            name="assistance_share_of_obligated_capped", type=str, is_optional=True, is_list=False
+        ),
+        "attribution_confidence": FieldSchema(
+            name="attribution_confidence", type=str, is_optional=True, is_list=False
+        ),
+        "attribution_status": FieldSchema(
+            name="attribution_status", type=str, is_optional=True, is_list=False
+        ),
+        "ba_growth_next_year": FieldSchema(
+            name="ba_growth_next_year", type=str, is_optional=True, is_list=False
+        ),
+        "ba_growth_next_year_pct": FieldSchema(
+            name="ba_growth_next_year_pct", type=str, is_optional=True, is_list=False
+        ),
+        "bea_category": FieldSchema(name="bea_category", type=str, is_optional=True, is_list=False),
+        "bureau_name": FieldSchema(name="bureau_name", type=str, is_optional=True, is_list=False),
+        "contract_obligated": FieldSchema(
+            name="contract_obligated", type=str, is_optional=True, is_list=False
+        ),
+        "contract_obligated_5yr_cagr": FieldSchema(
+            name="contract_obligated_5yr_cagr", type=str, is_optional=True, is_list=False
+        ),
+        "contract_obligated_estimated": FieldSchema(
+            name="contract_obligated_estimated", type=str, is_optional=True, is_list=False
+        ),
+        "contract_obligated_yoy_pct": FieldSchema(
+            name="contract_obligated_yoy_pct", type=str, is_optional=True, is_list=False
+        ),
+        "contract_outlayed": FieldSchema(
+            name="contract_outlayed", type=str, is_optional=True, is_list=False
+        ),
+        "contract_share_capped_flag": FieldSchema(
+            name="contract_share_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "contract_share_of_obligated": FieldSchema(
+            name="contract_share_of_obligated", type=str, is_optional=True, is_list=False
+        ),
+        "contract_share_of_obligated_capped": FieldSchema(
+            name="contract_share_of_obligated_capped", type=str, is_optional=True, is_list=False
+        ),
+        "created": FieldSchema(name="created", type=datetime, is_optional=True, is_list=False),
+        "enacted_ba": FieldSchema(name="enacted_ba", type=str, is_optional=True, is_list=False),
+        "enacted_ba_5yr_cagr": FieldSchema(
+            name="enacted_ba_5yr_cagr", type=str, is_optional=True, is_list=False
+        ),
+        "enacted_ba_yoy_pct": FieldSchema(
+            name="enacted_ba_yoy_pct", type=str, is_optional=True, is_list=False
+        ),
+        "enacted_to_requested_pct": FieldSchema(
+            name="enacted_to_requested_pct", type=str, is_optional=True, is_list=False
+        ),
+        "enacted_to_requested_pct_capped": FieldSchema(
+            name="enacted_to_requested_pct_capped", type=str, is_optional=True, is_list=False
+        ),
+        "enacted_to_requested_pct_capped_flag": FieldSchema(
+            name="enacted_to_requested_pct_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "federal_account_symbol": FieldSchema(
+            name="federal_account_symbol", type=str, is_optional=True, is_list=False
+        ),
+        "fiscal_year": FieldSchema(name="fiscal_year", type=str, is_optional=True, is_list=False),
+        "id": FieldSchema(name="id", type=str, is_optional=True, is_list=False),
+        "modified": FieldSchema(name="modified", type=datetime, is_optional=True, is_list=False),
+        "n_contracts": FieldSchema(name="n_contracts", type=str, is_optional=True, is_list=False),
+        "n_grants": FieldSchema(name="n_grants", type=str, is_optional=True, is_list=False),
+        "n_unique_contract_recipients": FieldSchema(
+            name="n_unique_contract_recipients", type=str, is_optional=True, is_list=False
+        ),
+        "n_unique_grant_recipients": FieldSchema(
+            name="n_unique_grant_recipients", type=str, is_optional=True, is_list=False
+        ),
+        "narratives": FieldSchema(
+            name="narratives", type=dict, is_optional=True, is_list=True, nested_model="Narratives"
+        ),
+        "next_year_requested_ba": FieldSchema(
+            name="next_year_requested_ba", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_to_apportioned_pct": FieldSchema(
+            name="obligated_to_apportioned_pct", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_to_apportioned_pct_capped": FieldSchema(
+            name="obligated_to_apportioned_pct_capped", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_to_apportioned_pct_capped_flag": FieldSchema(
+            name="obligated_to_apportioned_pct_capped_flag",
+            type=str,
+            is_optional=True,
+            is_list=False,
+        ),
+        "obligated_to_enacted_pct": FieldSchema(
+            name="obligated_to_enacted_pct", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_to_enacted_pct_capped": FieldSchema(
+            name="obligated_to_enacted_pct_capped", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_to_enacted_pct_capped_flag": FieldSchema(
+            name="obligated_to_enacted_pct_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_total": FieldSchema(
+            name="obligated_total", type=str, is_optional=True, is_list=False
+        ),
+        "obligated_yoy_pct": FieldSchema(
+            name="obligated_yoy_pct", type=str, is_optional=True, is_list=False
+        ),
+        "on_off_budget": FieldSchema(
+            name="on_off_budget", type=str, is_optional=True, is_list=False
+        ),
+        "outlayed_to_obligated_pct": FieldSchema(
+            name="outlayed_to_obligated_pct", type=str, is_optional=True, is_list=False
+        ),
+        "outlayed_to_obligated_pct_capped": FieldSchema(
+            name="outlayed_to_obligated_pct_capped", type=str, is_optional=True, is_list=False
+        ),
+        "outlayed_to_obligated_pct_capped_flag": FieldSchema(
+            name="outlayed_to_obligated_pct_capped_flag", type=str, is_optional=True, is_list=False
+        ),
+        "outlayed_total": FieldSchema(
+            name="outlayed_total", type=str, is_optional=True, is_list=False
+        ),
+        "requested_ba": FieldSchema(name="requested_ba", type=str, is_optional=True, is_list=False),
+        "requested_contractual_services": FieldSchema(
+            name="requested_contractual_services", type=str, is_optional=True, is_list=False
+        ),
+        "requested_personnel_share": FieldSchema(
+            name="requested_personnel_share", type=str, is_optional=True, is_list=False
+        ),
+        "subfunction_code": FieldSchema(
+            name="subfunction_code", type=str, is_optional=True, is_list=False
+        ),
+        "top_contract_recipients": FieldSchema(
+            name="top_contract_recipients", type=str, is_optional=True, is_list=False
+        ),
+        "top_grant_recipients": FieldSchema(
+            name="top_grant_recipients", type=str, is_optional=True, is_list=False
+        ),
+        "unlinked_obligated": FieldSchema(
+            name="unlinked_obligated", type=str, is_optional=True, is_list=False
+        ),
+        "unobligated_balance": FieldSchema(
+            name="unobligated_balance", type=str, is_optional=True, is_list=False
+        ),
+        "unobligated_pct": FieldSchema(
+            name="unobligated_pct", type=str, is_optional=True, is_list=False
         ),
     },
     "BusinessType": {
@@ -637,6 +996,178 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "website": FieldSchema(name="website", type=str, is_optional=True, is_list=False),
+    },
+    "DibbsAward": {
+        "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+        "award_number": FieldSchema(name="award_number", type=str, is_optional=True, is_list=False),
+        "awardee": FieldSchema(
+            name="awardee", type=dict, is_optional=True, is_list=False, nested_model="Awardee"
+        ),
+        "awardee_cage": FieldSchema(name="awardee_cage", type=int, is_optional=True, is_list=False),
+        "delivery_order_counter": FieldSchema(
+            name="delivery_order_counter", type=int, is_optional=True, is_list=False
+        ),
+        "delivery_order_number": FieldSchema(
+            name="delivery_order_number", type=int, is_optional=True, is_list=False
+        ),
+        "last_mod_posting_date": FieldSchema(
+            name="last_mod_posting_date", type=date, is_optional=True, is_list=False
+        ),
+        "nomenclature": FieldSchema(name="nomenclature", type=str, is_optional=True, is_list=False),
+        "nsn": FieldSchema(name="nsn", type=str, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Organization",
+        ),
+        "part_number": FieldSchema(name="part_number", type=str, is_optional=True, is_list=False),
+        "posted_date": FieldSchema(name="posted_date", type=date, is_optional=True, is_list=False),
+        "purchase_request": FieldSchema(
+            name="purchase_request", type=str, is_optional=True, is_list=False
+        ),
+        "solicitation": FieldSchema(name="solicitation", type=str, is_optional=True, is_list=False),
+        "total_contract_price": FieldSchema(
+            name="total_contract_price", type=Decimal, is_optional=True, is_list=False
+        ),
+        "total_contract_price_text": FieldSchema(
+            name="total_contract_price_text", type=str, is_optional=True, is_list=False
+        ),
+        "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    },
+    "DibbsRfp": {
+        "buyer_code": FieldSchema(name="buyer_code", type=str, is_optional=True, is_list=False),
+        "closes_date": FieldSchema(name="closes_date", type=date, is_optional=True, is_list=False),
+        "document_url": FieldSchema(name="document_url", type=str, is_optional=True, is_list=False),
+        "is_open": FieldSchema(name="is_open", type=bool, is_optional=True, is_list=False),
+        "issued_date": FieldSchema(name="issued_date", type=date, is_optional=True, is_list=False),
+        "nomenclature": FieldSchema(name="nomenclature", type=str, is_optional=True, is_list=False),
+        "nsn": FieldSchema(name="nsn", type=str, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Organization",
+        ),
+        "part_number": FieldSchema(name="part_number", type=str, is_optional=True, is_list=False),
+        "solicitation": FieldSchema(name="solicitation", type=str, is_optional=True, is_list=False),
+        "tech_docs_url": FieldSchema(
+            name="tech_docs_url", type=str, is_optional=True, is_list=False
+        ),
+        "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    },
+    "DibbsRfq": {
+        "document_url": FieldSchema(name="document_url", type=str, is_optional=True, is_list=False),
+        "is_open": FieldSchema(name="is_open", type=bool, is_optional=True, is_list=False),
+        "issue_date": FieldSchema(name="issue_date", type=date, is_optional=True, is_list=False),
+        "nomenclature": FieldSchema(name="nomenclature", type=str, is_optional=True, is_list=False),
+        "nsn": FieldSchema(name="nsn", type=str, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Organization",
+        ),
+        "part_number": FieldSchema(name="part_number", type=str, is_optional=True, is_list=False),
+        "purchase_request": FieldSchema(
+            name="purchase_request", type=str, is_optional=True, is_list=False
+        ),
+        "quantity": FieldSchema(name="quantity", type=int, is_optional=True, is_list=False),
+        "return_by_date": FieldSchema(
+            name="return_by_date", type=date, is_optional=True, is_list=False
+        ),
+        "set_aside": FieldSchema(name="set_aside", type=str, is_optional=True, is_list=False),
+        "solicitation": FieldSchema(name="solicitation", type=str, is_optional=True, is_list=False),
+        "solicitation_formatted": FieldSchema(
+            name="solicitation_formatted", type=str, is_optional=True, is_list=False
+        ),
+        "status_code": FieldSchema(name="status_code", type=str, is_optional=True, is_list=False),
+        "unit_of_issue": FieldSchema(
+            name="unit_of_issue", type=str, is_optional=True, is_list=False
+        ),
+        "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    },
+    "Exclusion": {
+        "activate_date": FieldSchema(
+            name="activate_date", type=date, is_optional=True, is_list=False
+        ),
+        "additional_comments": FieldSchema(
+            name="additional_comments", type=str, is_optional=True, is_list=False
+        ),
+        "cage_code": FieldSchema(name="cage_code", type=str, is_optional=True, is_list=False),
+        "classification_type": FieldSchema(
+            name="classification_type", type=str, is_optional=True, is_list=False
+        ),
+        "create_date": FieldSchema(name="create_date", type=date, is_optional=True, is_list=False),
+        "ct_code": FieldSchema(name="ct_code", type=str, is_optional=True, is_list=False),
+        "delisted_at": FieldSchema(name="delisted_at", type=str, is_optional=True, is_list=False),
+        "display_name": FieldSchema(name="display_name", type=str, is_optional=True, is_list=False),
+        "dnb_open_data": FieldSchema(
+            name="dnb_open_data", type=str, is_optional=True, is_list=False
+        ),
+        "entity_name": FieldSchema(name="entity_name", type=str, is_optional=True, is_list=False),
+        "entity_uei": FieldSchema(name="entity_uei", type=str, is_optional=True, is_list=False),
+        "evs_investigation_status": FieldSchema(
+            name="evs_investigation_status", type=str, is_optional=True, is_list=False
+        ),
+        "excluding_agency_code": FieldSchema(
+            name="excluding_agency_code", type=str, is_optional=True, is_list=False
+        ),
+        "excluding_agency_name": FieldSchema(
+            name="excluding_agency_name", type=str, is_optional=True, is_list=False
+        ),
+        "exclusion_key": FieldSchema(
+            name="exclusion_key", type=str, is_optional=True, is_list=False
+        ),
+        "exclusion_program": FieldSchema(
+            name="exclusion_program", type=str, is_optional=True, is_list=False
+        ),
+        "exclusion_type": FieldSchema(
+            name="exclusion_type", type=str, is_optional=True, is_list=False
+        ),
+        "first_name": FieldSchema(name="first_name", type=str, is_optional=True, is_list=False),
+        "is_currently_excluded": FieldSchema(
+            name="is_currently_excluded", type=bool, is_optional=True, is_list=False
+        ),
+        "is_fascsa_order": FieldSchema(
+            name="is_fascsa_order", type=bool, is_optional=True, is_list=False
+        ),
+        "last_name": FieldSchema(name="last_name", type=str, is_optional=True, is_list=False),
+        "middle_name": FieldSchema(name="middle_name", type=str, is_optional=True, is_list=False),
+        "more_locations": FieldSchema(
+            name="more_locations", type=str, is_optional=True, is_list=False
+        ),
+        "npi": FieldSchema(name="npi", type=str, is_optional=True, is_list=False),
+        "prefix": FieldSchema(name="prefix", type=str, is_optional=True, is_list=False),
+        "primary_address": FieldSchema(
+            name="primary_address", type=str, is_optional=True, is_list=False
+        ),
+        "references": FieldSchema(name="references", type=str, is_optional=True, is_list=False),
+        "secondary_address": FieldSchema(
+            name="secondary_address", type=str, is_optional=True, is_list=False
+        ),
+        "suffix": FieldSchema(name="suffix", type=str, is_optional=True, is_list=False),
+        "termination_date": FieldSchema(
+            name="termination_date", type=str, is_optional=True, is_list=False
+        ),
+        "termination_type": FieldSchema(
+            name="termination_type", type=str, is_optional=True, is_list=False
+        ),
+        "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+        "update_date": FieldSchema(name="update_date", type=date, is_optional=True, is_list=False),
+        "vessel_call_sign": FieldSchema(
+            name="vessel_call_sign", type=str, is_optional=True, is_list=False
+        ),
+        "vessel_flag": FieldSchema(name="vessel_flag", type=str, is_optional=True, is_list=False),
+        "vessel_grt": FieldSchema(name="vessel_grt", type=str, is_optional=True, is_list=False),
+        "vessel_owner": FieldSchema(name="vessel_owner", type=str, is_optional=True, is_list=False),
+        "vessel_tonnage": FieldSchema(
+            name="vessel_tonnage", type=str, is_optional=True, is_list=False
+        ),
+        "vessel_type": FieldSchema(name="vessel_type", type=str, is_optional=True, is_list=False),
     },
     "Forecast": {
         "created": FieldSchema(name="created", type=datetime, is_optional=True, is_list=False),
@@ -1247,5 +1778,97 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             name="level_2_category_code", type=Decimal, is_optional=True, is_list=False
         ),
         "parent": FieldSchema(name="parent", type=str, is_optional=True, is_list=False),
+    },
+    "SbirSolicitation": {
+        "activity": FieldSchema(name="activity", type=str, is_optional=True, is_list=False),
+        "cycle": FieldSchema(name="cycle", type=str, is_optional=True, is_list=False),
+        "cycle_name": FieldSchema(name="cycle_name", type=str, is_optional=True, is_list=False),
+        "documents": FieldSchema(
+            name="documents", type=dict, is_optional=True, is_list=True, nested_model="Documents"
+        ),
+        "end_date": FieldSchema(name="end_date", type=date, is_optional=True, is_list=False),
+        "out_of_cycle": FieldSchema(
+            name="out_of_cycle", type=bool, is_optional=True, is_list=False
+        ),
+        "program": FieldSchema(name="program", type=str, is_optional=True, is_list=False),
+        "sol_download_url": FieldSchema(
+            name="sol_download_url", type=str, is_optional=True, is_list=False
+        ),
+        "solicitation_cycle_id": FieldSchema(
+            name="solicitation_cycle_id", type=int, is_optional=True, is_list=False
+        ),
+        "solicitation_id": FieldSchema(
+            name="solicitation_id", type=str, is_optional=True, is_list=False
+        ),
+        "solicitation_number": FieldSchema(
+            name="solicitation_number", type=Decimal, is_optional=True, is_list=False
+        ),
+        "solicitation_status": FieldSchema(
+            name="solicitation_status", type=str, is_optional=True, is_list=False
+        ),
+        "source_last_updated": FieldSchema(
+            name="source_last_updated", type=datetime, is_optional=True, is_list=False
+        ),
+        "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
+        "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+        "topics": FieldSchema(
+            name="topics", type=dict, is_optional=True, is_list=True, nested_model="Topics"
+        ),
+        "year": FieldSchema(name="year", type=int, is_optional=True, is_list=False),
+    },
+    "SbirTopic": {
+        "activity": FieldSchema(name="activity", type=str, is_optional=True, is_list=False),
+        "agency": FieldSchema(name="agency", type=str, is_optional=True, is_list=False),
+        "close_date": FieldSchema(name="close_date", type=date, is_optional=True, is_list=False),
+        "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+        "doc_source": FieldSchema(name="doc_source", type=str, is_optional=True, is_list=False),
+        "due_dates_text": FieldSchema(
+            name="due_dates_text", type=str, is_optional=True, is_list=False
+        ),
+        "grant": FieldSchema(
+            name="grant", type=dict, is_optional=True, is_list=False, nested_model="Grant"
+        ),
+        "listed_open": FieldSchema(name="listed_open", type=bool, is_optional=True, is_list=False),
+        "official_solicitation_url": FieldSchema(
+            name="official_solicitation_url", type=str, is_optional=True, is_list=False
+        ),
+        "open_date": FieldSchema(name="open_date", type=date, is_optional=True, is_list=False),
+        "opportunity": FieldSchema(
+            name="opportunity",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Opportunity",
+        ),
+        "release_date": FieldSchema(
+            name="release_date", type=date, is_optional=True, is_list=False
+        ),
+        "solicitation": FieldSchema(
+            name="solicitation",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Solicitation",
+        ),
+        "solicitation_number": FieldSchema(
+            name="solicitation_number", type=Decimal, is_optional=True, is_list=False
+        ),
+        "solicitation_status": FieldSchema(
+            name="solicitation_status", type=str, is_optional=True, is_list=False
+        ),
+        "source_last_updated": FieldSchema(
+            name="source_last_updated", type=datetime, is_optional=True, is_list=False
+        ),
+        "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+        "topic_id": FieldSchema(name="topic_id", type=str, is_optional=True, is_list=False),
+        "topic_node_id": FieldSchema(
+            name="topic_node_id", type=int, is_optional=True, is_list=False
+        ),
+        "topic_number": FieldSchema(name="topic_number", type=int, is_optional=True, is_list=False),
+        "topic_url": FieldSchema(name="topic_url", type=str, is_optional=True, is_list=False),
+        "year": FieldSchema(name="year", type=int, is_optional=True, is_list=False),
+    },
+    "Vehicle": {
+        "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
     },
 }

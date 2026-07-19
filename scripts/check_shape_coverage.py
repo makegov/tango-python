@@ -63,6 +63,9 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "naics": "Naics",
     "gsa_elibrary_contracts": "GsaElibraryContract",
     "itdashboard": "ITDashboardInvestment",
+    # Nested routes are keyed with a slash in the contract ("budget/accounts").
+    # The pre-slash key is kept so an older vendored contract still maps.
+    "budget/accounts": "BudgetAccount",
     "budget_accounts": "BudgetAccount",
     "protests": "Protest",
     "offices": "Office",
@@ -70,6 +73,12 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "business_types": "BusinessType",
     "departments": "Department",
     "psc": "PSC",
+    "dibbs/rfqs": "DibbsRfq",
+    "dibbs/rfps": "DibbsRfp",
+    "dibbs/awards": "DibbsAward",
+    "exclusions": "Exclusion",
+    "sbir/topics": "SbirTopic",
+    "sbir/solicitations": "SbirSolicitation",
     "mas_sins": "MasSin",
     "events": "Event",
     "news": "News",

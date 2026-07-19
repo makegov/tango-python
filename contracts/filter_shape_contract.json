@@ -129,6 +129,807 @@
         "show_shapes"
       ]
     },
+    "budget/accounts": {
+      "basename": "budget-account",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "budget/accounts",
+      "resource_key": "budget/accounts",
+      "runtime": {
+        "filter_params": [
+          "account_title__icontains",
+          "actual_vs_requested_contract",
+          "actual_vs_requested_contract__gte",
+          "actual_vs_requested_contract__lte",
+          "actual_vs_requested_contract_capped",
+          "actual_vs_requested_contract_capped__gte",
+          "actual_vs_requested_contract_capped__lte",
+          "agency_code",
+          "agency_code__in",
+          "apportioned",
+          "apportioned__gte",
+          "apportioned__lte",
+          "apportioned_to_enacted_pct",
+          "apportioned_to_enacted_pct__gte",
+          "apportioned_to_enacted_pct__lte",
+          "apportioned_to_enacted_pct_capped",
+          "apportioned_to_enacted_pct_capped__gte",
+          "apportioned_to_enacted_pct_capped__lte",
+          "assistance_obligated",
+          "assistance_obligated__gte",
+          "assistance_obligated__lte",
+          "assistance_outlayed",
+          "assistance_outlayed__gte",
+          "assistance_outlayed__lte",
+          "ba_growth_next_year_pct",
+          "ba_growth_next_year_pct__gte",
+          "ba_growth_next_year_pct__lte",
+          "bea_category",
+          "bea_category__in",
+          "bureau_name",
+          "bureau_name__icontains",
+          "bureau_name__in",
+          "contract_obligated",
+          "contract_obligated__gte",
+          "contract_obligated__lte",
+          "contract_outlayed",
+          "contract_outlayed__gte",
+          "contract_outlayed__lte",
+          "contract_share_of_obligated_capped",
+          "contract_share_of_obligated_capped__gte",
+          "contract_share_of_obligated_capped__lte",
+          "enacted_ba",
+          "enacted_ba_5yr_cagr",
+          "enacted_ba_5yr_cagr__gte",
+          "enacted_ba_5yr_cagr__lte",
+          "enacted_ba__gte",
+          "enacted_ba__lte",
+          "enacted_ba_yoy_pct",
+          "enacted_ba_yoy_pct__gte",
+          "enacted_ba_yoy_pct__lte",
+          "federal_account_symbol",
+          "federal_account_symbol__in",
+          "fiscal_year",
+          "fiscal_year__gte",
+          "fiscal_year__in",
+          "fiscal_year__lte",
+          "obligated_to_apportioned_pct",
+          "obligated_to_apportioned_pct__gte",
+          "obligated_to_apportioned_pct__lte",
+          "obligated_to_apportioned_pct_capped",
+          "obligated_to_apportioned_pct_capped__gte",
+          "obligated_to_apportioned_pct_capped__lte",
+          "obligated_to_enacted_pct",
+          "obligated_to_enacted_pct__gte",
+          "obligated_to_enacted_pct__lte",
+          "obligated_to_enacted_pct_capped",
+          "obligated_to_enacted_pct_capped__gte",
+          "obligated_to_enacted_pct_capped__lte",
+          "obligated_total",
+          "obligated_total__gte",
+          "obligated_total__lte",
+          "obligated_yoy_pct",
+          "obligated_yoy_pct__gte",
+          "obligated_yoy_pct__lte",
+          "on_off_budget",
+          "outlayed_to_obligated_pct",
+          "outlayed_to_obligated_pct__gte",
+          "outlayed_to_obligated_pct__lte",
+          "outlayed_to_obligated_pct_capped",
+          "outlayed_to_obligated_pct_capped__gte",
+          "outlayed_to_obligated_pct_capped__lte",
+          "outlayed_total",
+          "outlayed_total__gte",
+          "outlayed_total__lte",
+          "requested_ba",
+          "requested_ba__gte",
+          "requested_ba__lte",
+          "subfunction_code",
+          "subfunction_code__in",
+          "unobligated_balance",
+          "unobligated_balance__gte",
+          "unobligated_balance__lte",
+          "unobligated_pct",
+          "unobligated_pct__gte",
+          "unobligated_pct__lte"
+        ],
+        "filter_params_detail": {
+          "account_title__icontains": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "actual_vs_requested_contract": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "actual_vs_requested_contract__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "actual_vs_requested_contract__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "actual_vs_requested_contract_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "actual_vs_requested_contract_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "actual_vs_requested_contract_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "agency_code": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "agency_code__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
+          "apportioned": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "apportioned__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "apportioned__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "apportioned_to_enacted_pct_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "assistance_obligated": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "assistance_obligated__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "assistance_obligated__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "assistance_outlayed": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "assistance_outlayed__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "assistance_outlayed__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ba_growth_next_year_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "ba_growth_next_year_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "ba_growth_next_year_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "bea_category": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "bea_category__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
+          "bureau_name": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "bureau_name__icontains": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "bureau_name__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
+          "contract_obligated": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "contract_obligated__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "contract_obligated__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "contract_outlayed": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "contract_outlayed__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "contract_outlayed__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "contract_share_of_obligated_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "contract_share_of_obligated_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "contract_share_of_obligated_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "enacted_ba": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "enacted_ba_5yr_cagr": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "enacted_ba_5yr_cagr__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "enacted_ba_5yr_cagr__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "enacted_ba__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "enacted_ba__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "enacted_ba_yoy_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "enacted_ba_yoy_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "enacted_ba_yoy_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "federal_account_symbol": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "federal_account_symbol__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "fiscal_year__in": {
+            "filter_class": "NumberInFilter",
+            "lookup": "in",
+            "type": "number"
+          },
+          "fiscal_year__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_to_apportioned_pct_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_to_enacted_pct_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_total": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_total__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_total__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "obligated_yoy_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "obligated_yoy_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_yoy_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "on_off_budget": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "outlayed_to_obligated_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "outlayed_to_obligated_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "outlayed_to_obligated_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "outlayed_to_obligated_pct_capped": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "outlayed_to_obligated_pct_capped__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "outlayed_to_obligated_pct_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "outlayed_total": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "outlayed_total__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "outlayed_total__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "requested_ba": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "requested_ba__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "requested_ba__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "subfunction_code": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "subfunction_code__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
+          "unobligated_balance": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "unobligated_balance__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "unobligated_balance__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "unobligated_pct": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "unobligated_pct__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "unobligated_pct__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "actual_vs_requested_contract_capped",
+          "agency_code",
+          "ba_growth_next_year_pct",
+          "contract_obligated",
+          "contract_share_of_obligated_capped",
+          "enacted_ba",
+          "enacted_ba_5yr_cagr",
+          "enacted_ba_yoy_pct",
+          "federal_account_symbol",
+          "fiscal_year",
+          "modified",
+          "obligated_to_apportioned_pct_capped",
+          "obligated_to_enacted_pct_capped",
+          "obligated_total",
+          "outlayed_total"
+        ],
+        "pagination": {
+          "class": "CachedPageNumberPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "appendix": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "appendix_granule_id",
+                "appendix_pdf_url",
+                "federal_account_symbol",
+                "fiscal_year",
+                "has_object_classification",
+                "has_program_financing",
+                "n_program_activities",
+                "narrative_length",
+                "on_off_budget",
+                "request",
+                "subfunction_code"
+              ]
+            },
+            "narratives": {
+              "expands": {},
+              "fields": [
+                "account_code",
+                "account_heading",
+                "agency_code",
+                "agency_title",
+                "appropriations_length",
+                "appropriations_text",
+                "budget_year",
+                "bureau_title",
+                "date_issued",
+                "federal_account_symbol",
+                "fiscal_year",
+                "fund_type",
+                "granule_id",
+                "granule_title",
+                "narrative_id",
+                "narrative_length",
+                "narrative_text",
+                "notes",
+                "on_off_budget",
+                "source_url",
+                "subaccount_code",
+                "subfunction_code"
+              ]
+            }
+          },
+          "fields": [
+            "account_narrative_excerpt",
+            "account_title",
+            "actual_vs_requested_contract",
+            "actual_vs_requested_contract_capped",
+            "actual_vs_requested_contract_capped_flag",
+            "agency_code",
+            "agency_name",
+            "appendix_pdf_url",
+            "apportioned",
+            "apportioned_to_enacted_pct",
+            "apportioned_to_enacted_pct_capped",
+            "apportioned_to_enacted_pct_capped_flag",
+            "assistance_obligated",
+            "assistance_outlayed",
+            "assistance_share_capped_flag",
+            "assistance_share_of_obligated",
+            "assistance_share_of_obligated_capped",
+            "attribution_confidence",
+            "attribution_status",
+            "ba_growth_next_year",
+            "ba_growth_next_year_pct",
+            "bea_category",
+            "bureau_name",
+            "contract_obligated",
+            "contract_obligated_5yr_cagr",
+            "contract_obligated_estimated",
+            "contract_obligated_yoy_pct",
+            "contract_outlayed",
+            "contract_share_capped_flag",
+            "contract_share_of_obligated",
+            "contract_share_of_obligated_capped",
+            "created",
+            "enacted_ba",
+            "enacted_ba_5yr_cagr",
+            "enacted_ba_yoy_pct",
+            "enacted_to_requested_pct",
+            "enacted_to_requested_pct_capped",
+            "enacted_to_requested_pct_capped_flag",
+            "federal_account_symbol",
+            "fiscal_year",
+            "id",
+            "modified",
+            "n_contracts",
+            "n_grants",
+            "n_unique_contract_recipients",
+            "n_unique_grant_recipients",
+            "next_year_requested_ba",
+            "obligated_to_apportioned_pct",
+            "obligated_to_apportioned_pct_capped",
+            "obligated_to_apportioned_pct_capped_flag",
+            "obligated_to_enacted_pct",
+            "obligated_to_enacted_pct_capped",
+            "obligated_to_enacted_pct_capped_flag",
+            "obligated_total",
+            "obligated_yoy_pct",
+            "on_off_budget",
+            "outlayed_to_obligated_pct",
+            "outlayed_to_obligated_pct_capped",
+            "outlayed_to_obligated_pct_capped_flag",
+            "outlayed_total",
+            "requested_ba",
+            "requested_contractual_services",
+            "requested_personnel_share",
+            "subfunction_code",
+            "top_contract_recipients",
+            "top_grant_recipients",
+            "unlinked_obligated",
+            "unobligated_balance",
+            "unobligated_pct"
+          ]
+        },
+        "shape_flat_paths": [
+          "account_narrative_excerpt",
+          "account_title",
+          "actual_vs_requested_contract",
+          "actual_vs_requested_contract_capped",
+          "actual_vs_requested_contract_capped_flag",
+          "agency_code",
+          "agency_name",
+          "appendix",
+          "appendix.agency_code",
+          "appendix.appendix_granule_id",
+          "appendix.appendix_pdf_url",
+          "appendix.federal_account_symbol",
+          "appendix.fiscal_year",
+          "appendix.has_object_classification",
+          "appendix.has_program_financing",
+          "appendix.n_program_activities",
+          "appendix.narrative_length",
+          "appendix.on_off_budget",
+          "appendix.request",
+          "appendix.subfunction_code",
+          "appendix_pdf_url",
+          "apportioned",
+          "apportioned_to_enacted_pct",
+          "apportioned_to_enacted_pct_capped",
+          "apportioned_to_enacted_pct_capped_flag",
+          "assistance_obligated",
+          "assistance_outlayed",
+          "assistance_share_capped_flag",
+          "assistance_share_of_obligated",
+          "assistance_share_of_obligated_capped",
+          "attribution_confidence",
+          "attribution_status",
+          "ba_growth_next_year",
+          "ba_growth_next_year_pct",
+          "bea_category",
+          "bureau_name",
+          "contract_obligated",
+          "contract_obligated_5yr_cagr",
+          "contract_obligated_estimated",
+          "contract_obligated_yoy_pct",
+          "contract_outlayed",
+          "contract_share_capped_flag",
+          "contract_share_of_obligated",
+          "contract_share_of_obligated_capped",
+          "created",
+          "enacted_ba",
+          "enacted_ba_5yr_cagr",
+          "enacted_ba_yoy_pct",
+          "enacted_to_requested_pct",
+          "enacted_to_requested_pct_capped",
+          "enacted_to_requested_pct_capped_flag",
+          "federal_account_symbol",
+          "fiscal_year",
+          "id",
+          "modified",
+          "n_contracts",
+          "n_grants",
+          "n_unique_contract_recipients",
+          "n_unique_grant_recipients",
+          "narratives",
+          "narratives.account_code",
+          "narratives.account_heading",
+          "narratives.agency_code",
+          "narratives.agency_title",
+          "narratives.appropriations_length",
+          "narratives.appropriations_text",
+          "narratives.budget_year",
+          "narratives.bureau_title",
+          "narratives.date_issued",
+          "narratives.federal_account_symbol",
+          "narratives.fiscal_year",
+          "narratives.fund_type",
+          "narratives.granule_id",
+          "narratives.granule_title",
+          "narratives.narrative_id",
+          "narratives.narrative_length",
+          "narratives.narrative_text",
+          "narratives.notes",
+          "narratives.on_off_budget",
+          "narratives.source_url",
+          "narratives.subaccount_code",
+          "narratives.subfunction_code",
+          "next_year_requested_ba",
+          "obligated_to_apportioned_pct",
+          "obligated_to_apportioned_pct_capped",
+          "obligated_to_apportioned_pct_capped_flag",
+          "obligated_to_enacted_pct",
+          "obligated_to_enacted_pct_capped",
+          "obligated_to_enacted_pct_capped_flag",
+          "obligated_total",
+          "obligated_yoy_pct",
+          "on_off_budget",
+          "outlayed_to_obligated_pct",
+          "outlayed_to_obligated_pct_capped",
+          "outlayed_to_obligated_pct_capped_flag",
+          "outlayed_total",
+          "requested_ba",
+          "requested_contractual_services",
+          "requested_personnel_share",
+          "subfunction_code",
+          "top_contract_recipients",
+          "top_grant_recipients",
+          "unlinked_obligated",
+          "unobligated_balance",
+          "unobligated_pct"
+        ],
+        "viewset": "budget.views.BudgetAccountViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
     "business_types": {
       "basename": "businesstype",
       "docs_file": null,
@@ -350,7 +1151,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -987,6 +1788,493 @@
         "show_shapes"
       ]
     },
+    "dibbs/awards": {
+      "basename": "dibbs-award",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "dibbs/awards",
+      "resource_key": "dibbs/awards",
+      "runtime": {
+        "filter_params": [
+          "award_date_after",
+          "award_date_before",
+          "award_number",
+          "awardee_cage",
+          "delivery_order_number",
+          "entity",
+          "nsn",
+          "organization",
+          "part_number",
+          "posted_date_after",
+          "posted_date_before",
+          "purchase_request",
+          "search",
+          "solicitation",
+          "total_contract_price_max",
+          "total_contract_price_min"
+        ],
+        "filter_params_detail": {
+          "award_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "award_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "award_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "awardee_cage": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "delivery_order_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "entity": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "nsn": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "organization": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "part_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "posted_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "posted_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "purchase_request": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "solicitation": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "total_contract_price_max": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "total_contract_price_min": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "modified",
+          "posted_date",
+          "rank",
+          "total_contract_price"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "awardee": {
+              "expands": {},
+              "fields": [
+                "cage_code",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "award_date",
+            "award_number",
+            "awardee_cage",
+            "delivery_order_counter",
+            "delivery_order_number",
+            "last_mod_posting_date",
+            "nomenclature",
+            "nsn",
+            "part_number",
+            "posted_date",
+            "purchase_request",
+            "solicitation",
+            "total_contract_price",
+            "total_contract_price_text",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "award_date",
+          "award_number",
+          "awardee",
+          "awardee.cage_code",
+          "awardee.legal_business_name",
+          "awardee.uei",
+          "awardee_cage",
+          "delivery_order_counter",
+          "delivery_order_number",
+          "last_mod_posting_date",
+          "nomenclature",
+          "nsn",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "part_number",
+          "posted_date",
+          "purchase_request",
+          "solicitation",
+          "total_contract_price",
+          "total_contract_price_text",
+          "uuid"
+        ],
+        "viewset": "dibbs.views.DibbsAwardViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "dibbs/rfps": {
+      "basename": "dibbs-rfp",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "dibbs/rfps",
+      "resource_key": "dibbs/rfps",
+      "runtime": {
+        "filter_params": [
+          "buyer_code",
+          "closes_date_after",
+          "closes_date_before",
+          "issued_date_after",
+          "issued_date_before",
+          "nsn",
+          "open",
+          "organization",
+          "part_number",
+          "search",
+          "solicitation"
+        ],
+        "filter_params_detail": {
+          "buyer_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "closes_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "closes_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "issued_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "issued_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "nsn": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "open": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "organization": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "part_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "solicitation": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "closes_date",
+          "issued_date",
+          "modified",
+          "rank"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "buyer_code",
+            "closes_date",
+            "document_url",
+            "is_open",
+            "issued_date",
+            "nomenclature",
+            "nsn",
+            "part_number",
+            "solicitation",
+            "tech_docs_url",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "buyer_code",
+          "closes_date",
+          "document_url",
+          "is_open",
+          "issued_date",
+          "nomenclature",
+          "nsn",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "part_number",
+          "solicitation",
+          "tech_docs_url",
+          "uuid"
+        ],
+        "viewset": "dibbs.views.DibbsRfpViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "dibbs/rfqs": {
+      "basename": "dibbs-rfq",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "dibbs/rfqs",
+      "resource_key": "dibbs/rfqs",
+      "runtime": {
+        "filter_params": [
+          "issue_date_after",
+          "issue_date_before",
+          "nsn",
+          "open",
+          "organization",
+          "part_number",
+          "purchase_request",
+          "quantity_max",
+          "quantity_min",
+          "return_by_date_after",
+          "return_by_date_before",
+          "search",
+          "set_aside",
+          "solicitation",
+          "status_code"
+        ],
+        "filter_params_detail": {
+          "issue_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "issue_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "nsn": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "open": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "organization": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "part_number": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "purchase_request": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "quantity_max": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "quantity_min": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "return_by_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "return_by_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "set_aside": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "solicitation": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "status_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "issue_date",
+          "modified",
+          "quantity",
+          "rank",
+          "return_by_date"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "document_url",
+            "is_open",
+            "issue_date",
+            "nomenclature",
+            "nsn",
+            "part_number",
+            "purchase_request",
+            "quantity",
+            "return_by_date",
+            "set_aside",
+            "solicitation",
+            "solicitation_formatted",
+            "status_code",
+            "unit_of_issue",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "document_url",
+          "is_open",
+          "issue_date",
+          "nomenclature",
+          "nsn",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "part_number",
+          "purchase_request",
+          "quantity",
+          "return_by_date",
+          "set_aside",
+          "solicitation",
+          "solicitation_formatted",
+          "status_code",
+          "unit_of_issue",
+          "uuid"
+        ],
+        "viewset": "dibbs.views.DibbsRfqViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
     "entities": {
       "basename": "entity",
       "docs_file": null,
@@ -1157,6 +2445,226 @@
       },
       "swagger_has_key": false,
       "swagger_params": []
+    },
+    "exclusions": {
+      "basename": "exclusion",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "exclusions",
+      "resource_key": "exclusions",
+      "runtime": {
+        "filter_params": [
+          "activate_date_after",
+          "activate_date_before",
+          "active",
+          "cage_code",
+          "classification_type",
+          "delisted",
+          "entity_uei",
+          "excluding_agency_code",
+          "excluding_agency_name",
+          "exclusion_program",
+          "exclusion_type",
+          "npi",
+          "search",
+          "termination_date_after",
+          "termination_date_before",
+          "uei",
+          "update_date_after",
+          "update_date_before"
+        ],
+        "filter_params_detail": {
+          "activate_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "activate_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "active": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "cage_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "classification_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "delisted": {
+            "filter_class": "BooleanFilter",
+            "lookup": "isnull",
+            "type": "boolean"
+          },
+          "entity_uei": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "excluding_agency_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "excluding_agency_name": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "exclusion_program": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "exclusion_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "npi": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "termination_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "termination_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "uei": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "update_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "update_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "activate_date",
+          "create_date",
+          "modified",
+          "rank",
+          "termination_date",
+          "update_date"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "activate_date",
+            "additional_comments",
+            "cage_code",
+            "classification_type",
+            "create_date",
+            "ct_code",
+            "delisted_at",
+            "display_name",
+            "dnb_open_data",
+            "entity_name",
+            "entity_uei",
+            "evs_investigation_status",
+            "excluding_agency_code",
+            "excluding_agency_name",
+            "exclusion_key",
+            "exclusion_program",
+            "exclusion_type",
+            "first_name",
+            "is_currently_excluded",
+            "is_fascsa_order",
+            "last_name",
+            "middle_name",
+            "more_locations",
+            "npi",
+            "prefix",
+            "primary_address",
+            "references",
+            "secondary_address",
+            "suffix",
+            "termination_date",
+            "termination_type",
+            "uei",
+            "update_date",
+            "vessel_call_sign",
+            "vessel_flag",
+            "vessel_grt",
+            "vessel_owner",
+            "vessel_tonnage",
+            "vessel_type"
+          ]
+        },
+        "shape_flat_paths": [
+          "activate_date",
+          "additional_comments",
+          "cage_code",
+          "classification_type",
+          "create_date",
+          "ct_code",
+          "delisted_at",
+          "display_name",
+          "dnb_open_data",
+          "entity_name",
+          "entity_uei",
+          "evs_investigation_status",
+          "excluding_agency_code",
+          "excluding_agency_name",
+          "exclusion_key",
+          "exclusion_program",
+          "exclusion_type",
+          "first_name",
+          "is_currently_excluded",
+          "is_fascsa_order",
+          "last_name",
+          "middle_name",
+          "more_locations",
+          "npi",
+          "prefix",
+          "primary_address",
+          "references",
+          "secondary_address",
+          "suffix",
+          "termination_date",
+          "termination_type",
+          "uei",
+          "update_date",
+          "vessel_call_sign",
+          "vessel_flag",
+          "vessel_grt",
+          "vessel_owner",
+          "vessel_tonnage",
+          "vessel_type"
+        ],
+        "viewset": "exclusions.views.ExclusionViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "ordering",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
     },
     "forecasts": {
       "basename": "forecast",
@@ -2039,7 +3547,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -2860,7 +4368,7 @@
             "type": "date"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
+            "filter_class": "NoticeSearchFilter",
             "type": "string"
           },
           "set_aside": {
@@ -3063,7 +4571,7 @@
             "type": "string"
           },
           "place_of_performance": {
-            "filter_class": "BaseSmartFilter",
+            "filter_class": "OpportunityPlaceOfPerformanceFilter",
             "type": "string"
           },
           "psc": {
@@ -3111,6 +4619,7 @@
       },
       "swagger_has_key": true,
       "swagger_params": [
+        "active",
         "agency",
         "first_notice_date_after",
         "first_notice_date_before",
@@ -3543,7 +5052,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -3891,7 +5400,7 @@
         ],
         "pagination": {
           "class": "KeysetPagination",
-          "max_page_size": null
+          "max_page_size": 100
         },
         "shape": {
           "expands": {
@@ -4094,6 +5603,7 @@
           "decision_date_before",
           "filed_date_after",
           "filed_date_before",
+          "naics_code",
           "outcome",
           "protester",
           "search",
@@ -4132,6 +5642,11 @@
             "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
+          },
+          "naics_code": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
           },
           "outcome": {
             "filter_class": "BaseSmartFilter",
@@ -4257,6 +5772,395 @@
         "shape",
         "show_shapes"
       ]
+    },
+    "sbir/solicitations": {
+      "basename": "sbir-solicitation",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "sbir/solicitations",
+      "resource_key": "sbir/solicitations",
+      "runtime": {
+        "filter_params": [
+          "activity",
+          "cycle_name",
+          "end_date_after",
+          "end_date_before",
+          "out_of_cycle",
+          "program",
+          "search",
+          "solicitation_number",
+          "solicitation_status",
+          "start_date_after",
+          "start_date_before",
+          "year"
+        ],
+        "filter_params_detail": {
+          "activity": {
+            "choices": [
+              "closed",
+              "open"
+            ],
+            "choices_count": 2,
+            "filter_class": "ChoiceFilter",
+            "type": "choice"
+          },
+          "cycle_name": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "end_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "end_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "out_of_cycle": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "program": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "solicitation_number": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "solicitation_status": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "start_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "start_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "activity",
+          "end_date",
+          "modified",
+          "start_date",
+          "year"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "documents": {
+              "expands": {},
+              "fields": [
+                "cycle_name",
+                "document_id",
+                "extraction_status",
+                "file_size",
+                "filename",
+                "n_chars",
+                "n_pages",
+                "s3_key"
+              ]
+            },
+            "topics": {
+              "expands": {},
+              "fields": [
+                "agency",
+                "close_date",
+                "title",
+                "topic_id",
+                "topic_number",
+                "topic_url"
+              ]
+            }
+          },
+          "fields": [
+            "activity",
+            "cycle",
+            "cycle_name",
+            "end_date",
+            "out_of_cycle",
+            "program",
+            "sol_download_url",
+            "solicitation_cycle_id",
+            "solicitation_id",
+            "solicitation_number",
+            "solicitation_status",
+            "source_last_updated",
+            "start_date",
+            "title",
+            "year"
+          ]
+        },
+        "shape_flat_paths": [
+          "activity",
+          "cycle",
+          "cycle_name",
+          "documents",
+          "documents.cycle_name",
+          "documents.document_id",
+          "documents.extraction_status",
+          "documents.file_size",
+          "documents.filename",
+          "documents.n_chars",
+          "documents.n_pages",
+          "documents.s3_key",
+          "end_date",
+          "out_of_cycle",
+          "program",
+          "sol_download_url",
+          "solicitation_cycle_id",
+          "solicitation_id",
+          "solicitation_number",
+          "solicitation_status",
+          "source_last_updated",
+          "start_date",
+          "title",
+          "topics",
+          "topics.agency",
+          "topics.close_date",
+          "topics.title",
+          "topics.topic_id",
+          "topics.topic_number",
+          "topics.topic_url",
+          "year"
+        ],
+        "viewset": "sbir.views.SbirDsipSolicitationViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "sbir/topics": {
+      "basename": "sbir-topic",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "sbir/topics",
+      "resource_key": "sbir/topics",
+      "runtime": {
+        "filter_params": [
+          "activity",
+          "agency",
+          "close_date_after",
+          "close_date_before",
+          "doc_source",
+          "open_date_after",
+          "open_date_before",
+          "release_date_after",
+          "release_date_before",
+          "search",
+          "solicitation_number",
+          "topic_number",
+          "year"
+        ],
+        "filter_params_detail": {
+          "activity": {
+            "choices": [
+              "closed",
+              "open",
+              "unknown"
+            ],
+            "choices_count": 3,
+            "filter_class": "ChoiceFilter",
+            "type": "choice"
+          },
+          "agency": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "close_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "close_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "doc_source": {
+            "filter_class": "CharFilter",
+            "lookup": "iexact",
+            "type": "string"
+          },
+          "open_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "open_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "release_date_after": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "release_date_before": {
+            "filter_class": "DateFromToRangeFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "solicitation_number": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "topic_number": {
+            "filter_class": "CharFilter",
+            "lookup": "icontains",
+            "type": "string"
+          },
+          "year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "activity",
+          "close_date",
+          "modified",
+          "open_date",
+          "release_date",
+          "year"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "grant": {
+              "expands": {},
+              "fields": [
+                "grant_id",
+                "opportunity_number",
+                "response_date",
+                "title"
+              ]
+            },
+            "opportunity": {
+              "expands": {},
+              "fields": [
+                "opportunity_id",
+                "response_deadline",
+                "solicitation_number",
+                "title"
+              ]
+            },
+            "solicitation": {
+              "expands": {},
+              "fields": [
+                "cycle_name",
+                "end_date",
+                "out_of_cycle",
+                "program",
+                "solicitation_id",
+                "solicitation_number",
+                "solicitation_status",
+                "start_date",
+                "title",
+                "year"
+              ]
+            }
+          },
+          "fields": [
+            "activity",
+            "agency",
+            "close_date",
+            "description",
+            "doc_source",
+            "due_dates_text",
+            "listed_open",
+            "official_solicitation_url",
+            "open_date",
+            "release_date",
+            "solicitation_number",
+            "solicitation_status",
+            "source_last_updated",
+            "title",
+            "topic_id",
+            "topic_node_id",
+            "topic_number",
+            "topic_url",
+            "year"
+          ]
+        },
+        "shape_flat_paths": [
+          "activity",
+          "agency",
+          "close_date",
+          "description",
+          "doc_source",
+          "due_dates_text",
+          "grant",
+          "grant.grant_id",
+          "grant.opportunity_number",
+          "grant.response_date",
+          "grant.title",
+          "listed_open",
+          "official_solicitation_url",
+          "open_date",
+          "opportunity",
+          "opportunity.opportunity_id",
+          "opportunity.response_deadline",
+          "opportunity.solicitation_number",
+          "opportunity.title",
+          "release_date",
+          "solicitation",
+          "solicitation.cycle_name",
+          "solicitation.end_date",
+          "solicitation.out_of_cycle",
+          "solicitation.program",
+          "solicitation.solicitation_id",
+          "solicitation.solicitation_number",
+          "solicitation.solicitation_status",
+          "solicitation.start_date",
+          "solicitation.title",
+          "solicitation.year",
+          "solicitation_number",
+          "solicitation_status",
+          "source_last_updated",
+          "title",
+          "topic_id",
+          "topic_node_id",
+          "topic_number",
+          "topic_url",
+          "year"
+        ],
+        "viewset": "sbir.views.SbirTopicViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
     },
     "subawards": {
       "basename": "subaward",
@@ -5474,6 +7378,7 @@
             "last_date_to_order",
             "latest_award_date",
             "naics_code",
+            "name",
             "opportunity_id",
             "order_count",
             "organization",
@@ -5900,6 +7805,7 @@
           "metrics.top_recipient_share",
           "metrics.using_agency_count",
           "naics_code",
+          "name",
           "opportunity",
           "opportunity.active",
           "opportunity.agency",
@@ -6057,11 +7963,16 @@
     "no_docs_page": [
       "agencies",
       "assistance_listings",
+      "budget/accounts",
       "business_types",
       "contracts",
       "departments",
+      "dibbs/awards",
+      "dibbs/rfps",
+      "dibbs/rfqs",
       "entities",
       "events",
+      "exclusions",
       "forecasts",
       "grants",
       "gsa_elibrary_contracts",
@@ -6078,14 +7989,22 @@
       "otidvs",
       "protests",
       "psc",
+      "sbir/solicitations",
+      "sbir/topics",
       "subawards",
       "vehicles"
     ],
     "no_swagger": [
+      "budget/accounts",
+      "dibbs/awards",
+      "dibbs/rfps",
+      "dibbs/rfqs",
       "events",
       "itdashboard",
       "news",
-      "protests"
+      "protests",
+      "sbir/solicitations",
+      "sbir/topics"
     ]
   }
 }
