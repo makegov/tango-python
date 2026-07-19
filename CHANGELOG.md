@@ -8,6 +8,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Reverse shape-coverage: the SDK now captures every field and expand the API
+  returns.** The conformance check only validated one direction — that the SDK's
+  shape constants reference *allowed* fields. Nothing checked the reverse, so the
+  hand-maintained `tango/shapes/explicit_schemas.py` had silently fallen ~200+
+  fields behind the API: 209 leaf fields, 41 whole nested expand branches, and 3
+  resources (naics, psc, mas_sins) the typed shape API could not request at all.
+  A new generated overlay (`tango/shapes/generated_overlay.py`, produced by
+  `scripts/generate_shape_overlay.py` and merged over the base by `SchemaRegistry`)
+  closes all of them, with types resolved from live-API sampling rather than
+  guessed. Notable now-shapeable data: contract/IDV acquisition attributes
+  (`fair_opportunity_limited_sources`, `subcontracting_plan`, …), `contracts.officers`
+  and `period_of_performance`, the full `organizations` hierarchy
+  (`obligation_rank`, `l1..l8_fh_key`, `budget_appropriation`, `children`/`parent`),
+  `otas`/`otidvs` `transactions`, and the deep `vehicles.awardees[.orders]` tree.
+  Code-object expands (`set_aside`, `award_type`, `idv_type`, …), previously
+  modeled inconsistently as `str`/bare `dict`, now uniformly resolve to
+  `{code, description}`.
+- **Reverse shape-coverage gate.** `scripts/check_shape_coverage.py` walks Tango's
+  shape trees (from the vendored contract) against the SDK schemas and fails when
+  the SDK misses anything the API exposes and it isn't in
+  `contracts/shape_coverage_baseline.json`. Offline against the vendored contract —
+  no token, runs on forks — and wired into the `lint.yml` conformance job.
+  Regenerate the overlay with `scripts/generate_shape_overlay.py` (from the vendored
+  contract + `contracts/observed_shape_types.json`, no API key); refresh the type
+  observations with `scripts/probe_shape_types.py` (maintainer-run, needs a key).
 - **Contract-first conformance system.** The canonical API filter/shape
   contract is now vendored at `contracts/filter_shape_contract.json` (refresh
   with the new `scripts/refresh_contract.py`), so the conformance check runs

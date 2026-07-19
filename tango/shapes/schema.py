@@ -103,6 +103,22 @@ class SchemaRegistry:
             # Explicit schemas module not available, fall back to dataclass introspection
             pass
 
+        # Merge the generated reverse-coverage overlay — the fields and expands
+        # Tango's shape trees expose that the hand-curated schemas above missed.
+        # Generated from the vendored contract + live-API type probe; see
+        # scripts/generate_shape_overlay.py and check_shape_coverage.py.
+        # Copy each schema before updating so the module-level EXPLICIT_SCHEMAS
+        # dicts are never mutated (they may be shared across registry instances).
+        try:
+            from tango.shapes.generated_overlay import GENERATED_NESTED, GENERATED_OVERLAY
+
+            for ref_name, schema in GENERATED_NESTED.items():
+                self._schemas[ref_name] = {**self._schemas.get(ref_name, {}), **schema}
+            for model_name, additions in GENERATED_OVERLAY.items():
+                self._schemas[model_name] = {**self._schemas.get(model_name, {}), **additions}
+        except ImportError:
+            pass
+
     def _register_builtin_models(self) -> None:
         """Register all built-in Tango model schemas
 

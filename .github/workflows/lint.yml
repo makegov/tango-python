@@ -11,6 +11,10 @@ name: Linting
 #   vendored contract against the tango repo's HEAD and emits a staleness
 #   notice (never a failure — tango HEAD may carry unreleased changes).
 #   Refresh the vendored contract with scripts/refresh_contract.py.
+# - Reverse shape-coverage is a HARD gate: check_shape_coverage.py fails when
+#   Tango's shape trees expose a field/expand the SDK schema doesn't capture and
+#   it isn't in contracts/shape_coverage_baseline.json. Also offline (vendored
+#   contract), so it runs on forks. Burn the baseline down with the generator.
 on:
   workflow_dispatch:
   push:
@@ -67,6 +71,13 @@ jobs:
 
     - name: Check SDK filter/shape conformance (vendored contract)
       run: uv run python scripts/check_filter_shape_conformance.py
+
+    - name: Check reverse shape coverage (Tango exposes -> SDK captures)
+      # Complements the conformance check with the OTHER direction: fails when
+      # Tango's shape trees expose a field/expand the SDK schema doesn't capture
+      # and it isn't in contracts/shape_coverage_baseline.json. Also offline
+      # against the vendored contract — no secrets, works on forks.
+      run: uv run python scripts/check_shape_coverage.py
 
     # --- Staleness notice (best-effort, never fails the job) ---------------
     - name: Determine token availability
