@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-19
+
 ### Added
 - **DIBBS, exclusions, and SBIR/STTR endpoint support.** Six endpoint families
   Tango shipped in v4.16–v4.18 had no SDK support at all — no models, no methods.
@@ -47,39 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Regenerate the overlay with `scripts/generate_shape_overlay.py` (from the vendored
   contract + `contracts/observed_shape_types.json`, no API key); refresh the type
   observations with `scripts/probe_shape_types.py` (maintainer-run, needs a key).
-
-### Fixed
-- **`docs/WEBHOOKS.md` listed only five of the eight webhook alert types.** It
-  was missing `alerts.exclusion.match`, `alerts.dibbs_rfq.match`, and
-  `alerts.dibbs_rfp.match`. No SDK change was needed — event types are served by
-  the API and never hardcoded, so the new types already worked — but the
-  hand-written list had gone stale. Also documents two things that surprise
-  people: DIBBS *awards* are not alertable, and nothing fires when a record
-  merely lapses (an exclusion hitting its termination date, or an RFQ/RFP
-  passing its close date, emits no event). A production smoke test now asserts
-  every live event type appears in the doc, so the list cannot silently fall
-  behind again.
-- **Refreshed the vendored API contract, which had gone stale by seven
-  resources.** It tracked 25 resources against Tango's current 32, so the
-  conformance and coverage checks were validating against out-of-date truth and
-  could not see DIBBS, exclusions, SBIR, or `budget/accounts` at all. Refreshing
-  it also surfaced 72 additional fields on existing resources, now covered.
-  Nested routes are keyed with a slash (`budget/accounts`), which silently broke
-  the old `budget_accounts` mapping — both keys are now accepted.
-- **`check_filter_shape_conformance.py` no longer reports false stale params.**
-  It resolved SDK arguments to API params only through an explicit
-  `api_param_mapping` dict, so methods that express the translation as tuple
-  tables — `("account_title__icontains", account_title)` and
-  `range_filters = (("apportioned", apportioned, apportioned_gte, ...))` — looked
-  like they exposed dozens of params the API rejects. They do not:
-  `list_budget_accounts` correctly sends `apportioned__gte`, `fiscal_year__lte`,
-  and `account_title__icontains`. The checker now understands both tuple forms
-  (in `Assign`, `AnnAssign`, and inline `for` iterables), with an explicit
-  `api_param_mapping` still taking precedence. This let `budget/accounts` be
-  conformance-checked for the first time; its genuinely missing lookup variants
-  (`agency_code__in`, `bureau_name__icontains`, …) are now baselined.
-
-### Added
 - **Contract-first conformance system.** The canonical API filter/shape
   contract is now vendored at `contracts/filter_shape_contract.json` (refresh
   with the new `scripts/refresh_contract.py`), so the conformance check runs
@@ -113,6 +82,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   returns structured `issues` — e.g.
   `Invalid request parameters: Invalid shape: tradeoff_process (unknown_field)`
   instead of just `Invalid request parameters: Invalid shape`. ([#45](https://github.com/makegov/tango-python/issues/45))
+
+### Fixed
+- **`docs/WEBHOOKS.md` listed only five of the eight webhook alert types.** It
+  was missing `alerts.exclusion.match`, `alerts.dibbs_rfq.match`, and
+  `alerts.dibbs_rfp.match`. No SDK change was needed — event types are served by
+  the API and never hardcoded, so the new types already worked — but the
+  hand-written list had gone stale. Also documents two things that surprise
+  people: DIBBS *awards* are not alertable, and nothing fires when a record
+  merely lapses (an exclusion hitting its termination date, or an RFQ/RFP
+  passing its close date, emits no event). A production smoke test now asserts
+  every live event type appears in the doc, so the list cannot silently fall
+  behind again.
+- **Refreshed the vendored API contract, which had gone stale by seven
+  resources.** It tracked 25 resources against Tango's current 32, so the
+  conformance and coverage checks were validating against out-of-date truth and
+  could not see DIBBS, exclusions, SBIR, or `budget/accounts` at all. Refreshing
+  it also surfaced 72 additional fields on existing resources, now covered.
+  Nested routes are keyed with a slash (`budget/accounts`), which silently broke
+  the old `budget_accounts` mapping — both keys are now accepted.
+- **`check_filter_shape_conformance.py` no longer reports false stale params.**
+  It resolved SDK arguments to API params only through an explicit
+  `api_param_mapping` dict, so methods that express the translation as tuple
+  tables — `("account_title__icontains", account_title)` and
+  `range_filters = (("apportioned", apportioned, apportioned_gte, ...))` — looked
+  like they exposed dozens of params the API rejects. They do not:
+  `list_budget_accounts` correctly sends `apportioned__gte`, `fiscal_year__lte`,
+  and `account_title__icontains`. The checker now understands both tuple forms
+  (in `Assign`, `AnnAssign`, and inline `for` iterables), with an explicit
+  `api_param_mapping` still taking precedence. This let `budget/accounts` be
+  conformance-checked for the first time; its genuinely missing lookup variants
+  (`agency_code__in`, `bureau_name__icontains`, …) are now baselined.
 
 ## [1.2.0] - 2026-06-05
 
