@@ -98,15 +98,11 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
 # removed once Tango's generator surfaces it — `check_conformance` warns when an
 # entry is no longer needed, so this list cannot quietly rot.
 #
-#   mas_sins `search`: verified 2026-07-20 — 330 results unfiltered vs 0 for a
-#   nonsense term, 32 for "office", 3 for "cloud". The endpoint clearly applies
-#   it, and the contract records `filter_params: []` for the resource.
-#
-# (budget/accounts `search` lived here until 2026-07-20; makegov/tango#2944's
-# SearchFilter extraction now publishes it, so the carve-out was removed.)
-CONTRACT_OMITTED_PARAMS: dict[str, frozenset[str]] = {
-    "mas_sins": frozenset({"search"}),
-}
+# Currently empty, and that is the goal state. Two entries have come and gone:
+# budget/accounts `search` (published by makegov/tango#2944's SearchFilter
+# extraction) and mas_sins `search` (published by makegov/tango#2948's
+# `view_handled_params` declaration). Both were retired by the warning above.
+CONTRACT_OMITTED_PARAMS: dict[str, frozenset[str]] = {}
 
 # SDK-level conveniences that never correspond to API filter params.
 # `sort`/`order` compose into the API's `ordering`; `filters` is the legacy

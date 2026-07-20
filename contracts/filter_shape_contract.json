@@ -4613,8 +4613,15 @@
       "prefix": "mas_sins",
       "resource_key": "mas_sins",
       "runtime": {
-        "filter_params": [],
-        "filter_params_detail": {},
+        "filter_params": [
+          "search"
+        ],
+        "filter_params_detail": {
+          "search": {
+            "filter_class": "ViewHandledParam",
+            "type": "string"
+          }
+        },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
@@ -6882,8 +6889,15 @@
       "prefix": "psc",
       "resource_key": "psc",
       "runtime": {
-        "filter_params": [],
-        "filter_params_detail": {},
+        "filter_params": [
+          "has_awards"
+        ],
+        "filter_params_detail": {
+          "has_awards": {
+            "filter_class": "ViewHandledParam",
+            "type": "boolean"
+          }
+        },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {

@@ -1949,3 +1949,44 @@ class TestProtestFilters:
         client.list_protests()
 
         assert "naics_code" not in mock_request.call_args[1]["params"]
+
+
+def _stub_empty_page(mock_request):
+    """Wire a mocked httpx response for an empty paginated result."""
+    mock_response = Mock()
+    mock_response.is_success = True
+    mock_response.status_code = 200
+    mock_response.json.return_value = {
+        "count": 0,
+        "next": None,
+        "previous": None,
+        "results": [],
+    }
+    mock_response.content = b'{"count": 0}'
+    mock_request.return_value = mock_response
+
+
+class TestPscFilters:
+    """`has_awards` reached the SDK only after makegov/tango#2948 published it.
+
+    The param filtered for real but was absent from the contract, so the conformance check had nothing to compare against and the gap went unreported.
+    """
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_psc_forwards_has_awards_true(self, mock_request):
+        _stub_empty_page(mock_request)
+        TangoClient(api_key="test-key").list_psc(has_awards=True)
+        assert mock_request.call_args[1]["params"]["has_awards"] == "true"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_psc_forwards_has_awards_false(self, mock_request):
+        """False must be sent, not dropped — the API distinguishes them."""
+        _stub_empty_page(mock_request)
+        TangoClient(api_key="test-key").list_psc(has_awards=False)
+        assert mock_request.call_args[1]["params"]["has_awards"] == "false"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_psc_omits_unset_has_awards(self, mock_request):
+        _stub_empty_page(mock_request)
+        TangoClient(api_key="test-key").list_psc()
+        assert "has_awards" not in mock_request.call_args[1]["params"]
