@@ -18,6 +18,13 @@ ADDITIONAL_INFO_SCHEMA: dict[str, FieldSchema] = {
     "link": FieldSchema(name="link", type=str, is_optional=True, is_list=False),
 }
 
+ADDRESS_SCHEMA: dict[str, FieldSchema] = {
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "country": FieldSchema(name="country", type=str, is_optional=True, is_list=False),
+    "state": FieldSchema(name="state", type=str, is_optional=True, is_list=False),
+    "zip": FieldSchema(name="zip", type=str, is_optional=True, is_list=False),
+}
+
 AGENCY_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=int, is_optional=True, is_list=False),
@@ -68,7 +75,36 @@ APPENDIX_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+ARCHIVE_SCHEMA: dict[str, FieldSchema] = {
+    "date": FieldSchema(name="date", type=date, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+}
+
 ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
+    "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
+    "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
+    "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=str, is_optional=True, is_list=False),
+    "resource_id": FieldSchema(name="resource_id", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+}
+
+ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
+    "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
+    "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
+    "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=True, is_list=False),
+    "resource_id": FieldSchema(name="resource_id", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+}
+
+ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
     "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
@@ -86,22 +122,6 @@ AWARDEE_SCHEMA: dict[str, FieldSchema] = {
         name="legal_business_name", type=str, is_optional=True, is_list=False
     ),
     "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
-}
-
-AWARDING_OFFICE_SCHEMA: dict[str, FieldSchema] = {
-    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
-    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
-    "department_code": FieldSchema(
-        name="department_code", type=str, is_optional=True, is_list=False
-    ),
-    "department_name": FieldSchema(
-        name="department_name", type=str, is_optional=True, is_list=False
-    ),
-    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
-    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
-    "organization_id": FieldSchema(
-        name="organization_id", type=str, is_optional=True, is_list=False
-    ),
 }
 
 BUDGET_APPROPRIATION_SCHEMA: dict[str, FieldSchema] = {
@@ -147,6 +167,18 @@ CURRENT_SCHEMA: dict[str, FieldSchema] = {
     "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
 }
 
+DECISIONS_SCHEMA: dict[str, FieldSchema] = {
+    "courtlistener_url": FieldSchema(
+        name="courtlistener_url", type=str, is_optional=True, is_list=False
+    ),
+    "decision_date": FieldSchema(name="decision_date", type=date, is_optional=True, is_list=False),
+    "document_type": FieldSchema(name="document_type", type=str, is_optional=True, is_list=False),
+    "document_url": FieldSchema(name="document_url", type=str, is_optional=True, is_list=False),
+    "judges": FieldSchema(name="judges", type=str, is_optional=True, is_list=False),
+    "outcome": FieldSchema(name="outcome", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+}
+
 DEPARTMENT_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "cgac": FieldSchema(name="cgac", type=str, is_optional=True, is_list=False),
@@ -169,6 +201,45 @@ DEPARTMENT2_SCHEMA: dict[str, FieldSchema] = {
     "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
     "website": FieldSchema(name="website", type=str, is_optional=True, is_list=False),
+}
+
+DETAILS_SCHEMA: dict[str, FieldSchema] = {
+    "business_case_url": FieldSchema(
+        name="business_case_url", type=str, is_optional=True, is_list=False
+    ),
+    "change_in_status": FieldSchema(
+        name="change_in_status", type=str, is_optional=True, is_list=False
+    ),
+    "current_uii": FieldSchema(name="current_uii", type=str, is_optional=True, is_list=False),
+    "investment_description": FieldSchema(
+        name="investment_description", type=str, is_optional=True, is_list=False
+    ),
+    "it_infrastructure_and_management_type": FieldSchema(
+        name="it_infrastructure_and_management_type", type=int, is_optional=True, is_list=False
+    ),
+    "last_updated": FieldSchema(
+        name="last_updated", type=datetime, is_optional=True, is_list=False
+    ),
+    "mission_delivery_and_management_support_area": FieldSchema(
+        name="mission_delivery_and_management_support_area",
+        type=int,
+        is_optional=True,
+        is_list=False,
+    ),
+    "mission_support_investment_categories": FieldSchema(
+        name="mission_support_investment_categories", type=str, is_optional=True, is_list=False
+    ),
+    "national_security_system_identifier": FieldSchema(
+        name="national_security_system_identifier", type=int, is_optional=True, is_list=False
+    ),
+    "previous_uii": FieldSchema(name="previous_uii", type=str, is_optional=True, is_list=False),
+    "public_urls": FieldSchema(name="public_urls", type=str, is_optional=True, is_list=False),
+    "shared_services_category": FieldSchema(
+        name="shared_services_category", type=str, is_optional=True, is_list=False
+    ),
+    "shared_services_identifier": FieldSchema(
+        name="shared_services_identifier", type=int, is_optional=True, is_list=False
+    ),
 }
 
 DISPLAY_SCHEMA: dict[str, FieldSchema] = {
@@ -212,6 +283,45 @@ DOCUMENTS_SCHEMA: dict[str, FieldSchema] = {
 FEDERAL_OBLIGATIONS_SCHEMA: dict[str, FieldSchema] = {
     "active": FieldSchema(name="active", type=str, is_optional=True, is_list=False),
     "total": FieldSchema(name="total", type=str, is_optional=True, is_list=False),
+}
+
+FUNDING_SCHEMA: dict[str, FieldSchema] = {
+    "fy2020_contribution": FieldSchema(
+        name="fy2020_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2020_internal_funding": FieldSchema(
+        name="fy2020_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2021_contribution": FieldSchema(
+        name="fy2021_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2021_internal_funding": FieldSchema(
+        name="fy2021_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2022_contribution": FieldSchema(
+        name="fy2022_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2022_internal_funding": FieldSchema(
+        name="fy2022_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2023_contribution": FieldSchema(
+        name="fy2023_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2023_internal_funding": FieldSchema(
+        name="fy2023_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2024_contribution": FieldSchema(
+        name="fy2024_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2024_internal_funding": FieldSchema(
+        name="fy2024_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2025_contribution": FieldSchema(
+        name="fy2025_contribution", type=Decimal, is_optional=True, is_list=False
+    ),
+    "fy2025_internal_funding": FieldSchema(
+        name="fy2025_internal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
 }
 
 FUNDING_DETAILS_SCHEMA: dict[str, FieldSchema] = {
@@ -259,6 +369,14 @@ GSA_ELIBRARY_SCHEMA: dict[str, FieldSchema] = {
     "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
 }
 
+HIGHEST_OWNER_SCHEMA: dict[str, FieldSchema] = {
+    "cage_code": FieldSchema(name="cage_code", type=str, is_optional=True, is_list=False),
+    "legal_business_name": FieldSchema(
+        name="legal_business_name", type=str, is_optional=True, is_list=False
+    ),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+}
+
 HISTORICAL_SCHEMA: dict[str, FieldSchema] = {
     "active": FieldSchema(name="active", type=bool, is_optional=True, is_list=False),
     "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
@@ -297,7 +415,36 @@ LATEST_NOTICE_SCHEMA: dict[str, FieldSchema] = {
     "notice_id": FieldSchema(name="notice_id", type=str, is_optional=True, is_list=False),
 }
 
+MAILING_ADDRESS_SCHEMA: dict[str, FieldSchema] = {
+    "address_line1": FieldSchema(name="address_line1", type=str, is_optional=True, is_list=False),
+    "address_line2": FieldSchema(name="address_line2", type=str, is_optional=True, is_list=False),
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "country_code": FieldSchema(name="country_code", type=str, is_optional=True, is_list=False),
+    "country_name": FieldSchema(name="country_name", type=str, is_optional=True, is_list=False),
+    "county": FieldSchema(name="county", type=str, is_optional=True, is_list=False),
+    "county_code": FieldSchema(name="county_code", type=str, is_optional=True, is_list=False),
+    "fips_code": FieldSchema(name="fips_code", type=str, is_optional=True, is_list=False),
+    "state_or_province_code": FieldSchema(
+        name="state_or_province_code", type=int, is_optional=True, is_list=False
+    ),
+    "zip_code": FieldSchema(name="zip_code", type=int, is_optional=True, is_list=False),
+    "zip_code_plus4": FieldSchema(name="zip_code_plus4", type=str, is_optional=True, is_list=False),
+}
+
 META_SCHEMA: dict[str, FieldSchema] = {
+    "link": FieldSchema(name="link", type=str, is_optional=True, is_list=False),
+    "notice_type": FieldSchema(
+        name="notice_type", type=dict, is_optional=True, is_list=False, nested_model="NoticeType"
+    ),
+    "parent_notice_id": FieldSchema(
+        name="parent_notice_id", type=str, is_optional=True, is_list=False
+    ),
+    "related_notice_id": FieldSchema(
+        name="related_notice_id", type=str, is_optional=True, is_list=False
+    ),
+}
+
+META2_SCHEMA: dict[str, FieldSchema] = {
     "attachments_count": FieldSchema(
         name="attachments_count", type=int, is_optional=True, is_list=False
     ),
@@ -305,6 +452,13 @@ META_SCHEMA: dict[str, FieldSchema] = {
         name="notice_type", type=dict, is_optional=True, is_list=False, nested_model="NoticeType"
     ),
     "notices_count": FieldSchema(name="notices_count", type=int, is_optional=True, is_list=False),
+}
+
+NAICS_CODES_SCHEMA: dict[str, FieldSchema] = {
+    "code": FieldSchema(name="code", type=int, is_optional=True, is_list=False),
+    "sba_small_business": FieldSchema(
+        name="sba_small_business", type=str, is_optional=True, is_list=False
+    ),
 }
 
 NARRATIVES_SCHEMA: dict[str, FieldSchema] = {
@@ -347,6 +501,27 @@ NARRATIVES_SCHEMA: dict[str, FieldSchema] = {
 }
 
 NOTICE_HISTORY_SCHEMA: dict[str, FieldSchema] = {
+    "deleted": FieldSchema(name="deleted", type=bool, is_optional=True, is_list=False),
+    "index": FieldSchema(name="index", type=int, is_optional=True, is_list=False),
+    "latest": FieldSchema(name="latest", type=bool, is_optional=True, is_list=False),
+    "notice_id": FieldSchema(name="notice_id", type=str, is_optional=True, is_list=False),
+    "notice_type_code": FieldSchema(
+        name="notice_type_code", type=str, is_optional=True, is_list=False
+    ),
+    "parent_notice_id": FieldSchema(
+        name="parent_notice_id", type=str, is_optional=True, is_list=False
+    ),
+    "posted_date": FieldSchema(name="posted_date", type=datetime, is_optional=True, is_list=False),
+    "related_notice_id": FieldSchema(
+        name="related_notice_id", type=str, is_optional=True, is_list=False
+    ),
+    "solicitation_number": FieldSchema(
+        name="solicitation_number", type=str, is_optional=True, is_list=False
+    ),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+}
+
+NOTICE_HISTORY2_SCHEMA: dict[str, FieldSchema] = {
     "deleted": FieldSchema(name="deleted", type=str, is_optional=True, is_list=False),
     "index": FieldSchema(name="index", type=str, is_optional=True, is_list=False),
     "latest": FieldSchema(name="latest", type=str, is_optional=True, is_list=False),
@@ -370,6 +545,22 @@ NOTICE_HISTORY_SCHEMA: dict[str, FieldSchema] = {
 NOTICE_TYPE_SCHEMA: dict[str, FieldSchema] = {
     "code": FieldSchema(name="code", type=str, is_optional=True, is_list=False),
     "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+}
+
+OFFICE_SCHEMA: dict[str, FieldSchema] = {
+    "agency_code": FieldSchema(name="agency_code", type=str, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=str, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+    "office_code": FieldSchema(name="office_code", type=str, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
 }
 
 OFFICERS_SCHEMA: dict[str, FieldSchema] = {
@@ -406,6 +597,11 @@ OFFICERS_SCHEMA: dict[str, FieldSchema] = {
 }
 
 OPPORTUNITY_SCHEMA: dict[str, FieldSchema] = {
+    "link": FieldSchema(name="link", type=str, is_optional=True, is_list=False),
+    "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
+}
+
+OPPORTUNITY2_SCHEMA: dict[str, FieldSchema] = {
     "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
     "response_deadline": FieldSchema(
         name="response_deadline", type=datetime, is_optional=True, is_list=False
@@ -432,9 +628,30 @@ ORGANIZATION_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+ORGANIZATION2_SCHEMA: dict[str, FieldSchema] = {
+    "agency_code": FieldSchema(name="agency_code", type=int, is_optional=True, is_list=False),
+    "agency_name": FieldSchema(name="agency_name", type=str, is_optional=True, is_list=False),
+    "department_code": FieldSchema(
+        name="department_code", type=int, is_optional=True, is_list=False
+    ),
+    "department_name": FieldSchema(
+        name="department_name", type=str, is_optional=True, is_list=False
+    ),
+    "office_code": FieldSchema(name="office_code", type=int, is_optional=True, is_list=False),
+    "office_name": FieldSchema(name="office_name", type=str, is_optional=True, is_list=False),
+    "organization_id": FieldSchema(
+        name="organization_id", type=str, is_optional=True, is_list=False
+    ),
+}
+
 PARENT_AWARD_SCHEMA: dict[str, FieldSchema] = {
     "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
     "piid": FieldSchema(name="piid", type=str, is_optional=True, is_list=False),
+}
+
+PAST_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
+    "summary": FieldSchema(name="summary", type=str, is_optional=True, is_list=False),
+    "top_agencies": FieldSchema(name="top_agencies", type=str, is_optional=True, is_list=False),
 }
 
 PERIOD_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
@@ -447,7 +664,39 @@ PERIOD_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
     ),
 }
 
+PHYSICAL_ADDRESS_SCHEMA: dict[str, FieldSchema] = {
+    "address_line1": FieldSchema(name="address_line1", type=str, is_optional=True, is_list=False),
+    "address_line2": FieldSchema(name="address_line2", type=str, is_optional=True, is_list=False),
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "country_code": FieldSchema(name="country_code", type=str, is_optional=True, is_list=False),
+    "country_name": FieldSchema(name="country_name", type=str, is_optional=True, is_list=False),
+    "county": FieldSchema(name="county", type=str, is_optional=True, is_list=False),
+    "county_code": FieldSchema(name="county_code", type=str, is_optional=True, is_list=False),
+    "fips_code": FieldSchema(name="fips_code", type=str, is_optional=True, is_list=False),
+    "state_or_province_code": FieldSchema(
+        name="state_or_province_code", type=str, is_optional=True, is_list=False
+    ),
+    "zip_code": FieldSchema(name="zip_code", type=int, is_optional=True, is_list=False),
+    "zip_code_plus4": FieldSchema(name="zip_code_plus4", type=int, is_optional=True, is_list=False),
+}
+
 PLACE_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "country": FieldSchema(name="country", type=str, is_optional=True, is_list=False),
+    "state": FieldSchema(name="state", type=str, is_optional=True, is_list=False),
+    "street_address": FieldSchema(name="street_address", type=str, is_optional=True, is_list=False),
+    "zip": FieldSchema(name="zip", type=str, is_optional=True, is_list=False),
+}
+
+PLACE_OF_PERFORMANCE2_SCHEMA: dict[str, FieldSchema] = {
+    "city": FieldSchema(name="city", type=int, is_optional=True, is_list=False),
+    "country": FieldSchema(name="country", type=str, is_optional=True, is_list=False),
+    "state": FieldSchema(name="state", type=str, is_optional=True, is_list=False),
+    "street_address": FieldSchema(name="street_address", type=str, is_optional=True, is_list=False),
+    "zip": FieldSchema(name="zip", type=str, is_optional=True, is_list=False),
+}
+
+PLACE_OF_PERFORMANCE3_SCHEMA: dict[str, FieldSchema] = {
     "city_name": FieldSchema(name="city_name", type=str, is_optional=True, is_list=False),
     "country_code": FieldSchema(name="country_code", type=str, is_optional=True, is_list=False),
     "country_name": FieldSchema(name="country_name", type=str, is_optional=True, is_list=False),
@@ -456,20 +705,43 @@ PLACE_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
     "zip_code": FieldSchema(name="zip_code", type=str, is_optional=True, is_list=False),
 }
 
-PLACE_OF_PERFORMANCE2_SCHEMA: dict[str, FieldSchema] = {
-    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
-    "country": FieldSchema(name="country", type=str, is_optional=True, is_list=False),
-    "state": FieldSchema(name="state", type=str, is_optional=True, is_list=False),
-    "street_address": FieldSchema(name="street_address", type=str, is_optional=True, is_list=False),
-    "zip": FieldSchema(name="zip", type=str, is_optional=True, is_list=False),
-}
-
-SECONDARY_CONTACT_SCHEMA: dict[str, FieldSchema] = {
+PRIMARY_CONTACT_SCHEMA: dict[str, FieldSchema] = {
     "email": FieldSchema(name="email", type=str, is_optional=True, is_list=False),
     "fax": FieldSchema(name="fax", type=str, is_optional=True, is_list=False),
     "full_name": FieldSchema(name="full_name", type=str, is_optional=True, is_list=False),
     "phone": FieldSchema(name="phone", type=str, is_optional=True, is_list=False),
     "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+}
+
+RELATIONSHIPS_SCHEMA: dict[str, FieldSchema] = {
+    "display_name": FieldSchema(name="display_name", type=str, is_optional=True, is_list=False),
+    "relation": FieldSchema(name="relation", type=str, is_optional=True, is_list=False),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+}
+
+RESOLVED_AGENCY_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "match_confidence": FieldSchema(
+        name="match_confidence", type=str, is_optional=True, is_list=False
+    ),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "rationale": FieldSchema(name="rationale", type=str, is_optional=True, is_list=False),
+}
+
+RESOLVED_PROTESTER_SCHEMA: dict[str, FieldSchema] = {
+    "match_confidence": FieldSchema(
+        name="match_confidence", type=str, is_optional=True, is_list=False
+    ),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "rationale": FieldSchema(name="rationale", type=str, is_optional=True, is_list=False),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+}
+
+SBA_BUSINESS_TYPES_SCHEMA: dict[str, FieldSchema] = {
+    "code": FieldSchema(name="code", type=str, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "entry_date": FieldSchema(name="entry_date", type=date, is_optional=True, is_list=False),
+    "exit_date": FieldSchema(name="exit_date", type=date, is_optional=True, is_list=False),
 }
 
 SIZE_STANDARDS_SCHEMA: dict[str, FieldSchema] = {
@@ -531,41 +803,62 @@ TRANSACTIONS2_SCHEMA: dict[str, FieldSchema] = {
 
 GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "AdditionalInfo": ADDITIONAL_INFO_SCHEMA,
+    "Address": ADDRESS_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Agency2": AGENCY2_SCHEMA,
     "Ancestors": ANCESTORS_SCHEMA,
     "Appendix": APPENDIX_SCHEMA,
+    "Archive": ARCHIVE_SCHEMA,
     "Attachments": ATTACHMENTS_SCHEMA,
+    "Attachments2": ATTACHMENTS2_SCHEMA,
+    "Attachments3": ATTACHMENTS3_SCHEMA,
     "Awardee": AWARDEE_SCHEMA,
-    "AwardingOffice": AWARDING_OFFICE_SCHEMA,
     "BudgetAppropriation": BUDGET_APPROPRIATION_SCHEMA,
     "BudgetSpending": BUDGET_SPENDING_SCHEMA,
     "Children": CHILDREN_SCHEMA,
     "Current": CURRENT_SCHEMA,
+    "Decisions": DECISIONS_SCHEMA,
     "Department": DEPARTMENT_SCHEMA,
     "Department2": DEPARTMENT2_SCHEMA,
+    "Details": DETAILS_SCHEMA,
     "Display": DISPLAY_SCHEMA,
     "Documents": DOCUMENTS_SCHEMA,
     "FederalObligations": FEDERAL_OBLIGATIONS_SCHEMA,
+    "Funding": FUNDING_SCHEMA,
     "FundingDetails": FUNDING_DETAILS_SCHEMA,
     "Grant": GRANT_SCHEMA,
     "GrantorContact": GRANTOR_CONTACT_SCHEMA,
     "GsaElibrary": GSA_ELIBRARY_SCHEMA,
+    "HighestOwner": HIGHEST_OWNER_SCHEMA,
     "Historical": HISTORICAL_SCHEMA,
     "ImportantDates": IMPORTANT_DATES_SCHEMA,
     "LatestNotice": LATEST_NOTICE_SCHEMA,
+    "MailingAddress": MAILING_ADDRESS_SCHEMA,
     "Meta": META_SCHEMA,
+    "Meta2": META2_SCHEMA,
+    "NaicsCodes": NAICS_CODES_SCHEMA,
     "Narratives": NARRATIVES_SCHEMA,
     "NoticeHistory": NOTICE_HISTORY_SCHEMA,
+    "NoticeHistory2": NOTICE_HISTORY2_SCHEMA,
     "NoticeType": NOTICE_TYPE_SCHEMA,
+    "Office": OFFICE_SCHEMA,
     "Officers": OFFICERS_SCHEMA,
     "Opportunity": OPPORTUNITY_SCHEMA,
+    "Opportunity2": OPPORTUNITY2_SCHEMA,
     "Organization": ORGANIZATION_SCHEMA,
+    "Organization2": ORGANIZATION2_SCHEMA,
     "ParentAward": PARENT_AWARD_SCHEMA,
+    "PastPerformance": PAST_PERFORMANCE_SCHEMA,
     "PeriodOfPerformance": PERIOD_OF_PERFORMANCE_SCHEMA,
+    "PhysicalAddress": PHYSICAL_ADDRESS_SCHEMA,
     "PlaceOfPerformance": PLACE_OF_PERFORMANCE_SCHEMA,
     "PlaceOfPerformance2": PLACE_OF_PERFORMANCE2_SCHEMA,
-    "SecondaryContact": SECONDARY_CONTACT_SCHEMA,
+    "PlaceOfPerformance3": PLACE_OF_PERFORMANCE3_SCHEMA,
+    "PrimaryContact": PRIMARY_CONTACT_SCHEMA,
+    "Relationships": RELATIONSHIPS_SCHEMA,
+    "ResolvedAgency": RESOLVED_AGENCY_SCHEMA,
+    "ResolvedProtester": RESOLVED_PROTESTER_SCHEMA,
+    "SbaBusinessTypes": SBA_BUSINESS_TYPES_SCHEMA,
     "SizeStandards": SIZE_STANDARDS_SCHEMA,
     "Solicitation": SOLICITATION_SCHEMA,
     "Topics": TOPICS_SCHEMA,
@@ -1090,6 +1383,151 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
     },
+    "Entity": {
+        "additional_website": FieldSchema(
+            name="additional_website", type=str, is_optional=True, is_list=False
+        ),
+        "business_types": FieldSchema(
+            name="business_types",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "capabilities_link": FieldSchema(
+            name="capabilities_link", type=str, is_optional=True, is_list=False
+        ),
+        "country_of_incorporation": FieldSchema(
+            name="country_of_incorporation",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "county": FieldSchema(name="county", type=str, is_optional=True, is_list=False),
+        "current_principals": FieldSchema(
+            name="current_principals", type=str, is_optional=True, is_list=False
+        ),
+        "display_name": FieldSchema(name="display_name", type=str, is_optional=True, is_list=False),
+        "entity_structure": FieldSchema(
+            name="entity_structure",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "entity_type": FieldSchema(
+            name="entity_type",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "federal_obligations": FieldSchema(
+            name="federal_obligations",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="FederalObligations",
+        ),
+        "g2x_about": FieldSchema(name="g2x_about", type=str, is_optional=True, is_list=False),
+        "g2x_ai_summary": FieldSchema(
+            name="g2x_ai_summary", type=str, is_optional=True, is_list=False
+        ),
+        "g2x_employee_count": FieldSchema(
+            name="g2x_employee_count", type=str, is_optional=True, is_list=False
+        ),
+        "highest_owner": FieldSchema(
+            name="highest_owner",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="HighestOwner",
+        ),
+        "immediate_owner": FieldSchema(
+            name="immediate_owner",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="HighestOwner",
+        ),
+        "mailing_address": FieldSchema(
+            name="mailing_address",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="MailingAddress",
+        ),
+        "naics_codes": FieldSchema(
+            name="naics_codes", type=dict, is_optional=True, is_list=True, nested_model="NaicsCodes"
+        ),
+        "naics_small_codes": FieldSchema(
+            name="naics_small_codes", type=int, is_optional=True, is_list=True
+        ),
+        "non_fed_govt_certifications": FieldSchema(
+            name="non_fed_govt_certifications", type=str, is_optional=True, is_list=False
+        ),
+        "organization_structure": FieldSchema(
+            name="organization_structure",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "past_performance": FieldSchema(
+            name="past_performance",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="PastPerformance",
+        ),
+        "physical_address": FieldSchema(
+            name="physical_address",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="PhysicalAddress",
+        ),
+        "profit_structure": FieldSchema(
+            name="profit_structure",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "purpose_of_registration": FieldSchema(
+            name="purpose_of_registration",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "relationships": FieldSchema(
+            name="relationships",
+            type=dict,
+            is_optional=True,
+            is_list=True,
+            nested_model="Relationships",
+        ),
+        "sba_business_types": FieldSchema(
+            name="sba_business_types",
+            type=dict,
+            is_optional=True,
+            is_list=True,
+            nested_model="SbaBusinessTypes",
+        ),
+        "special_equip_material": FieldSchema(
+            name="special_equip_material", type=str, is_optional=True, is_list=False
+        ),
+        "state_of_incorporation": FieldSchema(
+            name="state_of_incorporation",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+        "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    },
     "Exclusion": {
         "activate_date": FieldSchema(
             name="activate_date", type=date, is_optional=True, is_list=False
@@ -1376,6 +1814,17 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         "vehicle_uuid": FieldSchema(name="vehicle_uuid", type=str, is_optional=True, is_list=False),
         "who_can_use": FieldSchema(name="who_can_use", type=str, is_optional=True, is_list=False),
     },
+    "ITDashboardInvestment": {
+        "details": FieldSchema(
+            name="details", type=dict, is_optional=True, is_list=False, nested_model="Details"
+        ),
+        "funding": FieldSchema(
+            name="funding", type=dict, is_optional=True, is_list=False, nested_model="Funding"
+        ),
+        "organization_id": FieldSchema(
+            name="organization_id", type=str, is_optional=True, is_list=False
+        ),
+    },
     "MasSin": {
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "expiration_date": FieldSchema(
@@ -1425,6 +1874,65 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             nested_model="SizeStandards",
         ),
     },
+    "Notice": {
+        "address": FieldSchema(
+            name="address", type=dict, is_optional=True, is_list=False, nested_model="Address"
+        ),
+        "archive": FieldSchema(
+            name="archive", type=dict, is_optional=True, is_list=False, nested_model="Archive"
+        ),
+        "attachments": FieldSchema(
+            name="attachments",
+            type=dict,
+            is_optional=True,
+            is_list=True,
+            nested_model="Attachments",
+        ),
+        "meta": FieldSchema(
+            name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
+        ),
+        "office": FieldSchema(
+            name="office", type=dict, is_optional=True, is_list=False, nested_model="Office"
+        ),
+        "opportunity": FieldSchema(
+            name="opportunity",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Opportunity",
+        ),
+        "opportunity_id": FieldSchema(
+            name="opportunity_id", type=str, is_optional=True, is_list=False
+        ),
+        "place_of_performance": FieldSchema(
+            name="place_of_performance",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="PlaceOfPerformance",
+        ),
+        "primary_contact": FieldSchema(
+            name="primary_contact",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="PrimaryContact",
+        ),
+        "secondary_contact": FieldSchema(
+            name="secondary_contact",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="PrimaryContact",
+        ),
+        "set_aside": FieldSchema(
+            name="set_aside",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="CodeDescription",
+        ),
+    },
     "OTA": {
         "award_type": FieldSchema(
             name="award_type",
@@ -1438,7 +1946,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="AwardingOffice",
+            nested_model="Office",
         ),
         "base_and_exercised_options_value": FieldSchema(
             name="base_and_exercised_options_value", type=Decimal, is_optional=True, is_list=False
@@ -1459,11 +1967,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
         "funding_office": FieldSchema(
-            name="funding_office",
-            type=dict,
-            is_optional=True,
-            is_list=False,
-            nested_model="AwardingOffice",
+            name="funding_office", type=dict, is_optional=True, is_list=False, nested_model="Office"
         ),
         "non_governmental_dollars": FieldSchema(
             name="non_governmental_dollars", type=Decimal, is_optional=True, is_list=False
@@ -1496,7 +2000,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="PlaceOfPerformance",
+            nested_model="PlaceOfPerformance3",
         ),
         "psc": FieldSchema(
             name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
@@ -1523,7 +2027,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="AwardingOffice",
+            nested_model="Office",
         ),
         "base_and_exercised_options_value": FieldSchema(
             name="base_and_exercised_options_value", type=Decimal, is_optional=True, is_list=False
@@ -1544,11 +2048,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
         "funding_office": FieldSchema(
-            name="funding_office",
-            type=dict,
-            is_optional=True,
-            is_list=False,
-            nested_model="AwardingOffice",
+            name="funding_office", type=dict, is_optional=True, is_list=False, nested_model="Office"
         ),
         "non_governmental_dollars": FieldSchema(
             name="non_governmental_dollars", type=Decimal, is_optional=True, is_list=False
@@ -1571,7 +2071,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="PlaceOfPerformance",
+            nested_model="PlaceOfPerformance3",
         ),
         "psc": FieldSchema(
             name="psc", type=dict, is_optional=True, is_list=False, nested_model="CodeDescription"
@@ -1626,7 +2126,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="Attachments",
+            nested_model="Attachments3",
         ),
         "department": FieldSchema(
             name="department",
@@ -1649,14 +2149,14 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             name="latest_notice_id", type=str, is_optional=True, is_list=False
         ),
         "meta": FieldSchema(
-            name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
+            name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta2"
         ),
         "notice_history": FieldSchema(
             name="notice_history",
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="NoticeHistory",
+            nested_model="NoticeHistory2",
         ),
         "office_id": FieldSchema(name="office_id", type=str, is_optional=True, is_list=False),
         "place_of_performance": FieldSchema(
@@ -1664,14 +2164,14 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="PlaceOfPerformance2",
+            nested_model="PlaceOfPerformance",
         ),
         "secondary_contact": FieldSchema(
             name="secondary_contact",
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="SecondaryContact",
+            nested_model="PrimaryContact",
         ),
         "set_aside": FieldSchema(
             name="set_aside",
@@ -1779,6 +2279,62 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "parent": FieldSchema(name="parent", type=str, is_optional=True, is_list=False),
     },
+    "Protest": {
+        "challenged_party": FieldSchema(
+            name="challenged_party", type=str, is_optional=True, is_list=False
+        ),
+        "decision_text": FieldSchema(
+            name="decision_text", type=str, is_optional=True, is_list=False
+        ),
+        "decisions": FieldSchema(
+            name="decisions", type=dict, is_optional=True, is_list=True, nested_model="Decisions"
+        ),
+        "judge": FieldSchema(name="judge", type=str, is_optional=True, is_list=False),
+        "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+        "outcome_reason": FieldSchema(
+            name="outcome_reason", type=str, is_optional=True, is_list=False
+        ),
+        "resolved_agency": FieldSchema(
+            name="resolved_agency",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="ResolvedAgency",
+        ),
+        "resolved_protester": FieldSchema(
+            name="resolved_protester",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="ResolvedProtester",
+        ),
+        "size_standard": FieldSchema(
+            name="size_standard", type=str, is_optional=True, is_list=False
+        ),
+    },
+    "ProtestDocket": {
+        "challenged_party": FieldSchema(
+            name="challenged_party", type=str, is_optional=True, is_list=False
+        ),
+        "decision_text": FieldSchema(
+            name="decision_text", type=str, is_optional=True, is_list=False
+        ),
+        "judge": FieldSchema(name="judge", type=str, is_optional=True, is_list=False),
+        "naics_code": FieldSchema(name="naics_code", type=str, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="Organization2",
+        ),
+        "outcome_reason": FieldSchema(
+            name="outcome_reason", type=str, is_optional=True, is_list=False
+        ),
+        "size_standard": FieldSchema(
+            name="size_standard", type=str, is_optional=True, is_list=False
+        ),
+    },
     "SbirSolicitation": {
         "activity": FieldSchema(name="activity", type=str, is_optional=True, is_list=False),
         "cycle": FieldSchema(name="cycle", type=str, is_optional=True, is_list=False),
@@ -1838,7 +2394,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="Opportunity",
+            nested_model="Opportunity2",
         ),
         "release_date": FieldSchema(
             name="release_date", type=date, is_optional=True, is_list=False

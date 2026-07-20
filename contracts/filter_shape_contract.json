@@ -64,6 +64,8 @@
           "department.website",
           "name"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "agencies.views.AgencyViewSet"
       },
       "swagger_has_key": true,
@@ -116,6 +118,8 @@
           "published_date",
           "title"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "shared.views.AssistanceListingViewSet"
       },
       "swagger_has_key": true,
@@ -224,6 +228,7 @@
           "requested_ba",
           "requested_ba__gte",
           "requested_ba__lte",
+          "search",
           "subfunction_code",
           "subfunction_code__in",
           "unobligated_balance",
@@ -639,6 +644,10 @@
             "lookup": "lte",
             "type": "number"
           },
+          "search": {
+            "filter_class": "DRFSearchFilter",
+            "type": "string"
+          },
           "subfunction_code": {
             "filter_class": "CharFilter",
             "type": "string"
@@ -925,6 +934,8 @@
           "unobligated_balance",
           "unobligated_pct"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "budget.views.BudgetAccountViewSet"
       },
       "swagger_has_key": false,
@@ -956,6 +967,8 @@
           "code",
           "name"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "shared.views.BusinessTypesViewSet"
       },
       "swagger_has_key": true,
@@ -1703,6 +1716,8 @@
           "vehicle.vehicle_type",
           "vehicle.who_can_use"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.contracts.ContractViewSet"
       },
       "swagger_has_key": true,
@@ -1775,6 +1790,8 @@
           "name",
           "website"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "agencies.views.DepartmentViewSet"
       },
       "swagger_has_key": true,
@@ -1967,6 +1984,8 @@
           "total_contract_price_text",
           "uuid"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "dibbs.views.DibbsAwardViewSet"
       },
       "swagger_has_key": false,
@@ -2103,6 +2122,8 @@
           "tech_docs_url",
           "uuid"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "dibbs.views.DibbsRfpViewSet"
       },
       "swagger_has_key": false,
@@ -2270,6 +2291,8 @@
           "unit_of_issue",
           "uuid"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "dibbs.views.DibbsRfqViewSet"
       },
       "swagger_has_key": false,
@@ -2363,8 +2386,327 @@
           "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "business_types": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "country_of_incorporation": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "entity_structure": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "entity_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "federal_obligations": {
+              "expands": {},
+              "fields": [
+                "active",
+                "total"
+              ]
+            },
+            "highest_owner": {
+              "expands": {},
+              "fields": [
+                "cage_code",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "immediate_owner": {
+              "expands": {},
+              "fields": [
+                "cage_code",
+                "legal_business_name",
+                "uei"
+              ]
+            },
+            "mailing_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "country_code",
+                "country_name",
+                "county",
+                "county_code",
+                "fips_code",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "naics_codes": {
+              "expands": {},
+              "fields": [
+                "code",
+                "sba_small_business"
+              ]
+            },
+            "organization_structure": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "past_performance": {
+              "expands": {},
+              "fields": [
+                "summary",
+                "top_agencies"
+              ]
+            },
+            "physical_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "country_code",
+                "country_name",
+                "county",
+                "county_code",
+                "fips_code",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "profit_structure": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "purpose_of_registration": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "relationships": {
+              "expands": {},
+              "fields": [
+                "display_name",
+                "relation",
+                "uei"
+              ]
+            },
+            "sba_business_types": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description",
+                "entry_date",
+                "exit_date"
+              ]
+            },
+            "state_of_incorporation": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "additional_website",
+            "business_types",
+            "cage_code",
+            "capabilities",
+            "capabilities_link",
+            "congressional_district",
+            "county",
+            "current_principals",
+            "dba_name",
+            "description",
+            "display_name",
+            "dodaac",
+            "email_address",
+            "entity_division_name",
+            "entity_division_number",
+            "entity_start_date",
+            "entity_url",
+            "evs_source",
+            "exclusion_status_flag",
+            "exclusion_url",
+            "fiscal_year_end_close_date",
+            "g2x_about",
+            "g2x_ai_summary",
+            "g2x_employee_count",
+            "highest_owner",
+            "immediate_owner",
+            "keywords",
+            "last_update_date",
+            "legal_business_name",
+            "mailing_address",
+            "naics_codes",
+            "naics_small_codes",
+            "non_fed_govt_certifications",
+            "past_performance",
+            "physical_address",
+            "primary_naics",
+            "psc_codes",
+            "public_display_flag",
+            "registered",
+            "registration_status",
+            "relationships",
+            "sam_activation_date",
+            "sam_expiration_date",
+            "sam_registration_date",
+            "sba_business_types",
+            "special_equip_material",
+            "submission_date",
+            "uei",
+            "uei_creation_date",
+            "uei_expiration_date",
+            "uei_status",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "additional_website",
+          "business_types",
+          "business_types.code",
+          "business_types.description",
+          "cage_code",
+          "capabilities",
+          "capabilities_link",
+          "congressional_district",
+          "country_of_incorporation",
+          "country_of_incorporation.code",
+          "country_of_incorporation.description",
+          "county",
+          "current_principals",
+          "dba_name",
+          "description",
+          "display_name",
+          "dodaac",
+          "email_address",
+          "entity_division_name",
+          "entity_division_number",
+          "entity_start_date",
+          "entity_structure",
+          "entity_structure.code",
+          "entity_structure.description",
+          "entity_type",
+          "entity_type.code",
+          "entity_type.description",
+          "entity_url",
+          "evs_source",
+          "exclusion_status_flag",
+          "exclusion_url",
+          "federal_obligations",
+          "federal_obligations.active",
+          "federal_obligations.total",
+          "fiscal_year_end_close_date",
+          "g2x_about",
+          "g2x_ai_summary",
+          "g2x_employee_count",
+          "highest_owner",
+          "highest_owner.cage_code",
+          "highest_owner.legal_business_name",
+          "highest_owner.uei",
+          "immediate_owner",
+          "immediate_owner.cage_code",
+          "immediate_owner.legal_business_name",
+          "immediate_owner.uei",
+          "keywords",
+          "last_update_date",
+          "legal_business_name",
+          "mailing_address",
+          "mailing_address.address_line1",
+          "mailing_address.address_line2",
+          "mailing_address.city",
+          "mailing_address.country_code",
+          "mailing_address.country_name",
+          "mailing_address.county",
+          "mailing_address.county_code",
+          "mailing_address.fips_code",
+          "mailing_address.state_or_province_code",
+          "mailing_address.zip_code",
+          "mailing_address.zip_code_plus4",
+          "naics_codes",
+          "naics_codes.code",
+          "naics_codes.sba_small_business",
+          "naics_small_codes",
+          "non_fed_govt_certifications",
+          "organization_structure",
+          "organization_structure.code",
+          "organization_structure.description",
+          "past_performance",
+          "past_performance.summary",
+          "past_performance.top_agencies",
+          "physical_address",
+          "physical_address.address_line1",
+          "physical_address.address_line2",
+          "physical_address.city",
+          "physical_address.country_code",
+          "physical_address.country_name",
+          "physical_address.county",
+          "physical_address.county_code",
+          "physical_address.fips_code",
+          "physical_address.state_or_province_code",
+          "physical_address.zip_code",
+          "physical_address.zip_code_plus4",
+          "primary_naics",
+          "profit_structure",
+          "profit_structure.code",
+          "profit_structure.description",
+          "psc_codes",
+          "public_display_flag",
+          "purpose_of_registration",
+          "purpose_of_registration.code",
+          "purpose_of_registration.description",
+          "registered",
+          "registration_status",
+          "relationships",
+          "relationships.display_name",
+          "relationships.relation",
+          "relationships.uei",
+          "sam_activation_date",
+          "sam_expiration_date",
+          "sam_registration_date",
+          "sba_business_types",
+          "sba_business_types.code",
+          "sba_business_types.description",
+          "sba_business_types.entry_date",
+          "sba_business_types.exit_date",
+          "special_equip_material",
+          "state_of_incorporation",
+          "state_of_incorporation.code",
+          "state_of_incorporation.description",
+          "submission_date",
+          "uei",
+          "uei_creation_date",
+          "uei_expiration_date",
+          "uei_status",
+          "uuid"
+        ],
+        "shape_supported": true,
+        "shape_tier_required": "pro",
         "viewset": "entities.views.EntityViewSet"
       },
       "swagger_has_key": true,
@@ -2441,6 +2783,8 @@
         },
         "shape": null,
         "shape_flat_paths": [],
+        "shape_supported": false,
+        "shape_tier_required": null,
         "viewset": "g2x.views.content.EventsViewSet"
       },
       "swagger_has_key": false,
@@ -2652,6 +2996,8 @@
           "vessel_tonnage",
           "vessel_type"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "exclusions.views.ExclusionViewSet"
       },
       "swagger_has_key": true,
@@ -2868,6 +3214,8 @@
           "status",
           "title"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "forecasts.views.ForecastViewSet"
       },
       "swagger_has_key": true,
@@ -3239,6 +3587,8 @@
           "synopsis",
           "title"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "grants.views.GrantOpportunityViewSet"
       },
       "swagger_has_key": true,
@@ -3354,6 +3704,8 @@
           "uei",
           "uuid"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.gsa_elibrary.GsaELibraryContractViewSet"
       },
       "swagger_has_key": true,
@@ -3967,6 +4319,8 @@
           "vehicle_uuid",
           "who_can_use"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.idvs.IDVViewSet"
       },
       "swagger_has_key": true,
@@ -4067,8 +4421,186 @@
           "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "cio_evaluation": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "contracts": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "cost_pools_towers": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "details": {
+              "expands": {},
+              "fields": [
+                "business_case_url",
+                "change_in_status",
+                "current_uii",
+                "investment_description",
+                "it_infrastructure_and_management_type",
+                "last_updated",
+                "mission_delivery_and_management_support_area",
+                "mission_support_investment_categories",
+                "national_security_system_identifier",
+                "previous_uii",
+                "public_urls",
+                "shared_services_category",
+                "shared_services_identifier"
+              ]
+            },
+            "funding": {
+              "expands": {},
+              "fields": [
+                "fy2020_contribution",
+                "fy2020_internal_funding",
+                "fy2021_contribution",
+                "fy2021_internal_funding",
+                "fy2022_contribution",
+                "fy2022_internal_funding",
+                "fy2023_contribution",
+                "fy2023_internal_funding",
+                "fy2024_contribution",
+                "fy2024_internal_funding",
+                "fy2025_contribution",
+                "fy2025_internal_funding"
+              ]
+            },
+            "funding_sources": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "operational_analysis": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "performance_actual": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "performance_metrics": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            },
+            "projects": {
+              "expands": {},
+              "fields": [
+                "*"
+              ]
+            }
+          },
+          "fields": [
+            "agency_code",
+            "agency_name",
+            "bureau_code",
+            "bureau_name",
+            "business_case_html",
+            "investment_title",
+            "organization_id",
+            "part_of_it_portfolio",
+            "type_of_investment",
+            "uii",
+            "updated_time",
+            "url"
+          ]
+        },
+        "shape_flat_paths": [
+          "agency_code",
+          "agency_name",
+          "bureau_code",
+          "bureau_name",
+          "business_case_html",
+          "cio_evaluation",
+          "cio_evaluation.*",
+          "contracts",
+          "contracts.*",
+          "cost_pools_towers",
+          "cost_pools_towers.*",
+          "details",
+          "details.business_case_url",
+          "details.change_in_status",
+          "details.current_uii",
+          "details.investment_description",
+          "details.it_infrastructure_and_management_type",
+          "details.last_updated",
+          "details.mission_delivery_and_management_support_area",
+          "details.mission_support_investment_categories",
+          "details.national_security_system_identifier",
+          "details.previous_uii",
+          "details.public_urls",
+          "details.shared_services_category",
+          "details.shared_services_identifier",
+          "funding",
+          "funding.fy2020_contribution",
+          "funding.fy2020_internal_funding",
+          "funding.fy2021_contribution",
+          "funding.fy2021_internal_funding",
+          "funding.fy2022_contribution",
+          "funding.fy2022_internal_funding",
+          "funding.fy2023_contribution",
+          "funding.fy2023_internal_funding",
+          "funding.fy2024_contribution",
+          "funding.fy2024_internal_funding",
+          "funding.fy2025_contribution",
+          "funding.fy2025_internal_funding",
+          "funding_sources",
+          "funding_sources.*",
+          "investment_title",
+          "operational_analysis",
+          "operational_analysis.*",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "organization_id",
+          "part_of_it_portfolio",
+          "performance_actual",
+          "performance_actual.*",
+          "performance_metrics",
+          "performance_metrics.*",
+          "projects",
+          "projects.*",
+          "type_of_investment",
+          "uii",
+          "updated_time",
+          "url"
+        ],
+        "shape_supported": true,
+        "shape_tier_required": "business",
         "viewset": "itdashboard.views.ITDashboardInvestmentViewSet"
       },
       "swagger_has_key": false,
@@ -4081,8 +4613,15 @@
       "prefix": "mas_sins",
       "resource_key": "mas_sins",
       "runtime": {
-        "filter_params": [],
-        "filter_params_detail": {},
+        "filter_params": [
+          "search"
+        ],
+        "filter_params_detail": {
+          "search": {
+            "filter_class": "ViewHandledParam",
+            "type": "string"
+          }
+        },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
@@ -4126,6 +4665,8 @@
           "tdr",
           "title"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "shared.views.MasSinsViewSet"
       },
       "swagger_has_key": true,
@@ -4228,6 +4769,8 @@
           "size_standards.employee_limit",
           "size_standards.revenue_limit"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "shared.views.NaicsCodeViewSet"
       },
       "swagger_has_key": true,
@@ -4300,6 +4843,8 @@
         },
         "shape": null,
         "shape_flat_paths": [],
+        "shape_supported": false,
+        "shape_tier_required": null,
         "viewset": "g2x.views.content.NewsViewSet"
       },
       "swagger_has_key": false,
@@ -4386,8 +4931,212 @@
           "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "address": {
+              "expands": {},
+              "fields": [
+                "city",
+                "country",
+                "state",
+                "zip"
+              ]
+            },
+            "archive": {
+              "expands": {},
+              "fields": [
+                "date",
+                "type"
+              ]
+            },
+            "attachments": {
+              "expands": {},
+              "fields": [
+                "attachment_id",
+                "extracted_text",
+                "file_size",
+                "mime_type",
+                "name",
+                "posted_date",
+                "resource_id",
+                "type",
+                "url"
+              ]
+            },
+            "meta": {
+              "expands": {
+                "notice_type": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "type"
+                  ]
+                }
+              },
+              "fields": [
+                "link",
+                "notice_type",
+                "parent_notice_id",
+                "related_notice_id"
+              ]
+            },
+            "office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "opportunity": {
+              "expands": {},
+              "fields": [
+                "link",
+                "opportunity_id"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city",
+                "country",
+                "state",
+                "street_address",
+                "zip"
+              ]
+            },
+            "primary_contact": {
+              "expands": {},
+              "fields": [
+                "email",
+                "fax",
+                "full_name",
+                "phone",
+                "title"
+              ]
+            },
+            "secondary_contact": {
+              "expands": {},
+              "fields": [
+                "email",
+                "fax",
+                "full_name",
+                "phone",
+                "title"
+              ]
+            },
+            "set_aside": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "active",
+            "address",
+            "archive",
+            "attachment_count",
+            "attachments",
+            "award_number",
+            "description",
+            "last_updated",
+            "meta",
+            "naics_code",
+            "notice_id",
+            "office",
+            "opportunity",
+            "opportunity_id",
+            "place_of_performance",
+            "posted_date",
+            "psc_code",
+            "response_deadline",
+            "sam_url",
+            "set_aside",
+            "solicitation_number",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "active",
+          "address",
+          "address.city",
+          "address.country",
+          "address.state",
+          "address.zip",
+          "archive",
+          "archive.date",
+          "archive.type",
+          "attachment_count",
+          "attachments",
+          "attachments.attachment_id",
+          "attachments.extracted_text",
+          "attachments.file_size",
+          "attachments.mime_type",
+          "attachments.name",
+          "attachments.posted_date",
+          "attachments.resource_id",
+          "attachments.type",
+          "attachments.url",
+          "award_number",
+          "description",
+          "last_updated",
+          "meta",
+          "meta.link",
+          "meta.notice_type",
+          "meta.notice_type.code",
+          "meta.notice_type.type",
+          "meta.parent_notice_id",
+          "meta.related_notice_id",
+          "naics_code",
+          "notice_id",
+          "office",
+          "office.agency_code",
+          "office.agency_name",
+          "office.department_code",
+          "office.department_name",
+          "office.office_code",
+          "office.office_name",
+          "office.organization_id",
+          "opportunity",
+          "opportunity.link",
+          "opportunity.opportunity_id",
+          "opportunity_id",
+          "place_of_performance",
+          "place_of_performance.city",
+          "place_of_performance.country",
+          "place_of_performance.state",
+          "place_of_performance.street_address",
+          "place_of_performance.zip",
+          "posted_date",
+          "primary_contact",
+          "primary_contact.email",
+          "primary_contact.fax",
+          "primary_contact.full_name",
+          "primary_contact.phone",
+          "primary_contact.title",
+          "psc_code",
+          "response_deadline",
+          "sam_url",
+          "secondary_contact",
+          "secondary_contact.email",
+          "secondary_contact.fax",
+          "secondary_contact.full_name",
+          "secondary_contact.phone",
+          "secondary_contact.title",
+          "set_aside",
+          "set_aside.code",
+          "set_aside.description",
+          "solicitation_number",
+          "title"
+        ],
+        "shape_supported": true,
+        "shape_tier_required": "pro",
         "viewset": "opportunities.views.NoticeViewSet"
       },
       "swagger_has_key": true,
@@ -4491,6 +5240,8 @@
           "office_code",
           "office_name"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "agencies.views.OfficeViewSet"
       },
       "swagger_has_key": true,
@@ -4613,8 +5364,254 @@
           "class": "OpportunityPageNumberPagination",
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "agency": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "code",
+                "name"
+              ]
+            },
+            "attachments": {
+              "expands": {},
+              "fields": [
+                "attachment_id",
+                "extracted_text",
+                "file_size",
+                "mime_type",
+                "name",
+                "posted_date",
+                "resource_id",
+                "type",
+                "url"
+              ]
+            },
+            "department": {
+              "expands": {},
+              "fields": [
+                "abbreviation",
+                "cgac",
+                "code",
+                "congressional_justification",
+                "description",
+                "name",
+                "website"
+              ]
+            },
+            "latest_notice": {
+              "expands": {},
+              "fields": [
+                "link",
+                "notice_id"
+              ]
+            },
+            "meta": {
+              "expands": {
+                "notice_type": {
+                  "expands": {},
+                  "fields": [
+                    "code",
+                    "type"
+                  ]
+                }
+              },
+              "fields": [
+                "attachments_count",
+                "notice_type",
+                "notices_count"
+              ]
+            },
+            "notice_history": {
+              "expands": {},
+              "fields": [
+                "deleted",
+                "index",
+                "latest",
+                "notice_id",
+                "notice_type_code",
+                "parent_notice_id",
+                "posted_date",
+                "related_notice_id",
+                "solicitation_number",
+                "title"
+              ]
+            },
+            "office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city",
+                "country",
+                "state",
+                "street_address",
+                "zip"
+              ]
+            },
+            "primary_contact": {
+              "expands": {},
+              "fields": [
+                "email",
+                "fax",
+                "full_name",
+                "phone",
+                "title"
+              ]
+            },
+            "secondary_contact": {
+              "expands": {},
+              "fields": [
+                "email",
+                "fax",
+                "full_name",
+                "phone",
+                "title"
+              ]
+            },
+            "set_aside": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            }
+          },
+          "fields": [
+            "active",
+            "agency",
+            "agency_id",
+            "archive_date",
+            "attachments",
+            "award_number",
+            "department",
+            "department_id",
+            "description",
+            "first_notice_date",
+            "last_notice_date",
+            "latest_notice",
+            "latest_notice_id",
+            "meta",
+            "naics_code",
+            "office",
+            "office_id",
+            "opportunity_id",
+            "place_of_performance",
+            "primary_contact",
+            "psc_code",
+            "response_deadline",
+            "sam_url",
+            "secondary_contact",
+            "set_aside",
+            "snippet",
+            "solicitation_number",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "active",
+          "agency",
+          "agency.abbreviation",
+          "agency.code",
+          "agency.name",
+          "agency_id",
+          "archive_date",
+          "attachments",
+          "attachments.attachment_id",
+          "attachments.extracted_text",
+          "attachments.file_size",
+          "attachments.mime_type",
+          "attachments.name",
+          "attachments.posted_date",
+          "attachments.resource_id",
+          "attachments.type",
+          "attachments.url",
+          "award_number",
+          "department",
+          "department.abbreviation",
+          "department.cgac",
+          "department.code",
+          "department.congressional_justification",
+          "department.description",
+          "department.name",
+          "department.website",
+          "department_id",
+          "description",
+          "first_notice_date",
+          "last_notice_date",
+          "latest_notice",
+          "latest_notice.link",
+          "latest_notice.notice_id",
+          "latest_notice_id",
+          "meta",
+          "meta.attachments_count",
+          "meta.notice_type",
+          "meta.notice_type.code",
+          "meta.notice_type.type",
+          "meta.notices_count",
+          "naics_code",
+          "notice_history",
+          "notice_history.deleted",
+          "notice_history.index",
+          "notice_history.latest",
+          "notice_history.notice_id",
+          "notice_history.notice_type_code",
+          "notice_history.parent_notice_id",
+          "notice_history.posted_date",
+          "notice_history.related_notice_id",
+          "notice_history.solicitation_number",
+          "notice_history.title",
+          "office",
+          "office.agency_code",
+          "office.agency_name",
+          "office.department_code",
+          "office.department_name",
+          "office.office_code",
+          "office.office_name",
+          "office.organization_id",
+          "office_id",
+          "opportunity_id",
+          "place_of_performance",
+          "place_of_performance.city",
+          "place_of_performance.country",
+          "place_of_performance.state",
+          "place_of_performance.street_address",
+          "place_of_performance.zip",
+          "primary_contact",
+          "primary_contact.email",
+          "primary_contact.fax",
+          "primary_contact.full_name",
+          "primary_contact.phone",
+          "primary_contact.title",
+          "psc_code",
+          "response_deadline",
+          "sam_url",
+          "secondary_contact",
+          "secondary_contact.email",
+          "secondary_contact.fax",
+          "secondary_contact.full_name",
+          "secondary_contact.phone",
+          "secondary_contact.title",
+          "set_aside",
+          "set_aside.code",
+          "set_aside.description",
+          "snippet",
+          "solicitation_number",
+          "title"
+        ],
+        "shape_supported": true,
+        "shape_tier_required": "pro",
         "viewset": "opportunities.views.OpportunityViewSet"
       },
       "swagger_has_key": true,
@@ -4894,6 +5891,8 @@
           "tree_obligations",
           "type"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "agencies.views.OrganizationViewSet"
       },
       "swagger_has_key": true,
@@ -5248,6 +6247,8 @@
           "type_of_ot_agreement.code",
           "type_of_ot_agreement.description"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.otas.OTAViewSet"
       },
       "swagger_has_key": true,
@@ -5575,6 +6576,8 @@
           "type_of_ot_agreement.code",
           "type_of_ot_agreement.description"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.otidvs.OTIDVViewSet"
       },
       "swagger_has_key": true,
@@ -5676,8 +6679,204 @@
           "class": "BidProtestPagination",
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "decisions": {
+              "expands": {},
+              "fields": [
+                "courtlistener_url",
+                "decision_date",
+                "document_type",
+                "document_url",
+                "judges",
+                "outcome",
+                "title"
+              ]
+            },
+            "dockets": {
+              "expands": {
+                "organization": {
+                  "expands": {},
+                  "fields": [
+                    "agency_code",
+                    "agency_name",
+                    "department_code",
+                    "department_name",
+                    "office_code",
+                    "office_name",
+                    "organization_id"
+                  ]
+                }
+              },
+              "fields": [
+                "agency",
+                "case_number",
+                "case_type",
+                "challenged_party",
+                "decision_date",
+                "decision_text",
+                "decision_url",
+                "digest",
+                "docket_number",
+                "docket_url",
+                "due_date",
+                "filed_date",
+                "judge",
+                "naics_code",
+                "outcome",
+                "outcome_reason",
+                "posted_date",
+                "protester",
+                "size_standard",
+                "solicitation_number",
+                "source_system",
+                "title"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "resolved_agency": {
+              "expands": {},
+              "fields": [
+                "key",
+                "match_confidence",
+                "name",
+                "rationale"
+              ]
+            },
+            "resolved_protester": {
+              "expands": {},
+              "fields": [
+                "match_confidence",
+                "name",
+                "rationale",
+                "uei"
+              ]
+            }
+          },
+          "fields": [
+            "agency",
+            "case_id",
+            "case_number",
+            "case_type",
+            "challenged_party",
+            "decision_date",
+            "decision_text",
+            "decision_url",
+            "decisions",
+            "digest",
+            "docket_url",
+            "dockets",
+            "due_date",
+            "filed_date",
+            "judge",
+            "naics_code",
+            "organization",
+            "outcome",
+            "outcome_reason",
+            "posted_date",
+            "protester",
+            "resolved_agency",
+            "resolved_protester",
+            "size_standard",
+            "solicitation_number",
+            "source_system",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "agency",
+          "case_id",
+          "case_number",
+          "case_type",
+          "challenged_party",
+          "decision_date",
+          "decision_text",
+          "decision_url",
+          "decisions",
+          "decisions.courtlistener_url",
+          "decisions.decision_date",
+          "decisions.document_type",
+          "decisions.document_url",
+          "decisions.judges",
+          "decisions.outcome",
+          "decisions.title",
+          "digest",
+          "docket_url",
+          "dockets",
+          "dockets.agency",
+          "dockets.case_number",
+          "dockets.case_type",
+          "dockets.challenged_party",
+          "dockets.decision_date",
+          "dockets.decision_text",
+          "dockets.decision_url",
+          "dockets.digest",
+          "dockets.docket_number",
+          "dockets.docket_url",
+          "dockets.due_date",
+          "dockets.filed_date",
+          "dockets.judge",
+          "dockets.naics_code",
+          "dockets.organization",
+          "dockets.organization.agency_code",
+          "dockets.organization.agency_name",
+          "dockets.organization.department_code",
+          "dockets.organization.department_name",
+          "dockets.organization.office_code",
+          "dockets.organization.office_name",
+          "dockets.organization.organization_id",
+          "dockets.outcome",
+          "dockets.outcome_reason",
+          "dockets.posted_date",
+          "dockets.protester",
+          "dockets.size_standard",
+          "dockets.solicitation_number",
+          "dockets.source_system",
+          "dockets.title",
+          "due_date",
+          "filed_date",
+          "judge",
+          "naics_code",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "outcome",
+          "outcome_reason",
+          "posted_date",
+          "protester",
+          "resolved_agency",
+          "resolved_agency.key",
+          "resolved_agency.match_confidence",
+          "resolved_agency.name",
+          "resolved_agency.rationale",
+          "resolved_protester",
+          "resolved_protester.match_confidence",
+          "resolved_protester.name",
+          "resolved_protester.rationale",
+          "resolved_protester.uei",
+          "size_standard",
+          "solicitation_number",
+          "source_system",
+          "title"
+        ],
+        "shape_supported": true,
+        "shape_tier_required": "enterprise_a",
         "viewset": "protests.views.BidProtestViewSet"
       },
       "swagger_has_key": false,
@@ -5690,8 +6889,15 @@
       "prefix": "psc",
       "resource_key": "psc",
       "runtime": {
-        "filter_params": [],
-        "filter_params_detail": {},
+        "filter_params": [
+          "has_awards"
+        ],
+        "filter_params_detail": {
+          "has_awards": {
+            "filter_class": "ViewHandledParam",
+            "type": "boolean"
+          }
+        },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
@@ -5760,6 +6966,8 @@
           "level_2_category_code",
           "parent"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "shared.views.ProductServiceCodeViewSet"
       },
       "swagger_has_key": true,
@@ -5947,6 +7155,8 @@
           "topics.topic_url",
           "year"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "sbir.views.SbirDsipSolicitationViewSet"
       },
       "swagger_has_key": false,
@@ -6157,6 +7367,8 @@
           "topic_url",
           "year"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "sbir.views.SbirTopicViewSet"
       },
       "swagger_has_key": false,
@@ -6378,6 +7590,8 @@
           "subaward_recipient.uei",
           "usaspending_permalink"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.subawards.SubawardViewSet"
       },
       "swagger_has_key": true,
@@ -7922,6 +9136,8 @@
           "vehicle_type",
           "who_can_use"
         ],
+        "shape_supported": true,
+        "shape_tier_required": null,
         "viewset": "awards.views.vehicles.VehicleViewSet"
       },
       "swagger_has_key": true,
