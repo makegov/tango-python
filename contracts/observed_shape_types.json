@@ -515,7 +515,7 @@
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
-        "type": "int"
+        "type": "str"
       },
       "awarding_office.office_name": {
         "is_list": false,
@@ -986,15 +986,6 @@
         "type": "str"
       },
       "legislative_mandates.other_statutory_authority": {
-        "kind": "code_object"
-      },
-      "legislative_mandates.other_statutory_authority.code": {
-        "is_list": false,
-        "is_optional": true,
-        "kind": "scalar",
-        "type": "str"
-      },
-      "legislative_mandates.other_statutory_authority.description": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
@@ -1184,7 +1175,7 @@
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
-        "type": "Decimal"
+        "type": "str"
       },
       "psc": {
         "kind": "code_object"
@@ -1222,13 +1213,13 @@
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
-        "type": "str"
+        "type": "int"
       },
       "recipient.cage_code": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
-        "type": "str"
+        "type": "int"
       },
       "recipient.display_name": {
         "is_list": false,
@@ -1559,7 +1550,7 @@
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
-        "type": "int"
+        "type": "str"
       },
       "vehicle.description": {
         "is_list": true,
@@ -2119,6 +2110,791 @@
       }
     },
     "records_seen": 80
+  },
+  "entities": {
+    "paths": {
+      "additional_website": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "business_types": {
+        "kind": "code_object"
+      },
+      "business_types.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "business_types.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cage_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "capabilities": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "capabilities_link": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "congressional_district": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "country_of_incorporation": {
+        "kind": "code_object"
+      },
+      "country_of_incorporation.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "country_of_incorporation.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "county": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "current_principals": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dba_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "display_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dodaac": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "email_address": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_division_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_division_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_start_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "entity_structure": {
+        "kind": "code_object"
+      },
+      "entity_structure.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_structure.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_type": {
+        "kind": "code_object"
+      },
+      "entity_type.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_type.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "entity_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "evs_source": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "exclusion_status_flag": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "exclusion_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "federal_obligations": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "federal_obligations.active": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "federal_obligations.active.awards_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "federal_obligations.active.awards_obligated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "federal_obligations.active.idv_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "federal_obligations.total": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "federal_obligations.total.awards_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "federal_obligations.total.awards_obligated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "federal_obligations.total.idv_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "federal_obligations.total.subawards_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "federal_obligations.total.subawards_obligated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "fiscal_year_end_close_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "g2x_about": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "g2x_ai_summary": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "g2x_employee_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "highest_owner": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "highest_owner.legal_business_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "highest_owner.uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "immediate_owner": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "immediate_owner.cage_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "immediate_owner.legal_business_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "keywords": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "last_update_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "legal_business_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "mailing_address.addressLine1": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.addressLine2": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.address_line1": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.address_line2": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.city": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.countryCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.country_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.stateOrProvinceCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "mailing_address.state_or_province_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "mailing_address.zipCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "mailing_address.zipCodePlus4": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "mailing_address.zip_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "mailing_address.zip_code_plus4": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "naics_codes": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "naics_codes.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "naics_codes.sba_small_business": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "naics_small_codes": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "non_fed_govt_certifications": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization_structure": {
+        "kind": "code_object"
+      },
+      "organization_structure.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization_structure.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "past_performance": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "past_performance.summary": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "past_performance.summary.agency_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.summary.naics_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.summary.psc_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.summary.total_awards": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.summary.total_obligated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "past_performance.top_agencies": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "past_performance.top_agencies.agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.top_agencies.agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "past_performance.top_agencies.awards_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.top_agencies.department_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.top_agencies.department_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "past_performance.top_agencies.obligations": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "past_performance.top_agencies.top_naics": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "past_performance.top_agencies.top_psc": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "physical_address": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "physical_address.addressLine1": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.addressLine2": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.address_line1": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.address_line2": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.city": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.countryCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.country_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.stateOrProvinceCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.state_or_province_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "physical_address.zipCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "physical_address.zipCodePlus4": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "physical_address.zip_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "physical_address.zip_code_plus4": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "primary_naics": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "profit_structure": {
+        "kind": "code_object"
+      },
+      "profit_structure.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "profit_structure.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "psc_codes": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "public_display_flag": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "purpose_of_registration": {
+        "kind": "code_object"
+      },
+      "purpose_of_registration.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "purpose_of_registration.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "registered": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "registration_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "relationships": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "relationships.display_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "relationships.relation": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "relationships.uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "sam_activation_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "sam_expiration_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "sam_registration_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "sba_business_types": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "special_equip_material": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "state_of_incorporation": {
+        "kind": "code_object"
+      },
+      "state_of_incorporation.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "state_of_incorporation.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "submission_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "uei_creation_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "uei_expiration_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "uei_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "uuid": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 720
   },
   "exclusions": {
     "paths": {
@@ -6475,6 +7251,822 @@
     },
     "records_seen": 800
   },
+  "itdashboard": {
+    "paths": {
+      "agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "bureau_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "bureau_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "business_case_html": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cio_evaluation": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "cio_evaluation.cioRating": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cio_evaluation.comment": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cio_evaluation.latestIndicator": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cio_evaluation.ratedDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "cio_evaluation.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "contracts": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "contracts.contractPIID": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contracts.referencePIID": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contracts.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "cost_pools_towers": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "cost_pools_towers.amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "cost_pools_towers.category": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cost_pools_towers.fiscalYear": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "cost_pools_towers.sourceType": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cost_pools_towers.tbmType": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "cost_pools_towers.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "details": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "details.business_case_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.change_in_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.current_uii": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.investment_description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.it_infrastructure_and_management_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "details.last_updated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "details.mission_delivery_and_management_support_area": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "details.mission_support_investment_categories": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.national_security_system_identifier": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "details.previous_uii": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.public_urls": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.shared_services_category": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "details.shared_services_identifier": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "funding": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "funding.fy2020_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2020_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2021_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2021_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2022_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2022_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2023_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2023_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2024_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2024_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2025_contribution": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding.fy2025_internal_funding": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding_sources": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "funding_sources.agencyCode(fromBudgetAccount)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "funding_sources.budgetAccountCode": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "funding_sources.budgetAccountName": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "funding_sources.bureauCode(fromBudgetAccount)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "funding_sources.fiscalYear": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "funding_sources.fundingAmount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "funding_sources.fundingType": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "funding_sources.sourceType": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "funding_sources.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "investment_title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "operational_analysis": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "operational_analysis.analysisConclusion": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "operational_analysis.analysisResults": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "operational_analysis.date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "operational_analysis.investmentTitle": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "operational_analysis.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "organization": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "organization.agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.department_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.department_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.office_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.office_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.organization_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "part_of_it_portfolio": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "performance_actual.actualResult": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_actual.comment": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual.dateOfActualResult": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "performance_actual.measurementCondition": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual.metTarget": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual.metricActualAgencyId": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "performance_actual.metricAgencyId": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "performance_actual.metricDescription": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual.reportingFrequency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_actual.target2024PY": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_actual.target2025CY": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_actual.unitOfMeasure": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_actual.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "performance_metrics": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "performance_metrics.agencyBaselineCapability": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_metrics.dateOfLatestActualResult": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "performance_metrics.isRetired": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "performance_metrics.latestActualResult": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_metrics.measurementCondition": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_metrics.metTarget": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_metrics.metricAgencyId": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "performance_metrics.metricDescription": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_metrics.performanceMeasurementCategory": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_metrics.reportingFrequency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "performance_metrics.target2024PY": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_metrics.target2025CY": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_metrics.unitOfMeasure": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "performance_metrics.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "projects": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "projects.actualCost": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.actualEndDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.actualStartDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.agencyProjectId": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "projects.costVariance($M)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.costVariance(%)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.costVarianceColor": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.incrementalDevelopment": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "projects.iterationFrequencyAmount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.iterationFrequencyUnits": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.iterativeDescription": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.plannedCost": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.plannedEndDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.plannedStartDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.projectGoal": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.projectId": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "projects.projectName": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.projectStatus": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.projectedCost": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.projectedEndDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.projectedStartDate": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "projects.scheduleVariance(%)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "projects.scheduleVariance(days)": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "projects.scheduleVarianceColor": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.softwareProject": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "projects.tmfInitiative": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "projects.updatedTime": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "type_of_investment": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "uii": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "updated_time": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 480
+  },
   "mas_sins": {
     "paths": {
       "description": {
@@ -6643,6 +8235,377 @@
     },
     "records_seen": 120
   },
+  "notices": {
+    "paths": {
+      "active": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "address": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "address.city": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "address.country": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "address.state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "address.zip": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "archive": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "archive.date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "archive.type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachment_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "attachments.attachment_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.file_size": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments.mime_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.resource_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "last_updated": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "meta.link": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.notice_type": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "meta.notice_type.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.notice_type.type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.parent_notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.related_notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "naics_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "opportunity.link": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.opportunity_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "place_of_performance.city": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.country": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.street_address": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.zip": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "primary_contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.fax": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.full_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "psc_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "response_deadline": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "sam_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "secondary_contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.fax": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.full_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "set_aside": {
+        "kind": "code_object"
+      },
+      "set_aside.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "set_aside.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 440
+  },
   "offices": {
     "paths": {
       "agency": {
@@ -6765,6 +8728,513 @@
       }
     },
     "records_seen": 120
+  },
+  "opportunities": {
+    "paths": {
+      "active": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "agency": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "agency.abbreviation": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "agency.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "agency.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "agency_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "archive_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "attachments": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "attachments.attachment_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.extracted_text": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.file_size": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments.mime_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "attachments.resource_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "department.abbreviation": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department.cgac": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "department.congressional_justification": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department.website": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "department_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "first_notice_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "last_notice_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "latest_notice": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "latest_notice.link": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "latest_notice.notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "latest_notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "meta.attachments_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "meta.notice_type": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "meta.notice_type.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.notice_type.type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.notices_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "naics_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "notice_history": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "notice_history.deleted": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "notice_history.index": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "notice_history.latest": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "notice_history.notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "notice_history.notice_type_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "notice_history.parent_notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "notice_history.posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "notice_history.related_notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "notice_history.solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "notice_history.title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "office.agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "office.agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office.department_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "office.department_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office.office_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "office.office_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office.organization_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "office_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "place_of_performance.city": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "place_of_performance.country_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.street_address": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "place_of_performance.zip_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "primary_contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "primary_contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.full_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "primary_contact.title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "psc_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "response_deadline": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "sam_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "secondary_contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.full_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "secondary_contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "set_aside": {
+        "kind": "code_object"
+      },
+      "set_aside.code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "set_aside.description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "snippet": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 480
   },
   "organizations": {
     "paths": {
@@ -7867,6 +10337,444 @@
       }
     },
     "records_seen": 400
+  },
+  "protests": {
+    "paths": {
+      "agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "case_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "case_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "case_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "challenged_party": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "decision_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "decision_text": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "decision_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "decisions": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "digest": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "docket_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "dockets.agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.base_case_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.case_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.case_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.challenged_party": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.decision_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "dockets.decision_text": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.decision_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.digest": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.docket_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.docket_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.due_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "dockets.filed_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "dockets.judge": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.naics_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.organization": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "dockets.organization.agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "dockets.organization.agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.organization.department_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "dockets.organization.department_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.organization.office_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "dockets.organization.office_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.organization.organization_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.outcome": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.outcome_reason": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "dockets.protester": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.size_standard": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.source_system": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "dockets.title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "due_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "filed_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "judge": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "naics_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "organization.agency_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.agency_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.department_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.department_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.office_code": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "organization.office_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.organization_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "outcome": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "outcome_reason": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "protester": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_agency": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "resolved_agency.key": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_agency.match_confidence": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_agency.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_agency.rationale": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_protester": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "resolved_protester.match_confidence": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_protester.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_protester.rationale": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "resolved_protester.uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "size_standard": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "source_system": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 240
   },
   "psc": {
     "paths": {

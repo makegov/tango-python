@@ -74,20 +74,38 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "exclusions": "list_exclusions",
     "sbir/topics": "list_sbir_topics",
     "sbir/solicitations": "list_sbir_solicitations",
-    # Resources not yet implemented in SDK
-    "offices": None,
+    "protests": "list_protests",
+    "offices": "list_offices",
+    "psc": "list_psc",
+    "mas_sins": "list_mas_sins",
+    "departments": "list_departments",
+    "business_types": "list_business_types",
+    "assistance_listings": "list_assistance_listings",
+    # Genuinely absent from the SDK. Both are content endpoints with no shaping
+    # and no list method; `list_webhook_event_types` is unrelated to `events`.
+    "events": None,
+    "news": None,
 }
 
 # Params the API genuinely accepts but the contract omits, so they would read as
-# stale (a silent no-op) when they in fact work. Tango surfaces view-handled
-# search params for filtersets that declare `min_length_params`; where it does
-# not, the param is absent from the contract even though the endpoint honors it.
+# stale (a silent no-op) when they in fact work. Tango's generator surfaces
+# view-handled search params only for filtersets declaring `min_length_params`
+# and DRF `SearchFilter` backends declaring `search_fields`; a resource that
+# implements search another way is absent from the contract even though the
+# endpoint honors it.
+#
 # Each entry must be verified against the live API before being added, and
-# removed once Tango's contract generator surfaces it.
-#   budget/accounts `search`: verified 2026-07-19 — 21,170 results unfiltered vs
-#   0 for a nonsense term, so the endpoint clearly applies it.
+# removed once Tango's generator surfaces it — `check_conformance` warns when an
+# entry is no longer needed, so this list cannot quietly rot.
+#
+#   mas_sins `search`: verified 2026-07-20 — 330 results unfiltered vs 0 for a
+#   nonsense term, 32 for "office", 3 for "cloud". The endpoint clearly applies
+#   it, and the contract records `filter_params: []` for the resource.
+#
+# (budget/accounts `search` lived here until 2026-07-20; makegov/tango#2944's
+# SearchFilter extraction now publishes it, so the carve-out was removed.)
 CONTRACT_OMITTED_PARAMS: dict[str, frozenset[str]] = {
-    "budget/accounts": frozenset({"search"}),
+    "mas_sins": frozenset({"search"}),
 }
 
 # SDK-level conveniences that never correspond to API filter params.
@@ -395,11 +413,22 @@ def run_check(manifest_path: Path) -> tuple[list[str], list[str]]:
             )
 
         # Direction 2 — staleness: SDK sends it, API no longer accepts it.
+        omitted = CONTRACT_OMITTED_PARAMS.get(resource_name, frozenset())
+
+        # A carve-out is only justified while the contract still omits the param.
+        # Once Tango publishes it, the entry hides real staleness — warn so it
+        # gets removed, mirroring how baseline entries are burned down above.
+        redundant = sorted(omitted & runtime_filters)
+        if redundant:
+            warnings.append(
+                f"{resource_name}: CONTRACT_OMITTED_PARAMS entries no longer needed "
+                f"(the contract now publishes them): {', '.join(redundant)}"
+            )
+
         stale = sorted(
             f"{arg} (sends `{api_param}`)" if arg != api_param else arg
             for arg, api_param in exposed.items()
-            if api_param not in runtime_filters
-            and api_param not in CONTRACT_OMITTED_PARAMS.get(resource_name, frozenset())
+            if api_param not in runtime_filters and api_param not in omitted
         )
         if stale:
             errors.append(

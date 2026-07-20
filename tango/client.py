@@ -2540,6 +2540,7 @@ class TangoClient:
         filed_date_before: str | None = None,
         decision_date_after: str | None = None,
         decision_date_before: str | None = None,
+        naics_code: str | None = None,
         search: str | None = None,
     ) -> PaginatedResponse:
         """
@@ -2569,6 +2570,7 @@ class TangoClient:
             filed_date_before: Filed date on or before
             decision_date_after: Decision date on or after
             decision_date_before: Decision date on or before
+            naics_code: Filter by the solicitation's NAICS code (e.g. 541519)
             search: Full-text search over protest searchable fields
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
@@ -2594,6 +2596,7 @@ class TangoClient:
             ("filed_date_before", filed_date_before),
             ("decision_date_after", decision_date_after),
             ("decision_date_before", decision_date_before),
+            ("naics_code", naics_code),
             ("search", search),
         ):
             if val is not None:

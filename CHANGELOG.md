@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `list_protests()` now accepts `naics_code`, filtering protests by the solicitation's NAICS code. The API has always supported it (verified live: 15,027 protests unfiltered, 12 for `541519`, 2 for `336411`), but `protests` was absent from the conformance checker's resource-to-method map, so the gap was never reported.
+
+### Fixed
+- **The reverse shape-coverage gate was blind to seven resources, and the SDK's schemas had silently drifted behind four of them.** The gate skipped any resource whose contract shape tree was falsy (`if not shape: continue`). Tango published `"shape": null` for `entities`, `opportunities`, `notices`, `protests`, `itdashboard`, `events`, and `news` — five of them because its contract generator crashed on tier-aware viewsets ([makegov/tango#2944](https://github.com/makegov/tango/pull/2944)) — so the gate reported full coverage while checking nothing for them. Re-vendoring the fixed contract surfaced **69 real gaps** (36 fields, 20 expands, 13 flattened expands) across entities, notices, protests, and itdashboard, all now closed by a regenerated overlay.
+
+  The user-visible consequence was worse than missing schema entries. Because `ShapeParser` validates client-side, the SDK *rejected* 13 fields the API accepts, before ever issuing a request — `list_entities(shape="display_name")` raised `ShapeValidationError` against an endpoint that returns 200 for it. Affected: `Entity`'s `display_name`, `entity_type`, `entity_structure`, `organization_structure`, `profit_structure`, `purpose_of_registration`, `country_of_incorporation`, `past_performance`, `registered`, `sba_business_types`, and `Protest`'s `decisions`, `resolved_agency`, `resolved_protester`. All 13 now validate. Note that `registered` and `sba_business_types` regressed *in 1.3.0* — they validated under 1.1.1 — so the overlay generation had narrowed `Entity` while nothing was watching.
+
+  The gate no longer skips silently: a resource declaring `shape_supported: true` with no shape tree is now a hard finding (`contract_missing_shape`) reported as an upstream contract defect rather than an SDK one. Contracts predating `schema_version: 2` omit the key, where a null tree stays genuinely ambiguous and skipping remains correct.
+- **Seven resources with working SDK methods were never conformance-checked at all.** `RESOURCE_TO_METHOD` omitted `protests`, `psc`, `mas_sins`, `departments`, `business_types`, and `assistance_listings` entirely, and mapped `offices` to `None` as "not yet implemented" even though `list_offices` exists. Their filter coverage had never been validated. Wiring them up found one real gap (`protests.naics_code`, above); the other six were already complete. `events` and `news` stay mapped to `None` — genuinely absent from the SDK, now with a note explaining that `list_webhook_event_types` is unrelated.
+- **`refresh_contract.py` + `probe_shape_types.py` re-run against the corrected contract.** `contracts/observed_shape_types.json` gained live-sampled types for the five newly-visible resources (entities alone contributes 136 observed paths), so the regenerated overlay resolves their types from real API responses rather than name heuristics.
+
+### Changed
+- `CONTRACT_OMITTED_PARAMS` now warns when an entry is no longer needed, mirroring how baseline entries are burned down. Added `mas_sins: search` — the API applies it (330 results unfiltered, 0 for a nonsense term, 32 for `office`) but the contract records `filter_params: []`, so the checker would otherwise flag a working parameter as a silent no-op and invite its removal. Dropped `budget/accounts: search`, which makegov/tango#2944's `SearchFilter` extraction now publishes.
+
 ## [1.3.0] - 2026-07-19
 
 ### Added

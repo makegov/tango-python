@@ -171,8 +171,29 @@ def collect_gaps(contract: dict[str, Any], registry: Any, models: Any) -> list[d
             walk(resource, child_path, enode, child_schema)
 
     for rkey, r in contract.get("resources", {}).items():
-        shape = (r.get("runtime") or {}).get("shape")
+        runtime = r.get("runtime") or {}
+        shape = runtime.get("shape")
         if not shape:
+            # A null tree used to be an unconditional skip, which made this gate
+            # blind to exactly the resources it most needed to check. Tango
+            # published null for entities/opportunities/notices/protests/
+            # itdashboard because its generator crashed on tier-aware viewsets
+            # (makegov/tango#2944), and this gate reported full coverage while
+            # the SDK's Entity and Protest schemas drifted 13 fields behind.
+            #
+            # Contracts at schema_version >= 2 declare shape_supported, so a
+            # null tree on a shaping resource is now a hard finding. Older
+            # contracts omit the key; there `None` is genuinely ambiguous and
+            # skipping stays the only safe read.
+            if runtime.get("shape_supported"):
+                findings.append(
+                    {
+                        "kind": "contract_missing_shape",
+                        "resource": rkey,
+                        "path": "(root)",
+                        "name": runtime.get("shape_error") or "no shape tree published",
+                    }
+                )
             continue
         model_name = RESOURCE_TO_MODEL.get(rkey)
         model = getattr(models, model_name, None) if model_name else None
@@ -304,6 +325,19 @@ def main() -> int:
     if not new:
         print("\nNo new shape-coverage drift. ✓")
         return 0
+
+    contract_gaps = [f for f in new if f["kind"] == "contract_missing_shape"]
+    if contract_gaps:
+        print(
+            "\n*** CONTRACT DEFECT — these resources support shaping but publish no shape tree ***"
+        )
+        _print_grouped("RESOURCES WITH NO SHAPE TREE", contract_gaps)
+        print(
+            "\n  This is an upstream problem, not an SDK one: the vendored contract understates\n"
+            "  the API, so coverage cannot be checked for these resources at all. Refresh the\n"
+            "  contract (scripts/refresh_contract.py); if it persists, the generator is failing\n"
+            "  to extract them — see makegov/tango contracts/README.md."
+        )
 
     print("\n*** NEW shape-coverage drift (Tango exposes these; the SDK schema does not) ***")
     _print_grouped("MISSING FIELDS", [f for f in new if f["kind"] == "missing_field"])

@@ -1902,3 +1902,50 @@ class TestParsers:
         client = TangoClient()
         result = client._parse_agency(None)
         assert result is None
+
+
+class TestProtestFilters:
+    """`naics_code` reached the SDK late — the conformance check could not see
+    the protests resource at all until makegov/tango#2944 fixed the contract's
+    shape blind spot and the resource was wired into RESOURCE_TO_METHOD.
+    """
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_protests_forwards_naics_code(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_protests(naics_code="541519", outcome="Sustained")
+
+        params = mock_request.call_args[1]["params"]
+        assert params["naics_code"] == "541519"
+        assert params["outcome"] == "Sustained"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_protests_omits_unset_naics_code(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_protests()
+
+        assert "naics_code" not in mock_request.call_args[1]["params"]
