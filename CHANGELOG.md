@@ -49,6 +49,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   observations with `scripts/probe_shape_types.py` (maintainer-run, needs a key).
 
 ### Fixed
+- **`docs/WEBHOOKS.md` listed only five of the eight webhook alert types.** It
+  was missing `alerts.exclusion.match`, `alerts.dibbs_rfq.match`, and
+  `alerts.dibbs_rfp.match`. No SDK change was needed — event types are served by
+  the API and never hardcoded, so the new types already worked — but the
+  hand-written list had gone stale. Also documents two things that surprise
+  people: DIBBS *awards* are not alertable, and nothing fires when a record
+  merely lapses (an exclusion hitting its termination date, or an RFQ/RFP
+  passing its close date, emits no event). A production smoke test now asserts
+  every live event type appears in the doc, so the list cannot silently fall
+  behind again.
 - **Refreshed the vendored API contract, which had gone stale by seven
   resources.** It tracked 25 resources against Tango's current 32, so the
   conformance and coverage checks were validating against out-of-date truth and
