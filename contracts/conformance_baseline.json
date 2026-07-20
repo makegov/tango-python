@@ -1,12 +1,35 @@
 {
   "_comment": "Accepted SDK coverage gaps vs the API contract. Params listed here downgrade from error to warning in scripts/check_filter_shape_conformance.py. Each entry is tracked backlog: remove it in the same PR that adds the param to the SDK. Run the checker with --suggest for ready-to-paste typed parameter scaffolds.",
   "missing_filters": {
-    "contracts": ["key"],
-    "entities": ["cage"],
-    "forecasts": ["id"],
-    "idvs": ["key"],
-    "opportunities": ["opportunity_id"],
-    "otas": ["key"],
-    "otidvs": ["key"]
+    "contracts": [
+      "key"
+    ],
+    "entities": [
+      "cage"
+    ],
+    "forecasts": [
+      "id"
+    ],
+    "idvs": [
+      "key"
+    ],
+    "opportunities": [
+      "opportunity_id"
+    ],
+    "otas": [
+      "key"
+    ],
+    "otidvs": [
+      "key"
+    ],
+    "budget/accounts": [
+      "agency_code__in",
+      "bea_category__in",
+      "bureau_name__icontains",
+      "bureau_name__in",
+      "federal_account_symbol__in",
+      "fiscal_year__in",
+      "subfunction_code__in"
+    ]
   }
 }

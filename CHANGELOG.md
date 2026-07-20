@@ -7,7 +7,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-19
+
 ### Added
+- **DIBBS, exclusions, and SBIR/STTR endpoint support.** Six endpoint families
+  Tango shipped in v4.16–v4.18 had no SDK support at all — no models, no methods.
+  Added `list_dibbs_rfqs`/`get_dibbs_rfq`, `list_dibbs_rfps`/`get_dibbs_rfp`,
+  `list_dibbs_awards`/`get_dibbs_award`, `list_exclusions`/`get_exclusion`,
+  `list_sbir_topics`/`get_sbir_topic`, and
+  `list_sbir_solicitations`/`get_sbir_solicitation`, with all 85 filter params,
+  shape schemas, and `ShapeConfig` defaults. New models: `DibbsRfq`, `DibbsRfp`,
+  `DibbsAward`, `Exclusion`, `SbirTopic`, `SbirSolicitation`.
+
+  Two API behaviors are worth knowing. `is_open` (DIBBS) and
+  `is_currently_excluded` (exclusions) are derived at query time, so filter with
+  the `open` / `active` kwargs rather than shaping on those fields. And DIBBS
+  `total_contract_price` is the *order* total repeated on every line item —
+  never sum it across rows; deduplicate on award + delivery-order number first.
+- **Reverse shape-coverage: the SDK now captures every field and expand the API
+  returns.** The conformance check only validated one direction — that the SDK's
+  shape constants reference *allowed* fields. Nothing checked the reverse, so the
+  hand-maintained `tango/shapes/explicit_schemas.py` had silently fallen ~200+
+  fields behind the API: 209 leaf fields, 41 whole nested expand branches, and 3
+  resources (naics, psc, mas_sins) the typed shape API could not request at all.
+  A new generated overlay (`tango/shapes/generated_overlay.py`, produced by
+  `scripts/generate_shape_overlay.py` and merged over the base by `SchemaRegistry`)
+  closes all of them, with types resolved from live-API sampling rather than
+  guessed. Notable now-shapeable data: contract/IDV acquisition attributes
+  (`fair_opportunity_limited_sources`, `subcontracting_plan`, …), `contracts.officers`
+  and `period_of_performance`, the full `organizations` hierarchy
+  (`obligation_rank`, `l1..l8_fh_key`, `budget_appropriation`, `children`/`parent`),
+  `otas`/`otidvs` `transactions`, and the deep `vehicles.awardees[.orders]` tree.
+  Code-object expands (`set_aside`, `award_type`, `idv_type`, …), previously
+  modeled inconsistently as `str`/bare `dict`, now uniformly resolve to
+  `{code, description}`.
+- **Reverse shape-coverage gate.** `scripts/check_shape_coverage.py` walks Tango's
+  shape trees (from the vendored contract) against the SDK schemas and fails when
+  the SDK misses anything the API exposes and it isn't in
+  `contracts/shape_coverage_baseline.json`. Offline against the vendored contract —
+  no token, runs on forks — and wired into the `lint.yml` conformance job.
+  Regenerate the overlay with `scripts/generate_shape_overlay.py` (from the vendored
+  contract + `contracts/observed_shape_types.json`, no API key); refresh the type
+  observations with `scripts/probe_shape_types.py` (maintainer-run, needs a key).
 - **Contract-first conformance system.** The canonical API filter/shape
   contract is now vendored at `contracts/filter_shape_contract.json` (refresh
   with the new `scripts/refresh_contract.py`), so the conformance check runs
@@ -41,6 +82,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   returns structured `issues` — e.g.
   `Invalid request parameters: Invalid shape: tradeoff_process (unknown_field)`
   instead of just `Invalid request parameters: Invalid shape`. ([#45](https://github.com/makegov/tango-python/issues/45))
+
+### Fixed
+- **`docs/WEBHOOKS.md` listed only five of the eight webhook alert types.** It
+  was missing `alerts.exclusion.match`, `alerts.dibbs_rfq.match`, and
+  `alerts.dibbs_rfp.match`. No SDK change was needed — event types are served by
+  the API and never hardcoded, so the new types already worked — but the
+  hand-written list had gone stale. Also documents two things that surprise
+  people: DIBBS *awards* are not alertable, and nothing fires when a record
+  merely lapses (an exclusion hitting its termination date, or an RFQ/RFP
+  passing its close date, emits no event). A production smoke test now asserts
+  every live event type appears in the doc, so the list cannot silently fall
+  behind again.
+- **Refreshed the vendored API contract, which had gone stale by seven
+  resources.** It tracked 25 resources against Tango's current 32, so the
+  conformance and coverage checks were validating against out-of-date truth and
+  could not see DIBBS, exclusions, SBIR, or `budget/accounts` at all. Refreshing
+  it also surfaced 72 additional fields on existing resources, now covered.
+  Nested routes are keyed with a slash (`budget/accounts`), which silently broke
+  the old `budget_accounts` mapping — both keys are now accepted.
+- **`check_filter_shape_conformance.py` no longer reports false stale params.**
+  It resolved SDK arguments to API params only through an explicit
+  `api_param_mapping` dict, so methods that express the translation as tuple
+  tables — `("account_title__icontains", account_title)` and
+  `range_filters = (("apportioned", apportioned, apportioned_gte, ...))` — looked
+  like they exposed dozens of params the API rejects. They do not:
+  `list_budget_accounts` correctly sends `apportioned__gte`, `fiscal_year__lte`,
+  and `account_title__icontains`. The checker now understands both tuple forms
+  (in `Assign`, `AnnAssign`, and inline `for` iterables), with an explicit
+  `api_param_mapping` still taking precedence. This let `budget/accounts` be
+  conformance-checked for the first time; its genuinely missing lookup variants
+  (`agency_code__in`, `bureau_name__icontains`, …) are now baselined.
 
 ## [1.2.0] - 2026-06-05
 

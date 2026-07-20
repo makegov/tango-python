@@ -1,0 +1,1 @@
+{"description": "Known reverse shape-coverage gaps (Tango exposes, SDK schema lacks), accepted as a tracked backlog. check_shape_coverage.py fails only on gaps NOT listed here. Burn down and regenerate with --update-baseline.", "count": 0, "known_gaps": []}

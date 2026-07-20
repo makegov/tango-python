@@ -10,12 +10,18 @@ from .exceptions import (
 )
 from .models import (
     BudgetAccount,
+    DibbsAward,
+    DibbsRfp,
+    DibbsRfq,
+    Exclusion,
     GsaElibraryContract,
     ITDashboardInvestment,
     PaginatedResponse,
     RateLimitInfo,
     ResolveCandidate,
     ResolveResult,
+    SbirSolicitation,
+    SbirTopic,
     SearchFilters,
     ShapeConfig,
     ValidateResult,
@@ -44,7 +50,7 @@ from .webhooks import (
 )
 from .webhooks.receiver import Delivery, WebhookReceiver
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
@@ -56,6 +62,12 @@ __all__ = [
     "ResolveCandidate",
     "ResolveResult",
     "BudgetAccount",
+    "DibbsAward",
+    "DibbsRfp",
+    "DibbsRfq",
+    "Exclusion",
+    "SbirSolicitation",
+    "SbirTopic",
     "GsaElibraryContract",
     "ITDashboardInvestment",
     "PaginatedResponse",

@@ -64,9 +64,30 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "naics": "list_naics",
     "gsa_elibrary_contracts": "list_gsa_elibrary_contracts",
     "itdashboard": "list_itdashboard_investments",
+    # Nested routes are keyed with a slash in the contract ("budget/accounts").
+    # The pre-slash key is kept so an older vendored contract still maps.
+    "budget/accounts": "list_budget_accounts",
     "budget_accounts": "list_budget_accounts",
+    "dibbs/rfqs": "list_dibbs_rfqs",
+    "dibbs/rfps": "list_dibbs_rfps",
+    "dibbs/awards": "list_dibbs_awards",
+    "exclusions": "list_exclusions",
+    "sbir/topics": "list_sbir_topics",
+    "sbir/solicitations": "list_sbir_solicitations",
     # Resources not yet implemented in SDK
     "offices": None,
+}
+
+# Params the API genuinely accepts but the contract omits, so they would read as
+# stale (a silent no-op) when they in fact work. Tango surfaces view-handled
+# search params for filtersets that declare `min_length_params`; where it does
+# not, the param is absent from the contract even though the endpoint honors it.
+# Each entry must be verified against the live API before being added, and
+# removed once Tango's contract generator surfaces it.
+#   budget/accounts `search`: verified 2026-07-19 — 21,170 results unfiltered vs
+#   0 for a nonsense term, so the endpoint clearly applies it.
+CONTRACT_OMITTED_PARAMS: dict[str, frozenset[str]] = {
+    "budget/accounts": frozenset({"search"}),
 }
 
 # SDK-level conveniences that never correspond to API filter params.
@@ -213,7 +234,13 @@ def parse_client_methods() -> dict[str, dict[str, Any]]:
             arg.arg: ast.unparse(arg.annotation) for arg in arg_nodes if arg.annotation is not None
         }
         has_kwargs = node.args.kwarg is not None
-        mapping: dict[str, str] = {}
+        # Explicit `api_param_mapping` always wins over the inline forms below:
+        # a method that has one routes its tuple keys THROUGH it
+        # (`api_param_mapping.get(key, key)`), so there the tuple literal is the
+        # SDK-side name, not the API param.
+        explicit_mapping: dict[str, str] = {}
+        inline_mapping: dict[str, str] = {}
+        mapping: dict[str, str] = explicit_mapping
         for child in ast.walk(node):
             if isinstance(child, ast.Assign):
                 if len(child.targets) != 1 or not isinstance(child.targets[0], ast.Name):
@@ -224,6 +251,44 @@ def parse_client_methods() -> dict[str, dict[str, Any]]:
                     for key, value in zip(child.value.keys, child.value.values, strict=True):
                         if isinstance(key, ast.Constant) and isinstance(value, ast.Constant):
                             mapping[str(key.value)] = str(value.value)
+
+            # Methods also express the arg -> API-param translation as tuple
+            # tables rather than an api_param_mapping dict. These must be
+            # understood or their args look stale, when in fact they resolve to a
+            # param the API does accept under a different name. Two element
+            # shapes appear, in inline `for ... in (...)` iterables and in named
+            # tables (`scalar_filters = (...)`, `range_filters: tuple[...] = (...)`,
+            # so both Assign and AnnAssign):
+            #
+            #   ("account_title__icontains", account_title)
+            #       -> the literal is the API param, the Name is the SDK argument.
+            #
+            #   ("apportioned", apportioned, apportioned_gte, apportioned_lte)
+            #       -> the loop emits field / field__gte / field__lte, so the three
+            #          Names map onto those three API params in order.
+            table: ast.expr | None = None
+            if isinstance(child, ast.For):
+                table = child.iter
+            elif isinstance(child, ast.Assign):
+                table = child.value
+            elif isinstance(child, ast.AnnAssign):
+                table = child.value
+            if isinstance(table, ast.Tuple | ast.List):
+                for elt in table.elts:
+                    if not isinstance(elt, ast.Tuple) or not elt.elts:
+                        continue
+                    head = elt.elts[0]
+                    if not (isinstance(head, ast.Constant) and isinstance(head.value, str)):
+                        continue
+                    if len(elt.elts) == 2 and isinstance(elt.elts[1], ast.Name):
+                        inline_mapping[elt.elts[1].id] = head.value
+                    elif len(elt.elts) == 4:
+                        for name_node, suffix in zip(
+                            elt.elts[1:], ("", "__gte", "__lte"), strict=True
+                        ):
+                            if isinstance(name_node, ast.Name):
+                                inline_mapping[name_node.id] = f"{head.value}{suffix}"
+        mapping = {**inline_mapping, **explicit_mapping}
         methods[node.name] = {
             "args": set(args),
             "annotations": annotations,
@@ -334,6 +399,7 @@ def run_check(manifest_path: Path) -> tuple[list[str], list[str]]:
             f"{arg} (sends `{api_param}`)" if arg != api_param else arg
             for arg, api_param in exposed.items()
             if api_param not in runtime_filters
+            and api_param not in CONTRACT_OMITTED_PARAMS.get(resource_name, frozenset())
         )
         if stale:
             errors.append(

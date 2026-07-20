@@ -711,3 +711,23 @@ class TestProductionSmoke:
 
         validate_pagination(response)
         assert response.count >= 0, "Count should be non-negative"
+
+
+class TestWebhookEventTypeDocs:
+    """docs/WEBHOOKS.md lists the alert types by hand, so it silently goes stale
+    when Tango ships a new one — exactly how it fell three behind (exclusion,
+    dibbs_rfq, dibbs_rfp). The SDK itself needs no changes for a new type (event
+    types are served by the API and never hardcoded), but the docs do.
+    """
+
+    def test_every_live_event_type_is_documented(self, production_client):
+        from pathlib import Path
+
+        doc = Path(__file__).resolve().parents[2] / "docs" / "WEBHOOKS.md"
+        text = doc.read_text(encoding="utf-8")
+        live = {et.event_type for et in production_client.list_webhook_event_types().event_types}
+        undocumented = sorted(et for et in live if et not in text)
+        assert not undocumented, (
+            f"docs/WEBHOOKS.md is missing webhook event type(s): {', '.join(undocumented)}. "
+            "Add them to the list-event-types block."
+        )

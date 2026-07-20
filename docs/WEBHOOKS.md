@@ -84,7 +84,24 @@ tango webhooks list-event-types
 # alerts.entity.match        Entity matched a saved alert
 # alerts.grant.match         Grant matched a saved alert
 # alerts.forecast.match      Forecast matched a saved alert
+# alerts.exclusion.match     SAM.gov exclusion matched a saved alert
+# alerts.dibbs_rfq.match     DLA DIBBS RFQ matched a saved alert
+# alerts.dibbs_rfp.match     DLA DIBBS RFP matched a saved alert
 ```
+
+This list is served by the API, so it is always current — the SDK does not hardcode
+event types anywhere. Always trust `list-event-types` over any list written down
+here.
+
+Two things that surprise people:
+
+- **DIBBS awards are not alertable.** There is no `alerts.dibbs_award.match`;
+  only RFQs and RFPs emit alerts.
+- **Nothing fires when a record merely lapses.** An exclusion reaching its
+  termination date, or an RFQ/RFP passing its close date, emits no event.
+  Alerts fire on a record matching your saved search, not on the passage of
+  time. Poll with `list_exclusions(active=...)` / `list_dibbs_rfqs(open=...)`
+  if you need to observe expiry.
 
 ### 2. See what a payload looks like
 

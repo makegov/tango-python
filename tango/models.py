@@ -840,6 +840,196 @@ class BudgetAccount:
     modified: str | None = None
 
 
+class DibbsRfq:
+    """Schema definition for DibbsRfq (not used for instances).
+
+    DLA DIBBS request-for-quote solicitations at ``/api/dibbs/rfqs/``. Shape-on-demand,
+    so every field is optional. ``is_open`` is derived at query time from
+    ``return_by_date``, so it is not filterable as a stored field — use the ``open``
+    filter instead. See https://tango.makegov.com/docs/api-reference/dibbs.md.
+    """
+
+    uuid: str | None = None
+    solicitation: str | None = None
+    solicitation_formatted: str | None = None
+    nsn: str | None = None
+    part_number: str | None = None
+    nomenclature: str | None = None
+    purchase_request: str | None = None
+    quantity: int | None = None
+    unit_of_issue: str | None = None
+    issue_date: str | None = None
+    return_by_date: str | None = None
+    status_code: str | None = None
+    set_aside: str | None = None
+    is_open: bool | None = None
+    document_url: str | None = None
+    organization: dict[str, Any] | None = None
+
+
+class DibbsRfp:
+    """Schema definition for DibbsRfp (not used for instances).
+
+    DLA DIBBS request-for-proposal solicitations at ``/api/dibbs/rfps/``.
+    Shape-on-demand, so every field is optional. ``is_open`` is derived at query time
+    from ``closes_date`` — use the ``open`` filter to select on it.
+    See https://tango.makegov.com/docs/api-reference/dibbs.md.
+    """
+
+    uuid: str | None = None
+    solicitation: str | None = None
+    nsn: str | None = None
+    part_number: str | None = None
+    nomenclature: str | None = None
+    buyer_code: str | None = None
+    issued_date: str | None = None
+    closes_date: str | None = None
+    is_open: bool | None = None
+    document_url: str | None = None
+    tech_docs_url: str | None = None
+    organization: dict[str, Any] | None = None
+
+
+class DibbsAward:
+    """Schema definition for DibbsAward (not used for instances).
+
+    DLA DIBBS awards at ``/api/dibbs/awards/``. Shape-on-demand, so every field is
+    optional.
+
+    WARNING: ``total_contract_price`` is the *order* total repeated on every line
+    item of the award — never sum it across rows, or you will multiply the value by
+    the line-item count. See
+    https://tango.makegov.com/docs/api-reference/dibbs.md.
+    """
+
+    uuid: str | None = None
+    award_number: str | None = None
+    delivery_order_number: str | None = None
+    delivery_order_counter: int | None = None
+    solicitation: str | None = None
+    purchase_request: str | None = None
+    nsn: str | None = None
+    part_number: str | None = None
+    nomenclature: str | None = None
+    awardee_cage: str | None = None
+    award_date: str | None = None
+    posted_date: str | None = None
+    last_mod_posting_date: str | None = None
+    total_contract_price: str | None = None
+    total_contract_price_text: str | None = None
+    awardee: dict[str, Any] | None = None
+    organization: dict[str, Any] | None = None
+
+
+class Exclusion:
+    """Schema definition for Exclusion (not used for instances).
+
+    SAM.gov exclusion (debarment) records at ``/api/exclusions/``. Shape-on-demand,
+    so every field is optional. ``is_currently_excluded`` is derived at query time
+    from the activate/termination dates — use the ``active`` filter to select on it.
+    See https://tango.makegov.com/docs/api-reference/exclusions.md.
+    """
+
+    exclusion_key: str | None = None
+    classification_type: str | None = None
+    exclusion_type: str | None = None
+    exclusion_program: str | None = None
+    display_name: str | None = None
+    entity_name: str | None = None
+    entity_uei: str | None = None
+    uei: str | None = None
+    cage_code: str | None = None
+    npi: str | None = None
+    ct_code: str | None = None
+    prefix: str | None = None
+    first_name: str | None = None
+    middle_name: str | None = None
+    last_name: str | None = None
+    suffix: str | None = None
+    excluding_agency_code: str | None = None
+    excluding_agency_name: str | None = None
+    activate_date: str | None = None
+    termination_date: str | None = None
+    termination_type: str | None = None
+    create_date: str | None = None
+    update_date: str | None = None
+    delisted_at: str | None = None
+    is_currently_excluded: bool | None = None
+    is_fascsa_order: bool | None = None
+    additional_comments: str | None = None
+    evs_investigation_status: str | None = None
+    dnb_open_data: str | None = None
+    primary_address: dict[str, Any] | None = None
+    secondary_address: dict[str, Any] | None = None
+    more_locations: Any | None = None
+    references: Any | None = None
+    vessel_call_sign: str | None = None
+    vessel_flag: str | None = None
+    vessel_grt: str | None = None
+    vessel_owner: str | None = None
+    vessel_tonnage: str | None = None
+    vessel_type: str | None = None
+
+
+class SbirTopic:
+    """Schema definition for SbirTopic (not used for instances).
+
+    SBIR/STTR topics at ``/api/sbir/topics/``. Shape-on-demand, so every field is
+    optional. ``listed_open`` reflects the source listing rather than a computed
+    window. See https://tango.makegov.com/docs/api-reference/sbir.md.
+    """
+
+    topic_id: str | None = None
+    topic_node_id: str | None = None
+    topic_number: str | None = None
+    title: str | None = None
+    description: str | None = None
+    agency: str | None = None
+    activity: str | None = None
+    year: int | None = None
+    solicitation_number: str | None = None
+    solicitation_status: str | None = None
+    release_date: str | None = None
+    open_date: str | None = None
+    close_date: str | None = None
+    due_dates_text: str | None = None
+    listed_open: bool | None = None
+    topic_url: str | None = None
+    official_solicitation_url: str | None = None
+    doc_source: str | None = None
+    source_last_updated: str | None = None
+    solicitation: dict[str, Any] | None = None
+    opportunity: dict[str, Any] | None = None
+    grant: dict[str, Any] | None = None
+
+
+class SbirSolicitation:
+    """Schema definition for SbirSolicitation (not used for instances).
+
+    DoD DSIP SBIR/STTR solicitations at ``/api/sbir/solicitations/``. Shape-on-demand,
+    so every field is optional. See
+    https://tango.makegov.com/docs/api-reference/sbir.md.
+    """
+
+    solicitation_id: str | None = None
+    solicitation_number: str | None = None
+    solicitation_cycle_id: str | None = None
+    title: str | None = None
+    program: str | None = None
+    activity: str | None = None
+    cycle: str | None = None
+    cycle_name: str | None = None
+    solicitation_status: str | None = None
+    out_of_cycle: bool | None = None
+    year: int | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    sol_download_url: str | None = None
+    source_last_updated: str | None = None
+    topics: list[dict[str, Any]] | None = None
+    documents: list[dict[str, Any]] | None = None
+
+
 @dataclass
 class PaginatedResponse[T]:
     """Paginated API response
@@ -913,6 +1103,41 @@ class ShapeConfig:
 
     # Default for list_protests()
     PROTESTS_MINIMAL: Final = "case_id,case_number,title,source_system,outcome,filed_date"
+
+    # Default for list_dibbs_rfqs()
+    DIBBS_RFQS_MINIMAL: Final = (
+        "uuid,solicitation,nsn,part_number,nomenclature,quantity,issue_date,return_by_date,is_open"
+    )
+
+    # Default for list_dibbs_rfps()
+    DIBBS_RFPS_MINIMAL: Final = (
+        "uuid,solicitation,nsn,part_number,nomenclature,issued_date,closes_date,is_open"
+    )
+
+    # Default for list_dibbs_awards(). total_contract_price is the ORDER total
+    # repeated per line item — never sum it across rows.
+    DIBBS_AWARDS_MINIMAL: Final = (
+        "uuid,award_number,solicitation,nsn,part_number,nomenclature,"
+        "awardee_cage,award_date,total_contract_price"
+    )
+
+    # Default for list_exclusions()
+    EXCLUSIONS_MINIMAL: Final = (
+        "exclusion_key,display_name,entity_name,uei,classification_type,exclusion_type,"
+        "excluding_agency_name,activate_date,termination_date,is_currently_excluded"
+    )
+
+    # Default for list_sbir_topics()
+    SBIR_TOPICS_MINIMAL: Final = (
+        "topic_id,topic_number,title,agency,activity,year,"
+        "solicitation_number,open_date,close_date,listed_open"
+    )
+
+    # Default for list_sbir_solicitations()
+    SBIR_SOLICITATIONS_MINIMAL: Final = (
+        "solicitation_id,solicitation_number,title,program,activity,"
+        "cycle_name,solicitation_status,year,start_date,end_date"
+    )
 
     # Default for list_grants()
     GRANTS_MINIMAL: Final = "grant_id,opportunity_number,title,status(*),agency_code"

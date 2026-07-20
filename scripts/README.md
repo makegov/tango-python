@@ -14,6 +14,9 @@ This directory contains utility scripts used during development and maintenance 
 - **`test_production.py`** - Runs production API smoke tests against the live API
 - **`pr_review.py`** - Runs configurable validation checks for PR review (linting, type checking, tests, conformance)
 - **`check_filter_shape_conformance.py`** - Validates SDK filter and shape conformance (see [Filter and shape conformance](#filter-and-shape-conformance))
+- **`check_shape_coverage.py`** - Reverse shape-coverage gate: fails when Tango's shape trees expose a field/expand the SDK schema doesn't capture and it isn't in `contracts/shape_coverage_baseline.json`. Offline against the vendored contract (no API key; runs on forks)
+- **`generate_shape_overlay.py`** - Regenerates `tango/shapes/generated_overlay.py` (the schema additions that close the coverage gaps) from the vendored contract + `contracts/observed_shape_types.json`. No API key needed; `--report` prints the gaps without writing
+- **`probe_shape_types.py`** - Samples the live API to derive ground-truth shape types (types + list-ness the contract can't express) into `contracts/observed_shape_types.json`. Maintainer-run; requires `TANGO_API_KEY`
 
 ## Usage
 
