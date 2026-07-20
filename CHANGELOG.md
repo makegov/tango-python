@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-07-20
+
 ### Added
 - `list_protests()` now accepts `naics_code`, filtering protests by the solicitation's NAICS code. The API has always supported it (verified live: 15,027 protests unfiltered, 12 for `541519`, 2 for `336411`), but `protests` was absent from the conformance checker's resource-to-method map, so the gap was never reported.
 - `list_psc()` now accepts `has_awards`, restricting results to codes with contract award history (2,526 PSC codes unfiltered, 2,243 with awards). `False` is sent explicitly rather than dropped, since the API distinguishes the two. This param has always worked but was invisible to the contract until [makegov/tango#2948](https://github.com/makegov/tango/pull/2948) added the `view_handled_params` declaration for params a viewset reads straight from `query_params`. That PR also fixed a truthiness bug where `has_awards=false` filtered identically to `true`, and is deployed — verified live at 2,526 for `False` and 2,243 for `True`.
