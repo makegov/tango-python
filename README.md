@@ -137,8 +137,36 @@ contracts = client.list_contracts(
 - `expiring_gte`, `expiring_lte` - Contract expiration date range
 
 **Party Filters:**
-- `awarding_agency`, `funding_agency` - Agency codes
+- `awarding_agency`, `funding_agency` - Agency codes, names, abbreviations, or organization UUIDs. Multi-value OR via `|`.
 - `recipient_name`, `recipient_uei` - Vendor/recipient filters
+
+### Checking how agency filters resolved
+
+Agency values are resolved fuzzily, so a token can match an organization you did not
+intend — which silently scopes the query to that organization's subtree. A short result
+set is then indistinguishable from "no such records exist". Responses expose what
+actually happened:
+
+```python
+response = client.list_contracts(awarding_agency="HUD|HUDD")
+
+# Tokens that matched nothing and were ignored.
+if response.unresolved_agency_tokens:
+    raise SystemExit(f"dropped: {response.unresolved_agency_tokens}")
+    # {'awarding_agency': ['HUDD']}
+
+# What the tokens that DID match resolved to — the only way to catch a
+# plausible-but-wrong match, where nothing was dropped at all.
+for org in response.resolved_agencies.get("awarding_agency", []):
+    print(org["name"], org["cgac"])
+    # Department of Housing and Urban Development 086
+
+for warning in response.agency_warnings:
+    print(warning)
+```
+
+If *every* token for a filter fails to resolve, the API returns `400` and the SDK raises
+`TangoValidationError` naming the offending value, rather than an empty page.
 
 **Classification:**
 - `naics_code`, `psc_code` - Industry/product codes
