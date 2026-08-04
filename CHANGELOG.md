@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`relationships(type, source)` on entities.** Tango API 4.20.0 added two keys to each entry in the entity `relationships` expand: `type`, the stable relationship-type code (`prime_sub`, `parent_subsidiary`, `ultimate_parent`, `predecessor`), and `source`, where the tie came from (`sam`, `subawards`). Both are shape-selectable, so `shape="uei,relationships(type,source,uei)"` now resolves against the SDK's schema. Re-vendored the contract and regenerated the shape overlay; the coverage gate reports 0 gaps.
+
+### Changed
+- **The `relation` value vocabulary changed upstream — match on `type` instead.** In Tango API 4.20.0 the `relation` label stopped collapsing to `affiliate` for subcontracting and corporate-succession ties and now names the partner's role: `subcontractor` / `prime`, `predecessor` / `successor`, and `descendant` (rather than `child`) on the far side of an ultimate-parent tie. `affiliate` survives only as a fallback for a type the API doesn't recognize. This affects the large majority of relationship entries.
+
+  No SDK code change is required — `relation` was and remains a `str`. But if you have application code branching on the string `affiliate`, switch it to `type`, which is stable and won't churn again. See the [entities data dictionary](https://docs.makegov.com/data-dictionary/entities/#relationships) for the full vocabulary table.
+
 ## [1.4.0] - 2026-07-20
 
 ### Added

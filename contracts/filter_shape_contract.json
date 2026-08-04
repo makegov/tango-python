@@ -1,5 +1,6 @@
 {
   "meta": {
+    "api_version": "4.20.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -2511,6 +2512,8 @@
               "fields": [
                 "display_name",
                 "relation",
+                "source",
+                "type",
                 "uei"
               ]
             },
@@ -2685,6 +2688,8 @@
           "relationships",
           "relationships.display_name",
           "relationships.relation",
+          "relationships.source",
+          "relationships.type",
           "relationships.uei",
           "sam_activation_date",
           "sam_expiration_date",

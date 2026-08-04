@@ -716,6 +716,8 @@ PRIMARY_CONTACT_SCHEMA: dict[str, FieldSchema] = {
 RELATIONSHIPS_SCHEMA: dict[str, FieldSchema] = {
     "display_name": FieldSchema(name="display_name", type=str, is_optional=True, is_list=False),
     "relation": FieldSchema(name="relation", type=str, is_optional=True, is_list=False),
+    "source": FieldSchema(name="source", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
     "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
 }
 
