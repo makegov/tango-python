@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-08-04
+
 ### Added
 - **`relationships(type, source)` on entities.** Tango API 4.20.0 added two keys to each entry in the entity `relationships` expand: `type`, the stable relationship-type code (`prime_sub`, `parent_subsidiary`, `ultimate_parent`, `predecessor`), and `source`, where the tie came from (`sam`, `subawards`). Both are shape-selectable, so `shape="uei,relationships(type,source,uei)"` now resolves against the SDK's schema. Re-vendored the contract and regenerated the shape overlay; the coverage gate reports 0 gaps.
 - `PaginatedResponse.meta` now carries the response-level `meta` block the API returns, with three accessors over it: `unresolved_agency_tokens` (agency tokens that matched nothing, per filter), `resolved_agencies` (the organization each token *did* match), and `agency_warnings` (the API's human-readable notes). Agency values resolve fuzzily, so a token can match an organization the caller did not intend and quietly scope the query to that subtree — and a token that resolves to nothing was previously dropped with no signal at all. Both cases were indistinguishable from "no such records exist". The API now reports both; until now the SDK read the envelope key-by-key and dropped `meta` on the floor, so SDK users were the one group that could not see it. `resolved_agencies` is the accessor that matters for the wrong-organization case: nothing is dropped there, so an unresolved-token check cannot detect it. All accessors return empty rather than raising when `meta` is absent (most responses) or malformed.
