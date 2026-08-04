@@ -26,8 +26,5 @@ jobs:
     - name: Publish to PyPI
       env:
         UV_PUBLISH_TOKEN: ${{ secrets.TANGO_PYPI_TOKEN }}
-      # --check-url makes the upload idempotent: uv queries the index first and skips
-      # files already present instead of failing the run. Without it, any version that
-      # reached PyPI by another route — a manual `uv publish`, a re-run of this
-      # workflow — makes the GitHub Release that follows it go red for no real reason.
+      # --check-url skips files already on the index, so re-running this is a no-op rather than an error.
       run: uv publish --check-url https://pypi.org/simple/

@@ -126,13 +126,14 @@ packages = ["tango"]
 # diaries, scratch reports, etc.) when anyone runs `uv publish` locally.
 # The explicit whitelist is belt-and-suspenders for that foot-gun: even
 # from a developer laptop, only these paths can ever end up on PyPI.
+#
+# `.github/workflows` is excluded on purpose: shipping it moves the sdist hash on every CI-only commit, which breaks `--check-url`.
 [tool.hatch.build.targets.sdist]
 include = [
     "/tango",
     "/tests",
     "/docs",
     "/scripts",
-    "/.github/workflows",
     "/README.md",
     "/LICENSE",
     "/CHANGELOG.md",
