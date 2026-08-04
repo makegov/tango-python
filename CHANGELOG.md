@@ -9,11 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **`relationships(type, source)` on entities.** Tango API 4.20.0 added two keys to each entry in the entity `relationships` expand: `type`, the stable relationship-type code (`prime_sub`, `parent_subsidiary`, `ultimate_parent`, `predecessor`), and `source`, where the tie came from (`sam`, `subawards`). Both are shape-selectable, so `shape="uei,relationships(type,source,uei)"` now resolves against the SDK's schema. Re-vendored the contract and regenerated the shape overlay; the coverage gate reports 0 gaps.
+- `PaginatedResponse.meta` now carries the response-level `meta` block the API returns, with three accessors over it: `unresolved_agency_tokens` (agency tokens that matched nothing, per filter), `resolved_agencies` (the organization each token *did* match), and `agency_warnings` (the API's human-readable notes). Agency values resolve fuzzily, so a token can match an organization the caller did not intend and quietly scope the query to that subtree — and a token that resolves to nothing was previously dropped with no signal at all. Both cases were indistinguishable from "no such records exist". The API now reports both; until now the SDK read the envelope key-by-key and dropped `meta` on the floor, so SDK users were the one group that could not see it. `resolved_agencies` is the accessor that matters for the wrong-organization case: nothing is dropped there, so an unresolved-token check cannot detect it. All accessors return empty rather than raising when `meta` is absent (most responses) or malformed.
+- A fully-unresolvable agency filter now raises `TangoValidationError` naming the offending value instead of returning an empty page. This needed no SDK change — the existing 400 handler already reads the API's `error` key — but it is new behavior for callers of `list_subawards()`, `list_opportunities()`, `list_notices()`, and `list_vehicles()`, which previously returned an empty result set. Contracts, IDVs, OTAs, and OTIDVs already behaved this way.
 
 ### Changed
 - **The `relation` value vocabulary changed upstream — match on `type` instead.** In Tango API 4.20.0 the `relation` label stopped collapsing to `affiliate` for subcontracting and corporate-succession ties and now names the partner's role: `subcontractor` / `prime`, `predecessor` / `successor`, and `descendant` (rather than `child`) on the far side of an ultimate-parent tie. `affiliate` survives only as a fallback for a type the API doesn't recognize. This affects the large majority of relationship entries.
 
   No SDK code change is required — `relation` was and remains a `str`. But if you have application code branching on the string `affiliate`, switch it to `type`, which is stable and won't churn again. See the [entities data dictionary](https://docs.makegov.com/data-dictionary/entities/#relationships) for the full vocabulary table.
+
+### Notes
+- `PaginatedResponse.page_metadata` is documented as always `None`: the API has never emitted a `page_metadata` key, so the field has only ever read a value that does not exist. It is retained so existing attribute access keeps working. Use `meta`.
 
 ## [1.4.0] - 2026-07-20
 

@@ -491,6 +491,7 @@ class TangoClient:
                 for ag in (self._parse_agency(agency) for agency in data["results"])
                 if ag is not None
             ],
+            meta=data.get("meta"),
         )
 
     def get_agency(self, code: str) -> Agency:
@@ -521,6 +522,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=data.get("results", []),
+            meta=data.get("meta"),
         )
 
     def get_office(self, code: str) -> dict[str, Any]:
@@ -573,6 +575,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_organization(
@@ -785,6 +788,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
+            meta=data.get("meta"),
         )
 
     def get_contract(
@@ -846,6 +850,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
+            meta=data.get("meta"),
         )
 
     def get_contract_transactions(
@@ -868,6 +873,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=data.get("results") or [],
             cursor=data.get("cursor"),
+            meta=data.get("meta"),
         )
 
     # ============================================================================
@@ -971,6 +977,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def get_idv(
@@ -1072,6 +1079,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_idv_child_idvs(
@@ -1116,6 +1124,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=results,
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_idv_transactions(
@@ -1132,6 +1141,7 @@ class TangoClient:
             previous=data.get("previous"),
             results=data.get("results") or [],
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_otas(
@@ -1214,6 +1224,7 @@ class TangoClient:
             results=results,
             cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def get_ota(
@@ -1319,6 +1330,7 @@ class TangoClient:
             results=results,
             cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def get_otidv(
@@ -1395,6 +1407,7 @@ class TangoClient:
             results=results,
             cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_subawards(
@@ -1449,6 +1462,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_subaward(
@@ -1533,6 +1547,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_gsa_elibrary_contract(
@@ -1639,6 +1654,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_itdashboard_investment(
@@ -1808,6 +1824,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_vehicle(
@@ -1889,6 +1906,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def list_vehicle_orders(
@@ -1937,6 +1955,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     # Business Types endpoints
@@ -1971,6 +1990,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def list_naics(
@@ -2022,6 +2042,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=data.get("results", []),
+            meta=data.get("meta"),
         )
 
     # Entity endpoints
@@ -2108,6 +2129,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_entity(
@@ -2164,6 +2186,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     # Forecast endpoints
@@ -2256,6 +2279,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_forecast(
@@ -2379,6 +2403,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_opportunity(
@@ -2493,6 +2518,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_notice(
@@ -2614,6 +2640,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_protest(
@@ -2750,6 +2777,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_dibbs_rfq(
@@ -2869,6 +2897,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_dibbs_rfp(
@@ -3006,6 +3035,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_dibbs_award(
@@ -3151,6 +3181,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_exclusion(
@@ -3278,6 +3309,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_sbir_topic(
@@ -3398,6 +3430,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_sbir_solicitation(
@@ -3772,6 +3805,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_budget_account(
@@ -3823,6 +3857,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=data.get("results") or [],
+            meta=data.get("meta"),
         )
 
     def get_budget_account_recipients(
@@ -3850,6 +3885,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=data.get("results") or [],
+            meta=data.get("meta"),
         )
 
     # Grant endpoints
@@ -3943,6 +3979,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_grant(
@@ -4035,6 +4072,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def create_webhook_endpoint(
@@ -4219,6 +4257,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def get_webhook_alert(self, alert_id: str) -> WebhookAlert:
@@ -4433,6 +4472,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     def get_department(self, code: str) -> dict[str, Any]:
@@ -4470,6 +4510,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     def get_psc(
@@ -4570,6 +4611,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     def get_assistance_listing(
@@ -4616,6 +4658,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     def get_mas_sin(
@@ -4685,6 +4728,7 @@ class TangoClient:
             results=results,
             cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_entity_contracts(
@@ -4860,6 +4904,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            meta=data.get("meta"),
         )
 
     def list_entity_lcats(
@@ -4890,6 +4935,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     def get_entity_metrics(self, uei: str, months: int, period_grouping: str) -> dict[str, Any]:
@@ -4930,6 +4976,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
+            meta=data.get("meta"),
         )
 
     # ============================================================================
@@ -4987,6 +5034,7 @@ class TangoClient:
             results=results,
             cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
+            meta=data.get("meta"),
         )
 
     def list_agency_awarding_contracts(

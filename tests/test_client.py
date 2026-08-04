@@ -1990,3 +1990,140 @@ class TestPscFilters:
         _stub_empty_page(mock_request)
         TangoClient(api_key="test-key").list_psc()
         assert "has_awards" not in mock_request.call_args[1]["params"]
+
+
+class TestAgencyFilterDiagnostics:
+    """`meta` from the API's agency-filter diagnostics.
+
+    Agency resolution is fuzzy, so a token can be dropped entirely or matched to an
+    organization the caller did not intend. Before the API exposed `meta`, both were
+    indistinguishable from "no such records exist" — and the SDK is the last place that
+    distinction can reach a user.
+    """
+
+    HUD = {
+        "key": "3f2a0000-0000-0000-0000-000000000001",
+        "name": "Department of Housing and Urban Development",
+        "level": 1,
+        "cgac": "086",
+        "fpds_code": None,
+    }
+
+    def _mock(self, mock_request, meta=None):
+        payload = {"count": 0, "next": None, "previous": None, "results": []}
+        if meta is not None:
+            payload["meta"] = meta
+        response = Mock()
+        response.is_success = True
+        response.json.return_value = payload
+        response.content = b'{"count": 0}'
+        mock_request.return_value = response
+        return TangoClient(api_key="test-key")
+
+    @patch("tango.client.httpx.Client.request")
+    def test_meta_is_carried_through_to_the_response(self, mock_request):
+        meta = {
+            "resolved_filters": {
+                "awarding_agency": [
+                    {"token": "HUD", "resolved": self.HUD},
+                    {"token": "HUDD", "resolved": None},
+                ]
+            },
+            "warnings": ["Agency filter 'awarding_agency': 'HUDD' did not match."],
+        }
+        client = self._mock(mock_request, meta)
+
+        response = client.list_contracts(awarding_agency="HUD|HUDD")
+
+        assert response.meta == meta
+
+    @patch("tango.client.httpx.Client.request")
+    def test_dropped_tokens_are_reported_per_filter(self, mock_request):
+        client = self._mock(
+            mock_request,
+            {
+                "resolved_filters": {
+                    "awarding_agency": [
+                        {"token": "HUD", "resolved": self.HUD},
+                        {"token": "HUDD", "resolved": None},
+                    ],
+                    "funding_agency": [{"token": "NOPE", "resolved": None}],
+                }
+            },
+        )
+
+        response = client.list_contracts(awarding_agency="HUD|HUDD")
+
+        assert response.unresolved_agency_tokens == {
+            "awarding_agency": ["HUDD"],
+            "funding_agency": ["NOPE"],
+        }
+
+    @patch("tango.client.httpx.Client.request")
+    def test_resolved_agencies_expose_the_matched_organization(self, mock_request):
+        """The wrong-subtree case: nothing was dropped, so only the resolved name
+        reveals that a token matched an organization the caller did not intend."""
+        client = self._mock(
+            mock_request,
+            {"resolved_filters": {"awarding_agency": [{"token": "HUD", "resolved": self.HUD}]}},
+        )
+
+        response = client.list_contracts(awarding_agency="HUD")
+
+        assert response.unresolved_agency_tokens == {}
+        assert [org["name"] for org in response.resolved_agencies["awarding_agency"]] == [
+            "Department of Housing and Urban Development"
+        ]
+
+    @patch("tango.client.httpx.Client.request")
+    def test_warnings_are_surfaced(self, mock_request):
+        client = self._mock(
+            mock_request, {"warnings": ["Agency filter 'agency': 'X' did not match."]}
+        )
+
+        response = client.list_opportunities()
+
+        assert response.agency_warnings == ["Agency filter 'agency': 'X' did not match."]
+
+    @patch("tango.client.httpx.Client.request")
+    def test_absent_meta_yields_empty_accessors_not_errors(self, mock_request):
+        """Most responses carry no `meta` at all; the accessors must stay total."""
+        client = self._mock(mock_request, meta=None)
+
+        response = client.list_contracts()
+
+        assert response.meta is None
+        assert response.agency_warnings == []
+        assert response.unresolved_agency_tokens == {}
+        assert response.resolved_agencies == {}
+
+    @patch("tango.client.httpx.Client.request")
+    def test_malformed_meta_does_not_raise(self, mock_request):
+        """`meta` is server-controlled; a shape change must not crash a caller's loop."""
+        client = self._mock(
+            mock_request,
+            {"resolved_filters": "not-a-dict", "warnings": "not-a-list"},
+        )
+
+        response = client.list_contracts()
+
+        assert response.agency_warnings == []
+        assert response.unresolved_agency_tokens == {}
+        assert response.resolved_agencies == {}
+
+    @patch("tango.client.httpx.Client.request")
+    def test_full_miss_raises_with_the_offending_token(self, mock_request):
+        """A fully-unresolvable agency filter is a 400, not an empty page."""
+        response = Mock()
+        response.is_success = False
+        response.status_code = 400
+        response.content = b'{"error": "No agency found matching HUDD."}'
+        response.json.return_value = {"error": "No agency found matching 'HUDD'."}
+        mock_request.return_value = response
+
+        client = TangoClient(api_key="test-key")
+
+        with pytest.raises(TangoValidationError) as excinfo:
+            client.list_contracts(awarding_agency="HUDD")
+
+        assert "HUDD" in str(excinfo.value)

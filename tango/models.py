@@ -1044,7 +1044,15 @@ class PaginatedResponse[T]:
         previous: URL for the previous page of results (None if first page)
         results: List of result items (type depends on shape parameter)
         cursor: Cursor token for cursor-based pagination (None if not available)
-        page_metadata: Optional metadata about the current page
+        meta: Response-level metadata the API attached to this page, when present.
+            Currently carries agency-filter diagnostics: ``resolved_filters`` maps
+            each agency filter to the organizations its ``|``-separated tokens
+            resolved to (or ``None``), and ``warnings`` lists human-readable notes
+            about tokens that were dropped or matched loosely. See
+            :meth:`agency_warnings` and :meth:`unresolved_agency_tokens`.
+        page_metadata: Always ``None`` — the API has never emitted a
+            ``page_metadata`` key. Retained so existing attribute access keeps
+            working; use ``meta`` instead.
 
     Examples:
         >>> from tango import TangoClient, ShapeConfig
@@ -1063,7 +1071,91 @@ class PaginatedResponse[T]:
     previous: str | None
     results: list[T]
     cursor: str | None = None
+    meta: dict[str, Any] | None = None
     page_metadata: dict[str, Any] | None = None
+
+    @property
+    def agency_warnings(self) -> list[str]:
+        """Warnings the API raised about agency filters on this request.
+
+        Empty when every supplied agency token resolved cleanly. A non-empty list
+        means part of the filter did not apply, so a small or empty ``results`` is
+        not evidence that no such records exist.
+
+        Examples:
+            >>> response = client.list_contracts(awarding_agency="GSA|NOTANAGENCY")
+            >>> for warning in response.agency_warnings:
+            ...     print(warning)
+            Agency filter 'awarding_agency': 'NOTANAGENCY' did not match any organization and was ignored.
+        """
+        if not self.meta:
+            return []
+        warnings = self.meta.get("warnings")
+        return list(warnings) if isinstance(warnings, list) else []
+
+    @property
+    def unresolved_agency_tokens(self) -> dict[str, list[str]]:
+        """Agency tokens that matched no organization, keyed by filter name.
+
+        Empty when everything resolved. Use this to fail loudly in a pipeline
+        rather than treating a silently-narrowed result set as an answer.
+
+        Examples:
+            >>> response = client.list_contracts(awarding_agency="GSA|NOTANAGENCY")
+            >>> response.unresolved_agency_tokens
+            {'awarding_agency': ['NOTANAGENCY']}
+        """
+        if not self.meta:
+            return {}
+        resolved = self.meta.get("resolved_filters")
+        if not isinstance(resolved, dict):
+            return {}
+        dropped: dict[str, list[str]] = {}
+        for filter_name, entries in resolved.items():
+            if not isinstance(entries, list):
+                continue
+            tokens = [
+                entry["token"]
+                for entry in entries
+                if isinstance(entry, dict)
+                and entry.get("resolved") is None
+                and entry.get("token") is not None
+            ]
+            if tokens:
+                dropped[filter_name] = tokens
+        return dropped
+
+    @property
+    def resolved_agencies(self) -> dict[str, list[dict[str, Any]]]:
+        """What each agency token actually resolved to, keyed by filter name.
+
+        Agency resolution is fuzzy, so a token can match an organization the caller
+        did not intend and scope the query to that subtree instead. Checking the
+        resolved ``name`` is the only way to catch that from the client side — an
+        unresolved-token check cannot, because nothing was dropped.
+
+        Examples:
+            >>> response = client.list_contracts(awarding_agency="HUD")
+            >>> [org["name"] for org in response.resolved_agencies["awarding_agency"]]
+            ['Department of Housing and Urban Development']
+        """
+        if not self.meta:
+            return {}
+        resolved = self.meta.get("resolved_filters")
+        if not isinstance(resolved, dict):
+            return {}
+        matched: dict[str, list[dict[str, Any]]] = {}
+        for filter_name, entries in resolved.items():
+            if not isinstance(entries, list):
+                continue
+            orgs = [
+                entry["resolved"]
+                for entry in entries
+                if isinstance(entry, dict) and isinstance(entry.get("resolved"), dict)
+            ]
+            if orgs:
+                matched[filter_name] = orgs
+        return matched
 
 
 class ShapeConfig:
