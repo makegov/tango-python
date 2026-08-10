@@ -1998,8 +1998,8 @@ class TestEntityFilters:
     @patch("tango.client.httpx.Client.request")
     def test_list_entities_forwards_pipe_separated_socioeconomic(self, mock_request):
         _stub_empty_page(mock_request)
-        TangoClient(api_key="test-key").list_entities(socioeconomic="8A|WOSB")
-        assert mock_request.call_args[1]["params"]["socioeconomic"] == "8A|WOSB"
+        TangoClient(api_key="test-key").list_entities(socioeconomic="OY|A2")
+        assert mock_request.call_args[1]["params"]["socioeconomic"] == "OY|A2"
 
     @patch("tango.client.httpx.Client.request")
     def test_list_entities_omits_unset_socioeconomic(self, mock_request):

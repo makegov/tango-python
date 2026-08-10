@@ -2081,7 +2081,7 @@ class TangoClient:
             name: Entity name filter
             psc: PSC code filter
             purpose_of_registration_code: Purpose of registration code
-            socioeconomic: Socioeconomic status filter; accepts pipe-separated values for OR semantics, e.g. ``socioeconomic="8A|WOSB"``
+            socioeconomic: Socioeconomic status filter; takes SAM business-type codes (e.g. "OY" Black American Owned, "A6" SBA-certified 8(a), "A2" Woman Owned — see `GET /api/business_types/`), not set-aside codes, and accepts pipe-separated values for OR semantics, e.g. ``socioeconomic="OY|A2"``
             state: State filter
             total_awards_obligated_gte: Total awards obligated >=
             total_awards_obligated_lte: Total awards obligated <=
