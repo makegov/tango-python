@@ -1992,6 +1992,22 @@ class TestPscFilters:
         assert "has_awards" not in mock_request.call_args[1]["params"]
 
 
+class TestEntityFilters:
+    """The server ORs pipe-separated `socioeconomic` values; the SDK's job is to forward the string verbatim."""
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_entities_forwards_pipe_separated_socioeconomic(self, mock_request):
+        _stub_empty_page(mock_request)
+        TangoClient(api_key="test-key").list_entities(socioeconomic="8A|WOSB")
+        assert mock_request.call_args[1]["params"]["socioeconomic"] == "8A|WOSB"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_entities_omits_unset_socioeconomic(self, mock_request):
+        _stub_empty_page(mock_request)
+        TangoClient(api_key="test-key").list_entities()
+        assert "socioeconomic" not in mock_request.call_args[1]["params"]
+
+
 class TestAgencyFilterDiagnostics:
     """`meta` from the API's agency-filter diagnostics.
 

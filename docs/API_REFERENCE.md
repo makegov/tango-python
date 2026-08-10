@@ -713,7 +713,7 @@ entities = client.list_entities(
 - `name` - Filter by entity name
 - `psc` - Filter by PSC code
 - `purpose_of_registration_code` - Filter by registration purpose
-- `socioeconomic` - Filter by socioeconomic status
+- `socioeconomic` - Filter by socioeconomic status; accepts pipe-separated values for OR semantics, e.g. `socioeconomic="8A|WOSB"`
 - `state` - Filter by state
 - `total_awards_obligated_gte` / `total_awards_obligated_lte` - Obligation amount range
 - `uei` - Filter by UEI

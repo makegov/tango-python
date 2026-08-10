@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+- Documented (and pinned with tests) the OR syntax `list_entities(socioeconomic=...)` has always supported: pipe-separated values match entities holding any of the listed designations, e.g. `socioeconomic="8A|WOSB"`.
+
 ## [1.5.0] - 2026-08-04
 
 ### Added

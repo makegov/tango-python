@@ -2081,7 +2081,7 @@ class TangoClient:
             name: Entity name filter
             psc: PSC code filter
             purpose_of_registration_code: Purpose of registration code
-            socioeconomic: Socioeconomic status filter
+            socioeconomic: Socioeconomic status filter; accepts pipe-separated values for OR semantics, e.g. ``socioeconomic="8A|WOSB"``
             state: State filter
             total_awards_obligated_gte: Total awards obligated >=
             total_awards_obligated_lte: Total awards obligated <=
