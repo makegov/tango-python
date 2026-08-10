@@ -713,7 +713,7 @@ entities = client.list_entities(
 - `name` - Filter by entity name
 - `psc` - Filter by PSC code
 - `purpose_of_registration_code` - Filter by registration purpose
-- `socioeconomic` - Filter by socioeconomic status
+- `socioeconomic` - Filter by socioeconomic status; takes SAM business-type codes (e.g. `OY` Black American Owned, `A6` SBA-certified 8(a), `A2` Woman Owned — see `GET /api/business_types/`), not set-aside codes; accepts pipe-separated values for OR semantics, e.g. `socioeconomic="OY|A2"`
 - `state` - Filter by state
 - `total_awards_obligated_gte` / `total_awards_obligated_lte` - Obligation amount range
 - `uei` - Filter by UEI

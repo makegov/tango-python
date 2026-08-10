@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+- Documented (and pinned with tests) the OR syntax `list_entities(socioeconomic=...)` has always supported: pipe-separated values match entities holding any of the listed designations, e.g. `socioeconomic="OY|A2"`; values are SAM business-type codes (e.g. `OY` Black American Owned, `A6` SBA-certified 8(a), `A2` Woman Owned), not set-aside codes.
+
 ## [1.5.0] - 2026-08-04
 
 ### Added
