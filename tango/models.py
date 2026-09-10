@@ -1030,6 +1030,127 @@ class SbirSolicitation:
     documents: list[dict[str, Any]] | None = None
 
 
+class SledOpportunity:
+    """Schema definition for SledOpportunity (not used for instances).
+
+    State, local and education solicitations at ``/api/sled/opportunities/``.
+    Shape-on-demand, so every field is optional. See
+    https://tango.makegov.com/docs/api-reference/sled.md.
+
+    Two behaviors have no federal equivalent. ``status`` is Tango-derived and
+    refreshed every fifteen minutes; ``source_status`` is the portal's own word,
+    frozen at last capture, and most of what it calls open has a passed deadline
+    — so never filter liveness on it. And a list request that passes neither
+    ``status`` nor ``active`` returns open solicitations only, while a detail
+    request returns the solicitation whatever its status.
+
+    ``snippet`` is present only under ``search=``, and only on rows that matched
+    on their description; a title-or-agency match carries none.
+
+    Searching document text and reading it are separate: ``search=`` matches
+    inside attachment text on every plan and returns no fragment of it, while
+    ``attachments(extracted_text)`` serves the body on a Small plan or above.
+    """
+
+    opportunity_id: str | None = None
+    solicitation_number: str | None = None
+    solicitation_type: str | None = None
+    solicitation_type_source: str | None = None
+    title: str | None = None
+    description: str | None = None
+    state: str | None = None
+    jurisdiction: str | None = None
+    agency: str | None = None
+    status: str | None = None
+    status_reason: str | None = None
+    status_computed_at: str | None = None
+    source_status: str | None = None
+    source_url: str | None = None
+    posted_date: str | None = None
+    response_deadline: str | None = None
+    response_deadline_original: str | None = None
+    bid_opening_date: str | None = None
+    bid_opening_raw: str | None = None
+    category_codes: list[Any] | None = None
+    has_documents: bool | None = None
+    first_seen_at: str | None = None
+    last_seen_at: str | None = None
+    last_change_seen_at: str | None = None
+    modified: str | None = None
+    snippet: str | None = None
+    organization: dict[str, Any] | None = None
+    contact: dict[str, Any] | None = None
+    meta: dict[str, Any] | None = None
+    # Each entry carries document metadata and extraction stats. `extracted_text`
+    # — the body — needs a Small plan, is served ONLY when named explicitly, and
+    # its key is absent rather than null when it is not being served.
+    attachments: list[dict[str, Any]] | None = None
+    revisions: list[dict[str, Any]] | None = None
+    raw: dict[str, Any] | None = None
+
+
+class SledOpportunityRevision:
+    """Schema definition for SledOpportunityRevision (not used for instances).
+
+    One observed change to a SLED solicitation, served by
+    ``/api/sled/opportunities/{opportunity_id}/revisions/``.
+
+    ``observed_at`` is the scrape that saw the change, not the date the agency
+    made it — no state portal emits amendment notices, so ``kind`` is Tango's
+    inference from the diff on about 95% of revisions and ``source_declared`` is
+    true only where a portal's own amendment marker moved. ``changes`` (the
+    per-field before and after) requires a Small plan or above; ``changed_fields``
+    names what moved at every plan.
+    """
+
+    observed_at: str | None = None
+    sequence: int | None = None
+    kind: str | None = None
+    changed_fields: list[str] | None = None
+    changes: dict[str, Any] | None = None
+    source_declared: bool | None = None
+
+
+class SledForecast:
+    """Schema definition for SledForecast (not used for instances).
+
+    Planned state procurements at ``/api/sled/forecasts/``. Shape-on-demand, so
+    every field is optional. See
+    https://tango.makegov.com/docs/api-reference/sled.md.
+
+    Forecasts carry no liveness at all: there is no deadline to have passed, so
+    there is no ``status`` field and no ``active`` filter.
+    ``estimated_advertisement_date`` is the START of the published quarter rather
+    than a posting date, and ``estimated_advertisement_raw`` keeps the portal's
+    own words.
+    """
+
+    forecast_id: str | None = None
+    state: str | None = None
+    agency: str | None = None
+    title: str | None = None
+    description: str | None = None
+    estimated_advertisement_date: str | None = None
+    estimated_advertisement_raw: str | None = None
+    procurement_category: str | None = None
+    procurement_method: str | None = None
+    contract_term: str | None = None
+    contract_number: str | None = None
+    incumbent_name: str | None = None
+    mbe_dbe_goal: str | None = None
+    delivery_location: str | None = None
+    source_url: str | None = None
+    source_status: str | None = None
+    has_documents: bool | None = None
+    first_seen_at: str | None = None
+    last_seen_at: str | None = None
+    modified: str | None = None
+    organization: dict[str, Any] | None = None
+    contact: dict[str, Any] | None = None
+    estimated_value: dict[str, Any] | None = None
+    raw: dict[str, Any] | None = None
+
+
 @dataclass
 class PaginatedResponse[T]:
     """Paginated API response
@@ -1229,6 +1350,49 @@ class ShapeConfig:
     SBIR_SOLICITATIONS_MINIMAL: Final = (
         "solicitation_id,solicitation_number,title,program,activity,"
         "cycle_name,solicitation_status,year,start_date,end_date"
+    )
+
+    # Default for list_sled_opportunities(). `description` is detail-only on the
+    # API (median ~550 chars, tail past 120k), so it is not in the list default.
+    SLED_OPPORTUNITIES_MINIMAL: Final = (
+        "opportunity_id,solicitation_number,solicitation_type,title,state,"
+        "jurisdiction,agency,status,status_reason,posted_date,response_deadline,"
+        "source_url,has_documents,first_seen_at,last_change_seen_at"
+    )
+
+    # Default for get_sled_opportunity(). `attachments(*)` deliberately does not
+    # pull `attachments(extracted_text)`: the body needs a Small plan and the API
+    # only resolves it when a caller names the leaf, so putting it in a default
+    # shape would make every detail fetch pay for a document nobody asked to read.
+    SLED_OPPORTUNITIES_COMPREHENSIVE: Final = (
+        "opportunity_id,solicitation_number,solicitation_type,"
+        "solicitation_type_source,title,description,state,jurisdiction,agency,"
+        "status,status_reason,status_computed_at,source_status,source_url,"
+        "posted_date,response_deadline,response_deadline_original,"
+        "bid_opening_date,bid_opening_raw,category_codes,has_documents,"
+        "first_seen_at,last_seen_at,last_change_seen_at,"
+        "organization(*),contact(*),meta(*),attachments(*),revisions(*)"
+    )
+
+    # Default for list_sled_opportunity_revisions(). `changes` is omitted because
+    # it needs a Small plan; name it explicitly when the caller has one.
+    SLED_REVISIONS_MINIMAL: Final = "observed_at,sequence,kind,changed_fields,source_declared"
+
+    # Default for list_sled_forecasts()
+    SLED_FORECASTS_MINIMAL: Final = (
+        "forecast_id,state,agency,title,estimated_advertisement_date,"
+        "estimated_advertisement_raw,procurement_category,procurement_method,"
+        "contract_number,incumbent_name,source_url,estimated_value(*)"
+    )
+
+    # Default for get_sled_forecast()
+    SLED_FORECASTS_COMPREHENSIVE: Final = (
+        "forecast_id,state,agency,title,description,"
+        "estimated_advertisement_date,estimated_advertisement_raw,"
+        "procurement_category,procurement_method,contract_term,contract_number,"
+        "incumbent_name,mbe_dbe_goal,delivery_location,source_url,source_status,"
+        "has_documents,first_seen_at,last_seen_at,"
+        "organization(*),contact(*),estimated_value(*)"
     )
 
     # Default for list_grants()
