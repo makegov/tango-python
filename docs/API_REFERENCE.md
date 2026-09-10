@@ -18,6 +18,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Forecasts](#forecasts)
 - [Opportunities](#opportunities)
 - [Notices](#notices)
+- [State \& Local (SLED)](#state--local-sled)
 - [Grants](#grants)
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
@@ -1213,6 +1214,186 @@ protest = client.get_protest(
 
 ---
 
+## State & Local (SLED)
+
+State, local and education procurement — solicitations that never appear on SAM.gov because they were never federal. **Beta**: coverage is partial and grows one jurisdiction at a time.
+
+This data does not join to the federal data. There is no UEI, no PIID, no agency-hierarchy key and no NAICS/PSC crosswalk; `organization(*)` here is three strings, not the federal 7-key office payload.
+
+### list_sled_opportunities()
+
+List SLED solicitations with filtering and shaping.
+
+```python
+solicitations = client.list_sled_opportunities(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.SLED_OPPORTUNITIES_MINIMAL,
+    # Filter parameters (all optional)
+    state=None,
+    jurisdiction=None,
+    status=None,
+    active=None,
+    agency=None,
+    solicitation_number=None,
+    solicitation_type=None,
+    has_documents=None,
+    revision_kind=None,
+    naics=None,
+    nigp=None,
+    unspsc=None,
+    category=None,
+    category_code=None,
+    posted_after=None,
+    posted_before=None,
+    response_deadline_after=None,
+    response_deadline_before=None,
+    first_seen_after=None,
+    first_seen_before=None,
+    change_seen_after=None,
+    modified_after=None,
+    modified_before=None,
+    search=None,
+    ordering=None,
+)
+```
+
+**Two defaults worth knowing before your first call:**
+
+- **Passing neither `status` nor `active` returns open solicitations only.** Only about a fifth of the corpus is open, and a portal drops a closed solicitation rather than restating it, so the API defaults the list to `status=open`. Pass an explicit `status` to page the whole corpus. `status="unknown"` (standing rosters, dateless RFIs) is hidden by that default — reach it with `status="open|unknown"`. `get_sled_opportunity()` returns the solicitation whatever its status.
+- **`status` is Tango's answer, not the portal's.** It is derived from the portal's word, the deadline and the clock, and refreshed every fifteen minutes. The portal's own word is served as `source_status` and is frozen at last capture — most of what it calls open already has a passed deadline. Never filter liveness on it.
+
+**Filter Parameters:**
+- `state` - Two-letter state or territory code. Multi-value: `"TX|OK"`
+- `jurisdiction` - `"state"`, `"local"`, `"education"`, or `"unknown"` for aggregator rows that cannot tell state from local
+- `status` - `"open"`, `"closed"`, `"awarded"`, `"cancelled"`, `"unknown"`
+- `active` - Sugar for federal-shaped callers: `True` is `status="open"`; `False` is its complement, so it includes `unknown`
+- `agency` - Substring match on the buyer's published text (min 2 characters); no code resolution behind it
+- `solicitation_number` - The number a human would quote; null on roughly a third of the corpus
+- `solicitation_type` - `"rfp"`, `"ifb"`, `"rfq"`, `"rfi"`, `"itb"`, `"sole_source"`, `"grant"`, `"other"`. `"null"` (portal states no type) is a distinct answer from `"other"`
+- `has_documents` - Whether the solicitation advertises at least one document
+- `revision_kind` - Kind of the most recent substantive revision
+- `naics` / `nigp` / `unspsc` / `category` - Exact match within one category scheme. **`naics` is thin on purpose**: scheme tagging is mid-migration, so only a small share of entries are tagged NAICS
+- `category_code` - Match a code under ANY scheme, including the untagged pre-migration strings. The escape hatch when a scheme-specific filter returns less than expected
+- `posted_after` / `posted_before` - Posted-date range
+- `response_deadline_after` / `response_deadline_before` - Deadline range
+- `first_seen_after` / `first_seen_before` - When Tango first observed it. The polling primitive
+- `change_seen_after` - When Tango *observed* the last substantive change. A scrape date, not an amendment date
+- `modified_after` / `modified_before` - When the Tango row last changed
+- `platform` / `native_id` / `external_id` - Support filters for reproducing a record with us. Not in any response shape and not stable values
+- `search` - Ranked full-text search over title, agency, identifiers, category labels and description, widened by the solicitations whose *attachment text* matched (min 2 characters)
+- `ordering` - `rank`, `response_deadline`, `posted_date`, `first_seen_at`, `last_seen_at`, `last_change_seen_at`, `modified`. `rank` requires a non-empty `search`
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with solicitation dictionaries
+
+**Example:**
+```python
+# Open Texas solicitations closing this month, newest first
+page = client.list_sled_opportunities(
+    state="TX",
+    response_deadline_before="2026-10-01",
+    ordering="response_deadline",
+    limit=25,
+)
+
+for row in page.results:
+    print(f"{row['state']} {row.get('solicitation_number') or '—'}: {row['title']}")
+
+# Full-text search puts the matching passage on each row that matched on its body
+hits = client.list_sled_opportunities(
+    search="environmental mitigation",
+    shape="opportunity_id,title,state,snippet,response_deadline",
+)
+```
+
+`snippet` is present only under `search=`, and only on rows that matched on their description — a title-or-agency match honestly carries none. Attachment matching contributes ids only: a caller learns *that* a document matched, never what it said.
+
+### get_sled_opportunity()
+
+Get a single solicitation by `opportunity_id`, whatever its status.
+
+```python
+row = client.get_sled_opportunity(
+    "OPPORTUNITY_UUID",
+    shape="opportunity_id,title,status,attachments(*),revisions(*)",
+)
+```
+
+**Notes:**
+- `meta.attachment_count` can be **lower** than `len(row["attachments"])`. Some portals auto-generate a cover sheet alongside the real documents; it is listed and flagged `is_generated_summary`, but excluded from the count and from `has_documents`. The count answers "does this hold its solicitation package"; the array answers "what files exist".
+- Attachment bodies are never served. `size_bytes` and `char_count` only mean something as a pair — 3 MB that yielded no characters is a scan awaiting OCR.
+- `raw(*)` needs a Small plan or above, and is explicitly unstable: its shape varies by portal platform.
+
+### list_sled_opportunity_revisions()
+
+List one solicitation's observed revision history.
+
+```python
+revisions = client.list_sled_opportunity_revisions(
+    "OPPORTUNITY_UUID",
+    kind=None,
+    source_declared=None,
+    observed_after=None,
+    observed_before=None,
+)
+```
+
+**Notes:**
+- `observed_at` is the scrape that saw the change, not the date the agency made it. No state portal emits amendment notices, so `kind` is Tango's inference from the diff on about 95% of revisions, resolution is that state's crawl cadence, and history starts when Tango began reading the jurisdiction.
+- Unlike the `revisions(*)` expand, this route serves `enrichment` rows — Tango's own detail fetch filling in coverage rather than an agency amendment. Pass `kind="enrichment"` for only those.
+- `changes` (the per-field before and after) needs a Small plan; it is left out of the default shape for that reason. `changed_fields` names what moved at every plan.
+
+### get_sled_coverage()
+
+Get the per-state coverage rollup. Takes no parameters; not shaped or paginated.
+
+```python
+coverage = client.get_sled_coverage()
+print(coverage["totals"])
+for row in coverage["states"]:
+    print(row["state"], row["total_count"], row["by_status"], row["last_change_observed_at"])
+```
+
+**Call this before treating a per-state count as market size.** A thin result for a state is at least as likely to be a portal Tango does not read as a quiet market, and that is the ambiguity this endpoint exists to resolve. Every state row carries all five status buckets whether or not they have rows, so a total and two buckets never invite subtraction.
+
+### list_sled_forecasts()
+
+List planned state procurements.
+
+```python
+forecasts = client.list_sled_forecasts(
+    state=None,
+    agency=None,
+    procurement_category=None,
+    procurement_method=None,
+    contract_number=None,
+    incumbent_name=None,
+    advertisement_after=None,
+    advertisement_before=None,
+    first_seen_after=None,
+    first_seen_before=None,
+    modified_after=None,
+    modified_before=None,
+    search=None,
+    ordering=None,
+)
+```
+
+**Notes:**
+- **Forecasts carry no liveness at all** — no deadline to have passed, so there is no `status` field, no `active` filter, and no open-only default. Currency is the caller's call from `estimated_advertisement_date`.
+- `estimated_advertisement_date` is the **start of the published quarter**, not a posting date. `estimated_advertisement_raw` keeps the portal's own words (`"Q3 (Jan.-March 2027)"`), and a large share of rows publish no quarter at all.
+- `estimated_value(min,max,raw)` is parsed from a free-text award band at serve time. **A band naming one number is a floor, so `max` is `None`** — never read a missing `max` as an unbounded ceiling. `raw` is always there to check the parse against.
+- `incumbent_name` is published text, not a resolved Tango entity.
+- `ordering`: `rank`, `estimated_advertisement_date`, `first_seen_at`, `last_seen_at`, `modified`.
+
+### get_sled_forecast()
+
+```python
+forecast = client.get_sled_forecast("FORECAST_UUID")
+```
+
+---
+
 ## Budget
 
 Federal account × fiscal year budget rollups, covering the full budget lifecycle (requested → enacted → apportioned → obligated → outlayed), pre-computed ratios and trends, the contract / assistance / unlinked breakdown, and request-vs-actual spend.
@@ -2012,6 +2193,11 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |
+| `SLED_OPPORTUNITIES_MINIMAL` | `list_sled_opportunities` | opportunity_id, solicitation_number, solicitation_type, title, state, jurisdiction, agency, status, status_reason, posted_date, response_deadline, source_url, has_documents, first_seen_at, last_change_seen_at (no `description` — detail-only on the API) |
+| `SLED_OPPORTUNITIES_COMPREHENSIVE` | `get_sled_opportunity` | Full solicitation with description, the raw portal status, both deadlines, bid opening, category codes, and organization / contact / meta / attachments / revisions |
+| `SLED_REVISIONS_MINIMAL` | `list_sled_opportunity_revisions` | observed_at, sequence, kind, changed_fields, source_declared (omits `changes`, which needs a Small plan) |
+| `SLED_FORECASTS_MINIMAL` | `list_sled_forecasts` | forecast_id, state, agency, title, estimated_advertisement_date, estimated_advertisement_raw, procurement_category, procurement_method, contract_number, incumbent_name, source_url, estimated_value(*) |
+| `SLED_FORECASTS_COMPREHENSIVE` | `get_sled_forecast` | Full forecast with description, contract_term, mbe_dbe_goal, delivery_location, and organization / contact / estimated_value |
 
 All predefined shapes are validated at SDK release time (see [Developer Guide](DEVELOPERS.md#sdk-conformance-maintainers)). For custom shapes, see the [Shaping Guide](SHAPES.md).
 

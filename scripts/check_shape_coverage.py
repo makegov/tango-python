@@ -79,6 +79,8 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "exclusions": "Exclusion",
     "sbir/topics": "SbirTopic",
     "sbir/solicitations": "SbirSolicitation",
+    "sled/opportunities": "SledOpportunity",
+    "sled/forecasts": "SledForecast",
     "mas_sins": "MasSin",
     "events": "Event",
     "news": "News",

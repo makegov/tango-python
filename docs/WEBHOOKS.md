@@ -87,6 +87,7 @@ tango webhooks list-event-types
 # alerts.exclusion.match     SAM.gov exclusion matched a saved alert
 # alerts.dibbs_rfq.match     DLA DIBBS RFQ matched a saved alert
 # alerts.dibbs_rfp.match     DLA DIBBS RFP matched a saved alert
+# alerts.sled_opportunity.match  State/local/education solicitation matched a saved alert
 ```
 
 This list is served by the API, so it is always current — the SDK does not hardcode
@@ -97,11 +98,20 @@ Two things that surprise people:
 
 - **DIBBS awards are not alertable.** There is no `alerts.dibbs_award.match`;
   only RFQs and RFPs emit alerts.
-- **Nothing fires when a record merely lapses.** An exclusion reaching its
-  termination date, or an RFQ/RFP passing its close date, emits no event.
-  Alerts fire on a record matching your saved search, not on the passage of
-  time. Poll with `list_exclusions(active=...)` / `list_dibbs_rfqs(open=...)`
-  if you need to observe expiry.
+- **Nothing fires when a record merely lapses — except SLED.** An exclusion
+  reaching its termination date, or an RFQ/RFP passing its close date, emits no
+  event: open/closed and in-force are derived at query time, so no stored row
+  changes. Poll with `list_exclusions(active=...)` /
+  `list_dibbs_rfqs(open=...)` if you need to observe expiry.
+
+  `sled_opportunity` is the exception, and the only one. A SLED solicitation's
+  liveness is a stored `status` column that Tango recomputes every fifteen
+  minutes rather than deriving per request, so a deadline passing **is** a write
+  and `alerts.sled_opportunity.match` can follow it. There is no
+  `sled_forecast` query type — a forecast has no deadline, so nothing
+  transitions — and SLED revisions and attachments are not separately
+  alertable: subscribe to `sled_opportunity` and filter on
+  `change_seen_after` or `revision_kind`.
 
 ### 2. See what a payload looks like
 

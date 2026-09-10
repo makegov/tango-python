@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **State, local and education (SLED) procurement** (Tango API 4.25.0). Six methods over the new `/api/sled/` namespace: `list_sled_opportunities()`, `get_sled_opportunity()`, `list_sled_opportunity_revisions()`, `get_sled_coverage()`, `list_sled_forecasts()`, `get_sled_forecast()`, plus `SledOpportunity` / `SledOpportunityRevision` / `SledForecast` schemas and five `ShapeConfig` defaults. Every one of the API's 27 solicitation filters and 13 forecast filters is an explicit named parameter.
+
+  Four behaviors are documented on the methods themselves because each misleads a caller who assumes federal semantics. **Passing neither `status` nor `active` returns open solicitations only** — that default is the API's, and the SDK deliberately does not synthesize a `status` param, since doing so would make `active=False` unreachable (pinned by a test). **`status` is Tango-derived and refreshed every fifteen minutes**; the portal's own word is served as `source_status`, is frozen at last capture, and is not a liveness filter. **Category scheme tagging is mid-migration**, so `naics=` matches only the small tagged share and `category_code=` is the escape hatch. And **`meta.attachment_count` can be lower than `len(attachments)`**, because an auto-generated portal cover sheet is listed and flagged `is_generated_summary` but excluded from the count.
+
+  `SLED_REVISIONS_MINIMAL` omits `changes` on purpose: the per-field before/after needs a Small plan, so naming it by default would 403 a Free caller. `changed_fields` is in the default and available at every plan.
+- **`previous_uii` on `list_itdashboard_investments()`.** The Tango API has accepted this filter for a while — it resolves a retired UII forward to whatever superseded it — and the SDK never picked it up, so it was a silent no-op for anyone who passed it through. Ungated, unlike its analytical neighbours on that endpoint. Found by the SDK's own filter-conformance check, not by SLED work.
+
+### Changed
+- Re-vendored `contracts/filter_shape_contract.json` (schema_version 2, 48 resources) and regenerated `tango/shapes/generated_overlay.py` from it — 535 fields across 33 containers, 84 nested schemas. Besides the SLED expands this closes three entity gaps the older contract could not see: `relationships(confidence, verification_method)` and the whole `workforce(*)` expand were reachable on the API and rejected client-side by the SDK's schema.
+- Baselined 14 reverse-shape-coverage gaps in `contracts/shape_coverage_baseline.json`. All 14 are nested sub-resource routes the newer contract publishes for the first time (`entities_contracts`, `idvs_awards`, `vehicles_orders`, and similar); none is SLED, and none is a regression — they are pre-existing SDK gaps that only became visible with the re-vendored contract. The gate reports 0 new drift.
+
+### Documentation
+- New **State & Local (SLED)** section in `docs/API_REFERENCE.md` covering all six methods, both defaults that surprise people, and the five new `ShapeConfig` constants.
+- Corrected `docs/WEBHOOKS.md`. It stated flatly that "nothing fires when a record merely lapses"; that is now false for exactly one query type. `alerts.sled_opportunity.match` **does** fire on a closing, because SLED liveness is a stored column a fifteen-minute sweep writes rather than a query-time derivation. Also documented that there is no `sled_forecast` query type and that SLED revisions and attachments are not separately alertable.
+
 ## [1.5.1] - 2026-08-10
 
 ### Documentation

@@ -46,6 +46,9 @@ from tango.models import (
     SbirTopic,
     SearchFilters,
     ShapeConfig,
+    SledForecast,
+    SledOpportunity,
+    SledOpportunityRevision,
     Subaward,
     ValidateResult,
     Vehicle,
@@ -1596,12 +1599,15 @@ class TangoClient:
         cio_rating: int | None = None,
         cio_rating_max: int | None = None,
         performance_risk: bool | None = None,
+        previous_uii: str | None = None,
     ) -> PaginatedResponse:
         """List federal IT investments from the IT Dashboard (`/api/itdashboard/`).
 
         Filters are tier-gated by the API:
 
-        - **Free**: ``search`` (full-text across UII, title, description, agency, bureau)
+        - **Free**: ``search`` (full-text across UII, title, description, agency,
+          bureau) and ``previous_uii`` — following a retired identifier forward to
+          whatever superseded it is recovery, not analysis, so it is ungated
         - **Pro**: ``agency_code``, ``type_of_investment``,
           ``updated_time_after`` / ``updated_time_before``
         - **Business+**: ``agency_name`` (text), ``cio_rating``,
@@ -1633,6 +1639,7 @@ class TangoClient:
             ("cio_rating", cio_rating),
             ("cio_rating_max", cio_rating_max),
             ("performance_risk", performance_risk),
+            ("previous_uii", previous_uii),
         ):
             if val is None:
                 continue
@@ -3463,6 +3470,450 @@ class TangoClient:
 
         data = self._get(f"/api/sbir/solicitations/{solicitation_id}/", params)
         return self._parse_response_with_shape(data, shape, SbirSolicitation, flat, flat_lists)
+
+    # ============================================================================
+    # State, local and education (SLED) procurement
+    # ============================================================================
+
+    def list_sled_opportunities(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        state: str | None = None,
+        jurisdiction: str | None = None,
+        status: str | None = None,
+        active: bool | None = None,
+        agency: str | None = None,
+        solicitation_number: str | None = None,
+        solicitation_type: str | None = None,
+        has_documents: bool | None = None,
+        revision_kind: str | None = None,
+        naics: str | None = None,
+        nigp: str | None = None,
+        unspsc: str | None = None,
+        category: str | None = None,
+        category_code: str | None = None,
+        posted_after: str | None = None,
+        posted_before: str | None = None,
+        response_deadline_after: str | None = None,
+        response_deadline_before: str | None = None,
+        first_seen_after: str | None = None,
+        first_seen_before: str | None = None,
+        change_seen_after: str | None = None,
+        modified_after: str | None = None,
+        modified_before: str | None = None,
+        platform: str | None = None,
+        native_id: str | None = None,
+        external_id: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List state, local and education (SLED) solicitations.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        Beta. Coverage is partial and grows one jurisdiction at a time, so a thin
+        per-state result is at least as likely to be a portal Tango does not read
+        as a quiet market. Call :meth:`get_sled_coverage` before treating a
+        per-state count as market size.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            state: Two-letter state or territory code. Multi-value: ``TX|OK``
+            jurisdiction: Level of government — ``state``, ``local``,
+                ``education``, or ``unknown`` for aggregator rows that cannot
+                tell state from local
+            status: Tango-derived liveness — ``open``, ``closed``, ``awarded``,
+                ``cancelled`` or ``unknown``. **Passing neither this nor**
+                ``active`` **returns open solicitations only.** ``unknown``
+                (standing rosters, dateless RFIs) is hidden by that default —
+                reach it with ``status="open|unknown"``
+            active: Sugar for federal-shaped callers. ``True`` is
+                ``status="open"``; ``False`` is its complement, so it includes
+                ``unknown``
+            agency: Substring match on the buyer's published text (min 2
+                characters). There is no code resolution behind it — state
+                agencies have no entry in the federal organization tree
+            solicitation_number: The number a human would quote. Null on roughly
+                a third of the corpus, where the portal publishes none
+            solicitation_type: ``rfp``, ``ifb``, ``rfq``, ``rfi``, ``itb``,
+                ``sole_source``, ``grant`` or ``other``. ``null`` (the portal
+                states no type) is a distinct answer from ``other``
+            has_documents: Whether the solicitation advertises at least one
+                document
+            revision_kind: Kind of the most recent substantive revision —
+                ``deadline_change``, ``status_change``, ``documents_added``,
+                ``documents_removed``, ``documents_replaced``, ``title_change``
+                or ``content_change``
+            naics: Exact match within the ``naics`` category scheme. Thin on
+                purpose: scheme tagging is mid-migration, so only a small share
+                of entries are tagged NAICS. Use ``category_code`` instead unless
+                you need scheme precision
+            nigp: Exact match within the ``nigp`` scheme
+            unspsc: Exact match within the ``unspsc`` scheme
+            category: Exact match within the ``text`` scheme, where the code is
+                the portal's own human label
+            category_code: Match a code under ANY scheme, including the untagged
+                pre-migration strings. The escape hatch when a scheme-specific
+                filter returns less than you expected
+            posted_after: Posted date on or after (YYYY-MM-DD)
+            posted_before: Posted date on or before (YYYY-MM-DD)
+            response_deadline_after: Response deadline on or after (YYYY-MM-DD)
+            response_deadline_before: Response deadline on or before (YYYY-MM-DD)
+            first_seen_after: When Tango FIRST OBSERVED the solicitation, on or
+                after (YYYY-MM-DD). The polling primitive
+            first_seen_before: First observed on or before (YYYY-MM-DD)
+            change_seen_after: When Tango OBSERVED the last substantive change,
+                on or after (YYYY-MM-DD). A scrape date, not an amendment date
+            modified_after: Tango row last changed on or after (YYYY-MM-DD)
+            modified_before: Tango row last changed on or before (YYYY-MM-DD)
+            platform: Support filter identifying the source portal's platform
+                family. Not in any response shape, and not a stable value
+            native_id: Support filter — the portal's own identifier
+            external_id: Support filter — Tango's opaque lake key. At most 500
+                values
+            search: Ranked full-text search over title, agency, identifiers,
+                category labels and description, widened by the solicitations
+                whose ATTACHMENT text matched (min 2 characters). Adds a
+                ``snippet`` to rows that matched on their description
+            ordering: Sort field — ``rank``, ``response_deadline``,
+                ``posted_date``, ``first_seen_at``, ``last_seen_at``,
+                ``last_change_seen_at``, ``modified``. ``rank`` requires a
+                non-empty ``search``
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.SLED_OPPORTUNITIES_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("state", state),
+            ("jurisdiction", jurisdiction),
+            ("status", status),
+            ("active", active),
+            ("agency", agency),
+            ("solicitation_number", solicitation_number),
+            ("solicitation_type", solicitation_type),
+            ("has_documents", has_documents),
+            ("revision_kind", revision_kind),
+            ("naics", naics),
+            ("nigp", nigp),
+            ("unspsc", unspsc),
+            ("category", category),
+            ("category_code", category_code),
+            ("posted_after", posted_after),
+            ("posted_before", posted_before),
+            ("response_deadline_after", response_deadline_after),
+            ("response_deadline_before", response_deadline_before),
+            ("first_seen_after", first_seen_after),
+            ("first_seen_before", first_seen_before),
+            ("change_seen_after", change_seen_after),
+            ("modified_after", modified_after),
+            ("modified_before", modified_before),
+            ("platform", platform),
+            ("native_id", native_id),
+            ("external_id", external_id),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/sled/opportunities/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, SledOpportunity, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_sled_opportunity(
+        self,
+        opportunity_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single SLED solicitation by opportunity_id, whatever its status.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        The open-only default applies to the list endpoint, not here — a closed
+        solicitation still resolves on its own URL.
+
+        Args:
+            opportunity_id: Solicitation UUID
+            shape: Response shape string (defaults to the comprehensive shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.SLED_OPPORTUNITIES_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/sled/opportunities/{opportunity_id}/", params)
+        return self._parse_response_with_shape(data, shape, SledOpportunity, flat, flat_lists)
+
+    def list_sled_opportunity_revisions(
+        self,
+        opportunity_id: str,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        kind: str | None = None,
+        source_declared: bool | None = None,
+        observed_after: str | None = None,
+        observed_before: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List one SLED solicitation's observed revision history.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        ``observed_at`` is the scrape that saw the change, not the date the agency
+        made it: no state portal emits amendment notices, so resolution is that
+        state's crawl cadence and history starts when Tango began reading the
+        jurisdiction rather than when the solicitation was posted.
+
+        Unlike the ``revisions(*)`` expand on the solicitation, this route serves
+        ``enrichment`` rows — Tango's own detail fetch filling in coverage rather
+        than an agency amendment. Pass ``kind="enrichment"`` to see only those.
+
+        Args:
+            opportunity_id: Solicitation UUID
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape). ``changes``
+                — the per-field before and after — needs a Small plan; name it
+                explicitly when the caller has one
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            kind: Revision kind, plus ``enrichment``. Multi-value: use ``|``
+            source_declared: Whether the portal's own amendment marker moved at
+                this emission. True on about 5% of revisions; everything else is
+                Tango inferring the change from the diff
+            observed_after: Observed on or after (YYYY-MM-DD)
+            observed_before: Observed on or before (YYYY-MM-DD)
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.SLED_REVISIONS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("kind", kind),
+            ("source_declared", source_declared),
+            ("observed_after", observed_after),
+            ("observed_before", observed_before),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get(f"/api/sled/opportunities/{opportunity_id}/revisions/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, SledOpportunityRevision, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_sled_coverage(self) -> dict[str, Any]:
+        """
+        Get the per-state SLED coverage rollup.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        Returns corpus totals plus one row per jurisdiction — the total, the count
+        in each of the five statuses, the jurisdiction levels present, and when a
+        solicitation there last changed. It answers one question: whether a thin
+        result for a state is a thin market or a portal Tango does not read.
+
+        Every state row carries all five status buckets whether or not they have
+        rows, so a total and two buckets never invite subtraction. Takes no
+        parameters and is not shaped or paginated.
+        """
+        return self._get("/api/sled/opportunities/coverage/", {})
+
+    def list_sled_forecasts(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        state: str | None = None,
+        agency: str | None = None,
+        procurement_category: str | None = None,
+        procurement_method: str | None = None,
+        contract_number: str | None = None,
+        incumbent_name: str | None = None,
+        advertisement_after: str | None = None,
+        advertisement_before: str | None = None,
+        first_seen_after: str | None = None,
+        first_seen_before: str | None = None,
+        modified_after: str | None = None,
+        modified_before: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List planned state procurements (SLED forecasts).
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        Forecasts carry no liveness at all — there is no deadline to have passed,
+        so there is no ``status`` filter and no open-only default. Currency is the
+        caller's call from ``estimated_advertisement_date``, which is the START of
+        the published quarter rather than a posting date.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            state: Two-letter state code. Multi-value: use ``|``
+            agency: Substring match on the buyer's published text (min 2
+                characters)
+            procurement_category: The portal's own category word, verbatim
+            procurement_method: The portal's own method word, verbatim
+            contract_number: The number the state expects to award under, where it
+                publishes one in advance
+            incumbent_name: Substring match on the incumbent vendor's name as
+                published. NOT resolved to a Tango entity
+            advertisement_after: Estimated advertisement date on or after
+                (YYYY-MM-DD). Remember the date is a quarter start
+            advertisement_before: Estimated advertisement date on or before
+                (YYYY-MM-DD)
+            first_seen_after: When Tango first observed the forecast, on or after
+                (YYYY-MM-DD)
+            first_seen_before: First observed on or before (YYYY-MM-DD)
+            modified_after: Tango row last changed on or after (YYYY-MM-DD)
+            modified_before: Tango row last changed on or before (YYYY-MM-DD)
+            search: Ranked full-text search over title, agency and description
+                (min 2 characters)
+            ordering: Sort field — ``rank``, ``estimated_advertisement_date``,
+                ``first_seen_at``, ``last_seen_at``, ``modified``. ``rank``
+                requires a non-empty ``search``
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.SLED_FORECASTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("state", state),
+            ("agency", agency),
+            ("procurement_category", procurement_category),
+            ("procurement_method", procurement_method),
+            ("contract_number", contract_number),
+            ("incumbent_name", incumbent_name),
+            ("advertisement_after", advertisement_after),
+            ("advertisement_before", advertisement_before),
+            ("first_seen_after", first_seen_after),
+            ("first_seen_before", first_seen_before),
+            ("modified_after", modified_after),
+            ("modified_before", modified_before),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/sled/forecasts/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, SledForecast, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_sled_forecast(
+        self,
+        forecast_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single SLED forecast by forecast_id.
+
+        API reference: https://tango.makegov.com/docs/api-reference/sled.md
+
+        Args:
+            forecast_id: Forecast UUID
+            shape: Response shape string (defaults to the comprehensive shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.SLED_FORECASTS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/sled/forecasts/{forecast_id}/", params)
+        return self._parse_response_with_shape(data, shape, SledForecast, flat, flat_lists)
 
     # ============================================================================
     # Budget (federal account x fiscal year rollups)
