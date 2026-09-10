@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-09-10
+
 ### Added
 - **`attachments(extracted_text)` — SLED document bodies on the Small plan and above** (Tango API 4.25.1). Re-vendored the contract and regenerated the shape overlay, so `shape="...,attachments(name,extracted_text)"` now validates instead of being rejected client-side. Three properties are documented on the model and in `docs/API_REFERENCE.md`, because each is otherwise a support question: the leaf must be **named** (neither `SLED_OPPORTUNITIES_MINIMAL` nor `SLED_OPPORTUNITIES_COMPREHENSIVE` includes it, and `attachments(*)` does not carry it, because the API only resolves the body for a caller who asked); the **key is absent rather than null** when the text is not being served, so read it with `.get()`; and a **contested document never returns text at any plan**. Searching document text stays ungated on every plan and returns no fragment of it — buying the body does not change search.
 - **State, local and education (SLED) procurement** (Tango API 4.25.0). Six methods over the new `/api/sled/` namespace: `list_sled_opportunities()`, `get_sled_opportunity()`, `list_sled_opportunity_revisions()`, `get_sled_coverage()`, `list_sled_forecasts()`, `get_sled_forecast()`, plus `SledOpportunity` / `SledOpportunityRevision` / `SledForecast` schemas and five `ShapeConfig` defaults. Every one of the API's 27 solicitation filters and 13 forecast filters is an explicit named parameter.
