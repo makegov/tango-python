@@ -1046,6 +1046,10 @@ class SledOpportunity:
 
     ``snippet`` is present only under ``search=``, and only on rows that matched
     on their description; a title-or-agency match carries none.
+
+    Searching document text and reading it are separate: ``search=`` matches
+    inside attachment text on every plan and returns no fragment of it, while
+    ``attachments(extracted_text)`` serves the body on a Small plan or above.
     """
 
     opportunity_id: str | None = None
@@ -1077,6 +1081,9 @@ class SledOpportunity:
     organization: dict[str, Any] | None = None
     contact: dict[str, Any] | None = None
     meta: dict[str, Any] | None = None
+    # Each entry carries document metadata and extraction stats. `extracted_text`
+    # — the body — needs a Small plan, is served ONLY when named explicitly, and
+    # its key is absent rather than null when it is not being served.
     attachments: list[dict[str, Any]] | None = None
     revisions: list[dict[str, Any]] | None = None
     raw: dict[str, Any] | None = None
@@ -1353,7 +1360,10 @@ class ShapeConfig:
         "source_url,has_documents,first_seen_at,last_change_seen_at"
     )
 
-    # Default for get_sled_opportunity()
+    # Default for get_sled_opportunity(). `attachments(*)` deliberately does not
+    # pull `attachments(extracted_text)`: the body needs a Small plan and the API
+    # only resolves it when a caller names the leaf, so putting it in a default
+    # shape would make every detail fetch pay for a document nobody asked to read.
     SLED_OPPORTUNITIES_COMPREHENSIVE: Final = (
         "opportunity_id,solicitation_number,solicitation_type,"
         "solicitation_type_source,title,description,state,jurisdiction,agency,"

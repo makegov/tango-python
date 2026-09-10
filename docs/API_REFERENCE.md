@@ -1321,8 +1321,25 @@ row = client.get_sled_opportunity(
 
 **Notes:**
 - `meta.attachment_count` can be **lower** than `len(row["attachments"])`. Some portals auto-generate a cover sheet alongside the real documents; it is listed and flagged `is_generated_summary`, but excluded from the count and from `has_documents`. The count answers "does this hold its solicitation package"; the array answers "what files exist".
-- Attachment bodies are never served. `size_bytes` and `char_count` only mean something as a pair — 3 MB that yielded no characters is a scan awaiting OCR.
+- `size_bytes` and `char_count` only mean something as a pair — 3 MB that yielded no characters is a scan awaiting OCR.
 - `raw(*)` needs a Small plan or above, and is explicitly unstable: its shape varies by portal platform.
+
+**Reading a document body — `attachments(extracted_text)`:**
+
+```python
+row = client.get_sled_opportunity(
+    opportunity_id,
+    shape="opportunity_id,attachments(name,size_bytes,extracted_text)",
+)
+```
+
+Needs a **Small plan or above**, and Tango API 4.25.1 or later (`client.get_version()` reports what you are calling). Three rules:
+
+- **You have to name it.** `attachments(*)` does not carry the body, and neither default shape names it — the API only resolves it for a caller who asked, so a default would make every detail fetch pay for a document nobody wanted to read.
+- **The key is absent, not null**, whenever the text is not being served to you: below Small (where it is withheld and named in `meta.upgrade_hints`), on a contested document, or where the text cannot be resolved. Use `attachment.get("extracted_text")`.
+- **A contested document never returns text**, at any plan — its stored bytes disagree with what the record advertised, so its text is not reliably that record's.
+
+Searching document text and reading it are separate things. `search=` matches inside attachment text on **every plan** and returns no fragment of it; `extracted_text` is a per-record read on Small and above. Buying the body does not change search.
 
 ### list_sled_opportunity_revisions()
 

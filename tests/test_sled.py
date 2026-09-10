@@ -255,6 +255,22 @@ class TestSledShapes:
         parser = ShapeParser(cache_enabled=True)
         parser.validate(parser.parse(shape), model)
 
+    def test_the_document_body_validates_when_named(self):
+        """`extracted_text` needs a Small plan, but the SDK must not reject it client-side."""
+        parser = ShapeParser(cache_enabled=True)
+        parser.validate(
+            parser.parse("opportunity_id,attachments(name,size_bytes,extracted_text)"),
+            SledOpportunity,
+        )
+
+    def test_no_default_shape_names_the_paid_document_body(self):
+        """The API resolves the body only when named, so a default shape that named it would make every detail fetch pay for it."""
+        for shape in (
+            ShapeConfig.SLED_OPPORTUNITIES_MINIMAL,
+            ShapeConfig.SLED_OPPORTUNITIES_COMPREHENSIVE,
+        ):
+            assert "extracted_text" not in shape
+
     def test_support_filters_are_not_response_fields(self):
         """`external_id`, `native_id` and `platform` are filters only — never shaped."""
         from tango.exceptions import ShapeValidationError

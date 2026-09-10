@@ -111,6 +111,7 @@ ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
         name="download_status", type=str, is_optional=True, is_list=False
     ),
     "extension": FieldSchema(name="extension", type=str, is_optional=True, is_list=False),
+    "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
     "extraction_status": FieldSchema(
         name="extraction_status", type=str, is_optional=True, is_list=False
     ),
