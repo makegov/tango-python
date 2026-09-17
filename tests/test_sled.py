@@ -6,6 +6,7 @@ shape schemas that back them. Requests are mocked; live behavior is exercised by
 the production smoke tests.
 """
 
+from datetime import UTC, datetime
 from unittest.mock import Mock, patch
 
 import pytest
@@ -138,6 +139,29 @@ class TestSledOpportunities:
         assert page.count == 1
         assert page.results[0]["state"] == "TX"
 
+    @patch("tango.client.httpx.Client.request")
+    def test_delisted_at_is_requested_by_default_and_served(self, mock_request):
+        """A list row already carries `status_reason="delisted"`, so it must carry the timestamp behind it too."""
+        _mock(
+            mock_request,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "opportunity_id": "u1",
+                        "status": "closed",
+                        "status_reason": "delisted",
+                        "delisted_at": "2026-09-10T06:00:00Z",
+                    }
+                ],
+            },
+        )
+        page = TangoClient(api_key="k").list_sled_opportunities()
+        assert "delisted_at" in _call_params(mock_request)["shape"]
+        assert page.results[0]["delisted_at"] == datetime(2026, 9, 10, 6, 0, tzinfo=UTC)
+
 
 class TestSledRevisions:
     @patch("tango.client.httpx.Client.request")
@@ -261,6 +285,13 @@ class TestSledShapes:
         parser.validate(
             parser.parse("opportunity_id,attachments(name,size_bytes,extracted_text)"),
             SledOpportunity,
+        )
+
+    def test_delisted_at_validates(self):
+        """The API serves `delisted_at`, so the SDK must not reject it client-side."""
+        parser = ShapeParser(cache_enabled=True)
+        parser.validate(
+            parser.parse("opportunity_id,status,status_reason,delisted_at"), SledOpportunity
         )
 
     def test_no_default_shape_names_the_paid_document_body(self):

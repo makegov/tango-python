@@ -1044,6 +1044,8 @@ class SledOpportunity:
     ``status`` nor ``active`` returns open solicitations only, while a detail
     request returns the solicitation whatever its status.
 
+    ``delisted_at`` is when a portal dropped the solicitation from its listing before its deadline, which is the reading behind ``status_reason="delisted"``; it is null when the record was never delisted or has been seen since.
+
     ``snippet`` is present only under ``search=``, and only on rows that matched
     on their description; a title-or-agency match carries none.
 
@@ -1063,6 +1065,7 @@ class SledOpportunity:
     agency: str | None = None
     status: str | None = None
     status_reason: str | None = None
+    delisted_at: str | None = None
     status_computed_at: str | None = None
     source_status: str | None = None
     source_url: str | None = None
@@ -1356,8 +1359,9 @@ class ShapeConfig:
     # API (median ~550 chars, tail past 120k), so it is not in the list default.
     SLED_OPPORTUNITIES_MINIMAL: Final = (
         "opportunity_id,solicitation_number,solicitation_type,title,state,"
-        "jurisdiction,agency,status,status_reason,posted_date,response_deadline,"
-        "source_url,has_documents,first_seen_at,last_change_seen_at"
+        "jurisdiction,agency,status,status_reason,delisted_at,posted_date,"
+        "response_deadline,source_url,has_documents,first_seen_at,"
+        "last_change_seen_at"
     )
 
     # Default for get_sled_opportunity(). `attachments(*)` deliberately does not
@@ -1367,8 +1371,8 @@ class ShapeConfig:
     SLED_OPPORTUNITIES_COMPREHENSIVE: Final = (
         "opportunity_id,solicitation_number,solicitation_type,"
         "solicitation_type_source,title,description,state,jurisdiction,agency,"
-        "status,status_reason,status_computed_at,source_status,source_url,"
-        "posted_date,response_deadline,response_deadline_original,"
+        "status,status_reason,delisted_at,status_computed_at,source_status,"
+        "source_url,posted_date,response_deadline,response_deadline_original,"
         "bid_opening_date,bid_opening_raw,category_codes,has_documents,"
         "first_seen_at,last_seen_at,last_change_seen_at,"
         "organization(*),contact(*),meta(*),attachments(*),revisions(*)"

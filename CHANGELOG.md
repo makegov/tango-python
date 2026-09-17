@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`delisted_at` on SLED solicitations** (Tango API 4.25.3). The API serves the moment a portal dropped a solicitation from its listing before its deadline — the reading behind `status_reason="delisted"` — but the SDK's schema did not capture it, so it could not be requested through the typed shape API at all. It joins the `SledOpportunity` schema and both default shapes. `SLED_OPPORTUNITIES_MINIMAL` already carried `status_reason`, so until now a list caller could see *that* a solicitation had been delisted without being able to see *when*.
+- **`meta(jurisdiction_declared)` on SLED solicitations**, picked up by the same contract refresh. A boolean: whether the portal declared the solicitation's jurisdiction level, or Tango derived it. The level itself stays on `jurisdiction`, where a caller filters it; this is only its provenance.
+
+### Changed
+- Re-vendored `contracts/filter_shape_contract.json` (API 4.25.1 → 4.25.3) and regenerated `tango/shapes/generated_overlay.py` from it. The two SLED fields above are the only differences across all 48 resources — no filter changed, no other resource changed, and the shape-coverage baseline is untouched.
+
 ## [1.6.0] - 2026-09-10
 
 ### Added

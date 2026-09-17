@@ -624,6 +624,9 @@ META3_SCHEMA: dict[str, FieldSchema] = {
     "attachment_count": FieldSchema(
         name="attachment_count", type=int, is_optional=True, is_list=False
     ),
+    "jurisdiction_declared": FieldSchema(
+        name="jurisdiction_declared", type=str, is_optional=True, is_list=False
+    ),
     "last_change_source_declared": FieldSchema(
         name="last_change_source_declared", type=str, is_optional=True, is_list=False
     ),
@@ -2823,6 +2826,9 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_optional=True,
             is_list=False,
             nested_model="GrantorContact",
+        ),
+        "delisted_at": FieldSchema(
+            name="delisted_at", type=datetime, is_optional=True, is_list=False
         ),
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "first_seen_at": FieldSchema(
