@@ -10,6 +10,7 @@ from .exceptions import (
 )
 from .models import (
     BudgetAccount,
+    ContractAppeal,
     DibbsAward,
     DibbsRfp,
     DibbsRfq,
@@ -65,6 +66,7 @@ __all__ = [
     "ResolveCandidate",
     "ResolveResult",
     "BudgetAccount",
+    "ContractAppeal",
     "DibbsAward",
     "DibbsRfp",
     "DibbsRfq",

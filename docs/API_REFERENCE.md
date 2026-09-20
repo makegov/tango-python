@@ -22,6 +22,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Grants](#grants)
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
+- [Contract Appeals](#contract-appeals)
 - [Budget](#budget)
 - [Business Types](#business-types)
 - [NAICS](#naics)
@@ -1235,6 +1236,85 @@ protest = client.get_protest(
 
 ---
 
+## Contract Appeals
+
+Contract Disputes Act appeal decisions from the Civilian Board of Contract Appeals (CBCA) and the Armed Services Board of Contract Appeals (ASBCA).
+
+**These are not bid protests.** A protest challenges an award or a solicitation before performance; an appeal here challenges a contracting officer's final decision under an existing contract — a claim, a termination, a differing-site-conditions dispute. Protests live at [Protests](#protests) and share no identifiers with this resource.
+
+One row is one decision as the board's own listing publishes it, so several fields describe the listing rather than the dispute. `listed` goes false once the board's newest listing stops carrying the decision; the row is kept, never dropped.
+
+### list_contract_appeals()
+
+List appeal decisions with filtering and shaping.
+
+```python
+appeals = client.list_contract_appeals(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.CONTRACT_APPEALS_MINIMAL,
+    # Filter parameters (all optional)
+    board=None,
+    docket=None,
+    appellant=None,
+    judge=None,
+    decision_type=None,
+    decision_date_after=None,
+    decision_date_before=None,
+    listed=None,
+    document_id=None,
+    search=None,
+    ordering=None,
+)
+```
+
+**Filter Parameters:**
+- `board` - `"cbca"` or `"asbca"`; OR both with `"cbca|asbca"`
+- `docket` - Exact docket match, e.g. `"3288-R"`, `"59116"` or `"7092-C(6682, 6765, 6767)"`. A leading `CBCA` / `ASBCA` and `No.` / `Nos.` are ignored, so a docket can be pasted as it is cited. Commas are part of a docket, never a separator; OR several with `|`
+- `appellant` - Case-insensitive substring match on the appellant's name (min 2 characters)
+- `judge` - Case-insensitive exact match on the judge as the listing names them
+- `decision_type` - CBCA only: `"Decision"`, `"Dismissal"`, `"Order"`, `"Full Board Order"`, or the listing's own text. ASBCA rows carry no type
+- `decision_date_after` / `decision_date_before` - Decision date range (`YYYY-MM-DD`)
+- `listed` - Whether the board's newest listing still carries the decision
+- `document_id` - The board's own document id
+- `search` - Ranked full-text search over the appellant and the full decision text (min 2 characters); wrap in double quotes for a phrase
+- `ordering` - `decision_date` (the default, as `-decision_date`), `appellant`, `first_listed_at` or `rank`. `rank` requires a non-empty `search`
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with appeal-decision dictionaries
+
+**Example:**
+```python
+appeals = client.list_contract_appeals(
+    board="asbca",
+    search="differing site conditions",
+    decision_date_after="2025-01-01",
+    ordering="rank",
+    limit=25,
+)
+
+for appeal in appeals.results:
+    dockets = ", ".join(appeal["docket_numbers"])
+    print(f"{appeal['board'].upper()} {dockets}: {appeal['appellant']} ({appeal['decision_date']})")
+```
+
+### get_contract_appeal()
+
+Get a single decision by `uuid`.
+
+```python
+appeal = client.get_contract_appeal(
+    "DECISION_UUID",
+    shape=ShapeConfig.CONTRACT_APPEALS_COMPREHENSIVE,
+)
+```
+
+**Notes:**
+- `docket_numbers` is a list — the dockets with the board prefix stripped (`3288-R`, `59116`), and a consolidated appeal carries several. `docket_raw` keeps the listing's own text, and `docket_source` says where the dockets came from.
+- **Reading `decision_text` requires an Enterprise plan, and below that tier the key is absent rather than null** — read it with `.get()`, not `[...]`. Neither default shape names it: the body runs to roughly 100K characters, so asking for it on every row is rarely what you want.
+- **Searching that text is free at every plan.** `search=` matches inside the decision body and returns no fragment of it, so buying the body does not change what you can find.
+
+---
+
 ## State & Local (SLED)
 
 State, local and education procurement — solicitations that never appear on SAM.gov because they were never federal. **Beta**: coverage is partial and grows one jurisdiction at a time.
@@ -2229,6 +2309,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `SUBAWARDS_MINIMAL` | `list_subawards` | award_key, prime_recipient(uei,display_name), subaward_recipient(uei,display_name) |
 | `GSA_ELIBRARY_CONTRACTS_MINIMAL` | `list_gsa_elibrary_contracts` | uuid, contract_number, schedule, recipient(display_name,uei), idv(key,award_date) |
 | `PROTESTS_MINIMAL` | `list_protests` | case_id, case_number, title, source_system, outcome, filed_date |
+| `CONTRACT_APPEALS_MINIMAL` | `list_contract_appeals` | uuid, board, docket_numbers, decision_date, appellant, judge, decision_type, url |
+| `CONTRACT_APPEALS_COMPREHENSIVE` | `get_contract_appeal` | The list fields plus docket_raw, docket_source, decision_date_repaired, decision_type_raw, listing_year, first_listed_at, listed, text_status, text_char_count (omits `decision_text`, which needs an Enterprise plan) |
 | `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |

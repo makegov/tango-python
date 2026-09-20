@@ -1,10 +1,9 @@
 {
   "description": "Known reverse shape-coverage gaps (Tango exposes, SDK schema lacks), accepted as a tracked backlog. check_shape_coverage.py fails only on gaps NOT listed here. Burn down and regenerate with --update-baseline.",
-  "count": 16,
+  "count": 15,
   "known_gaps": [
     "unmapped_resource|agencies_contracts_awarding|(root)|None",
     "unmapped_resource|agencies_contracts_funding|(root)|None",
-    "unmapped_resource|contract_appeals|(root)|None",
     "unmapped_resource|contracts_subawards|(root)|None",
     "unmapped_resource|ebuy/requests|(root)|None",
     "unmapped_resource|entities_contracts|(root)|None",

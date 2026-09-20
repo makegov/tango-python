@@ -763,6 +763,43 @@ PROTEST_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+CONTRACT_APPEAL_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    "board": FieldSchema(name="board", type=str, is_optional=True, is_list=False),
+    "docket_numbers": FieldSchema(name="docket_numbers", type=str, is_optional=True, is_list=True),
+    "docket_source": FieldSchema(name="docket_source", type=str, is_optional=True, is_list=False),
+    "docket_raw": FieldSchema(name="docket_raw", type=str, is_optional=True, is_list=False),
+    "decision_date": FieldSchema(name="decision_date", type=date, is_optional=True, is_list=False),
+    "decision_date_raw": FieldSchema(
+        name="decision_date_raw", type=str, is_optional=True, is_list=False
+    ),
+    "decision_date_repaired": FieldSchema(
+        name="decision_date_repaired", type=bool, is_optional=True, is_list=False
+    ),
+    "appellant": FieldSchema(name="appellant", type=str, is_optional=True, is_list=False),
+    "judge": FieldSchema(name="judge", type=str, is_optional=True, is_list=False),
+    "decision_type": FieldSchema(name="decision_type", type=str, is_optional=True, is_list=False),
+    "decision_type_raw": FieldSchema(
+        name="decision_type_raw", type=str, is_optional=True, is_list=False
+    ),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+    "document_id": FieldSchema(name="document_id", type=str, is_optional=True, is_list=False),
+    "listing_url": FieldSchema(name="listing_url", type=str, is_optional=True, is_list=False),
+    "listing_year": FieldSchema(name="listing_year", type=int, is_optional=True, is_list=False),
+    "first_listed_at": FieldSchema(
+        name="first_listed_at", type=datetime, is_optional=True, is_list=False
+    ),
+    "listed": FieldSchema(name="listed", type=bool, is_optional=True, is_list=False),
+    "text_status": FieldSchema(name="text_status", type=str, is_optional=True, is_list=False),
+    "text_char_count": FieldSchema(
+        name="text_char_count", type=int, is_optional=True, is_list=False
+    ),
+    # Enterprise-only. The key is absent rather than null below that tier, so the
+    # schema still carries it — the SDK must not reject a shape the API accepts.
+    "decision_text": FieldSchema(name="decision_text", type=str, is_optional=True, is_list=False),
+}
+
+
 AGENCY_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=str, is_optional=False, is_list=False),
@@ -1507,6 +1544,7 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Notice": NOTICE_SCHEMA,
     "Protest": PROTEST_SCHEMA,
     "ProtestDocket": PROTEST_DOCKET_SCHEMA,
+    "ContractAppeal": CONTRACT_APPEAL_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Grant": GRANT_SCHEMA,
     # Vehicles (Awards)

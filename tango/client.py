@@ -24,6 +24,7 @@ from tango.models import (
     BudgetAccount,
     BusinessType,
     Contract,
+    ContractAppeal,
     DibbsAward,
     DibbsRfp,
     DibbsRfq,
@@ -2683,6 +2684,141 @@ class TangoClient:
         return self._parse_response_with_shape(data, shape, Protest, flat, flat_lists)
 
     # ============================================================================
+    # Contract Disputes Act appeals (CBCA and ASBCA)
+    # ============================================================================
+
+    def list_contract_appeals(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        board: str | None = None,
+        docket: str | None = None,
+        appellant: str | None = None,
+        judge: str | None = None,
+        decision_type: str | None = None,
+        decision_date_after: str | None = None,
+        decision_date_before: str | None = None,
+        listed: bool | None = None,
+        document_id: str | None = None,
+        search: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List Contract Disputes Act appeal decisions.
+
+        Decisions of the Civilian Board of Contract Appeals (CBCA) and the Armed
+        Services Board of Contract Appeals (ASBCA) — appeals of a contracting
+        officer's decision, which is a different dispute from a bid protest. For
+        protests, use :meth:`list_protests`.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            board: ``cbca`` or ``asbca``. Multi-value: ``cbca|asbca``
+            docket: Exact docket match, e.g. ``3288-R``, ``59116`` or
+                ``7092-C(6682, 6765, 6767)``. A leading ``CBCA`` / ``ASBCA`` and
+                ``No.`` / ``Nos.`` are ignored, so a docket can be pasted as it is
+                cited. Commas are part of a docket, never a separator; OR several
+                with ``|``
+            appellant: Case-insensitive substring match on the appellant's name
+                (min 2 characters)
+            judge: Case-insensitive exact match on the judge as the listing names
+                them
+            decision_type: CBCA only — ``Decision``, ``Dismissal``, ``Order``,
+                ``Full Board Order``, or the listing's own text where it matches
+                none of those. ASBCA rows carry no type
+            decision_date_after: Decided on or after (YYYY-MM-DD)
+            decision_date_before: Decided on or before (YYYY-MM-DD)
+            listed: Whether the board's newest listing still carries the decision.
+                ``False`` returns the ones it has dropped, which are kept here
+                rather than deleted
+            document_id: The board's own document id
+            search: Ranked full-text search over the appellant and the full
+                decision text (min 2 characters). Wrap in double quotes for a
+                phrase. Free at every plan, and it returns no fragment of the
+                text — only reading ``decision_text`` needs Enterprise
+            ordering: Sort field — ``decision_date`` (the default, as
+                ``-decision_date``), ``appellant``, ``first_listed_at`` or
+                ``rank``. ``rank`` requires a non-empty ``search``
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.CONTRACT_APPEALS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("board", board),
+            ("docket", docket),
+            ("appellant", appellant),
+            ("judge", judge),
+            ("decision_type", decision_type),
+            ("decision_date_after", decision_date_after),
+            ("decision_date_before", decision_date_before),
+            ("listed", listed),
+            ("document_id", document_id),
+            ("search", search),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/contract_appeals/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, ContractAppeal, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_contract_appeal(
+        self,
+        appeal_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single Contract Disputes Act appeal decision by uuid.
+
+        Args:
+            appeal_id: Decision UUID
+            shape: Response shape string (defaults to the comprehensive shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.CONTRACT_APPEALS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/contract_appeals/{appeal_id}/", params)
+        return self._parse_response_with_shape(data, shape, ContractAppeal, flat, flat_lists)
+
+    # ============================================================================
     # DLA DIBBS (RFQs, RFPs, awards)
     # ============================================================================
 
@@ -4733,7 +4869,10 @@ class TangoClient:
         Args:
             name: Human-readable name for this alert.
             query_type: One of ``opportunity``, ``contract``, ``idv``, ``ota``,
-                ``otidv``, ``entity``, ``grant``, ``forecast``.
+                ``otidv``, ``entity``, ``grant``, ``forecast``, ``exclusion``,
+                ``dibbs_rfq``, ``dibbs_rfp``, ``sled_opportunity`` or
+                ``contract_appeal``. :meth:`list_webhook_event_types` is the
+                current authority — this list can only go stale.
             filters: Dict of query parameters that the alert matches against
                 (e.g. ``{"naics": "541330", "set_aside": "SBA"}``).
             frequency: ``realtime`` | ``daily`` | ``weekly`` | ``custom``.
