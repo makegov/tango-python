@@ -174,6 +174,20 @@ overlay: dict[str, dict[str, dict]] = {}
 report_rows: list[str] = []
 
 
+def put(container: str, name: str, e: dict) -> None:
+    """Record an overlay entry, unioning nested schemas when two resources reach the same container.
+
+    A model can be reached from its own resource and as another resource's expand (`opportunities` vs `vehicles.opportunity`), and those trees can expose different sub-fields.
+    Overwriting let a narrower embed hide fields the resource itself serves; the union only adds the missing ones, and the later entry still decides every field both trees define, so no existing type moves.
+    """
+    cur = overlay.setdefault(container, {}).get(name)
+    nested = {cur.get("nested") if cur else None, e.get("nested")}
+    if cur and None not in nested and "CodeDescription" not in nested and len(nested) == 2:
+        merged = {**nested_schemas[cur["nested"]], **nested_schemas[e["nested"]]}
+        e = {**e, "nested": intern_nested(re.sub(r"\d+$", "", e["nested"]), merged)}
+    overlay[container][name] = e
+
+
 def walk(res: str, path: str, node: dict, schema, container: str) -> None:
     if schema is None:
         return
@@ -182,7 +196,7 @@ def walk(res: str, path: str, node: dict, schema, container: str) -> None:
         for f in fields:
             if f != "*" and f not in schema:
                 t, lst = resolve_scalar(res, path, f)
-                overlay.setdefault(container, {})[f] = entry(t, True, lst)
+                put(container, f, entry(t, True, lst))
                 report_rows.append(f"{res}:{path or '(root)'}.{f}  ->  {t}{'[]' if lst else ''}")
     for ename, enode in (node.get("expands") or {}).items():
         fs = schema.get(ename)
@@ -192,7 +206,7 @@ def walk(res: str, path: str, node: dict, schema, container: str) -> None:
         if fs is None or child_schema is None:
             if is_wildcard(enode) and fs is not None:
                 continue
-            overlay.setdefault(container, {})[ename] = expand_entry(res, path, ename, enode)
+            put(container, ename, expand_entry(res, path, ename, enode))
             report_rows.append(f"{res}:{path or '(root)'}.{ename}  ->  expand")
         else:
             walk(res, child_path, enode, child_schema, container=nested_name)
@@ -214,7 +228,8 @@ for rkey, r in contract["resources"].items():
         for cname, cnode in (shape.get("expands") or {}).items():
             s[cname] = expand_entry(rkey, "", cname, cnode)
         if model_name:
-            overlay[model_name] = {**overlay.get(model_name, {}), **s}
+            for name, e in s.items():
+                put(model_name, name, e)
         continue
     walk(rkey, "", shape, schema, container=model_name)
 

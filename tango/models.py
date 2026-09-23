@@ -559,7 +559,13 @@ class Forecast:
 
 @dataclass
 class Opportunity:
-    """Schema definition for Opportunity (not used for instances)"""
+    """Schema definition for Opportunity (not used for instances)
+
+    The ``attachments(...)`` expand can carry two document-role fields on a Pro plan or above: ``doc_role``, what the document is for (one of ``requirement``, ``instructions``, ``pricing``, ``terms``, ``reference``, ``unknown``), and ``doc_role_alt``, a runner-up role that is usually null.
+    Both must be named, e.g. ``attachments(name,url,doc_role,doc_role_alt)``, because ``attachments(*)`` does not include them.
+    An attachment Tango has not classified omits both keys rather than returning null, so read them with ``.get()``.
+    A Free-plan request that names them gets the response without them, plus an entry in ``meta.upgrade_hints``.
+    """
 
     opportunity_id: str
     title: str
@@ -573,7 +579,13 @@ class Opportunity:
 
 @dataclass
 class Notice:
-    """Schema definition for Notice (not used for instances)"""
+    """Schema definition for Notice (not used for instances)
+
+    The ``attachments(...)`` expand can carry two document-role fields on a Pro plan or above: ``doc_role``, what the document is for (one of ``requirement``, ``instructions``, ``pricing``, ``terms``, ``reference``, ``unknown``), and ``doc_role_alt``, a runner-up role that is usually null.
+    Both must be named, e.g. ``attachments(name,url,doc_role,doc_role_alt)``, because ``attachments(*)`` does not include them.
+    An attachment Tango has not classified omits both keys rather than returning null, so read them with ``.get()``.
+    A Free-plan request that names them gets the response without them, plus an entry in ``meta.upgrade_hints``.
+    """
 
     notice_id: str
     title: str
@@ -1050,6 +1062,10 @@ class SledOpportunity:
     Searching document text and reading it are separate: ``search=`` matches
     inside attachment text on every plan and returns no fragment of it, while
     ``attachments(extracted_text)`` serves the body on a Small plan or above.
+
+    ``delisted_at`` is when a portal dropped the solicitation from its listing before its deadline, which is the reading behind ``status_reason="delisted"``; it is null when the solicitation was never delisted or has been seen again since.
+
+    ``meta(jurisdiction_declared)`` is a boolean saying whether the source stated the jurisdiction level itself; ``False`` means Tango classified it from the issuer's name.
     """
 
     opportunity_id: str | None = None
@@ -1063,6 +1079,7 @@ class SledOpportunity:
     agency: str | None = None
     status: str | None = None
     status_reason: str | None = None
+    delisted_at: str | None = None
     status_computed_at: str | None = None
     source_status: str | None = None
     source_url: str | None = None
@@ -1356,8 +1373,9 @@ class ShapeConfig:
     # API (median ~550 chars, tail past 120k), so it is not in the list default.
     SLED_OPPORTUNITIES_MINIMAL: Final = (
         "opportunity_id,solicitation_number,solicitation_type,title,state,"
-        "jurisdiction,agency,status,status_reason,posted_date,response_deadline,"
-        "source_url,has_documents,first_seen_at,last_change_seen_at"
+        "jurisdiction,agency,status,status_reason,delisted_at,posted_date,"
+        "response_deadline,source_url,has_documents,first_seen_at,"
+        "last_change_seen_at"
     )
 
     # Default for get_sled_opportunity(). `attachments(*)` deliberately does not
@@ -1367,8 +1385,8 @@ class ShapeConfig:
     SLED_OPPORTUNITIES_COMPREHENSIVE: Final = (
         "opportunity_id,solicitation_number,solicitation_type,"
         "solicitation_type_source,title,description,state,jurisdiction,agency,"
-        "status,status_reason,status_computed_at,source_status,source_url,"
-        "posted_date,response_deadline,response_deadline_original,"
+        "status,status_reason,delisted_at,status_computed_at,source_status,"
+        "source_url,posted_date,response_deadline,response_deadline_original,"
         "bid_opening_date,bid_opening_raw,category_codes,has_documents,"
         "first_seen_at,last_seen_at,last_change_seen_at,"
         "organization(*),contact(*),meta(*),attachments(*),revisions(*)"

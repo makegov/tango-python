@@ -6,6 +6,7 @@ shape schemas that back them. Requests are mocked; live behavior is exercised by
 the production smoke tests.
 """
 
+from datetime import UTC, datetime
 from unittest.mock import Mock, patch
 
 import pytest
@@ -138,6 +139,55 @@ class TestSledOpportunities:
         assert page.count == 1
         assert page.results[0]["state"] == "TX"
 
+    @patch("tango.client.httpx.Client.request")
+    def test_delisted_at_is_requested_by_default_and_served(self, mock_request):
+        _mock(
+            mock_request,
+            {
+                "count": 1,
+                "next": None,
+                "previous": None,
+                "results": [
+                    {
+                        "opportunity_id": "u1",
+                        "status": "closed",
+                        "status_reason": "delisted",
+                        "delisted_at": "2026-09-10T06:00:00Z",
+                    }
+                ],
+            },
+        )
+        page = TangoClient(api_key="k").list_sled_opportunities()
+        assert "delisted_at" in _call_params(mock_request)["shape"].split(",")
+        assert page.results[0]["delisted_at"] == datetime(2026, 9, 10, 6, 0, tzinfo=UTC)
+
+    @patch("tango.client.httpx.Client.request")
+    def test_detail_fields_keep_the_api_types(self, mock_request):
+        _mock(
+            mock_request,
+            {
+                "opportunity_id": "u1",
+                "posted_date": "2026-09-01T14:30:00Z",
+                "response_deadline": "2026-10-01T17:00:00Z",
+                "category_codes": [{"scheme": "nigp", "code": "91000"}],
+                "meta": {"jurisdiction_declared": False, "last_change_source_declared": True},
+                "attachments": [{"name": "rfp.pdf", "size_bytes": 1024, "pages": 3}],
+            },
+        )
+        row = TangoClient(api_key="k").get_sled_opportunity(
+            "u1",
+            shape=(
+                "opportunity_id,posted_date,response_deadline,category_codes,"
+                "meta(jurisdiction_declared,last_change_source_declared),"
+                "attachments(name,size_bytes,pages)"
+            ),
+        )
+        assert row["posted_date"] == datetime(2026, 9, 1, 14, 30, tzinfo=UTC)
+        assert row["response_deadline"] == datetime(2026, 10, 1, 17, 0, tzinfo=UTC)
+        assert row["category_codes"] == [{"scheme": "nigp", "code": "91000"}]
+        assert row["meta"]["jurisdiction_declared"] is False
+        assert row["attachments"][0]["size_bytes"] == 1024
+
 
 class TestSledRevisions:
     @patch("tango.client.httpx.Client.request")
@@ -262,6 +312,17 @@ class TestSledShapes:
             parser.parse("opportunity_id,attachments(name,size_bytes,extracted_text)"),
             SledOpportunity,
         )
+
+    @pytest.mark.parametrize(
+        "shape",
+        [
+            "opportunity_id,status,status_reason,delisted_at",
+            "opportunity_id,meta(jurisdiction_declared,last_change_source_declared)",
+        ],
+    )
+    def test_fields_added_after_launch_validate(self, shape):
+        parser = ShapeParser(cache_enabled=True)
+        parser.validate(parser.parse(shape), SledOpportunity)
 
     def test_no_default_shape_names_the_paid_document_body(self):
         """The API resolves the body only when named, so a default shape that named it would make every detail fetch pay for it."""

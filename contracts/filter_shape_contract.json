@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "4.25.1",
+    "api_version": "5.1.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -252,7 +252,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -994,7 +994,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -2471,6 +2471,156 @@
         "show_shapes"
       ]
     },
+    "contract_appeals": {
+      "basename": "contractappeal",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "contract_appeals",
+      "resource_key": "contract_appeals",
+      "runtime": {
+        "filter_params": [
+          "appellant",
+          "board",
+          "decision_date_after",
+          "decision_date_before",
+          "decision_type",
+          "docket",
+          "document_id",
+          "judge",
+          "listed",
+          "search"
+        ],
+        "filter_params_detail": {
+          "appellant": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "board": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "decision_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "decision_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "decision_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "docket": {
+            "filter_class": "DocketFilter",
+            "type": "string"
+          },
+          "document_id": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "judge": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "listed": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "search": {
+            "filter_class": "ContractAppealSearchFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "appellant",
+          "decision_date",
+          "first_listed_at",
+          "rank"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {},
+          "fields": [
+            "appellant",
+            "board",
+            "decision_date",
+            "decision_date_raw",
+            "decision_date_repaired",
+            "decision_text",
+            "decision_type",
+            "decision_type_raw",
+            "docket_numbers",
+            "docket_raw",
+            "docket_source",
+            "document_id",
+            "first_listed_at",
+            "judge",
+            "listed",
+            "listing_url",
+            "listing_year",
+            "text_char_count",
+            "text_status",
+            "url",
+            "uuid"
+          ]
+        },
+        "shape_flat_paths": [
+          "appellant",
+          "board",
+          "decision_date",
+          "decision_date_raw",
+          "decision_date_repaired",
+          "decision_text",
+          "decision_type",
+          "decision_type_raw",
+          "docket_numbers",
+          "docket_raw",
+          "docket_source",
+          "document_id",
+          "first_listed_at",
+          "judge",
+          "listed",
+          "listing_url",
+          "listing_year",
+          "text_char_count",
+          "text_status",
+          "url",
+          "uuid"
+        ],
+        "shape_gated_by_level": {
+          "business": [
+            "decision_text"
+          ],
+          "free": [
+            "decision_text"
+          ],
+          "pro": [
+            "decision_text"
+          ]
+        },
+        "shape_supported": true,
+        "shape_tier_required": "enterprise_a",
+        "viewset": "appeals.views.ContractAppealViewSet"
+      },
+      "swagger_has_key": true,
+      "swagger_params": [
+        "flat",
+        "flat_lists",
+        "joiner",
+        "limit",
+        "ordering",
+        "page",
+        "shape",
+        "show_shapes"
+      ]
+    },
     "contracts": {
       "basename": "contract",
       "docs_file": null,
@@ -2641,7 +2791,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -4016,6 +4166,241 @@
       "swagger_has_key": false,
       "swagger_params": []
     },
+    "ebuy/requests": {
+      "basename": "ebuy-request",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "ebuy/requests",
+      "resource_key": "ebuy/requests",
+      "runtime": {
+        "filter_params": [
+          "buyer_agency",
+          "close_date_after",
+          "close_date_before",
+          "contract_number",
+          "issue_date_after",
+          "issue_date_before",
+          "reference_number",
+          "request_type",
+          "rfq_id",
+          "schedule",
+          "search",
+          "sin",
+          "status"
+        ],
+        "filter_params_detail": {
+          "buyer_agency": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "close_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "close_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "date__lte",
+            "type": "date"
+          },
+          "contract_number": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "issue_date_after": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "issue_date_before": {
+            "filter_class": "DateFilter",
+            "lookup": "date__lte",
+            "type": "date"
+          },
+          "reference_number": {
+            "filter_class": "SolicitationNumberFilter",
+            "type": "string"
+          },
+          "request_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "rfq_id": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "schedule": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "sin": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "status": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "close_date",
+          "issue_date",
+          "last_seen",
+          "modified"
+        ],
+        "pagination": {
+          "class": "StandardResultsSetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "attachments": {
+              "expands": {},
+              "fields": [
+                "doc_name",
+                "doc_path",
+                "doc_seq_num",
+                "doc_session_date",
+                "doc_type",
+                "is_link"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "addresses",
+            "amendment_count",
+            "amendments",
+            "attachment_count",
+            "award_method",
+            "buyer_agency",
+            "buyer_agency_code",
+            "buyer_email",
+            "buyer_name",
+            "buyer_user_id",
+            "cancel_date",
+            "close_date",
+            "commercial_type",
+            "contract_type",
+            "description",
+            "detail_fetched",
+            "first_seen",
+            "follow_on",
+            "issue_date",
+            "last_mod_date",
+            "last_seen",
+            "line_items",
+            "link_count",
+            "mod_version",
+            "oco_aac",
+            "oco_agency",
+            "oco_name",
+            "oco_phone",
+            "oco_title",
+            "ocs_aac",
+            "ocs_agency",
+            "ocs_name",
+            "ocs_phone",
+            "ocs_title",
+            "pop_end_date",
+            "pop_start_date",
+            "qa_document_count",
+            "reference_number",
+            "request_type",
+            "rfq_id",
+            "schedule",
+            "sin",
+            "source_sought",
+            "status",
+            "title"
+          ]
+        },
+        "shape_flat_paths": [
+          "addresses",
+          "amendment_count",
+          "amendments",
+          "attachment_count",
+          "attachments",
+          "attachments.doc_name",
+          "attachments.doc_path",
+          "attachments.doc_seq_num",
+          "attachments.doc_session_date",
+          "attachments.doc_type",
+          "attachments.is_link",
+          "award_method",
+          "buyer_agency",
+          "buyer_agency_code",
+          "buyer_email",
+          "buyer_name",
+          "buyer_user_id",
+          "cancel_date",
+          "close_date",
+          "commercial_type",
+          "contract_type",
+          "description",
+          "detail_fetched",
+          "first_seen",
+          "follow_on",
+          "issue_date",
+          "last_mod_date",
+          "last_seen",
+          "line_items",
+          "link_count",
+          "mod_version",
+          "oco_aac",
+          "oco_agency",
+          "oco_name",
+          "oco_phone",
+          "oco_title",
+          "ocs_aac",
+          "ocs_agency",
+          "ocs_name",
+          "ocs_phone",
+          "ocs_title",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "pop_end_date",
+          "pop_start_date",
+          "qa_document_count",
+          "reference_number",
+          "request_type",
+          "rfq_id",
+          "schedule",
+          "sin",
+          "source_sought",
+          "status",
+          "title"
+        ],
+        "shape_gated_by_level": {},
+        "shape_supported": true,
+        "shape_tier_required": null,
+        "viewset": "ebuy.views.EbuyRequestViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
     "entities": {
       "basename": "entity",
       "docs_file": null,
@@ -4636,7 +5021,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -5368,7 +5753,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -6134,7 +6519,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -6477,7 +6862,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -8068,7 +8453,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -8708,7 +9093,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -9440,7 +9825,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -10692,6 +11077,8 @@
               "expands": {},
               "fields": [
                 "attachment_id",
+                "doc_role",
+                "doc_role_alt",
                 "extracted_text",
                 "file_size",
                 "mime_type",
@@ -10814,6 +11201,8 @@
           "attachment_count",
           "attachments",
           "attachments.attachment_id",
+          "attachments.doc_role",
+          "attachments.doc_role_alt",
           "attachments.extracted_text",
           "attachments.file_size",
           "attachments.mime_type",
@@ -10876,6 +11265,8 @@
         ],
         "shape_gated_by_level": {
           "free": [
+            "attachments.doc_role",
+            "attachments.doc_role_alt",
             "attachments.extracted_text"
           ]
         },
@@ -11123,6 +11514,8 @@
               "expands": {},
               "fields": [
                 "attachment_id",
+                "doc_role",
+                "doc_role_alt",
                 "extracted_text",
                 "file_size",
                 "mime_type",
@@ -11274,6 +11667,8 @@
           "archive_date",
           "attachments",
           "attachments.attachment_id",
+          "attachments.doc_role",
+          "attachments.doc_role_alt",
           "attachments.extracted_text",
           "attachments.file_size",
           "attachments.mime_type",
@@ -11357,6 +11752,8 @@
         ],
         "shape_gated_by_level": {
           "free": [
+            "attachments.doc_role",
+            "attachments.doc_role_alt",
             "attachments.extracted_text"
           ]
         },
@@ -11790,7 +12187,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -12141,7 +12538,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -12471,7 +12868,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -13885,6 +14282,7 @@
               "expands": {},
               "fields": [
                 "attachment_count",
+                "jurisdiction_declared",
                 "last_change_source_declared",
                 "last_revision_kind",
                 "revision_count"
@@ -13921,6 +14319,7 @@
             "bid_opening_date",
             "bid_opening_raw",
             "category_codes",
+            "delisted_at",
             "description",
             "first_seen_at",
             "has_documents",
@@ -13969,6 +14368,7 @@
           "contact.email",
           "contact.name",
           "contact.phone",
+          "delisted_at",
           "description",
           "first_seen_at",
           "has_documents",
@@ -13977,6 +14377,7 @@
           "last_seen_at",
           "meta",
           "meta.attachment_count",
+          "meta.jurisdiction_declared",
           "meta.last_change_source_declared",
           "meta.last_revision_kind",
           "meta.revision_count",
@@ -15075,7 +15476,6 @@
                   "expands": {},
                   "fields": [
                     "attachment_id",
-                    "extracted_text",
                     "file_size",
                     "mime_type",
                     "name",
@@ -15681,7 +16081,6 @@
           "opportunity.archive_date",
           "opportunity.attachments",
           "opportunity.attachments.attachment_id",
-          "opportunity.attachments.extracted_text",
           "opportunity.attachments.file_size",
           "opportunity.attachments.mime_type",
           "opportunity.attachments.name",
@@ -15996,7 +16395,7 @@
             "type": "string"
           },
           "uei": {
-            "filter_class": "UppercaseCharFilter",
+            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -16577,12 +16976,14 @@
       "assistance_listings",
       "budget/accounts",
       "business_types",
+      "contract_appeals",
       "contracts",
       "contracts_subawards",
       "departments",
       "dibbs/awards",
       "dibbs/rfps",
       "dibbs/rfqs",
+      "ebuy/requests",
       "entities",
       "entities_contracts",
       "entities_idvs",
@@ -16628,6 +17029,7 @@
       "dibbs/awards",
       "dibbs/rfps",
       "dibbs/rfqs",
+      "ebuy/requests",
       "entities_contracts",
       "entities_idvs",
       "entities_lcats",
