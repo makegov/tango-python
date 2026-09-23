@@ -925,6 +925,25 @@ for opp in opportunities.results:
 - `naics_code` - Industry code
 - `psc_code` - Product/service code
 
+**Document roles — `attachments(doc_role, doc_role_alt)`:**
+
+On a **Pro plan or above**, each attachment can say what the document is for.
+`doc_role` is one of `requirement`, `instructions`, `pricing`, `terms`, `reference` or `unknown`; `doc_role_alt` is a runner-up role, and is null on nearly every attachment.
+
+```python
+opp = client.get_opportunity(
+    opportunity_id,
+    shape="opportunity_id,title,attachments(name,url,doc_role,doc_role_alt)",
+)
+for attachment in opp["attachments"]:
+    print(attachment["name"], attachment.get("doc_role"))
+```
+
+- **You have to name them.** `attachments(*)` does not include either field, and no default shape does.
+- **The keys are absent, not null**, on an attachment Tango has not classified. Use `attachment.get("doc_role")`.
+- A Free-plan request that names them gets the response without them, plus an entry in `meta.upgrade_hints`.
+- There is no filter on document role.
+
 ---
 
 ## Notices
@@ -1143,7 +1162,7 @@ contract = client.get_gsa_elibrary_contract("UUID_HERE")
 
 ## Protests
 
-Bid protest records (GAO, COFC, etc.).
+Bid protest records from three venues: GAO, the U.S. Court of Federal Claims (COFC), and the SBA Office of Hearings and Appeals (SBA OHA).
 
 ### list_protests()
 
@@ -1166,20 +1185,22 @@ protests = client.list_protests(
     filed_date_before=None,
     decision_date_after=None,
     decision_date_before=None,
+    naics_code=None,
     search=None,
 )
 ```
 
 **Filter Parameters:**
-- `source_system` - Filter by source system (e.g., `"gao"`)
+- `source_system` - Filter by source system: `"gao"`, `"cofc"`, or `"sba_oha"`
 - `outcome` - Filter by outcome (e.g., `"Denied"`, `"Dismissed"`, `"Withdrawn"`, `"Sustained"`)
 - `case_type` - Filter by case type
 - `agency` - Filter by protested agency
-- `case_number` - Filter by case number (e.g., `"b-423274"`)
+- `case_number` - Filter by base case number, matched case-insensitively (e.g., `"b-423274"` for GAO, `"26-1391"` for COFC, `"SIZ-6100"` for SBA OHA)
 - `solicitation_number` - Filter by solicitation number
 - `protester` - Search by protester name
 - `filed_date_after` / `filed_date_before` - Filed date range
 - `decision_date_after` / `decision_date_before` - Decision date range
+- `naics_code` - The NAICS code at issue in an SBA OHA size or NAICS appeal (e.g., `"541519"`). GAO and COFC protests carry no NAICS code, so this filter returns SBA OHA records only
 - `search` - Full-text search
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with protest dictionaries
@@ -1323,6 +1344,8 @@ row = client.get_sled_opportunity(
 - `meta.attachment_count` can be **lower** than `len(row["attachments"])`. Some portals auto-generate a cover sheet alongside the real documents; it is listed and flagged `is_generated_summary`, but excluded from the count and from `has_documents`. The count answers "does this hold its solicitation package"; the array answers "what files exist".
 - `size_bytes` and `char_count` only mean something as a pair — 3 MB that yielded no characters is a scan awaiting OCR.
 - `raw(*)` needs a Small plan or above, and is explicitly unstable: its shape varies by portal platform.
+- `delisted_at` is when a portal dropped the solicitation from its listing before its deadline, and is what `status_reason="delisted"` means. It is null when the solicitation was never delisted or has been seen again since.
+- `meta.jurisdiction_declared` says whether the source stated the jurisdiction level itself. `False` means Tango classified it from the issuer's name, which is the common case on a state's central portal.
 
 **Reading a document body — `attachments(extracted_text)`:**
 
@@ -2210,8 +2233,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |
-| `SLED_OPPORTUNITIES_MINIMAL` | `list_sled_opportunities` | opportunity_id, solicitation_number, solicitation_type, title, state, jurisdiction, agency, status, status_reason, posted_date, response_deadline, source_url, has_documents, first_seen_at, last_change_seen_at (no `description` — detail-only on the API) |
-| `SLED_OPPORTUNITIES_COMPREHENSIVE` | `get_sled_opportunity` | Full solicitation with description, the raw portal status, both deadlines, bid opening, category codes, and organization / contact / meta / attachments / revisions |
+| `SLED_OPPORTUNITIES_MINIMAL` | `list_sled_opportunities` | opportunity_id, solicitation_number, solicitation_type, title, state, jurisdiction, agency, status, status_reason, delisted_at, posted_date, response_deadline, source_url, has_documents, first_seen_at, last_change_seen_at (no `description` — detail-only on the API) |
+| `SLED_OPPORTUNITIES_COMPREHENSIVE` | `get_sled_opportunity` | Full solicitation with description, the raw portal status, the delisting timestamp, both deadlines, bid opening, category codes, and organization / contact / meta / attachments / revisions |
 | `SLED_REVISIONS_MINIMAL` | `list_sled_opportunity_revisions` | observed_at, sequence, kind, changed_fields, source_declared (omits `changes`, which needs a Small plan) |
 | `SLED_FORECASTS_MINIMAL` | `list_sled_forecasts` | forecast_id, state, agency, title, estimated_advertisement_date, estimated_advertisement_raw, procurement_category, procurement_method, contract_number, incumbent_name, source_url, estimated_value(*) |
 | `SLED_FORECASTS_COMPREHENSIVE` | `get_sled_forecast` | Full forecast with description, contract_term, mbe_dbe_goal, delivery_location, and organization / contact / estimated_value |

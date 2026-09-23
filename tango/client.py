@@ -2592,18 +2592,18 @@ class TangoClient:
             shape: Response shape string (defaults to minimal shape)
             flat: If True, flatten nested objects in shaped response
             flat_lists: If True, flatten arrays using indexed keys
-            source_system: Filter by source system (e.g. gao)
+            source_system: Filter by source system: gao, cofc, or sba_oha
             outcome: Filter by outcome (e.g. Denied, Dismissed, Withdrawn, Sustained)
             case_type: Filter by case type
             agency: Filter by protested agency text
-            case_number: Filter by case number (e.g. b-423274)
+            case_number: Filter by base case number, matched case-insensitively (e.g. b-423274 for GAO, 26-1391 for COFC, SIZ-6100 for SBA OHA)
             solicitation_number: Filter by exact solicitation number
             protester: Filter by protester name text
             filed_date_after: Filed date on or after
             filed_date_before: Filed date on or before
             decision_date_after: Decision date on or after
             decision_date_before: Decision date on or before
-            naics_code: Filter by the solicitation's NAICS code (e.g. 541519)
+            naics_code: Filter by the NAICS code at issue in an SBA OHA size or NAICS appeal (e.g. 541519); GAO and COFC protests carry no NAICS code and never match
             search: Full-text search over protest searchable fields
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}

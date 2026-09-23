@@ -11278,6 +11278,588 @@
     },
     "records_seen": 160
   },
+  "sled/forecasts": {
+    "paths": {
+      "agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contact.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contract_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contract_term": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "delivery_location": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "estimated_advertisement_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "estimated_advertisement_raw": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "estimated_value": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "estimated_value.max": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "estimated_value.min": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "Decimal"
+      },
+      "estimated_value.raw": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "first_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "forecast_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "has_documents": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "incumbent_name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "last_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "mbe_dbe_goal": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "modified": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "organization": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "organization.agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.level": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "procurement_category": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "procurement_method": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "raw": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "source_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "source_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 200
+  },
+  "sled/opportunities": {
+    "paths": {
+      "agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "attachments.char_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments.checksum": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.download_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.extension": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.extracted_text": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.extraction_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.first_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "attachments.is_contested": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "attachments.is_generated_summary": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "attachments.mime_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "attachments.pages": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments.size_bytes": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "attachments.word_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "bid_opening_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "bid_opening_raw": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "category_codes": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "dict"
+      },
+      "contact": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "contact.email": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contact.name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "contact.phone": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "delisted_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "description": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "first_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "has_documents": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "jurisdiction": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "last_change_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "last_seen_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "meta": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "meta.attachment_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "meta.jurisdiction_declared": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "meta.last_change_source_declared": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "meta.last_revision_kind": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "meta.revision_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "modified": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "opportunity_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "organization.agency": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.level": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "organization.state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "posted_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "raw": {
+        "is_list": false,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "response_deadline": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "response_deadline_original": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "revisions": {
+        "is_list": true,
+        "is_optional": false,
+        "kind": "object"
+      },
+      "revisions.changed_fields": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "revisions.changes": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "dict"
+      },
+      "revisions.kind": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "revisions.observed_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "revisions.sequence": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "revisions.source_declared": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "snippet": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_type": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_type_source": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "source_status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "source_url": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "state": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "status": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "status_computed_at": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "datetime"
+      },
+      "status_reason": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "title": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      }
+    },
+    "records_seen": 280
+  },
   "subawards": {
     "paths": {
       "award_key": {

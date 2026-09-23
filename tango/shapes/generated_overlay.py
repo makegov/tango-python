@@ -81,7 +81,20 @@ ARCHIVE_SCHEMA: dict[str, FieldSchema] = {
 }
 
 ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
+    "doc_name": FieldSchema(name="doc_name", type=str, is_optional=True, is_list=False),
+    "doc_path": FieldSchema(name="doc_path", type=str, is_optional=True, is_list=False),
+    "doc_seq_num": FieldSchema(name="doc_seq_num", type=str, is_optional=True, is_list=False),
+    "doc_session_date": FieldSchema(
+        name="doc_session_date", type=date, is_optional=True, is_list=False
+    ),
+    "doc_type": FieldSchema(name="doc_type", type=str, is_optional=True, is_list=False),
+    "is_link": FieldSchema(name="is_link", type=bool, is_optional=True, is_list=False),
+}
+
+ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
+    "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
     "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
@@ -92,8 +105,10 @@ ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
+    "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
     "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
@@ -104,7 +119,7 @@ ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
     "char_count": FieldSchema(name="char_count", type=int, is_optional=True, is_list=False),
     "checksum": FieldSchema(name="checksum", type=str, is_optional=True, is_list=False),
     "download_status": FieldSchema(
@@ -124,13 +139,26 @@ ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
     ),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
-    "pages": FieldSchema(name="pages", type=str, is_optional=True, is_list=False),
-    "size_bytes": FieldSchema(name="size_bytes", type=str, is_optional=True, is_list=False),
+    "pages": FieldSchema(name="pages", type=int, is_optional=True, is_list=False),
+    "size_bytes": FieldSchema(name="size_bytes", type=int, is_optional=True, is_list=False),
     "word_count": FieldSchema(name="word_count", type=int, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS5_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
+    "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "posted_date": FieldSchema(name="posted_date", type=date, is_optional=True, is_list=False),
+    "resource_id": FieldSchema(name="resource_id", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+    "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
+}
+
+ATTACHMENTS6_SCHEMA: dict[str, FieldSchema] = {
+    "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
+    "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
     "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
@@ -375,8 +403,8 @@ DOCUMENTS_SCHEMA: dict[str, FieldSchema] = {
 }
 
 ESTIMATED_VALUE_SCHEMA: dict[str, FieldSchema] = {
-    "max": FieldSchema(name="max", type=str, is_optional=True, is_list=False),
-    "min": FieldSchema(name="min", type=str, is_optional=True, is_list=False),
+    "max": FieldSchema(name="max", type=Decimal, is_optional=True, is_list=False),
+    "min": FieldSchema(name="min", type=Decimal, is_optional=True, is_list=False),
     "raw": FieldSchema(name="raw", type=str, is_optional=True, is_list=False),
 }
 
@@ -624,8 +652,11 @@ META3_SCHEMA: dict[str, FieldSchema] = {
     "attachment_count": FieldSchema(
         name="attachment_count", type=int, is_optional=True, is_list=False
     ),
+    "jurisdiction_declared": FieldSchema(
+        name="jurisdiction_declared", type=bool, is_optional=True, is_list=False
+    ),
     "last_change_source_declared": FieldSchema(
-        name="last_change_source_declared", type=str, is_optional=True, is_list=False
+        name="last_change_source_declared", type=bool, is_optional=True, is_list=False
     ),
     "last_revision_kind": FieldSchema(
         name="last_revision_kind", type=str, is_optional=True, is_list=False
@@ -942,13 +973,13 @@ RESOLVED_PROTESTER_SCHEMA: dict[str, FieldSchema] = {
 }
 
 REVISIONS_SCHEMA: dict[str, FieldSchema] = {
-    "changed_fields": FieldSchema(name="changed_fields", type=str, is_optional=True, is_list=False),
-    "changes": FieldSchema(name="changes", type=str, is_optional=True, is_list=False),
+    "changed_fields": FieldSchema(name="changed_fields", type=str, is_optional=True, is_list=True),
+    "changes": FieldSchema(name="changes", type=dict, is_optional=True, is_list=False),
     "kind": FieldSchema(name="kind", type=str, is_optional=True, is_list=False),
     "observed_at": FieldSchema(name="observed_at", type=datetime, is_optional=True, is_list=False),
-    "sequence": FieldSchema(name="sequence", type=str, is_optional=True, is_list=False),
+    "sequence": FieldSchema(name="sequence", type=int, is_optional=True, is_list=False),
     "source_declared": FieldSchema(
-        name="source_declared", type=str, is_optional=True, is_list=False
+        name="source_declared", type=bool, is_optional=True, is_list=False
     ),
 }
 
@@ -1087,6 +1118,8 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "Attachments2": ATTACHMENTS2_SCHEMA,
     "Attachments3": ATTACHMENTS3_SCHEMA,
     "Attachments4": ATTACHMENTS4_SCHEMA,
+    "Attachments5": ATTACHMENTS5_SCHEMA,
+    "Attachments6": ATTACHMENTS6_SCHEMA,
     "Awardee": AWARDEE_SCHEMA,
     "AwardingOffice": AWARDING_OFFICE_SCHEMA,
     "AwardingOffice2": AWARDING_OFFICE2_SCHEMA,
@@ -2185,7 +2218,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=True,
-            nested_model="Attachments",
+            nested_model="Attachments2",
         ),
         "meta": FieldSchema(
             name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
@@ -2433,7 +2466,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="Attachments4",
+            nested_model="Attachments6",
         ),
         "department": FieldSchema(
             name="department",
@@ -2751,7 +2784,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "estimated_advertisement_date": FieldSchema(
-            name="estimated_advertisement_date", type=date, is_optional=True, is_list=False
+            name="estimated_advertisement_date", type=datetime, is_optional=True, is_list=False
         ),
         "estimated_advertisement_raw": FieldSchema(
             name="estimated_advertisement_raw", type=str, is_optional=True, is_list=False
@@ -2805,17 +2838,17 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             name="attachments",
             type=dict,
             is_optional=True,
-            is_list=False,
-            nested_model="Attachments3",
+            is_list=True,
+            nested_model="Attachments4",
         ),
         "bid_opening_date": FieldSchema(
-            name="bid_opening_date", type=date, is_optional=True, is_list=False
+            name="bid_opening_date", type=datetime, is_optional=True, is_list=False
         ),
         "bid_opening_raw": FieldSchema(
             name="bid_opening_raw", type=str, is_optional=True, is_list=False
         ),
         "category_codes": FieldSchema(
-            name="category_codes", type=str, is_optional=True, is_list=False
+            name="category_codes", type=dict, is_optional=True, is_list=True
         ),
         "contact": FieldSchema(
             name="contact",
@@ -2823,6 +2856,9 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_optional=True,
             is_list=False,
             nested_model="GrantorContact",
+        ),
+        "delisted_at": FieldSchema(
+            name="delisted_at", type=datetime, is_optional=True, is_list=False
         ),
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "first_seen_at": FieldSchema(
@@ -2852,16 +2888,18 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_list=False,
             nested_model="Organization3",
         ),
-        "posted_date": FieldSchema(name="posted_date", type=date, is_optional=True, is_list=False),
+        "posted_date": FieldSchema(
+            name="posted_date", type=datetime, is_optional=True, is_list=False
+        ),
         "raw": FieldSchema(name="raw", type=dict, is_optional=True, is_list=False),
         "response_deadline": FieldSchema(
-            name="response_deadline", type=str, is_optional=True, is_list=False
+            name="response_deadline", type=datetime, is_optional=True, is_list=False
         ),
         "response_deadline_original": FieldSchema(
-            name="response_deadline_original", type=str, is_optional=True, is_list=False
+            name="response_deadline_original", type=datetime, is_optional=True, is_list=False
         ),
         "revisions": FieldSchema(
-            name="revisions", type=dict, is_optional=True, is_list=False, nested_model="Revisions"
+            name="revisions", type=dict, is_optional=True, is_list=True, nested_model="Revisions"
         ),
         "snippet": FieldSchema(name="snippet", type=str, is_optional=True, is_list=False),
         "solicitation_number": FieldSchema(

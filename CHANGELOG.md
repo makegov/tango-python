@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **`attachments(doc_role, doc_role_alt)` on opportunities and notices no longer raises `ShapeValidationError`.** The Tango API serves both fields on a Pro plan or above, but the SDK rejected them client-side after the request had already been made. `doc_role` says what an attachment is for (`requirement`, `instructions`, `pricing`, `terms`, `reference` or `unknown`) and `doc_role_alt` is a runner-up role that is usually null. Both must be named in the shape, since `attachments(*)` does not include them, and an attachment that has not been classified omits both keys, so read them with `.get()`.
+- **The shape overlay generator no longer lets one resource's view of a model hide fields from another's.** An opportunity is reachable both from `list_opportunities()` and as the `opportunity` expand on vehicles, and the vehicles embed exposes fewer attachment fields. Whichever tree was generated last replaced the other, so the opportunity schema lost fields its own endpoint serves. The generator now adds the missing fields instead of replacing the schema, and keeps every existing field's type as it was.
+- **SLED solicitations accept `delisted_at` and `meta(jurisdiction_declared)`.** Both were rejected client-side even though the API returns them. `delisted_at` is when a portal dropped a solicitation from its listing before its deadline, which is what `status_reason="delisted"` means. `meta.jurisdiction_declared` says whether the source stated the jurisdiction level itself or Tango classified it from the issuer's name. `delisted_at` is now in both `SLED_OPPORTUNITIES_MINIMAL` and `SLED_OPPORTUNITIES_COMPREHENSIVE`, matching the API's own list default.
+
+### Changed
+- **SLED response values now carry the types the API returns.** The SDK's SLED schema had guessed several types from field names. `posted_date`, `response_deadline`, `response_deadline_original` and `bid_opening_date` on `SledOpportunity` now parse to timezone-aware `datetime` values (before, `posted_date` and `bid_opening_date` were truncated to a `date` and the two deadlines stayed strings), as does `estimated_advertisement_date` on `SledForecast`. `estimated_value(min, max)` on forecasts now parses to `Decimal`. `category_codes` is typed as a list of `{scheme, code}` objects, `attachments` and `revisions` as lists, `meta(last_change_source_declared)` and `revisions(source_declared)` as booleans, and `attachments(size_bytes, pages)` and `revisions(sequence)` as integers. If you compared any of the date fields as strings, compare them as `datetime` values instead.
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.1.0) and regenerated `tango/shapes/generated_overlay.py`. The two resources the SDK does not wrap yet, `contract_appeals` and `ebuy/requests`, are recorded in `contracts/shape_coverage_baseline.json` as known gaps.
+
+### Documentation
+- `list_protests()` and `docs/API_REFERENCE.md` now describe all three protest venues: GAO, the U.S. Court of Federal Claims (COFC) and the SBA Office of Hearings and Appeals (SBA OHA). `naics_code` is documented as the NAICS code at issue in an SBA OHA size or NAICS appeal, which GAO and COFC protests never carry, rather than the solicitation's code. `case_number` examples now cover each venue's format, and `naics_code` is listed among the filter parameters.
+- `docs/API_REFERENCE.md` documents the document-role fields on opportunity and notice attachments, and `delisted_at` and `meta.jurisdiction_declared` on SLED solicitations.
+
 ## [1.6.0] - 2026-09-10
 
 ### Added
