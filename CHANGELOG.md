@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Contract Disputes Act appeals** (Tango API 4.26.0). Two methods over the new `/api/contract_appeals/` resource: `list_contract_appeals()` and `get_contract_appeal()`, plus a `ContractAppeal` schema and the `CONTRACT_APPEALS_MINIMAL` / `CONTRACT_APPEALS_COMPREHENSIVE` defaults. These are decisions of the Civilian Board of Contract Appeals (CBCA) and the Armed Services Board of Contract Appeals (ASBCA) — appeals of a contracting officer's final decision under an existing contract, which is a different dispute from a bid protest and shares no identifiers with `list_protests()`. All ten of the API's filters are explicit named parameters.
+
+  Three behaviors are documented on the methods and the model, because each is otherwise a support question. **`decision_text` needs an Enterprise plan, and below that tier the key is absent rather than null** — read it with `.get()`. **Searching that text is free at every plan**: `search=` matches inside the decision body and returns no fragment of it, so buying the body does not change what you can find. And **`docket` accepts a docket as it is cited** — a leading `CBCA` / `ASBCA` and `No.` / `Nos.` are ignored, while commas stay part of a docket (`7092-C(6682, 6765, 6767)`) rather than separating two.
+
+  Neither default shape names `decision_text`: the body runs to roughly 100K characters, so putting it in a default would make every fetch ask for something most callers cannot read. `ordering="rank"` requires a non-empty `search`, matching the API.
+- **`alerts.contract_appeal.match` is an alertable event type.** `create_webhook_alert(query_type="contract_appeal", ...)` works. That method's `query_type` docstring now names the full current set and points at `list_webhook_event_types()` as the authority, since a list written into a docstring can only go stale.
+
 ### Fixed
 - **`attachments(doc_role, doc_role_alt)` on opportunities and notices no longer raises `ShapeValidationError`.** The Tango API serves both fields on a Pro plan or above, but the SDK rejected them client-side after the request had already been made. `doc_role` says what an attachment is for (`requirement`, `instructions`, `pricing`, `terms`, `reference` or `unknown`) and `doc_role_alt` is a runner-up role that is usually null. Both must be named in the shape, since `attachments(*)` does not include them, and an attachment that has not been classified omits both keys, so read them with `.get()`.
 - **The shape overlay generator no longer lets one resource's view of a model hide fields from another's.** An opportunity is reachable both from `list_opportunities()` and as the `opportunity` expand on vehicles, and the vehicles embed exposes fewer attachment fields. Whichever tree was generated last replaced the other, so the opportunity schema lost fields its own endpoint serves. The generator now adds the missing fields instead of replacing the schema, and keeps every existing field's type as it was.
@@ -14,11 +22,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **SLED response values now carry the types the API returns.** The SDK's SLED schema had guessed several types from field names. `posted_date`, `response_deadline`, `response_deadline_original` and `bid_opening_date` on `SledOpportunity` now parse to timezone-aware `datetime` values (before, `posted_date` and `bid_opening_date` were truncated to a `date` and the two deadlines stayed strings), as does `estimated_advertisement_date` on `SledForecast`. `estimated_value(min, max)` on forecasts now parses to `Decimal`. `category_codes` is typed as a list of `{scheme, code}` objects, `attachments` and `revisions` as lists, `meta(last_change_source_declared)` and `revisions(source_declared)` as booleans, and `attachments(size_bytes, pages)` and `revisions(sequence)` as integers. If you compared any of the date fields as strings, compare them as `datetime` values instead.
-- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.1.0) and regenerated `tango/shapes/generated_overlay.py`. The two resources the SDK does not wrap yet, `contract_appeals` and `ebuy/requests`, are recorded in `contracts/shape_coverage_baseline.json` as known gaps.
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.1.0) and regenerated `tango/shapes/generated_overlay.py`. The one resource the SDK does not wrap yet, `ebuy/requests`, is recorded in `contracts/shape_coverage_baseline.json` as a known gap.
+- The `ContractAppeal` shape schema is hand-curated in `tango/shapes/explicit_schemas.py` rather than left to the generated overlay. The generator falls back to name heuristics for a resource the live-API type probe has not sampled yet, and those heuristics get four of this resource's fields wrong: `docket_numbers` is a list, `listed` and `decision_date_repaired` are booleans, and `listing_year` is an integer.
 
 ### Documentation
 - `list_protests()` and `docs/API_REFERENCE.md` now describe all three protest venues: GAO, the U.S. Court of Federal Claims (COFC) and the SBA Office of Hearings and Appeals (SBA OHA). `naics_code` is documented as the NAICS code at issue in an SBA OHA size or NAICS appeal, which GAO and COFC protests never carry, rather than the solicitation's code. `case_number` examples now cover each venue's format, and `naics_code` is listed among the filter parameters.
 - `docs/API_REFERENCE.md` documents the document-role fields on opportunity and notice attachments, and `delisted_at` and `meta.jurisdiction_declared` on SLED solicitations.
+- New **Contract Appeals** section in `docs/API_REFERENCE.md`, leading with what separates an appeal from a protest, plus the two new `ShapeConfig` constants in the shapes table.
+- Added `alerts.contract_appeal.match` to the event-type listing in `docs/WEBHOOKS.md`.
 
 ## [1.6.0] - 2026-09-10
 

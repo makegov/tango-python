@@ -1168,6 +1168,51 @@ class SledForecast:
     raw: dict[str, Any] | None = None
 
 
+class ContractAppeal:
+    """Schema definition for ContractAppeal (not used for instances).
+
+    Contract Disputes Act appeal decisions at ``/api/contract_appeals/``, from the
+    Civilian Board of Contract Appeals (CBCA) and the Armed Services Board of
+    Contract Appeals (ASBCA). These are appeals of a contracting officer's
+    decision, not bid protests — protests live at ``/api/protests/``.
+    Shape-on-demand, so every field is optional.
+
+    One row is one decision as the board's own listing publishes it, so several
+    fields describe the listing rather than the dispute. ``listed`` goes false
+    once the board's newest listing stops carrying the decision; the row itself is
+    kept, never dropped. ``docket_numbers`` holds the dockets with the board
+    prefix stripped (``3288-R``, ``59116``) and a consolidated appeal carries
+    several, while ``docket_raw`` keeps the listing's own text.
+
+    ``decision_text`` is the extracted decision body and needs an Enterprise plan.
+    Below that tier the key is ABSENT rather than null, so read it with ``.get()``.
+    Searching that text is free at every plan: ``search=`` matches inside it and
+    returns no fragment of it.
+    """
+
+    uuid: str | None = None
+    board: str | None = None
+    docket_numbers: list[str] | None = None
+    docket_source: str | None = None
+    docket_raw: str | None = None
+    decision_date: date | None = None
+    decision_date_raw: str | None = None
+    decision_date_repaired: bool | None = None
+    appellant: str | None = None
+    judge: str | None = None
+    decision_type: str | None = None
+    decision_type_raw: str | None = None
+    url: str | None = None
+    document_id: str | None = None
+    listing_url: str | None = None
+    listing_year: int | None = None
+    first_listed_at: datetime | None = None
+    listed: bool | None = None
+    text_status: str | None = None
+    text_char_count: int | None = None
+    decision_text: str | None = None
+
+
 @dataclass
 class PaginatedResponse[T]:
     """Paginated API response
@@ -1333,6 +1378,21 @@ class ShapeConfig:
 
     # Default for list_protests()
     PROTESTS_MINIMAL: Final = "case_id,case_number,title,source_system,outcome,filed_date"
+
+    # Default for list_contract_appeals(). Mirrors the API's own list default.
+    CONTRACT_APPEALS_MINIMAL: Final = (
+        "uuid,board,docket_numbers,decision_date,appellant,judge,decision_type,url"
+    )
+
+    # Default for get_contract_appeal(). Mirrors the API's own retrieve default.
+    # `decision_text` is left out on purpose: it runs to ~100K characters and
+    # needs an Enterprise plan, so naming it by default would make every detail
+    # fetch ask for a body most callers cannot read.
+    CONTRACT_APPEALS_COMPREHENSIVE: Final = (
+        "uuid,board,docket_numbers,decision_date,appellant,judge,decision_type,url,"
+        "docket_raw,docket_source,decision_date_repaired,decision_type_raw,"
+        "listing_year,first_listed_at,listed,text_status,text_char_count"
+    )
 
     # Default for list_dibbs_rfqs()
     DIBBS_RFQS_MINIMAL: Final = (
