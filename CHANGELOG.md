@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-09-23
+
 ### Added
 - **Contract Disputes Act appeals** (Tango API 4.26.0). Two methods over the new `/api/contract_appeals/` resource: `list_contract_appeals()` and `get_contract_appeal()`, plus a `ContractAppeal` schema and the `CONTRACT_APPEALS_MINIMAL` / `CONTRACT_APPEALS_COMPREHENSIVE` defaults. These are decisions of the Civilian Board of Contract Appeals (CBCA) and the Armed Services Board of Contract Appeals (ASBCA) — appeals of a contracting officer's final decision under an existing contract, which is a different dispute from a bid protest and shares no identifiers with `list_protests()`. All ten of the API's filters are explicit named parameters.
 
