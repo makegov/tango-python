@@ -12,6 +12,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
   `get_federal_register_document()` takes the document's `uuid`, not its `document_number`, because a document number is not unique on its own: the Federal Register reused some before 2016. Look a document up by number with `list_federal_register_documents(document_number=...)`. `full_text` is available on the detail method only when named in `shape`, and neither default shape includes it, since it can run to several MB. `ordering="rank"` requires a non-empty `search`, matching the API.
 - **`alerts.federal_register.match` is an alertable event type.** `create_webhook_alert(query_type="federal_register", ...)` works.
+- **`agency` filter on `list_budget_accounts()`, `list_exclusions()` and `list_itdashboard_investments()`** (Tango API 5.3.0). It takes a Tango agency name, abbreviation, code or organization key (e.g. `EPA`) and matches the whole organization subtree, so a department includes its sub-agencies; OR several with `|`. On exclusions it scopes by the excluding agency. On IT Dashboard it is available at every plan.
+- **The `organization` expand is accepted on budget accounts, exclusions, SBIR topics and SBIR solicitations**, along with the `organization_id` field on budget accounts and exclusions. `organization(...)` carries `agency_code`, `agency_name`, `department_code`, `department_name`, `office_code`, `office_name` and `organization_id`. The SDK rejected these shapes client-side before. The default shapes are unchanged.
+
+### Fixed
+- **`list_itdashboard_investments()` documents the API's current filter tiers.** `agency_name` is available at every plan, not Business+ only.
 
 ## [1.7.0] - 2026-09-23
 

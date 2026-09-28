@@ -1593,6 +1593,7 @@ class TangoClient:
         flat_lists: bool = False,
         joiner: str = ".",
         search: str | None = None,
+        agency: str | None = None,
         agency_code: int | None = None,
         agency_name: str | None = None,
         type_of_investment: str | None = None,
@@ -1607,13 +1608,12 @@ class TangoClient:
 
         Filters are tier-gated by the API:
 
-        - **Free**: ``search`` (full-text across UII, title, description, agency,
-          bureau) and ``previous_uii`` — following a retired identifier forward to
-          whatever superseded it is recovery, not analysis, so it is ungated
+        - **Free**: ``search`` (full-text across UII, title, description, agency, bureau), ``agency_name`` (text), ``agency`` and ``previous_uii`` — following a retired identifier forward to whatever superseded it is recovery, not analysis, so it is ungated
         - **Pro**: ``agency_code``, ``type_of_investment``,
           ``updated_time_after`` / ``updated_time_before``
-        - **Business+**: ``agency_name`` (text), ``cio_rating``,
-          ``cio_rating_max``, ``performance_risk``
+        - **Business+**: ``cio_rating``, ``cio_rating_max``, ``performance_risk``
+
+        ``agency`` takes a Tango agency name, abbreviation, code or organization key, e.g. ``DOT``, and matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``.
 
         Hitting a gated filter on a lower tier returns a 403 with upgrade info.
 
@@ -1633,6 +1633,7 @@ class TangoClient:
                 params["flat_lists"] = "true"
         for k, val in (
             ("search", search),
+            ("agency", agency),
             ("agency_code", agency_code),
             ("agency_name", agency_name),
             ("type_of_investment", type_of_investment),
@@ -3374,6 +3375,7 @@ class TangoClient:
         classification_type: str | None = None,
         exclusion_type: str | None = None,
         exclusion_program: str | None = None,
+        agency: str | None = None,
         excluding_agency_code: str | None = None,
         excluding_agency_name: str | None = None,
         active: bool | None = None,
@@ -3405,6 +3407,7 @@ class TangoClient:
             classification_type: Filter by classification (Firm, Individual, Vessel, ...)
             exclusion_type: Filter by exclusion type
             exclusion_program: Filter by exclusion program
+            agency: Excluding agency as a Tango organization. A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``
             excluding_agency_code: Filter by excluding agency code
             excluding_agency_name: Filter by excluding agency name
             active: True returns only records currently in effect.
@@ -3440,6 +3443,7 @@ class TangoClient:
             ("classification_type", classification_type),
             ("exclusion_type", exclusion_type),
             ("exclusion_program", exclusion_program),
+            ("agency", agency),
             ("excluding_agency_code", excluding_agency_code),
             ("excluding_agency_name", excluding_agency_name),
             ("active", active),
@@ -4210,6 +4214,7 @@ class TangoClient:
         fiscal_year: int | None = None,
         fiscal_year_gte: int | None = None,
         fiscal_year_lte: int | None = None,
+        agency: str | None = None,
         agency_code: str | None = None,
         bureau_name: str | None = None,
         account_title: str | None = None,
@@ -4314,6 +4319,7 @@ class TangoClient:
             fiscal_year: Fiscal year (exact).
             fiscal_year_gte: Fiscal year >=.
             fiscal_year_lte: Fiscal year <=.
+            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``.
             agency_code: Agency code (exact).
             bureau_name: Bureau name (exact).
             account_title: Account title (icontains).
@@ -4378,6 +4384,7 @@ class TangoClient:
             ("fiscal_year", fiscal_year),
             ("fiscal_year__gte", fiscal_year_gte),
             ("fiscal_year__lte", fiscal_year_lte),
+            ("agency", agency),
             ("agency_code", agency_code),
             ("bureau_name", bureau_name),
             ("account_title__icontains", account_title),

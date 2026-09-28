@@ -1382,6 +1382,16 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         "on_off_budget": FieldSchema(
             name="on_off_budget", type=str, is_optional=True, is_list=False
         ),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="AwardingOffice",
+        ),
+        "organization_id": FieldSchema(
+            name="organization_id", type=str, is_optional=True, is_list=False
+        ),
         "outlayed_to_obligated_pct": FieldSchema(
             name="outlayed_to_obligated_pct", type=str, is_optional=True, is_list=False
         ),
@@ -1911,6 +1921,16 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             name="more_locations", type=str, is_optional=True, is_list=False
         ),
         "npi": FieldSchema(name="npi", type=str, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="AwardingOffice",
+        ),
+        "organization_id": FieldSchema(
+            name="organization_id", type=str, is_optional=True, is_list=False
+        ),
         "prefix": FieldSchema(name="prefix", type=str, is_optional=True, is_list=False),
         "primary_address": FieldSchema(
             name="primary_address", type=str, is_optional=True, is_list=False
@@ -2683,6 +2703,13 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             name="documents", type=dict, is_optional=True, is_list=True, nested_model="Documents"
         ),
         "end_date": FieldSchema(name="end_date", type=date, is_optional=True, is_list=False),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="AwardingOffice",
+        ),
         "out_of_cycle": FieldSchema(
             name="out_of_cycle", type=bool, is_optional=True, is_list=False
         ),
@@ -2735,6 +2762,13 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_optional=True,
             is_list=False,
             nested_model="Opportunity2",
+        ),
+        "organization": FieldSchema(
+            name="organization",
+            type=dict,
+            is_optional=True,
+            is_list=False,
+            nested_model="AwardingOffice",
         ),
         "release_date": FieldSchema(
             name="release_date", type=date, is_optional=True, is_list=False
