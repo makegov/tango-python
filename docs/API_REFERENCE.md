@@ -23,6 +23,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
 - [Contract Appeals](#contract-appeals)
+- [Federal Register](#federal-register)
 - [Budget](#budget)
 - [Business Types](#business-types)
 - [NAICS](#naics)
@@ -1315,6 +1316,93 @@ appeal = client.get_contract_appeal(
 
 ---
 
+## Federal Register
+
+Federal Register documents — rules, proposed rules, notices and presidential documents published since 1994.
+
+A document is identified by `uuid`. `document_number` is not unique on its own: the Federal Register reused some numbers before 2016, so `document_number=` can return more than one document.
+
+### list_federal_register_documents()
+
+List documents with filtering and shaping.
+
+```python
+documents = client.list_federal_register_documents(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.FEDERAL_REGISTER_MINIMAL,
+    # Filter parameters (all optional)
+    search=None,
+    document_number=None,
+    type=None,
+    agency=None,
+    fr_agency=None,
+    publication_date_after=None,
+    publication_date_before=None,
+    effective_on_after=None,
+    effective_on_before=None,
+    comments_close_on_after=None,
+    comments_close_on_before=None,
+    comments_open=None,
+    cfr_title=None,
+    cfr_part=None,
+    significant=None,
+    rin=None,
+    executive_order_number=None,
+    ordering=None,
+)
+```
+
+**Filter Parameters:**
+- `search` - Ranked full-text search over the title, abstract and action; wrap in double quotes for a phrase
+- `document_number` - Exact FR document number, e.g. `"2016-31922"`; OR several with `|`
+- `type` - `"Notice"`, `"Rule"`, `"Proposed Rule"`, `"Presidential Document"`, `"Correction"`, `"Sunshine Act Document"` or `"Uncategorized Document"` (case-insensitive); OR several with `|`. An unknown type is an error, not an empty page. Documents published before 2008 are mostly `Uncategorized Document`, so a type filter undercounts that era
+- `agency` - A Tango agency name, abbreviation, code or organization key, e.g. `"EPA"`. Matches a document when any agency it lists falls within that organization, so a department includes its sub-agencies; OR several with `|`
+- `fr_agency` - The Federal Register's own agency slug, e.g. `"environmental-protection-agency"`; OR several with `|`
+- `publication_date_after` / `publication_date_before` - Publication date range (`YYYY-MM-DD`)
+- `effective_on_after` / `effective_on_before` - Effective date range (`YYYY-MM-DD`)
+- `comments_close_on_after` / `comments_close_on_before` - Comment-deadline range (`YYYY-MM-DD`)
+- `comments_open` - `True` for documents whose comment period closes today or later, `False` for those already closed; documents with no comment deadline match neither
+- `cfr_title` - A CFR title number, e.g. `"40"`
+- `cfr_part` - A CFR part number, e.g. `"52"`. Requires `cfr_title`, and both must match the same CFR reference, so `cfr_title="40", cfr_part="52"` finds 40 CFR 52
+- `significant` - Significant under Executive Order 12866
+- `rin` - A Regulation Identifier Number, e.g. `"2060-AV16"`; OR several with `|`
+- `executive_order_number` - Exact executive order number
+- `ordering` - `publication_date` (the default, as `-publication_date`), `effective_on`, `comments_close_on`, `document_number` or `rank`. `rank` requires a non-empty `search`
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with document dictionaries
+
+**Example:**
+```python
+documents = client.list_federal_register_documents(
+    type="Proposed Rule",
+    comments_open=True,
+    agency="EPA",
+    limit=25,
+)
+
+for doc in documents.results:
+    print(f"{doc['document_number']} ({doc['publication_date']}): {doc['title']}")
+    print(f"  comments close {doc['comments_close_on']}")
+```
+
+### get_federal_register_document()
+
+Get a single document by `uuid`. To look one up by its document number, use `list_federal_register_documents(document_number=...)`.
+
+```python
+document = client.get_federal_register_document(
+    "DOCUMENT_UUID",
+    shape=ShapeConfig.FEDERAL_REGISTER_COMPREHENSIVE,
+)
+```
+
+**Notes:**
+- `agencies`, `cfr_references`, `dockets` and `topics` are the Federal Register's own structures, served as published. `agencies` carries Federal Register agency slugs, not Tango organization keys.
+- `full_text`, the document's plain text, is available on this method only and only when named in `shape` (e.g. `shape="uuid,title,full_text"`). It can run to several MB, so neither default shape includes it.
+
+---
+
 ## State & Local (SLED)
 
 State, local and education procurement — solicitations that never appear on SAM.gov because they were never federal. **Beta**: coverage is partial and grows one jurisdiction at a time.
@@ -2311,6 +2399,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `PROTESTS_MINIMAL` | `list_protests` | case_id, case_number, title, source_system, outcome, filed_date |
 | `CONTRACT_APPEALS_MINIMAL` | `list_contract_appeals` | uuid, board, docket_numbers, decision_date, appellant, judge, decision_type, url |
 | `CONTRACT_APPEALS_COMPREHENSIVE` | `get_contract_appeal` | The list fields plus docket_raw, docket_source, decision_date_repaired, decision_type_raw, listing_year, first_listed_at, listed, text_status, text_char_count (omits `decision_text`, which needs an Enterprise plan) |
+| `FEDERAL_REGISTER_MINIMAL` | `list_federal_register_documents` | uuid, document_number, publication_date, type, subtype, title, abstract, action, agencies, cfr_references, citation, significant, comments_close_on, effective_on, html_url, pdf_url |
+| `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |

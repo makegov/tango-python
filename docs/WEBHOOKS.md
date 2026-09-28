@@ -89,6 +89,7 @@ tango webhooks list-event-types
 # alerts.dibbs_rfp.match     DLA DIBBS RFP matched a saved alert
 # alerts.sled_opportunity.match  State/local/education solicitation matched a saved alert
 # alerts.contract_appeal.match  CBCA/ASBCA appeal decision matched a saved alert
+# alerts.federal_register.match  Federal Register document matched a saved alert
 ```
 
 This list is served by the API, so it is always current — the SDK does not hardcode

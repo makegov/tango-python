@@ -800,6 +800,83 @@ CONTRACT_APPEAL_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+FEDERAL_REGISTER_DOCUMENT_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    "document_number": FieldSchema(
+        name="document_number", type=str, is_optional=True, is_list=False
+    ),
+    "publication_date": FieldSchema(
+        name="publication_date", type=date, is_optional=True, is_list=False
+    ),
+    "citation": FieldSchema(name="citation", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
+    "subtype": FieldSchema(name="subtype", type=str, is_optional=True, is_list=False),
+    "abstract": FieldSchema(name="abstract", type=str, is_optional=True, is_list=False),
+    "action": FieldSchema(name="action", type=str, is_optional=True, is_list=False),
+    "dates": FieldSchema(name="dates", type=str, is_optional=True, is_list=False),
+    "comments_close_on": FieldSchema(
+        name="comments_close_on", type=date, is_optional=True, is_list=False
+    ),
+    "effective_on": FieldSchema(name="effective_on", type=date, is_optional=True, is_list=False),
+    "signing_date": FieldSchema(name="signing_date", type=date, is_optional=True, is_list=False),
+    "start_page": FieldSchema(name="start_page", type=int, is_optional=True, is_list=False),
+    "end_page": FieldSchema(name="end_page", type=int, is_optional=True, is_list=False),
+    "page_length": FieldSchema(name="page_length", type=int, is_optional=True, is_list=False),
+    "volume": FieldSchema(name="volume", type=int, is_optional=True, is_list=False),
+    "significant": FieldSchema(name="significant", type=bool, is_optional=True, is_list=False),
+    "toc_doc": FieldSchema(name="toc_doc", type=str, is_optional=True, is_list=False),
+    "toc_subject": FieldSchema(name="toc_subject", type=str, is_optional=True, is_list=False),
+    "correction_of": FieldSchema(name="correction_of", type=str, is_optional=True, is_list=False),
+    "corrections": FieldSchema(name="corrections", type=str, is_optional=True, is_list=True),
+    "disposition_notes": FieldSchema(
+        name="disposition_notes", type=str, is_optional=True, is_list=False
+    ),
+    "executive_order_notes": FieldSchema(
+        name="executive_order_notes", type=str, is_optional=True, is_list=False
+    ),
+    "executive_order_number": FieldSchema(
+        name="executive_order_number", type=str, is_optional=True, is_list=False
+    ),
+    "presidential_document_number": FieldSchema(
+        name="presidential_document_number", type=str, is_optional=True, is_list=False
+    ),
+    "proclamation_number": FieldSchema(
+        name="proclamation_number", type=str, is_optional=True, is_list=False
+    ),
+    "not_received_for_publication": FieldSchema(
+        name="not_received_for_publication", type=str, is_optional=True, is_list=False
+    ),
+    "comment_url": FieldSchema(name="comment_url", type=str, is_optional=True, is_list=False),
+    "regulations_dot_gov_url": FieldSchema(
+        name="regulations_dot_gov_url", type=str, is_optional=True, is_list=False
+    ),
+    "html_url": FieldSchema(name="html_url", type=str, is_optional=True, is_list=False),
+    "body_html_url": FieldSchema(name="body_html_url", type=str, is_optional=True, is_list=False),
+    "pdf_url": FieldSchema(name="pdf_url", type=str, is_optional=True, is_list=False),
+    "public_inspection_pdf_url": FieldSchema(
+        name="public_inspection_pdf_url", type=str, is_optional=True, is_list=False
+    ),
+    "raw_text_url": FieldSchema(name="raw_text_url", type=str, is_optional=True, is_list=False),
+    "agencies": FieldSchema(name="agencies", type=dict, is_optional=True, is_list=True),
+    "cfr_references": FieldSchema(name="cfr_references", type=dict, is_optional=True, is_list=True),
+    "dockets": FieldSchema(name="dockets", type=dict, is_optional=True, is_list=True),
+    "docket_ids": FieldSchema(name="docket_ids", type=str, is_optional=True, is_list=True),
+    "topics": FieldSchema(name="topics", type=str, is_optional=True, is_list=True),
+    "regulation_id_numbers": FieldSchema(
+        name="regulation_id_numbers", type=str, is_optional=True, is_list=True
+    ),
+    "regulation_id_number_info": FieldSchema(
+        name="regulation_id_number_info", type=dict, is_optional=True, is_list=False
+    ),
+    "regulations_dot_gov_info": FieldSchema(
+        name="regulations_dot_gov_info", type=dict, is_optional=True, is_list=False
+    ),
+    # Detail endpoint only, and only when named in the shape.
+    "full_text": FieldSchema(name="full_text", type=str, is_optional=True, is_list=False),
+}
+
+
 AGENCY_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=str, is_optional=False, is_list=False),
@@ -1545,6 +1622,7 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "Protest": PROTEST_SCHEMA,
     "ProtestDocket": PROTEST_DOCKET_SCHEMA,
     "ContractAppeal": CONTRACT_APPEAL_SCHEMA,
+    "FederalRegisterDocument": FEDERAL_REGISTER_DOCUMENT_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Grant": GRANT_SCHEMA,
     # Vehicles (Awards)

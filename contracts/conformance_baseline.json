@@ -23,6 +23,7 @@
       "key"
     ],
     "budget/accounts": [
+      "agency",
       "agency_code__in",
       "bea_category__in",
       "bureau_name__icontains",
@@ -30,6 +31,12 @@
       "federal_account_symbol__in",
       "fiscal_year__in",
       "subfunction_code__in"
+    ],
+    "exclusions": [
+      "agency"
+    ],
+    "itdashboard": [
+      "agency"
     ]
   }
 }

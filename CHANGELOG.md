@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Federal Register documents** (Tango API 5.3.0). Two methods over the new `/api/federal_register/` resource: `list_federal_register_documents()` and `get_federal_register_document()`, plus a `FederalRegisterDocument` schema and the `FEDERAL_REGISTER_MINIMAL` / `FEDERAL_REGISTER_COMPREHENSIVE` defaults. These are the rules, proposed rules, notices and presidential documents published in the Federal Register since 1994. All seventeen of the API's filters are explicit named parameters, including `comments_open`, `cfr_title` / `cfr_part`, `rin`, and both `agency` (a Tango organization, including its sub-agencies) and `fr_agency` (the Federal Register's own agency slug).
+
+  `get_federal_register_document()` takes the document's `uuid`, not its `document_number`, because a document number is not unique on its own: the Federal Register reused some before 2016. Look a document up by number with `list_federal_register_documents(document_number=...)`. `full_text` is available on the detail method only when named in `shape`, and neither default shape includes it, since it can run to several MB. `ordering="rank"` requires a non-empty `search`, matching the API.
+- **`alerts.federal_register.match` is an alertable event type.** `create_webhook_alert(query_type="federal_register", ...)` works.
+
 ## [1.7.0] - 2026-09-23
 
 ### Added

@@ -1213,6 +1213,65 @@ class ContractAppeal:
     decision_text: str | None = None
 
 
+class FederalRegisterDocument:
+    """Schema definition for FederalRegisterDocument (not used for instances).
+
+    Federal Register documents at ``/api/federal_register/``: rules, proposed rules, notices and presidential documents published since 1994.
+    Shape-on-demand, so every field is optional.
+
+    A document is identified by ``uuid``.
+    ``document_number`` alone is not unique: the Federal Register reused some numbers before 2016, so ``document_number=`` can match more than one document.
+
+    ``agencies``, ``cfr_references``, ``dockets`` and ``topics`` are the Federal Register's own structures, served as published.
+    ``full_text`` can run to several MB, so it is available on the detail endpoint only and only when named in ``shape``.
+    """
+
+    uuid: str | None = None
+    document_number: str | None = None
+    publication_date: date | None = None
+    citation: str | None = None
+    title: str | None = None
+    type: str | None = None
+    subtype: str | None = None
+    abstract: str | None = None
+    action: str | None = None
+    dates: str | None = None
+    comments_close_on: date | None = None
+    effective_on: date | None = None
+    signing_date: date | None = None
+    start_page: int | None = None
+    end_page: int | None = None
+    page_length: int | None = None
+    volume: int | None = None
+    significant: bool | None = None
+    toc_doc: str | None = None
+    toc_subject: str | None = None
+    correction_of: str | None = None
+    corrections: list[str] | None = None
+    disposition_notes: str | None = None
+    executive_order_notes: str | None = None
+    executive_order_number: str | None = None
+    presidential_document_number: str | None = None
+    proclamation_number: str | None = None
+    not_received_for_publication: str | None = None
+    comment_url: str | None = None
+    regulations_dot_gov_url: str | None = None
+    html_url: str | None = None
+    body_html_url: str | None = None
+    pdf_url: str | None = None
+    public_inspection_pdf_url: str | None = None
+    raw_text_url: str | None = None
+    agencies: list[dict[str, Any]] | None = None
+    cfr_references: list[dict[str, Any]] | None = None
+    dockets: list[dict[str, Any]] | None = None
+    docket_ids: list[str] | None = None
+    topics: list[str] | None = None
+    regulation_id_numbers: list[str] | None = None
+    regulation_id_number_info: dict[str, Any] | None = None
+    regulations_dot_gov_info: dict[str, Any] | None = None
+    full_text: str | None = None
+
+
 @dataclass
 class PaginatedResponse[T]:
     """Paginated API response
@@ -1392,6 +1451,24 @@ class ShapeConfig:
         "uuid,board,docket_numbers,decision_date,appellant,judge,decision_type,url,"
         "docket_raw,docket_source,decision_date_repaired,decision_type_raw,"
         "listing_year,first_listed_at,listed,text_status,text_char_count"
+    )
+
+    # Default for list_federal_register_documents(). Mirrors the API's own list default.
+    FEDERAL_REGISTER_MINIMAL: Final = (
+        "uuid,document_number,publication_date,type,subtype,title,abstract,action,"
+        "agencies,cfr_references,citation,significant,comments_close_on,effective_on,"
+        "html_url,pdf_url"
+    )
+
+    # Default for get_federal_register_document(). Mirrors the API's own retrieve default.
+    # `full_text` is left out on purpose: it can run to several MB.
+    FEDERAL_REGISTER_COMPREHENSIVE: Final = (
+        "uuid,document_number,publication_date,type,subtype,title,abstract,action,"
+        "agencies,cfr_references,citation,significant,comments_close_on,effective_on,"
+        "html_url,pdf_url,dates,signing_date,start_page,end_page,volume,docket_ids,"
+        "dockets,regulation_id_numbers,topics,correction_of,corrections,"
+        "executive_order_number,presidential_document_number,proclamation_number,"
+        "comment_url,regulations_dot_gov_url,raw_text_url,body_html_url"
     )
 
     # Default for list_dibbs_rfqs()
