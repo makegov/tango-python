@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-09-28
+
 ### Added
 - **Federal Register documents** (Tango API 5.3.0). Two methods over the new `/api/federal_register/` resource: `list_federal_register_documents()` and `get_federal_register_document()`, plus a `FederalRegisterDocument` schema and the `FEDERAL_REGISTER_MINIMAL` / `FEDERAL_REGISTER_COMPREHENSIVE` defaults. These are the rules, proposed rules, notices and presidential documents published in the Federal Register since 1994. All seventeen of the API's filters are explicit named parameters, including `comments_open`, `cfr_title` / `cfr_part`, `rin`, and both `agency` (a Tango organization, including its sub-agencies) and `fr_agency` (the Federal Register's own agency slug).
 
