@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2026-09-28
+
 ### Added
 - **GSA eBuy requests** (Tango API 5.1.0). Four methods over the `/api/ebuy/` resource: `list_ebuy_requests()`, `get_ebuy_request()`, `get_ebuy_attachment_url()` and `get_ebuy_access()`, plus `EbuyRequest` / `EbuyAttachment` schemas, an `EbuyAccess` result type, and the `EBUY_REQUESTS_MINIMAL` / `EBUY_REQUESTS_COMPREHENSIVE` defaults. These are the RFQs, RFPs and RFIs posted to GSA eBuy. All fourteen of the API's filters are explicit named parameters, including `search` (which also matches attachment text), `reference_number`, `sin`, `agency` and `contract_number`.
 
