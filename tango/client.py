@@ -5,7 +5,7 @@ import warnings
 from datetime import date, datetime
 from decimal import Decimal
 from typing import Any, Literal, cast
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 import httpx
 
@@ -28,6 +28,8 @@ from tango.models import (
     DibbsAward,
     DibbsRfp,
     DibbsRfq,
+    EbuyAccess,
+    EbuyRequest,
     Entity,
     Exclusion,
     FederalRegisterDocument,
@@ -175,54 +177,56 @@ class TangoClient:
             self._last_response_headers = response.headers
             self._last_rate_limit_info = self._parse_rate_limit_headers(response.headers)
 
-            if response.status_code == 401:
-                raise TangoAuthError(
-                    "Invalid API key or authentication required", response.status_code
-                )
-            elif response.status_code == 404:
-                raise TangoNotFoundError("Resource not found", response.status_code)
-            elif response.status_code == 400:
-                error_data = response.json() if response.content else {}
-                error_msg = "Invalid request parameters"
-                if error_data:
-                    # Try to extract a more specific error message
-                    if isinstance(error_data, dict):
-                        detail = (
-                            error_data.get("detail")
-                            or error_data.get("message")
-                            or error_data.get("error")
-                        )
-                        if detail:
-                            error_msg = f"Invalid request parameters: {detail}"
-                        issues = error_data.get("issues")
-                        if isinstance(issues, list):
-                            rejected = [
-                                f"{issue['path']} ({issue['reason']})"
-                                if issue.get("reason")
-                                else str(issue["path"])
-                                for issue in issues
-                                if isinstance(issue, dict) and issue.get("path")
-                            ]
-                            if rejected:
-                                error_msg = f"{error_msg}: {', '.join(rejected)}"
-                raise TangoValidationError(
-                    error_msg,
-                    response.status_code,
-                    error_data,
-                )
-            elif response.status_code == 429:
-                error_data = response.json() if response.content else {}
-                detail = error_data.get("detail", "Rate limit exceeded")
-                raise TangoRateLimitError(detail, response.status_code, error_data)
-            elif not response.is_success:
-                raise TangoAPIError(
-                    f"API request failed with status {response.status_code}", response.status_code
-                )
+            self._raise_for_status(response)
 
             return response.json() if response.content else {}
 
         except httpx.HTTPError as e:
             raise TangoAPIError(f"Request failed: {str(e)}") from e
+
+    def _raise_for_status(self, response: httpx.Response) -> None:
+        """Raise the SDK exception matching a non-success response; return quietly on success."""
+        if response.status_code == 401:
+            raise TangoAuthError("Invalid API key or authentication required", response.status_code)
+        elif response.status_code == 404:
+            raise TangoNotFoundError("Resource not found", response.status_code)
+        elif response.status_code == 400:
+            error_data = response.json() if response.content else {}
+            error_msg = "Invalid request parameters"
+            if error_data:
+                # Try to extract a more specific error message
+                if isinstance(error_data, dict):
+                    detail = (
+                        error_data.get("detail")
+                        or error_data.get("message")
+                        or error_data.get("error")
+                    )
+                    if detail:
+                        error_msg = f"Invalid request parameters: {detail}"
+                    issues = error_data.get("issues")
+                    if isinstance(issues, list):
+                        rejected = [
+                            f"{issue['path']} ({issue['reason']})"
+                            if issue.get("reason")
+                            else str(issue["path"])
+                            for issue in issues
+                            if isinstance(issue, dict) and issue.get("path")
+                        ]
+                        if rejected:
+                            error_msg = f"{error_msg}: {', '.join(rejected)}"
+            raise TangoValidationError(
+                error_msg,
+                response.status_code,
+                error_data,
+            )
+        elif response.status_code == 429:
+            error_data = response.json() if response.content else {}
+            detail = error_data.get("detail", "Rate limit exceeded")
+            raise TangoRateLimitError(detail, response.status_code, error_data)
+        elif not response.is_success:
+            raise TangoAPIError(
+                f"API request failed with status {response.status_code}", response.status_code
+            )
 
     def _get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:
         """Make a GET request"""
@@ -2964,6 +2968,215 @@ class TangoClient:
         )
 
     # ============================================================================
+    # GSA eBuy requests
+    # ============================================================================
+
+    def list_ebuy_requests(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        search: str | None = None,
+        rfq_id: str | None = None,
+        reference_number: str | None = None,
+        request_type: str | None = None,
+        status: str | None = None,
+        sin: str | None = None,
+        schedule: str | None = None,
+        buyer_agency: str | None = None,
+        agency: str | None = None,
+        contract_number: str | None = None,
+        issue_date_after: str | None = None,
+        issue_date_before: str | None = None,
+        close_date_after: str | None = None,
+        close_date_before: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List GSA eBuy requests (RFQs, RFPs and RFIs).
+
+        Requires the Pro tier or above; below it the API returns 403.
+        Results are scoped to your account: you see only requests posted under the GSA schedule contracts linked to it.
+        With no linked contract the page is empty rather than an error, so use ``get_ebuy_access()`` to tell "no access" from "no matches".
+
+        ``status`` is frozen at the last state the request was seen in.
+        Only currently-active requests are carried, so a request that closes stops appearing rather than getting a final row, and ``Open`` means "open the last time it was seen".
+        Read ``last_seen`` for staleness.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            search: Full-text search over the title, description, reference number, request id and attachment text. Results rank by relevance unless ``ordering`` is given
+            rfq_id: Exact request id, e.g. ``RFQ1835158``. OR several with ``|``
+            reference_number: The buyer's own solicitation number; dashes are ignored
+            request_type: ``RFQ``, ``RFP`` or ``RFI``. OR several with ``|``
+            status: ``Open`` or ``Cancelled``, as last seen. OR several with ``|``
+            sin: Special Item Number, e.g. ``54151S``. OR several with ``|``
+            schedule: GSA schedule. OR several with ``|``
+            buyer_agency: The buyer agency as eBuy names it (free text). OR several with ``|``
+            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``GSA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``
+            contract_number: Narrow to requests posted under one of your own linked contracts. A contract not linked to your account returns an empty page, not an error
+            issue_date_after: Issued on or after (YYYY-MM-DD)
+            issue_date_before: Issued on or before (YYYY-MM-DD)
+            close_date_after: Closes on or after (YYYY-MM-DD)
+            close_date_before: Closes on or before (YYYY-MM-DD)
+            ordering: Sort field — ``issue_date`` (the default, as ``-issue_date``), ``close_date``, ``last_seen`` or ``modified``. Prefix ``-`` for descending
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.EBUY_REQUESTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("search", search),
+            ("rfq_id", rfq_id),
+            ("reference_number", reference_number),
+            ("request_type", request_type),
+            ("status", status),
+            ("sin", sin),
+            ("schedule", schedule),
+            ("buyer_agency", buyer_agency),
+            ("agency", agency),
+            ("contract_number", contract_number),
+            ("issue_date_after", issue_date_after),
+            ("issue_date_before", issue_date_before),
+            ("close_date_after", close_date_after),
+            ("close_date_before", close_date_before),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/ebuy/requests/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, EbuyRequest, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_ebuy_request(
+        self,
+        rfq_id: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single GSA eBuy request by its request id.
+
+        A request outside your account's scope raises ``TangoNotFoundError``, the same as an id that does not exist.
+
+        Args:
+            rfq_id: Request id, e.g. ``RFQ1835158``
+            shape: Response shape string (defaults to the comprehensive shape: every field plus the ``organization`` and ``attachments`` expands)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.EBUY_REQUESTS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/ebuy/requests/{quote(rfq_id, safe='')}/", params)
+        return self._parse_response_with_shape(data, shape, EbuyRequest, flat, flat_lists)
+
+    def get_ebuy_attachment_url(self, rfq_id: str, doc_seq_num: int) -> str:
+        """
+        Get a short-lived download URL for one attachment on a GSA eBuy request.
+
+        The API answers with a redirect to a signed URL that expires after about five minutes; this returns that URL without downloading the document.
+        Fetch it promptly, and call this again rather than storing it.
+
+        Args:
+            rfq_id: Request id, e.g. ``RFQ1835158``
+            doc_seq_num: The attachment's ``doc_seq_num`` from ``get_ebuy_request()``
+
+        Raises:
+            TangoValidationError: The entry is an external link (``is_link``), not a stored document. The link is in the message and in ``response_data["url"]``.
+            TangoNotFoundError: The request is unknown or outside your scope, the attachment does not exist, or its document has not been captured yet.
+        """
+        endpoint = (
+            f"/api/ebuy/requests/{quote(rfq_id, safe='')}/attachments/{int(doc_seq_num)}/download/"
+        )
+        url = urljoin(f"{self.base_url}/", endpoint.lstrip("/"))
+
+        try:
+            response = self.client.request(method="GET", url=url, follow_redirects=False)
+        except httpx.HTTPError as e:
+            raise TangoAPIError(f"Request failed: {str(e)}") from e
+        self._last_response_headers = response.headers
+        self._last_rate_limit_info = self._parse_rate_limit_headers(response.headers)
+
+        location = response.headers.get("Location")
+        if response.is_redirect and location:
+            return str(location)
+
+        if response.status_code in (400, 404):
+            try:
+                error_data = response.json() if response.content else {}
+            except ValueError:
+                error_data = {}
+            if not isinstance(error_data, dict):
+                error_data = {}
+            if response.status_code == 400 and error_data.get("url"):
+                raise TangoValidationError(
+                    f"Attachment {doc_seq_num} on {rfq_id} is an external link, not a stored document: {error_data['url']}",
+                    response.status_code,
+                    error_data,
+                )
+            if response.status_code == 404:
+                raise TangoNotFoundError(
+                    error_data.get("detail") or "Resource not found",
+                    response.status_code,
+                    error_data,
+                )
+
+        self._raise_for_status(response)
+        raise TangoAPIError(
+            f"Expected a redirect to the attachment, got status {response.status_code}",
+            response.status_code,
+        )
+
+    def get_ebuy_access(self) -> EbuyAccess:
+        """
+        Check whether your account can read GSA eBuy requests.
+
+        ``list_ebuy_requests()`` returns an empty page, not an error, when no contract is linked; this tells the two apart.
+        ``reason`` is ``"tier_required"`` below the Pro tier (it wins when both apply), ``"no_contract_grant"`` when no contract is linked, and ``None`` when ``enabled`` is true.
+        ``contracts`` lists your own linked contracts, sorted.
+        """
+        data = self._get("/api/ebuy/access/")
+        return EbuyAccess(
+            enabled=bool(data.get("enabled")),
+            reason=data.get("reason"),
+            contracts=list(data.get("contracts") or []),
+        )
+
+    # ============================================================================
     # DLA DIBBS (RFQs, RFPs, awards)
     # ============================================================================
 
@@ -5022,7 +5235,7 @@ class TangoClient:
             query_type: One of ``opportunity``, ``contract``, ``idv``, ``ota``,
                 ``otidv``, ``entity``, ``grant``, ``forecast``, ``exclusion``,
                 ``dibbs_rfq``, ``dibbs_rfp``, ``sled_opportunity``,
-                ``contract_appeal`` or ``federal_register``. :meth:`list_webhook_event_types` is the
+                ``contract_appeal``, ``federal_register`` or ``ebuy_request``. :meth:`list_webhook_event_types` is the
                 current authority — this list can only go stale.
             filters: Dict of query parameters that the alert matches against
                 (e.g. ``{"naics": "541330", "set_aside": "SBA"}``).

@@ -81,17 +81,6 @@ ARCHIVE_SCHEMA: dict[str, FieldSchema] = {
 }
 
 ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
-    "doc_name": FieldSchema(name="doc_name", type=str, is_optional=True, is_list=False),
-    "doc_path": FieldSchema(name="doc_path", type=str, is_optional=True, is_list=False),
-    "doc_seq_num": FieldSchema(name="doc_seq_num", type=str, is_optional=True, is_list=False),
-    "doc_session_date": FieldSchema(
-        name="doc_session_date", type=date, is_optional=True, is_list=False
-    ),
-    "doc_type": FieldSchema(name="doc_type", type=str, is_optional=True, is_list=False),
-    "is_link": FieldSchema(name="is_link", type=bool, is_optional=True, is_list=False),
-}
-
-ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
@@ -105,7 +94,7 @@ ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
@@ -119,7 +108,7 @@ ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
     "char_count": FieldSchema(name="char_count", type=int, is_optional=True, is_list=False),
     "checksum": FieldSchema(name="checksum", type=str, is_optional=True, is_list=False),
     "download_status": FieldSchema(
@@ -144,7 +133,7 @@ ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
     "word_count": FieldSchema(name="word_count", type=int, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS5_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
@@ -155,7 +144,7 @@ ATTACHMENTS5_SCHEMA: dict[str, FieldSchema] = {
     "url": FieldSchema(name="url", type=str, is_optional=True, is_list=False),
 }
 
-ATTACHMENTS6_SCHEMA: dict[str, FieldSchema] = {
+ATTACHMENTS5_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
@@ -1119,7 +1108,6 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "Attachments3": ATTACHMENTS3_SCHEMA,
     "Attachments4": ATTACHMENTS4_SCHEMA,
     "Attachments5": ATTACHMENTS5_SCHEMA,
-    "Attachments6": ATTACHMENTS6_SCHEMA,
     "Awardee": AWARDEE_SCHEMA,
     "AwardingOffice": AWARDING_OFFICE_SCHEMA,
     "AwardingOffice2": AWARDING_OFFICE2_SCHEMA,
@@ -2238,7 +2226,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=True,
-            nested_model="Attachments2",
+            nested_model="Attachments",
         ),
         "meta": FieldSchema(
             name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
@@ -2486,7 +2474,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=False,
-            nested_model="Attachments6",
+            nested_model="Attachments5",
         ),
         "department": FieldSchema(
             name="department",
@@ -2873,7 +2861,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             type=dict,
             is_optional=True,
             is_list=True,
-            nested_model="Attachments4",
+            nested_model="Attachments3",
         ),
         "bid_opening_date": FieldSchema(
             name="bid_opening_date", type=datetime, is_optional=True, is_list=False

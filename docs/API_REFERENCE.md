@@ -24,6 +24,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Protests](#protests)
 - [Contract Appeals](#contract-appeals)
 - [Federal Register](#federal-register)
+- [GSA eBuy](#gsa-ebuy)
 - [Budget](#budget)
 - [Business Types](#business-types)
 - [NAICS](#naics)
@@ -1602,6 +1603,118 @@ forecast = client.get_sled_forecast("FORECAST_UUID")
 
 ---
 
+## GSA eBuy
+
+GSA eBuy requests for quotes, proposals and information (RFQs, RFPs, RFIs), keyed by `rfq_id`.
+
+**Access is scoped to your account.** You see only requests posted under the GSA schedule contracts linked to your account, and the endpoints require the Pro tier or above (below it they return 403). With no linked contract, `list_ebuy_requests()` returns an empty page rather than an error, and `get_ebuy_request()` raises `TangoNotFoundError` for a request outside your scope, the same as for an id that does not exist. Use `get_ebuy_access()` to tell "no access" from "no matches".
+
+### list_ebuy_requests()
+
+List requests with filtering and shaping.
+
+```python
+requests = client.list_ebuy_requests(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.EBUY_REQUESTS_MINIMAL,
+    # Filter parameters (all optional)
+    search=None,
+    rfq_id=None,
+    reference_number=None,
+    request_type=None,
+    status=None,
+    sin=None,
+    schedule=None,
+    buyer_agency=None,
+    agency=None,
+    contract_number=None,
+    issue_date_after=None,
+    issue_date_before=None,
+    close_date_after=None,
+    close_date_before=None,
+    ordering=None,
+)
+```
+
+**Filter Parameters:**
+- `search` - Full-text search over the title, description, reference number, request id and attachment text. Results rank by relevance unless `ordering` is given
+- `rfq_id` - Exact request id, e.g. `"RFQ1835158"`
+- `reference_number` - The buyer's own solicitation number; dashes are ignored
+- `request_type` - `"RFQ"`, `"RFP"` or `"RFI"`
+- `status` - `"Open"` or `"Cancelled"`, as last seen (see the note below)
+- `sin` - Special Item Number, e.g. `"54151S"`
+- `schedule` - GSA schedule
+- `buyer_agency` - The buyer agency as eBuy names it (free text)
+- `agency` - A Tango agency name, abbreviation, code or organization key, e.g. `"GSA"`. Matches the whole organization subtree, so a department includes its sub-agencies
+- `contract_number` - Narrow to requests posted under one of your own linked contracts. A contract not linked to your account returns an empty page, not an error
+- `issue_date_after` / `issue_date_before` - Issue date range (`YYYY-MM-DD`, inclusive)
+- `close_date_after` / `close_date_before` - Close date range (`YYYY-MM-DD`, inclusive)
+- `ordering` - `issue_date` (the default, as `-issue_date`), `close_date`, `last_seen` or `modified`; prefix `-` for descending
+
+String filters accept several values joined with `|` (OR).
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with request dictionaries
+
+**Example:**
+```python
+requests = client.list_ebuy_requests(status="Open", sin="54151S", ordering="close_date")
+
+for req in requests.results:
+    print(f"{req['rfq_id']} closes {req['close_date']}: {req['title']}")
+    print(f"  last seen {req['last_seen']}")
+```
+
+**Notes:**
+- **`status` is frozen at the last state the request was seen in.** Only currently-active requests are carried, so a request that closes stops appearing rather than getting a final row. `Open` means "open the last time it was seen", not "open now"; read `last_seen` for staleness.
+- The contract number a request was posted under is never returned in any payload.
+- `buyer_agency_code` and some other buyer and contact fields are sparse on older requests.
+
+### get_ebuy_request()
+
+Get a single request by `rfq_id`.
+
+```python
+request = client.get_ebuy_request(
+    "RFQ1835158",
+    shape=ShapeConfig.EBUY_REQUESTS_COMPREHENSIVE,
+)
+
+for attachment in request["attachments"]:
+    print(attachment["doc_seq_num"], attachment["doc_name"], attachment["is_link"])
+```
+
+The default shape returns every field plus two expands: `organization` (the buyer office, with the same seven keys as other resources' `organization` expand) and `attachments`. Each attachment carries `doc_seq_num`, `doc_name`, `doc_type`, `doc_path`, `is_link` and `doc_session_date`. `is_link=True` means `doc_path` is an outbound URL with no stored document behind it. `amendments`, `line_items` and `addresses` are lists of objects, served as eBuy publishes them.
+
+### get_ebuy_attachment_url()
+
+Get a short-lived download URL for one stored attachment.
+
+```python
+url = client.get_ebuy_attachment_url("RFQ1835158", doc_seq_num=1)
+```
+
+**Returns:** The signed URL the API redirects to, as a string. The SDK reads the redirect without following it, so no document is downloaded. The URL expires after about five minutes: fetch it promptly, and call this again rather than storing it.
+
+**Raises:**
+- `TangoValidationError` - The entry is an external link (`is_link`), not a stored document. The link is in the message and in `error.response_data["url"]`
+- `TangoNotFoundError` - The request is unknown or outside your scope, the attachment does not exist, or its document has not been captured yet
+
+### get_ebuy_access()
+
+Check whether your account can read eBuy requests.
+
+```python
+access = client.get_ebuy_access()
+if not access.enabled:
+    print(access.reason)  # "tier_required" or "no_contract_grant"
+print(access.contracts)   # your own linked contracts, sorted
+```
+
+**Returns:** `EbuyAccess` with `enabled` (bool), `reason` (`"tier_required"`, `"no_contract_grant"` or `None`; `tier_required` wins when both apply) and `contracts` (list of str).
+
+---
+
 ## Budget
 
 Federal account × fiscal year budget rollups, covering the full budget lifecycle (requested → enacted → apportioned → obligated → outlayed), pre-computed ratios and trends, the contract / assistance / unlinked breakdown, and request-vs-actual spend.
@@ -2401,6 +2514,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `CONTRACT_APPEALS_COMPREHENSIVE` | `get_contract_appeal` | The list fields plus docket_raw, docket_source, decision_date_repaired, decision_type_raw, listing_year, first_listed_at, listed, text_status, text_char_count (omits `decision_text`, which needs an Enterprise plan) |
 | `FEDERAL_REGISTER_MINIMAL` | `list_federal_register_documents` | uuid, document_number, publication_date, type, subtype, title, abstract, action, agencies, cfr_references, citation, significant, comments_close_on, effective_on, html_url, pdf_url |
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
+| `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
+| `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
 | `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |

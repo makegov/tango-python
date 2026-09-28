@@ -254,6 +254,15 @@ protests = client.list_protests(source_system="gao", outcome="Sustained", limit=
 protest = client.get_protest("CASE_UUID")
 ```
 
+### GSA eBuy
+
+```python
+access = client.get_ebuy_access()  # scoped to the schedule contracts linked to your account
+requests = client.list_ebuy_requests(status="Open", sin="54151S", limit=25)
+request = client.get_ebuy_request("RFQ1835158")
+url = client.get_ebuy_attachment_url("RFQ1835158", doc_seq_num=1)  # short-lived signed URL
+```
+
 ### GSA eLibrary Contracts
 
 ```python
