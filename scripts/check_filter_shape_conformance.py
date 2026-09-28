@@ -79,6 +79,7 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "protests": "list_protests",
     "contract_appeals": "list_contract_appeals",
     "federal_register": "list_federal_register_documents",
+    "ebuy/requests": "list_ebuy_requests",
     "offices": "list_offices",
     "psc": "list_psc",
     "mas_sins": "list_mas_sins",

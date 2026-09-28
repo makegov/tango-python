@@ -877,6 +877,97 @@ FEDERAL_REGISTER_DOCUMENT_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+EBUY_ATTACHMENT_SCHEMA: dict[str, FieldSchema] = {
+    "doc_seq_num": FieldSchema(name="doc_seq_num", type=int, is_optional=True, is_list=False),
+    "doc_name": FieldSchema(name="doc_name", type=str, is_optional=True, is_list=False),
+    "doc_type": FieldSchema(name="doc_type", type=int, is_optional=True, is_list=False),
+    "doc_path": FieldSchema(name="doc_path", type=str, is_optional=True, is_list=False),
+    "is_link": FieldSchema(name="is_link", type=bool, is_optional=True, is_list=False),
+    "doc_session_date": FieldSchema(
+        name="doc_session_date", type=datetime, is_optional=True, is_list=False
+    ),
+}
+
+
+EBUY_REQUEST_SCHEMA: dict[str, FieldSchema] = {
+    "rfq_id": FieldSchema(name="rfq_id", type=str, is_optional=True, is_list=False),
+    "request_type": FieldSchema(name="request_type", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
+    "schedule": FieldSchema(name="schedule", type=str, is_optional=True, is_list=False),
+    "sin": FieldSchema(name="sin", type=str, is_optional=True, is_list=False),
+    "status": FieldSchema(name="status", type=str, is_optional=True, is_list=False),
+    "buyer_name": FieldSchema(name="buyer_name", type=str, is_optional=True, is_list=False),
+    "buyer_agency": FieldSchema(name="buyer_agency", type=str, is_optional=True, is_list=False),
+    "buyer_agency_code": FieldSchema(
+        name="buyer_agency_code", type=str, is_optional=True, is_list=False
+    ),
+    "buyer_email": FieldSchema(name="buyer_email", type=str, is_optional=True, is_list=False),
+    "buyer_user_id": FieldSchema(name="buyer_user_id", type=str, is_optional=True, is_list=False),
+    "reference_number": FieldSchema(
+        name="reference_number", type=str, is_optional=True, is_list=False
+    ),
+    "award_method": FieldSchema(name="award_method", type=str, is_optional=True, is_list=False),
+    "contract_type": FieldSchema(name="contract_type", type=str, is_optional=True, is_list=False),
+    "commercial_type": FieldSchema(
+        name="commercial_type", type=str, is_optional=True, is_list=False
+    ),
+    "follow_on": FieldSchema(name="follow_on", type=bool, is_optional=True, is_list=False),
+    "source_sought": FieldSchema(name="source_sought", type=bool, is_optional=True, is_list=False),
+    "issue_date": FieldSchema(name="issue_date", type=datetime, is_optional=True, is_list=False),
+    "close_date": FieldSchema(name="close_date", type=datetime, is_optional=True, is_list=False),
+    "cancel_date": FieldSchema(name="cancel_date", type=datetime, is_optional=True, is_list=False),
+    "last_mod_date": FieldSchema(
+        name="last_mod_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "pop_start_date": FieldSchema(
+        name="pop_start_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "pop_end_date": FieldSchema(
+        name="pop_end_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "oco_name": FieldSchema(name="oco_name", type=str, is_optional=True, is_list=False),
+    "oco_title": FieldSchema(name="oco_title", type=str, is_optional=True, is_list=False),
+    "oco_agency": FieldSchema(name="oco_agency", type=str, is_optional=True, is_list=False),
+    "oco_phone": FieldSchema(name="oco_phone", type=str, is_optional=True, is_list=False),
+    "oco_aac": FieldSchema(name="oco_aac", type=str, is_optional=True, is_list=False),
+    "ocs_name": FieldSchema(name="ocs_name", type=str, is_optional=True, is_list=False),
+    "ocs_title": FieldSchema(name="ocs_title", type=str, is_optional=True, is_list=False),
+    "ocs_agency": FieldSchema(name="ocs_agency", type=str, is_optional=True, is_list=False),
+    "ocs_phone": FieldSchema(name="ocs_phone", type=str, is_optional=True, is_list=False),
+    "ocs_aac": FieldSchema(name="ocs_aac", type=str, is_optional=True, is_list=False),
+    "amendment_count": FieldSchema(
+        name="amendment_count", type=int, is_optional=True, is_list=False
+    ),
+    "mod_version": FieldSchema(name="mod_version", type=int, is_optional=True, is_list=False),
+    "qa_document_count": FieldSchema(
+        name="qa_document_count", type=int, is_optional=True, is_list=False
+    ),
+    "attachment_count": FieldSchema(
+        name="attachment_count", type=int, is_optional=True, is_list=False
+    ),
+    "link_count": FieldSchema(name="link_count", type=int, is_optional=True, is_list=False),
+    "amendments": FieldSchema(name="amendments", type=dict, is_optional=True, is_list=True),
+    "line_items": FieldSchema(name="line_items", type=dict, is_optional=True, is_list=True),
+    "addresses": FieldSchema(name="addresses", type=dict, is_optional=True, is_list=True),
+    "detail_fetched": FieldSchema(
+        name="detail_fetched", type=bool, is_optional=True, is_list=False
+    ),
+    "first_seen": FieldSchema(name="first_seen", type=datetime, is_optional=True, is_list=False),
+    "last_seen": FieldSchema(name="last_seen", type=datetime, is_optional=True, is_list=False),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
+    "attachments": FieldSchema(
+        name="attachments", type=dict, is_optional=True, is_list=True, nested_model="EbuyAttachment"
+    ),
+}
+
+
 AGENCY_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=str, is_optional=False, is_list=False),
@@ -1623,6 +1714,8 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "ProtestDocket": PROTEST_DOCKET_SCHEMA,
     "ContractAppeal": CONTRACT_APPEAL_SCHEMA,
     "FederalRegisterDocument": FEDERAL_REGISTER_DOCUMENT_SCHEMA,
+    "EbuyRequest": EBUY_REQUEST_SCHEMA,
+    "EbuyAttachment": EBUY_ATTACHMENT_SCHEMA,
     "Agency": AGENCY_SCHEMA,
     "Grant": GRANT_SCHEMA,
     # Vehicles (Awards)

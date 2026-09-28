@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **GSA eBuy requests** (Tango API 5.1.0). Four methods over the `/api/ebuy/` resource: `list_ebuy_requests()`, `get_ebuy_request()`, `get_ebuy_attachment_url()` and `get_ebuy_access()`, plus `EbuyRequest` / `EbuyAttachment` schemas, an `EbuyAccess` result type, and the `EBUY_REQUESTS_MINIMAL` / `EBUY_REQUESTS_COMPREHENSIVE` defaults. These are the RFQs, RFPs and RFIs posted to GSA eBuy. All fourteen of the API's filters are explicit named parameters, including `search` (which also matches attachment text), `reference_number`, `sin`, `agency` and `contract_number`.
+
+  Access is scoped to your account: you see only requests posted under the GSA schedule contracts linked to it, and the endpoints require the Pro tier or above. With no linked contract, `list_ebuy_requests()` returns an empty page rather than an error, so `get_ebuy_access()` reports whether access is enabled, why not (`tier_required` or `no_contract_grant`), and which contracts are linked. `status` is frozen at the last state a request was seen in, because a request that closes stops appearing rather than getting a final row; read `last_seen` for staleness. `get_ebuy_attachment_url()` returns the short-lived signed URL the API redirects to without downloading the document, and raises the new `TangoAttachmentLinkError` (a `TangoValidationError`) with the link on `.url` when the entry is an external link rather than a stored document. The `agency` filter requires Tango API 5.3.0.
+- **`alerts.ebuy_request.match` is an alertable event type.** `create_webhook_alert(query_type="ebuy_request", ...)` works.
+
 ## [1.8.0] - 2026-09-28
 
 ### Added

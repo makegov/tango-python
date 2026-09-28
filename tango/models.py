@@ -1272,6 +1272,97 @@ class FederalRegisterDocument:
     full_text: str | None = None
 
 
+class EbuyAttachment:
+    """Schema definition for one entry in an eBuy request's ``attachments`` (not used for instances).
+
+    ``is_link=True`` means the entry is an outbound URL in ``doc_path`` with no stored document behind it, so ``get_ebuy_attachment_url()`` raises ``TangoAttachmentLinkError`` for it.
+    """
+
+    doc_seq_num: int | None = None
+    doc_name: str | None = None
+    doc_type: int | None = None
+    doc_path: str | None = None
+    is_link: bool | None = None
+    doc_session_date: datetime | None = None
+
+
+class EbuyRequest:
+    """Schema definition for EbuyRequest (not used for instances).
+
+    GSA eBuy requests (RFQs, RFPs, RFIs) at ``/api/ebuy/requests/``, keyed by ``rfq_id``.
+    Shape-on-demand, so every field is optional.
+
+    The resource is scoped to your account: you see only requests posted under the GSA schedule contracts linked to it.
+
+    ``status`` is frozen at the last state the request was seen in.
+    Only currently-active requests are carried, so a request that closes stops appearing rather than getting a final row, and ``Open`` means "open the last time it was seen".
+    Read ``last_seen`` for staleness.
+
+    ``buyer_agency_code`` and some other buyer and contact fields are sparse on older requests.
+    The contract number a request was posted under is never returned.
+    """
+
+    rfq_id: str | None = None
+    request_type: str | None = None
+    title: str | None = None
+    description: str | None = None
+    schedule: str | None = None
+    sin: str | None = None
+    status: str | None = None
+    buyer_name: str | None = None
+    buyer_agency: str | None = None
+    buyer_agency_code: str | None = None
+    buyer_email: str | None = None
+    buyer_user_id: str | None = None
+    reference_number: str | None = None
+    award_method: str | None = None
+    contract_type: str | None = None
+    commercial_type: str | None = None
+    follow_on: bool | None = None
+    source_sought: bool | None = None
+    issue_date: datetime | None = None
+    close_date: datetime | None = None
+    cancel_date: datetime | None = None
+    last_mod_date: datetime | None = None
+    pop_start_date: datetime | None = None
+    pop_end_date: datetime | None = None
+    oco_name: str | None = None
+    oco_title: str | None = None
+    oco_agency: str | None = None
+    oco_phone: str | None = None
+    oco_aac: str | None = None
+    ocs_name: str | None = None
+    ocs_title: str | None = None
+    ocs_agency: str | None = None
+    ocs_phone: str | None = None
+    ocs_aac: str | None = None
+    amendment_count: int | None = None
+    mod_version: int | None = None
+    qa_document_count: int | None = None
+    attachment_count: int | None = None
+    link_count: int | None = None
+    amendments: list[dict[str, Any]] | None = None
+    line_items: list[dict[str, Any]] | None = None
+    addresses: list[dict[str, Any]] | None = None
+    detail_fetched: bool | None = None
+    first_seen: datetime | None = None
+    last_seen: datetime | None = None
+    organization: dict[str, Any] | None = None
+    attachments: list[EbuyAttachment] | None = None
+
+
+@dataclass
+class EbuyAccess:
+    """Result of ``GET /api/ebuy/access/``: whether your account can read eBuy requests.
+
+    ``list_ebuy_requests()`` returns an empty page, not an error, when no contract is linked, so this is how to tell "no access" from "no matches".
+    """
+
+    enabled: bool
+    reason: Literal["tier_required", "no_contract_grant"] | None
+    contracts: list[str]
+
+
 @dataclass
 class PaginatedResponse[T]:
     """Paginated API response
@@ -1469,6 +1560,26 @@ class ShapeConfig:
         "dockets,regulation_id_numbers,topics,correction_of,corrections,"
         "executive_order_number,presidential_document_number,proclamation_number,"
         "comment_url,regulations_dot_gov_url,raw_text_url,body_html_url"
+    )
+
+    # Default for list_ebuy_requests(). Mirrors the API's own list default.
+    EBUY_REQUESTS_MINIMAL: Final = (
+        "rfq_id,request_type,title,schedule,sin,status,buyer_name,buyer_agency,"
+        "buyer_agency_code,reference_number,issue_date,close_date,attachment_count,"
+        "link_count,last_seen"
+    )
+
+    # Default for get_ebuy_request(). Mirrors the API's own retrieve default; the attachment fields are named rather than `attachments(*)` so their dates parse.
+    EBUY_REQUESTS_COMPREHENSIVE: Final = (
+        "rfq_id,request_type,title,description,schedule,sin,status,buyer_name,"
+        "buyer_agency,buyer_agency_code,buyer_email,buyer_user_id,reference_number,"
+        "award_method,contract_type,commercial_type,follow_on,source_sought,issue_date,"
+        "close_date,cancel_date,last_mod_date,pop_start_date,pop_end_date,oco_name,"
+        "oco_title,oco_agency,oco_phone,oco_aac,ocs_name,ocs_title,ocs_agency,ocs_phone,"
+        "ocs_aac,amendment_count,mod_version,qa_document_count,attachment_count,"
+        "link_count,amendments,line_items,addresses,detail_fetched,first_seen,last_seen,"
+        "organization(*),"
+        "attachments(doc_seq_num,doc_name,doc_type,doc_path,is_link,doc_session_date)"
     )
 
     # Default for list_dibbs_rfqs()
