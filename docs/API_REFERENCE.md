@@ -1646,7 +1646,7 @@ requests = client.list_ebuy_requests(
 - `sin` - Special Item Number, e.g. `"54151S"`
 - `schedule` - GSA schedule
 - `buyer_agency` - The buyer agency as eBuy names it (free text)
-- `agency` - A Tango agency name, abbreviation, code or organization key, e.g. `"GSA"`. Matches the whole organization subtree, so a department includes its sub-agencies
+- `agency` - A Tango agency name, abbreviation, code or organization key, e.g. `"GSA"`. Matches the whole organization subtree, so a department includes its sub-agencies. Requires Tango API 5.3.0
 - `contract_number` - Narrow to requests posted under one of your own linked contracts. A contract not linked to your account returns an empty page, not an error
 - `issue_date_after` / `issue_date_before` - Issue date range (`YYYY-MM-DD`, inclusive)
 - `close_date_after` / `close_date_before` - Close date range (`YYYY-MM-DD`, inclusive)
@@ -1697,7 +1697,7 @@ url = client.get_ebuy_attachment_url("RFQ1835158", doc_seq_num=1)
 **Returns:** The signed URL the API redirects to, as a string. The SDK reads the redirect without following it, so no document is downloaded. The URL expires after about five minutes: fetch it promptly, and call this again rather than storing it.
 
 **Raises:**
-- `TangoValidationError` - The entry is an external link (`is_link`), not a stored document. The link is in the message and in `error.response_data["url"]`
+- `TangoAttachmentLinkError` (a `TangoValidationError`) - The entry is an external link (`is_link`), not a stored document. The link is on `error.url`
 - `TangoNotFoundError` - The request is unknown or outside your scope, the attachment does not exist, or its document has not been captured yet
 
 ### get_ebuy_access()

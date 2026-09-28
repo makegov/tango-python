@@ -11,6 +11,7 @@ import httpx
 
 from tango.exceptions import (
     TangoAPIError,
+    TangoAttachmentLinkError,
     TangoAuthError,
     TangoNotFoundError,
     TangoRateLimitError,
@@ -3019,7 +3020,7 @@ class TangoClient:
             sin: Special Item Number, e.g. ``54151S``. OR several with ``|``
             schedule: GSA schedule. OR several with ``|``
             buyer_agency: The buyer agency as eBuy names it (free text). OR several with ``|``
-            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``GSA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``
+            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``GSA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``. Requires Tango API 5.3.0
             contract_number: Narrow to requests posted under one of your own linked contracts. A contract not linked to your account returns an empty page, not an error
             issue_date_after: Issued on or after (YYYY-MM-DD)
             issue_date_before: Issued on or before (YYYY-MM-DD)
@@ -3116,7 +3117,7 @@ class TangoClient:
             doc_seq_num: The attachment's ``doc_seq_num`` from ``get_ebuy_request()``
 
         Raises:
-            TangoValidationError: The entry is an external link (``is_link``), not a stored document. The link is in the message and in ``response_data["url"]``.
+            TangoAttachmentLinkError: The entry is an external link (``is_link``), not a stored document. The link is on ``.url`` and in the message. Subclasses ``TangoValidationError``.
             TangoNotFoundError: The request is unknown or outside your scope, the attachment does not exist, or its document has not been captured yet.
         """
         endpoint = (
@@ -3143,7 +3144,7 @@ class TangoClient:
             if not isinstance(error_data, dict):
                 error_data = {}
             if response.status_code == 400 and error_data.get("url"):
-                raise TangoValidationError(
+                raise TangoAttachmentLinkError(
                     f"Attachment {doc_seq_num} on {rfq_id} is an external link, not a stored document: {error_data['url']}",
                     response.status_code,
                     error_data,

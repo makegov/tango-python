@@ -1275,7 +1275,7 @@ class FederalRegisterDocument:
 class EbuyAttachment:
     """Schema definition for one entry in an eBuy request's ``attachments`` (not used for instances).
 
-    ``is_link=True`` means the entry is an outbound URL in ``doc_path`` with no stored document behind it, so ``get_ebuy_attachment_url()`` refuses it.
+    ``is_link=True`` means the entry is an outbound URL in ``doc_path`` with no stored document behind it, so ``get_ebuy_attachment_url()`` raises ``TangoAttachmentLinkError`` for it.
     """
 
     doc_seq_num: int | None = None

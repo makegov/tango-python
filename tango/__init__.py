@@ -3,6 +3,7 @@
 from .client import TangoClient
 from .exceptions import (
     TangoAPIError,
+    TangoAttachmentLinkError,
     TangoAuthError,
     TangoNotFoundError,
     TangoRateLimitError,
@@ -65,6 +66,7 @@ __all__ = [
     "TangoAuthError",
     "TangoNotFoundError",
     "TangoValidationError",
+    "TangoAttachmentLinkError",
     "TangoRateLimitError",
     "RateLimitInfo",
     "ResolveCandidate",

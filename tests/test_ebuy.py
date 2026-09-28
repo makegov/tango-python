@@ -13,6 +13,7 @@ from tango import EbuyAccess, TangoClient
 from tango.exceptions import (
     ShapeValidationError,
     TangoAPIError,
+    TangoAttachmentLinkError,
     TangoNotFoundError,
     TangoValidationError,
 )
@@ -241,11 +242,12 @@ class TestGetEbuyAttachmentUrl:
             },
         )
 
-        with pytest.raises(TangoValidationError) as excinfo:
+        with pytest.raises(TangoAttachmentLinkError) as excinfo:
             TangoClient(api_key="k").get_ebuy_attachment_url(RFQ_ID, 2)
 
+        assert isinstance(excinfo.value, TangoValidationError)
+        assert excinfo.value.url == "https://example.gov/qa"
         assert "https://example.gov/qa" in str(excinfo.value)
-        assert excinfo.value.response_data["url"] == "https://example.gov/qa"
 
     @patch("tango.client.httpx.Client.request")
     def test_uncaptured_document_is_not_found_with_detail(self, mock_request):

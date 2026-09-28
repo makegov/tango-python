@@ -53,6 +53,16 @@ class TangoValidationError(TangoAPIError):
         return val if isinstance(val, dict) else None
 
 
+class TangoAttachmentLinkError(TangoValidationError):
+    """The requested attachment is an external link, not a stored document, so there is nothing to download."""
+
+    @property
+    def url(self) -> str | None:
+        """The external link the entry points at."""
+        val = self.response_data.get("url")
+        return val if isinstance(val, str) else None
+
+
 class TangoRateLimitError(TangoAPIError):
     """Rate limit exceeded error"""
 
