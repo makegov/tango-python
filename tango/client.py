@@ -30,6 +30,7 @@ from tango.models import (
     DibbsRfq,
     Entity,
     Exclusion,
+    FederalRegisterDocument,
     Forecast,
     Grant,
     GsaElibraryContract,
@@ -1601,18 +1602,18 @@ class TangoClient:
         cio_rating_max: int | None = None,
         performance_risk: bool | None = None,
         previous_uii: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """List federal IT investments from the IT Dashboard (`/api/itdashboard/`).
 
         Filters are tier-gated by the API:
 
-        - **Free**: ``search`` (full-text across UII, title, description, agency,
-          bureau) and ``previous_uii`` — following a retired identifier forward to
-          whatever superseded it is recovery, not analysis, so it is ungated
+        - **Free**: ``search`` (full-text across UII, title, description, agency, bureau), ``agency_name`` (text), ``agency`` and ``previous_uii`` — following a retired identifier forward to whatever superseded it is recovery, not analysis, so it is ungated
         - **Pro**: ``agency_code``, ``type_of_investment``,
           ``updated_time_after`` / ``updated_time_before``
-        - **Business+**: ``agency_name`` (text), ``cio_rating``,
-          ``cio_rating_max``, ``performance_risk``
+        - **Business+**: ``cio_rating``, ``cio_rating_max``, ``performance_risk``
+
+        ``agency`` takes a Tango agency name, abbreviation, code or organization key, e.g. ``DOT``, and matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``.
 
         Hitting a gated filter on a lower tier returns a 403 with upgrade info.
 
@@ -1632,6 +1633,7 @@ class TangoClient:
                 params["flat_lists"] = "true"
         for k, val in (
             ("search", search),
+            ("agency", agency),
             ("agency_code", agency_code),
             ("agency_name", agency_name),
             ("type_of_investment", type_of_investment),
@@ -2819,6 +2821,149 @@ class TangoClient:
         return self._parse_response_with_shape(data, shape, ContractAppeal, flat, flat_lists)
 
     # ============================================================================
+    # Federal Register documents
+    # ============================================================================
+
+    def list_federal_register_documents(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        search: str | None = None,
+        document_number: str | None = None,
+        type: str | None = None,
+        agency: str | None = None,
+        fr_agency: str | None = None,
+        publication_date_after: str | None = None,
+        publication_date_before: str | None = None,
+        effective_on_after: str | None = None,
+        effective_on_before: str | None = None,
+        comments_close_on_after: str | None = None,
+        comments_close_on_before: str | None = None,
+        comments_open: bool | None = None,
+        cfr_title: str | None = None,
+        cfr_part: str | None = None,
+        significant: bool | None = None,
+        rin: str | None = None,
+        executive_order_number: str | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List Federal Register documents.
+
+        Rules, proposed rules, notices and presidential documents published in the Federal Register since 1994.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            search: Ranked full-text search over the title, abstract and action. Wrap in double quotes for a phrase
+            document_number: Exact FR document number, e.g. ``2016-31922``. OR several with ``|``. A number the Federal Register reused before 2016 matches every document that carries it
+            type: ``Notice``, ``Rule``, ``Proposed Rule``, ``Presidential Document``, ``Correction``, ``Sunshine Act Document`` or ``Uncategorized Document`` (case-insensitive). OR several with ``|``. Documents published before 2008 are mostly ``Uncategorized Document``
+            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches a document when any agency it lists falls within that organization, so a department includes its sub-agencies. OR several with ``|``
+            fr_agency: The Federal Register's own agency slug, e.g. ``environmental-protection-agency``. OR several with ``|``
+            publication_date_after: Published on or after (YYYY-MM-DD)
+            publication_date_before: Published on or before (YYYY-MM-DD)
+            effective_on_after: Effective on or after (YYYY-MM-DD)
+            effective_on_before: Effective on or before (YYYY-MM-DD)
+            comments_close_on_after: Comment period closes on or after (YYYY-MM-DD)
+            comments_close_on_before: Comment period closes on or before (YYYY-MM-DD)
+            comments_open: ``True`` for documents whose comment period closes today or later, ``False`` for those already closed. Documents with no comment deadline match neither
+            cfr_title: A CFR title number, e.g. ``40``
+            cfr_part: A CFR part number, e.g. ``52``. Requires ``cfr_title``, and both must match the same CFR reference
+            significant: Significant under Executive Order 12866
+            rin: A Regulation Identifier Number, e.g. ``2060-AV16``. OR several with ``|``
+            executive_order_number: Exact executive order number
+            ordering: Sort field — ``publication_date`` (the default, as ``-publication_date``), ``effective_on``, ``comments_close_on``, ``document_number`` or ``rank``. ``rank`` requires a non-empty ``search``
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.FEDERAL_REGISTER_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("search", search),
+            ("document_number", document_number),
+            ("type", type),
+            ("agency", agency),
+            ("fr_agency", fr_agency),
+            ("publication_date_after", publication_date_after),
+            ("publication_date_before", publication_date_before),
+            ("effective_on_after", effective_on_after),
+            ("effective_on_before", effective_on_before),
+            ("comments_close_on_after", comments_close_on_after),
+            ("comments_close_on_before", comments_close_on_before),
+            ("comments_open", comments_open),
+            ("cfr_title", cfr_title),
+            ("cfr_part", cfr_part),
+            ("significant", significant),
+            ("rin", rin),
+            ("executive_order_number", executive_order_number),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/federal_register/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, FederalRegisterDocument, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_federal_register_document(
+        self,
+        document_uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single Federal Register document by uuid.
+
+        The detail route takes the document's ``uuid``, not its ``document_number``, which is not unique on its own.
+        To look a document up by number, use ``list_federal_register_documents(document_number=...)``.
+
+        Args:
+            document_uuid: Document UUID
+            shape: Response shape string (defaults to the comprehensive shape). Name ``full_text`` here to get the document's plain text, which can run to several MB
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.FEDERAL_REGISTER_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/federal_register/{document_uuid}/", params)
+        return self._parse_response_with_shape(
+            data, shape, FederalRegisterDocument, flat, flat_lists
+        )
+
+    # ============================================================================
     # DLA DIBBS (RFQs, RFPs, awards)
     # ============================================================================
 
@@ -3242,6 +3387,7 @@ class TangoClient:
         update_date_before: str | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """
         List SAM.gov exclusion (debarment) records.
@@ -3261,6 +3407,7 @@ class TangoClient:
             classification_type: Filter by classification (Firm, Individual, Vessel, ...)
             exclusion_type: Filter by exclusion type
             exclusion_program: Filter by exclusion program
+            agency: Excluding agency as a Tango organization. A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``
             excluding_agency_code: Filter by excluding agency code
             excluding_agency_name: Filter by excluding agency name
             active: True returns only records currently in effect.
@@ -3296,6 +3443,7 @@ class TangoClient:
             ("classification_type", classification_type),
             ("exclusion_type", exclusion_type),
             ("exclusion_program", exclusion_program),
+            ("agency", agency),
             ("excluding_agency_code", excluding_agency_code),
             ("excluding_agency_name", excluding_agency_name),
             ("active", active),
@@ -4153,6 +4301,7 @@ class TangoClient:
         actual_vs_requested_contract_capped_lte: float | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """List budget accounts (`/api/budget/accounts/`).
 
@@ -4170,6 +4319,7 @@ class TangoClient:
             fiscal_year: Fiscal year (exact).
             fiscal_year_gte: Fiscal year >=.
             fiscal_year_lte: Fiscal year <=.
+            agency: A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``.
             agency_code: Agency code (exact).
             bureau_name: Bureau name (exact).
             account_title: Account title (icontains).
@@ -4234,6 +4384,7 @@ class TangoClient:
             ("fiscal_year", fiscal_year),
             ("fiscal_year__gte", fiscal_year_gte),
             ("fiscal_year__lte", fiscal_year_lte),
+            ("agency", agency),
             ("agency_code", agency_code),
             ("bureau_name", bureau_name),
             ("account_title__icontains", account_title),
@@ -4870,8 +5021,8 @@ class TangoClient:
             name: Human-readable name for this alert.
             query_type: One of ``opportunity``, ``contract``, ``idv``, ``ota``,
                 ``otidv``, ``entity``, ``grant``, ``forecast``, ``exclusion``,
-                ``dibbs_rfq``, ``dibbs_rfp``, ``sled_opportunity`` or
-                ``contract_appeal``. :meth:`list_webhook_event_types` is the
+                ``dibbs_rfq``, ``dibbs_rfp``, ``sled_opportunity``,
+                ``contract_appeal`` or ``federal_register``. :meth:`list_webhook_event_types` is the
                 current authority — this list can only go stale.
             filters: Dict of query parameters that the alert matches against
                 (e.g. ``{"naics": "541330", "set_aside": "SBA"}``).

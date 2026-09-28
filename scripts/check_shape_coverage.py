@@ -69,6 +69,7 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "budget_accounts": "BudgetAccount",
     "protests": "Protest",
     "contract_appeals": "ContractAppeal",
+    "federal_register": "FederalRegisterDocument",
     "offices": "Office",
     "assistance_listings": "AssistanceListing",
     "business_types": "BusinessType",
