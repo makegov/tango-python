@@ -1593,7 +1593,6 @@ class TangoClient:
         flat_lists: bool = False,
         joiner: str = ".",
         search: str | None = None,
-        agency: str | None = None,
         agency_code: int | None = None,
         agency_name: str | None = None,
         type_of_investment: str | None = None,
@@ -1603,6 +1602,7 @@ class TangoClient:
         cio_rating_max: int | None = None,
         performance_risk: bool | None = None,
         previous_uii: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """List federal IT investments from the IT Dashboard (`/api/itdashboard/`).
 
@@ -3375,7 +3375,6 @@ class TangoClient:
         classification_type: str | None = None,
         exclusion_type: str | None = None,
         exclusion_program: str | None = None,
-        agency: str | None = None,
         excluding_agency_code: str | None = None,
         excluding_agency_name: str | None = None,
         active: bool | None = None,
@@ -3388,6 +3387,7 @@ class TangoClient:
         update_date_before: str | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """
         List SAM.gov exclusion (debarment) records.
@@ -4214,7 +4214,6 @@ class TangoClient:
         fiscal_year: int | None = None,
         fiscal_year_gte: int | None = None,
         fiscal_year_lte: int | None = None,
-        agency: str | None = None,
         agency_code: str | None = None,
         bureau_name: str | None = None,
         account_title: str | None = None,
@@ -4302,6 +4301,7 @@ class TangoClient:
         actual_vs_requested_contract_capped_lte: float | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        agency: str | None = None,
     ) -> PaginatedResponse:
         """List budget accounts (`/api/budget/accounts/`).
 
