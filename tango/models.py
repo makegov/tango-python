@@ -1000,6 +1000,7 @@ class SbirTopic:
     activity: str | None = None
     year: int | None = None
     solicitation_number: str | None = None
+    cycle_name: str | None = None
     solicitation_status: str | None = None
     release_date: str | None = None
     open_date: str | None = None

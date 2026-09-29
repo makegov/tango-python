@@ -2731,6 +2731,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         "activity": FieldSchema(name="activity", type=str, is_optional=True, is_list=False),
         "agency": FieldSchema(name="agency", type=str, is_optional=True, is_list=False),
         "close_date": FieldSchema(name="close_date", type=date, is_optional=True, is_list=False),
+        "cycle_name": FieldSchema(name="cycle_name", type=str, is_optional=True, is_list=False),
         "description": FieldSchema(name="description", type=str, is_optional=True, is_list=False),
         "doc_source": FieldSchema(name="doc_source", type=str, is_optional=True, is_list=False),
         "due_dates_text": FieldSchema(
