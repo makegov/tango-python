@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`list_sbir_topics(cycle_name=...)`** filters topics by their DSIP solicitation cycle (e.g. `DOD_SBIR_2026_P1_CBZ`), and `SbirTopic` gains a `cycle_name` field (Tango API 5.3.1). The vendored API contract is refreshed to 5.3.1.
+
 ## [1.9.0] - 2026-09-28
 
 ### Added

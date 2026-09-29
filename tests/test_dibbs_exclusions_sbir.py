@@ -142,6 +142,12 @@ class TestSbir:
         assert params["topic_number"] == "A26-001"
 
     @patch("tango.client.httpx.Client.request")
+    def test_list_sbir_topics_cycle_name(self, mock_request):
+        _mock(mock_request)
+        TangoClient(api_key="k").list_sbir_topics(cycle_name="DOD_SBIR_2026_P1_CBZ")
+        assert _call_params(mock_request)["cycle_name"] == "DOD_SBIR_2026_P1_CBZ"
+
+    @patch("tango.client.httpx.Client.request")
     def test_get_sbir_topic_uses_topic_id_route(self, mock_request):
         _mock(mock_request, {"topic_id": "t1"})
         TangoClient(api_key="k").get_sbir_topic("t1")

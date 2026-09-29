@@ -3733,6 +3733,7 @@ class TangoClient:
         flat_lists: bool = False,
         topic_number: str | None = None,
         solicitation_number: str | None = None,
+        cycle_name: str | None = None,
         agency: str | None = None,
         activity: str | None = None,
         year: int | None = None,
@@ -3759,6 +3760,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             topic_number: Filter by topic number
             solicitation_number: Filter by solicitation number
+            cycle_name: Filter by DSIP solicitation cycle, exact (e.g. "DOD_SBIR_2026_P1_CBZ"; requires Tango API 5.3.1)
             agency: Filter by agency
             activity: Filter by activity (component/branch)
             year: Filter by solicitation year
@@ -3786,6 +3788,7 @@ class TangoClient:
         for key, val in (
             ("topic_number", topic_number),
             ("solicitation_number", solicitation_number),
+            ("cycle_name", cycle_name),
             ("agency", agency),
             ("activity", activity),
             ("year", year),

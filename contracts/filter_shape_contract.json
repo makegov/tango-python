@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.3.0",
+    "api_version": "5.3.1",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -13990,6 +13990,7 @@
           "agency",
           "close_date_after",
           "close_date_before",
+          "cycle_name",
           "doc_source",
           "open_date_after",
           "open_date_before",
@@ -14024,6 +14025,10 @@
             "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
+          },
+          "cycle_name": {
+            "filter_class": "CharFilter",
+            "type": "string"
           },
           "doc_source": {
             "filter_class": "CharFilter",
@@ -14134,6 +14139,7 @@
             "activity",
             "agency",
             "close_date",
+            "cycle_name",
             "description",
             "doc_source",
             "due_dates_text",
@@ -14156,6 +14162,7 @@
           "activity",
           "agency",
           "close_date",
+          "cycle_name",
           "description",
           "doc_source",
           "due_dates_text",
