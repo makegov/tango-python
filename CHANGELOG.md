@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.11.0] - 2026-09-29
+
 ### Added
 
 - **Award fields on opportunities and notices** (Tango API 5.5.0) — new `awarded` / `awardee_uei` filters on `list_opportunities()`, plus award leaves and an `awards(...)` expand in the opportunity and notice shapes (see `docs/API_REFERENCE.md`).
