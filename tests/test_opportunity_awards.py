@@ -120,3 +120,17 @@ class TestAwardFilters:
         params = mock_request.call_args.kwargs["params"]
         assert params["awarded"] is False
         assert "awardee_uei" not in params
+
+    @patch("tango.client.httpx.Client.request")
+    def test_existing_positional_arguments_keep_their_meaning(self, mock_request):
+        _mock(mock_request, _page([]))
+        TangoClient(api_key="k").list_opportunities(
+            1, 25, None, False, False, None, None, "2026-08-01"
+        )
+        params = mock_request.call_args.kwargs["params"]
+        assert params["first_notice_date_after"] == "2026-08-01"
+        assert "awarded" not in params
+
+    def test_award_filters_are_keyword_only(self):
+        with pytest.raises(TypeError):
+            TangoClient(api_key="k").list_opportunities(*([None] * 21), True)

@@ -2332,8 +2332,6 @@ class TangoClient:
         flat_lists: bool = False,
         active: bool | None = None,
         agency: str | None = None,
-        awarded: bool | None = None,
-        awardee_uei: str | None = None,
         first_notice_date_after: str | None = None,
         first_notice_date_before: str | None = None,
         last_notice_date_after: str | None = None,
@@ -2348,6 +2346,9 @@ class TangoClient:
         search: str | None = None,
         set_aside: str | None = None,
         solicitation_number: str | None = None,
+        *,
+        awarded: bool | None = None,
+        awardee_uei: str | None = None,
     ) -> PaginatedResponse:
         """
         List contract opportunities/solicitations
