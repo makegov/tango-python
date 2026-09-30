@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.3.1",
+    "api_version": "5.5.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -11458,7 +11458,11 @@
             "archive",
             "attachment_count",
             "attachments",
+            "award_amount",
+            "award_date",
             "award_number",
+            "awardee",
+            "awardee_uei",
             "description",
             "last_updated",
             "meta",
@@ -11500,7 +11504,11 @@
           "attachments.resource_id",
           "attachments.type",
           "attachments.url",
+          "award_amount",
+          "award_date",
           "award_number",
+          "awardee",
+          "awardee_uei",
           "description",
           "last_updated",
           "meta",
@@ -11690,6 +11698,8 @@
         "filter_params": [
           "active",
           "agency",
+          "awarded",
+          "awardee_uei",
           "first_notice_date_after",
           "first_notice_date_before",
           "last_notice_date_after",
@@ -11712,6 +11722,14 @@
           },
           "agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "awarded": {
+            "filter_class": "BooleanFilter",
+            "type": "boolean"
+          },
+          "awardee_uei": {
+            "filter_class": "AwardeeUeiFilter",
             "type": "string"
           },
           "first_notice_date_after": {
@@ -11813,6 +11831,18 @@
                 "resource_id",
                 "type",
                 "url"
+              ]
+            },
+            "awards": {
+              "expands": {},
+              "fields": [
+                "award_amount",
+                "award_date",
+                "award_number",
+                "awardee",
+                "awardee_uei",
+                "notice_id",
+                "opportunity_id"
               ]
             },
             "department": {
@@ -11921,7 +11951,13 @@
             "agency_id",
             "archive_date",
             "attachments",
+            "award_amount",
+            "award_count",
+            "award_date",
             "award_number",
+            "awarded",
+            "awardee",
+            "awardee_uei",
             "department",
             "department_id",
             "description",
@@ -11943,6 +11979,7 @@
             "set_aside",
             "snippet",
             "solicitation_number",
+            "solicitation_opportunity_id",
             "title"
           ]
         },
@@ -11966,7 +12003,21 @@
           "attachments.resource_id",
           "attachments.type",
           "attachments.url",
+          "award_amount",
+          "award_count",
+          "award_date",
           "award_number",
+          "awarded",
+          "awardee",
+          "awardee_uei",
+          "awards",
+          "awards.award_amount",
+          "awards.award_date",
+          "awards.award_number",
+          "awards.awardee",
+          "awards.awardee_uei",
+          "awards.notice_id",
+          "awards.opportunity_id",
           "department",
           "department.abbreviation",
           "department.cgac",
@@ -12037,6 +12088,7 @@
           "set_aside.description",
           "snippet",
           "solicitation_number",
+          "solicitation_opportunity_id",
           "title"
         ],
         "shape_gated_by_level": {
@@ -12054,6 +12106,8 @@
       "swagger_params": [
         "active",
         "agency",
+        "awarded",
+        "awardee_uei",
         "first_notice_date_after",
         "first_notice_date_before",
         "flat",
@@ -15820,6 +15874,18 @@
                     "url"
                   ]
                 },
+                "awards": {
+                  "expands": {},
+                  "fields": [
+                    "award_amount",
+                    "award_date",
+                    "award_number",
+                    "awardee",
+                    "awardee_uei",
+                    "notice_id",
+                    "opportunity_id"
+                  ]
+                },
                 "department": {
                   "expands": {},
                   "fields": [
@@ -15926,7 +15992,13 @@
                 "agency_id",
                 "archive_date",
                 "attachments",
+                "award_amount",
+                "award_count",
+                "award_date",
                 "award_number",
+                "awarded",
+                "awardee",
+                "awardee_uei",
                 "department",
                 "department_id",
                 "description",
@@ -15948,6 +16020,7 @@
                 "set_aside",
                 "snippet",
                 "solicitation_number",
+                "solicitation_opportunity_id",
                 "title"
               ]
             },
@@ -16423,7 +16496,21 @@
           "opportunity.attachments.resource_id",
           "opportunity.attachments.type",
           "opportunity.attachments.url",
+          "opportunity.award_amount",
+          "opportunity.award_count",
+          "opportunity.award_date",
           "opportunity.award_number",
+          "opportunity.awarded",
+          "opportunity.awardee",
+          "opportunity.awardee_uei",
+          "opportunity.awards",
+          "opportunity.awards.award_amount",
+          "opportunity.awards.award_date",
+          "opportunity.awards.award_number",
+          "opportunity.awards.awardee",
+          "opportunity.awards.awardee_uei",
+          "opportunity.awards.notice_id",
+          "opportunity.awards.opportunity_id",
           "opportunity.department",
           "opportunity.department.abbreviation",
           "opportunity.department.cgac",
@@ -16494,6 +16581,7 @@
           "opportunity.set_aside.description",
           "opportunity.snippet",
           "opportunity.solicitation_number",
+          "opportunity.solicitation_opportunity_id",
           "opportunity.title",
           "opportunity_id",
           "order_count",

@@ -565,6 +565,10 @@ class Opportunity:
     Both must be named, e.g. ``attachments(name,url,doc_role,doc_role_alt)``, because ``attachments(*)`` does not include them.
     An attachment Tango has not classified omits both keys rather than returning null, so read them with ``.get()``.
     A Free-plan request that names them gets the response without them, plus an entry in ``meta.upgrade_hints``.
+
+    The award fields (``award_date``, ``award_amount``, ``awardee``, ``awardee_uei``) are filled only where SAM.gov posted an award notice, and ``award_amount`` is the text SAM.gov published, not a number.
+    SAM.gov often posts an award as its own opportunity; when that award notice references its solicitation, ``solicitation_opportunity_id`` points back to it, and the solicitation's ``awards(...)`` expand lists up to ten of the most recent linked awards, with ``award_count`` giving the full count.
+    An award notice that does not reference its solicitation is not linked.
     """
 
     opportunity_id: str
@@ -575,6 +579,15 @@ class Opportunity:
     active: bool | None = None
     naics_code: str | None = None
     psc_code: str | None = None
+    award_number: str | None = None
+    awarded: bool | None = None
+    award_date: date | None = None
+    award_amount: str | None = None
+    awardee: str | None = None
+    awardee_uei: str | None = None
+    award_count: int | None = None
+    solicitation_opportunity_id: str | None = None
+    awards: list[dict[str, Any]] | None = None
 
 
 @dataclass
@@ -593,6 +606,11 @@ class Notice:
     description: str | None = None
     posted_date: datetime | None = None
     naics_code: str | None = None
+    award_number: str | None = None
+    award_date: date | None = None
+    award_amount: str | None = None
+    awardee: str | None = None
+    awardee_uei: str | None = None
 
 
 @dataclass

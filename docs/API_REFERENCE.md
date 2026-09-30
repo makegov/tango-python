@@ -868,6 +868,8 @@ opportunities = client.list_opportunities(
     # Filter parameters (all optional)
     active=None,
     agency=None,
+    awarded=None,
+    awardee_uei=None,
     first_notice_date_after=None,
     first_notice_date_before=None,
     last_notice_date_after=None,
@@ -894,6 +896,8 @@ opportunities = client.list_opportunities(
 **Filter Parameters:**
 - `active` - Filter by active status (bool)
 - `agency` - Filter by agency code
+- `awarded` - Whether the opportunity has an award, either posted on it or linked to it (bool). Requires Tango API 5.5.0
+- `awardee_uei` - Awardee UEI, case-insensitive; OR several with `|`. Requires Tango API 5.5.0
 - `first_notice_date_after` / `first_notice_date_before` - First notice date range
 - `last_notice_date_after` / `last_notice_date_before` - Last notice date range
 - `naics` - NAICS code
@@ -946,6 +950,33 @@ for attachment in opp["attachments"]:
 - **The keys are absent, not null**, on an attachment Tango has not classified. Use `attachment.get("doc_role")`.
 - A Free-plan request that names them gets the response without them, plus an entry in `meta.upgrade_hints`.
 - There is no filter on document role.
+
+**Award fields:**
+
+Tango API 5.5.0 adds award information to opportunities.
+None of it is in the SDK's default shape, so name the fields you want.
+
+```python
+opp = client.get_opportunity(
+    opportunity_id,
+    shape=(
+        "opportunity_id,title,awarded,award_date,award_amount,awardee,awardee_uei,"
+        "award_count,solicitation_opportunity_id,"
+        "awards(opportunity_id,notice_id,award_number,award_date,award_amount,awardee,awardee_uei)"
+    ),
+)
+
+awarded = client.list_opportunities(
+    awardee_uei="ABCDEF123456",
+    shape="opportunity_id,title,award_date,awardee",
+)
+```
+
+- `award_date`, `award_amount`, `awardee` and `awardee_uei` are filled only where SAM.gov posted an award notice; elsewhere they are null. `award_amount` is the text SAM.gov published, not a number.
+- SAM.gov often posts an award as its own opportunity. When that award notice references its solicitation, the award's `solicitation_opportunity_id` points back to the solicitation, and the solicitation's `awards(...)` lists up to ten of the most recent linked awards; `award_count` is the full count. An award notice that does not reference its solicitation is not linked.
+- `awarded` is true when the opportunity has an award of its own or has linked awards.
+- The `awarded` and `awardee_uei` filters search every opportunity, not just active ones, so pass `active=True` to narrow to open opportunities.
+- Notices accept `award_date`, `award_amount`, `awardee` and `awardee_uei` in `shape` too.
 
 ---
 

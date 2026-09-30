@@ -8348,7 +8348,31 @@
         "kind": "scalar",
         "type": "str"
       },
+      "award_amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "award_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
       "award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awardee": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awardee_uei": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
@@ -8831,7 +8855,90 @@
         "kind": "scalar",
         "type": "str"
       },
+      "award_amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "award_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "award_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
       "award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awarded": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "awardee": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awardee_uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "object"
+      },
+      "awards.award_amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards.award_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "awards.award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards.awardee": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards.awardee_uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards.notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "awards.opportunity_id": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
@@ -9222,6 +9329,12 @@
         "type": "str"
       },
       "solicitation_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "solicitation_opportunity_id": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
@@ -12477,6 +12590,95 @@
         "type": "int"
       },
       "name": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.award_amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.award_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "opportunity.award_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "opportunity.awarded": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "bool"
+      },
+      "opportunity.awardee": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awardee_uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "object"
+      },
+      "opportunity.awards.award_amount": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards.award_date": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "date"
+      },
+      "opportunity.awards.award_number": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards.awardee": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards.awardee_uei": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards.notice_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.awards.opportunity_id": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
+      "opportunity.solicitation_opportunity_id": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
