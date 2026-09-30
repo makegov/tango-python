@@ -2346,6 +2346,9 @@ class TangoClient:
         search: str | None = None,
         set_aside: str | None = None,
         solicitation_number: str | None = None,
+        *,
+        awarded: bool | None = None,
+        awardee_uei: str | None = None,
     ) -> PaginatedResponse:
         """
         List contract opportunities/solicitations
@@ -2358,6 +2361,8 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             active: Filter by active status
             agency: Agency filter
+            awarded: Filter by whether the opportunity has an award, either posted on it or linked to it from a separate award notice. Searches every opportunity rather than only active ones. Requires Tango API 5.5.0
+            awardee_uei: Filter by the awardee's UEI (case-insensitive). OR several with ``|``. Searches every opportunity rather than only active ones. Requires Tango API 5.5.0
             first_notice_date_after: First notice date after
             first_notice_date_before: First notice date before
             last_notice_date_after: Last notice date after
@@ -2387,6 +2392,8 @@ class TangoClient:
         for key, val in (
             ("active", active),
             ("agency", agency),
+            ("awarded", awarded),
+            ("awardee_uei", awardee_uei),
             ("first_notice_date_after", first_notice_date_after),
             ("first_notice_date_before", first_notice_date_before),
             ("last_notice_date_after", last_notice_date_after),

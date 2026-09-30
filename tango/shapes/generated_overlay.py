@@ -213,6 +213,16 @@ AWARDS_SCHEMA: dict[str, FieldSchema] = {
     "transactions": FieldSchema(name="transactions", type=str, is_optional=True, is_list=False),
 }
 
+AWARDS2_SCHEMA: dict[str, FieldSchema] = {
+    "award_amount": FieldSchema(name="award_amount", type=str, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "award_number": FieldSchema(name="award_number", type=str, is_optional=True, is_list=False),
+    "awardee": FieldSchema(name="awardee", type=str, is_optional=True, is_list=False),
+    "awardee_uei": FieldSchema(name="awardee_uei", type=str, is_optional=True, is_list=False),
+    "notice_id": FieldSchema(name="notice_id", type=str, is_optional=True, is_list=False),
+    "opportunity_id": FieldSchema(name="opportunity_id", type=str, is_optional=True, is_list=False),
+}
+
 BUDGET_APPROPRIATION_SCHEMA: dict[str, FieldSchema] = {
     "cgac": FieldSchema(name="cgac", type=int, is_optional=True, is_list=False),
     "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
@@ -1112,6 +1122,7 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "AwardingOffice": AWARDING_OFFICE_SCHEMA,
     "AwardingOffice2": AWARDING_OFFICE2_SCHEMA,
     "Awards": AWARDS_SCHEMA,
+    "Awards2": AWARDS2_SCHEMA,
     "BudgetAppropriation": BUDGET_APPROPRIATION_SCHEMA,
     "BudgetSpending": BUDGET_SPENDING_SCHEMA,
     "Children": CHILDREN_SCHEMA,
@@ -2228,6 +2239,10 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_list=True,
             nested_model="Attachments",
         ),
+        "award_amount": FieldSchema(name="award_amount", type=str, is_optional=True, is_list=False),
+        "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+        "awardee": FieldSchema(name="awardee", type=str, is_optional=True, is_list=False),
+        "awardee_uei": FieldSchema(name="awardee_uei", type=str, is_optional=True, is_list=False),
         "meta": FieldSchema(
             name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
         ),
@@ -2476,6 +2491,15 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             is_list=False,
             nested_model="Attachments5",
         ),
+        "award_amount": FieldSchema(name="award_amount", type=str, is_optional=True, is_list=False),
+        "award_count": FieldSchema(name="award_count", type=int, is_optional=True, is_list=False),
+        "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+        "awarded": FieldSchema(name="awarded", type=bool, is_optional=True, is_list=False),
+        "awardee": FieldSchema(name="awardee", type=str, is_optional=True, is_list=False),
+        "awardee_uei": FieldSchema(name="awardee_uei", type=str, is_optional=True, is_list=False),
+        "awards": FieldSchema(
+            name="awards", type=dict, is_optional=True, is_list=True, nested_model="Awards2"
+        ),
         "department": FieldSchema(
             name="department",
             type=dict,
@@ -2529,6 +2553,9 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
             nested_model="CodeDescription",
         ),
         "snippet": FieldSchema(name="snippet", type=str, is_optional=True, is_list=False),
+        "solicitation_opportunity_id": FieldSchema(
+            name="solicitation_opportunity_id", type=str, is_optional=True, is_list=False
+        ),
     },
     "Organization": {
         "aac_code": FieldSchema(name="aac_code", type=str, is_optional=True, is_list=False),
