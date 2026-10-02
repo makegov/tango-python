@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.12.0] - 2026-10-02
+
 ### Added
 
 - **`account_category` and `source_anomalies` on budget accounts** (Tango API 5.7.0). Both are in the default `BUDGET_ACCOUNTS_MINIMAL` shape and accepted in custom shapes. `account_category` is `budgetary` or `credit_financing` today. `source_anomalies` lists the problems found in the source data behind an account, and is `[]` when there are none. Each element is typed as the new `BudgetAccountSourceAnomaly` `TypedDict` (with `BudgetAccountAnomalySource` and `BudgetAccountAnomalySourceRow` for its nested `source`), and every key is optional. Treat `account_category` and an anomaly's `code` as open strings, since new values may appear.
