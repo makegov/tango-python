@@ -62,7 +62,7 @@ from .webhooks import (
 )
 from .webhooks.receiver import Delivery, WebhookReceiver
 
-__version__ = "1.13.0"
+__version__ = "1.14.0"
 __all__ = [
     "TangoClient",
     "TangoAPIError",
