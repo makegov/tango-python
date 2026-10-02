@@ -4448,6 +4448,8 @@ class TangoClient:
         bea_category: str | None = None,
         on_off_budget: str | None = None,
         subfunction_code: str | None = None,
+        account_category: str | None = None,
+        account_category_in: str | None = None,
         # Range-numeric filters: each field also accepts ``__gte`` / ``__lte``.
         requested_ba: float | None = None,
         requested_ba_gte: float | None = None,
@@ -4554,6 +4556,11 @@ class TangoClient:
             bea_category: BEA category (exact).
             on_off_budget: On/off budget flag (exact).
             subfunction_code: Subfunction code (exact).
+            account_category: Account category (exact), e.g. ``budgetary`` or
+                ``credit_financing``. Treat the value as an open string; new
+                categories may be added.
+            account_category_in: Comma-separated account categories to match
+                any of, e.g. ``"budgetary,credit_financing"``.
             requested_ba: President's-budget requested BA (exact). Also
                 ``requested_ba_gte`` / ``requested_ba_lte`` for range queries.
             enacted_ba: Enacted budget authority (exact / gte / lte).
@@ -4596,7 +4603,9 @@ class TangoClient:
             ordering: Sort field (prefix with '-' for descending). Any of the
                 numeric fields above is a valid ordering target — e.g.
                 ``ordering="-unobligated_balance"`` to rank by largest
-                headroom first.
+                headroom first. The default ordering is the latest fiscal year
+                first, then largest ``enacted_ba`` first, with accounts that
+                have no ``enacted_ba`` sorted last.
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
         if shape is None:
@@ -4619,6 +4628,8 @@ class TangoClient:
             ("bea_category", bea_category),
             ("on_off_budget", on_off_budget),
             ("subfunction_code", subfunction_code),
+            ("account_category", account_category),
+            ("account_category__in", account_category_in),
             ("search", search),
             ("ordering", ordering),
         )

@@ -1225,6 +1225,9 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
     },
     "BudgetAccount": {
+        "account_category": FieldSchema(
+            name="account_category", type=str, is_optional=True, is_list=False
+        ),
         "account_narrative_excerpt": FieldSchema(
             name="account_narrative_excerpt", type=str, is_optional=True, is_list=False
         ),
@@ -1409,6 +1412,9 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "requested_personnel_share": FieldSchema(
             name="requested_personnel_share", type=str, is_optional=True, is_list=False
+        ),
+        "source_anomalies": FieldSchema(
+            name="source_anomalies", type=dict, is_optional=True, is_list=True
         ),
         "subfunction_code": FieldSchema(
             name="subfunction_code", type=str, is_optional=True, is_list=False

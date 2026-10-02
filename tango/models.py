@@ -786,6 +786,55 @@ class ValidateResult:
     errors: list[str] | None = None
 
 
+class BudgetAccountAnomalySourceRow(TypedDict, total=False):
+    """One source record behind a budget-account source anomaly.
+
+    Every key is optional and any value may be ``None``.
+    """
+
+    fiscal_period: int | None
+    piid: str | None
+    parent_piid: str | None
+    tas: str | None
+    reporting_agency_id: str | None
+    transaction_obligated_amount: float | str | None
+    file_c_source: str | None
+
+
+class BudgetAccountAnomalySource(TypedDict, total=False):
+    """Where a budget-account source anomaly was found.
+
+    Every key is optional and any value may be ``None``.
+    """
+
+    dataset: str | None
+    fiscal_year: int | None
+    rows: list[BudgetAccountAnomalySourceRow] | None
+
+
+class BudgetAccountSourceAnomaly(TypedDict, total=False):
+    """One problem found in the source data behind a budget account.
+
+    An element of ``BudgetAccount.source_anomalies``. Every key is optional and
+    any value may be ``None``, so read keys with ``.get()``. ``code`` and
+    ``action`` are open strings: today ``code`` is one of
+    ``contract_exceeds_obligations``, ``assistance_exceeds_obligations`` or
+    ``contract_without_obligations``, and ``action`` is ``capped`` or
+    ``flagged``, but new values may appear.
+    """
+
+    code: str | None
+    field: str | None
+    bound_field: str | None
+    action: str | None
+    reported_value: float | str | None
+    served_value: float | str | None
+    likely_cause: str | None
+    affected_fields: list[str] | None
+    message: str | None
+    source: BudgetAccountAnomalySource | None
+
+
 @dataclass
 class BudgetAccount:
     """Schema definition for BudgetAccount (not used for instances).
@@ -805,6 +854,8 @@ class BudgetAccount:
     bea_category: str | None = None
     on_off_budget: str | None = None
     subfunction_code: str | None = None
+    # ``budgetary`` or ``credit_financing`` today; treat as an open string.
+    account_category: str | None = None
     # Lifecycle
     requested_ba: Decimal | None = None
     enacted_ba: Decimal | None = None
@@ -828,6 +879,8 @@ class BudgetAccount:
     assistance_share_of_obligated: Decimal | None = None
     assistance_share_of_obligated_capped: Decimal | None = None
     assistance_share_capped_flag: bool | None = None
+    # Problems found in the source data; ``[]`` when there are none.
+    source_anomalies: list[BudgetAccountSourceAnomaly] | None = None
     # Forward-look
     next_year_requested_ba: Decimal | None = None
     ba_growth_next_year: Decimal | None = None
@@ -1728,12 +1781,12 @@ class ShapeConfig:
     # Mirrors the API's BUDGET_ACCOUNT_DEFAULT_SHAPE.
     BUDGET_ACCOUNTS_MINIMAL: Final = (
         "id,federal_account_symbol,fiscal_year,agency_code,agency_name,bureau_name,"
-        "account_title,bea_category,on_off_budget,subfunction_code,"
+        "account_title,bea_category,on_off_budget,subfunction_code,account_category,"
         "requested_ba,enacted_ba,apportioned,obligated_total,outlayed_total,"
         "unobligated_balance,contract_obligated,contract_share_of_obligated_capped,"
         "assistance_obligated,obligated_to_apportioned_pct_capped,"
         "obligated_to_enacted_pct_capped,outlayed_to_obligated_pct_capped,"
-        "ba_growth_next_year_pct"
+        "ba_growth_next_year_pct,source_anomalies"
     )
 
     # Default for list_organizations()

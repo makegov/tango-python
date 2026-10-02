@@ -124,6 +124,12 @@
   },
   "budget/accounts": {
     "paths": {
+      "account_category": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "str"
+      },
       "account_narrative_excerpt": {
         "is_list": false,
         "is_optional": true,
@@ -438,6 +444,12 @@
         "is_optional": true,
         "kind": "scalar",
         "type": "int"
+      },
+      "source_anomalies": {
+        "is_list": true,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "dict"
       }
     },
     "records_seen": 80
