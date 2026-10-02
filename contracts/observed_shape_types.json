@@ -308,6 +308,12 @@
         "kind": "scalar",
         "type": "int"
       },
+      "data_through_period": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
       "narratives": {
         "is_list": true,
         "is_optional": false,

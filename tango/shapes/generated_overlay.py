@@ -1319,7 +1319,7 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         ),
         "created": FieldSchema(name="created", type=datetime, is_optional=True, is_list=False),
         "data_through_period": FieldSchema(
-            name="data_through_period", type=str, is_optional=True, is_list=False
+            name="data_through_period", type=int, is_optional=True, is_list=False
         ),
         "enacted_ba": FieldSchema(name="enacted_ba", type=str, is_optional=True, is_list=False),
         "enacted_ba_5yr_cagr": FieldSchema(

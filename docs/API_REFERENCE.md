@@ -1775,6 +1775,10 @@ accounts = client.list_budget_accounts(
     subfunction_code=None,
     account_category=None,
     account_category_in=None,
+    data_through_period=None,
+    data_through_period_gte=None,
+    data_through_period_lte=None,
+    data_through_period_isnull=None,
     search=None,
     ordering=None,
 )
@@ -1792,6 +1796,9 @@ accounts = client.list_budget_accounts(
 - `subfunction_code` - Subfunction code (exact)
 - `account_category` - Account category (exact): `budgetary` or `credit_financing` today; treat it as an open string
 - `account_category_in` - Comma-separated account categories to match any of (e.g. `"budgetary,credit_financing"`)
+- `data_through_period` - File A period (1-12) the account-year's figures run through (exact); below 12 the year is partial
+- `data_through_period_gte` / `data_through_period_lte` - `data_through_period` range
+- `data_through_period_isnull` - `True` for accounts with no File A data, `False` for accounts with it
 - `search` - Full-text search over `account_title`, `agency_name`, `bureau_name`
 - `ordering` - Sort field; prefix with `-` for descending. The default is the latest fiscal year first, then largest `enacted_ba` first, with accounts that have no `enacted_ba` last.
 
@@ -2562,7 +2569,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
 | `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
-| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
+| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, data_through_period, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |

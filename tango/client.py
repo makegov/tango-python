@@ -4450,6 +4450,10 @@ class TangoClient:
         subfunction_code: str | None = None,
         account_category: str | None = None,
         account_category_in: str | None = None,
+        data_through_period: int | None = None,
+        data_through_period_gte: int | None = None,
+        data_through_period_lte: int | None = None,
+        data_through_period_isnull: bool | None = None,
         # Range-numeric filters: each field also accepts ``__gte`` / ``__lte``.
         requested_ba: float | None = None,
         requested_ba_gte: float | None = None,
@@ -4561,6 +4565,8 @@ class TangoClient:
                 categories may be added.
             account_category_in: Comma-separated account categories to match
                 any of, e.g. ``"budgetary,credit_financing"``.
+            data_through_period: File A period (1-12) the account-year's figures run through (exact). Also ``data_through_period_gte`` / ``data_through_period_lte``; a value below 12 means a partial year.
+            data_through_period_isnull: ``True`` for accounts with no File A data, ``False`` for accounts with it.
             requested_ba: President's-budget requested BA (exact). Also
                 ``requested_ba_gte`` / ``requested_ba_lte`` for range queries.
             enacted_ba: Enacted budget authority (exact / gte / lte).
@@ -4630,11 +4636,17 @@ class TangoClient:
             ("subfunction_code", subfunction_code),
             ("account_category", account_category),
             ("account_category__in", account_category_in),
+            ("data_through_period", data_through_period),
+            ("data_through_period__gte", data_through_period_gte),
+            ("data_through_period__lte", data_through_period_lte),
+            ("data_through_period__isnull", data_through_period_isnull),
             ("search", search),
             ("ordering", ordering),
         )
         for key, val in scalar_filters:
-            if val is not None:
+            if isinstance(val, bool):
+                params[key] = "true" if val else "false"
+            elif val is not None:
                 params[key] = val
         # Range-numeric filters: each field has exact / __gte / __lte forms.
         range_filters: tuple[tuple[str, float | None, float | None, float | None], ...] = (

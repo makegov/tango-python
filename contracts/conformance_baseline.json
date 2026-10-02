@@ -27,10 +27,6 @@
       "bea_category__in",
       "bureau_name__icontains",
       "bureau_name__in",
-      "data_through_period",
-      "data_through_period__gte",
-      "data_through_period__isnull",
-      "data_through_period__lte",
       "federal_account_symbol__in",
       "fiscal_year__in",
       "subfunction_code__in"
