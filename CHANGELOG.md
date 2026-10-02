@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`list_idvs()`, `list_idv_awards()`, `list_idv_child_idvs()` and `list_idv_transactions()` now return the API's pagination `cursor`.** They dropped it, so `response.cursor` was always `None` and a caller following the cursor stopped after the first page.
+
 ## [1.11.0] - 2026-09-29
 
 ### Added
