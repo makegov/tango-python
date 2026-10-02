@@ -599,7 +599,10 @@ The post-cutover (May 2026) vehicle response includes these top-level fields, al
 | `vehicle_type`, `who_can_use`, `type_of_idc`, `contract_type` | dict \| None | Returned as `{code, description}`. |
 | `description` | str \| None | Common text across IDV descriptions. |
 | `descriptions` | list[str] \| None | Distinct IDV descriptions. |
-| `idv_count`, `awardee_count`, `order_count` | int \| None | Denormalized rollups. |
+| `idv_count`, `order_count` | int \| None | Denormalized rollups. |
+| `holder_count` | int \| None | Distinct companies holding one of the vehicle's IDVs. |
+| `order_winner_count` | int \| None | Distinct companies that have won a task order under the vehicle. |
+| `awardee_count` | int \| None | **Deprecated.** Same value as `order_winner_count`; use that instead. Removed at the next major API version. |
 | `total_obligated`, `vehicle_obligations`, `vehicle_contracts_value` | Decimal \| None | Denormalized rollups. |
 | `award_date`, `latest_award_date`, `last_date_to_order` | date \| None | |
 | `solicitation_title`, `solicitation_description`, `solicitation_date`, `opportunity_id` | str / date / None | From SAM.gov via the linked Opportunity. |
@@ -2544,7 +2547,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `GRANTS_MINIMAL` | `list_grants` | grant_id, opportunity_number, title, status(*), agency_code |
 | `IDVS_MINIMAL` | `list_idvs`, `list_vehicle_awardees` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `IDVS_COMPREHENSIVE` | `get_idv` | Full IDV with offices, place_of_performance, competition, transactions, etc. |
-| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |
+| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, holder_count, order_winner_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |
 | `VEHICLES_COMPREHENSIVE` | `get_vehicle` | Full vehicle with competition_details, fiscal_year, set_aside, etc. |
 | `VEHICLE_AWARDEES_MINIMAL` | `list_vehicle_awardees` | uuid, key, piid, award_date, title, order_count, idv_obligations, idv_contracts_value, recipient(display_name,uei) |
 | `ORGANIZATIONS_MINIMAL` | `list_organizations` | key, fh_key, name, level, type, short_name |

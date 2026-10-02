@@ -12494,6 +12494,12 @@
         "kind": "scalar",
         "type": "int"
       },
+      "holder_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
       "idv_count": {
         "is_list": false,
         "is_optional": true,
@@ -12703,6 +12709,12 @@
         "type": "str"
       },
       "order_count": {
+        "is_list": false,
+        "is_optional": true,
+        "kind": "scalar",
+        "type": "int"
+      },
+      "order_winner_count": {
         "is_list": false,
         "is_optional": true,
         "kind": "scalar",
