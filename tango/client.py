@@ -986,6 +986,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
             meta=data.get("meta"),
         )
@@ -1088,6 +1089,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
             meta=data.get("meta"),
         )
@@ -1133,6 +1135,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=results,
+            cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
             meta=data.get("meta"),
         )
@@ -1150,6 +1153,7 @@ class TangoClient:
             next=data.get("next"),
             previous=data.get("previous"),
             results=data.get("results") or [],
+            cursor=data.get("cursor"),
             page_metadata=data.get("page_metadata"),
             meta=data.get("meta"),
         )

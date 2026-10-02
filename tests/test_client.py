@@ -271,6 +271,34 @@ class TestTangoClient:
         assert otas.results[0]["key"] == "OTA-1"
         assert otas.cursor == "next-page-token"
 
+    @pytest.mark.parametrize(
+        ("method", "args"),
+        [
+            ("list_idvs", ()),
+            ("list_idv_awards", ("IDV-1",)),
+            ("list_idv_child_idvs", ("IDV-1",)),
+            ("list_idv_transactions", ("IDV-1",)),
+        ],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_idv_list_methods_return_cursor(self, mock_request, method, args):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 250,
+            "next": "https://tango.makegov.com/api/idvs/?cursor=next-page-token",
+            "previous": None,
+            "results": [{"key": "IDV-1"}],
+            "cursor": "next-page-token",
+        }
+        mock_response.content = b'{"count": 250}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        page = getattr(client, method)(*args, limit=1)
+
+        assert page.cursor == "next-page-token"
+
     @patch("tango.client.httpx.Client.request")
     def test_list_otidvs_with_default_shape(self, mock_request):
         """Test list_otidvs uses default minimal shape"""
