@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`PaginatedResponse.count_type`**: `"exact"` or `"approximate"`, read from the API's `X-Results-CountType` header on every list method (`None` when the API doesn't send it). Past 1,000 matches the contract, IDV, opportunity and notice lists may return a query-planner estimate as `count`, which can be well off; this is how a caller tells the two apart. It is taken from each response itself, so concurrent calls on one client can't see each other's value the way `last_response_headers` can.
+
 ## [1.13.0] - 2026-10-02
 
 ### Added

@@ -71,6 +71,9 @@ from tango.shapes import (
     build_parser_registry_from_client,
 )
 
+# Where `_request` stores a list response's `X-Results-CountType` header so each `PaginatedResponse` reads its own, not the shared `last_response_headers`.
+_COUNT_TYPE_KEY = "_tango_count_type"
+
 
 class TangoClient:
     """Tango API Client"""
@@ -180,7 +183,11 @@ class TangoClient:
 
             self._raise_for_status(response)
 
-            return response.json() if response.content else {}
+            data = response.json() if response.content else {}
+            count_type = response.headers.get("X-Results-CountType")
+            if isinstance(count_type, str) and isinstance(data, dict) and "count" in data:
+                data[_COUNT_TYPE_KEY] = count_type.lower()
+            return data
 
         except httpx.HTTPError as e:
             raise TangoAPIError(f"Request failed: {str(e)}") from e
@@ -495,6 +502,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=[
                 ag
@@ -530,6 +538,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results", []),
             meta=data.get("meta"),
@@ -583,6 +592,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -795,6 +805,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -857,6 +868,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -880,6 +892,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(data.get("results") or [])),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results") or [],
             cursor=data.get("cursor"),
@@ -984,6 +997,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1087,6 +1101,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1133,6 +1148,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1151,6 +1167,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(data.get("results") or [])),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results") or [],
             cursor=data.get("cursor"),
@@ -1234,6 +1251,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1340,6 +1358,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1417,6 +1436,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -1474,6 +1494,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -1559,6 +1580,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -1671,6 +1693,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -1841,6 +1864,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -1923,6 +1947,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -1972,6 +1997,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2007,6 +2033,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2059,6 +2086,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results", []),
             meta=data.get("meta"),
@@ -2146,6 +2174,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2203,6 +2232,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -2296,6 +2326,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2427,6 +2458,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2542,6 +2574,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2664,6 +2697,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2802,6 +2836,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -2940,6 +2975,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3080,6 +3116,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3288,6 +3325,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3408,6 +3446,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3546,6 +3585,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3695,6 +3735,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3826,6 +3867,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -3947,6 +3989,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -4155,6 +4198,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -4267,6 +4311,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -4391,6 +4436,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -4792,6 +4838,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data.get("count", 0),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -4844,6 +4891,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(data.get("results") or [])),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results") or [],
             meta=data.get("meta"),
@@ -4872,6 +4920,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(data.get("results") or [])),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=data.get("results") or [],
             meta=data.get("meta"),
@@ -4966,6 +5015,7 @@ class TangoClient:
         return PaginatedResponse(
             count=data["count"],
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -5059,6 +5109,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", len(results))),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -5244,6 +5295,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", len(results))),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -5462,6 +5514,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -5500,6 +5553,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -5601,6 +5655,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -5648,6 +5703,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -5716,6 +5772,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
@@ -5894,6 +5951,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             meta=data.get("meta"),
@@ -5925,6 +5983,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -5966,6 +6025,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count", 0)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=list(data.get("results") or []),
             meta=data.get("meta"),
@@ -6022,6 +6082,7 @@ class TangoClient:
         return PaginatedResponse(
             count=int(data.get("count") or len(results)),
             next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
             previous=data.get("previous"),
             results=results,
             cursor=data.get("cursor"),
