@@ -1764,6 +1764,10 @@ accounts = client.list_budget_accounts(
     fiscal_year=None,
     fiscal_year_gte=None,
     fiscal_year_lte=None,
+    data_through_period=None,
+    data_through_period_gte=None,
+    data_through_period_lte=None,
+    data_through_period_isnull=None,
     agency_code=None,
     bureau_name=None,
     account_title=None,
@@ -1781,6 +1785,8 @@ accounts = client.list_budget_accounts(
 - `federal_account_symbol` - Exact federal account symbol (e.g., `"097-0100"`)
 - `fiscal_year` - Fiscal year (exact)
 - `fiscal_year_gte` / `fiscal_year_lte` - Fiscal year range
+- `data_through_period` - File A fiscal period (1–12) the account-year's figures run through (exact); `data_through_period_gte` / `data_through_period_lte` for a range
+- `data_through_period_isnull` - `True` for account-years with no File A data, `False` for those with it
 - `agency_code` - Agency code (exact)
 - `bureau_name` - Bureau name (exact)
 - `account_title` - Account title (case-insensitive substring match)
@@ -1791,6 +1797,8 @@ accounts = client.list_budget_accounts(
 - `account_category_in` - Comma-separated account categories to match any of (e.g. `"budgetary,credit_financing"`)
 - `search` - Full-text search over `account_title`, `agency_name`, `bureau_name`
 - `ordering` - Sort field; prefix with `-` for descending. The default is the latest fiscal year first, then largest `enacted_ba` first, with accounts that have no `enacted_ba` last.
+
+**Data through period:** the default shape includes `data_through_period`, right after `fiscal_year`. It is the File A fiscal period (1–12) the account-year's figures run through, so the latest fiscal year is partial until it reaches 12. It is `None` when the row has no File A data.
 
 **Source anomalies:** the default shape includes `account_category` and `source_anomalies`. `source_anomalies` is a list of problems found in the source data behind the account, and `[]` when there are none. Each element is a `BudgetAccountSourceAnomaly` (a `TypedDict`; every key is optional and may be `None`, so read keys with `.get()`): `code`, `field`, `bound_field`, `action` (`capped` or `flagged`), `reported_value`, `served_value`, `likely_cause`, `affected_fields`, `message`, and `source` (`dataset`, `fiscal_year`, and `rows` of `fiscal_period`, `piid`, `parent_piid`, `tas`, `reporting_agency_id`, `transaction_obligated_amount`, `file_c_source`). Today `code` is one of `contract_exceeds_obligations`, `assistance_exceeds_obligations` or `contract_without_obligations`; treat it as an open string. There is no filter on anomalies.
 
@@ -2559,7 +2567,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
 | `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
-| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
+| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, data_through_period, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |

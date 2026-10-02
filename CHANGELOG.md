@@ -11,11 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **`account_category` and `source_anomalies` on budget accounts** (Tango API 5.7.0). Both are in the default `BUDGET_ACCOUNTS_MINIMAL` shape and accepted in custom shapes. `account_category` is `budgetary` or `credit_financing` today. `source_anomalies` lists the problems found in the source data behind an account, and is `[]` when there are none. Each element is typed as the new `BudgetAccountSourceAnomaly` `TypedDict` (with `BudgetAccountAnomalySource` and `BudgetAccountAnomalySourceRow` for its nested `source`), and every key is optional. Treat `account_category` and an anomaly's `code` as open strings, since new values may appear.
 - **`list_budget_accounts(account_category=..., account_category_in=...)`** filters by account category, exactly or against a comma-separated list.
+- **`data_through_period` on budget accounts** (Tango API 5.8.0): the File A fiscal period (1–12) an account-year's figures run through, so the latest fiscal year is partial until it reaches 12. `None` when the row has no File A data. It is in the default `BUDGET_ACCOUNTS_MINIMAL` shape right after `fiscal_year`, and `list_budget_accounts()` filters on it with `data_through_period`, `data_through_period_gte`, `data_through_period_lte` and `data_through_period_isnull`.
 
 ### Changed
 
 - **`list_budget_accounts()` documents the API's default ordering**: the latest fiscal year first, then largest `enacted_ba` first, with accounts that have no `enacted_ba` last.
-- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.7.0) and regenerated `tango/shapes/generated_overlay.py`.
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.8.0) and regenerated `tango/shapes/generated_overlay.py`.
 
 ### Fixed
 

@@ -625,6 +625,39 @@ class TestTangoClient:
         assert params["account_category__in"] == "budgetary,credit_financing"
 
     @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_data_through_period_filters_and_shape(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 2,
+            "next": None,
+            "previous": None,
+            "results": [
+                {"id": 1, "fiscal_year": 2026, "data_through_period": 9},
+                {"id": 2, "fiscal_year": 2026, "data_through_period": None},
+            ],
+        }
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        page = client.list_budget_accounts(
+            data_through_period=9,
+            data_through_period_gte=3,
+            data_through_period_lte=11,
+            data_through_period_isnull=False,
+        )
+
+        params = mock_request.call_args[1]["params"]
+        assert params["data_through_period"] == 9
+        assert params["data_through_period__gte"] == 3
+        assert params["data_through_period__lte"] == 11
+        assert params["data_through_period__isnull"] is False
+        shape_fields = params["shape"].split(",")
+        assert shape_fields.index("data_through_period") == shape_fields.index("fiscal_year") + 1
+        assert [r["data_through_period"] for r in page.results] == [9, None]
+
+    @patch("tango.client.httpx.Client.request")
     def test_list_budget_accounts_default_shape_parses_source_anomalies(self, mock_request):
         anomaly = {
             "code": "contract_exceeds_obligations",

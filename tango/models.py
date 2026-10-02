@@ -847,6 +847,8 @@ class BudgetAccount:
     id: int | None = None
     federal_account_symbol: str | None = None
     fiscal_year: int | None = None
+    # File A period (1-12) the figures run through; below 12 the year is partial, ``None`` with no File A data.
+    data_through_period: int | None = None
     agency_code: str | None = None
     agency_name: str | None = None
     bureau_name: str | None = None
@@ -1780,8 +1782,9 @@ class ShapeConfig:
     # Default for list_budget_accounts() / get_budget_account()
     # Mirrors the API's BUDGET_ACCOUNT_DEFAULT_SHAPE.
     BUDGET_ACCOUNTS_MINIMAL: Final = (
-        "id,federal_account_symbol,fiscal_year,agency_code,agency_name,bureau_name,"
-        "account_title,bea_category,on_off_budget,subfunction_code,account_category,"
+        "id,federal_account_symbol,fiscal_year,data_through_period,agency_code,agency_name,"
+        "bureau_name,account_title,bea_category,on_off_budget,subfunction_code,"
+        "account_category,"
         "requested_ba,enacted_ba,apportioned,obligated_total,outlayed_total,"
         "unobligated_balance,contract_obligated,contract_share_of_obligated_capped,"
         "assistance_obligated,obligated_to_apportioned_pct_capped,"

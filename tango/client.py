@@ -4442,6 +4442,10 @@ class TangoClient:
         fiscal_year: int | None = None,
         fiscal_year_gte: int | None = None,
         fiscal_year_lte: int | None = None,
+        data_through_period: int | None = None,
+        data_through_period_gte: int | None = None,
+        data_through_period_lte: int | None = None,
+        data_through_period_isnull: bool | None = None,
         agency_code: str | None = None,
         bureau_name: str | None = None,
         account_title: str | None = None,
@@ -4549,6 +4553,12 @@ class TangoClient:
             fiscal_year: Fiscal year (exact).
             fiscal_year_gte: Fiscal year >=.
             fiscal_year_lte: Fiscal year <=.
+            data_through_period: File A fiscal period (1-12) the account-year's
+                figures run through (exact). Also ``data_through_period_gte`` /
+                ``data_through_period_lte``. Below 12 the fiscal year is partial.
+            data_through_period_isnull: ``True`` for account-years with no
+                File A data (``data_through_period`` is null), ``False`` for
+                those with it.
             agency: A Tango agency name, abbreviation, code or organization key, e.g. ``EPA``. Matches the whole organization subtree, so a department includes its sub-agencies. OR several with ``|``.
             agency_code: Agency code (exact).
             bureau_name: Bureau name (exact).
@@ -4621,6 +4631,10 @@ class TangoClient:
             ("fiscal_year", fiscal_year),
             ("fiscal_year__gte", fiscal_year_gte),
             ("fiscal_year__lte", fiscal_year_lte),
+            ("data_through_period", data_through_period),
+            ("data_through_period__gte", data_through_period_gte),
+            ("data_through_period__lte", data_through_period_lte),
+            ("data_through_period__isnull", data_through_period_isnull),
             ("agency", agency),
             ("agency_code", agency_code),
             ("bureau_name", bureau_name),
