@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`holder_count` and `order_winner_count` on vehicles** (Tango API 5.8.0). `holder_count` is the number of distinct companies holding one of the vehicle's IDVs, and `order_winner_count` is the number of distinct companies that have won a task order under it. Both are in the default `VEHICLES_MINIMAL` and `VEHICLES_COMPREHENSIVE` shapes and accepted in custom shapes.
+- **`data_through_period` on budget accounts** (Tango API 5.8.0). The File A period (1-12) an account-year's figures run through; below 12 the year is partial, and `None` means there is no File A data. It is in the default `BUDGET_ACCOUNTS_MINIMAL` shape and accepted in custom shapes.
+- **`list_budget_accounts(data_through_period=..., data_through_period_gte=..., data_through_period_lte=..., data_through_period_isnull=...)`** filters by that period, exactly, by range, or by whether it is set.
+
+### Changed
+
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.8.0) and regenerated `tango/shapes/generated_overlay.py`.
+
+### Deprecated
+
+- **`awardee_count` on vehicles.** It is the same value as `order_winner_count`; use that instead. The API removes it at its next major version, and the SDK's default vehicle shapes will drop it then.
+
 ## [1.12.0] - 2026-10-02
 
 ### Added

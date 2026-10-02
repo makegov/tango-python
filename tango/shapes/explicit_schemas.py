@@ -1337,6 +1337,11 @@ VEHICLE_SCHEMA: dict[str, FieldSchema] = {
     ),
     # Denormalized rollups
     "idv_count": FieldSchema(name="idv_count", type=int, is_optional=True, is_list=False),
+    "holder_count": FieldSchema(name="holder_count", type=int, is_optional=True, is_list=False),
+    "order_winner_count": FieldSchema(
+        name="order_winner_count", type=int, is_optional=True, is_list=False
+    ),
+    # Deprecated: same value as `order_winner_count`; removed at the next major API version.
     "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
     "order_count": FieldSchema(name="order_count", type=int, is_optional=True, is_list=False),
     "total_obligated": FieldSchema(

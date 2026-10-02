@@ -489,6 +489,8 @@ class Vehicle:
     program_acronym: str | None = None
     description: str | None = None
     idv_count: int | None = None
+    holder_count: int | None = None
+    order_winner_count: int | None = None
     total_obligated: Decimal | None = None
     latest_award_date: date | None = None
     solicitation_title: str | None = None
@@ -847,6 +849,8 @@ class BudgetAccount:
     id: int | None = None
     federal_account_symbol: str | None = None
     fiscal_year: int | None = None
+    # File A period (1-12) this account-year's figures run through; below 12 the year is partial, and `None` means no File A data.
+    data_through_period: int | None = None
     agency_code: str | None = None
     agency_name: str | None = None
     bureau_name: str | None = None
@@ -1752,7 +1756,7 @@ class ShapeConfig:
     VEHICLES_MINIMAL: Final = (
         "uuid,solicitation_identifier,is_synthetic_solicitation,program_acronym,"
         "organization_id,organization,vehicle_type,description,"
-        "idv_count,awardee_count,order_count,total_obligated,"
+        "idv_count,holder_count,order_winner_count,awardee_count,order_count,total_obligated,"
         "vehicle_obligations,vehicle_contracts_value,latest_award_date,"
         "solicitation_title,solicitation_date"
     )
@@ -1764,7 +1768,8 @@ class ShapeConfig:
         "solicitation_title,solicitation_description,solicitation_date,opportunity_id,"
         "naics_code,psc_code,set_aside,"
         "fiscal_year,award_date,latest_award_date,last_date_to_order,"
-        "description,idv_count,awardee_count,order_count,total_obligated,"
+        "description,idv_count,holder_count,order_winner_count,awardee_count,order_count,"
+        "total_obligated,"
         "vehicle_obligations,vehicle_contracts_value,"
         "type_of_idc,contract_type,metrics(*)"
     )
@@ -1780,7 +1785,8 @@ class ShapeConfig:
     # Default for list_budget_accounts() / get_budget_account()
     # Mirrors the API's BUDGET_ACCOUNT_DEFAULT_SHAPE.
     BUDGET_ACCOUNTS_MINIMAL: Final = (
-        "id,federal_account_symbol,fiscal_year,agency_code,agency_name,bureau_name,"
+        "id,federal_account_symbol,fiscal_year,data_through_period,agency_code,agency_name,"
+        "bureau_name,"
         "account_title,bea_category,on_off_budget,subfunction_code,account_category,"
         "requested_ba,enacted_ba,apportioned,obligated_total,outlayed_total,"
         "unobligated_balance,contract_obligated,contract_share_of_obligated_capped,"

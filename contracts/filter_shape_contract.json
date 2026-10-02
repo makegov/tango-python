@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.7.0",
+    "api_version": "5.8.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -1672,6 +1672,10 @@
           "contract_share_of_obligated_capped",
           "contract_share_of_obligated_capped__gte",
           "contract_share_of_obligated_capped__lte",
+          "data_through_period",
+          "data_through_period__gte",
+          "data_through_period__isnull",
+          "data_through_period__lte",
           "enacted_ba",
           "enacted_ba_5yr_cagr",
           "enacted_ba_5yr_cagr__gte",
@@ -1929,6 +1933,25 @@
             "type": "number"
           },
           "contract_share_of_obligated_capped__lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "data_through_period": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "data_through_period__gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "data_through_period__isnull": {
+            "filter_class": "BooleanFilter",
+            "lookup": "isnull",
+            "type": "boolean"
+          },
+          "data_through_period__lte": {
             "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
@@ -2304,6 +2327,7 @@
             "contract_share_of_obligated",
             "contract_share_of_obligated_capped",
             "created",
+            "data_through_period",
             "enacted_ba",
             "enacted_ba_5yr_cagr",
             "enacted_ba_yoy_pct",
@@ -2392,6 +2416,7 @@
           "contract_share_of_obligated",
           "contract_share_of_obligated_capped",
           "created",
+          "data_through_period",
           "enacted_ba",
           "enacted_ba_5yr_cagr",
           "enacted_ba_yoy_pct",
@@ -16061,6 +16086,7 @@
             "description",
             "descriptions",
             "fiscal_year",
+            "holder_count",
             "idv_count",
             "is_synthetic_solicitation",
             "last_date_to_order",
@@ -16069,6 +16095,7 @@
             "name",
             "opportunity_id",
             "order_count",
+            "order_winner_count",
             "organization",
             "organization_id",
             "program_acronym",
@@ -16474,6 +16501,7 @@
           "description",
           "descriptions",
           "fiscal_year",
+          "holder_count",
           "idv_count",
           "is_synthetic_solicitation",
           "last_date_to_order",
@@ -16600,6 +16628,7 @@
           "opportunity.title",
           "opportunity_id",
           "order_count",
+          "order_winner_count",
           "organization",
           "organization.agency_code",
           "organization.agency_name",

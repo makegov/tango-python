@@ -2,40 +2,40 @@ interactions:
 - request:
     body: ''
     headers:
-      accept:
+      Accept:
       - '*/*'
-      accept-encoding:
+      Accept-Encoding:
       - gzip, deflate
-      connection:
+      Connection:
       - keep-alive
-      host:
+      Host:
       - tango.makegov.com
-      user-agent:
+      User-Agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date
   response:
     body:
-      string: '{"count":20452,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"description":["CATTLE
+      string: '{"count":22055,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"description":["CATTLE
         AND SWINE BACKTAG CEMENT","CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED
-        ON AN IDIQ BASIS TO KS, MO."],"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2006-06-01","order_count":25,"organization":{"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","office_code":"126395","office_name":"MRPBS
+        ON AN IDIQ BASIS TO KS, MO."],"holder_count":2,"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2006-06-01","order_count":25,"order_winner_count":2,"organization":{"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","office_code":"126395","office_name":"MRPBS
         MINNEAPOLIS MN","agency_code":"12K3","agency_name":"ANIMAL AND PLANT HEALTH
         INSPECTION SERVICE","department_code":"012","department_name":"AGRICULTURE,
         DEPARTMENT OF"},"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","program_acronym":"APHIS
-        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5116733.97,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
+        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5388564.6899999995,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
     headers:
       CF-RAY:
-      - 9f73b823692c60c7-JAX
+      - a44766154de3123a-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 00:02:59 GMT
+      - Fri, 02 Oct 2026 23:13:38 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=B6gMSdTzCoCyerbzAHIcVlqBefWD2yJM28l29mzuR4ye3cO5QBChXu%2Foof465c8FHkZe8jIIWNe9U9rJfvAMpvgPgzx8eLhyJYVdac5U3d9XyF0qKbxJt58%2FMsn51P4CcUG49wsHDkNwLfd7N8qo"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=WC5DlXnrN1iQxaM1il4uCMfwOhz9JnJCMqAkDhrEg0gj4jiG3codMj8aBvSrqzESYlXFxQy4RyjYaANM7zRdXMVaxhMGuijsaMDEQ%2Bzl6XCogz8IL%2FLnsOzSGg5v4QllWCS7u5LeLbIaan2%2F%2BI5E"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -45,7 +45,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1333'
+      - '1417'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -55,63 +55,65 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.021s
+      - 0.029s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '981'
+      - '985'
       x-ratelimit-burst-reset:
-      - '28'
+      - '35'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999981'
+      - '1997189'
       x-ratelimit-daily-reset:
-      - '86220'
+      - '2781'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '981'
+      - '985'
       x-ratelimit-reset:
-      - '28'
+      - '35'
       x-results-counttype:
       - exact
+      x-tango-api-version:
+      - 5.8.0
     status:
       code: 200
       message: OK
 - request:
     body: ''
     headers:
-      accept:
+      Accept:
       - '*/*'
-      accept-encoding:
+      Accept-Encoding:
       - gzip, deflate
-      connection:
+      Connection:
       - keep-alive
-      host:
+      Host:
       - tango.makegov.com
-      user-agent:
+      User-Agent:
       - python-httpx/0.28.1
     method: GET
     uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/?shape=uuid%2Cmetrics%28%2A%29
   response:
     body:
-      string: '{"metrics":{"avg_offers_received":1.5,"award_concentration_hhi":6058.0,"order_concentration_hhi":5200.0,"competed_rate":0.88,"using_agency_count":1,"avg_order_value":215542.58759999997,"max_order_value":602601.6,"top_recipient_share":72.99,"recent_obligations_24mo":0.0,"recent_orders_24mo":0,"days_since_last_order":5710,"obligation_to_ceiling_ratio":1.053125826277812},"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e"}'
+      string: '{"metrics":{"avg_offers_received":1.5,"award_concentration_hhi":6058.0,"order_concentration_hhi":5200.0,"competed_rate":0.88,"using_agency_count":1,"avg_order_value":215542.58759999997,"max_order_value":602601.6,"top_recipient_share":72.99,"recent_obligations_24mo":0.0,"recent_orders_24mo":0,"days_since_last_order":5860,"obligation_to_ceiling_ratio":1.0},"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e"}'
     headers:
       CF-RAY:
-      - 9f73b823da9360c7-JAX
+      - a4476616fea66195-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 00:02:59 GMT
+      - Fri, 02 Oct 2026 23:13:38 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=5i%2Bk54VkK%2FXROY20rDQl9Rsx8mWgHA2Cn8jk3aUms2rC%2FpUJW8g4ecY5n8OZlTXhCF%2B5a0kpjUoAXs7btqOqBrmtTDnAaKNTjRYKpz72at%2Bbcu8K%2BCcopKM7zRf7KdNL9q9hPXB01yre8vUVrCJ0"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=idj%2FtMJqyNQN4yuAEUAi%2BA48E6G8np2OT48Z7jox%2FxcbhwLF6%2BvnucPWD8ThtMHngHLhWhI6Ikz8eivtHTPKgLf4610C2R0bEzGEK7tHn4QBkA%2F7RktYDQCZHwK1JucbFwXA98ED0WZmyJ1EFe%2BX"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -121,7 +123,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '417'
+      - '403'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -131,27 +133,29 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.016s
+      - 0.020s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '980'
+      - '984'
       x-ratelimit-burst-reset:
-      - '28'
+      - '35'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999980'
+      - '1997188'
       x-ratelimit-daily-reset:
-      - '86220'
+      - '2781'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '980'
+      - '984'
       x-ratelimit-reset:
-      - '28'
+      - '35'
+      x-tango-api-version:
+      - 5.8.0
     status:
       code: 200
       message: OK

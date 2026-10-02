@@ -624,6 +624,36 @@ class TestTangoClient:
         assert params["account_category"] == "credit_financing"
         assert params["account_category__in"] == "budgetary,credit_financing"
 
+    @pytest.mark.parametrize("isnull", [True, False])
+    @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_data_through_period_filters(self, mock_request, isnull):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 1,
+            "next": None,
+            "previous": None,
+            "results": [{"id": 1, "fiscal_year": 2026, "data_through_period": 9}],
+        }
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        page = client.list_budget_accounts(
+            data_through_period=9,
+            data_through_period_gte=6,
+            data_through_period_lte=11,
+            data_through_period_isnull=isnull,
+        )
+
+        params = mock_request.call_args[1]["params"]
+        assert params["data_through_period"] == 9
+        assert params["data_through_period__gte"] == 6
+        assert params["data_through_period__lte"] == 11
+        assert params["data_through_period__isnull"] == ("true" if isnull else "false")
+        assert "data_through_period" in params["shape"].split(",")
+        assert page.results[0]["data_through_period"] == 9
+
     @patch("tango.client.httpx.Client.request")
     def test_list_budget_accounts_default_shape_parses_source_anomalies(self, mock_request):
         anomaly = {
@@ -707,6 +737,39 @@ class TestTangoClient:
 
         assert account["source_anomalies"] == [{"code": "some_future_code"}]
         assert account["account_category"] == "budgetary"
+
+    @pytest.mark.parametrize(
+        ("method", "args"),
+        [("list_vehicles", ()), ("get_vehicle", ("11111111-1111-1111-1111-111111111111",))],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_vehicle_default_shapes_parse_company_counts(self, mock_request, method, args):
+        vehicle = {
+            "uuid": "11111111-1111-1111-1111-111111111111",
+            "holder_count": 12,
+            "order_winner_count": 7,
+            "awardee_count": 7,
+        }
+        body = (
+            {"count": 1, "next": None, "previous": None, "results": [vehicle]}
+            if method == "list_vehicles"
+            else vehicle
+        )
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = body
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        result = getattr(client, method)(*args)
+
+        shape_fields = mock_request.call_args[1]["params"]["shape"].split(",")
+        assert {"holder_count", "order_winner_count", "awardee_count"} <= set(shape_fields)
+        parsed = result.results[0] if method == "list_vehicles" else result
+        assert parsed["holder_count"] == 12
+        assert parsed["order_winner_count"] == 7
+        assert parsed["awardee_count"] == 7
 
 
 class TestShapeConfig:

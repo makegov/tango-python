@@ -599,7 +599,10 @@ The post-cutover (May 2026) vehicle response includes these top-level fields, al
 | `vehicle_type`, `who_can_use`, `type_of_idc`, `contract_type` | dict \| None | Returned as `{code, description}`. |
 | `description` | str \| None | Common text across IDV descriptions. |
 | `descriptions` | list[str] \| None | Distinct IDV descriptions. |
-| `idv_count`, `awardee_count`, `order_count` | int \| None | Denormalized rollups. |
+| `idv_count`, `order_count` | int \| None | Denormalized rollups. |
+| `holder_count` | int \| None | Distinct companies holding one of the vehicle's IDVs. |
+| `order_winner_count` | int \| None | Distinct companies that have won a task order under the vehicle. |
+| `awardee_count` | int \| None | **Deprecated.** Same value as `order_winner_count`; use that instead. Removed at the next major API version. |
 | `total_obligated`, `vehicle_obligations`, `vehicle_contracts_value` | Decimal \| None | Denormalized rollups. |
 | `award_date`, `latest_award_date`, `last_date_to_order` | date \| None | |
 | `solicitation_title`, `solicitation_description`, `solicitation_date`, `opportunity_id` | str / date / None | From SAM.gov via the linked Opportunity. |
@@ -1772,6 +1775,10 @@ accounts = client.list_budget_accounts(
     subfunction_code=None,
     account_category=None,
     account_category_in=None,
+    data_through_period=None,
+    data_through_period_gte=None,
+    data_through_period_lte=None,
+    data_through_period_isnull=None,
     search=None,
     ordering=None,
 )
@@ -1789,6 +1796,9 @@ accounts = client.list_budget_accounts(
 - `subfunction_code` - Subfunction code (exact)
 - `account_category` - Account category (exact): `budgetary` or `credit_financing` today; treat it as an open string
 - `account_category_in` - Comma-separated account categories to match any of (e.g. `"budgetary,credit_financing"`)
+- `data_through_period` - File A period (1-12) the account-year's figures run through (exact); below 12 the year is partial
+- `data_through_period_gte` / `data_through_period_lte` - `data_through_period` range
+- `data_through_period_isnull` - `True` for accounts with no File A data, `False` for accounts with it
 - `search` - Full-text search over `account_title`, `agency_name`, `bureau_name`
 - `ordering` - Sort field; prefix with `-` for descending. The default is the latest fiscal year first, then largest `enacted_ba` first, with accounts that have no `enacted_ba` last.
 
@@ -2544,7 +2554,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `GRANTS_MINIMAL` | `list_grants` | grant_id, opportunity_number, title, status(*), agency_code |
 | `IDVS_MINIMAL` | `list_idvs`, `list_vehicle_awardees` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `IDVS_COMPREHENSIVE` | `get_idv` | Full IDV with offices, place_of_performance, competition, transactions, etc. |
-| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |
+| `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, holder_count, order_winner_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |
 | `VEHICLES_COMPREHENSIVE` | `get_vehicle` | Full vehicle with competition_details, fiscal_year, set_aside, etc. |
 | `VEHICLE_AWARDEES_MINIMAL` | `list_vehicle_awardees` | uuid, key, piid, award_date, title, order_count, idv_obligations, idv_contracts_value, recipient(display_name,uei) |
 | `ORGANIZATIONS_MINIMAL` | `list_organizations` | key, fh_key, name, level, type, short_name |
@@ -2559,7 +2569,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
 | `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
-| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
+| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, data_through_period, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |
