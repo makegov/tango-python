@@ -1462,6 +1462,8 @@ class PaginatedResponse[T]:
         page_metadata: Always ``None`` — the API has never emitted a
             ``page_metadata`` key. Retained so existing attribute access keeps
             working; use ``meta`` instead.
+        count_type: ``"exact"`` or ``"approximate"``, from the API's ``X-Results-CountType`` header; ``None`` when the endpoint doesn't send it.
+            The contract, IDV, opportunity and notice lists can switch to a query-planner estimate past 1,000 matches, which can be well off.
 
     Examples:
         >>> from tango import TangoClient, ShapeConfig
@@ -1482,6 +1484,7 @@ class PaginatedResponse[T]:
     cursor: str | None = None
     meta: dict[str, Any] | None = None
     page_metadata: dict[str, Any] | None = None
+    count_type: str | None = None
 
     @property
     def agency_warnings(self) -> list[str]:

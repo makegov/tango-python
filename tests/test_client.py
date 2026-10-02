@@ -4,6 +4,7 @@ from datetime import date, datetime
 from decimal import Decimal
 from unittest.mock import Mock, patch
 
+import httpx
 import pytest
 
 from tango import (
@@ -298,6 +299,46 @@ class TestTangoClient:
         page = getattr(client, method)(*args, limit=1)
 
         assert page.cursor == "next-page-token"
+
+    @pytest.mark.parametrize(
+        ("headers", "expected"),
+        [
+            ({"X-Results-CountType": "approximate"}, "approximate"),
+            ({"X-Results-CountType": "Exact"}, "exact"),
+            ({}, None),
+        ],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_list_reports_the_count_type_header(self, mock_request, headers, expected):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.headers = httpx.Headers(headers)
+        mock_response.json.return_value = {
+            "count": 2914,
+            "next": None,
+            "previous": None,
+            "results": [{"key": "IDV-1"}],
+        }
+        mock_response.content = b'{"count": 2914}'
+        mock_request.return_value = mock_response
+
+        page = TangoClient(api_key="test-key").list_idvs(limit=1)
+
+        assert page.count_type == expected
+        assert all("_tango_count_type" not in r for r in page.results)
+
+    @patch("tango.client.httpx.Client.request")
+    def test_detail_response_never_carries_the_count_type_key(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.headers = httpx.Headers({"X-Results-CountType": "exact"})
+        mock_response.json.return_value = {"key": "IDV-1", "piid": "P1"}
+        mock_response.content = b'{"key": "IDV-1"}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+
+        assert "_tango_count_type" not in client._get("/api/idvs/IDV-1/")
 
     @patch("tango.client.httpx.Client.request")
     def test_list_otidvs_with_default_shape(self, mock_request):
