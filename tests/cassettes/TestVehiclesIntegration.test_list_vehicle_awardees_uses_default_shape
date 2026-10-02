@@ -2,40 +2,40 @@ interactions:
 - request:
     body: ''
     headers:
-      accept:
+      Accept:
       - '*/*'
-      accept-encoding:
+      Accept-Encoding:
       - gzip, deflate
-      connection:
+      Connection:
       - keep-alive
-      host:
+      Host:
       - tango.makegov.com
-      user-agent:
+      User-Agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=1&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date
   response:
     body:
-      string: '{"count":20452,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"description":["CATTLE
+      string: '{"count":22055,"next":"https://tango.makegov.com/api/vehicles/?limit=1&page=2&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":2,"description":["CATTLE
         AND SWINE BACKTAG CEMENT","CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED
-        ON AN IDIQ BASIS TO KS, MO."],"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2006-06-01","order_count":25,"organization":{"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","office_code":"126395","office_name":"MRPBS
+        ON AN IDIQ BASIS TO KS, MO."],"holder_count":2,"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2006-06-01","order_count":25,"order_winner_count":2,"organization":{"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","office_code":"126395","office_name":"MRPBS
         MINNEAPOLIS MN","agency_code":"12K3","agency_name":"ANIMAL AND PLANT HEALTH
         INSPECTION SERVICE","department_code":"012","department_name":"AGRICULTURE,
         DEPARTMENT OF"},"organization_id":"767bb2b0-239a-5bb4-8f3c-16d0a418fb71","program_acronym":"APHIS
-        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5116733.97,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
+        VS","solicitation_date":null,"solicitation_identifier":"002-M-APHIS-06","solicitation_title":null,"total_obligated":5388564.69,"uuid":"8597845d-2a4c-5acd-99ff-1f5fe348501e","vehicle_contracts_value":5388564.6899999995,"vehicle_obligations":5388564.6899999995,"vehicle_type":{"code":"B","description":"IDC"}}]}'
     headers:
       CF-RAY:
-      - 9f73b82028e92733-JAX
+      - a447661149f8356f-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 00:02:59 GMT
+      - Fri, 02 Oct 2026 23:13:37 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=pb6L38IhrE8slcKjDmpMOoPMm4XFe4ByVQdtJXbaKHCLmJmZg4mj8VaQO%2F1v7gOmIbL9H3TNqGXF7WPcULg3j8haT%2B%2FMMkOVPve4NgEzKZxAJL8XFw9Oklv86aTGvrYJyH8zq39%2BOrnMHDI0S5g0"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rQQsdvPmd9lRX4nYEAfKcutngJU%2BcS%2F%2FKE3A3KX5VaGErfSoOlptQYk7m0uWRnP7H9PdHdKwQ3cIX%2FHaB02dc24tyCn7EglEMLuBM90z2ezdtKnMEJTJ1SN5GzIW0WAtCqc2YtYMHeZQ9e1gHf0H"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -45,7 +45,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '1333'
+      - '1417'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -55,66 +55,68 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.022s
+      - 0.029s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '984'
+      - '987'
       x-ratelimit-burst-reset:
-      - '29'
+      - '36'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999984'
+      - '1997191'
       x-ratelimit-daily-reset:
-      - '86220'
+      - '2782'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '984'
+      - '987'
       x-ratelimit-reset:
-      - '29'
+      - '36'
       x-results-counttype:
       - exact
+      x-tango-api-version:
+      - 5.8.0
     status:
       code: 200
       message: OK
 - request:
     body: ''
     headers:
-      accept:
+      Accept:
       - '*/*'
-      accept-encoding:
+      Accept-Encoding:
       - gzip, deflate
-      connection:
+      Connection:
       - keep-alive
-      host:
+      Host:
       - tango.makegov.com
-      user-agent:
+      User-Agent:
       - python-httpx/0.28.1
     method: GET
     uri: https://tango.makegov.com/api/vehicles/8597845d-2a4c-5acd-99ff-1f5fe348501e/awardees/?page=1&limit=10&shape=uuid%2Ckey%2Cpiid%2Caward_date%2Ctitle%2Corder_count%2Cidv_obligations%2Cidv_contracts_value%2Crecipient%28display_name%2Cuei%29
   response:
     body:
-      string: '{"count":2,"next":null,"previous":null,"results":[{"award_date":"2006-06-01","idv_contracts_value":1183372.8,"idv_obligations":1455203.52,"key":"CONT_IDV_AG6395C060018_12K3","order_count":10,"piid":"AG6395C060018","recipient":{"uei":"GDVZPLNAKLL9","display_name":"STEVEN
-        INDUSTRIES INC"},"title":"CATTLE AND SWINE BACKTAG CEMENT","uuid":"af5f3527-b51b-55d8-9c6f-2d6aad936d31"},{"award_date":"2006-06-01","idv_contracts_value":3933361.17,"idv_obligations":3933361.17,"key":"CONT_IDV_AG6395C060019_12K3","order_count":15,"piid":"AG6395C060019","recipient":{"uei":"C1D7UA31LAK8","display_name":"M
-        J RUSCOE"},"title":"CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED ON AN
-        IDIQ BASIS TO KS, MO.","uuid":"55cdcfa5-9b94-5aa5-8a8b-7a291d675e20"}]}'
+      string: '{"count":2,"next":null,"previous":null,"results":[{"award_date":"2006-06-01","idv_contracts_value":1455203.52,"idv_obligations":1455203.52,"key":"CONT_IDV_AG6395C060018_12K3","order_count":10,"piid":"AG6395C060018","recipient":{"uei":"GDVZPLNAKLL9","display_name":"STEVEN
+        INDUSTRIES INC"},"title":"CATTLE AND SWINE BACKTAG CEMENT","uuid":"af5f3527-b51b-55d8-9c6f-2d6aad936d31"},{"award_date":"2006-06-01","idv_contracts_value":3933361.17,"idv_obligations":3933361.17,"key":"CONT_IDV_AG6395C060019_12K3","order_count":15,"piid":"AG6395C060019","recipient":{"uei":"C1D7UA31LAK8","display_name":"THE
+        RUSCOE COMPANY"},"title":"CATTLE AND SWINE BACKTAG CEMENT TO BE DELIVERED
+        ON AN IDIQ BASIS TO KS, MO.","uuid":"55cdcfa5-9b94-5aa5-8a8b-7a291d675e20"}]}'
     headers:
       CF-RAY:
-      - 9f73b820ba5d2733-JAX
+      - a4476612acdc3215-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 00:02:59 GMT
+      - Fri, 02 Oct 2026 23:13:37 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=Hhdv2%2B3QcWBaFBmrjpPppmB%2BWUA7Qs%2FTsc05%2BmgouFx8U5esHFgTLVxRQMHjK7htLjAT4aI7s2cu43j1IjRqN8P%2FhFHLKq4yMnqrZ%2B3zionLGPhJFQ%2FVbIiaNsVRBsuCRRHzED8Mq%2F%2FohxH5q62o"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=9xeSJNQHDn4SA1wE9XN4NckxUxulBtJjrpG4roy%2Fvsp86YQRPyc0phw24LqaMCGPHj9jIawkrD%2B8PvJOHxSze%2FoNUUT4DGUFg%2BF3NYtwswTwB92XY6dchIFjpUf3NoCfYBpGXDRKePjr4gEHww7t"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -124,7 +126,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '739'
+      - '748'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -134,27 +136,29 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.036s
+      - 0.038s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '983'
+      - '986'
       x-ratelimit-burst-reset:
-      - '29'
+      - '36'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999983'
+      - '1997190'
       x-ratelimit-daily-reset:
-      - '86220'
+      - '2782'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '983'
+      - '986'
       x-ratelimit-reset:
-      - '29'
+      - '36'
+      x-tango-api-version:
+      - 5.8.0
     status:
       code: 200
       message: OK

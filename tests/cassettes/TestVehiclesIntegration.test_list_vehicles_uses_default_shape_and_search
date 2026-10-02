@@ -2,106 +2,104 @@ interactions:
 - request:
     body: ''
     headers:
-      accept:
+      Accept:
       - '*/*'
-      accept-encoding:
+      Accept-Encoding:
       - gzip, deflate
-      connection:
+      Connection:
       - keep-alive
-      host:
+      Host:
       - tango.makegov.com
-      user-agent:
+      User-Agent:
       - python-httpx/0.28.1
     method: GET
-    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date&search=GSA
+    uri: https://tango.makegov.com/api/vehicles/?page=1&limit=10&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date&search=GSA
   response:
     body:
-      string: '{"count":103,"next":"https://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":0,"description":["EMDX
-        RESEARCH AND CONSULTING ASSOCIATES, LLC, NATIONAL ANIMAL CARE BLANKET PURCHASE
-        AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","SCITECH SERVICES INC NATIONAL
-        ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","THE
-        MCCONNELL GROUP, INC., NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR
-        THE AGRICULTURAL RESEARCH SERVICE","ABANTEARE LLC NATIONAL ANIMAL CARE BLANKET
-        PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","BCA FEDERAL, LLC,
-        NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH
-        SERVICE","FEFA, LLC NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE
-        AGRICULTURAL RESEARCH SERVICE","SOBRAN, INC., NATIONAL ANIMAL CARE BLANKET
-        PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE"],"idv_count":7,"is_synthetic_solicitation":false,"latest_award_date":"2026-05-01","order_count":0,"organization":{"organization_id":"0ef2831b-d699-50c7-8326-63541a75fa11","office_code":"1232SA","office_name":"USDA
+      string: '{"count":262,"next":"https://tango.makegov.com/api/vehicles/?limit=10&page=2&search=GSA&shape=uuid%2Csolicitation_identifier%2Cis_synthetic_solicitation%2Cprogram_acronym%2Corganization_id%2Corganization%2Cvehicle_type%2Cdescription%2Cidv_count%2Cholder_count%2Corder_winner_count%2Cawardee_count%2Corder_count%2Ctotal_obligated%2Cvehicle_obligations%2Cvehicle_contracts_value%2Clatest_award_date%2Csolicitation_title%2Csolicitation_date","previous":null,"results":[{"awardee_count":4,"description":["ESTABLISHMENT
+        OF A SINGLE AWARD BPA TO SUPPORT USDA NATIONAL FINANCE CENTER''S (NFC) MODERNIZATION
+        OF ITS LEGACY MAINFRAME PAYROLL SYSTEM USING FEDRAMP AUTHORIZED CLOUD PAYROLL,
+        SOFTWARE LICENSING, SOFTWARE MAINTENANCE, AND IT PROFESSIONAL SERVIC","ESTABLISHMENT
+        OF A SINGLE AWARD BPA TO SUPPORT USDA NFC''S MODERNIZATION OF ITS LEGACY MAINFRAME
+        PAYROLL SYSTEM USING FEDRAMP AUTHORIZED CLOUD PAYROLL, SOFTWARE LICENSING,
+        SOFTWARE MAINTENANCE, AND IT PROFESSIONAL SERVICES."],"holder_count":4,"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2026-08-04","order_count":3,"order_winner_count":4,"organization":{"organization_id":"9913639c-be79-53e5-9dc6-68ee8bc1bb9b","office_code":"123144","office_name":"USDA,
+        OCP-POD-ACQ-MGMT-BRANCH-FTC","agency_code":"1205","agency_name":"USDA, DEPARTMENTAL
+        ADMINISTRATION","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"organization_id":"9913639c-be79-53e5-9dc6-68ee8bc1bb9b","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"12314426Q0153","solicitation_title":null,"total_obligated":29999.39,"uuid":"d1c6e887-3591-5919-9e14-84233ae331d0","vehicle_contracts_value":18412019.28,"vehicle_obligations":18412019.28,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":1,"description":["BCA
+        FEDERAL, LLC, NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL
+        RESEARCH SERVICE","THE MCCONNELL GROUP, INC., NATIONAL ANIMAL CARE BLANKET
+        PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","SOBRAN, INC., NATIONAL
+        ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","SCITECH
+        SERVICES INC NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL
+        RESEARCH SERVICE","FEFA, LLC NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT
+        FOR THE AGRICULTURAL RESEARCH SERVICE","ABANTEARE LLC NATIONAL ANIMAL CARE
+        BLANKET PURCHASE AGREEMENT FOR THE AGRICULTURAL RESEARCH SERVICE","EMDX RESEARCH
+        AND CONSULTING ASSOCIATES, LLC, NATIONAL ANIMAL CARE BLANKET PURCHASE AGREEMENT
+        FOR THE AGRICULTURAL RESEARCH SERVICE"],"holder_count":7,"idv_count":7,"is_synthetic_solicitation":false,"latest_award_date":"2026-05-01","order_count":1,"order_winner_count":1,"organization":{"organization_id":"0ef2831b-d699-50c7-8326-63541a75fa11","office_code":"1232SA","office_name":"USDA
         ARS AFM APD","agency_code":"12H2","agency_name":"AGRICULTURAL RESEARCH SERVICE","department_code":"012","department_name":"AGRICULTURE,
-        DEPARTMENT OF"},"organization_id":"0ef2831b-d699-50c7-8326-63541a75fa11","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"1232SA26Q0019","solicitation_title":null,"total_obligated":0.0,"uuid":"3fdd49c6-bf14-57b5-9b56-05a5d3adb35a","vehicle_contracts_value":0.0,"vehicle_obligations":0.0,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":2,"description":["VARIOUS
+        DEPARTMENT OF"},"organization_id":"0ef2831b-d699-50c7-8326-63541a75fa11","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"1232SA26Q0019","solicitation_title":null,"total_obligated":195091.2,"uuid":"3fdd49c6-bf14-57b5-9b56-05a5d3adb35a","vehicle_contracts_value":602976.0,"vehicle_obligations":195091.2,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":2,"description":["GSA
+        BPA FOR FACILITIES SUPPORT SERVICES","GSA BPA FOR FACILITIES SUPPORT SERVICES
+        (NATIONWIDE)"],"holder_count":2,"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2023-08-21","order_count":6,"order_winner_count":2,"organization":{"organization_id":"16624b2a-ac98-5cea-8673-5afee0294cb1","office_code":"12905B","office_name":"USDA
+        ARS PWA AAO ACQ/PER PROP","agency_code":"12H2","agency_name":"AGRICULTURAL
+        RESEARCH SERVICE","department_code":"012","department_name":"AGRICULTURE,
+        DEPARTMENT OF"},"organization_id":"16624b2a-ac98-5cea-8673-5afee0294cb1","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"12905B23R0008","solicitation_title":null,"total_obligated":4552262.2,"uuid":"21795b70-9d23-59f7-bf09-e27275161d53","vehicle_contracts_value":8521467.52,"vehicle_obligations":4552262.2,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":0,"description":["PRE-ACQUISITION
+        ENVIRONMENTAL DATABASE SEARCHES AND REPORTING SERVICES FOR USDA NATURAL RESOURCE
+        CONSERVATION SERVICES (NRCS) AGENCY - NATIONWIDE."],"holder_count":5,"idv_count":5,"is_synthetic_solicitation":false,"latest_award_date":"2026-09-03","order_count":0,"order_winner_count":0,"organization":{"organization_id":"5cea6c7c-ea62-5830-8b3c-1fbc3cf7bb94","office_code":"12FPC1","office_name":"FPAC
+        BUS CNTR-ACQ DIV-CENTRAL SEC","agency_code":"12D0","agency_name":"FARM PRODUCTION
+        AND CONSERVATION BUSINESS CENTER","department_code":"012","department_name":"AGRICULTURE,
+        DEPARTMENT OF"},"organization_id":"5cea6c7c-ea62-5830-8b3c-1fbc3cf7bb94","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"12FPC126Q0023","solicitation_title":null,"total_obligated":0.0,"uuid":"2ccf1a8f-5082-5b4f-969d-6391385a372c","vehicle_contracts_value":0.0,"vehicle_obligations":0.0,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":1,"description":["NOAA
+        MODERN DATA ARCHITECTURE BPA - BOOZ ALLEN","NOAA MODERN DATA ARCHITECTURE
+        BPA -  PRIMARY - ACCENTURE"],"holder_count":2,"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2026-09-25","order_count":1,"order_winner_count":1,"organization":{"organization_id":"2e8c9a06-9e38-5765-87cc-1d31b838101f","office_code":"1305M4","office_name":"DEPT
+        OF COMMERCE NOAA","agency_code":"1330","agency_name":"NATIONAL OCEANIC AND
+        ATMOSPHERIC ADMINISTRATION","department_code":"013","department_name":"COMMERCE,
+        DEPARTMENT OF"},"organization_id":"2e8c9a06-9e38-5765-87cc-1d31b838101f","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"1305M426Q0075","solicitation_title":null,"total_obligated":391182.58,"uuid":"cf5452db-17f1-5aa5-81da-96912b512d75","vehicle_contracts_value":419164.29,"vehicle_obligations":391182.58,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":3,"description":["ESTABLISHING
+        MULTIPLE AWARD BPAS UNDER GSA MAS FOR NATIONWIDE SUPPLY AND DELIVERY OF COPY
+        PAPER AND RELATED PAPER PRODUCTS IN COMPLIANCE WITH ABILITYONE AND SUSTAINABILITY
+        REQUIREMENTS."],"holder_count":3,"idv_count":3,"is_synthetic_solicitation":false,"latest_award_date":"2025-09-22","order_count":41,"order_winner_count":3,"organization":{"organization_id":"51f9cb85-9d0f-59ae-ac9f-332cb3bc7772","office_code":"15BNAS","office_name":"NATIONAL
+        ACQUISITIONS - CO","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM
+        / BUREAU OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"organization_id":"51f9cb85-9d0f-59ae-ac9f-332cb3bc7772","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"15BNAS25Q00000050","solicitation_title":null,"total_obligated":355381.74,"uuid":"423f3ea1-95bb-593e-92d8-6bf29a9a9f7e","vehicle_contracts_value":355381.74,"vehicle_obligations":355381.74,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":0,"description":["NATIONAL
+        COPIER BPA. TERMS AND CONDITIONS ARE SUBJECT TO THE CLAUSES AND PROVISIONS
+        OF THE OFFERORS GSA MAS."],"holder_count":3,"idv_count":3,"is_synthetic_solicitation":false,"latest_award_date":"2026-09-17","order_count":0,"order_winner_count":0,"organization":{"organization_id":"51f9cb85-9d0f-59ae-ac9f-332cb3bc7772","office_code":"15BNAS","office_name":"NATIONAL
+        ACQUISITIONS - CO","agency_code":"1540","agency_name":"FEDERAL PRISON SYSTEM
+        / BUREAU OF PRISONS","department_code":"015","department_name":"JUSTICE, DEPARTMENT
+        OF"},"organization_id":"51f9cb85-9d0f-59ae-ac9f-332cb3bc7772","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"15BNAS26Q00000076","solicitation_title":null,"total_obligated":0.0,"uuid":"5c27791e-5757-5e5f-b4ec-6ac9e12ed379","vehicle_contracts_value":0.0,"vehicle_obligations":0.0,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":2,"description":["VARIOUS
         DIVISIONS WITHIN THE AGENCY REQUIRE CURRICULUM DEVELOPMENT SUPPORT. EACH DEPARTMENT/DIVISION
         WILL BE REQUIRED TO USE THE ANALYZE, DESIGN, DEVELOP, IMPLEMENT AND EVALUATION
-        (ADDIE) MODULE.","DIVISIONS WITHIN THE AGENCY REQUIRE CURRICULUM DEVELOPMENT
-        SUPPORT. EACH DEPT/DIV WILL REQUIRE THE USE OF ANALYZE, DESIGN, DEVELOP, IMPLEMENT
-        AND EVALUATION (ADDIE) MODULE. EACH DEPT/DIV SPECIFIC REQUIREMENTS WILL BE
-        PROVIDED ON SEPARATE BPA CALL."],"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2025-09-04","order_count":5,"organization":{"organization_id":"ea1c7a92-5838-5641-99ba-1527f4524306","office_code":"15F067","office_name":"FBI-JEH","agency_code":"1549","agency_name":"FEDERAL
+        (ADDIE) MODULE.","VARIOUS DIVISIONS WITHIN THE AGENCY REQUIRE CURRICULUM DEVELOPMENT
+        SUPPORT. EACH DEPARTMENT/DIVISION WILL BE REQUIRED TO USE THE ANALYZE, DESIGN,
+        DEVELOP, IMPLEMENT AND EVALUATION (ADDIE) MODULE. THE MASTER BPA IS ONE OF
+        4 TO SUPPORT THE AGENCY.","DIVISIONS WITHIN THE AGENCY REQUIRE CURRICULUM
+        DEVELOPMENT SUPPORT. EACH DEPT/DIV WILL REQUIRE THE USE OF ANALYZE, DESIGN,
+        DEVELOP, IMPLEMENT AND EVALUATION (ADDIE) MODULE. EACH DEPT/DIV SPECIFIC REQUIREMENTS
+        WILL BE PROVIDED ON SEPARATE BPA CALL."],"holder_count":4,"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2025-09-04","order_count":5,"order_winner_count":2,"organization":{"organization_id":"ea1c7a92-5838-5641-99ba-1527f4524306","office_code":"15F067","office_name":"FBI-JEH","agency_code":"1549","agency_name":"FEDERAL
         BUREAU OF INVESTIGATION","department_code":"015","department_name":"JUSTICE,
-        DEPARTMENT OF"},"organization_id":"ea1c7a92-5838-5641-99ba-1527f4524306","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"15F06725Q0000150","solicitation_title":"Curriculum
-        Development Synopsis/Solicitation - Updated GSA site","total_obligated":3104682.7,"uuid":"6741a166-ae8e-57ba-b156-76f9137febad","vehicle_contracts_value":29044858.959999997,"vehicle_obligations":3104682.7,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":1,"description":["MULTI-AWARD
-        BLANKET PURCHASE AGREEMENT (BPA) FOR EDUCATION, OUTREACH & ANALYSIS"],"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2025-02-13","order_count":1,"organization":{"organization_id":"5b904ace-8e3f-5909-a991-3e7297c5ffeb","office_code":"1605C2","office_name":"DOL
+        DEPARTMENT OF"},"organization_id":"ea1c7a92-5838-5641-99ba-1527f4524306","program_acronym":null,"solicitation_date":"2025-04-10","solicitation_identifier":"15F06725Q0000150","solicitation_title":"Curriculum
+        Development Synopsis/Solicitation - Updated GSA site","total_obligated":8452629.68,"uuid":"6741a166-ae8e-57ba-b156-76f9137febad","vehicle_contracts_value":29771018.959999997,"vehicle_obligations":8452545.06,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":4,"description":["MULTI-AWARD
+        BLANKET PURCHASE AGREEMENT (BPA) FOR EDUCATION, OUTREACH & ANALYSIS"],"holder_count":7,"idv_count":7,"is_synthetic_solicitation":false,"latest_award_date":"2025-02-13","order_count":10,"order_winner_count":4,"organization":{"organization_id":"5b904ace-8e3f-5909-a991-3e7297c5ffeb","office_code":"1605C2","office_name":"DOL
         - CAS DIVISION 2 PROCUREMENT","agency_code":"1605","agency_name":"OFFICE OF
         THE ASSISTANT SECRETARY FOR ADMINISTRATION AND MANAGEMENT","department_code":"016","department_name":"LABOR,
-        DEPARTMENT OF"},"organization_id":"5b904ace-8e3f-5909-a991-3e7297c5ffeb","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"1605C2-24-Q-00026","solicitation_title":null,"total_obligated":50000.0,"uuid":"9f042142-a09b-5244-9b3d-a638a4e2f219","vehicle_contracts_value":739950.6,"vehicle_obligations":50000.0,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":3,"description":["VAAA
-        ACQUISITION WORKFORCE TRAINING, MULTIPLE AWARD BLANKET PURCHASE AGREEMENT
-        (BPA)"],"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2024-02-12","order_count":14,"organization":{"organization_id":"d8247025-812e-5403-954c-09577eab4a91","office_code":"36C10X","office_name":"SAC
-        FREDERICK (36C10X)","agency_code":"3600","agency_name":"VETERANS AFFAIRS,
-        DEPARTMENT OF","department_code":"036","department_name":"VETERANS AFFAIRS,
-        DEPARTMENT OF"},"organization_id":"d8247025-812e-5403-954c-09577eab4a91","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"36C10X23Q0022","solicitation_title":"U008--Acquisition
-        Workforce Training Multiple Award BPA - NEW GSA Contract Number Business Management
-        Research Associates, Inc","total_obligated":2359268.78,"uuid":"6fea329b-c906-5857-8384-6451a4c93430","vehicle_contracts_value":2359268.78,"vehicle_obligations":2359268.78,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":3,"description":["REFERENCE
-        LABORATORY SERVICES FOR VISN 21","REFERENCE LABORATORY SERVICES FOR VISN 21."],"idv_count":3,"is_synthetic_solicitation":false,"latest_award_date":"2020-09-25","order_count":93,"organization":{"organization_id":"2c45fd53-3590-5589-a188-1f34917b3de5","office_code":"36C261","office_name":"261-NETWORK
-        CONTRACT OFFICE 21 (36C261)","agency_code":"3600","agency_name":"VETERANS
-        AFFAIRS, DEPARTMENT OF","department_code":"036","department_name":"VETERANS
-        AFFAIRS, DEPARTMENT OF"},"organization_id":"2c45fd53-3590-5589-a188-1f34917b3de5","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"36C26120Q0012","solicitation_title":"Q301--Quest
-        FSS-BPA GSA Schedule 621 II","total_obligated":52052266.47,"uuid":"e99312ce-b377-5fac-81ce-7f3f19b548c4","vehicle_contracts_value":53523209.29,"vehicle_obligations":52052266.47,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":6,"description":["GSA
-        LEASING SUPPORT SERVICES"],"idv_count":9,"is_synthetic_solicitation":false,"latest_award_date":"2020-05-13","order_count":911,"organization":{"organization_id":"6f5ca983-9b09-55b6-9ad0-f0ce1c2d06c1","office_code":"47PA05","office_name":"PBS
-        R00 CENTER FOR BROKER SERVICES","agency_code":"4740","agency_name":"PUBLIC
-        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
-        ADMINISTRATION"},"organization_id":"6f5ca983-9b09-55b6-9ad0-f0ce1c2d06c1","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"47PA0519R0001","solicitation_title":"GSA
-        Leasing Support Services Plus","total_obligated":0.0,"uuid":"5dbdd43a-d8aa-56eb-a11f-78e0ded35642","vehicle_contracts_value":907.02,"vehicle_obligations":0.0,"vehicle_type":{"code":"B","description":"IDC"}},{"awardee_count":7,"description":["ELECTRIC
-        SUPPLY","PROVIDE ELECTRIC UTILITY SUPPLY IN ERCOT FOR GROUPS 9 FOR AGENCIES
-        LISTED IN EXHIBIT 1 OF THIS CONTRACT.","PROVIDE ELECTRIC UTILITY SUPPLY IN
-        PJM FOR GROUPS 3 5 7 FOR AGENCIES LISTED IN EXHIBIT 1 OF THIS CONTRACT.","PROVIDE
-        ELECTRIC UTILITY SUPPLY IN PJM FOR GROUPS 2 4 6 8 FOR AGENCIES LISTED IN EXHIBIT
-        1 OF THIS CONTRACT."],"idv_count":9,"is_synthetic_solicitation":false,"latest_award_date":"2025-08-18","order_count":88,"organization":{"organization_id":"949facff-0fda-5062-972b-01ad17491bc6","office_code":"47PA08","office_name":"PBS
-        RETAIL UTILITY PROCUREMENTS","agency_code":"4740","agency_name":"PUBLIC BUILDINGS
-        SERVICE","department_code":"047","department_name":"GENERAL SERVICES ADMINISTRATION"},"organization_id":"949facff-0fda-5062-972b-01ad17491bc6","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"47PA0825R0002","solicitation_title":"FY25
-        GSA Streamlined Retail Electric Solicitation","total_obligated":44802108.86,"uuid":"6aa9d616-4d60-52b3-bfb7-a4f4ba332a3c","vehicle_contracts_value":105773964.96,"vehicle_obligations":44802108.86,"vehicle_type":{"code":"B","description":"IDC"}},{"awardee_count":0,"description":["ELECTRIC
-        SUPPLY FOR FIXED PRICES, PRICING GROUP 3 IN THE PJM BALANCING AUTHORITY","ELECTRIC
-        SUPPLY FOR FIXED PRICES, PRICING GROUPS 5 AND 6 IN THE PJM BALANCING AUTHORITY","ELECTRIC
-        SUPPLY FOR FIXED PRICES, PRICING GROUPS 1 AND 2 IN THE PJM BALANCING AUTHORITY","ELECTRIC
-        SUPPLY FOR FIXED PRICES, PRICING GROUP 4 IN THE PJM BALANCING AUTHORITY"],"idv_count":4,"is_synthetic_solicitation":false,"latest_award_date":"2026-03-23","order_count":0,"organization":{"organization_id":"949facff-0fda-5062-972b-01ad17491bc6","office_code":"47PA08","office_name":"PBS
-        RETAIL UTILITY PROCUREMENTS","agency_code":"4740","agency_name":"PUBLIC BUILDINGS
-        SERVICE","department_code":"047","department_name":"GENERAL SERVICES ADMINISTRATION"},"organization_id":"949facff-0fda-5062-972b-01ad17491bc6","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"47PA0826R0001","solicitation_title":"FY26
-        GSA Streamlined Retail Electric Solicitation","total_obligated":0.0,"uuid":"7c370689-aad8-5ba3-9498-c018bc5df121","vehicle_contracts_value":0.0,"vehicle_obligations":0.0,"vehicle_type":{"code":"B","description":"IDC"}},{"awardee_count":8,"description":["MULTIPLE
-        AWARD, INDEFINITE DELIVERY/INDEFINITE QUANTITY (IDIQ) WITH MINIMUM GUARANTEE
-        FOR CONSTRUCTION SERVICES FOR GSA-OWNED AND LEASED FEDERAL FACILITIES IN REGION
-        1 SOUTH ZONE.","MULTIPLE AWARD, INDEFINITE DELIVERY/INDEFINITE QUANTITY (IDIQ)
-        WITH MINIMUM GUARANTEE FOR CONSTRUCTION SERVICES FOR GSA-OWNED AND LEASED
-        FEDERAL FACILITIES IN REGION 1 NORTH ZONE.","MULTIPLE AWARD, INDEFINITE DELIVERY/INDEFINITE
-        QUANTITY (IDIQ) WITH MINIMUM GUARANTEE FOR CONSTRUCTION SERVICES FOR GSA-OWNED
-        AND LEASED FEDERAL FACILITIES IN REGION 1 BOSTON ZONE."],"idv_count":24,"is_synthetic_solicitation":false,"latest_award_date":"2025-02-24","order_count":51,"organization":{"organization_id":"2fd4b124-5131-5ab9-9091-e2ee27274d0e","office_code":"47PB00","office_name":"PBS
-        R1 ACQ MANAGEMENT DIVISION","agency_code":"4740","agency_name":"PUBLIC BUILDINGS
-        SERVICE","department_code":"047","department_name":"GENERAL SERVICES ADMINISTRATION"},"organization_id":"2fd4b124-5131-5ab9-9091-e2ee27274d0e","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"47PB0023R0012","solicitation_title":"GSA
-        Region 1 Construction IDIQ - North/Boston/South Zones","total_obligated":24000257.07,"uuid":"4b755976-75c2-573a-bd3a-92147261df2f","vehicle_contracts_value":24000257.07,"vehicle_obligations":24000257.07,"vehicle_type":{"code":"B","description":"IDC"}},{"awardee_count":0,"description":["CARIBBEAN
-        CONSTRUCTION & DESIGN-BUILD CONSTRUCTION SERVICES"],"idv_count":7,"is_synthetic_solicitation":false,"latest_award_date":"2025-12-16","order_count":0,"organization":{"organization_id":"54839cf5-aa68-5304-8f46-9aa63eaf2ba5","office_code":"47PC55","office_name":"PBS
-        PROJECT DELIVERY EAST - BRANCH E","agency_code":"4740","agency_name":"PUBLIC
-        BUILDINGS SERVICE","department_code":"047","department_name":"GENERAL SERVICES
-        ADMINISTRATION"},"organization_id":"54839cf5-aa68-5304-8f46-9aa63eaf2ba5","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"47PC0222R0019","solicitation_title":"GSA
-        R2 - Caribbean Construction IDIQ","total_obligated":0.0,"uuid":"1a1704af-7d47-5293-b189-cf6a8c7ca35f","vehicle_contracts_value":0.0,"vehicle_obligations":0.0,"vehicle_type":{"code":"B","description":"IDC"}}]}'
+        DEPARTMENT OF"},"organization_id":"5b904ace-8e3f-5909-a991-3e7297c5ffeb","program_acronym":"GSA","solicitation_date":null,"solicitation_identifier":"1605C2-24-Q-00026","solicitation_title":null,"total_obligated":8791688.93,"uuid":"9f042142-a09b-5244-9b3d-a638a4e2f219","vehicle_contracts_value":31850797.48,"vehicle_obligations":8791688.93,"vehicle_type":{"code":"E","description":"BPA"}},{"awardee_count":1,"description":["THIS
+        ACQUISITION IS TO RE-COMPETE OPA AUDIOVISUAL PRODUCTION & SUPPORT SERVICES.
+        OPA ANTICIPATES UP TO TWO BPA AWARDEES OFF OF THE GSA MAS. THIS IS SET ASIDE
+        FOR SMALL BUSINESS AWARD. POP IS ANTICIPATED TO START MAY 27,2026 BUT IS SUBJECT
+        TO CHAN"],"holder_count":2,"idv_count":2,"is_synthetic_solicitation":false,"latest_award_date":"2026-05-18","order_count":2,"order_winner_count":1,"organization":{"organization_id":"ab79c8e7-358e-5dc7-a72e-949e5484b175","office_code":"1605C5","office_name":"DOL
+        - CAS DIVISION 5 PROCUREMENT","agency_code":"1605","agency_name":"OFFICE OF
+        THE ASSISTANT SECRETARY FOR ADMINISTRATION AND MANAGEMENT","department_code":"016","department_name":"LABOR,
+        DEPARTMENT OF"},"organization_id":"ab79c8e7-358e-5dc7-a72e-949e5484b175","program_acronym":null,"solicitation_date":null,"solicitation_identifier":"1605C5-26-Q-00003","solicitation_title":null,"total_obligated":80000.0,"uuid":"077943d7-d95d-5c6e-8ea9-c5f327d7c036","vehicle_contracts_value":240191.09,"vehicle_obligations":80000.0,"vehicle_type":{"code":"E","description":"BPA"}}]}'
     headers:
       CF-RAY:
-      - 9f73b81bf9a460c7-JAX
+      - a447660c1b141642-ORD
       Connection:
       - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 May 2026 00:02:58 GMT
+      - Fri, 02 Oct 2026 23:13:36 GMT
       Nel:
       - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
       Report-To:
-      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=mvbE0znCQMx6U%2BgaEc5wluqJwJD6ucje1qKsBbZ%2F7ZWCVecTQHyBrlSBGPO44JvVemBkaSui4vuB6wXTaW1QuBpGD9oaRlxmkXUigS2jf%2BDoqMKs2mlfmejcjhk6xq8MNUy%2B0sfLHo8NYz%2FHVLiQ"}]}'
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=yX3QUcfyTvrkzoan%2Fp0OOxgwNAgKIUG6B371p4IsdGvvSVGF%2FvK05myElQ339FCyQkjOGYJi%2BIX0U%2F%2FXQDUPgmQq164RdmDuMxZx72IqDc6KoOMAhp8qyNuNt2WJ8U3VdxWDfpx%2BXIqbCoK%2BYPxj"}]}'
       Server:
       - cloudflare
       Transfer-Encoding:
@@ -111,7 +109,7 @@ interactions:
       cf-cache-status:
       - DYNAMIC
       content-length:
-      - '11445'
+      - '11708'
       cross-origin-opener-policy:
       - same-origin
       referrer-policy:
@@ -121,29 +119,31 @@ interactions:
       x-content-type-options:
       - nosniff
       x-execution-time:
-      - 0.304s
+      - 0.032s
       x-frame-options:
       - DENY
       x-ratelimit-burst-limit:
       - '1000'
       x-ratelimit-burst-remaining:
-      - '987'
+      - '990'
       x-ratelimit-burst-reset:
-      - '29'
+      - '37'
       x-ratelimit-daily-limit:
       - '2000000'
       x-ratelimit-daily-remaining:
-      - '1999987'
+      - '1997194'
       x-ratelimit-daily-reset:
-      - '86221'
+      - '2783'
       x-ratelimit-limit:
       - '1000'
       x-ratelimit-remaining:
-      - '987'
+      - '990'
       x-ratelimit-reset:
-      - '29'
+      - '37'
       x-results-counttype:
       - exact
+      x-tango-api-version:
+      - 5.8.0
     status:
       code: 200
       message: OK
