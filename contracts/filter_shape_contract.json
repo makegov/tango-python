@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.5.0",
+    "api_version": "5.7.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -1628,6 +1628,8 @@
       "resource_key": "budget/accounts",
       "runtime": {
         "filter_params": [
+          "account_category",
+          "account_category__in",
           "account_title__icontains",
           "actual_vs_requested_contract",
           "actual_vs_requested_contract__gte",
@@ -1727,6 +1729,15 @@
           "unobligated_pct__lte"
         ],
         "filter_params_detail": {
+          "account_category": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "account_category__in": {
+            "filter_class": "CharInFilter",
+            "lookup": "in",
+            "type": "string"
+          },
           "account_title__icontains": {
             "filter_class": "CharFilter",
             "lookup": "icontains",
@@ -2260,6 +2271,7 @@
             }
           },
           "fields": [
+            "account_category",
             "account_narrative_excerpt",
             "account_title",
             "actual_vs_requested_contract",
@@ -2324,6 +2336,7 @@
             "requested_ba",
             "requested_contractual_services",
             "requested_personnel_share",
+            "source_anomalies",
             "subfunction_code",
             "top_contract_recipients",
             "top_grant_recipients",
@@ -2333,6 +2346,7 @@
           ]
         },
         "shape_flat_paths": [
+          "account_category",
           "account_narrative_excerpt",
           "account_title",
           "actual_vs_requested_contract",
@@ -2441,6 +2455,7 @@
           "requested_ba",
           "requested_contractual_services",
           "requested_personnel_share",
+          "source_anomalies",
           "subfunction_code",
           "top_contract_recipients",
           "top_grant_recipients",

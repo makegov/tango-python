@@ -11,6 +11,9 @@ from .exceptions import (
 )
 from .models import (
     BudgetAccount,
+    BudgetAccountAnomalySource,
+    BudgetAccountAnomalySourceRow,
+    BudgetAccountSourceAnomaly,
     ContractAppeal,
     DibbsAward,
     DibbsRfp,
@@ -72,6 +75,9 @@ __all__ = [
     "ResolveCandidate",
     "ResolveResult",
     "BudgetAccount",
+    "BudgetAccountAnomalySource",
+    "BudgetAccountAnomalySourceRow",
+    "BudgetAccountSourceAnomaly",
     "ContractAppeal",
     "FederalRegisterDocument",
     "EbuyAccess",

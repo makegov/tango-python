@@ -1770,6 +1770,8 @@ accounts = client.list_budget_accounts(
     bea_category=None,
     on_off_budget=None,
     subfunction_code=None,
+    account_category=None,
+    account_category_in=None,
     search=None,
     ordering=None,
 )
@@ -1785,8 +1787,18 @@ accounts = client.list_budget_accounts(
 - `bea_category` - BEA category (exact)
 - `on_off_budget` - On/off budget flag (exact)
 - `subfunction_code` - Subfunction code (exact)
+- `account_category` - Account category (exact): `budgetary` or `credit_financing` today; treat it as an open string
+- `account_category_in` - Comma-separated account categories to match any of (e.g. `"budgetary,credit_financing"`)
 - `search` - Full-text search over `account_title`, `agency_name`, `bureau_name`
-- `ordering` - Sort field; prefix with `-` for descending
+- `ordering` - Sort field; prefix with `-` for descending. The default is the latest fiscal year first, then largest `enacted_ba` first, with accounts that have no `enacted_ba` last.
+
+**Source anomalies:** the default shape includes `account_category` and `source_anomalies`. `source_anomalies` is a list of problems found in the source data behind the account, and `[]` when there are none. Each element is a `BudgetAccountSourceAnomaly` (a `TypedDict`; every key is optional and may be `None`, so read keys with `.get()`): `code`, `field`, `bound_field`, `action` (`capped` or `flagged`), `reported_value`, `served_value`, `likely_cause`, `affected_fields`, `message`, and `source` (`dataset`, `fiscal_year`, and `rows` of `fiscal_period`, `piid`, `parent_piid`, `tas`, `reporting_agency_id`, `transaction_obligated_amount`, `file_c_source`). Today `code` is one of `contract_exceeds_obligations`, `assistance_exceeds_obligations` or `contract_without_obligations`; treat it as an open string. There is no filter on anomalies.
+
+```python
+for acct in client.list_budget_accounts(fiscal_year=2025).results:
+    for anomaly in acct["source_anomalies"] or []:
+        print(acct["federal_account_symbol"], anomaly.get("code"), anomaly.get("action"))
+```
 
 **Returns:** [PaginatedResponse](#paginatedresponse) of `BudgetAccount` records (see [ShapeConfig](#shapeconfig-predefined-shapes) for the default shape).
 
@@ -2547,7 +2559,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
 | `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
-| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth |
+| `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |
 | `ITDASHBOARD_INVESTMENTS_COMPREHENSIVE` | `get_itdashboard_investment` | Full investment fields: uii, agency_code, agency_name, bureau_code, bureau_name, investment_title, type_of_investment, part_of_it_portfolio, updated_time, url |

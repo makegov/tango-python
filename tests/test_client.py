@@ -601,6 +601,113 @@ class TestTangoClient:
         ]
         assert leaked == [], f"unexpected filter keys sent: {leaked}"
 
+    @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_account_category_filters(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 0,
+            "next": None,
+            "previous": None,
+            "results": [],
+        }
+        mock_response.content = b'{"count": 0, "results": []}'
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        client.list_budget_accounts(
+            account_category="credit_financing",
+            account_category_in="budgetary,credit_financing",
+        )
+
+        params = mock_request.call_args[1]["params"]
+        assert params["account_category"] == "credit_financing"
+        assert params["account_category__in"] == "budgetary,credit_financing"
+
+    @patch("tango.client.httpx.Client.request")
+    def test_list_budget_accounts_default_shape_parses_source_anomalies(self, mock_request):
+        anomaly = {
+            "code": "contract_exceeds_obligations",
+            "field": "contract_obligated",
+            "bound_field": "obligated_total",
+            "action": "capped",
+            "reported_value": 1250.0,
+            "served_value": 1000.0,
+            "likely_cause": None,
+            "affected_fields": ["contract_obligated", "contract_share_of_obligated"],
+            "message": "Contract obligations exceed total obligations.",
+            "source": {
+                "dataset": "file_c",
+                "fiscal_year": 2025,
+                "rows": [
+                    {
+                        "fiscal_period": 12,
+                        "piid": "ABC123",
+                        "parent_piid": None,
+                        "tas": "012-1234",
+                        "reporting_agency_id": "012",
+                        "transaction_obligated_amount": 1250.0,
+                        "file_c_source": "award",
+                    }
+                ],
+            },
+        }
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "count": 2,
+            "next": None,
+            "previous": None,
+            "results": [
+                {
+                    "id": 1,
+                    "fiscal_year": 2025,
+                    "account_category": "budgetary",
+                    "source_anomalies": [anomaly],
+                },
+                {
+                    "id": 2,
+                    "fiscal_year": 2025,
+                    "account_category": "credit_financing",
+                    "enacted_ba": None,
+                    "source_anomalies": [],
+                },
+            ],
+        }
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        page = client.list_budget_accounts()
+
+        shape_fields = mock_request.call_args[1]["params"]["shape"].split(",")
+        assert "account_category" in shape_fields
+        assert "source_anomalies" in shape_fields
+        first, second = page.results
+        assert first["account_category"] == "budgetary"
+        assert first["source_anomalies"] == [anomaly]
+        assert first["source_anomalies"][0]["source"]["rows"][0]["piid"] == "ABC123"
+        assert second["account_category"] == "credit_financing"
+        assert second["source_anomalies"] == []
+
+    @patch("tango.client.httpx.Client.request")
+    def test_get_budget_account_accepts_explicit_anomaly_shape(self, mock_request):
+        mock_response = Mock()
+        mock_response.is_success = True
+        mock_response.json.return_value = {
+            "id": 7,
+            "account_category": "budgetary",
+            "source_anomalies": [{"code": "some_future_code"}],
+        }
+        mock_response.content = b"{}"
+        mock_request.return_value = mock_response
+
+        client = TangoClient(api_key="test-key")
+        account = client.get_budget_account(7, shape="id,account_category,source_anomalies")
+
+        assert account["source_anomalies"] == [{"code": "some_future_code"}]
+        assert account["account_category"] == "budgetary"
+
 
 class TestShapeConfig:
     """Test ShapeConfig class"""
