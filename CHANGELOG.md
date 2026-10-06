@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.15.0] - 2026-10-06
+
 ### Added
 
 - **`matched_by` on agency-filter diagnostics** (Tango API 5.9.0). Each entry of `PaginatedResponse.meta["resolved_filters"][<filter name>]` that resolved now says how its token matched: `key` (an organization UUID), `code` (a 3-digit CGAC or 4-digit FPDS code), `name` (the organization's name, including a department's everyday name, a spelling variant or a rename), `alias` (an abbreviation or the organization's own alias) or `fuzzy` (a looser text match, worth checking against the resolved name). An entry that did not resolve has no `matched_by`. `meta` is passed through as the API sends it, so no code change was needed to receive the field; this release documents it and pins it with a test. `agency_warnings`, `unresolved_agency_tokens` and `resolved_agencies` are unchanged.
