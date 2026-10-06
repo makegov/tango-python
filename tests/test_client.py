@@ -2293,6 +2293,22 @@ class TestAgencyFilterDiagnostics:
         assert response.meta == meta
 
     @patch("tango.client.httpx.Client.request")
+    def test_matched_by_reaches_the_caller_and_leaves_the_accessors_unchanged(self, mock_request):
+        entries = [
+            {"token": "HUD", "matched_by": "alias", "resolved": self.HUD},
+            {"token": "Housing and Urban Developmnt", "matched_by": "fuzzy", "resolved": self.HUD},
+            {"token": "HUDD", "resolved": None},
+        ]
+        client = self._mock(mock_request, {"resolved_filters": {"awarding_agency": entries}})
+
+        response = client.list_contracts(awarding_agency="HUD|Housing and Urban Developmnt|HUDD")
+
+        returned = response.meta["resolved_filters"]["awarding_agency"]
+        assert [entry.get("matched_by") for entry in returned] == ["alias", "fuzzy", None]
+        assert response.unresolved_agency_tokens == {"awarding_agency": ["HUDD"]}
+        assert response.resolved_agencies == {"awarding_agency": [self.HUD, self.HUD]}
+
+    @patch("tango.client.httpx.Client.request")
     def test_dropped_tokens_are_reported_per_filter(self, mock_request):
         client = self._mock(
             mock_request,

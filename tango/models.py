@@ -1454,11 +1454,10 @@ class PaginatedResponse[T]:
         results: List of result items (type depends on shape parameter)
         cursor: Cursor token for cursor-based pagination (None if not available)
         meta: Response-level metadata the API attached to this page, when present.
-            Currently carries agency-filter diagnostics: ``resolved_filters`` maps
-            each agency filter to the organizations its ``|``-separated tokens
-            resolved to (or ``None``), and ``warnings`` lists human-readable notes
-            about tokens that were dropped or matched loosely. See
-            :meth:`agency_warnings` and :meth:`unresolved_agency_tokens`.
+            Currently carries agency-filter diagnostics: ``resolved_filters`` maps each agency filter to the organizations its ``|``-separated tokens resolved to (or ``None``), and ``warnings`` lists human-readable notes about tokens that were dropped or matched loosely.
+            Each ``resolved_filters`` entry that resolved also carries ``matched_by`` (Tango API 5.9.0+), saying how the token matched: ``"key"`` (an organization UUID), ``"code"`` (a 3-digit CGAC or 4-digit FPDS code), ``"name"`` (the organization's name, including a department's everyday name, a spelling variant or a rename), ``"alias"`` (an abbreviation or the organization's own alias) or ``"fuzzy"`` (a looser text match, worth checking against the resolved ``name``).
+            An entry that did not resolve has no ``matched_by``.
+            See :meth:`agency_warnings`, :meth:`unresolved_agency_tokens` and :meth:`resolved_agencies`.
         page_metadata: Always ``None`` — the API has never emitted a
             ``page_metadata`` key. Retained so existing attribute access keeps
             working; use ``meta`` instead.
