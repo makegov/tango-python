@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **`matched_by` on agency-filter diagnostics** (Tango API 5.9.0). Each entry of `PaginatedResponse.meta["resolved_filters"][<filter name>]` that resolved now says how its token matched: `key` (an organization UUID), `code` (a 3-digit CGAC or 4-digit FPDS code), `name` (the organization's name, including a department's everyday name, a spelling variant or a rename), `alias` (an abbreviation or the organization's own alias) or `fuzzy` (a looser text match, worth checking against the resolved name). An entry that did not resolve has no `matched_by`. `meta` is passed through as the API sends it, so no code change was needed to receive the field; this release documents it and pins it with a test. `agency_warnings`, `unresolved_agency_tokens` and `resolved_agencies` are unchanged.
+- **File and link counts on opportunities and notices** (Tango API 5.9.0). An attachment's `type` is `file` (a document attached to the notice; only files have extracted text) or `link` (a URL the notice lists), and the new fields count each: `meta.files_count` and `meta.links_count` on opportunities, `file_count` and `link_count` on notices. The existing `meta.attachments_count` and `attachment_count` still count every attachment, links included, and an attachment of any other type counts only there, so files plus links need not equal the total. The new fields are `None` until a record has been counted, so treat `None` as unknown, not zero. All four are accepted in custom shapes, as is `opportunity(meta(files_count,links_count))` on vehicles; no default SDK shape names them.
+
+### Changed
+
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.9.0) and regenerated `tango/shapes/generated_overlay.py`.
 
 ## [1.14.0] - 2026-10-02
 

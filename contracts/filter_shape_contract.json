@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.8.0",
+    "api_version": "5.9.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -4533,7 +4533,6 @@
           },
           "state": {
             "filter_class": "CharFilter",
-            "lookup": "state_or_province_code__contains",
             "type": "string"
           },
           "total_awards_obligated_gte": {
@@ -4551,7 +4550,6 @@
           },
           "zip_code": {
             "filter_class": "CharFilter",
-            "lookup": "zip_code__exact",
             "type": "string"
           }
         },
@@ -11504,7 +11502,9 @@
             "awardee",
             "awardee_uei",
             "description",
+            "file_count",
             "last_updated",
+            "link_count",
             "meta",
             "naics_code",
             "notice_id",
@@ -11550,7 +11550,9 @@
           "awardee",
           "awardee_uei",
           "description",
+          "file_count",
           "last_updated",
+          "link_count",
           "meta",
           "meta.link",
           "meta.notice_type",
@@ -11916,6 +11918,8 @@
               },
               "fields": [
                 "attachments_count",
+                "files_count",
+                "links_count",
                 "notice_type",
                 "notices_count"
               ]
@@ -12076,6 +12080,8 @@
           "latest_notice_id",
           "meta",
           "meta.attachments_count",
+          "meta.files_count",
+          "meta.links_count",
           "meta.notice_type",
           "meta.notice_type.code",
           "meta.notice_type.type",
@@ -15957,6 +15963,8 @@
                   },
                   "fields": [
                     "attachments_count",
+                    "files_count",
+                    "links_count",
                     "notice_type",
                     "notices_count"
                   ]
@@ -16572,6 +16580,8 @@
           "opportunity.latest_notice_id",
           "opportunity.meta",
           "opportunity.meta.attachments_count",
+          "opportunity.meta.files_count",
+          "opportunity.meta.links_count",
           "opportunity.meta.notice_type",
           "opportunity.meta.notice_type.code",
           "opportunity.meta.notice_type.type",

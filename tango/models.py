@@ -571,6 +571,12 @@ class Opportunity:
     The award fields (``award_date``, ``award_amount``, ``awardee``, ``awardee_uei``) are filled only where SAM.gov posted an award notice, and ``award_amount`` is the text SAM.gov published, not a number.
     SAM.gov often posts an award as its own opportunity; when that award notice references its solicitation, ``solicitation_opportunity_id`` points back to it, and the solicitation's ``awards(...)`` expand lists up to ten of the most recent linked awards, with ``award_count`` giving the full count.
     An award notice that does not reference its solicitation is not linked.
+
+    The ``meta(...)`` expand counts an opportunity's attachments three ways (Tango API 5.9.0).
+    An attachment's ``type`` is ``file`` (a document attached to the notice; only files have extracted text) or ``link`` (a URL the notice lists).
+    ``meta.files_count`` and ``meta.links_count`` count each, and ``meta.attachments_count`` counts every attachment, links included.
+    An attachment of any other type counts only in the total, so files plus links need not equal it.
+    ``files_count`` and ``links_count`` are null until the record has been counted, so treat null as unknown, not zero.
     """
 
     opportunity_id: str
@@ -600,6 +606,10 @@ class Notice:
     Both must be named, e.g. ``attachments(name,url,doc_role,doc_role_alt)``, because ``attachments(*)`` does not include them.
     An attachment Tango has not classified omits both keys rather than returning null, so read them with ``.get()``.
     A Free-plan request that names them gets the response without them, plus an entry in ``meta.upgrade_hints``.
+
+    ``file_count`` and ``link_count`` (Tango API 5.9.0) split ``attachment_count`` by attachment ``type``: ``file`` is a document attached to the notice (only files have extracted text) and ``link`` is a URL the notice lists.
+    ``attachment_count`` still counts every attachment, links included, and an attachment of any other type counts only there, so files plus links need not equal it.
+    ``file_count`` and ``link_count`` are null until the notice has been counted, so treat null as unknown, not zero.
     """
 
     notice_id: str
@@ -613,6 +623,9 @@ class Notice:
     award_amount: str | None = None
     awardee: str | None = None
     awardee_uei: str | None = None
+    attachment_count: int | None = None
+    file_count: int | None = None
+    link_count: int | None = None
 
 
 @dataclass
