@@ -165,6 +165,15 @@ for warning in response.agency_warnings:
     print(warning)
 ```
 
+Each entry of `response.meta["resolved_filters"][<filter name>]` that resolved also says how its token matched, in `matched_by` (Tango API 5.9.0+): `key` (an organization UUID), `code` (a 3-digit CGAC or 4-digit FPDS code), `name` (the organization's name, including a department's everyday name, a spelling variant or a rename), `alias` (an abbreviation or the organization's own alias) or `fuzzy` (a looser text match).
+A `fuzzy` match is the one worth checking against the resolved name:
+
+```python
+for entry in response.meta["resolved_filters"].get("awarding_agency", []):
+    if entry.get("matched_by") == "fuzzy":
+        print(f"{entry['token']!r} loosely matched {entry['resolved']['name']}")
+```
+
 If *every* token for a filter fails to resolve, the API returns `400` and the SDK raises
 `TangoValidationError` naming the offending value, rather than an empty page.
 
