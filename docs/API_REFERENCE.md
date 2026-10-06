@@ -981,6 +981,27 @@ awarded = client.list_opportunities(
 - The `awarded` and `awardee_uei` filters search every opportunity, not just active ones, so pass `active=True` to narrow to open opportunities.
 - Notices accept `award_date`, `award_amount`, `awardee` and `awardee_uei` in `shape` too.
 
+**Attachment counts — `meta(attachments_count, files_count, links_count)`:**
+
+Tango API 5.9.0 splits an opportunity's attachment count by attachment `type`.
+A `file` is a document attached to the notice, and only files have extracted text; a `link` is a URL the notice lists.
+
+```python
+opp = client.get_opportunity(
+    opportunity_id,
+    shape="opportunity_id,title,meta(attachments_count,files_count,links_count)",
+)
+files = opp["meta"]["files_count"]
+if files is None:
+    print("not counted yet")
+```
+
+- `meta.files_count` counts the files and `meta.links_count` counts the links.
+- `meta.attachments_count` still counts every attachment, links included. An attachment of any other type counts only there, so `files_count + links_count` need not equal it.
+- **`None` means unknown, not zero.** Both new fields are null until the record has been counted.
+- None of the three is in the SDK's default shape, so name the ones you want.
+- The opportunity embedded in a vehicle accepts them too: `opportunity(meta(files_count,links_count))`.
+
 ---
 
 ## Notices
@@ -1052,6 +1073,23 @@ for notice in notices.results:
 - `description` - Description
 - `posted_date` - Date posted
 - `naics_code` - Industry code
+
+**Attachment counts — `attachment_count`, `file_count`, `link_count`:**
+
+Tango API 5.9.0 splits a notice's attachment count by attachment `type`.
+A `file` is a document attached to the notice, and only files have extracted text; a `link` is a URL the notice lists.
+
+```python
+notices = client.list_notices(
+    agency="GSA",
+    shape="notice_id,title,attachment_count,file_count,link_count",
+)
+```
+
+- `file_count` counts the files and `link_count` counts the links.
+- `attachment_count` still counts every attachment, links included. An attachment of any other type counts only there, so `file_count + link_count` need not equal it.
+- **`None` means unknown, not zero.** Both new fields are null until the notice has been counted.
+- The API returns all three when no `shape` is sent, but the SDK's default `NOTICES_MINIMAL` shape does not name them, so ask for them.
 
 ---
 

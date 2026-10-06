@@ -641,6 +641,8 @@ META2_SCHEMA: dict[str, FieldSchema] = {
     "attachments_count": FieldSchema(
         name="attachments_count", type=int, is_optional=True, is_list=False
     ),
+    "files_count": FieldSchema(name="files_count", type=int, is_optional=True, is_list=False),
+    "links_count": FieldSchema(name="links_count", type=int, is_optional=True, is_list=False),
     "notice_type": FieldSchema(
         name="notice_type", type=dict, is_optional=True, is_list=False, nested_model="NoticeType"
     ),
@@ -2252,6 +2254,8 @@ GENERATED_OVERLAY: dict[str, dict[str, FieldSchema]] = {
         "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
         "awardee": FieldSchema(name="awardee", type=str, is_optional=True, is_list=False),
         "awardee_uei": FieldSchema(name="awardee_uei", type=str, is_optional=True, is_list=False),
+        "file_count": FieldSchema(name="file_count", type=int, is_optional=True, is_list=False),
+        "link_count": FieldSchema(name="link_count", type=int, is_optional=True, is_list=False),
         "meta": FieldSchema(
             name="meta", type=dict, is_optional=True, is_list=False, nested_model="Meta"
         ),
