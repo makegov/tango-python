@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.9.0",
+    "api_version": "5.9.1",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -4339,6 +4339,7 @@
                 "doc_seq_num",
                 "doc_session_date",
                 "doc_type",
+                "extracted_text",
                 "is_link"
               ]
             },
@@ -4414,6 +4415,7 @@
           "attachments.doc_seq_num",
           "attachments.doc_session_date",
           "attachments.doc_type",
+          "attachments.extracted_text",
           "attachments.is_link",
           "award_method",
           "buyer_agency",
