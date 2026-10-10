@@ -1365,6 +1365,10 @@ class EbuyAttachment:
     """Schema definition for one entry in an eBuy request's ``attachments`` (not used for instances).
 
     ``is_link=True`` means the entry is an outbound URL in ``doc_path`` with no stored document behind it, so ``get_ebuy_attachment_url()`` raises ``TangoAttachmentLinkError`` for it.
+
+    ``extracted_text`` (Tango API 5.9.1) is the text extracted from the attachment's document.
+    It must be named, e.g. ``attachments(doc_seq_num,doc_name,extracted_text)``, because neither the default response nor ``attachments(*)`` includes it.
+    An attachment with no text (a link, an empty scan, or a document not yet extracted) omits the key from the API response rather than returning null; the SDK's shaped result reads that as ``None``.
     """
 
     doc_seq_num: int | None = None
@@ -1373,6 +1377,7 @@ class EbuyAttachment:
     doc_path: str | None = None
     is_link: bool | None = None
     doc_session_date: datetime | None = None
+    extracted_text: str | None = None
 
 
 class EbuyRequest:
@@ -1660,7 +1665,7 @@ class ShapeConfig:
         "link_count,last_seen"
     )
 
-    # Default for get_ebuy_request(). Mirrors the API's own retrieve default; the attachment fields are named rather than `attachments(*)` so their dates parse.
+    # Default for get_ebuy_request(). Mirrors the API's own retrieve default; the attachment fields are named rather than `attachments(*)` so their dates parse. `extracted_text` is left out because document bodies are large and the API serves them only when named.
     EBUY_REQUESTS_COMPREHENSIVE: Final = (
         "rfq_id,request_type,title,description,schedule,sin,status,buyer_name,"
         "buyer_agency,buyer_agency_code,buyer_email,buyer_user_id,reference_number,"

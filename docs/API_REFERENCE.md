@@ -1758,6 +1758,24 @@ for attachment in request["attachments"]:
 
 The default shape returns every field plus two expands: `organization` (the buyer office, with the same seven keys as other resources' `organization` expand) and `attachments`. Each attachment carries `doc_seq_num`, `doc_name`, `doc_type`, `doc_path`, `is_link` and `doc_session_date`. `is_link=True` means `doc_path` is an outbound URL with no stored document behind it. `amendments`, `line_items` and `addresses` are lists of objects, served as eBuy publishes them.
 
+**Reading a document's text — `attachments(extracted_text)`** (Tango API 5.9.1):
+
+```python
+request = client.get_ebuy_request(
+    "RFQ1835158",
+    shape="rfq_id,attachments(doc_seq_num,doc_name,extracted_text)",
+)
+
+for attachment in request["attachments"]:
+    text = attachment.get("extracted_text")
+    if text:
+        print(attachment["doc_name"], len(text))
+```
+
+- `extracted_text` is the text extracted from the attachment's document.
+- **It is returned only when you name it.** The default shape does not include it, and neither does `attachments(*)`.
+- **The API omits the key, rather than sending null**, for an attachment with no text: an external link, an empty scan, or a document that has not been extracted yet. The SDK's shaped result reads an omitted key as `None`, so treat `None` as "no text", not as an error.
+
 ### get_ebuy_attachment_url()
 
 Get a short-lived download URL for one stored attachment.
@@ -2606,7 +2624,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `FEDERAL_REGISTER_MINIMAL` | `list_federal_register_documents` | uuid, document_number, publication_date, type, subtype, title, abstract, action, agencies, cfr_references, citation, significant, comments_close_on, effective_on, html_url, pdf_url |
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
-| `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands |
+| `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands (without `extracted_text`, which must be named) |
 | `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, data_through_period, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |
 | `VEHICLE_ORDERS_MINIMAL` | `list_vehicle_orders` | key, piid, award_date, recipient(display_name,uei), total_contract_value, obligated |
 | `ITDASHBOARD_INVESTMENTS_MINIMAL` | `list_itdashboard_investments` | Minimal IT Dashboard investment fields |

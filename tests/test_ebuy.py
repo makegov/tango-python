@@ -213,6 +213,26 @@ class TestGetEbuyRequest:
         assert isinstance(row["attachments"][0]["doc_session_date"], datetime)
 
     @patch("tango.client.httpx.Client.request")
+    def test_extracted_text_is_read_when_named_and_none_without_text(self, mock_request):
+        shape = "rfq_id,attachments(doc_seq_num,is_link,extracted_text)"
+        _mock(
+            mock_request,
+            {
+                "rfq_id": RFQ_ID,
+                "attachments": [
+                    {"doc_seq_num": 1, "is_link": False, "extracted_text": "Statement of work"},
+                    {"doc_seq_num": 2, "is_link": True},
+                ],
+            },
+        )
+        row = TangoClient(api_key="k").get_ebuy_request(RFQ_ID, shape=shape)
+
+        assert _call_params(mock_request)["shape"] == shape
+        assert row["attachments"][0]["extracted_text"] == "Statement of work"
+        assert row["attachments"][1].get("extracted_text") is None
+        assert row["attachments"][1]["extracted_text"] is None
+
+    @patch("tango.client.httpx.Client.request")
     def test_out_of_scope_request_is_not_found(self, mock_request):
         mock_request.return_value = _response(404, {"detail": "No EbuyRequest matches."})
         with pytest.raises(TangoNotFoundError):
@@ -310,11 +330,21 @@ class TestEbuyShapes:
             ShapeConfig.EBUY_REQUESTS_COMPREHENSIVE,
             "rfq_id,organization(agency_code,office_name),attachments(doc_seq_num,is_link)",
             "rfq_id,amendments,line_items,addresses,oco_aac,ocs_phone",
+            "rfq_id,attachments(extracted_text)",
+            "rfq_id,attachments(doc_seq_num,doc_name,extracted_text)",
         ],
     )
     def test_shape_validates(self, shape):
         parser = ShapeParser(cache_enabled=True)
         parser.validate(parser.parse(shape), EbuyRequest)
+
+    @pytest.mark.parametrize(
+        "shape",
+        [ShapeConfig.EBUY_REQUESTS_MINIMAL, ShapeConfig.EBUY_REQUESTS_COMPREHENSIVE],
+    )
+    def test_default_shapes_leave_extracted_text_opt_in(self, shape):
+        assert "extracted_text" not in shape
+        assert "attachments(*)" not in shape
 
     def test_contract_number_is_a_filter_not_a_response_field(self):
         parser = ShapeParser(cache_enabled=True)

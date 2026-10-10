@@ -886,6 +886,8 @@ EBUY_ATTACHMENT_SCHEMA: dict[str, FieldSchema] = {
     "doc_session_date": FieldSchema(
         name="doc_session_date", type=datetime, is_optional=True, is_list=False
     ),
+    # Only when named in the shape; the API omits the key for an attachment with no text.
+    "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
 }
 
 
