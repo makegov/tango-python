@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.0] - 2026-10-10
+
 ### Added
 
 - **Extracted text on eBuy request attachments** (Tango API 5.9.1). `attachments(extracted_text)` on eBuy requests returns the text extracted from an attachment's document. It is returned only when named: the default `get_ebuy_request()` shape and `attachments(*)` leave it out. An attachment with no text (an external link, an empty scan, or a document not yet extracted) is sent by the API without the key rather than with a null; the SDK's shaped result reads that as `None`.
