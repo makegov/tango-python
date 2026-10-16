@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`commercial_item_acquisition_procedures` filter on `list_contracts()` and `list_idvs()`** (Tango API 5.10.0). Filters by the FPDS commercial item acquisition procedures code: `A` (commercial products/services), `B` (products or services pursuant to FAR 12.102(f)), `C` (services pursuant to FAR 12.102(g)), `D` (commercial procedures not used) or `E` (DoD Section 803 Commercial Solutions Opening). Codes are case-insensitive and pipe-separated for OR, e.g. `"A|E"`; an unknown or multi-character code matches nothing. The API does not offer it on OTAs or OTIDVs, so `list_otas()` and `list_otidvs()` do not take it. The field itself was already returned in responses.
+
+### Changed
+
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.10.0).
+
 ## [1.16.0] - 2026-10-10
 
 ### Added

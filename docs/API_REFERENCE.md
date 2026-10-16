@@ -244,6 +244,7 @@ contracts = client.list_contracts(
     naics_code=None,  # Mapped to 'naics' API param
     psc_code=None,  # Mapped to 'psc' API param
     set_aside_type=None,  # Mapped to 'set_aside' API param
+    commercial_item_acquisition_procedures=None,  # FPDS code A-E, e.g. "A|E"
     # Type filters
     fiscal_year=None,
     fiscal_year_gte=None,
@@ -290,6 +291,7 @@ contracts = client.list_contracts(
 - `naics_code` - NAICS industry code (mapped to 'naics' API param)
 - `psc_code` - Product/Service code (mapped to 'psc' API param)
 - `set_aside_type` - Set-aside type (mapped to 'set_aside' API param)
+- `commercial_item_acquisition_procedures` - FPDS commercial item acquisition procedures code, case-insensitive: `A` (commercial products/services), `B` (products or services pursuant to FAR 12.102(f)), `C` (services pursuant to FAR 12.102(g)), `D` (commercial procedures not used) or `E` (DoD Section 803 Commercial Solutions Opening). Multi-value OR via `|`, e.g. `"A|E"`. An unknown or multi-character code matches nothing.
 
 **Type Filters:**
 - `fiscal_year` - Federal fiscal year (exact match)
@@ -420,7 +422,7 @@ otas = client.list_otas(
 
 **Notes:**
 - Uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
-- Filter parameters mirror those on `list_contracts`.
+- Filter parameters mirror those on `list_contracts`, except `commercial_item_acquisition_procedures`, which the API does not offer on OTAs or OTIDVs.
 
 **Returns:** [PaginatedResponse](#paginatedresponse) with OTA dictionaries
 
@@ -638,12 +640,14 @@ idvs = client.list_idvs(
     cursor=None,
     shape=ShapeConfig.IDVS_MINIMAL,
     awarding_agency="4700",
+    commercial_item_acquisition_procedures="E",  # DoD Section 803 CSO
 )
 ```
 
 Notes:
 
 - This endpoint uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
+- `commercial_item_acquisition_procedures` takes the same FPDS codes `A`–`E` as on `list_contracts()`, with `|` for OR.
 
 ### get_idv()
 

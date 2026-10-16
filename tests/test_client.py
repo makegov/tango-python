@@ -2247,6 +2247,33 @@ class TestEntityFilters:
         assert "socioeconomic" not in mock_request.call_args[1]["params"]
 
 
+class TestCommercialItemAcquisitionProceduresFilter:
+    @pytest.mark.parametrize("method", ["list_contracts", "list_idvs"])
+    @patch("tango.client.httpx.Client.request")
+    def test_forwards_pipe_separated_codes_verbatim(self, mock_request, method):
+        _stub_empty_page(mock_request)
+        getattr(TangoClient(api_key="test-key"), method)(
+            commercial_item_acquisition_procedures="a|E"
+        )
+        assert (
+            mock_request.call_args[1]["params"]["commercial_item_acquisition_procedures"] == "a|E"
+        )
+
+    @pytest.mark.parametrize("method", ["list_contracts", "list_idvs"])
+    @patch("tango.client.httpx.Client.request")
+    def test_omits_unset_filter(self, mock_request, method):
+        _stub_empty_page(mock_request)
+        getattr(TangoClient(api_key="test-key"), method)()
+        assert "commercial_item_acquisition_procedures" not in mock_request.call_args[1]["params"]
+
+    @pytest.mark.parametrize("method", ["list_otas", "list_otidvs"])
+    def test_not_accepted_on_other_transaction_lists(self, method):
+        with pytest.raises(TypeError, match="commercial_item_acquisition_procedures"):
+            getattr(TangoClient(api_key="test-key"), method)(
+                commercial_item_acquisition_procedures="E"
+            )
+
+
 class TestAgencyFilterDiagnostics:
     """`meta` from the API's agency-filter diagnostics.
 

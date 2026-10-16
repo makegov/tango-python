@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.9.1",
+    "api_version": "5.10.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -95,6 +95,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -148,6 +149,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -837,6 +842,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -890,6 +896,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -2701,6 +2711,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -2754,6 +2765,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -3434,6 +3449,7 @@
         "award_date_lte",
         "award_type",
         "awarding_agency",
+        "commercial_item_acquisition_procedures",
         "cursor",
         "expiring_gte",
         "expiring_lte",
@@ -4936,6 +4952,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -4989,6 +5006,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -5677,6 +5698,7 @@
           "award_date_gte",
           "award_date_lte",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -5714,6 +5736,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -8629,6 +8655,7 @@
           "award_date_gte",
           "award_date_lte",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -8666,6 +8693,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -9220,6 +9251,7 @@
         "award_date_gte",
         "award_date_lte",
         "awarding_agency",
+        "commercial_item_acquisition_procedures",
         "cursor",
         "expiring_gte",
         "expiring_lte",
@@ -9260,6 +9292,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -9313,6 +9346,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -10001,6 +10038,7 @@
           "award_date_gte",
           "award_date_lte",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -10038,6 +10076,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
@@ -16717,6 +16759,7 @@
           "award_date_lte",
           "award_type",
           "awarding_agency",
+          "commercial_item_acquisition_procedures",
           "expiring_gte",
           "expiring_lte",
           "fiscal_year",
@@ -16770,6 +16813,10 @@
           },
           "awarding_agency": {
             "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "commercial_item_acquisition_procedures": {
+            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {

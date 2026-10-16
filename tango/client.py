@@ -632,6 +632,7 @@ class TangoClient:
         award_date_lte: str | None = None,
         award_type: str | None = None,
         awarding_agency: str | None = None,
+        commercial_item_acquisition_procedures: str | None = None,
         expiring_gte: str | None = None,
         expiring_lte: str | None = None,
         fiscal_year: int | None = None,
@@ -674,6 +675,7 @@ class TangoClient:
             award_date_lte: Award date <= (YYYY-MM-DD)
             award_type: Award type code
             awarding_agency: Awarding agency code (e.g., "4700" for GSA)
+            commercial_item_acquisition_procedures: FPDS commercial item acquisition procedures code, case-insensitive: "A" (commercial products/services), "B" (products or services pursuant to FAR 12.102(f)), "C" (services pursuant to FAR 12.102(g)), "D" (commercial procedures not used) or "E" (DoD Section 803 Commercial Solutions Opening). Pipe-separate codes for OR, e.g. "A|E"; an unknown code matches nothing.
             expiring_gte: Expiring on or after date
             expiring_lte: Expiring on or before date
             fiscal_year: Fiscal year (exact match)
@@ -751,6 +753,7 @@ class TangoClient:
             ("award_date_lte", award_date_lte),
             ("award_type", award_type),
             ("awarding_agency", awarding_agency),
+            ("commercial_item_acquisition_procedures", commercial_item_acquisition_procedures),
             ("expiring_gte", expiring_gte),
             ("expiring_lte", expiring_lte),
             ("fiscal_year", fiscal_year),
@@ -915,6 +918,7 @@ class TangoClient:
         award_date_gte: str | None = None,
         award_date_lte: str | None = None,
         awarding_agency: str | None = None,
+        commercial_item_acquisition_procedures: str | None = None,
         expiring_gte: str | None = None,
         expiring_lte: str | None = None,
         fiscal_year: int | None = None,
@@ -941,6 +945,8 @@ class TangoClient:
 
         This mirrors `/api/idvs/` and supports the same filter parameters as the API,
         plus shaping via `shape`.
+
+        `commercial_item_acquisition_procedures` takes an FPDS commercial item acquisition procedures code `A`–`E` (case-insensitive; `E` is DoD Section 803 Commercial Solutions Opening), pipe-separated for OR, e.g. `"A|E"`; an unknown code matches nothing.
         """
         params: dict[str, Any] = {"limit": min(limit, 100)}
         if cursor:
@@ -962,6 +968,7 @@ class TangoClient:
             ("award_date_gte", award_date_gte),
             ("award_date_lte", award_date_lte),
             ("awarding_agency", awarding_agency),
+            ("commercial_item_acquisition_procedures", commercial_item_acquisition_procedures),
             ("expiring_gte", expiring_gte),
             ("expiring_lte", expiring_lte),
             ("fiscal_year", fiscal_year),
