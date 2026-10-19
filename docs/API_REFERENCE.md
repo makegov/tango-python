@@ -285,7 +285,7 @@ contracts = client.list_contracts(
 - `awarding_agency` - Agency code (e.g., "4700" for GSA)
 - `funding_agency` - Funding agency code
 - `recipient_name` - Vendor/recipient name (mapped to 'recipient' API param)
-- `recipient_uei` - Vendor UEI (mapped to 'uei' API param)
+- `recipient_uei` - Vendor UEI (mapped to 'uei' API param). Several UEIs joined by `|` match awards to any of them, up to 500 (Tango API 5.11.0).
 
 **Classification:**
 - `naics_code` - NAICS industry code (mapped to 'naics' API param)
@@ -380,6 +380,22 @@ contracts = client.list_contracts(
 - `naics` - Industry classification (nested)
 - `psc` - Product/service code (nested)
 - `place_of_performance` - Location (nested)
+
+**Obligations by fiscal year — `obligations_by_fiscal_year(fiscal_year, obligated)`** (Tango API 5.11.0):
+
+```python
+contracts = client.list_contracts(
+    shape="key,piid,obligated,obligations_by_fiscal_year(fiscal_year,obligated)",
+    piid="SOME_PIID",
+)
+for year in contracts.results[0]["obligations_by_fiscal_year"] or []:
+    print(year["fiscal_year"], year["obligated"])  # int, Decimal
+```
+
+- Sums the award's transactions per federal fiscal year (October 1 starts the next fiscal year), oldest year first, each rounded to cents. A de-obligation nets against its own year, so a year can be zero or negative.
+- Returned only when named: no default shape includes it.
+- The same expand works on `list_otas()`, `list_idvs()`, `list_otidvs()` and the `get_*` methods. On IDVs and OTIDVs it is always `None`, because their transactions report a running lifetime total rather than each action's obligation.
+- `None` on a contract or OTA with no dated transactions.
 
 ---
 

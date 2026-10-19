@@ -197,6 +197,12 @@ TRANSACTION_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+FISCAL_YEAR_OBLIGATION_SCHEMA: dict[str, FieldSchema] = {
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=False, is_list=False),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=False, is_list=False),
+}
+
+
 DEPARTMENT_SCHEMA: dict[str, FieldSchema] = {
     "abbreviation": FieldSchema(name="abbreviation", type=str, is_optional=True, is_list=False),
     "code": FieldSchema(name="code", type=int, is_optional=True, is_list=False),
@@ -431,6 +437,13 @@ CONTRACT_SCHEMA: dict[str, FieldSchema] = {
         is_optional=True,
         is_list=False,
         nested_model="Vehicle",
+    ),
+    "obligations_by_fiscal_year": FieldSchema(
+        name="obligations_by_fiscal_year",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="FiscalYearObligation",
     ),
 }
 
@@ -1290,6 +1303,13 @@ IDV_SCHEMA: dict[str, FieldSchema] = {
     "idv_contracts_value": FieldSchema(
         name="idv_contracts_value", type=Decimal, is_optional=True, is_list=False
     ),
+    "obligations_by_fiscal_year": FieldSchema(
+        name="obligations_by_fiscal_year",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="FiscalYearObligation",
+    ),
 }
 
 
@@ -1439,6 +1459,13 @@ OTA_SCHEMA: dict[str, FieldSchema] = {
         is_list=False,
         nested_model="RecipientProfile",
     ),
+    "obligations_by_fiscal_year": FieldSchema(
+        name="obligations_by_fiscal_year",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="FiscalYearObligation",
+    ),
 }
 
 # OTIDV (Other Transaction IDV) - IDV-like
@@ -1458,6 +1485,13 @@ OTIDV_SCHEMA: dict[str, FieldSchema] = {
         is_optional=True,
         is_list=False,
         nested_model="RecipientProfile",
+    ),
+    "obligations_by_fiscal_year": FieldSchema(
+        name="obligations_by_fiscal_year",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="FiscalYearObligation",
     ),
 }
 
@@ -1707,6 +1741,7 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "LegislativeMandates": LEGISLATIVE_MANDATES_SCHEMA,
     "SubawardsSummary": SUBAWARDS_SUMMARY_SCHEMA,
     "Transaction": TRANSACTION_SCHEMA,
+    "FiscalYearObligation": FISCAL_YEAR_OBLIGATION_SCHEMA,
     "Department": DEPARTMENT_SCHEMA,
     "Contact": CONTACT_SCHEMA,
     "RecipientProfile": RECIPIENT_PROFILE_SCHEMA,

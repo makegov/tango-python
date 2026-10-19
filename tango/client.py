@@ -695,7 +695,7 @@ class TangoClient:
             naics_code: NAICS code (mapped to 'naics' API param)
             psc_code: PSC code (mapped to 'psc' API param)
             recipient_name: Vendor/recipient name (mapped to 'recipient' API param)
-            recipient_uei: Vendor UEI (mapped to 'uei' API param)
+            recipient_uei: Vendor UEI (mapped to 'uei' API param); join several with `|` for OR, up to 500
             set_aside_type: Set-aside type (mapped to 'set_aside' API param)
             sort: Field to sort by (combined with 'order' to produce 'ordering')
             order: Sort order ('asc' or 'desc', default 'asc')

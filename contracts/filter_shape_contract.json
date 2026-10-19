@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.10.0",
+    "api_version": "5.11.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -434,6 +434,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -723,6 +730,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -1181,6 +1191,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -1470,6 +1487,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -3050,6 +3070,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -3339,6 +3366,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -5291,6 +5321,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -5580,6 +5617,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -5968,6 +6008,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -6215,6 +6262,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -6671,6 +6721,13 @@
                 "organization_id"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "parent_award": {
               "expands": {},
               "fields": [
@@ -6788,6 +6845,9 @@
           "non_governmental_dollars",
           "non_traditional_government_contractor_participation",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "parent_award",
           "parent_award.key",
           "parent_award.piid",
@@ -7007,6 +7067,13 @@
                 "organization_id"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "period_of_performance": {
               "expands": {},
               "fields": [
@@ -7114,6 +7181,9 @@
           "non_governmental_dollars",
           "non_traditional_government_contractor_participation",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "period_of_performance",
           "period_of_performance.current_end_date",
           "period_of_performance.start_date",
@@ -8925,6 +8995,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -9172,6 +9249,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -9631,6 +9711,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -9920,6 +10007,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -10308,6 +10398,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -10555,6 +10652,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",
@@ -11451,6 +11551,7 @@
                 "doc_role",
                 "doc_role_alt",
                 "extracted_text",
+                "extraction_status",
                 "file_size",
                 "mime_type",
                 "name",
@@ -11581,6 +11682,7 @@
           "attachments.doc_role",
           "attachments.doc_role_alt",
           "attachments.extracted_text",
+          "attachments.extraction_status",
           "attachments.file_size",
           "attachments.mime_type",
           "attachments.name",
@@ -11910,6 +12012,7 @@
                 "doc_role",
                 "doc_role_alt",
                 "extracted_text",
+                "extraction_status",
                 "file_size",
                 "mime_type",
                 "name",
@@ -12084,6 +12187,7 @@
           "attachments.doc_role",
           "attachments.doc_role_alt",
           "attachments.extracted_text",
+          "attachments.extraction_status",
           "attachments.file_size",
           "attachments.mime_type",
           "attachments.name",
@@ -12674,6 +12778,13 @@
                 "organization_id"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "parent_award": {
               "expands": {},
               "fields": [
@@ -12791,6 +12902,9 @@
           "non_governmental_dollars",
           "non_traditional_government_contractor_participation",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "parent_award",
           "parent_award.key",
           "parent_award.piid",
@@ -13018,6 +13132,13 @@
                 "organization_id"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "period_of_performance": {
               "expands": {},
               "fields": [
@@ -13125,6 +13246,9 @@
           "non_governmental_dollars",
           "non_traditional_government_contractor_participation",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "period_of_performance",
           "period_of_performance.current_end_date",
           "period_of_performance.start_date",
@@ -13355,6 +13479,13 @@
                 "organization_id"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "parent_award": {
               "expands": {},
               "fields": [
@@ -13472,6 +13603,9 @@
           "non_governmental_dollars",
           "non_traditional_government_contractor_participation",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "parent_award",
           "parent_award.key",
           "parent_award.piid",
@@ -15399,6 +15533,13 @@
                     "description"
                   ]
                 },
+                "obligations_by_fiscal_year": {
+                  "expands": {},
+                  "fields": [
+                    "fiscal_year",
+                    "obligated"
+                  ]
+                },
                 "officers": {
                   "expands": {},
                   "fields": [
@@ -15575,6 +15716,13 @@
                       "fields": [
                         "code",
                         "description"
+                      ]
+                    },
+                    "obligations_by_fiscal_year": {
+                      "expands": {},
+                      "fields": [
+                        "fiscal_year",
+                        "obligated"
                       ]
                     },
                     "officers": {
@@ -15955,6 +16103,7 @@
                   "expands": {},
                   "fields": [
                     "attachment_id",
+                    "extraction_status",
                     "file_size",
                     "mime_type",
                     "name",
@@ -16272,6 +16421,9 @@
           "awardees.number_of_actions",
           "awardees.number_of_offers_source",
           "awardees.obligated",
+          "awardees.obligations_by_fiscal_year",
+          "awardees.obligations_by_fiscal_year.fiscal_year",
+          "awardees.obligations_by_fiscal_year.obligated",
           "awardees.officers",
           "awardees.officers.highly_compensated_officer_1_amount",
           "awardees.officers.highly_compensated_officer_1_name",
@@ -16381,6 +16533,9 @@
           "awardees.orders.number_of_actions",
           "awardees.orders.number_of_offers_source",
           "awardees.orders.obligated",
+          "awardees.orders.obligations_by_fiscal_year",
+          "awardees.orders.obligations_by_fiscal_year.fiscal_year",
+          "awardees.orders.obligations_by_fiscal_year.obligated",
           "awardees.orders.officers",
           "awardees.orders.officers.highly_compensated_officer_1_amount",
           "awardees.orders.officers.highly_compensated_officer_1_name",
@@ -16584,6 +16739,7 @@
           "opportunity.archive_date",
           "opportunity.attachments",
           "opportunity.attachments.attachment_id",
+          "opportunity.attachments.extraction_status",
           "opportunity.attachments.file_size",
           "opportunity.attachments.mime_type",
           "opportunity.attachments.name",
@@ -17098,6 +17254,13 @@
                 "description"
               ]
             },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
             "officers": {
               "expands": {},
               "fields": [
@@ -17387,6 +17550,9 @@
           "number_of_actions",
           "number_of_offers_source",
           "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
           "officers",
           "officers.highly_compensated_officer_1_amount",
           "officers.highly_compensated_officer_1_name",

@@ -85,6 +85,9 @@ ATTACHMENTS_SCHEMA: dict[str, FieldSchema] = {
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
+    "extraction_status": FieldSchema(
+        name="extraction_status", type=str, is_optional=True, is_list=False
+    ),
     "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
@@ -99,6 +102,9 @@ ATTACHMENTS2_SCHEMA: dict[str, FieldSchema] = {
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
+    "extraction_status": FieldSchema(
+        name="extraction_status", type=str, is_optional=True, is_list=False
+    ),
     "file_size": FieldSchema(name="file_size", type=int, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
@@ -135,6 +141,9 @@ ATTACHMENTS3_SCHEMA: dict[str, FieldSchema] = {
 
 ATTACHMENTS4_SCHEMA: dict[str, FieldSchema] = {
     "attachment_id": FieldSchema(name="attachment_id", type=str, is_optional=True, is_list=False),
+    "extraction_status": FieldSchema(
+        name="extraction_status", type=str, is_optional=True, is_list=False
+    ),
     "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
@@ -149,6 +158,9 @@ ATTACHMENTS5_SCHEMA: dict[str, FieldSchema] = {
     "doc_role": FieldSchema(name="doc_role", type=str, is_optional=True, is_list=False),
     "doc_role_alt": FieldSchema(name="doc_role_alt", type=str, is_optional=True, is_list=False),
     "extracted_text": FieldSchema(name="extracted_text", type=str, is_optional=True, is_list=False),
+    "extraction_status": FieldSchema(
+        name="extraction_status", type=str, is_optional=True, is_list=False
+    ),
     "file_size": FieldSchema(name="file_size", type=str, is_optional=True, is_list=False),
     "mime_type": FieldSchema(name="mime_type", type=str, is_optional=True, is_list=False),
     "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
@@ -758,6 +770,11 @@ NOTICE_TYPE_SCHEMA: dict[str, FieldSchema] = {
     "type": FieldSchema(name="type", type=str, is_optional=True, is_list=False),
 }
 
+OBLIGATIONS_BY_FISCAL_YEAR_SCHEMA: dict[str, FieldSchema] = {
+    "fiscal_year": FieldSchema(name="fiscal_year", type=str, is_optional=True, is_list=False),
+    "obligated": FieldSchema(name="obligated", type=str, is_optional=True, is_list=False),
+}
+
 OFFICERS_SCHEMA: dict[str, FieldSchema] = {
     "highly_compensated_officer_1_amount": FieldSchema(
         name="highly_compensated_officer_1_amount", type=Decimal, is_optional=True, is_list=False
@@ -1161,6 +1178,7 @@ GENERATED_NESTED: dict[str, dict[str, FieldSchema]] = {
     "NoticeHistory": NOTICE_HISTORY_SCHEMA,
     "NoticeHistory2": NOTICE_HISTORY2_SCHEMA,
     "NoticeType": NOTICE_TYPE_SCHEMA,
+    "ObligationsByFiscalYear": OBLIGATIONS_BY_FISCAL_YEAR_SCHEMA,
     "Officers": OFFICERS_SCHEMA,
     "Opportunity": OPPORTUNITY_SCHEMA,
     "Opportunity2": OPPORTUNITY2_SCHEMA,

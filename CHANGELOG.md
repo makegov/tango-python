@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`obligations_by_fiscal_year(fiscal_year, obligated)` shape expand on contracts, IDVs, OTAs and OTIDVs** (Tango API 5.11.0). Returns the award's obligations per federal fiscal year, each rounded to cents, with `fiscal_year` parsed as `int` and `obligated` as `Decimal`. It is always `None` on IDVs and OTIDVs, whose transactions report a running lifetime total.
+- **`attachments(extraction_status)` shape field on opportunities and notices** (Tango API 5.11.0). Reports `pending`, `extracting`, `completed`, `failed` or `unsupported` for each attachment, so you can tell why `extracted_text` is missing.
+
+### Changed
+
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.11.0) and regenerated the shape overlay.
+- Documented that `recipient_uei` on `list_contracts()` (and `uei` on the IDV, OTA and OTIDV lists) accepts several UEIs joined by `|` (Tango API 5.11.0); the SDK already passed the value through unchanged.
+
 ## [1.17.0] - 2026-10-16
 
 ### Added
