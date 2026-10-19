@@ -1,6 +1,10 @@
 """Tango API exceptions"""
 
+import re
 from typing import Any
+
+# The API names the tripped rate in its 429 detail: "Rate limit exceeded for daily. Please try again in 16 hours, 58 minutes."
+_RATE_NAME = re.compile(r"exceeded for ([\w-]+)", re.IGNORECASE)
 
 
 class TangoAPIError(Exception):
@@ -88,11 +92,13 @@ class TangoRateLimitError(TangoAPIError):
         d = self.detail
         if not d:
             return None
-        lower = d.lower()
-        if "burst" in lower or "minute" in lower:
-            return "burst"
-        if "daily" in lower or "day" in lower:
+        # Read the rate's name, not the whole sentence: a daily lockout's wait reads "16 hours, 58 minutes", which a match on "minute" took for burst.
+        match = _RATE_NAME.search(d)
+        text = match.group(1).lower() if match else d.lower()
+        if "daily" in text or re.search(r"\bday\b", text):
             return "daily"
+        if "burst" in text or "minute" in text:
+            return "burst"
         return None
 
 
