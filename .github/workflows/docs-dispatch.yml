@@ -32,17 +32,36 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
+      # Every `${{ }}` value reaches the scripts through `env:`, never inline, so a file name or event field cannot inject shell.
       - name: Detect changed paths
         id: changes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
         run: |
           set -euo pipefail
-          base=$(git rev-parse HEAD~1 2>/dev/null || git rev-parse HEAD)
+          # The empty-tree object: diffing against it lists every tracked file.
+          empty_tree=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+          if [ "$EVENT_NAME" = "push" ] && [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qx '0*' && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            base="$BEFORE"
+          elif git rev-parse --verify -q HEAD~1 >/dev/null; then
+            # New branch, force-push whose old tip is gone, or a manual run.
+            base=HEAD~1
+          else
+            base="$empty_tree"
+          fi
           external=$(git diff --name-only "$base" HEAD -- 'docs' 'README.md' 'CHANGELOG.md' | paste -sd, -)
+          # A manual run always dispatches: that is why someone runs it by hand.
+          if [ -n "$external" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            has_external=true
+          else
+            has_external=false
+          fi
           {
             echo "external=$external"
-            echo "has_external=$([ -n "$external" ] && echo true || echo false)"
+            echo "has_external=$has_external"
           } >> "$GITHUB_OUTPUT"
 
       - name: Dispatch to docs composer (makegov/docs)
@@ -50,9 +69,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
           TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+          SOURCE_REPO: ${{ github.repository }}
+          SOURCE_REF: ${{ github.sha }}
+          CHANGED_PATHS: ${{ steps.changes.outputs.external }}
         run: |
           gh api "repos/$TARGET/dispatches" \
             -f event_type=external_updated \
-            -f "client_payload[source_repo]=${{ github.repository }}" \
-            -f "client_payload[source_ref]=${{ github.sha }}" \
-            -f "client_payload[changed_paths]=${{ steps.changes.outputs.external }}"
+            -f "client_payload[source_repo]=$SOURCE_REPO" \
+            -f "client_payload[source_ref]=$SOURCE_REF" \
+            -f "client_payload[changed_paths]=$CHANGED_PATHS"
