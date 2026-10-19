@@ -44,17 +44,20 @@ jobs:
           set -euo pipefail
           # The empty-tree object: diffing against it lists every tracked file.
           empty_tree=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+          # Without a usable `before` (a manual run, a new branch, or a force-push whose old tip is gone) the push range is unknown, so dispatch regardless and report the tip commit's paths.
+          force=false
           if [ "$EVENT_NAME" = "push" ] && [ -n "$BEFORE" ] && ! echo "$BEFORE" | grep -qx '0*' && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
             base="$BEFORE"
-          elif git rev-parse --verify -q HEAD~1 >/dev/null; then
-            # New branch, force-push whose old tip is gone, or a manual run.
-            base=HEAD~1
           else
-            base="$empty_tree"
+            force=true
+            if git rev-parse --verify -q HEAD~1 >/dev/null; then
+              base=HEAD~1
+            else
+              base="$empty_tree"
+            fi
           fi
           external=$(git diff --name-only "$base" HEAD -- 'docs' 'README.md' 'CHANGELOG.md' | paste -sd, -)
-          # A manual run always dispatches: that is why someone runs it by hand.
-          if [ -n "$external" ] || [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+          if [ -n "$external" ] || [ "$force" = true ]; then
             has_external=true
           else
             has_external=false
