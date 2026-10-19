@@ -1502,6 +1502,22 @@ class TestErrorHandling:
         assert exc_info.value.limit_type == "daily"
         assert exc_info.value.wait_in_seconds == 3600
 
+    @pytest.mark.parametrize(
+        ("detail", "expected"),
+        [
+            # The API's own wording, with its waits as convert_seconds_to_human_readable_wait_time renders them.
+            ("Rate limit exceeded for daily. Please try again in 16 hours, 58 minutes.", "daily"),
+            ("Rate limit exceeded for daily. Please try again in 1 minute.", "daily"),
+            ("Rate limit exceeded for burst. Please try again in 45 seconds.", "burst"),
+            ("Rate limit exceeded for burst. Please try again in 1 minute.", "burst"),
+            ("Too many requests.", None),
+        ],
+    )
+    def test_limit_type_reads_the_rate_name_not_the_wait(self, detail, expected):
+        error = TangoRateLimitError("Rate limit exceeded", 429, {"detail": detail})
+
+        assert error.limit_type == expected
+
     @patch("tango.client.httpx.Client.request")
     def test_429_empty_body(self, mock_request):
         """Test 429 with no content body still works"""
