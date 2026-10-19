@@ -282,6 +282,17 @@ class AwardTransaction:
 
 
 @dataclass
+class FiscalYearObligation:
+    """Schema definition for FiscalYearObligation (not used for instances).
+
+    One entry of an award's ``obligations_by_fiscal_year``: the obligations dated in one federal fiscal year, rounded to cents.
+    """
+
+    fiscal_year: int
+    obligated: Decimal
+
+
+@dataclass
 class OrganizationOfficePayload:
     """Schema definition for OrganizationOfficePayload (not used for instances).
 
