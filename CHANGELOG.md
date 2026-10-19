@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.18.0] - 2026-10-19
+
 ### Added
 
 - **`obligations_by_fiscal_year(fiscal_year, obligated)` shape expand on contracts, IDVs, OTAs and OTIDVs** (Tango API 5.11.0). Returns the award's obligations per federal fiscal year, each rounded to cents, with `fiscal_year` parsed as `int` and `obligated` as `Decimal`. It is always `None` on IDVs and OTIDVs, whose transactions report a running lifetime total.
