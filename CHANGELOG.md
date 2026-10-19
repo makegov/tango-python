@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.18.2] - 2026-10-19
+
 ### Fixed
 
 - **`TangoRateLimitError.limit_type` no longer reports a daily lockout as `burst`.** It matched "minute" anywhere in the API's detail, and a daily 429 reads `Rate limit exceeded for daily. Please try again in 16 hours, 58 minutes.`, so callers were told to retry a burst limit they could not clear until midnight UTC. It now reads the rate's name from `exceeded for <name>` and checks for daily first.
