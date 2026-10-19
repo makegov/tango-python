@@ -8,8 +8,11 @@ name: Docs dispatch
 # tango-python is a `coloc-source` repo: its docs/ folder is the authoritative
 # source for the Python SDK pages on docs.makegov.com (see makegov/docs#15).
 #
-# Required secrets:
-#   DOCS_DISPATCH_TOKEN — GitHub token with contents:write on makegov/docs.
+# Required secrets — both are ORG secrets with `visibility: selected`, so this repo has to be on their selected list or every dispatch fails auth:
+#   DISPATCHBOT_APP_ID      — the makegov-dispatchbot App.
+#   DISPATCHBOT_PRIVATE_KEY — its private key.
+#
+# The App mints a short-lived installation token scoped to makegov/docs, the one repo this dispatches to.
 #
 # Required variables (optional):
 #   DOCS_TARGET_REPO — override the dispatch target (default: makegov/docs).
@@ -67,10 +70,21 @@ jobs:
             echo "has_external=$has_external"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Mint an installation token for the docs composer
+        if: steps.changes.outputs.has_external == 'true'
+        id: docs_composer
+        uses: actions/create-github-app-token@v3
+        with:
+          app-id: ${{ secrets.DISPATCHBOT_APP_ID }}
+          private-key: ${{ secrets.DISPATCHBOT_PRIVATE_KEY }}
+          owner: makegov
+          # Scoped to the single repo this step dispatches to, so a leaked token can't reach the rest of the org. A repository_dispatch needs Contents:write on the receiving repo.
+          repositories: docs
+
       - name: Dispatch to docs composer (makegov/docs)
         if: steps.changes.outputs.has_external == 'true'
         env:
-          GH_TOKEN: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          GH_TOKEN: ${{ steps.docs_composer.outputs.token }}
           TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
           SOURCE_REPO: ${{ github.repository }}
           SOURCE_REF: ${{ github.sha }}
