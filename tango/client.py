@@ -75,6 +75,31 @@ from tango.shapes import (
 _COUNT_TYPE_KEY = "_tango_count_type"
 
 
+def _error_body(response: httpx.Response) -> dict[str, Any]:
+    """The JSON object an error response carries, or {} for an empty, non-JSON (a proxy's HTML page) or non-object body."""
+    try:
+        data = response.json() if response.content else {}
+    except ValueError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def _error_reason(error_data: dict[str, Any]) -> str | None:
+    """The server's own explanation from an error body, e.g. why a 403 refused the request.
+
+    The API sends either ``{"detail": "..."}`` or a structured body such as a tier gate's ``{"error": "...", "code": "tier_required", ...}``, sometimes nested under ``detail``.
+    """
+    for body in (error_data, error_data.get("detail")):
+        if isinstance(body, str) and body:
+            return body
+        if isinstance(body, dict):
+            for key in ("error", "message", "detail"):
+                value = body.get(key)
+                if isinstance(value, str) and value:
+                    return value
+    return None
+
+
 class TangoClient:
     """Tango API Client"""
 
@@ -232,8 +257,13 @@ class TangoClient:
             detail = error_data.get("detail", "Rate limit exceeded")
             raise TangoRateLimitError(detail, response.status_code, error_data)
         elif not response.is_success:
+            error_data = _error_body(response)
+            reason = _error_reason(error_data)
+            message = f"API request failed with status {response.status_code}"
             raise TangoAPIError(
-                f"API request failed with status {response.status_code}", response.status_code
+                f"{message}: {reason}" if reason else message,
+                response.status_code,
+                error_data,
             )
 
     def _get(self, endpoint: str, params: dict[str, Any] | None = None) -> dict[str, Any]:

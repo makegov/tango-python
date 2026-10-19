@@ -1572,6 +1572,63 @@ class TestErrorHandling:
         assert exc_info.value.status_code == 500
         assert "500" in str(exc_info.value)
 
+    @staticmethod
+    def _error_response(status, body=None, content=b"{}"):
+        response = Mock()
+        response.is_success = False
+        response.status_code = status
+        response.content = content
+        response.json.return_value = body
+        return response
+
+    @patch("tango.client.httpx.Client.request")
+    def test_403_carries_the_server_reason(self, mock_request):
+        body = {"detail": "G2X shape fields are not allowed for your account."}
+        mock_request.return_value = self._error_response(403, body)
+
+        with pytest.raises(TangoAPIError) as exc_info:
+            TangoClient(api_key="test-key").list_agencies()
+
+        assert (
+            str(exc_info.value)
+            == "API request failed with status 403: G2X shape fields are not allowed for your account."
+        )
+        assert exc_info.value.status_code == 403
+        assert exc_info.value.response_data == body
+
+    @pytest.mark.parametrize(
+        "body",
+        [
+            {"error": "The 'psc' filter requires a Small plan or higher.", "code": "tier_required"},
+            {
+                "detail": {
+                    "error": "The 'psc' filter requires a Small plan or higher.",
+                    "code": "tier_required",
+                }
+            },
+        ],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_403_tier_gate_reason_flat_or_nested(self, mock_request, body):
+        mock_request.return_value = self._error_response(403, body)
+
+        with pytest.raises(
+            TangoAPIError, match=r"status 403: The 'psc' filter requires a Small plan"
+        ):
+            TangoClient(api_key="test-key").list_agencies()
+
+    @patch("tango.client.httpx.Client.request")
+    def test_non_json_error_body_keeps_the_bare_message(self, mock_request):
+        response = self._error_response(502, content=b"<html>Bad Gateway</html>")
+        response.json.side_effect = ValueError("not JSON")
+        mock_request.return_value = response
+
+        with pytest.raises(TangoAPIError) as exc_info:
+            TangoClient(api_key="test-key").list_agencies()
+
+        assert str(exc_info.value) == "API request failed with status 502"
+        assert exc_info.value.response_data == {}
+
     @patch("tango.client.httpx.Client.request")
     def test_network_error(self, mock_request):
         """Test network errors raise TangoAPIError"""
