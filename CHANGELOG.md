@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **API errors now carry the server's reason.** A 403 or other non-2xx response the SDK had no dedicated exception for raised `TangoAPIError("API request failed with status 403")` and threw the response body away, so a caller refused for a G2X-only shape field or a plan-gated filter couldn't tell why. The message now ends with the API's own explanation (`API request failed with status 403: G2X shape fields are not allowed for your account.`), and the parsed body is on `response_data`. Non-JSON bodies, such as a proxy's 502 page, keep the old message.
+
 ## [1.18.0] - 2026-10-19
 
 ### Added
