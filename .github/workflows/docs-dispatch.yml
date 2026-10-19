@@ -8,9 +8,9 @@ name: Docs dispatch
 # tango-python is a `coloc-source` repo: its docs/ folder is the authoritative
 # source for the Python SDK pages on docs.makegov.com (see makegov/docs#15).
 #
-# Required secrets — both are ORG secrets with `visibility: selected`, so this repo has to be on their selected list or every dispatch fails auth:
-#   DISPATCHBOT_APP_ID      — the makegov-dispatchbot App.
-#   DISPATCHBOT_PRIVATE_KEY — its private key.
+# Required org settings for the makegov-dispatchbot App:
+#   DISPATCHBOT_CLIENT_ID   — org variable: the App's Client ID, visible to all repos.
+#   DISPATCHBOT_PRIVATE_KEY — org secret: its private key. The secret has `visibility: selected`, so this repo has to be on its selected list or every dispatch fails auth.
 #
 # The App mints a short-lived installation token scoped to the one repo this dispatches to (makegov/docs unless DOCS_TARGET_REPO overrides it).
 #
@@ -93,7 +93,7 @@ jobs:
         id: docs_composer
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.DISPATCHBOT_APP_ID }}
+          client-id: ${{ vars.DISPATCHBOT_CLIENT_ID }}
           private-key: ${{ secrets.DISPATCHBOT_PRIVATE_KEY }}
           owner: ${{ steps.docs_target.outputs.owner }}
           # Scoped to the single repo this step dispatches to, so a leaked token can't reach the rest of the org. A repository_dispatch needs Contents:write on the receiving repo.
