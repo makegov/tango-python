@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.11.0) and regenerated the shape overlay.
+- Documented that `recipient_uei` on `list_contracts()` (and `uei` on the IDV, OTA and OTIDV lists) accepts several UEIs joined by `|` (Tango API 5.11.0); the SDK already passed the value through unchanged.
 
 ## [1.17.0] - 2026-10-16
 

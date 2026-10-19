@@ -285,7 +285,7 @@ contracts = client.list_contracts(
 - `awarding_agency` - Agency code (e.g., "4700" for GSA)
 - `funding_agency` - Funding agency code
 - `recipient_name` - Vendor/recipient name (mapped to 'recipient' API param)
-- `recipient_uei` - Vendor UEI (mapped to 'uei' API param)
+- `recipient_uei` - Vendor UEI (mapped to 'uei' API param). Several UEIs joined by `|` match awards to any of them, up to 500 (Tango API 5.11.0).
 
 **Classification:**
 - `naics_code` - NAICS industry code (mapped to 'naics' API param)
