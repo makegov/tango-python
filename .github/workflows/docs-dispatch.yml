@@ -12,7 +12,7 @@ name: Docs dispatch
 #   DISPATCHBOT_APP_ID      — the makegov-dispatchbot App.
 #   DISPATCHBOT_PRIVATE_KEY — its private key.
 #
-# The App mints a short-lived installation token scoped to makegov/docs, the one repo this dispatches to.
+# The App mints a short-lived installation token scoped to the one repo this dispatches to (makegov/docs unless DOCS_TARGET_REPO overrides it).
 #
 # Required variables (optional):
 #   DOCS_TARGET_REPO — override the dispatch target (default: makegov/docs).
@@ -70,6 +70,24 @@ jobs:
             echo "has_external=$has_external"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Resolve the docs composer target
+        if: steps.changes.outputs.has_external == 'true'
+        id: docs_target
+        env:
+          TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+        run: |
+          set -euo pipefail
+          # The token below is scoped to whatever repo the dispatch hits, so a `DOCS_TARGET_REPO` override still authenticates.
+          if ! [[ "$TARGET" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]; then
+            echo "::error::DOCS_TARGET_REPO must be owner/repo, got '$TARGET'"
+            exit 1
+          fi
+          {
+            echo "target=$TARGET"
+            echo "owner=${TARGET%%/*}"
+            echo "repo=${TARGET#*/}"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Mint an installation token for the docs composer
         if: steps.changes.outputs.has_external == 'true'
         id: docs_composer
@@ -77,15 +95,15 @@ jobs:
         with:
           app-id: ${{ secrets.DISPATCHBOT_APP_ID }}
           private-key: ${{ secrets.DISPATCHBOT_PRIVATE_KEY }}
-          owner: makegov
+          owner: ${{ steps.docs_target.outputs.owner }}
           # Scoped to the single repo this step dispatches to, so a leaked token can't reach the rest of the org. A repository_dispatch needs Contents:write on the receiving repo.
-          repositories: docs
+          repositories: ${{ steps.docs_target.outputs.repo }}
 
       - name: Dispatch to docs composer (makegov/docs)
         if: steps.changes.outputs.has_external == 'true'
         env:
           GH_TOKEN: ${{ steps.docs_composer.outputs.token }}
-          TARGET: ${{ vars.DOCS_TARGET_REPO || 'makegov/docs' }}
+          TARGET: ${{ steps.docs_target.outputs.target }}
           SOURCE_REPO: ${{ github.repository }}
           SOURCE_REF: ${{ github.sha }}
           CHANGED_PATHS: ${{ steps.changes.outputs.external }}
