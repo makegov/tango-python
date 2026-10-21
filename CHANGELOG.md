@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.0] - 2026-10-21
+
+### Added
+
+- **`group_by`, `fiscal_year` and `rolling` on `get_entity_metrics()`, `get_naics_metrics()` and `get_psc_metrics()`.** The metrics endpoints have always accepted these query parameters, but the SDK built only the path, so callers could not split obligations by funding `"agency"` or `"department"` or bucket them by federal fiscal year. Each is optional; existing calls send the same request as before.
+
 ## [1.18.2] - 2026-10-19
 
 ### Fixed

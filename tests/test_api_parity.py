@@ -372,6 +372,23 @@ class TestReferenceData:
         client = TangoClient(api_key="x", base_url="https://t.example")
         client.get_psc_metrics("R425", 12, "month")
         assert mock_request.call_args[1]["url"].endswith("/api/psc/R425/metrics/12/month/")
+        assert not mock_request.call_args[1]["params"]
+
+    def test_metrics_query_params(self, mock_request: Mock) -> None:
+        mock_request.return_value = _mock_response({"results": []})
+        client = TangoClient(api_key="x", base_url="https://t.example")
+        client.get_psc_metrics("R425", 12, "year", group_by="department", fiscal_year=True)
+        assert mock_request.call_args[1]["params"] == {
+            "group_by": "department",
+            "fiscal_year": "true",
+        }
+        client.get_naics_metrics(
+            "541511", 12, "year", group_by=["agency", "department"], rolling=True
+        )
+        assert mock_request.call_args[1]["params"] == {
+            "group_by": "agency,department",
+            "rolling": "true",
+        }
 
     def test_get_naics(self, mock_request: Mock) -> None:
         mock_request.return_value = _mock_response({"code": "541511"})
@@ -408,6 +425,15 @@ class TestEntitySubResources:
         client = TangoClient(api_key="x", base_url="https://t.example")
         client.get_entity_metrics("UEI1", 24, "quarter")
         assert mock_request.call_args[1]["url"].endswith("/api/entities/UEI1/metrics/24/quarter/")
+
+    def test_get_entity_metrics_by_department(self, mock_request: Mock) -> None:
+        mock_request.return_value = _mock_response({"results": []})
+        client = TangoClient(api_key="x", base_url="https://t.example")
+        client.get_entity_metrics("UEI1", 60, "year", group_by="department", fiscal_year=True)
+        assert mock_request.call_args[1]["params"] == {
+            "group_by": "department",
+            "fiscal_year": "true",
+        }
 
     def test_list_entity_lcats(self, mock_request: Mock) -> None:
         mock_request.return_value = _mock_response(

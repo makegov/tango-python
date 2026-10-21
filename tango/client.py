@@ -100,6 +100,10 @@ def _error_reason(error_data: dict[str, Any]) -> str | None:
     return None
 
 
+# Funding-organization keys the metrics endpoints accept in `group_by`.
+MetricsGroupBy = Literal["agency", "department"]
+
+
 class TangoClient:
     """Tango API Client"""
 
@@ -5615,7 +5619,15 @@ class TangoClient:
                 params["flat_lists"] = "true"
         return self._get(f"/api/psc/{code}/", params)
 
-    def get_psc_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
+    def get_psc_metrics(
+        self,
+        code: str,
+        months: int,
+        period_grouping: str,
+        group_by: MetricsGroupBy | list[MetricsGroupBy] | None = None,
+        fiscal_year: bool = False,
+        rolling: bool = False,
+    ) -> dict[str, Any]:
         """Get rolling PSC metrics (`/api/psc/{code}/metrics/{months}/{period_grouping}/`).
 
         Args:
@@ -5623,10 +5635,32 @@ class TangoClient:
             months: Window size in months (e.g. 6, 12, 24, 36).
             period_grouping: ``"month"``, ``"quarter"``, or ``"year"`` (the
                 values the API accepts on the path segment).
+            group_by: Split each period by the funding ``"agency"`` (an L2 short code such as ``"2100"``) or ``"department"`` (the CGAC code as an int, e.g. ``97`` for DoD), or both.
+            fiscal_year: Bucket by federal fiscal year (October-September) instead of calendar periods.
+            rolling: Add rolling averages. The API skips them, with a ``warning``, when ``group_by`` is set.
         """
         if not code:
             raise TangoValidationError("PSC code is required")
-        return self._get(f"/api/psc/{code}/metrics/{months}/{period_grouping}/")
+        return self._get(
+            f"/api/psc/{code}/metrics/{months}/{period_grouping}/",
+            self._metrics_params(group_by, fiscal_year, rolling),
+        )
+
+    @staticmethod
+    def _metrics_params(
+        group_by: MetricsGroupBy | list[MetricsGroupBy] | None,
+        fiscal_year: bool,
+        rolling: bool,
+    ) -> dict[str, Any]:
+        """Query params shared by the entity, NAICS and PSC metrics endpoints."""
+        params: dict[str, Any] = {}
+        if group_by:
+            params["group_by"] = group_by if isinstance(group_by, str) else ",".join(group_by)
+        if fiscal_year:
+            params["fiscal_year"] = "true"
+        if rolling:
+            params["rolling"] = "true"
+        return params
 
     def get_naics(
         self,
@@ -5647,11 +5681,25 @@ class TangoClient:
                 params["flat_lists"] = "true"
         return self._get(f"/api/naics/{code}/", params)
 
-    def get_naics_metrics(self, code: str, months: int, period_grouping: str) -> dict[str, Any]:
-        """Get rolling NAICS metrics (`/api/naics/{code}/metrics/{months}/{period_grouping}/`)."""
+    def get_naics_metrics(
+        self,
+        code: str,
+        months: int,
+        period_grouping: str,
+        group_by: MetricsGroupBy | list[MetricsGroupBy] | None = None,
+        fiscal_year: bool = False,
+        rolling: bool = False,
+    ) -> dict[str, Any]:
+        """Get rolling NAICS metrics (`/api/naics/{code}/metrics/{months}/{period_grouping}/`).
+
+        Takes the same ``group_by``, ``fiscal_year`` and ``rolling`` options as :meth:`get_psc_metrics`.
+        """
         if not code:
             raise TangoValidationError("NAICS code is required")
-        return self._get(f"/api/naics/{code}/metrics/{months}/{period_grouping}/")
+        return self._get(
+            f"/api/naics/{code}/metrics/{months}/{period_grouping}/",
+            self._metrics_params(group_by, fiscal_year, rolling),
+        )
 
     def get_business_type(
         self,
@@ -6026,13 +6074,26 @@ class TangoClient:
             meta=data.get("meta"),
         )
 
-    def get_entity_metrics(self, uei: str, months: int, period_grouping: str) -> dict[str, Any]:
+    def get_entity_metrics(
+        self,
+        uei: str,
+        months: int,
+        period_grouping: str,
+        group_by: MetricsGroupBy | list[MetricsGroupBy] | None = None,
+        fiscal_year: bool = False,
+        rolling: bool = False,
+    ) -> dict[str, Any]:
         """Get rolling metrics for an entity
         (`/api/entities/{uei}/metrics/{months}/{period_grouping}/`).
+
+        Takes the same ``group_by``, ``fiscal_year`` and ``rolling`` options as :meth:`get_psc_metrics`.
         """
         if not uei:
             raise TangoValidationError("UEI is required")
-        return self._get(f"/api/entities/{uei}/metrics/{months}/{period_grouping}/")
+        return self._get(
+            f"/api/entities/{uei}/metrics/{months}/{period_grouping}/",
+            self._metrics_params(group_by, fiscal_year, rolling),
+        )
 
     # ============================================================================
     # IDV sub-resources
