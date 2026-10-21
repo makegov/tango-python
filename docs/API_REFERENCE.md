@@ -2071,6 +2071,16 @@ psc = client.get_psc("D302")
 metrics = client.get_psc_metrics(code="D302", months=12, period_grouping="month")
 ```
 
+**Parameters:**
+- `code` (str): PSC code. Required.
+- `months` (int): Trailing window in months.
+- `period_grouping` (str): `"month"`, `"quarter"` or `"year"`.
+- `group_by` (`"agency"` | `"department"` | list | None): Split each period by funding organization. `agency` is an L2 short code such as `"2100"`; `department` is the CGAC code as an int, e.g. `97` for DoD.
+- `fiscal_year` (bool): Bucket by federal fiscal year instead of calendar periods. Default `False`.
+- `rolling` (bool): Add rolling averages. The API skips them, with a `warning`, when `group_by` is set. Default `False`.
+
+`get_naics_metrics()` and `get_entity_metrics()` take the same options.
+
 ---
 
 ## MAS SINs
@@ -2203,7 +2213,13 @@ lcats = client.list_entity_lcats("ABCDEF123456", limit=25)
 
 ```python
 metrics = client.get_entity_metrics("ABCDEF123456", months=12, period_grouping="month")
+# five fiscal years of obligations, split by funding department
+by_dept = client.get_entity_metrics(
+    "ABCDEF123456", months=60, period_grouping="year", group_by="department", fiscal_year=True
+)
 ```
+
+Takes the same `group_by`, `fiscal_year` and `rolling` options as [`get_psc_metrics()`](#get_psc_metrics).
 
 ### get_entity_budget_flows()
 
