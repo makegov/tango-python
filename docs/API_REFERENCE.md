@@ -2585,11 +2585,11 @@ response.count_type # "exact" or "approximate" (the API's X-Results-CountType he
 #### Exact counts
 
 `list_opportunities()`, `list_notices()`, `list_contracts()` and `list_idvs()` report an estimated `count` (`count_type == "approximate"`) once a filtered result set passes 10,000 matches, and that estimate is only a lower bound.
-Pass `exact=True` to get a real count instead; it costs the server a full `COUNT(*)`, so ask only when you need the total.
-On opportunities and notices it needs Tango API 5.11.1; earlier releases returned the estimate under an `exact` label.
+Pass `exact=True` to get an exact count instead; it is more expensive for the API, so ask only when you need the total.
+On opportunities and notices it requires Tango API 5.11.1.
 
 ```python
-page = client.list_opportunities(agency="VA", active=False, limit=1, exact=True)
+page = client.list_opportunities(agency="DOD", limit=1, exact=True)
 print(page.count, page.count_type)  # count_type is "exact"
 ```
 

@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **`exact=True` on `list_opportunities()`, `list_notices()`, `list_contracts()` and `list_idvs()`.** Past 10,000 matches these endpoints report an estimated `count` that is only a lower bound; `exact=True` sends `?exact=true` for a real count (correct on opportunities and notices from Tango API 5.11.1). Keyword-only and off by default, so existing calls send the same request.
+- **`exact=True` on `list_opportunities()`, `list_notices()`, `list_contracts()` and `list_idvs()`.** Past 10,000 matches these endpoints report an estimated `count` that is only a lower bound; `exact=True` sends `?exact=true` for a real count (opportunities and notices require Tango API 5.11.1). Keyword-only and off by default, so existing calls send the same request.
 
 ## [1.19.0] - 2026-10-21
 

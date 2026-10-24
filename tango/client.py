@@ -735,7 +735,7 @@ class TangoClient:
             set_aside_type: Set-aside type (mapped to 'set_aside' API param)
             sort: Field to sort by (combined with 'order' to produce 'ordering')
             order: Sort order ('asc' or 'desc', default 'asc')
-            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound; an exact count costs the server a full COUNT.
+            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound.
 
         Examples:
             >>> contracts = client.list_contracts(limit=10)
@@ -989,7 +989,7 @@ class TangoClient:
 
         `commercial_item_acquisition_procedures` takes an FPDS commercial item acquisition procedures code `A`–`E` (case-insensitive; `E` is DoD Section 803 Commercial Solutions Opening), pipe-separated for OR, e.g. `"A|E"`; an unknown code matches nothing.
 
-        Pass `exact=True` for an exact `count`: a filtered list past 10,000 matches otherwise reports an estimate (`count_type == "approximate"`) that is only a lower bound, and an exact count costs the server a full COUNT.
+        Pass `exact=True` for an exact `count`: a filtered list past 10,000 matches otherwise reports an estimate (`count_type == "approximate"`) that is only a lower bound.
         """
         params: dict[str, Any] = {"limit": min(limit, 100)}
         if cursor:
@@ -2465,7 +2465,7 @@ class TangoClient:
             search: Search query
             set_aside: Set-aside type filter
             solicitation_number: Solicitation number filter
-            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound; an exact count costs the server a full COUNT. Correct on opportunities and notices from Tango API 5.11.1
+            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound. Requires Tango API 5.11.1
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
@@ -2592,7 +2592,7 @@ class TangoClient:
             search: Search query
             set_aside: Set-aside type filter
             solicitation_number: Solicitation number filter
-            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound; an exact count costs the server a full COUNT. Correct on opportunities and notices from Tango API 5.11.1
+            exact: If True, ask the API for an exact count. A filtered list past 10,000 matches otherwise reports an estimate (``count_type == "approximate"``) that is only a lower bound. Requires Tango API 5.11.1
         """
         params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
 
