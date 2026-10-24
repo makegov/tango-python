@@ -265,6 +265,7 @@ contracts = client.list_contracts(
 - `shape` (str): Fields to return (see [Shaping Guide](SHAPES.md))
 - `flat` (bool): Flatten nested objects to dot-notation keys
 - `flat_lists` (bool): Flatten arrays with indexed keys
+- `exact` (bool, keyword-only): Ask for an exact `count` (see [Exact counts](#exact-counts))
 
 **Filter Parameters:**
 
@@ -664,6 +665,7 @@ Notes:
 
 - This endpoint uses **keyset pagination** (`cursor` + `limit`) rather than page numbers.
 - `commercial_item_acquisition_procedures` takes the same FPDS codes `A`–`E` as on `list_contracts()`, with `|` for OR.
+- `exact=True` (keyword-only) asks for an exact `count` (see [Exact counts](#exact-counts)).
 
 ### get_idv()
 
@@ -915,6 +917,7 @@ opportunities = client.list_opportunities(
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
 - `flat_lists` (bool): Flatten arrays with indexed keys
+- `exact` (bool, keyword-only): Ask for an exact `count` (see [Exact counts](#exact-counts)). Requires Tango API 5.11.1
 
 **Filter Parameters:**
 - `active` - Filter by active status (bool)
@@ -1061,6 +1064,7 @@ notices = client.list_notices(
 - `shape` (str): Fields to return
 - `flat` (bool): Flatten nested objects
 - `flat_lists` (bool): Flatten arrays with indexed keys
+- `exact` (bool, keyword-only): Ask for an exact `count` (see [Exact counts](#exact-counts)). Requires Tango API 5.11.1
 
 **Filter Parameters:**
 - `active` - Filter by active status (bool)
@@ -2575,6 +2579,18 @@ response.count      # Total number of results
 response.next       # URL to next page (or None)
 response.previous   # URL to previous page (or None)
 response.results    # List of result dictionaries
+response.count_type # "exact" or "approximate" (the API's X-Results-CountType header)
+```
+
+#### Exact counts
+
+`list_opportunities()`, `list_notices()`, `list_contracts()` and `list_idvs()` report an estimated `count` (`count_type == "approximate"`) once a filtered result set passes 10,000 matches, and that estimate is only a lower bound.
+Pass `exact=True` to get a real count instead; it costs the server a full `COUNT(*)`, so ask only when you need the total.
+On opportunities and notices it needs Tango API 5.11.1; earlier releases returned the estimate under an `exact` label.
+
+```python
+page = client.list_opportunities(agency="VA", active=False, limit=1, exact=True)
+print(page.count, page.count_type)  # count_type is "exact"
 ```
 
 **Example:**

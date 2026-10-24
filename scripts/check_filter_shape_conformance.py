@@ -114,6 +114,7 @@ CONTRACT_OMITTED_PARAMS: dict[str, frozenset[str]] = {}
 # SearchFilters escape hatch; the rest are pagination/shaping controls.
 NON_FILTER_ARGS = {
     "cursor",
+    "exact",
     "limit",
     "page",
     "shape",
