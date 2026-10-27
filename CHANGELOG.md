@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Financial-assistance award methods** for `/api/assistance/{grants,loans,direct_payments,other}/` (Tango API 5.12.1): `list_assistance_*` with every API filter and cursor pagination, and `get_assistance_*` by key (see `docs/API_REFERENCE.md#financial-assistance-awards`).
+- **Assistance award sub-routes**: `list_assistance_*_transactions()` and `list_assistance_*_listings()` page through an award's transactions and its money by assistance listing.
+- **`AssistanceAward` shape schema and `ShapeConfig.ASSISTANCE_AWARDS_MINIMAL`**, the API's own default shape, so every assistance field and expansion validates client-side.
+
+### Internal / Infra
+
+- **Vendored filter/shape contract refreshed to Tango API 5.12.1**, which adds the four assistance resources; the conformance and shape-coverage gates now map them.
+
 ## [1.20.0] - 2026-10-24
 
 ### Added

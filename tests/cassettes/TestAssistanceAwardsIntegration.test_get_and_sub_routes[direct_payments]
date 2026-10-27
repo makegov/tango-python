@@ -1,0 +1,331 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/?limit=1&shape=key
+  response:
+    body:
+      string: '{"count":56739924,"next":"https://tango.makegov.com/api/assistance/direct_payments/?limit=1&shape=key&cursor=WyIyMDI2LTEwLTIyIiwgImQxMjI3ZmYzLWY4ZDEtNWRjMy05MDE0LTI1NzJmMzhjY2MyNiJd","previous":null,"cursor":"WyIyMDI2LTEwLTIyIiwgImQxMjI3ZmYzLWY4ZDEtNWRjMy05MDE0LTI1NzJmMzhjY2MyNiJd","previous_cursor":null,"results":[{"key":"ASST_NON_12CCCEAUCEU5253218_012"}]}'
+    headers:
+      CF-RAY:
+      - a511b280496f5cb9-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V7UNcge%2B9YeqILrZ75SrUsNp9H%2BIwm5QpRmTCL6kbLGX4XyDTOFUO9AiFtWCwT5AJWQE6iHgk0NyztgRnSd65mqPq58Iq5TV60ZQRuZiuOavW4ZcUvx5X2emo8N3rSPNNBsI"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '360'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.025s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '958'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999638'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '958'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/ASST_NON_12CCCEAUCEU5253218_012/?shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"assistance_listing":{"number":"10.051","title":"Commodity Loans and
+        Loan Deficiency Payments"},"assistance_type":{"code":"F006","description":"Direct
+        Payment for Specified Use"},"award_date":"2026-10-22","awarding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"cfda_number":"10.051","face_value_of_loan":0.0,"fain":"12CCCEAUCEU5253218","fiscal_year":2027,"funding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"key":"ASST_NON_12CCCEAUCEU5253218_012","loan_subsidy_cost":0.0,"obligated":45412.85,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"HICKORY","code":"NC31065","country":"USA","county_fips":"37035","county_name":"CATAWBA","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"NC","state_fips":"37","state_name":"NORTH CAROLINA","zip_code":"28602","zip_plus_four":"1433"},"pragmatic_obligations":45412.85,"recipient":{"uuid":"b2aca74d-a067-53df-b21e-fed4492021ab","uei":"NBY3ULCLKC27","duns":null,"legal_business_name":"SHUFORD
+        YARNS LLC","legal_business_name_raw":"SHUFORD YARNS LLC","county":"CATAWBA","congressional_district":"NC-10","congressional_district_original":"NC-10","highest_owner":null,"business_types":[{"code":"X","description":"Other"}]},"record_type":"2","title":"ECONOMIC
+        ADJUSTMENT ASSISTANCE TO USERS OF UPLAND COTTON","uri":null}'
+    headers:
+      CF-RAY:
+      - a511b280cc810ed5-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=JPqPR3XidYNo6a7WFDNR3TNIWxkII3dzRzbf06CCTypqll14F6Bt%2F8VuYoUBbX4%2BpkFPX%2FjPoLdOw02bG0YkjE28VYVz%2B6uIcB8N42%2BlG3uZtV3zI8KD0%2B2iRRp6pfhbGNm%2F"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1774'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.021s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '957'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999637'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '957'
+      x-ratelimit-reset:
+      - '29'
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/ASST_NON_12CCCEAUCEU5253218_012/transactions/?page=1&limit=5
+  response:
+    body:
+      string: '{"count":1,"next":null,"previous":null,"results":[{"key":"12D2_12CCCEAUCEU5253218_-NONE-_10.051_-NONE-","modification_number":null,"transaction_date":"2026-10-22","action_type":"A1","assistance_type_code":"F006","correction_delete_indicator":null,"cfda_number":"10.051","obligated":45412.85,"pragmatic_obligations":45412.85,"non_federal_funding_amount":null,"indirect_cost_federal_share_amount":0.0,"face_value_of_loan":0.0,"loan_subsidy_cost":0.0,"award_amount_basis":null,"award_recipient_basis":null,"action_date_fiscal_year":2027,"last_modified_date":"2026-10-23T14:19:37Z","initial_report_date":"2026-10-23T14:19:37Z"}]}'
+    headers:
+      CF-RAY:
+      - a511b2813fcff793-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=LxhHkf9B2ytuaALnBSfEnoXaqiRoUziJXmJtM77k0AZGkaZOle0EWnbaM7FAtKFsDdA%2F33i%2Fggwy24yk7sGIp1y4hjOejlR3Tth5phijpZ5KOVX%2BFBbvcti7Pb9quCxYaz22"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '625'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '956'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999636'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '956'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - exact
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/ASST_NON_12CCCEAUCEU5253218_012/listings/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":1,"next":null,"previous":null,"results":[{"cfda_number":"10.051","is_primary":true,"obligated":45412.85,"pragmatic_obligations":45412.85,"non_federal_funding_amount":null,"indirect_cost_federal_share_amount":0.0,"face_value_of_loan":0.0,"loan_subsidy_cost":0.0,"transactions_count":1,"first_action_date":"2026-10-22","last_action_date":"2026-10-22"}]}'
+    headers:
+      CF-RAY:
+      - a511b281b88840ae-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=NoDHn2UCorIZgCvRGJnVgLHrZ8AhUqxwjDyrNkrTNsjIMqvKMHjiL0pFIkg3%2FY7VQU%2FrJqC536ZVLMaXaOECGKwFEXifXF%2FcdhMw2AH4gp8aDBY9Vcn1kM6HyZQ3Prt7kf4d"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '360'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '955'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999635'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '955'
+      x-ratelimit-reset:
+      - '28'
+      x-results-counttype:
+      - exact
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1

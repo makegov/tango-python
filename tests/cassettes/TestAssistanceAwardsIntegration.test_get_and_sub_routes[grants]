@@ -1,0 +1,329 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/?limit=1&shape=key
+  response:
+    body:
+      string: '{"count":5759909,"next":"https://tango.makegov.com/api/assistance/grants/?limit=1&shape=key&cursor=WyIyMDI2LTEwLTE5IiwgIjhjNGZlOWNkLTliNDgtNWEwYS05OTYzLTFlZWIxYzQyYzMyMCJd","previous":null,"cursor":"WyIyMDI2LTEwLTE5IiwgIjhjNGZlOWNkLTliNDgtNWEwYS05OTYzLTFlZWIxYzQyYzMyMCJd","previous_cursor":null,"results":[{"key":"ASST_NON_693JF72640002_069"}]}'
+    headers:
+      CF-RAY:
+      - a511b27c098143b6-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8P1ptuwcBa6THxyLD%2BtNzVNDvY913uI2qe5tDD7zfXX0R5R1UqsGXyU1%2Fj563dKVcoCFaDNQLkvZBl4vrpWnt%2BoCrIR%2F0sHSf5ErtMGKNwDQib4R52YpKE%2B519u%2F5cusxa48"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '345'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.022s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '966'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999646'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '966'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/ASST_NON_693JF72640002_069/?shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: "{\"assistance_listing\":{\"number\":\"20.823\",\"title\":\"Port Infrastructure
+        Development Program\"},\"assistance_type\":{\"code\":\"F001\",\"description\":\"Grant\"},\"award_date\":\"2026-10-19\",\"awarding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"cfda_number\":\"20.823\",\"face_value_of_loan\":0.0,\"fain\":\"693JF72640002\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"key\":\"ASST_NON_693JF72640002_069\",\"loan_subsidy_cost\":0.0,\"obligated\":2000000.0,\"period_of_performance\":{\"start_date\":\"2026-10-19\",\"current_end_date\":\"2029-04-30\"},\"place_of_performance\":{\"city_name\":\"MOBILE\",\"code\":\"AL36633\",\"country\":\"USA\",\"county_fips\":\"01097\",\"county_name\":\"MOBILE\",\"foreign_location\":null,\"scope\":\"SINGLE
+        ZIP CODE\",\"state_code\":\"AL\",\"state_fips\":\"01\",\"state_name\":\"ALABAMA\",\"zip_code\":\"36633\",\"zip_plus_four\":\"1588\"},\"pragmatic_obligations\":2000000.0,\"recipient\":{\"uuid\":\"88f47661-874f-5298-8b0b-0971be0c746d\",\"uei\":\"HS97F2C9NME3\",\"duns\":null,\"legal_business_name\":\"ALABAMA
+        PORT AUTHORITY\",\"legal_business_name_raw\":\"ALABAMA PORT AUTHORITY\",\"county\":\"MOBILE\",\"congressional_district\":\"AL-02\",\"congressional_district_original\":\"AL-02\",\"highest_owner\":null,\"business_types\":[{\"code\":\"A\",\"description\":\"State
+        Government\"}]},\"record_type\":\"2\",\"title\":\"AWARD PURPOSE THE PROJECT
+        INCLUDES ELECTRICAL\u2026\",\"uri\":null}"
+    headers:
+      CF-RAY:
+      - a511b27c9db45f15-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=V%2FJ%2FzcxYLCdlcbN0zUaItTTIh76TC%2BM8j5xKTiOxtEg3Su%2FG18ncsjpfPpHf5fEGX0hBGALsOTtISdaX5MwmGXuoSy6FGPNKY%2Fif6M6BneuHXJQrwtQmcxQ4c61sgWRh88Oj"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '1745'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '965'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999645'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '965'
+      x-ratelimit-reset:
+      - '29'
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/ASST_NON_693JF72640002_069/transactions/?page=1&limit=5
+  response:
+    body:
+      string: '{"count":1,"next":null,"previous":null,"results":[{"key":"6938_693JF72640002_-NONE-_20.823_-NONE-","modification_number":null,"transaction_date":"2026-10-19","action_type":"A1","assistance_type_code":"F001","correction_delete_indicator":null,"cfda_number":"20.823","obligated":2000000.0,"pragmatic_obligations":2000000.0,"non_federal_funding_amount":500000.0,"indirect_cost_federal_share_amount":0.0,"face_value_of_loan":0.0,"loan_subsidy_cost":0.0,"award_amount_basis":"A01","award_recipient_basis":"R01","action_date_fiscal_year":2027,"last_modified_date":"2026-10-20T13:59:38Z","initial_report_date":"2026-10-20T13:59:38Z"}]}'
+    headers:
+      CF-RAY:
+      - a511b27d1c2c72a7-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ZcYqFbFUMx638sdRJsc2vxGPNSirKLOkCfdLBWGsCuDzy9E%2BMsPFu2lemx4ETz1vsj9gnInUUMMBhQvPGPXQJd7zi6%2BgEjZ82OEUqP2zeivR8KURNSbOVCKzC1KnALVlz19U"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '628'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.016s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '964'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999644'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '964'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - exact
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/ASST_NON_693JF72640002_069/listings/?page=1&limit=10
+  response:
+    body:
+      string: '{"count":1,"next":null,"previous":null,"results":[{"cfda_number":"20.823","is_primary":true,"obligated":2000000.0,"pragmatic_obligations":2000000.0,"non_federal_funding_amount":500000.0,"indirect_cost_federal_share_amount":0.0,"face_value_of_loan":0.0,"loan_subsidy_cost":0.0,"transactions_count":1,"first_action_date":"2026-10-19","last_action_date":"2026-10-19"}]}'
+    headers:
+      CF-RAY:
+      - a511b27db8fb433f-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=7OBnRnjXuvaJNw88w4N416saQ2S4ESv88iYVinHfygT4frLBfG5jPtk9Cr9xz72viGkjCqIael5uAt9cjlyvJp%2FhK49%2FBX9qq0rwONHT1KEz6RIsfppLVR5Anztpa8IzJBNo"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '366'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.020s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '963'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999643'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '963'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - exact
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -80,6 +80,10 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "contract_appeals": "list_contract_appeals",
     "federal_register": "list_federal_register_documents",
     "ebuy/requests": "list_ebuy_requests",
+    "assistance/grants": "list_assistance_grants",
+    "assistance/loans": "list_assistance_loans",
+    "assistance/direct_payments": "list_assistance_direct_payments",
+    "assistance/other": "list_assistance_other",
     "offices": "list_offices",
     "psc": "list_psc",
     "mas_sins": "list_mas_sins",
@@ -162,6 +166,7 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
         IDV,
         OTA,
         OTIDV,
+        AssistanceAward,
         BudgetAccount,
         Contract,
         Entity,
@@ -212,6 +217,7 @@ def get_shape_config_entries() -> list[tuple[str, str, type[Any]]]:
             ITDashboardInvestment,
         ),
         ("BUDGET_ACCOUNTS_MINIMAL", ShapeConfig.BUDGET_ACCOUNTS_MINIMAL, BudgetAccount),
+        ("ASSISTANCE_AWARDS_MINIMAL", ShapeConfig.ASSISTANCE_AWARDS_MINIMAL, AssistanceAward),
     ]
     for name, shape_str, model_cls in configs:
         entries.append((name, shape_str, model_cls))

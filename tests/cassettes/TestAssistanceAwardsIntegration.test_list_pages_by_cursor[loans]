@@ -1,0 +1,193 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/loans/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"count":29866842,"next":"https://tango.makegov.com/api/assistance/loans/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29&cursor=WyIyMDI2LTEwLTE1IiwgImZlNWM4ZDcyLWNkZjEtNTFhMi1hMDNkLThiZDlhMzI1ZjUxOCJd","previous":null,"cursor":"WyIyMDI2LTEwLTE1IiwgImZlNWM4ZDcyLWNkZjEtNTFhMi1hMDNkLThiZDlhMzI1ZjUxOCJd","previous_cursor":null,"results":[{"assistance_listing":{"number":"59.012","title":"7(a)
+        Loan Guarantees"},"assistance_type":{"code":"F004","description":"Loan Guarantee"},"award_date":"2026-10-15","awarding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"cfda_number":"59.012","face_value_of_loan":425000.0,"fain":"8606059100","fiscal_year":2027,"funding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"key":"ASST_NON_8606059100_073","loan_subsidy_cost":0.0,"obligated":0.0,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"","code":"GA**067","country":"USA","county_fips":"13067","county_name":"COBB","foreign_location":null,"scope":"COUNTY-WIDE","state_code":"GA","state_fips":"13","state_name":"GEORGIA","zip_code":"","zip_plus_four":""},"pragmatic_obligations":0.0,"recipient":{"uuid":"536c50dc-3456-5ff2-979d-0f898b8e85c9","uei":null,"duns":null,"legal_business_name":"SLEDGE
+        HAMMER CONSULTING CORP.","legal_business_name_raw":"SLEDGE HAMMER CONSULTING
+        CORP.","county":"COBB","congressional_district":"GA-11","congressional_district_original":"GA-11","highest_owner":null,"business_types":[{"code":"R","description":"Small
+        Business"}]},"record_type":"2","title":"SBA 7(a) Program Loans","uri":null},{"assistance_listing":{"number":"59.012","title":"7(a)
+        Loan Guarantees"},"assistance_type":{"code":"F004","description":"Loan Guarantee"},"award_date":"2026-10-15","awarding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"cfda_number":"59.012","face_value_of_loan":2886000.0,"fain":"8605109100","fiscal_year":2027,"funding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"key":"ASST_NON_8605109100_073","loan_subsidy_cost":0.0,"obligated":0.0,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"","code":"VA**179","country":"USA","county_fips":"51179","county_name":"STAFFORD","foreign_location":null,"scope":"COUNTY-WIDE","state_code":"VA","state_fips":"51","state_name":"VIRGINIA","zip_code":"","zip_plus_four":""},"pragmatic_obligations":0.0,"recipient":{"uuid":"a2ecf274-1b3b-5e9c-aa15-2724284adf4b","uei":null,"duns":null,"legal_business_name":"KEVIN
+        PARKER ROOFING CONTRACTOR, INC.","legal_business_name_raw":"KEVIN PARKER ROOFING
+        CONTRACTOR, INC.","county":"STAFFORD","congressional_district":"VA-07","congressional_district_original":"VA-07","highest_owner":null,"business_types":[{"code":"R","description":"Small
+        Business"}]},"record_type":"2","title":"SBA 7(a) Program Loans","uri":null}]}'
+    headers:
+      CF-RAY:
+      - a511b278b9d7590b-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=14m8Show5eD657nVBxgx9hQ9fig6Cc%2F5zJEGxI3ewwlG4DawVQtDLtbiG4CJhXHhdlVic%2FItEpNmkvzAhoppcsBCAVUkOqr0BWRnKhLxJAIaIHYZh6c4XIkVCPy2Q5wegDe3"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4073'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '972'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999652'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '972'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/loans/?limit=2&cursor=WyIyMDI2LTEwLTE1IiwgImZlNWM4ZDcyLWNkZjEtNTFhMi1hMDNkLThiZDlhMzI1ZjUxOCJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"count":29866842,"next":"https://tango.makegov.com/api/assistance/loans/?limit=2&cursor=WyIyMDI2LTEwLTE1IiwgImZkYmVkODk4LTIwZTQtNWZkNC05MDE5LWIwMjE2ZjBkOWQ4MiJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","previous":"https://tango.makegov.com/api/assistance/loans/?limit=2&cursor=eyJ2IjogWyIyMDI2LTEwLTE1IiwgImZkZGFiODVkLWVmYzctNWJhYi04ZDJmLWJjYWYzMjE3NmJhYSJdLCAiZCI6ICJwcmV2In0%3D&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","cursor":"WyIyMDI2LTEwLTE1IiwgImZkYmVkODk4LTIwZTQtNWZkNC05MDE5LWIwMjE2ZjBkOWQ4MiJd","previous_cursor":"eyJ2IjogWyIyMDI2LTEwLTE1IiwgImZkZGFiODVkLWVmYzctNWJhYi04ZDJmLWJjYWYzMjE3NmJhYSJdLCAiZCI6ICJwcmV2In0=","results":[{"assistance_listing":{"number":"59.012","title":"7(a)
+        Loan Guarantees"},"assistance_type":{"code":"F004","description":"Loan Guarantee"},"award_date":"2026-10-15","awarding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"cfda_number":"59.012","face_value_of_loan":24500.0,"fain":"8604959106","fiscal_year":2027,"funding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"key":"ASST_NON_8604959106_073","loan_subsidy_cost":0.0,"obligated":0.0,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"","code":"CA**037","country":"USA","county_fips":"06037","county_name":"LOS
+        ANGELES","foreign_location":null,"scope":"COUNTY-WIDE","state_code":"CA","state_fips":"06","state_name":"CALIFORNIA","zip_code":"","zip_plus_four":""},"pragmatic_obligations":0.0,"recipient":{"uuid":"0e48f14d-c9df-5662-98c9-42d00f068905","uei":null,"duns":null,"legal_business_name":"MOONA
+        STAR, INC.","legal_business_name_raw":"MOONA STAR, INC.","county":"LOS ANGELES","congressional_district":"CA-32","congressional_district_original":"CA-32","highest_owner":null,"business_types":[{"code":"R","description":"Small
+        Business"}]},"record_type":"2","title":"SBA 7(a) Program Loans","uri":null},{"assistance_listing":{"number":"59.012","title":"7(a)
+        Loan Guarantees"},"assistance_type":{"code":"F004","description":"Loan Guarantee"},"award_date":"2026-10-15","awarding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"cfda_number":"59.012","face_value_of_loan":306000.0,"fain":"8603699109","fiscal_year":2027,"funding_office":{"organization_id":"7d23b0cc-0292-51fc-ac50-6ba0f26d0f2d","office_code":"737010","office_name":"OFC
+        OF CAPITAL ACCESS","agency_code":"7300","agency_name":"SMALL BUSINESS ADMINISTRATION","department_code":"073","department_name":"SMALL
+        BUSINESS ADMINISTRATION"},"key":"ASST_NON_8603699109_073","loan_subsidy_cost":0.0,"obligated":0.0,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"","code":"FL**071","country":"USA","county_fips":"12071","county_name":"LEE","foreign_location":null,"scope":"COUNTY-WIDE","state_code":"FL","state_fips":"12","state_name":"FLORIDA","zip_code":"","zip_plus_four":""},"pragmatic_obligations":0.0,"recipient":{"uuid":"bca64c94-f6d1-58c0-bdce-2074e393ffb2","uei":null,"duns":null,"legal_business_name":"DOCKTALING
+        LLC","legal_business_name_raw":"DOCKTALING LLC","county":"LEE","congressional_district":"FL-17","congressional_district_original":"FL-17","highest_owner":null,"business_types":[{"code":"R","description":"Small
+        Business"}]},"record_type":"2","title":"SBA 7(a) Program Loans","uri":null}]}'
+    headers:
+      CF-RAY:
+      - a511b2794ab50f64-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=YMqRDFIi1lyfdTZlxBw8m9SWYv2wJjeAylcuns3CXVc12760X1uRTti3IqgAJTumlMjy9pBDsjTVTthlFjg5wFZUhB5o8MnSerXwaUMly1Rqqfpbs8YR2j4l1S0qxnk0PATF"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4675'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '971'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999651'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '971'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1
