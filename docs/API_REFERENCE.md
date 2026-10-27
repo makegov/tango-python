@@ -20,6 +20,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Notices](#notices)
 - [State \& Local (SLED)](#state--local-sled)
 - [Grants](#grants)
+- [Financial Assistance Awards](#financial-assistance-awards)
 - [GSA eLibrary Contracts](#gsa-elibrary-contracts)
 - [Protests](#protests)
 - [Contract Appeals](#contract-appeals)
@@ -1211,6 +1212,136 @@ for grant in grants.results:
         for cfda in grant['cfda_numbers']:
             print(f"CFDA: {cfda.get('number')} - {cfda.get('title')}")
 ```
+
+---
+
+## Financial Assistance Awards
+
+Federal financial-assistance awards from USAspending, split across four endpoints by GSDM assistance type:
+
+| Endpoint | Assistance types | Methods |
+|----------|------------------|---------|
+| `/api/assistance/grants/` | `F001` grant, `F002` cooperative agreement | `list_assistance_grants`, `get_assistance_grant`, `list_assistance_grant_transactions`, `list_assistance_grant_listings` |
+| `/api/assistance/loans/` | `F003` direct loan, `F004` loan guarantee | `list_assistance_loans`, `get_assistance_loan`, `list_assistance_loan_transactions`, `list_assistance_loan_listings` |
+| `/api/assistance/direct_payments/` | `F006`, `F007` direct payments | `list_assistance_direct_payments`, `get_assistance_direct_payment`, `list_assistance_direct_payment_transactions`, `list_assistance_direct_payment_listings` |
+| `/api/assistance/other/` | `F005` insurance, `F008`-`F010` other | `list_assistance_other`, `get_assistance_other`, `list_assistance_other_transactions`, `list_assistance_other_listings` |
+
+The four endpoints take the same filters and shapes, and return the same fields (`AssistanceAward`). An award lives under the endpoint of its latest action's assistance type. These are awards: Grants.gov funding opportunities are [`list_grants()`](#grants).
+
+### list_assistance_grants() / list_assistance_loans() / list_assistance_direct_payments() / list_assistance_other()
+
+List awards with filtering, shaping and cursor pagination.
+
+```python
+grants = client.list_assistance_grants(
+    cursor=None,
+    limit=25,
+    shape=ShapeConfig.ASSISTANCE_AWARDS_MINIMAL,
+    # Filter parameters (all optional)
+    key=None,
+    fain=None,
+    uri=None,
+    uei=None,
+    recipient=None,
+    search=None,
+    awarding_agency=None,
+    funding_agency=None,
+    cfda_number=None,
+    assistance_type=None,
+    record_type=None,
+    business_funds_indicator=None,
+    disaster_emergency_fund_code=None,
+    funding_opportunity_number=None,
+    award_date=None,
+    award_date_gte=None,
+    award_date_lte=None,
+    fiscal_year=None,
+    fiscal_year_gte=None,
+    fiscal_year_lte=None,
+    pop_start_date_gte=None,
+    pop_start_date_lte=None,
+    pop_end_date_gte=None,
+    pop_end_date_lte=None,
+    pop_state=None,
+    pop_country=None,
+    pop_zip=None,
+    obligated_gte=None,
+    obligated_lte=None,
+    ordering=None,
+    exact=False,
+)
+```
+
+**Filter Parameters:**
+- `key` / `fain` / `uri` - Award key, Federal Award Identification Number, or Unique Record Identifier (aggregate records), exact; OR several with `|`
+- `uei` - Recipient UEI, exact; OR several with `|`
+- `recipient` - Recipient name or UEI. Each term matches the recipients closest to it by name; a term under three characters is a 400. OR several with `|`
+- `search` - Full-text search over identifiers, recipient names, assistance listing titles and descriptions, web-search style (`broadband or fiber`, `housing -veterans`)
+- `awarding_agency` / `funding_agency` - Agency code, name or abbreviation; OR several with `|`
+- `cfda_number` - The award's primary assistance listing number, e.g. `"93.778"`; OR several with `|`. Other programs on the award are in its listings
+- `assistance_type` - GSDM code `F001`-`F010`, case-insensitive; OR several with `|`
+- `record_type` - `"1"` aggregate, `"2"` non-aggregate, `"3"` non-aggregate to an individual (PII-redacted); OR several with `|`
+- `business_funds_indicator` - `"NON"` or `"REC"` (Recovery Act); OR several with `|`
+- `disaster_emergency_fund_code` - DEFC, e.g. `"L"`, matched as a whole code; OR several with `|`
+- `funding_opportunity_number` - The Grants.gov opportunity number the award was made under; OR several with `|`
+- `award_date`, `award_date_gte`, `award_date_lte` - Award date, exact or range (`YYYY-MM-DD`)
+- `fiscal_year`, `fiscal_year_gte`, `fiscal_year_lte` - Fiscal year, exact or range
+- `pop_start_date_gte` / `pop_start_date_lte`, `pop_end_date_gte` / `pop_end_date_lte` - Period of performance start and current end date ranges
+- `pop_state`, `pop_country` (ISO alpha-3), `pop_zip` (five digits) - Place of performance; OR several with `|`
+- `obligated_gte` / `obligated_lte` - Obligated amount range (USD)
+- `ordering` - `award_date`, `obligated` or `pragmatic_obligations`, `-` prefix for descending; defaults to `-award_date`
+- `exact` - `True` for an exact `count`; past 10,000 matches a filtered list otherwise reports an estimate (`count_type == "approximate"`)
+
+Any other parameter is rejected by the API with a 400.
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with award dictionaries; pass `response.cursor` back as `cursor` for the next page.
+
+**Example:**
+```python
+grants = client.list_assistance_grants(
+    cfda_number="93.778",
+    fiscal_year=2026,
+    ordering="-obligated",
+    limit=10,
+)
+
+for award in grants.results:
+    print(award["key"], award["obligated"], award["recipient"]["legal_business_name"])
+
+if grants.cursor:
+    more = client.list_assistance_grants(cfda_number="93.778", fiscal_year=2026, cursor=grants.cursor)
+```
+
+To compare dollars across the four endpoints, read `pragmatic_obligations`: the obligation for grants and payments, the subsidy cost for loans.
+
+### get_assistance_grant() / get_assistance_loan() / get_assistance_direct_payment() / get_assistance_other()
+
+Get one award by `key`.
+
+```python
+award = client.get_assistance_grant(
+    "ASST_NON_693JF72640002_069",
+    shape="key,title,summary,obligated,listings(*),obligations_by_fiscal_year(*)",
+)
+```
+
+A retired key (one in an award's `former_award_keys`) returns the award that carries it now, with its current `key`. A key that names no award on that endpoint raises `TangoNotFoundError`.
+
+### list_assistance_*_transactions() / list_assistance_*_listings()
+
+An award's transactions (latest first) and its money by assistance listing (primary listing first): `list_assistance_grant_transactions`, `list_assistance_grant_listings`, and the same pair for `loan`, `direct_payment` and `other`.
+
+```python
+transactions = client.list_assistance_grant_transactions("ASST_NON_693JF72640002_069", page=1, limit=100)
+listings = client.list_assistance_grant_listings("ASST_NON_693JF72640002_069")
+```
+
+These sub-routes take no shape and page by number (`page`, `limit`): transactions default to 100 per page (max 500), listings to 10 (max 100). Rows come back as plain dictionaries. A key that names no award returns an empty page rather than a 404.
+
+**Shape notes:**
+- `recipient` is Tango's shared recipient record, shaped like an entity; it exists for recipients without a UEI too, and is `None` on aggregate and PII-redacted records (`record_type` `"1"` and `"3"`). `business_types` is a list of `{code, description}` in USAspending's recipient-type codes.
+- `cfda_number` is always a plain field; `assistance_listing(number,title)` adds the program title.
+- `transactions` works as a leaf (every key of every transaction) or an expansion (`transactions(key,obligated)`); for long histories, page through the transactions sub-route instead.
 
 ---
 
@@ -2660,6 +2791,7 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `OPPORTUNITIES_MINIMAL` | `list_opportunities` | opportunity_id, title, solicitation_number, response_deadline, active |
 | `NOTICES_MINIMAL` | `list_notices` | notice_id, title, solicitation_number, posted_date |
 | `GRANTS_MINIMAL` | `list_grants` | grant_id, opportunity_number, title, status(*), agency_code |
+| `ASSISTANCE_AWARDS_MINIMAL` | `list_assistance_*`, `get_assistance_*` | The API's own default: key, fain, uri, award_date, fiscal_year, assistance_type(code,description), record_type, cfda_number, assistance_listing(number,title), title, obligated, pragmatic_obligations, face_value_of_loan, loan_subsidy_cost, awarding_office(*), funding_office(*), recipient(*), place_of_performance(*), period_of_performance(start_date,current_end_date) |
 | `IDVS_MINIMAL` | `list_idvs`, `list_vehicle_awardees` | key, piid, award_date, recipient(display_name,uei), description, total_contract_value, obligated, idv_type |
 | `IDVS_COMPREHENSIVE` | `get_idv` | Full IDV with offices, place_of_performance, competition, transactions, etc. |
 | `VEHICLES_MINIMAL` | `list_vehicles` | uuid, solicitation_identifier, is_synthetic_solicitation, program_acronym, organization_id, organization, vehicle_type, description, idv_count, holder_count, order_winner_count, awardee_count, order_count, total_obligated, vehicle_obligations, vehicle_contracts_value, latest_award_date, solicitation_title, solicitation_date |

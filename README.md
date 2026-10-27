@@ -10,7 +10,7 @@ A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, f
 
 - **Dynamic Response Shaping** - Request only the fields you need, reducing payload sizes by 60-80%
 - **Full Type Safety** - Runtime-generated TypedDict types with accurate type hints for IDE autocomplete
-- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, IDVs, OTAs, entities, forecasts, opportunities, notices, grants, protests, webhooks, and more)
+- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, IDVs, OTAs, financial-assistance awards, entities, forecasts, opportunities, notices, grants, protests, webhooks, and more)
 - **Flexible Data Access** - Dictionary-based response objects with validation
 - **Modern Python** - Built for Python 3.12+ using modern async-ready patterns
 - **Production-Ready** - Comprehensive test suite with VCR.py-based integration tests
@@ -254,6 +254,16 @@ notices = client.list_notices(agency="DOD", notice_type="Presolicitation", limit
 
 ```python
 grants = client.list_grants(agency="HHS", status="F", limit=25)  # F = Forecasted
+```
+
+### Financial Assistance Awards
+
+```python
+# Grants, loans, direct payments and other assistance from USAspending, one method family per endpoint
+grants = client.list_assistance_grants(cfda_number="93.778", ordering="-obligated", limit=25)
+award = client.get_assistance_grant(grants.results[0]["key"])
+transactions = client.list_assistance_grant_transactions(award["key"])
+loans = client.list_assistance_loans(pop_state="VA", fiscal_year=2026)
 ```
 
 ### Protests

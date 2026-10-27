@@ -10,6 +10,10 @@ from .exceptions import (
     TangoValidationError,
 )
 from .models import (
+    AssistanceAward,
+    AssistanceAwardListing,
+    AssistanceRecipient,
+    AssistanceTransaction,
     BudgetAccount,
     BudgetAccountAnomalySource,
     BudgetAccountAnomalySourceRow,
@@ -74,6 +78,10 @@ __all__ = [
     "RateLimitInfo",
     "ResolveCandidate",
     "ResolveResult",
+    "AssistanceAward",
+    "AssistanceAwardListing",
+    "AssistanceRecipient",
+    "AssistanceTransaction",
     "BudgetAccount",
     "BudgetAccountAnomalySource",
     "BudgetAccountAnomalySourceRow",

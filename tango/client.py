@@ -22,6 +22,7 @@ from tango.models import (
     OTA,
     OTIDV,
     Agency,
+    AssistanceAward,
     BudgetAccount,
     BusinessType,
     Contract,
@@ -1575,6 +1576,660 @@ class TangoClient:
         data = self._get(f"/api/subawards/{key}/", params)
         return self._parse_response_with_shape(
             data, shape, Subaward, flat, flat_lists, joiner=joiner
+        )
+
+    # ============================================================================
+    # Financial-assistance awards (grants, loans, direct payments, other)
+    # ============================================================================
+
+    def _list_assistance_awards(
+        self,
+        segment: str,
+        *,
+        cursor: str | None,
+        limit: int,
+        shape: str | None,
+        flat: bool,
+        flat_lists: bool,
+        joiner: str,
+        exact: bool,
+        **filters: Any,
+    ) -> PaginatedResponse:
+        """Shared body of the four `list_assistance_*` methods, which differ only in the route."""
+        params: dict[str, Any] = {"limit": min(limit, 100)}
+        if cursor:
+            params["cursor"] = cursor
+        if shape is None:
+            shape = ShapeConfig.ASSISTANCE_AWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        params.update({k: v for k, v in filters.items() if v is not None})
+        if exact:
+            params["exact"] = "true"
+
+        data = self._get(f"/api/assistance/{segment}/", params)
+        results = [
+            self._parse_response_with_shape(
+                obj, shape, AssistanceAward, flat, flat_lists, joiner=joiner
+            )
+            for obj in (data.get("results") or [])
+        ]
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
+            previous=data.get("previous"),
+            results=results,
+            cursor=data.get("cursor"),
+            meta=data.get("meta"),
+        )
+
+    def _get_assistance_award(
+        self,
+        segment: str,
+        key: str,
+        *,
+        shape: str | None,
+        flat: bool,
+        flat_lists: bool,
+        joiner: str,
+    ) -> Any:
+        if not key:
+            raise TangoValidationError("Award key is required")
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.ASSISTANCE_AWARDS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+                if joiner:
+                    params["joiner"] = joiner
+            if flat_lists:
+                params["flat_lists"] = "true"
+        data = self._get(f"/api/assistance/{segment}/{quote(key, safe='')}/", params)
+        return self._parse_response_with_shape(
+            data, shape, AssistanceAward, flat, flat_lists, joiner=joiner
+        )
+
+    def _list_assistance_award_rows(
+        self, segment: str, key: str, sub_route: str, *, page: int, limit: int
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """An award's `/transactions/` or `/listings/` page. These sub-routes take no shape, so rows come back as plain dicts."""
+        if not key:
+            raise TangoValidationError("Award key is required")
+        data = self._get(
+            f"/api/assistance/{segment}/{quote(key, safe='')}/{sub_route}/",
+            {"page": page, "limit": limit},
+        )
+        results = data.get("results") or []
+        return PaginatedResponse(
+            count=int(data.get("count") or len(results)),
+            next=data.get("next"),
+            count_type=data.get(_COUNT_TYPE_KEY),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def list_assistance_grants(
+        self,
+        cursor: str | None = None,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        key: str | None = None,
+        fain: str | None = None,
+        uri: str | None = None,
+        uei: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        awarding_agency: str | None = None,
+        funding_agency: str | None = None,
+        cfda_number: str | None = None,
+        assistance_type: str | None = None,
+        record_type: str | None = None,
+        business_funds_indicator: str | None = None,
+        disaster_emergency_fund_code: str | None = None,
+        funding_opportunity_number: str | None = None,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_state: str | None = None,
+        pop_country: str | None = None,
+        pop_zip: str | None = None,
+        obligated_gte: float | str | None = None,
+        obligated_lte: float | str | None = None,
+        ordering: str | None = None,
+        *,
+        exact: bool = False,
+    ) -> PaginatedResponse:
+        """
+        List grant and cooperative-agreement awards (`/api/assistance/grants/`).
+
+        Holds every award whose latest action's GSDM assistance type is ``F001`` or ``F002``.
+        Pagination is cursor-based: pass ``response.cursor`` back as ``cursor`` for the next page.
+
+        Args:
+            cursor: Cursor token from a previous response's ``cursor``; omit for the first page
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to ``ShapeConfig.ASSISTANCE_AWARDS_MINIMAL``, the API's own default)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            joiner: Separator for flattened keys when ``flat`` is True
+            key: Award key (exact). OR several with ``|``
+            fain: Federal Award Identification Number (exact). OR several with ``|``
+            uri: Unique Record Identifier, carried by aggregate records (exact). OR several with ``|``
+            uei: Recipient UEI (exact). OR several with ``|``
+            recipient: Recipient name or UEI. Each term matches the recipients closest to it by name; a term under three characters returns 400. OR several with ``|``
+            search: Full-text search over identifiers, recipient names, assistance listing titles and descriptions, web-search style
+            awarding_agency: Awarding agency (code, name or abbreviation). OR several with ``|``
+            funding_agency: Funding agency or department, matched like ``awarding_agency``. OR several with ``|``
+            cfda_number: The award's primary assistance listing (CFDA) number, e.g. ``93.778``. OR several with ``|``
+            assistance_type: GSDM assistance type code (``F001``-``F010``), case-insensitive. OR several with ``|``
+            record_type: ``1`` (aggregate), ``2`` (non-aggregate) or ``3`` (non-aggregate to an individual, PII-redacted). OR several with ``|``
+            business_funds_indicator: ``NON`` (not Recovery Act) or ``REC`` (Recovery Act), case-insensitive. OR several with ``|``
+            disaster_emergency_fund_code: Disaster Emergency Fund Code, e.g. ``L``, matched as a whole code within the award's list. OR several with ``|``
+            funding_opportunity_number: The Grants.gov funding opportunity number the award was made under (exact). OR several with ``|``
+            award_date: Award date (exact, YYYY-MM-DD)
+            award_date_gte: Award date on or after (YYYY-MM-DD)
+            award_date_lte: Award date on or before (YYYY-MM-DD)
+            fiscal_year: Federal fiscal year of the award (exact)
+            fiscal_year_gte: Fiscal year >=
+            fiscal_year_lte: Fiscal year <=
+            pop_start_date_gte: Period of performance start date on or after (YYYY-MM-DD)
+            pop_start_date_lte: Period of performance start date on or before (YYYY-MM-DD)
+            pop_end_date_gte: Period of performance current end date on or after (YYYY-MM-DD)
+            pop_end_date_lte: Period of performance current end date on or before (YYYY-MM-DD)
+            pop_state: Place of performance state code, e.g. ``VA``. OR several with ``|``
+            pop_country: Place of performance country code, ISO 3166 alpha-3, e.g. ``USA``. OR several with ``|``
+            pop_zip: Place of performance five-digit ZIP code. OR several with ``|``
+            obligated_gte: Obligated amount >= (USD)
+            obligated_lte: Obligated amount <= (USD)
+            ordering: ``award_date``, ``obligated`` or ``pragmatic_obligations``; prefix ``-`` for descending. Defaults to ``-award_date``
+            exact: If True, ask the API for an exact count. Past 10,000 matches a filtered list otherwise reports an estimate (``count_type == "approximate"``)
+
+        Examples:
+            >>> grants = client.list_assistance_grants(cfda_number="93.778", ordering="-obligated")
+            >>> grants = client.list_assistance_grants(search="wildfire resilience", fiscal_year=2025)
+        """
+        return self._list_assistance_awards(
+            "grants",
+            cursor=cursor,
+            limit=limit,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            exact=exact,
+            key=key,
+            fain=fain,
+            uri=uri,
+            uei=uei,
+            recipient=recipient,
+            search=search,
+            awarding_agency=awarding_agency,
+            funding_agency=funding_agency,
+            cfda_number=cfda_number,
+            assistance_type=assistance_type,
+            record_type=record_type,
+            business_funds_indicator=business_funds_indicator,
+            disaster_emergency_fund_code=disaster_emergency_fund_code,
+            funding_opportunity_number=funding_opportunity_number,
+            award_date=award_date,
+            award_date_gte=award_date_gte,
+            award_date_lte=award_date_lte,
+            fiscal_year=fiscal_year,
+            fiscal_year_gte=fiscal_year_gte,
+            fiscal_year_lte=fiscal_year_lte,
+            pop_start_date_gte=pop_start_date_gte,
+            pop_start_date_lte=pop_start_date_lte,
+            pop_end_date_gte=pop_end_date_gte,
+            pop_end_date_lte=pop_end_date_lte,
+            pop_state=pop_state,
+            pop_country=pop_country,
+            pop_zip=pop_zip,
+            obligated_gte=obligated_gte,
+            obligated_lte=obligated_lte,
+            ordering=ordering,
+        )
+
+    def get_assistance_grant(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get one grant or cooperative-agreement award by key (`/api/assistance/grants/{key}/`).
+
+        A retired key (one in an award's ``former_award_keys``) returns the award that carries it now, with its current ``key``.
+        A key that names no award on this endpoint raises ``TangoNotFoundError``.
+        """
+        return self._get_assistance_award(
+            "grants", key, shape=shape, flat=flat, flat_lists=flat_lists, joiner=joiner
+        )
+
+    def list_assistance_grant_transactions(
+        self, key: str, page: int = 1, limit: int = 100
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's transactions, latest first (`/api/assistance/grants/{key}/transactions/`).
+
+        Page-number pagination, max ``limit`` 500. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "grants", key, "transactions", page=page, limit=min(limit, 500)
+        )
+
+    def list_assistance_grant_listings(
+        self, key: str, page: int = 1, limit: int = 10
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's money by assistance listing (CFDA), primary listing first (`/api/assistance/grants/{key}/listings/`).
+
+        Page-number pagination, max ``limit`` 100. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "grants", key, "listings", page=page, limit=min(limit, 100)
+        )
+
+    def list_assistance_loans(
+        self,
+        cursor: str | None = None,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        key: str | None = None,
+        fain: str | None = None,
+        uri: str | None = None,
+        uei: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        awarding_agency: str | None = None,
+        funding_agency: str | None = None,
+        cfda_number: str | None = None,
+        assistance_type: str | None = None,
+        record_type: str | None = None,
+        business_funds_indicator: str | None = None,
+        disaster_emergency_fund_code: str | None = None,
+        funding_opportunity_number: str | None = None,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_state: str | None = None,
+        pop_country: str | None = None,
+        pop_zip: str | None = None,
+        obligated_gte: float | str | None = None,
+        obligated_lte: float | str | None = None,
+        ordering: str | None = None,
+        *,
+        exact: bool = False,
+    ) -> PaginatedResponse:
+        """
+        List direct loan and loan guarantee awards (`/api/assistance/loans/`).
+
+        Holds every award whose latest action's GSDM assistance type is ``F003`` or ``F004``.
+
+        Takes the same filters, shapes and cursor pagination as :meth:`list_assistance_grants`.
+        """
+        return self._list_assistance_awards(
+            "loans",
+            cursor=cursor,
+            limit=limit,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            exact=exact,
+            key=key,
+            fain=fain,
+            uri=uri,
+            uei=uei,
+            recipient=recipient,
+            search=search,
+            awarding_agency=awarding_agency,
+            funding_agency=funding_agency,
+            cfda_number=cfda_number,
+            assistance_type=assistance_type,
+            record_type=record_type,
+            business_funds_indicator=business_funds_indicator,
+            disaster_emergency_fund_code=disaster_emergency_fund_code,
+            funding_opportunity_number=funding_opportunity_number,
+            award_date=award_date,
+            award_date_gte=award_date_gte,
+            award_date_lte=award_date_lte,
+            fiscal_year=fiscal_year,
+            fiscal_year_gte=fiscal_year_gte,
+            fiscal_year_lte=fiscal_year_lte,
+            pop_start_date_gte=pop_start_date_gte,
+            pop_start_date_lte=pop_start_date_lte,
+            pop_end_date_gte=pop_end_date_gte,
+            pop_end_date_lte=pop_end_date_lte,
+            pop_state=pop_state,
+            pop_country=pop_country,
+            pop_zip=pop_zip,
+            obligated_gte=obligated_gte,
+            obligated_lte=obligated_lte,
+            ordering=ordering,
+        )
+
+    def get_assistance_loan(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get one direct loan or loan guarantee award by key (`/api/assistance/loans/{key}/`).
+
+        A retired key (one in an award's ``former_award_keys``) returns the award that carries it now, with its current ``key``.
+        A key that names no award on this endpoint raises ``TangoNotFoundError``.
+        """
+        return self._get_assistance_award(
+            "loans", key, shape=shape, flat=flat, flat_lists=flat_lists, joiner=joiner
+        )
+
+    def list_assistance_loan_transactions(
+        self, key: str, page: int = 1, limit: int = 100
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's transactions, latest first (`/api/assistance/loans/{key}/transactions/`).
+
+        Page-number pagination, max ``limit`` 500. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "loans", key, "transactions", page=page, limit=min(limit, 500)
+        )
+
+    def list_assistance_loan_listings(
+        self, key: str, page: int = 1, limit: int = 10
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's money by assistance listing (CFDA), primary listing first (`/api/assistance/loans/{key}/listings/`).
+
+        Page-number pagination, max ``limit`` 100. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "loans", key, "listings", page=page, limit=min(limit, 100)
+        )
+
+    def list_assistance_direct_payments(
+        self,
+        cursor: str | None = None,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        key: str | None = None,
+        fain: str | None = None,
+        uri: str | None = None,
+        uei: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        awarding_agency: str | None = None,
+        funding_agency: str | None = None,
+        cfda_number: str | None = None,
+        assistance_type: str | None = None,
+        record_type: str | None = None,
+        business_funds_indicator: str | None = None,
+        disaster_emergency_fund_code: str | None = None,
+        funding_opportunity_number: str | None = None,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_state: str | None = None,
+        pop_country: str | None = None,
+        pop_zip: str | None = None,
+        obligated_gte: float | str | None = None,
+        obligated_lte: float | str | None = None,
+        ordering: str | None = None,
+        *,
+        exact: bool = False,
+    ) -> PaginatedResponse:
+        """
+        List direct payment awards, for specified or unrestricted use (`/api/assistance/direct_payments/`).
+
+        Holds every award whose latest action's GSDM assistance type is ``F006`` or ``F007``.
+
+        Takes the same filters, shapes and cursor pagination as :meth:`list_assistance_grants`.
+        """
+        return self._list_assistance_awards(
+            "direct_payments",
+            cursor=cursor,
+            limit=limit,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            exact=exact,
+            key=key,
+            fain=fain,
+            uri=uri,
+            uei=uei,
+            recipient=recipient,
+            search=search,
+            awarding_agency=awarding_agency,
+            funding_agency=funding_agency,
+            cfda_number=cfda_number,
+            assistance_type=assistance_type,
+            record_type=record_type,
+            business_funds_indicator=business_funds_indicator,
+            disaster_emergency_fund_code=disaster_emergency_fund_code,
+            funding_opportunity_number=funding_opportunity_number,
+            award_date=award_date,
+            award_date_gte=award_date_gte,
+            award_date_lte=award_date_lte,
+            fiscal_year=fiscal_year,
+            fiscal_year_gte=fiscal_year_gte,
+            fiscal_year_lte=fiscal_year_lte,
+            pop_start_date_gte=pop_start_date_gte,
+            pop_start_date_lte=pop_start_date_lte,
+            pop_end_date_gte=pop_end_date_gte,
+            pop_end_date_lte=pop_end_date_lte,
+            pop_state=pop_state,
+            pop_country=pop_country,
+            pop_zip=pop_zip,
+            obligated_gte=obligated_gte,
+            obligated_lte=obligated_lte,
+            ordering=ordering,
+        )
+
+    def get_assistance_direct_payment(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get one direct payment award by key (`/api/assistance/direct_payments/{key}/`).
+
+        A retired key (one in an award's ``former_award_keys``) returns the award that carries it now, with its current ``key``.
+        A key that names no award on this endpoint raises ``TangoNotFoundError``.
+        """
+        return self._get_assistance_award(
+            "direct_payments", key, shape=shape, flat=flat, flat_lists=flat_lists, joiner=joiner
+        )
+
+    def list_assistance_direct_payment_transactions(
+        self, key: str, page: int = 1, limit: int = 100
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's transactions, latest first (`/api/assistance/direct_payments/{key}/transactions/`).
+
+        Page-number pagination, max ``limit`` 500. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "direct_payments", key, "transactions", page=page, limit=min(limit, 500)
+        )
+
+    def list_assistance_direct_payment_listings(
+        self, key: str, page: int = 1, limit: int = 10
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's money by assistance listing (CFDA), primary listing first (`/api/assistance/direct_payments/{key}/listings/`).
+
+        Page-number pagination, max ``limit`` 100. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "direct_payments", key, "listings", page=page, limit=min(limit, 100)
+        )
+
+    def list_assistance_other(
+        self,
+        cursor: str | None = None,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+        key: str | None = None,
+        fain: str | None = None,
+        uri: str | None = None,
+        uei: str | None = None,
+        recipient: str | None = None,
+        search: str | None = None,
+        awarding_agency: str | None = None,
+        funding_agency: str | None = None,
+        cfda_number: str | None = None,
+        assistance_type: str | None = None,
+        record_type: str | None = None,
+        business_funds_indicator: str | None = None,
+        disaster_emergency_fund_code: str | None = None,
+        funding_opportunity_number: str | None = None,
+        award_date: str | None = None,
+        award_date_gte: str | None = None,
+        award_date_lte: str | None = None,
+        fiscal_year: int | None = None,
+        fiscal_year_gte: int | None = None,
+        fiscal_year_lte: int | None = None,
+        pop_start_date_gte: str | None = None,
+        pop_start_date_lte: str | None = None,
+        pop_end_date_gte: str | None = None,
+        pop_end_date_lte: str | None = None,
+        pop_state: str | None = None,
+        pop_country: str | None = None,
+        pop_zip: str | None = None,
+        obligated_gte: float | str | None = None,
+        obligated_lte: float | str | None = None,
+        ordering: str | None = None,
+        *,
+        exact: bool = False,
+    ) -> PaginatedResponse:
+        """
+        List insurance, asset forfeiture, property sale and other financial-assistance awards (`/api/assistance/other/`).
+
+        Holds every award whose latest action's GSDM assistance type is ``F005`` or ``F008``-``F010``.
+
+        Takes the same filters, shapes and cursor pagination as :meth:`list_assistance_grants`.
+        """
+        return self._list_assistance_awards(
+            "other",
+            cursor=cursor,
+            limit=limit,
+            shape=shape,
+            flat=flat,
+            flat_lists=flat_lists,
+            joiner=joiner,
+            exact=exact,
+            key=key,
+            fain=fain,
+            uri=uri,
+            uei=uei,
+            recipient=recipient,
+            search=search,
+            awarding_agency=awarding_agency,
+            funding_agency=funding_agency,
+            cfda_number=cfda_number,
+            assistance_type=assistance_type,
+            record_type=record_type,
+            business_funds_indicator=business_funds_indicator,
+            disaster_emergency_fund_code=disaster_emergency_fund_code,
+            funding_opportunity_number=funding_opportunity_number,
+            award_date=award_date,
+            award_date_gte=award_date_gte,
+            award_date_lte=award_date_lte,
+            fiscal_year=fiscal_year,
+            fiscal_year_gte=fiscal_year_gte,
+            fiscal_year_lte=fiscal_year_lte,
+            pop_start_date_gte=pop_start_date_gte,
+            pop_start_date_lte=pop_start_date_lte,
+            pop_end_date_gte=pop_end_date_gte,
+            pop_end_date_lte=pop_end_date_lte,
+            pop_state=pop_state,
+            pop_country=pop_country,
+            pop_zip=pop_zip,
+            obligated_gte=obligated_gte,
+            obligated_lte=obligated_lte,
+            ordering=ordering,
+        )
+
+    def get_assistance_other(
+        self,
+        key: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        joiner: str = ".",
+    ) -> Any:
+        """Get one award of other financial assistance by key (`/api/assistance/other/{key}/`).
+
+        A retired key (one in an award's ``former_award_keys``) returns the award that carries it now, with its current ``key``.
+        A key that names no award on this endpoint raises ``TangoNotFoundError``.
+        """
+        return self._get_assistance_award(
+            "other", key, shape=shape, flat=flat, flat_lists=flat_lists, joiner=joiner
+        )
+
+    def list_assistance_other_transactions(
+        self, key: str, page: int = 1, limit: int = 100
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's transactions, latest first (`/api/assistance/other/{key}/transactions/`).
+
+        Page-number pagination, max ``limit`` 500. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "other", key, "transactions", page=page, limit=min(limit, 500)
+        )
+
+    def list_assistance_other_listings(
+        self, key: str, page: int = 1, limit: int = 10
+    ) -> PaginatedResponse[dict[str, Any]]:
+        """List an award's money by assistance listing (CFDA), primary listing first (`/api/assistance/other/{key}/listings/`).
+
+        Page-number pagination, max ``limit`` 100. Accepts a retired key; a key that names no award returns an empty page.
+        """
+        return self._list_assistance_award_rows(
+            "other", key, "listings", page=page, limit=min(limit, 100)
         )
 
     # ============================================================================

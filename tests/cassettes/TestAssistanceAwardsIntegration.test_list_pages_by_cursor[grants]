@@ -1,0 +1,205 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: "{\"count\":5759909,\"next\":\"https://tango.makegov.com/api/assistance/grants/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29&cursor=WyIyMDI2LTEwLTE2IiwgImIxZjg5ZjMwLWNiYjItNTdjOC04MDg2LTc0OGE4OGJmNzU4MSJd\",\"previous\":null,\"cursor\":\"WyIyMDI2LTEwLTE2IiwgImIxZjg5ZjMwLWNiYjItNTdjOC04MDg2LTc0OGE4OGJmNzU4MSJd\",\"previous_cursor\":null,\"results\":[{\"assistance_listing\":{\"number\":\"20.823\",\"title\":\"Port
+        Infrastructure Development Program\"},\"assistance_type\":{\"code\":\"F001\",\"description\":\"Grant\"},\"award_date\":\"2026-10-19\",\"awarding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"cfda_number\":\"20.823\",\"face_value_of_loan\":0.0,\"fain\":\"693JF72640002\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"key\":\"ASST_NON_693JF72640002_069\",\"loan_subsidy_cost\":0.0,\"obligated\":2000000.0,\"period_of_performance\":{\"start_date\":\"2026-10-19\",\"current_end_date\":\"2029-04-30\"},\"place_of_performance\":{\"city_name\":\"MOBILE\",\"code\":\"AL36633\",\"country\":\"USA\",\"county_fips\":\"01097\",\"county_name\":\"MOBILE\",\"foreign_location\":null,\"scope\":\"SINGLE
+        ZIP CODE\",\"state_code\":\"AL\",\"state_fips\":\"01\",\"state_name\":\"ALABAMA\",\"zip_code\":\"36633\",\"zip_plus_four\":\"1588\"},\"pragmatic_obligations\":2000000.0,\"recipient\":{\"uuid\":\"88f47661-874f-5298-8b0b-0971be0c746d\",\"uei\":\"HS97F2C9NME3\",\"duns\":null,\"legal_business_name\":\"ALABAMA
+        PORT AUTHORITY\",\"legal_business_name_raw\":\"ALABAMA PORT AUTHORITY\",\"county\":\"MOBILE\",\"congressional_district\":\"AL-02\",\"congressional_district_original\":\"AL-02\",\"highest_owner\":null,\"business_types\":[{\"code\":\"A\",\"description\":\"State
+        Government\"}]},\"record_type\":\"2\",\"title\":\"AWARD PURPOSE THE PROJECT
+        INCLUDES ELECTRICAL\u2026\",\"uri\":null},{\"assistance_listing\":{\"number\":\"20.933\",\"title\":\"National
+        Infrastructure Investments \"},\"assistance_type\":{\"code\":\"F001\",\"description\":\"Grant\"},\"award_date\":\"2026-10-16\",\"awarding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"cfda_number\":\"20.933\",\"face_value_of_loan\":0.0,\"fain\":\"693JF72440048\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"261f885d-c8b6-5e0d-b2f8-e0799a4e1de2\",\"office_code\":\"69A334\",\"office_name\":\"MARITIME
+        ADMINISTRATION\",\"agency_code\":\"6938\",\"agency_name\":\"MARITIME ADMINISTRATION\",\"department_code\":\"069\",\"department_name\":\"TRANSPORTATION,
+        DEPARTMENT OF\"},\"key\":\"ASST_NON_693JF72440048_069\",\"loan_subsidy_cost\":0.0,\"obligated\":2003532.0,\"period_of_performance\":{\"start_date\":\"2026-10-16\",\"current_end_date\":\"2028-08-31\"},\"place_of_performance\":{\"city_name\":\"CRISFIELD\",\"code\":\"MD21817\",\"country\":\"USA\",\"county_fips\":\"24039\",\"county_name\":\"SOMERSET\",\"foreign_location\":null,\"scope\":\"SINGLE
+        ZIP CODE\",\"state_code\":\"MD\",\"state_fips\":\"24\",\"state_name\":\"MARYLAND\",\"zip_code\":\"21817\",\"zip_plus_four\":\"1328\"},\"pragmatic_obligations\":2003532.0,\"recipient\":{\"uuid\":\"510bd6cc-9840-5adb-98d1-d8e5f74dff6b\",\"uei\":\"EKPQAJKKV549\",\"duns\":null,\"legal_business_name\":\"CITY
+        OF CRISFIELD\",\"legal_business_name_raw\":\"CITY OF CRISFIELD\",\"county\":\"SOMERSET\",\"congressional_district\":\"MD-01\",\"congressional_district_original\":\"MD-01\",\"highest_owner\":{\"uei\":null,\"duns\":null,\"legal_business_name\":null,\"legal_business_name_raw\":\"CITY
+        OF CRISFIELD\"},\"business_types\":[{\"code\":\"A\",\"description\":\"State
+        Government\"}]},\"record_type\":\"2\",\"title\":\"AWARD PURPOSE THE PROJECT
+        FUNDS THE FULL ENGINEERING\u2026\",\"uri\":null}]}"
+    headers:
+      CF-RAY:
+      - a511b2779e881d1a-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=eMi8OVBrJxcQyIl0X8v8aNvdCfECQPCsDsyD6%2BA0G%2BDcSSOS6TU42XsmT%2B%2FzJWqfge6L9DmGrjRkJBE2M8m3j80ExNBPy9pMrfzhWBphhFSScYjRaxnP0zn%2BfN3ZPZNqBaD7"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4296'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.031s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '974'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999654'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '974'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/?limit=2&cursor=WyIyMDI2LTEwLTE2IiwgImIxZjg5ZjMwLWNiYjItNTdjOC04MDg2LTc0OGE4OGJmNzU4MSJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"count":5759909,"next":"https://tango.makegov.com/api/assistance/grants/?limit=2&cursor=WyIyMDI2LTEwLTE1IiwgImZhYjlkZDIxLTlmZWEtNTBjNS04NjBlLWMxMjg4ZTJlNGVlOCJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","previous":"https://tango.makegov.com/api/assistance/grants/?limit=2&cursor=eyJ2IjogWyIyMDI2LTEwLTE2IiwgIjJhMGQ1NjViLTNlYzktNTRlZS1hZDE1LWUwMzA0ZjEwMmViZCJdLCAiZCI6ICJwcmV2In0%3D&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","cursor":"WyIyMDI2LTEwLTE1IiwgImZhYjlkZDIxLTlmZWEtNTBjNS04NjBlLWMxMjg4ZTJlNGVlOCJd","previous_cursor":"eyJ2IjogWyIyMDI2LTEwLTE2IiwgIjJhMGQ1NjViLTNlYzktNTRlZS1hZDE1LWUwMzA0ZjEwMmViZCJdLCAiZCI6ICJwcmV2In0=","results":[{"assistance_listing":{"number":"93.242","title":"Mental
+        Health Research Grants"},"assistance_type":{"code":"F001","description":"Grant"},"award_date":"2026-10-16","awarding_office":{"organization_id":"c430a9b0-56f5-5b13-8007-a73aeb1a801b","office_code":"75N700","office_name":"NIH
+        National Institute of Mental Health","agency_code":"7529","agency_name":"NATIONAL
+        INSTITUTES OF HEALTH","department_code":"075","department_name":"HEALTH AND
+        HUMAN SERVICES, DEPARTMENT OF"},"cfda_number":"93.242","face_value_of_loan":0.0,"fain":"KMH146453UPSM35","fiscal_year":2027,"funding_office":{"organization_id":"c430a9b0-56f5-5b13-8007-a73aeb1a801b","office_code":"75N700","office_name":"NIH
+        National Institute of Mental Health","agency_code":"7529","agency_name":"NATIONAL
+        INSTITUTES OF HEALTH","department_code":"075","department_name":"HEALTH AND
+        HUMAN SERVICES, DEPARTMENT OF"},"key":"ASST_NON_KMH146453UPSM35_075","loan_subsidy_cost":0.0,"obligated":0.0,"period_of_performance":{"start_date":"2026-09-04","current_end_date":"2030-08-31"},"place_of_performance":{"city_name":"INDIANAPOLIS","code":"IN36000","country":"USA","county_fips":"18097","county_name":"MARION","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"IN","state_fips":"18","state_name":"INDIANA","zip_code":"46202","zip_plus_four":"3012"},"pragmatic_obligations":0.0,"recipient":{"uuid":"b0011714-8095-51e3-b8de-795cc31043f3","uei":"SHHBRBAPSM35","duns":null,"legal_business_name":"TRUSTEES
+        OF INDIANA UNIVERSITY","legal_business_name_raw":"TRUSTEES OF INDIANA UNIVERSITY","county":"MARION","congressional_district":"IN-07","congressional_district_original":"IN-07","highest_owner":{"uei":"SHHBRBAPSM35","duns":null,"legal_business_name":"TRUSTEES
+        OF INDIANA UNIVERSITY","legal_business_name_raw":"TRUSTEES OF INDIANA UNIVERSITY"},"business_types":[{"code":"H","description":"Public/State
+        Controlled Institution of Higher Education"}]},"record_type":"2","title":"Suicide
+        Interventions for Youth in Primary Care","uri":"KMH146453UPSM35-328102780"},{"assistance_listing":{"number":"15.605","title":"Sport
+        Fish Restoration "},"assistance_type":{"code":"F001","description":"Grant"},"award_date":"2026-10-15","awarding_office":{"organization_id":"625cae1e-7830-5b81-ac8e-30283dd6570c","office_code":"140F04","office_name":"FWS
+        SOUTHEAST REGIONAL OFFICE","agency_code":"1448","agency_name":"US FISH AND
+        WILDLIFE SERVICE","department_code":"014","department_name":"INTERIOR, DEPARTMENT
+        OF THE"},"cfda_number":"15.605","face_value_of_loan":0.0,"fain":"F27AF00030","fiscal_year":2027,"funding_office":{"organization_id":"625cae1e-7830-5b81-ac8e-30283dd6570c","office_code":"00004","office_name":"FWS
+        SOUTHEAST REGIONAL OFFICE","agency_code":"1448","agency_name":"US FISH AND
+        WILDLIFE SERVICE","department_code":"014","department_name":"INTERIOR, DEPARTMENT
+        OF THE"},"key":"ASST_NON_F27AF00030_014","loan_subsidy_cost":0.0,"obligated":90000.0,"period_of_performance":{"start_date":"2026-11-01","current_end_date":"2027-10-31"},"place_of_performance":{"city_name":"","code":"KY*****","country":"USA","county_fips":null,"county_name":null,"foreign_location":null,"scope":"STATE-WIDE","state_code":"KY","state_fips":"21","state_name":"KENTUCKY","zip_code":"","zip_plus_four":""},"pragmatic_obligations":90000.0,"recipient":{"uuid":"ff5c7a37-a149-5ecb-b641-73d9546e6577","uei":"Y6PKBKPDCSL3","duns":null,"legal_business_name":"KENTUCKY
+        DEPARTMENT OF FISH & WIL","legal_business_name_raw":"KENTUCKY DEPARTMENT OF
+        FISH & WIL","county":"FRANKLIN","congressional_district":"KY-01","congressional_district_original":"KY-01","highest_owner":{"uei":null,"duns":null,"legal_business_name":"COMMONWEALTH
+        OF KENTUCKY","legal_business_name_raw":"COMMONWEALTH OF KENTUCKY"},"business_types":[{"code":"A","description":"State
+        Government"}]},"record_type":"2","title":"KY - CAMP NELSON BOAT RAMP RECONSTRUCTION
+        2026-27","uri":null}]}'
+    headers:
+      CF-RAY:
+      - a511b278189dc330-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=iyiGQ7jUCfGfq4VA9Vn9h6xjflkA%2Faxduha%2BbFVT63cljSSVtiOKW502054%2Fc9Br79MggPIqf59bTsrg5x%2FIJwmKIqx0cBU%2FUoDQ6jw%2FOc1bokCKTXSpSBkFgLrzaw4Wv72L"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '5261'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '973'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999653'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '973'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1

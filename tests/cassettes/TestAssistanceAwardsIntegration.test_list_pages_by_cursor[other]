@@ -1,0 +1,213 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/other/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: "{\"count\":7637560,\"next\":\"https://tango.makegov.com/api/assistance/other/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29&cursor=WyIyMDI2LTEwLTEyIiwgImZmY2ZiNzU4LTlmZGQtNTBmZS05YWE0LWQ0ODJmM2U3NjY2OSJd\",\"previous\":null,\"cursor\":\"WyIyMDI2LTEwLTEyIiwgImZmY2ZiNzU4LTlmZGQtNTBmZS05YWE0LWQ0ODJmM2U3NjY2OSJd\",\"previous_cursor\":null,\"results\":[{\"assistance_listing\":{\"number\":\"10.703\",\"title\":\"Cooperative
+        Fire Protection Agreement\"},\"assistance_type\":{\"code\":\"F010\",\"description\":\"Other
+        Financial Assistance\"},\"award_date\":\"2026-10-15\",\"awarding_office\":{\"organization_id\":\"091b577a-bf49-51b2-987e-8509d409bb10\",\"office_code\":\"1204GG\",\"office_name\":\"DESCHUTES
+        NATIONAL FOREST\",\"agency_code\":\"12C2\",\"agency_name\":\"FOREST SERVICE\",\"department_code\":\"012\",\"department_name\":\"AGRICULTURE,
+        DEPARTMENT OF\"},\"cfda_number\":\"10.703\",\"face_value_of_loan\":0.0,\"fain\":\"25FI11060100219\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"091b577a-bf49-51b2-987e-8509d409bb10\",\"office_code\":\"04GG\",\"office_name\":\"DESCHUTES
+        NATIONAL FOREST\",\"agency_code\":\"12C2\",\"agency_name\":\"FOREST SERVICE\",\"department_code\":\"012\",\"department_name\":\"AGRICULTURE,
+        DEPARTMENT OF\"},\"key\":\"ASST_NON_25FI11060100219_012\",\"loan_subsidy_cost\":0.0,\"obligated\":6949.33,\"period_of_performance\":{\"start_date\":\"2026-07-18\",\"current_end_date\":\"2026-07-19\"},\"place_of_performance\":{\"city_name\":\"\",\"code\":\"00*****\",\"country\":\"USA\",\"county_fips\":null,\"county_name\":null,\"foreign_location\":null,\"scope\":\"MULTI-STATE\",\"state_code\":\"\",\"state_fips\":null,\"state_name\":\"MULTI-STATE\",\"zip_code\":\"\",\"zip_plus_four\":\"\"},\"pragmatic_obligations\":6949.33,\"recipient\":{\"uuid\":\"f0246386-58f3-512a-b943-7c3c2f81572d\",\"uei\":\"K9B4A4D37AX7\",\"duns\":null,\"legal_business_name\":\"SISTERS-CAMP
+        SHERMAN RURAL FIRE PROTECTION DISTRICT\",\"legal_business_name_raw\":\"SISTERS-CAMP
+        SHERMAN RURAL FIRE PROTECTION DISTRICT\",\"county\":\"DESCHUTES\",\"congressional_district\":\"OR-04\",\"congressional_district_original\":\"OR-04\",\"highest_owner\":null,\"business_types\":[{\"code\":\"D\",\"description\":\"Special
+        District Government\"}]},\"record_type\":\"2\",\"title\":\"COOPERATIVE/ MUTUAL
+        AID FIRE ASSISTANCE PAYMET / FMMI DOC\u2026\",\"uri\":null},{\"assistance_listing\":{\"number\":\"97.022\",\"title\":\"Flood
+        Insurance\"},\"assistance_type\":{\"code\":\"F009\",\"description\":\"Sale,
+        Exchange, or Donation of Property and Goods\"},\"award_date\":\"2026-10-12\",\"awarding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"cfda_number\":\"97.022\",\"face_value_of_loan\":0.0,\"fain\":\"C99999500003785920260803000000\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"key\":\"ASST_NON_C99999500003785920260803000000_070\",\"loan_subsidy_cost\":0.0,\"obligated\":null,\"period_of_performance\":{\"start_date\":null,\"current_end_date\":null},\"place_of_performance\":{\"city_name\":\"BROOKLYN\",\"code\":\"NY00000\",\"country\":\"USA\",\"county_fips\":\"36047\",\"county_name\":\"KINGS\",\"foreign_location\":null,\"scope\":\"SINGLE
+        ZIP CODE\",\"state_code\":\"NY\",\"state_fips\":\"36\",\"state_name\":\"NEW
+        YORK\",\"zip_code\":\"11231\",\"zip_plus_four\":\"4911\"},\"pragmatic_obligations\":null,\"recipient\":{\"uuid\":\"99ba65ea-be2a-5c6d-b101-86ff3eafb31a\",\"uei\":\"W69TCJPDDLZ7\",\"duns\":null,\"legal_business_name\":\"TORRENT
+        TECHNOLOGIES, INC.\",\"legal_business_name_raw\":\"NFIP DIRECT SERVICING AGENT\",\"county\":\"FLATHEAD\",\"congressional_district\":\"MT-01\",\"congressional_district_original\":\"MT-01\",\"highest_owner\":{\"uei\":\"W69TCJPDDLZ7\",\"duns\":null,\"legal_business_name\":\"TORRENT
+        TECHNOLOGIES, INC.\",\"legal_business_name_raw\":null},\"business_types\":[{\"code\":\"Q\",\"description\":\"For-Profit
+        Organization (Other than Small Business)\"}]},\"record_type\":\"2\",\"title\":\"NATIONAL
+        FLOOD INSURANCE PROGRAM CLAIM COVERED OBLIGATION\u2026\",\"uri\":null}]}"
+    headers:
+      CF-RAY:
+      - a511b27adc5043cb-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=rggJngL9jyzgdGYA0o2u2nKe2UaPF8X9DRX0yAFNHDRG2inXV8iwBKtQev57Udc9Vdu0bt4gwLa0zqkkf7TckMaEH5i2wcbIv2GYv%2FvHcEsafUt%2B1uFjtX5kVOxITHXBcu5u"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4533'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.031s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '968'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999648'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '968'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/other/?limit=2&cursor=WyIyMDI2LTEwLTEyIiwgImZmY2ZiNzU4LTlmZGQtNTBmZS05YWE0LWQ0ODJmM2U3NjY2OSJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: "{\"count\":7637560,\"next\":\"https://tango.makegov.com/api/assistance/other/?limit=2&cursor=WyIyMDI2LTEwLTEyIiwgImZlZGZjZjlmLTU0YzctNTAzMC1hZmRkLTY4OGVhMDRiYmEyMiJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29\",\"previous\":\"https://tango.makegov.com/api/assistance/other/?limit=2&cursor=eyJ2IjogWyIyMDI2LTEwLTEyIiwgImZmYmU2Y2VmLTM0YWYtNTRhNC1iYjEwLTcyMmZkMzg5YzQ3MyJdLCAiZCI6ICJwcmV2In0%3D&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29\",\"cursor\":\"WyIyMDI2LTEwLTEyIiwgImZlZGZjZjlmLTU0YzctNTAzMC1hZmRkLTY4OGVhMDRiYmEyMiJd\",\"previous_cursor\":\"eyJ2IjogWyIyMDI2LTEwLTEyIiwgImZmYmU2Y2VmLTM0YWYtNTRhNC1iYjEwLTcyMmZkMzg5YzQ3MyJdLCAiZCI6ICJwcmV2In0=\",\"results\":[{\"assistance_listing\":{\"number\":\"97.022\",\"title\":\"Flood
+        Insurance\"},\"assistance_type\":{\"code\":\"F009\",\"description\":\"Sale,
+        Exchange, or Donation of Property and Goods\"},\"award_date\":\"2026-10-12\",\"awarding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"cfda_number\":\"97.022\",\"face_value_of_loan\":0.0,\"fain\":\"C18988300217701920260812000000\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"key\":\"ASST_NON_C18988300217701920260812000000_070\",\"loan_subsidy_cost\":0.0,\"obligated\":null,\"period_of_performance\":{\"start_date\":null,\"current_end_date\":null},\"place_of_performance\":{\"city_name\":\"CAMBRIDGE
+        CITY\",\"code\":\"IN09874\",\"country\":\"USA\",\"county_fips\":\"18177\",\"county_name\":\"WAYNE\",\"foreign_location\":null,\"scope\":\"SINGLE
+        ZIP CODE\",\"state_code\":\"IN\",\"state_fips\":\"18\",\"state_name\":\"INDIANA\",\"zip_code\":\"47327\",\"zip_plus_four\":\"9724\"},\"pragmatic_obligations\":null,\"recipient\":{\"uuid\":\"cf878ea8-c5ec-5cf5-9dd8-dc80631db0f5\",\"uei\":\"W7D3DJUSN9W7\",\"duns\":null,\"legal_business_name\":\"AUTO-OWNERS
+        INSURANCE CO\",\"legal_business_name_raw\":\"AUTO-OWNERS INSURANCE COMPANY\",\"county\":\"EATON\",\"congressional_district\":\"MI-07\",\"congressional_district_original\":\"MI-07\",\"highest_owner\":{\"uei\":null,\"duns\":null,\"legal_business_name\":\"AUTO-OWNERS
+        INSURANCE COMPANY\",\"legal_business_name_raw\":\"AUTO-OWNERS INSURANCE COMPANY\"},\"business_types\":[{\"code\":\"Q\",\"description\":\"For-Profit
+        Organization (Other than Small Business)\"}]},\"record_type\":\"2\",\"title\":\"NATIONAL
+        FLOOD INSURANCE PROGRAM CLAIM COVERED OBLIGATION\u2026\",\"uri\":null},{\"assistance_listing\":{\"number\":\"97.022\",\"title\":\"Flood
+        Insurance\"},\"assistance_type\":{\"code\":\"F009\",\"description\":\"Sale,
+        Exchange, or Donation of Property and Goods\"},\"award_date\":\"2026-10-12\",\"awarding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"cfda_number\":\"97.022\",\"face_value_of_loan\":0.0,\"fain\":\"C99999440096803520260813000000\",\"fiscal_year\":2027,\"funding_office\":{\"organization_id\":\"5b0fc9d4-aad8-5fff-b442-241ee9f027f3\",\"office_code\":\"70FGRT\",\"office_name\":\"FEMA
+        Headquarters: Financial Assistance Awards\",\"agency_code\":\"7022\",\"agency_name\":\"FEDERAL
+        EMERGENCY MANAGEMENT AGENCY\",\"department_code\":\"070\",\"department_name\":\"HOMELAND
+        SECURITY, DEPARTMENT OF\"},\"key\":\"ASST_NON_C99999440096803520260813000000_070\",\"loan_subsidy_cost\":0.0,\"obligated\":null,\"period_of_performance\":{\"start_date\":null,\"current_end_date\":null},\"place_of_performance\":{\"city_name\":\"RIVERTON\",\"code\":\"UT00000\",\"country\":\"USA\",\"county_fips\":\"49035\",\"county_name\":\"SALT
+        LAKE\",\"foreign_location\":null,\"scope\":\"SINGLE ZIP CODE\",\"state_code\":\"UT\",\"state_fips\":\"49\",\"state_name\":\"UTAH\",\"zip_code\":\"84065\",\"zip_plus_four\":\"7579\"},\"pragmatic_obligations\":null,\"recipient\":{\"uuid\":\"99ba65ea-be2a-5c6d-b101-86ff3eafb31a\",\"uei\":\"W69TCJPDDLZ7\",\"duns\":null,\"legal_business_name\":\"TORRENT
+        TECHNOLOGIES, INC.\",\"legal_business_name_raw\":\"NFIP DIRECT SERVICING AGENT\",\"county\":\"FLATHEAD\",\"congressional_district\":\"MT-01\",\"congressional_district_original\":\"MT-01\",\"highest_owner\":{\"uei\":\"W69TCJPDDLZ7\",\"duns\":null,\"legal_business_name\":\"TORRENT
+        TECHNOLOGIES, INC.\",\"legal_business_name_raw\":null},\"business_types\":[{\"code\":\"Q\",\"description\":\"For-Profit
+        Organization (Other than Small Business)\"}]},\"record_type\":\"2\",\"title\":\"NATIONAL
+        FLOOD INSURANCE PROGRAM CLAIM COVERED OBLIGATION\u2026\",\"uri\":null}]}"
+    headers:
+      CF-RAY:
+      - a511b27b6d3c6e53-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:51 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=aX%2FOeQIapxHd1MjRRrbF6GQkP52P4TMC52nO5zKGiUw8FItQI11mXcGLL26uuplq6LD4t3t3sktK6fVpbcXsZs8A9C7kUzpFsxe4k8XM7E2%2B94rAWLhHR3tULp628OrPmSSb"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '5446'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.042s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '967'
+      x-ratelimit-burst-reset:
+      - '29'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999647'
+      x-ratelimit-daily-reset:
+      - '41528'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '967'
+      x-ratelimit-reset:
+      - '29'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1

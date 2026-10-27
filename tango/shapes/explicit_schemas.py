@@ -1723,6 +1723,353 @@ ITDASHBOARD_INVESTMENT_SCHEMA: dict[str, FieldSchema] = {
 }
 
 # ============================================================================
+# FINANCIAL ASSISTANCE AWARDS
+# ============================================================================
+
+ASSISTANCE_RECIPIENT_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+    "duns": FieldSchema(name="duns", type=str, is_optional=True, is_list=False),
+    "legal_business_name": FieldSchema(
+        name="legal_business_name", type=str, is_optional=True, is_list=False
+    ),
+    "legal_business_name_raw": FieldSchema(
+        name="legal_business_name_raw", type=str, is_optional=True, is_list=False
+    ),
+    "county": FieldSchema(name="county", type=str, is_optional=True, is_list=False),
+    "congressional_district": FieldSchema(
+        name="congressional_district", type=str, is_optional=True, is_list=False
+    ),
+    "congressional_district_original": FieldSchema(
+        name="congressional_district_original", type=str, is_optional=True, is_list=False
+    ),
+    "highest_owner": FieldSchema(name="highest_owner", type=dict, is_optional=True, is_list=False),
+    "business_types": FieldSchema(name="business_types", type=dict, is_optional=True, is_list=True),
+}
+
+ASSISTANCE_RECIPIENT_ADDRESS_SCHEMA: dict[str, FieldSchema] = {
+    "address_line1": FieldSchema(name="address_line1", type=str, is_optional=True, is_list=False),
+    "address_line2": FieldSchema(name="address_line2", type=str, is_optional=True, is_list=False),
+    "city": FieldSchema(name="city", type=str, is_optional=True, is_list=False),
+    "state_or_province_code": FieldSchema(
+        name="state_or_province_code", type=str, is_optional=True, is_list=False
+    ),
+    "zip_code": FieldSchema(name="zip_code", type=str, is_optional=True, is_list=False),
+    "zip_code_plus4": FieldSchema(name="zip_code_plus4", type=str, is_optional=True, is_list=False),
+    "country_code": FieldSchema(name="country_code", type=str, is_optional=True, is_list=False),
+    "county_fips": FieldSchema(name="county_fips", type=str, is_optional=True, is_list=False),
+    "state_fips": FieldSchema(name="state_fips", type=str, is_optional=True, is_list=False),
+    "foreign_city_name": FieldSchema(
+        name="foreign_city_name", type=str, is_optional=True, is_list=False
+    ),
+    "foreign_province_name": FieldSchema(
+        name="foreign_province_name", type=str, is_optional=True, is_list=False
+    ),
+    "foreign_postal_code": FieldSchema(
+        name="foreign_postal_code", type=str, is_optional=True, is_list=False
+    ),
+    "congressional_district_original": FieldSchema(
+        name="congressional_district_original", type=str, is_optional=True, is_list=False
+    ),
+    "congressional_district_current": FieldSchema(
+        name="congressional_district_current", type=str, is_optional=True, is_list=False
+    ),
+}
+
+ASSISTANCE_PLACE_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
+    "country": FieldSchema(name="country", type=str, is_optional=True, is_list=False),
+    "state_code": FieldSchema(name="state_code", type=str, is_optional=True, is_list=False),
+    "state_name": FieldSchema(name="state_name", type=str, is_optional=True, is_list=False),
+    "state_fips": FieldSchema(name="state_fips", type=str, is_optional=True, is_list=False),
+    "county_fips": FieldSchema(name="county_fips", type=str, is_optional=True, is_list=False),
+    "county_name": FieldSchema(name="county_name", type=str, is_optional=True, is_list=False),
+    "city_name": FieldSchema(name="city_name", type=str, is_optional=True, is_list=False),
+    "zip_code": FieldSchema(name="zip_code", type=str, is_optional=True, is_list=False),
+    "zip_plus_four": FieldSchema(name="zip_plus_four", type=str, is_optional=True, is_list=False),
+    "code": FieldSchema(name="code", type=str, is_optional=True, is_list=False),
+    "scope": FieldSchema(name="scope", type=str, is_optional=True, is_list=False),
+    "foreign_location": FieldSchema(
+        name="foreign_location", type=str, is_optional=True, is_list=False
+    ),
+}
+
+ASSISTANCE_PERIOD_OF_PERFORMANCE_SCHEMA: dict[str, FieldSchema] = {
+    "start_date": FieldSchema(name="start_date", type=date, is_optional=True, is_list=False),
+    "current_end_date": FieldSchema(
+        name="current_end_date", type=date, is_optional=True, is_list=False
+    ),
+}
+
+ASSISTANCE_AWARD_LISTING_SCHEMA: dict[str, FieldSchema] = {
+    "cfda_number": FieldSchema(name="cfda_number", type=str, is_optional=True, is_list=False),
+    "is_primary": FieldSchema(name="is_primary", type=bool, is_optional=True, is_list=False),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "pragmatic_obligations": FieldSchema(
+        name="pragmatic_obligations", type=Decimal, is_optional=True, is_list=False
+    ),
+    "non_federal_funding_amount": FieldSchema(
+        name="non_federal_funding_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "indirect_cost_federal_share_amount": FieldSchema(
+        name="indirect_cost_federal_share_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "face_value_of_loan": FieldSchema(
+        name="face_value_of_loan", type=Decimal, is_optional=True, is_list=False
+    ),
+    "loan_subsidy_cost": FieldSchema(
+        name="loan_subsidy_cost", type=Decimal, is_optional=True, is_list=False
+    ),
+    "transactions_count": FieldSchema(
+        name="transactions_count", type=int, is_optional=True, is_list=False
+    ),
+    "first_action_date": FieldSchema(
+        name="first_action_date", type=date, is_optional=True, is_list=False
+    ),
+    "last_action_date": FieldSchema(
+        name="last_action_date", type=date, is_optional=True, is_list=False
+    ),
+}
+
+ASSISTANCE_TRANSACTION_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "modification_number": FieldSchema(
+        name="modification_number", type=str, is_optional=True, is_list=False
+    ),
+    "transaction_date": FieldSchema(
+        name="transaction_date", type=date, is_optional=True, is_list=False
+    ),
+    "action_type": FieldSchema(name="action_type", type=str, is_optional=True, is_list=False),
+    "assistance_type_code": FieldSchema(
+        name="assistance_type_code", type=str, is_optional=True, is_list=False
+    ),
+    "correction_delete_indicator": FieldSchema(
+        name="correction_delete_indicator", type=str, is_optional=True, is_list=False
+    ),
+    "cfda_number": FieldSchema(name="cfda_number", type=str, is_optional=True, is_list=False),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "pragmatic_obligations": FieldSchema(
+        name="pragmatic_obligations", type=Decimal, is_optional=True, is_list=False
+    ),
+    "non_federal_funding_amount": FieldSchema(
+        name="non_federal_funding_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "indirect_cost_federal_share_amount": FieldSchema(
+        name="indirect_cost_federal_share_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "face_value_of_loan": FieldSchema(
+        name="face_value_of_loan", type=Decimal, is_optional=True, is_list=False
+    ),
+    "loan_subsidy_cost": FieldSchema(
+        name="loan_subsidy_cost", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_amount_basis": FieldSchema(
+        name="award_amount_basis", type=str, is_optional=True, is_list=False
+    ),
+    "award_recipient_basis": FieldSchema(
+        name="award_recipient_basis", type=str, is_optional=True, is_list=False
+    ),
+    "action_date_fiscal_year": FieldSchema(
+        name="action_date_fiscal_year", type=int, is_optional=True, is_list=False
+    ),
+    "last_modified_date": FieldSchema(
+        name="last_modified_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "initial_report_date": FieldSchema(
+        name="initial_report_date", type=datetime, is_optional=True, is_list=False
+    ),
+}
+
+# One schema for all four `/api/assistance/{grants,loans,direct_payments,other}/` endpoints, which share their fields and shapes.
+ASSISTANCE_AWARD_SCHEMA: dict[str, FieldSchema] = {
+    "key": FieldSchema(name="key", type=str, is_optional=True, is_list=False),
+    "fain": FieldSchema(name="fain", type=str, is_optional=True, is_list=False),
+    "uri": FieldSchema(name="uri", type=str, is_optional=True, is_list=False),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "last_action_date": FieldSchema(
+        name="last_action_date", type=date, is_optional=True, is_list=False
+    ),
+    "last_modified_date": FieldSchema(
+        name="last_modified_date", type=datetime, is_optional=True, is_list=False
+    ),
+    "fiscal_year": FieldSchema(name="fiscal_year", type=int, is_optional=True, is_list=False),
+    "assistance_type": FieldSchema(
+        name="assistance_type",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="CodeDescription",
+    ),
+    "record_type": FieldSchema(name="record_type", type=str, is_optional=True, is_list=False),
+    "cfda_number": FieldSchema(name="cfda_number", type=str, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "summary": FieldSchema(name="summary", type=str, is_optional=True, is_list=False),
+    "purposes_differ": FieldSchema(
+        name="purposes_differ", type=bool, is_optional=True, is_list=False
+    ),
+    "obligated": FieldSchema(name="obligated", type=Decimal, is_optional=True, is_list=False),
+    "pragmatic_obligations": FieldSchema(
+        name="pragmatic_obligations", type=Decimal, is_optional=True, is_list=False
+    ),
+    "non_federal_funding_amount": FieldSchema(
+        name="non_federal_funding_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "indirect_cost_federal_share_amount": FieldSchema(
+        name="indirect_cost_federal_share_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "face_value_of_loan": FieldSchema(
+        name="face_value_of_loan", type=Decimal, is_optional=True, is_list=False
+    ),
+    "loan_subsidy_cost": FieldSchema(
+        name="loan_subsidy_cost", type=Decimal, is_optional=True, is_list=False
+    ),
+    "insurance_coverage_amount": FieldSchema(
+        name="insurance_coverage_amount", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_total_obligated": FieldSchema(
+        name="award_total_obligated", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_total_outlayed": FieldSchema(
+        name="award_total_outlayed", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_total_non_federal_funding": FieldSchema(
+        name="award_total_non_federal_funding", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_total_face_value_of_loan": FieldSchema(
+        name="award_total_face_value_of_loan", type=Decimal, is_optional=True, is_list=False
+    ),
+    "award_total_loan_subsidy_cost": FieldSchema(
+        name="award_total_loan_subsidy_cost", type=Decimal, is_optional=True, is_list=False
+    ),
+    "covid19_obligated": FieldSchema(
+        name="covid19_obligated", type=Decimal, is_optional=True, is_list=False
+    ),
+    "covid19_outlayed": FieldSchema(
+        name="covid19_outlayed", type=Decimal, is_optional=True, is_list=False
+    ),
+    "iija_obligated": FieldSchema(
+        name="iija_obligated", type=Decimal, is_optional=True, is_list=False
+    ),
+    "iija_outlayed": FieldSchema(
+        name="iija_outlayed", type=Decimal, is_optional=True, is_list=False
+    ),
+    "transactions_count": FieldSchema(
+        name="transactions_count", type=int, is_optional=True, is_list=False
+    ),
+    "listings_count": FieldSchema(name="listings_count", type=int, is_optional=True, is_list=False),
+    "assistance_types_count": FieldSchema(
+        name="assistance_types_count", type=int, is_optional=True, is_list=False
+    ),
+    "award_amount_basis": FieldSchema(
+        name="award_amount_basis", type=str, is_optional=True, is_list=False
+    ),
+    "award_recipient_basis": FieldSchema(
+        name="award_recipient_basis", type=str, is_optional=True, is_list=False
+    ),
+    "business_funds_indicator": FieldSchema(
+        name="business_funds_indicator", type=str, is_optional=True, is_list=False
+    ),
+    "disaster_emergency_fund_codes": FieldSchema(
+        name="disaster_emergency_fund_codes", type=str, is_optional=True, is_list=False
+    ),
+    "funding_opportunity_number": FieldSchema(
+        name="funding_opportunity_number", type=str, is_optional=True, is_list=False
+    ),
+    "funding_opportunity_goals_text": FieldSchema(
+        name="funding_opportunity_goals_text", type=str, is_optional=True, is_list=False
+    ),
+    "sai_number": FieldSchema(name="sai_number", type=str, is_optional=True, is_list=False),
+    "former_award_keys": FieldSchema(
+        name="former_award_keys", type=str, is_optional=True, is_list=True
+    ),
+    "treasury_accounts_funding_this_award": FieldSchema(
+        name="treasury_accounts_funding_this_award", type=str, is_optional=True, is_list=False
+    ),
+    "federal_accounts_funding_this_award": FieldSchema(
+        name="federal_accounts_funding_this_award", type=str, is_optional=True, is_list=False
+    ),
+    "object_classes_funding_this_award": FieldSchema(
+        name="object_classes_funding_this_award", type=str, is_optional=True, is_list=False
+    ),
+    "program_activities_funding_this_award": FieldSchema(
+        name="program_activities_funding_this_award", type=str, is_optional=True, is_list=False
+    ),
+    "transactions": FieldSchema(
+        name="transactions",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="AssistanceTransaction",
+    ),
+    "recipient": FieldSchema(
+        name="recipient",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AssistanceRecipient",
+    ),
+    "recipient_address": FieldSchema(
+        name="recipient_address",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AssistanceRecipientAddress",
+    ),
+    "place_of_performance": FieldSchema(
+        name="place_of_performance",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AssistancePlaceOfPerformance",
+    ),
+    "awarding_office": FieldSchema(
+        name="awarding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
+    "funding_office": FieldSchema(
+        name="funding_office",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
+    "assistance_listing": FieldSchema(
+        name="assistance_listing",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="CFDANumber",
+    ),
+    "period_of_performance": FieldSchema(
+        name="period_of_performance",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="AssistancePeriodOfPerformance",
+    ),
+    "officers": FieldSchema(
+        name="officers", type=dict, is_optional=True, is_list=False, nested_model="Officers"
+    ),
+    "obligations_by_fiscal_year": FieldSchema(
+        name="obligations_by_fiscal_year",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="FiscalYearObligation",
+    ),
+    "listings": FieldSchema(
+        name="listings",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="AssistanceAwardListing",
+    ),
+}
+
+
+# ============================================================================
 # SCHEMA REGISTRY MAPPING
 # ============================================================================
 
@@ -1783,6 +2130,14 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "GsaElibraryIdvRef": GSA_ELIBRARY_IDV_REF_SCHEMA,
     # IT Dashboard
     "ITDashboardInvestment": ITDASHBOARD_INVESTMENT_SCHEMA,
+    # Financial assistance awards
+    "AssistanceAward": ASSISTANCE_AWARD_SCHEMA,
+    "AssistanceRecipient": ASSISTANCE_RECIPIENT_SCHEMA,
+    "AssistanceRecipientAddress": ASSISTANCE_RECIPIENT_ADDRESS_SCHEMA,
+    "AssistancePlaceOfPerformance": ASSISTANCE_PLACE_OF_PERFORMANCE_SCHEMA,
+    "AssistancePeriodOfPerformance": ASSISTANCE_PERIOD_OF_PERFORMANCE_SCHEMA,
+    "AssistanceAwardListing": ASSISTANCE_AWARD_LISTING_SCHEMA,
+    "AssistanceTransaction": ASSISTANCE_TRANSACTION_SCHEMA,
 }
 
 

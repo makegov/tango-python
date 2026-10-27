@@ -1372,6 +1372,140 @@ class FederalRegisterDocument:
     full_text: str | None = None
 
 
+class AssistanceRecipient:
+    """Schema definition for AssistanceRecipient (not used for instances).
+
+    An assistance award's ``recipient``: Tango's shared recipient record, shaped like an entity.
+    Every assistance recipient has one, including the many with no UEI; for a recipient with a UEI, ``uuid`` is the entity's own UUID.
+    ``business_types`` is a list of ``{code, description}`` in USAspending's recipient-type codes, not SAM.gov's.
+    """
+
+    uuid: str | None = None
+    uei: str | None = None
+    duns: str | None = None
+    legal_business_name: str | None = None
+    legal_business_name_raw: str | None = None
+    county: str | None = None
+    congressional_district: str | None = None
+    congressional_district_original: str | None = None
+    highest_owner: dict[str, Any] | None = None
+    business_types: list[dict[str, Any]] | None = None
+
+
+class AssistanceTransaction:
+    """Schema definition for AssistanceTransaction (not used for instances).
+
+    One action on an assistance award: an entry of the ``transactions`` expansion, or a row of the ``/transactions/`` sub-route.
+    """
+
+    key: str | None = None
+    modification_number: str | None = None
+    transaction_date: date | None = None
+    action_type: str | None = None
+    assistance_type_code: str | None = None
+    correction_delete_indicator: str | None = None
+    cfda_number: str | None = None
+    obligated: Decimal | None = None
+    pragmatic_obligations: Decimal | None = None
+    non_federal_funding_amount: Decimal | None = None
+    indirect_cost_federal_share_amount: Decimal | None = None
+    face_value_of_loan: Decimal | None = None
+    loan_subsidy_cost: Decimal | None = None
+    award_amount_basis: str | None = None
+    award_recipient_basis: str | None = None
+    action_date_fiscal_year: int | None = None
+    last_modified_date: datetime | None = None
+    initial_report_date: datetime | None = None
+
+
+class AssistanceAwardListing:
+    """Schema definition for AssistanceAwardListing (not used for instances).
+
+    An assistance award's money under one assistance listing (CFDA) program: an entry of the ``listings`` expansion, or a row of the ``/listings/`` sub-route.
+    """
+
+    cfda_number: str | None = None
+    is_primary: bool | None = None
+    obligated: Decimal | None = None
+    pragmatic_obligations: Decimal | None = None
+    non_federal_funding_amount: Decimal | None = None
+    indirect_cost_federal_share_amount: Decimal | None = None
+    face_value_of_loan: Decimal | None = None
+    loan_subsidy_cost: Decimal | None = None
+    transactions_count: int | None = None
+    first_action_date: date | None = None
+    last_action_date: date | None = None
+
+
+class AssistanceAward:
+    """Schema definition for AssistanceAward (not used for instances).
+
+    Financial-assistance awards from USAspending at ``/api/assistance/grants/``, ``/api/assistance/loans/``, ``/api/assistance/direct_payments/`` and ``/api/assistance/other/``.
+    The four endpoints serve the same fields; an award lives under the one its latest action's assistance type belongs to.
+    Shape-on-demand, so every field is optional.
+
+    ``key`` is the award's identifier. A retired key (listed in ``former_award_keys``) still resolves to the award that carries it now.
+    To compare dollars across the four endpoints, read ``pragmatic_obligations``: the obligation for grants and payments, the subsidy cost for loans.
+    ``recipient`` is ``None`` on aggregate and PII-redacted records (``record_type`` ``1`` and ``3``).
+    """
+
+    key: str | None = None
+    fain: str | None = None
+    uri: str | None = None
+    award_date: date | None = None
+    last_action_date: date | None = None
+    last_modified_date: datetime | None = None
+    fiscal_year: int | None = None
+    assistance_type: dict[str, Any] | None = None
+    record_type: str | None = None
+    cfda_number: str | None = None
+    assistance_listing: dict[str, Any] | None = None
+    title: str | None = None
+    summary: str | None = None
+    purposes_differ: bool | None = None
+    obligated: Decimal | None = None
+    pragmatic_obligations: Decimal | None = None
+    non_federal_funding_amount: Decimal | None = None
+    indirect_cost_federal_share_amount: Decimal | None = None
+    face_value_of_loan: Decimal | None = None
+    loan_subsidy_cost: Decimal | None = None
+    insurance_coverage_amount: Decimal | None = None
+    award_total_obligated: Decimal | None = None
+    award_total_outlayed: Decimal | None = None
+    award_total_non_federal_funding: Decimal | None = None
+    award_total_face_value_of_loan: Decimal | None = None
+    award_total_loan_subsidy_cost: Decimal | None = None
+    covid19_obligated: Decimal | None = None
+    covid19_outlayed: Decimal | None = None
+    iija_obligated: Decimal | None = None
+    iija_outlayed: Decimal | None = None
+    transactions_count: int | None = None
+    listings_count: int | None = None
+    assistance_types_count: int | None = None
+    award_amount_basis: str | None = None
+    award_recipient_basis: str | None = None
+    business_funds_indicator: str | None = None
+    disaster_emergency_fund_codes: str | None = None
+    funding_opportunity_number: str | None = None
+    funding_opportunity_goals_text: str | None = None
+    sai_number: str | None = None
+    former_award_keys: list[str] | None = None
+    treasury_accounts_funding_this_award: str | None = None
+    federal_accounts_funding_this_award: str | None = None
+    object_classes_funding_this_award: str | None = None
+    program_activities_funding_this_award: str | None = None
+    awarding_office: OrganizationOfficePayload | None = None
+    funding_office: OrganizationOfficePayload | None = None
+    recipient: AssistanceRecipient | None = None
+    recipient_address: dict[str, Any] | None = None
+    place_of_performance: dict[str, Any] | None = None
+    period_of_performance: dict[str, Any] | None = None
+    officers: dict[str, Any] | None = None
+    obligations_by_fiscal_year: list[FiscalYearObligation] | None = None
+    listings: list[AssistanceAwardListing] | None = None
+    transactions: list[AssistanceTransaction] | None = None
+
+
 class EbuyAttachment:
     """Schema definition for one entry in an eBuy request's ``attachments`` (not used for instances).
 
@@ -1828,6 +1962,15 @@ class ShapeConfig:
 
     # Default for list_organizations()
     ORGANIZATIONS_MINIMAL: Final = "key,fh_key,name,level,type,short_name"
+
+    # Default for the list_assistance_* and get_assistance_* methods. Mirrors the API's own default, which list and detail share.
+    ASSISTANCE_AWARDS_MINIMAL: Final = (
+        "key,fain,uri,award_date,fiscal_year,assistance_type(code,description),"
+        "record_type,cfda_number,assistance_listing(number,title),title,"
+        "obligated,pragmatic_obligations,face_value_of_loan,loan_subsidy_cost,"
+        "awarding_office(*),funding_office(*),recipient(*),place_of_performance(*),"
+        "period_of_performance(start_date,current_end_date)"
+    )
 
     # Default for list_otas()
     OTAS_MINIMAL: Final = (

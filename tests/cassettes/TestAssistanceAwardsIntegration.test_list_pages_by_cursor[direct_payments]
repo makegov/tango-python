@@ -1,0 +1,209 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"count":56739924,"next":"https://tango.makegov.com/api/assistance/direct_payments/?limit=2&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29&cursor=WyIyMDI2LTEwLTE1IiwgImJhYzIyMzUwLWM0MGQtNTMxOC1iNGQ3LTJlMDI4MmVjNjk4NyJd","previous":null,"cursor":"WyIyMDI2LTEwLTE1IiwgImJhYzIyMzUwLWM0MGQtNTMxOC1iNGQ3LTJlMDI4MmVjNjk4NyJd","previous_cursor":null,"results":[{"assistance_listing":{"number":"10.051","title":"Commodity
+        Loans and Loan Deficiency Payments"},"assistance_type":{"code":"F006","description":"Direct
+        Payment for Specified Use"},"award_date":"2026-10-22","awarding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"cfda_number":"10.051","face_value_of_loan":0.0,"fain":"12CCCEAUCEU5253218","fiscal_year":2027,"funding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"key":"ASST_NON_12CCCEAUCEU5253218_012","loan_subsidy_cost":0.0,"obligated":45412.85,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"HICKORY","code":"NC31065","country":"USA","county_fips":"37035","county_name":"CATAWBA","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"NC","state_fips":"37","state_name":"NORTH CAROLINA","zip_code":"28602","zip_plus_four":"1433"},"pragmatic_obligations":45412.85,"recipient":{"uuid":"b2aca74d-a067-53df-b21e-fed4492021ab","uei":"NBY3ULCLKC27","duns":null,"legal_business_name":"SHUFORD
+        YARNS LLC","legal_business_name_raw":"SHUFORD YARNS LLC","county":"CATAWBA","congressional_district":"NC-10","congressional_district_original":"NC-10","highest_owner":null,"business_types":[{"code":"X","description":"Other"}]},"record_type":"2","title":"ECONOMIC
+        ADJUSTMENT ASSISTANCE TO USERS OF UPLAND COTTON","uri":null},{"assistance_listing":{"number":"10.051","title":"Commodity
+        Loans and Loan Deficiency Payments"},"assistance_type":{"code":"F006","description":"Direct
+        Payment for Specified Use"},"award_date":"2026-10-15","awarding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"cfda_number":"10.051","face_value_of_loan":0.0,"fain":"12CCCEAUCEU5500218","fiscal_year":2027,"funding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"key":"ASST_NON_12CCCEAUCEU5500218_012","loan_subsidy_cost":0.0,"obligated":676.46,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"JEFFERSON","code":"GA42016","country":"USA","county_fips":"13157","county_name":"JACKSON","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"GA","state_fips":"13","state_name":"GEORGIA","zip_code":"30549","zip_plus_four":"5836"},"pragmatic_obligations":676.46,"recipient":{"uuid":"3031e4c1-8a26-566c-a96b-9dd6d4d6de27","uei":"KJB1NJBJ2DX1","duns":null,"legal_business_name":"BUHLER
+        QUALITY YARNS CORP","legal_business_name_raw":"BUHLER QUALITY YARNS CORPORATION","county":"JACKSON","congressional_district":"GA-09","congressional_district_original":"GA-09","highest_owner":{"uei":"ZWQABBDNK4H3","duns":null,"legal_business_name":"SAMIL
+        SPINNING CO.,LTD","legal_business_name_raw":"SAMIL SPINNING CO.,LTD"},"business_types":[{"code":"X","description":"Other"}]},"record_type":"2","title":"ECONOMIC
+        ADJUSTMENT ASSISTANCE TO USERS OF UPLAND COTTON","uri":null}]}'
+    headers:
+      CF-RAY:
+      - a511b279cc7c1906-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=IIGzK9u2AsEzDBWBR10HXD%2FD8PEq0ngtL6IAxSonk84USCZ7j%2B3TIAUBR0m9wJpJPtFbraM8%2BlIcXX%2BMlnLwzYVzqj6P5GxdMA1CXj%2Bb36DLrSIZD4bu5KBOZPZv1D%2F5pqoS"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '4411'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.030s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '970'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999650'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '970'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/direct_payments/?limit=2&cursor=WyIyMDI2LTEwLTE1IiwgImJhYzIyMzUwLWM0MGQtNTMxOC1iNGQ3LTJlMDI4MmVjNjk4NyJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29
+  response:
+    body:
+      string: '{"count":56739924,"next":"https://tango.makegov.com/api/assistance/direct_payments/?limit=2&cursor=WyIyMDI2LTEwLTE1IiwgImFiMzFjMGE1LTJkZDctNWU5MS05YmRmLTUwYzhlZjE0NGJkNSJd&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","previous":"https://tango.makegov.com/api/assistance/direct_payments/?limit=2&cursor=eyJ2IjogWyIyMDI2LTEwLTE1IiwgImIwOTI2ZjhjLTNjNjItNTg2OS1iMDkxLTczODZjNzdjZjc0MSJdLCAiZCI6ICJwcmV2In0%3D&shape=key%2Cfain%2Curi%2Caward_date%2Cfiscal_year%2Cassistance_type%28code%2Cdescription%29%2Crecord_type%2Ccfda_number%2Cassistance_listing%28number%2Ctitle%29%2Ctitle%2Cobligated%2Cpragmatic_obligations%2Cface_value_of_loan%2Cloan_subsidy_cost%2Cawarding_office%28%2A%29%2Cfunding_office%28%2A%29%2Crecipient%28%2A%29%2Cplace_of_performance%28%2A%29%2Cperiod_of_performance%28start_date%2Ccurrent_end_date%29","cursor":"WyIyMDI2LTEwLTE1IiwgImFiMzFjMGE1LTJkZDctNWU5MS05YmRmLTUwYzhlZjE0NGJkNSJd","previous_cursor":"eyJ2IjogWyIyMDI2LTEwLTE1IiwgImIwOTI2ZjhjLTNjNjItNTg2OS1iMDkxLTczODZjNzdjZjc0MSJdLCAiZCI6ICJwcmV2In0=","results":[{"assistance_listing":{"number":"10.051","title":"Commodity
+        Loans and Loan Deficiency Payments"},"assistance_type":{"code":"F006","description":"Direct
+        Payment for Specified Use"},"award_date":"2026-10-15","awarding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"cfda_number":"10.051","face_value_of_loan":0.0,"fain":"12CCCEAUCEU5228218","fiscal_year":2027,"funding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"key":"ASST_NON_12CCCEAUCEU5228218_012","loan_subsidy_cost":0.0,"obligated":1461032.0,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"SALISBURY","code":"NC58860","country":"USA","county_fips":"37159","county_name":"ROWAN","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"NC","state_fips":"37","state_name":"NORTH CAROLINA","zip_code":"28146","zip_plus_four":"2316"},"pragmatic_obligations":1461032.0,"recipient":{"uuid":"49e54a48-950b-590a-b24a-c808ac22b1fe","uei":"KSX9F6SNSKJ1","duns":null,"legal_business_name":"GILDAN
+        YARNS LLC","legal_business_name_raw":"GILDAN YARNS LLC","county":"ROWAN","congressional_district":"NC-06","congressional_district_original":"NC-08","highest_owner":{"uei":"KSX9F6SNSKJ1","duns":null,"legal_business_name":"GILDAN
+        YARNS LLC","legal_business_name_raw":"GILDAN ACTIVEWEAR INC"},"business_types":[{"code":"X","description":"Other"}]},"record_type":"2","title":"ECONOMIC
+        ADJUSTMENT ASSISTANCE TO USERS OF UPLAND COTTON","uri":null},{"assistance_listing":{"number":"10.051","title":"Commodity
+        Loans and Loan Deficiency Payments"},"assistance_type":{"code":"F006","description":"Direct
+        Payment for Specified Use"},"award_date":"2026-10-15","awarding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"cfda_number":"10.051","face_value_of_loan":0.0,"fain":"12CCCEAUCEU5094218","fiscal_year":2027,"funding_office":{"organization_id":"b04122ee-f3a4-59ff-a81f-95d53416a49a","office_code":"12346T","office_name":"Deputy
+        Administrator Farm Programs","agency_code":"12D2","agency_name":"FARM SERVICE
+        AGENCY","department_code":"012","department_name":"AGRICULTURE, DEPARTMENT
+        OF"},"key":"ASST_NON_12CCCEAUCEU5094218_012","loan_subsidy_cost":0.0,"obligated":12115.85,"period_of_performance":{"start_date":null,"current_end_date":null},"place_of_performance":{"city_name":"GREENWOOD","code":"SC30895","country":"USA","county_fips":"45047","county_name":"GREENWOOD","foreign_location":null,"scope":"SINGLE
+        ZIP CODE","state_code":"SC","state_fips":"45","state_name":"SOUTH CAROLINA","zip_code":"29649","zip_plus_four":"9102"},"pragmatic_obligations":12115.85,"recipient":{"uuid":"7f3a1031-8a16-5f87-8a9c-d048fae2af2b","uei":"NDD9TKKJRD15","duns":null,"legal_business_name":"GREENWOOD
+        MILLS INC","legal_business_name_raw":"GREENWOOD MILLS INC","county":"GREENWOOD","congressional_district":"SC-03","congressional_district_original":"SC-03","highest_owner":{"uei":null,"duns":null,"legal_business_name":null,"legal_business_name_raw":"GMI
+        HOLDING, INC."},"business_types":[{"code":"X","description":"Other"}]},"record_type":"2","title":"ECONOMIC
+        ADJUSTMENT ASSISTANCE TO USERS OF UPLAND COTTON","uri":null}]}'
+    headers:
+      CF-RAY:
+      - a511b27a4f490f5b-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:50 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ZUGXGIMrj3Il77MNgZMulqwZnMZlRTrXwaKKC%2FJt0LGsXB2A%2BgQvRBQ5rIQI2%2Fwp0UhFvfTEGhJu3IkeHEckSFd8fSdZ4fCfjIQmgt1ExN7eKRvJk71RHgRjkhLu9grmMeFq"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '5173'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.026s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '969'
+      x-ratelimit-burst-reset:
+      - '30'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999649'
+      x-ratelimit-daily-reset:
+      - '41529'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '969'
+      x-ratelimit-reset:
+      - '30'
+      x-results-counttype:
+      - approximate
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1

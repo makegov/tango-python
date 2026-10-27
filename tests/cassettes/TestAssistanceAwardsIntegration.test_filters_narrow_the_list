@@ -1,0 +1,82 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Host:
+      - tango.makegov.com
+      User-Agent:
+      - python-httpx/0.28.1
+    method: GET
+    uri: https://tango.makegov.com/api/assistance/grants/?limit=3&shape=key%2Ccfda_number%2Cfiscal_year%2Cobligated&cfda_number=93.778&fiscal_year=2026&ordering=-obligated
+  response:
+    body:
+      string: '{"count":185,"next":"https://tango.makegov.com/api/assistance/grants/?limit=3&shape=key%2Ccfda_number%2Cfiscal_year%2Cobligated&cfda_number=93.778&fiscal_year=2026&ordering=-obligated&cursor=WzM2OTE5MzA4NzcwLjAsICIxZGY0NzU2MC1lN2I3LTVmODEtODNjMS02NTBjNzEzNjNhNjYiXQ%3D%3D","previous":null,"cursor":"WzM2OTE5MzA4NzcwLjAsICIxZGY0NzU2MC1lN2I3LTVmODEtODNjMS02NTBjNzEzNjNhNjYiXQ==","previous_cursor":null,"results":[{"cfda_number":"93.778","fiscal_year":2026,"key":"ASST_NON_2605CA5MAP_075","obligated":110435264806.0},{"cfda_number":"93.778","fiscal_year":2026,"key":"ASST_NON_2605NY5MAP_075","obligated":60489792298.0},{"cfda_number":"93.778","fiscal_year":2026,"key":"ASST_NON_2605TX5MAP_075","obligated":36919308770.0}]}'
+    headers:
+      CF-RAY:
+      - a511b2841d0a7d7a-EWR
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 27 Oct 2026 12:27:52 GMT
+      Nel:
+      - '{"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}'
+      Report-To:
+      - '{"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=J6h2vCVldnlLrWzZIP%2F5zZaZ90awtXQcZW1t74%2Fx22xQcZhQ%2BMLA60SoiTelzfD4tvwaCeYL0t76pINbnxYTZYm3DSB9RVPyLdJbRNmFhWpOBmhonmyxKC%2FPj3%2BAWZ62Ehw4"}]}'
+      Server:
+      - cloudflare
+      Transfer-Encoding:
+      - chunked
+      allow:
+      - GET, HEAD, OPTIONS
+      cf-cache-status:
+      - DYNAMIC
+      content-length:
+      - '719'
+      cross-origin-opener-policy:
+      - same-origin
+      referrer-policy:
+      - same-origin
+      strict-transport-security:
+      - max-age=3600
+      vary:
+      - Accept, Cookie
+      x-content-type-options:
+      - nosniff
+      x-execution-time:
+      - 0.032s
+      x-frame-options:
+      - DENY
+      x-ratelimit-burst-limit:
+      - '1000'
+      x-ratelimit-burst-remaining:
+      - '950'
+      x-ratelimit-burst-reset:
+      - '28'
+      x-ratelimit-daily-limit:
+      - '2000000'
+      x-ratelimit-daily-remaining:
+      - '1999630'
+      x-ratelimit-daily-reset:
+      - '41527'
+      x-ratelimit-limit:
+      - '1000'
+      x-ratelimit-remaining:
+      - '950'
+      x-ratelimit-reset:
+      - '28'
+      x-results-counttype:
+      - exact
+      x-tango-api-version:
+      - 5.12.1
+    status:
+      code: 200
+      message: OK
+version: 1
