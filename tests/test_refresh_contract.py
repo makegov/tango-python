@@ -34,11 +34,14 @@ def _upstream() -> dict:
                 "basename": "widget",
                 "docs_file": "widgets.md",
                 "docs_params": ["q"],
+                "swagger_has_key": True,
+                "swagger_params": ["page", "q"],
                 "runtime": {
                     "filter_params": ["q"],
                     "filter_params_detail": {"q": {"filter_class": "SomeFilter", "type": "string"}},
                     "pagination": {"class": "SomePaginator", "max_page_size": 100},
                     "shape": {"name": None},
+                    "viewset": "app.views.WidgetViewSet",
                 },
             }
         },
@@ -54,6 +57,7 @@ def test_project_public_drops_server_internals(refresh):
         "resource_key": "widgets",
         "prefix": "widgets",
         "basename": "widget",
+        "swagger_params": ["page", "q"],
         "runtime": {
             "filter_params": ["q"],
             "filter_params_detail": {"q": {"type": "string"}},

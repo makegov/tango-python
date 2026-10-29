@@ -30,7 +30,7 @@ GH_CONTENTS_PATH = "/repos/makegov/tango/contents/contracts/filter_shape_contrac
 # The upstream contract carries server internals; vendor only what the SDK consumes.
 DROPPED_TOP_LEVEL_KEYS = ("policy", "unmapped_resources")
 DROPPED_META_KEYS = ("generated_from",)
-DROPPED_RESOURCE_KEYS = ("docs_file", "docs_params")
+DROPPED_RESOURCE_KEYS = ("docs_file", "docs_params", "swagger_has_key")
 
 
 def project_public(manifest: dict[str, Any]) -> dict[str, Any]:
@@ -44,6 +44,7 @@ def project_public(manifest: dict[str, Any]) -> dict[str, Any]:
         for key in DROPPED_RESOURCE_KEYS:
             resource.pop(key, None)
         runtime = resource.get("runtime") or {}
+        runtime.pop("viewset", None)
         (runtime.get("pagination") or {}).pop("class", None)
         for detail in (runtime.get("filter_params_detail") or {}).values():
             if isinstance(detail, dict):

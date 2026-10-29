@@ -59,10 +59,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.AgencyViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -794,10 +792,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.AgencyAwardingContractViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "agencies_contracts_funding": {
@@ -1520,10 +1516,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.AgencyFundingContractViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "assistance/direct_payments": {
@@ -2043,10 +2037,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "assistance.views.DirectPaymentAwardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "assistance/grants": {
@@ -2566,10 +2558,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "assistance.views.GrantAwardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "assistance/loans": {
@@ -3089,10 +3079,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "assistance.views.LoanAwardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "assistance/other": {
@@ -3612,10 +3600,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "assistance.views.OtherAssistanceAwardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "assistance_listings": {
@@ -3655,10 +3641,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "shared.views.AssistanceListingViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -4433,10 +4417,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "budget.views.BudgetAccountViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "business_types": {
@@ -4464,10 +4446,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "shared.views.BusinessTypesViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -4600,10 +4580,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "enterprise_a",
-        "viewset": "appeals.views.ContractAppealViewSet"
+        "shape_tier_required": "enterprise_a"
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -5335,10 +5313,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.contracts.ContractViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "award_date",
         "award_date_gte",
@@ -5579,10 +5555,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.contracts.ContractSubawardsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "departments": {
@@ -5620,10 +5594,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.DepartmentViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -5800,10 +5772,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "dibbs.views.DibbsAwardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "dibbs/rfps": {
@@ -5929,10 +5899,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "dibbs.views.DibbsRfpViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "dibbs/rfqs": {
@@ -6085,10 +6053,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "dibbs.views.DibbsRfqViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "ebuy/requests": {
@@ -6310,10 +6276,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "ebuy.views.EbuyRequestViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities": {
@@ -6734,10 +6698,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "entities.views.EntityViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -7468,10 +7430,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "entities.views.EntityContractViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities_idvs": {
@@ -8054,10 +8014,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "entities.views.EntityIDVViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities_lcats": {
@@ -8234,10 +8192,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "entities.views.EntityCalcRateViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities_otas": {
@@ -8563,10 +8519,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "entities.views.EntityOTAViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities_otidvs": {
@@ -8871,10 +8825,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "entities.views.EntityOTIDVViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "entities_subawards": {
@@ -9083,10 +9035,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "entities.views.EntitySubawardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "events": {
@@ -9143,10 +9093,8 @@
         "shape_flat_paths": [],
         "shape_gated_by_level": {},
         "shape_supported": false,
-        "shape_tier_required": null,
-        "viewset": "g2x.views.content.EventsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "exclusions": {
@@ -9363,10 +9311,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "exclusions.views.ExclusionViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -9567,10 +9513,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "federal_register.views.FederalRegisterDocumentViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -9769,10 +9713,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "forecasts.views.ForecastViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -10127,10 +10069,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "grants.views.GrantOpportunityViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -10235,10 +10175,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.gsa_elibrary.GsaELibraryContractViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "contract_number",
         "flat",
@@ -10837,10 +10775,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.idvs.IDVViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "award_date",
         "award_date_gte",
@@ -11594,10 +11530,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.idvs.IDVAwardsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "idvs_idvs": {
@@ -12180,10 +12114,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.idvs.IDVChildIDVsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "idvs_lcats": {
@@ -12360,10 +12292,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "awards.views.calc.IDVCalcRateViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "itdashboard": {
@@ -12614,10 +12544,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "business",
-        "viewset": "itdashboard.views.ITDashboardInvestmentViewSet"
+        "shape_tier_required": "business"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "mas_sins": {
@@ -12677,10 +12605,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "shared.views.MasSinsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -12772,10 +12698,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "shared.views.NaicsCodeViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "employee_limit",
         "employee_limit_gte",
@@ -12838,10 +12762,8 @@
         "shape_flat_paths": [],
         "shape_gated_by_level": {},
         "shape_supported": false,
-        "shape_tier_required": null,
-        "viewset": "g2x.views.content.NewsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "notices": {
@@ -13140,10 +13062,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "opportunities.views.NoticeViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "agency",
         "department",
@@ -13242,10 +13162,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.OfficeViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -13652,10 +13570,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "opportunities.views.OpportunityViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "active",
         "agency",
@@ -13927,10 +13843,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "agencies.views.OrganizationViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "cgac",
         "flat",
@@ -14270,10 +14184,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.otas.OTAViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "cursor",
         "flat",
@@ -14586,10 +14498,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.otidvs.OTIDVViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "cursor",
         "flat",
@@ -14923,10 +14833,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.otidvs.OTIDVAwardsViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "protests": {
@@ -15210,10 +15118,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "enterprise_a",
-        "viewset": "protests.views.BidProtestViewSet"
+        "shape_tier_required": "enterprise_a"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "psc": {
@@ -15298,10 +15204,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "shared.views.ProductServiceCodeViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -15493,10 +15397,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "sbir.views.SbirDsipSolicitationViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "sbir/topics": {
@@ -15715,10 +15617,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "sbir.views.SbirTopicViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "sled/forecasts": {
@@ -15897,10 +15797,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "sled.views.SledForecastViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "sled/opportunities": {
@@ -16212,10 +16110,8 @@
           ]
         },
         "shape_supported": true,
-        "shape_tier_required": "pro",
-        "viewset": "sled.views.SledOpportunityViewSet"
+        "shape_tier_required": "pro"
       },
-      "swagger_has_key": false,
       "swagger_params": []
     },
     "subawards": {
@@ -16424,10 +16320,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.subawards.SubawardViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "flat",
         "flat_lists",
@@ -18008,10 +17902,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.vehicles.VehicleViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": true,
       "swagger_params": [
         "agency",
         "award_date_after",
@@ -18765,10 +18657,8 @@
         ],
         "shape_gated_by_level": {},
         "shape_supported": true,
-        "shape_tier_required": null,
-        "viewset": "awards.views.vehicles.VehicleOrdersViewSet"
+        "shape_tier_required": null
       },
-      "swagger_has_key": false,
       "swagger_params": []
     }
   }
