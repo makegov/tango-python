@@ -90,6 +90,22 @@ class TestDibbs:
         assert params["total_contract_price_max"] == 5000
         assert params["awardee_cage"] == "1ABC2"
 
+    @pytest.mark.parametrize(
+        ("method", "path"),
+        [
+            ("list_dibbs_rfqs", "/api/dibbs/rfqs/"),
+            ("list_dibbs_rfps", "/api/dibbs/rfps/"),
+            ("list_dibbs_awards", "/api/dibbs/awards/"),
+        ],
+    )
+    @patch("tango.client.httpx.Client.request")
+    def test_list_dibbs_fsc_filter(self, mock_request, method, path):
+        _mock(mock_request)
+        getattr(TangoClient(api_key="k"), method)(fsc="6515|6530")
+        params = _call_params(mock_request)
+        assert path in _call_url(mock_request)
+        assert params["fsc"] == "6515|6530"
+
     @patch("tango.client.httpx.Client.request")
     def test_dibbs_award_results_are_parsed(self, mock_request):
         _mock(
