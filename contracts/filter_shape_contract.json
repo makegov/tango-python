@@ -2,17 +2,11 @@
   "meta": {
     "api_version": "5.13.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
-    "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
-  },
-  "policy": {
-    "critical_runtime_swagger_resources": []
   },
   "resources": {
     "agencies": {
       "basename": "agency",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "agencies",
       "resource_key": "agencies",
       "runtime": {
@@ -21,14 +15,12 @@
         ],
         "filter_params_detail": {
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -84,8 +76,6 @@
     },
     "agencies_contracts_awarding": {
       "basename": "agencies_contracts_awarding",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "agencies/<str:code>/contracts/awarding/",
       "resource_key": "agencies_contracts_awarding",
       "runtime": {
@@ -121,15 +111,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -144,58 +131,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -209,55 +183,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -268,7 +230,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -841,8 +802,6 @@
     },
     "agencies_contracts_funding": {
       "basename": "agencies_contracts_funding",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "agencies/<str:code>/contracts/funding/",
       "resource_key": "agencies_contracts_funding",
       "runtime": {
@@ -878,15 +837,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -901,58 +857,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -966,55 +909,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -1025,7 +956,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -1598,8 +1528,6 @@
     },
     "assistance/direct_payments": {
       "basename": "assistance-direct_payments",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "assistance/direct_payments",
       "resource_key": "assistance/direct_payments",
       "runtime": {
@@ -1637,72 +1565,55 @@
         ],
         "filter_params_detail": {
           "assistance_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "business_funds_indicator": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "cfda_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "disaster_emergency_fund_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fain": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "funding_opportunity_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -1716,59 +1627,46 @@
               "pragmatic_obligations"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "pop_country": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_zip": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "record_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           },
           "uri": {
-            "filter_class": "IdListFilter",
             "type": "string"
           }
         },
@@ -1779,7 +1677,6 @@
           "pragmatic_obligations"
         ],
         "pagination": {
-          "class": "AssistanceKeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -2154,8 +2051,6 @@
     },
     "assistance/grants": {
       "basename": "assistance-grants",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "assistance/grants",
       "resource_key": "assistance/grants",
       "runtime": {
@@ -2193,72 +2088,55 @@
         ],
         "filter_params_detail": {
           "assistance_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "business_funds_indicator": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "cfda_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "disaster_emergency_fund_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fain": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "funding_opportunity_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -2272,59 +2150,46 @@
               "pragmatic_obligations"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "pop_country": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_zip": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "record_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           },
           "uri": {
-            "filter_class": "IdListFilter",
             "type": "string"
           }
         },
@@ -2335,7 +2200,6 @@
           "pragmatic_obligations"
         ],
         "pagination": {
-          "class": "AssistanceKeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -2710,8 +2574,6 @@
     },
     "assistance/loans": {
       "basename": "assistance-loans",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "assistance/loans",
       "resource_key": "assistance/loans",
       "runtime": {
@@ -2749,72 +2611,55 @@
         ],
         "filter_params_detail": {
           "assistance_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "business_funds_indicator": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "cfda_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "disaster_emergency_fund_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fain": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "funding_opportunity_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -2828,59 +2673,46 @@
               "pragmatic_obligations"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "pop_country": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_zip": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "record_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           },
           "uri": {
-            "filter_class": "IdListFilter",
             "type": "string"
           }
         },
@@ -2891,7 +2723,6 @@
           "pragmatic_obligations"
         ],
         "pagination": {
-          "class": "AssistanceKeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -3266,8 +3097,6 @@
     },
     "assistance/other": {
       "basename": "assistance-other",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "assistance/other",
       "resource_key": "assistance/other",
       "runtime": {
@@ -3305,72 +3134,55 @@
         ],
         "filter_params_detail": {
           "assistance_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "business_funds_indicator": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "cfda_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "disaster_emergency_fund_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fain": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "funding_opportunity_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -3384,59 +3196,46 @@
               "pragmatic_obligations"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "pop_country": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "pop_zip": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "record_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           },
           "uri": {
-            "filter_class": "IdListFilter",
             "type": "string"
           }
         },
@@ -3447,7 +3246,6 @@
           "pragmatic_obligations"
         ],
         "pagination": {
-          "class": "AssistanceKeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -3822,8 +3620,6 @@
     },
     "assistance_listings": {
       "basename": "assistancelisting",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "assistance_listings",
       "resource_key": "assistance_listings",
       "runtime": {
@@ -3832,7 +3628,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StaticModelCachedPagination",
           "max_page_size": 10000
         },
         "shape": {
@@ -3876,8 +3671,6 @@
     },
     "budget/accounts": {
       "basename": "budget-account",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "budget/accounts",
       "resource_key": "budget/accounts",
       "runtime": {
@@ -3988,480 +3781,377 @@
         ],
         "filter_params_detail": {
           "account_category": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "account_category__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "account_title__icontains": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "actual_vs_requested_contract": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "actual_vs_requested_contract__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "actual_vs_requested_contract__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "actual_vs_requested_contract_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "actual_vs_requested_contract_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "actual_vs_requested_contract_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "agency_code": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "agency_code__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "apportioned": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "apportioned__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "apportioned__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "apportioned_to_enacted_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "apportioned_to_enacted_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "apportioned_to_enacted_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "apportioned_to_enacted_pct_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "apportioned_to_enacted_pct_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "apportioned_to_enacted_pct_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "assistance_obligated": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "assistance_obligated__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "assistance_obligated__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "assistance_outlayed": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "assistance_outlayed__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "assistance_outlayed__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "ba_growth_next_year_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "ba_growth_next_year_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "ba_growth_next_year_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "bea_category": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "bea_category__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "bureau_name": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "bureau_name__icontains": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "bureau_name__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "contract_obligated": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "contract_obligated__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "contract_obligated__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "contract_outlayed": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "contract_outlayed__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "contract_outlayed__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "contract_share_of_obligated_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "contract_share_of_obligated_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "contract_share_of_obligated_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "data_through_period": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "data_through_period__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "data_through_period__isnull": {
-            "filter_class": "BooleanFilter",
             "lookup": "isnull",
             "type": "boolean"
           },
           "data_through_period__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "enacted_ba": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "enacted_ba_5yr_cagr": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "enacted_ba_5yr_cagr__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "enacted_ba_5yr_cagr__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "enacted_ba__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "enacted_ba__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "enacted_ba_yoy_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "enacted_ba_yoy_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "enacted_ba_yoy_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "federal_account_symbol": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "federal_account_symbol__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "fiscal_year__in": {
-            "filter_class": "NumberInFilter",
             "lookup": "in",
             "type": "number"
           },
           "fiscal_year__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_to_apportioned_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_to_apportioned_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_to_apportioned_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_to_apportioned_pct_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_to_apportioned_pct_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_to_apportioned_pct_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_to_enacted_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_to_enacted_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_to_enacted_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_to_enacted_pct_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_to_enacted_pct_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_to_enacted_pct_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_total": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_total__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_total__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "obligated_yoy_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "obligated_yoy_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_yoy_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "on_off_budget": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "outlayed_to_obligated_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "outlayed_to_obligated_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "outlayed_to_obligated_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "outlayed_to_obligated_pct_capped": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "outlayed_to_obligated_pct_capped__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "outlayed_to_obligated_pct_capped__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "outlayed_total": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "outlayed_total__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "outlayed_total__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "requested_ba": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "requested_ba__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "requested_ba__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "search": {
-            "filter_class": "DRFSearchFilter",
             "type": "string"
           },
           "subfunction_code": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "subfunction_code__in": {
-            "filter_class": "CharInFilter",
             "lookup": "in",
             "type": "string"
           },
           "unobligated_balance": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "unobligated_balance__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "unobligated_balance__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "unobligated_pct": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "unobligated_pct__gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "unobligated_pct__lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           }
@@ -4485,7 +4175,6 @@
           "outlayed_total"
         ],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -4752,8 +4441,6 @@
     },
     "business_types": {
       "basename": "businesstype",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "business_types",
       "resource_key": "business_types",
       "runtime": {
@@ -4762,7 +4449,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StaticModelCachedPagination",
           "max_page_size": 10000
         },
         "shape": {
@@ -4794,8 +4480,6 @@
     },
     "contract_appeals": {
       "basename": "contractappeal",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "contract_appeals",
       "resource_key": "contract_appeals",
       "runtime": {
@@ -4813,45 +4497,35 @@
         ],
         "filter_params_detail": {
           "appellant": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "board": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "decision_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "decision_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "decision_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "docket": {
-            "filter_class": "DocketFilter",
             "type": "string"
           },
           "document_id": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "judge": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "listed": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "search": {
-            "filter_class": "ContractAppealSearchFilter",
             "type": "string"
           }
         },
@@ -4863,7 +4537,6 @@
           "rank"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -4944,8 +4617,6 @@
     },
     "contracts": {
       "basename": "contract",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "contracts",
       "resource_key": "contracts",
       "runtime": {
@@ -4981,15 +4652,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -5004,58 +4672,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -5069,55 +4724,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -5128,7 +4771,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -5733,8 +5375,6 @@
     },
     "contracts_subawards": {
       "basename": "contracts_subawards",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "contracts/<str:key>/subawards/",
       "resource_key": "contracts_subawards",
       "runtime": {
@@ -5751,41 +5391,32 @@
         ],
         "filter_params_detail": {
           "award_key": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "awarding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "prime_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "sub_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
@@ -5794,7 +5425,6 @@
         ],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -5957,8 +5587,6 @@
     },
     "departments": {
       "basename": "department",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "departments",
       "resource_key": "departments",
       "runtime": {
@@ -5967,7 +5595,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -6009,8 +5636,6 @@
     },
     "dibbs/awards": {
       "basename": "dibbs-award",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "dibbs/awards",
       "resource_key": "dibbs/awards",
       "runtime": {
@@ -6035,76 +5660,59 @@
         ],
         "filter_params_detail": {
           "award_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "award_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "award_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "awardee_cage": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "delivery_order_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "entity": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fsc": {
-            "filter_class": "FscFilter",
             "type": "string"
           },
           "nsn": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "organization": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "part_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "posted_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "posted_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "purchase_request": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "solicitation": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "total_contract_price_max": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "total_contract_price_min": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           }
@@ -6118,7 +5726,6 @@
           "total_contract_price"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -6201,8 +5808,6 @@
     },
     "dibbs/rfps": {
       "basename": "dibbs-rfp",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "dibbs/rfps",
       "resource_key": "dibbs/rfps",
       "runtime": {
@@ -6222,55 +5827,43 @@
         ],
         "filter_params_detail": {
           "buyer_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "closes_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "closes_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fsc": {
-            "filter_class": "FscFilter",
             "type": "string"
           },
           "issued_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "issued_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "nsn": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "open": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "organization": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "part_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "solicitation": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
@@ -6282,7 +5875,6 @@
           "rank"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -6345,8 +5937,6 @@
     },
     "dibbs/rfqs": {
       "basename": "dibbs-rfq",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "dibbs/rfqs",
       "resource_key": "dibbs/rfqs",
       "runtime": {
@@ -6370,73 +5960,57 @@
         ],
         "filter_params_detail": {
           "fsc": {
-            "filter_class": "FscFilter",
             "type": "string"
           },
           "issue_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "issue_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "nsn": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "open": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "organization": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "part_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "purchase_request": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "quantity_max": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "quantity_min": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "return_by_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "return_by_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "solicitation": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "status_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
@@ -6449,7 +6023,6 @@
           "return_by_date"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -6520,8 +6093,6 @@
     },
     "ebuy/requests": {
       "basename": "ebuy-request",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "ebuy/requests",
       "resource_key": "ebuy/requests",
       "runtime": {
@@ -6543,63 +6114,49 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "buyer_agency": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "close_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "close_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "date__lte",
             "type": "date"
           },
           "contract_number": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "issue_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "issue_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "date__lte",
             "type": "date"
           },
           "reference_number": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "request_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "rfq_id": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "schedule": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "EbuyRequestSearchFilter",
             "type": "string"
           },
           "sin": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "status": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
@@ -6611,7 +6168,6 @@
           "modified"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -6762,8 +6318,6 @@
     },
     "entities": {
       "basename": "entity",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities",
       "resource_key": "entities",
       "runtime": {
@@ -6784,66 +6338,52 @@
         ],
         "filter_params_detail": {
           "cage": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "cage_code": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "naics": {
-            "filter_class": "EntityNAICSFilter",
             "type": "string"
           },
           "name": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "purpose_of_registration_code": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CustomEntityFilter",
             "type": "string"
           },
           "socioeconomic": {
-            "filter_class": "CustomBusinessTypeFilter",
             "type": "string"
           },
           "state": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "total_awards_obligated_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "total_awards_obligated_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "uei": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "zip_code": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -7210,8 +6750,6 @@
     },
     "entities_contracts": {
       "basename": "entities_contracts",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/contracts/",
       "resource_key": "entities_contracts",
       "runtime": {
@@ -7247,15 +6785,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -7270,58 +6805,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -7335,55 +6857,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -7394,7 +6904,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -7967,8 +7476,6 @@
     },
     "entities_idvs": {
       "basename": "entities_idvs",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/idvs/",
       "resource_key": "entities_idvs",
       "runtime": {
@@ -8002,49 +7509,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "idv_type": {
@@ -8061,25 +7557,20 @@
               "e"
             ],
             "choices_count": 10,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "last_date_to_order_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "last_date_to_order_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "ordering": {
@@ -8092,45 +7583,35 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -8141,7 +7622,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -8582,8 +8062,6 @@
     },
     "entities_lcats": {
       "basename": "entities_lcats",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/lcats/",
       "resource_key": "entities_lcats",
       "runtime": {
@@ -8607,80 +8085,64 @@
         ],
         "filter_params_detail": {
           "business_size": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "category": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "education_level": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "idv_piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "labor_category": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "min_years_experience_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "min_years_experience_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "piid": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "price_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "price_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "security_clearance": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "sin": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "vendor_name": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "worksite": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           }
@@ -8695,7 +8157,6 @@
           "vendor_name"
         ],
         "pagination": {
-          "class": "ExactCountPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -8781,8 +8242,6 @@
     },
     "entities_otas": {
       "basename": "entities_otas",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/otas/",
       "resource_key": "entities_otas",
       "runtime": {
@@ -8811,49 +8270,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "ordering": {
@@ -8866,47 +8314,37 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -8917,7 +8355,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -9134,8 +8571,6 @@
     },
     "entities_otidvs": {
       "basename": "entities_otidvs",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/otidvs/",
       "resource_key": "entities_otidvs",
       "runtime": {
@@ -9164,49 +8599,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "ordering": {
@@ -9219,47 +8643,37 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -9270,7 +8684,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -9466,8 +8879,6 @@
     },
     "entities_subawards": {
       "basename": "entities_subawards",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "entities/<str:uei>/subawards/",
       "resource_key": "entities_subawards",
       "runtime": {
@@ -9484,41 +8895,32 @@
         ],
         "filter_params_detail": {
           "award_key": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "awarding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "prime_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "sub_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
@@ -9527,7 +8929,6 @@
         ],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -9690,8 +9091,6 @@
     },
     "events": {
       "basename": "g2x-events",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "events",
       "resource_key": "events",
       "runtime": {
@@ -9707,38 +9106,30 @@
         ],
         "filter_params_detail": {
           "is_free": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "is_virtual": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "organizer": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "source": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "start_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "start_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "state": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           }
@@ -9746,7 +9137,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": null,
@@ -9761,8 +9151,6 @@
     },
     "exclusions": {
       "basename": "exclusion",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "exclusions",
       "resource_key": "exclusions",
       "runtime": {
@@ -9789,85 +9177,66 @@
         ],
         "filter_params_detail": {
           "activate_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "activate_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "active": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "cage_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "classification_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "delisted": {
-            "filter_class": "BooleanFilter",
             "lookup": "isnull",
             "type": "boolean"
           },
           "entity_uei": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "excluding_agency_code": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "excluding_agency_name": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "exclusion_program": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "exclusion_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "npi": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "termination_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "termination_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "uei": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "update_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "update_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           }
@@ -9882,7 +9251,6 @@
           "update_date"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -10012,8 +9380,6 @@
     },
     "federal_register": {
       "basename": "federalregisterdocument",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "federal_register",
       "resource_key": "federal_register",
       "runtime": {
@@ -10038,77 +9404,60 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "FederalRegisterAgencyFilter",
             "type": "string"
           },
           "cfr_part": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "cfr_title": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "comments_close_on_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "comments_close_on_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "comments_open": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "document_number": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "effective_on_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "effective_on_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "executive_order_number": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "fr_agency": {
-            "filter_class": "JsonbContainsFilter",
             "type": "string"
           },
           "publication_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "publication_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "rin": {
-            "filter_class": "JsonbContainsFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "FederalRegisterSearchFilter",
             "type": "string"
           },
           "significant": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "type": {
-            "filter_class": "DocumentTypeFilter",
             "type": "string"
           }
         },
@@ -10121,7 +9470,6 @@
           "rank"
         ],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -10236,8 +9584,6 @@
     },
     "forecasts": {
       "basename": "forecast",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "forecasts",
       "resource_key": "forecasts",
       "runtime": {
@@ -10259,65 +9605,51 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "award_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "award_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "id": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "modified_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "modified_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics_code": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "naics_starts_with": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "source_system": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "status": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
@@ -10328,7 +9660,6 @@
           "title"
         ],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -10454,8 +9785,6 @@
     },
     "grants": {
       "basename": "grantopportunity",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "grants",
       "resource_key": "grants",
       "runtime": {
@@ -10476,7 +9805,6 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "applicant_types": {
@@ -10501,12 +9829,10 @@
               "DESCRIPTION"
             ],
             "choices_count": 18,
-            "filter_class": "CaseInsensitiveChoiceFilter",
             "lookup": "icontains",
             "type": "choice"
           },
           "cfda_number": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
@@ -10546,7 +9872,6 @@
               "TR"
             ],
             "choices_count": 32,
-            "filter_class": "CaseInsensitiveChoiceFilter",
             "lookup": "icontains",
             "type": "choice"
           },
@@ -10564,40 +9889,32 @@
               "V"
             ],
             "choices_count": 10,
-            "filter_class": "CaseInsensitiveChoiceFilter",
             "lookup": "icontains",
             "type": "choice"
           },
           "grant_id": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "opportunity_number": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "posted_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "posted_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "response_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "response_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "status": {
@@ -10606,7 +9923,6 @@
               "P"
             ],
             "choices_count": 2,
-            "filter_class": "CaseInsensitiveChoiceFilter",
             "type": "choice"
           }
         },
@@ -10619,7 +9935,6 @@
           "rank"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -10828,8 +10143,6 @@
     },
     "gsa_elibrary_contracts": {
       "basename": "gsa-elibrary-contract",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "gsa_elibrary_contracts",
       "resource_key": "gsa_elibrary_contracts",
       "runtime": {
@@ -10844,33 +10157,26 @@
         ],
         "filter_params_detail": {
           "contract_number": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "piid": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "schedule": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "sin": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
@@ -10881,7 +10187,6 @@
           "schedule"
         ],
         "pagination": {
-          "class": "ExactCountPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -10954,8 +10259,6 @@
     },
     "idvs": {
       "basename": "idv",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "idvs",
       "resource_key": "idvs",
       "runtime": {
@@ -10989,49 +10292,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "idv_type": {
@@ -11048,25 +10340,20 @@
               "e"
             ],
             "choices_count": 10,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "last_date_to_order_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "last_date_to_order_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "ordering": {
@@ -11079,45 +10366,35 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -11128,7 +10405,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -11600,8 +10876,6 @@
     },
     "idvs_awards": {
       "basename": "idvs_awards",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "idvs/<str:key>/awards/",
       "resource_key": "idvs_awards",
       "runtime": {
@@ -11637,15 +10911,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -11660,58 +10931,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -11725,55 +10983,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -11784,7 +11030,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -12357,8 +11602,6 @@
     },
     "idvs_idvs": {
       "basename": "idvs_idvs",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "idvs/<str:key>/idvs/",
       "resource_key": "idvs_idvs",
       "runtime": {
@@ -12392,49 +11635,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "idv_type": {
@@ -12451,25 +11683,20 @@
               "e"
             ],
             "choices_count": 10,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "last_date_to_order_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "last_date_to_order_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "ordering": {
@@ -12482,45 +11709,35 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -12531,7 +11748,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -12972,8 +12188,6 @@
     },
     "idvs_lcats": {
       "basename": "idvs_lcats",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "idvs/<str:key>/lcats/",
       "resource_key": "idvs_lcats",
       "runtime": {
@@ -12997,80 +12211,64 @@
         ],
         "filter_params_detail": {
           "business_size": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "category": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "education_level": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "idv_piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "labor_category": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "min_years_experience_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "min_years_experience_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "piid": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "price_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "price_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "security_clearance": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "sin": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "vendor_name": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "worksite": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           }
@@ -13085,7 +12283,6 @@
           "vendor_name"
         ],
         "pagination": {
-          "class": "ExactCountPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -13171,8 +12368,6 @@
     },
     "itdashboard": {
       "basename": "itdashboardinvestment",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "itdashboard",
       "resource_key": "itdashboard",
       "runtime": {
@@ -13191,49 +12386,38 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "agency_code": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "agency_name": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "cio_rating": {
-            "filter_class": "CIORatingFilter",
             "type": "number"
           },
           "cio_rating_max": {
-            "filter_class": "CIORatingMaxFilter",
             "type": "number"
           },
           "performance_risk": {
-            "filter_class": "PerformanceRiskFilter",
             "type": "boolean"
           },
           "previous_uii": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "type_of_investment": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "updated_time_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "updated_time_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           }
@@ -13241,7 +12425,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -13439,8 +12622,6 @@
     },
     "mas_sins": {
       "basename": "massin",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "mas_sins",
       "resource_key": "mas_sins",
       "runtime": {
@@ -13449,14 +12630,12 @@
         ],
         "filter_params_detail": {
           "search": {
-            "filter_class": "ViewHandledParam",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StaticModelCachedPagination",
           "max_page_size": 10000
         },
         "shape": {
@@ -13515,8 +12694,6 @@
     },
     "naics": {
       "basename": "naicscode",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "naics",
       "resource_key": "naics",
       "runtime": {
@@ -13531,42 +12708,34 @@
         ],
         "filter_params_detail": {
           "employee_limit": {
-            "filter_class": "SizeLimitFilter",
             "type": "string"
           },
           "employee_limit_gte": {
-            "filter_class": "SizeLimitFilter",
             "lookup": "gte",
             "type": "string"
           },
           "employee_limit_lte": {
-            "filter_class": "SizeLimitFilter",
             "lookup": "lte",
             "type": "string"
           },
           "revenue_limit": {
-            "filter_class": "SizeLimitFilter",
             "type": "string"
           },
           "revenue_limit_gte": {
-            "filter_class": "SizeLimitFilter",
             "lookup": "gte",
             "type": "string"
           },
           "revenue_limit_lte": {
-            "filter_class": "SizeLimitFilter",
             "lookup": "lte",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StaticModelCachedPagination",
           "max_page_size": 10000
         },
         "shape": {
@@ -13626,8 +12795,6 @@
     },
     "news": {
       "basename": "g2x-news",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "news",
       "resource_key": "news",
       "runtime": {
@@ -13641,29 +12808,23 @@
         ],
         "filter_params_detail": {
           "published_after": {
-            "filter_class": "DateTimeFilter",
             "lookup": "gte",
             "type": "datetime"
           },
           "published_before": {
-            "filter_class": "DateTimeFilter",
             "lookup": "lte",
             "type": "datetime"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "source": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "tag": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "vertical": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           }
@@ -13671,7 +12832,6 @@
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": null,
@@ -13686,8 +12846,6 @@
     },
     "notices": {
       "basename": "notice",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "notices",
       "resource_key": "notices",
       "runtime": {
@@ -13707,62 +12865,49 @@
         ],
         "filter_params_detail": {
           "active": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "notice_type": {
-            "filter_class": "NoticeTypeFilter",
             "type": "string"
           },
           "posted_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "posted_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "response_deadline_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "response_deadline_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "search": {
-            "filter_class": "NoticeSearchFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -14023,8 +13168,6 @@
     },
     "offices": {
       "basename": "office",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "offices",
       "resource_key": "offices",
       "runtime": {
@@ -14033,14 +13176,12 @@
         ],
         "filter_params_detail": {
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -14117,8 +13258,6 @@
     },
     "opportunities": {
       "basename": "opportunity",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "opportunities",
       "resource_key": "opportunities",
       "runtime": {
@@ -14144,81 +13283,63 @@
         ],
         "filter_params_detail": {
           "active": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "awarded": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "awardee_uei": {
-            "filter_class": "AwardeeUeiFilter",
             "type": "string"
           },
           "first_notice_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "first_notice_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "last_notice_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "last_notice_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "notice_type": {
-            "filter_class": "NoticeTypeFilter",
             "type": "string"
           },
           "opportunity_id": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "place_of_performance": {
-            "filter_class": "OpportunityPlaceOfPerformanceFilter",
             "type": "string"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "response_deadline_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "response_deadline_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "search": {
-            "filter_class": "OpportunitySearchFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           }
         },
@@ -14231,7 +13352,6 @@
           "response_deadline"
         ],
         "pagination": {
-          "class": "OpportunityPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -14566,8 +13686,6 @@
     },
     "organizations": {
       "basename": "organization",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "organizations",
       "resource_key": "organizations",
       "runtime": {
@@ -14581,24 +13699,19 @@
         ],
         "filter_params_detail": {
           "cgac": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "include_inactive": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "level": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "parent": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "type": {
@@ -14610,14 +13723,12 @@
               "SUB COMMAND"
             ],
             "choices_count": 5,
-            "filter_class": "LenientMultipleChoiceFilter",
             "type": "choice"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -14838,8 +13949,6 @@
     },
     "otas": {
       "basename": "ota",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "otas",
       "resource_key": "otas",
       "runtime": {
@@ -14868,49 +13977,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "ordering": {
@@ -14923,47 +14021,37 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -14974,7 +14062,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -15199,8 +14286,6 @@
     },
     "otidvs": {
       "basename": "otidv",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "otidvs",
       "resource_key": "otidvs",
       "runtime": {
@@ -15229,49 +14314,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "ordering": {
@@ -15284,47 +14358,37 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -15335,7 +14399,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -15539,8 +14602,6 @@
     },
     "otidvs_awards": {
       "basename": "otidvs_awards",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "otidvs/<str:key>/awards/",
       "resource_key": "otidvs_awards",
       "runtime": {
@@ -15569,49 +14630,38 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "ordering": {
@@ -15624,47 +14674,37 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -15675,7 +14715,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "KeysetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -15892,8 +14931,6 @@
     },
     "protests": {
       "basename": "bidprotest",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "protests",
       "resource_key": "protests",
       "runtime": {
@@ -15914,67 +14951,53 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "case_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "case_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "decision_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "decision_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "filed_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "filed_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics_code": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "outcome": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "protester": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "source_system": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "BidProtestPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -16195,8 +15218,6 @@
     },
     "psc": {
       "basename": "productservicecode",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "psc",
       "resource_key": "psc",
       "runtime": {
@@ -16205,14 +15226,12 @@
         ],
         "filter_params_detail": {
           "has_awards": {
-            "filter_class": "ViewHandledParam",
             "type": "boolean"
           }
         },
         "ordering_aliases": [],
         "ordering_fields": [],
         "pagination": {
-          "class": "StaticModelCachedPagination",
           "max_page_size": 10000
         },
         "shape": {
@@ -16295,8 +15314,6 @@
     },
     "sbir/solicitations": {
       "basename": "sbir-solicitation",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "sbir/solicitations",
       "resource_key": "sbir/solicitations",
       "runtime": {
@@ -16321,59 +15338,47 @@
               "open"
             ],
             "choices_count": 2,
-            "filter_class": "ChoiceFilter",
             "type": "choice"
           },
           "cycle_name": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "end_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "end_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "out_of_cycle": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "program": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "solicitation_status": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "start_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "start_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           }
         },
@@ -16386,7 +15391,6 @@
           "year"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -16497,8 +15501,6 @@
     },
     "sbir/topics": {
       "basename": "sbir-topic",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "sbir/topics",
       "resource_key": "sbir/topics",
       "runtime": {
@@ -16526,68 +15528,54 @@
               "unknown"
             ],
             "choices_count": 3,
-            "filter_class": "ChoiceFilter",
             "type": "choice"
           },
           "agency": {
-            "filter_class": "OrganizationScopeAgencyFilter",
             "type": "string"
           },
           "close_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "close_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "cycle_name": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "doc_source": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "open_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "open_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "release_date_after": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "gte",
             "type": "date"
           },
           "release_date_before": {
-            "filter_class": "DateFromToRangeFilter",
             "lookup": "lte",
             "type": "date"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "topic_number": {
-            "filter_class": "CharFilter",
             "lookup": "icontains",
             "type": "string"
           },
           "year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           }
         },
@@ -16601,7 +15589,6 @@
           "year"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -16736,8 +15723,6 @@
     },
     "sled/forecasts": {
       "basename": "sled-forecast",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "sled/forecasts",
       "resource_key": "sled/forecasts",
       "runtime": {
@@ -16758,61 +15743,48 @@
         ],
         "filter_params_detail": {
           "advertisement_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "advertisement_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "agency": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "contract_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "first_seen_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "first_seen_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "incumbent_name": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "modified_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "modified_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "procurement_category": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "procurement_method": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           }
         },
@@ -16825,7 +15797,6 @@
           "rank"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -16934,8 +15905,6 @@
     },
     "sled/opportunities": {
       "basename": "sled-opportunity",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "sled/opportunities",
       "resource_key": "sled/opportunities",
       "runtime": {
@@ -16970,120 +15939,93 @@
         ],
         "filter_params_detail": {
           "active": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "agency": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "category": {
-            "filter_class": "CategorySchemeFilter",
             "type": "string"
           },
           "category_code": {
-            "filter_class": "CategoryCodeFilter",
             "type": "string"
           },
           "change_seen_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "external_id": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "first_seen_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "first_seen_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "has_documents": {
-            "filter_class": "BooleanFilter",
             "type": "boolean"
           },
           "jurisdiction": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "modified_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "modified_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "naics": {
-            "filter_class": "CategorySchemeFilter",
             "type": "string"
           },
           "native_id": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "nigp": {
-            "filter_class": "CategorySchemeFilter",
             "type": "string"
           },
           "platform": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "posted_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "posted_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "response_deadline_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "response_deadline_before": {
-            "filter_class": "_InclusiveBeforeDateFilter",
             "lookup": "lt",
             "type": "date"
           },
           "revision_kind": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "_SledOpportunitySearchFilter",
             "type": "string"
           },
           "solicitation_number": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "solicitation_type": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "state": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "status": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "unspsc": {
-            "filter_class": "CategorySchemeFilter",
             "type": "string"
           }
         },
@@ -17098,7 +16040,6 @@
           "response_deadline"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -17279,8 +16220,6 @@
     },
     "subawards": {
       "basename": "subaward",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "subawards",
       "resource_key": "subawards",
       "runtime": {
@@ -17297,41 +16236,32 @@
         ],
         "filter_params_detail": {
           "award_key": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "awarding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "SubawardAgencyFilter",
             "type": "string"
           },
           "prime_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "sub_uei": {
-            "filter_class": "CharFilter",
             "type": "string"
           }
         },
@@ -17340,7 +16270,6 @@
         ],
         "ordering_fields": [],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -17512,8 +16441,6 @@
     },
     "vehicles": {
       "basename": "vehicle",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "vehicles",
       "resource_key": "vehicles",
       "runtime": {
@@ -17543,103 +16470,81 @@
         ],
         "filter_params_detail": {
           "agency": {
-            "filter_class": "VehiclePerformantAgencyFilter",
             "type": "string"
           },
           "award_date_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "award_date_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "contract_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "idv_count_max": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "idv_count_min": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "last_date_to_order_after": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "last_date_to_order_before": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "naics_code": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "order_count_max": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "order_count_min": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "organization_id": {
-            "filter_class": "UUIDFilter",
             "type": "string"
           },
           "program_acronym": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "psc_code": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           },
           "search": {
-            "filter_class": "ViewHandledSearch",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "total_obligated_max": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
           "total_obligated_min": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "type_of_idc": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "vehicle_type": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "who_can_use": {
-            "filter_class": "CharFilter",
             "lookup": "iexact",
             "type": "string"
           }
@@ -17656,7 +16561,6 @@
           "vehicle_obligations"
         ],
         "pagination": {
-          "class": "StandardResultsSetPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -19143,8 +18047,6 @@
     },
     "vehicles_orders": {
       "basename": "vehicles_orders",
-      "docs_file": null,
-      "docs_params": [],
       "prefix": "vehicles/<uuid:uuid>/orders/",
       "resource_key": "vehicles_orders",
       "runtime": {
@@ -19180,15 +18082,12 @@
         ],
         "filter_params_detail": {
           "award_date": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_gte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_date_lte": {
-            "filter_class": "DateFilter",
             "type": "date"
           },
           "award_type": {
@@ -19203,58 +18102,45 @@
               "d"
             ],
             "choices_count": 8,
-            "filter_class": "UppercaseCodeChoiceFilter",
             "type": "choice"
           },
           "awarding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "commercial_item_acquisition_procedures": {
-            "filter_class": "BaseSmartFilter",
             "type": "string"
           },
           "expiring_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "expiring_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "fiscal_year": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_gte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "fiscal_year_lte": {
-            "filter_class": "NumberFilter",
             "type": "number"
           },
           "funding_agency": {
-            "filter_class": "PerformantAgencyFilter",
             "type": "string"
           },
           "key": {
-            "filter_class": "IdListFilter",
             "type": "string"
           },
           "naics": {
-            "filter_class": "CustomNAICSFilter",
             "type": "string"
           },
           "obligated_gte": {
-            "filter_class": "NumberFilter",
             "lookup": "gte",
             "type": "number"
           },
           "obligated_lte": {
-            "filter_class": "NumberFilter",
             "lookup": "lte",
             "type": "number"
           },
@@ -19268,55 +18154,43 @@
               "total_contract_value"
             ],
             "choices_count": 6,
-            "filter_class": "OrderingFilter",
             "type": "ordering"
           },
           "piid": {
-            "filter_class": "UppercaseCharFilter",
             "type": "string"
           },
           "pop_end_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_end_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "pop_start_date_gte": {
-            "filter_class": "DateFilter",
             "lookup": "gte",
             "type": "date"
           },
           "pop_start_date_lte": {
-            "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
           },
           "psc": {
-            "filter_class": "CustomPSCFilter",
             "type": "string"
           },
           "recipient": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "search": {
-            "filter_class": "CharFilter",
             "type": "string"
           },
           "set_aside": {
-            "filter_class": "CustomSetAsideFilter",
             "type": "string"
           },
           "solicitation_identifier": {
-            "filter_class": "SolicitationNumberFilter",
             "type": "string"
           },
           "uei": {
-            "filter_class": "UeiToEntityUuidFilter",
             "type": "string"
           }
         },
@@ -19327,7 +18201,6 @@
           "total_contract_value"
         ],
         "pagination": {
-          "class": "CachedPageNumberPagination",
           "max_page_size": 100
         },
         "shape": {
@@ -19898,97 +18771,5 @@
       "swagger_has_key": false,
       "swagger_params": []
     }
-  },
-  "unmapped_resources": {
-    "no_docs_page": [
-      "agencies",
-      "agencies_contracts_awarding",
-      "agencies_contracts_funding",
-      "assistance/direct_payments",
-      "assistance/grants",
-      "assistance/loans",
-      "assistance/other",
-      "assistance_listings",
-      "budget/accounts",
-      "business_types",
-      "contract_appeals",
-      "contracts",
-      "contracts_subawards",
-      "departments",
-      "dibbs/awards",
-      "dibbs/rfps",
-      "dibbs/rfqs",
-      "ebuy/requests",
-      "entities",
-      "entities_contracts",
-      "entities_idvs",
-      "entities_lcats",
-      "entities_otas",
-      "entities_otidvs",
-      "entities_subawards",
-      "events",
-      "exclusions",
-      "federal_register",
-      "forecasts",
-      "grants",
-      "gsa_elibrary_contracts",
-      "idvs",
-      "idvs_awards",
-      "idvs_idvs",
-      "idvs_lcats",
-      "itdashboard",
-      "mas_sins",
-      "naics",
-      "news",
-      "notices",
-      "offices",
-      "opportunities",
-      "organizations",
-      "otas",
-      "otidvs",
-      "otidvs_awards",
-      "protests",
-      "psc",
-      "sbir/solicitations",
-      "sbir/topics",
-      "sled/forecasts",
-      "sled/opportunities",
-      "subawards",
-      "vehicles",
-      "vehicles_orders"
-    ],
-    "no_swagger": [
-      "agencies_contracts_awarding",
-      "agencies_contracts_funding",
-      "assistance/direct_payments",
-      "assistance/grants",
-      "assistance/loans",
-      "assistance/other",
-      "budget/accounts",
-      "contracts_subawards",
-      "dibbs/awards",
-      "dibbs/rfps",
-      "dibbs/rfqs",
-      "ebuy/requests",
-      "entities_contracts",
-      "entities_idvs",
-      "entities_lcats",
-      "entities_otas",
-      "entities_otidvs",
-      "entities_subawards",
-      "events",
-      "idvs_awards",
-      "idvs_idvs",
-      "idvs_lcats",
-      "itdashboard",
-      "news",
-      "otidvs_awards",
-      "protests",
-      "sbir/solicitations",
-      "sbir/topics",
-      "sled/forecasts",
-      "sled/opportunities",
-      "vehicles_orders"
-    ]
   }
 }

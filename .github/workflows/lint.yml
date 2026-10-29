@@ -103,7 +103,9 @@ jobs:
     - name: Compare vendored contract against tango HEAD
       if: steps.gate.outputs.ready == 'true'
       run: |
-        if ! diff -q contracts/filter_shape_contract.json tango-api/contracts/filter_shape_contract.json >/dev/null; then
+        # The vendored copy is the refresh script's public projection, so compare against a fresh projection of HEAD.
+        uv run python scripts/refresh_contract.py --source tango-api/contracts/filter_shape_contract.json >/dev/null
+        if ! git diff --quiet -- contracts/filter_shape_contract.json; then
           echo "::warning::Vendored contract differs from makegov/tango HEAD. Refresh with: uv run python scripts/refresh_contract.py"
         else
           echo "Vendored contract matches makegov/tango HEAD."
