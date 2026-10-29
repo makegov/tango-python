@@ -20,11 +20,40 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 VENDORED_PATH = REPO_ROOT / "contracts" / "filter_shape_contract.json"
 SIBLING_PATH = REPO_ROOT.parent / "tango" / "contracts" / "filter_shape_contract.json"
 GH_CONTENTS_PATH = "/repos/makegov/tango/contents/contracts/filter_shape_contract.json"
+
+# The upstream contract carries server internals; vendor only what the SDK consumes.
+DROPPED_TOP_LEVEL_KEYS = ("policy", "unmapped_resources")
+DROPPED_META_KEYS = ("generated_from",)
+DROPPED_RESOURCE_KEYS = ("docs_file", "docs_params", "swagger_has_key")
+
+
+def project_public(manifest: dict[str, Any]) -> dict[str, Any]:
+    """Return a copy of the upstream contract with server-side internals removed."""
+    projected = json.loads(json.dumps(manifest))
+    for key in DROPPED_TOP_LEVEL_KEYS:
+        projected.pop(key, None)
+    for key in DROPPED_META_KEYS:
+        (projected.get("meta") or {}).pop(key, None)
+    for resource in (projected.get("resources") or {}).values():
+        for key in DROPPED_RESOURCE_KEYS:
+            resource.pop(key, None)
+        runtime = resource.get("runtime") or {}
+        runtime.pop("viewset", None)
+        (runtime.get("pagination") or {}).pop("class", None)
+        for detail in (runtime.get("filter_params_detail") or {}).values():
+            if isinstance(detail, dict):
+                detail.pop("filter_class", None)
+    return projected
+
+
+def render(manifest: dict[str, Any]) -> str:
+    return json.dumps(project_public(manifest), indent=2, sort_keys=True) + "\n"
 
 
 def fetch_from_github() -> str:
@@ -74,6 +103,7 @@ def main() -> int:
 
     manifest = json.loads(content)
     meta = manifest.get("meta", {})
+    content = render(manifest)
     changed = not VENDORED_PATH.exists() or VENDORED_PATH.read_text(encoding="utf-8") != content
     VENDORED_PATH.parent.mkdir(parents=True, exist_ok=True)
     VENDORED_PATH.write_text(content, encoding="utf-8")
