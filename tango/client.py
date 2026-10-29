@@ -3313,6 +3313,7 @@ class TangoClient:
         return_by_date_before: str | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        fsc: str | None = None,
     ) -> PaginatedResponse:
         """
         List DLA DIBBS request-for-quote solicitations.
@@ -3327,6 +3328,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             nsn: Filter by National Stock Number
             part_number: Filter by manufacturer part number
+            fsc: Filter by four-digit Federal Supply Class (NSN prefix), e.g. "6515" or "6515|6530"
             solicitation: Filter by solicitation number
             purchase_request: Filter by purchase request number
             organization: Filter by buying organization id
@@ -3358,6 +3360,7 @@ class TangoClient:
         for key, val in (
             ("nsn", nsn),
             ("part_number", part_number),
+            ("fsc", fsc),
             ("solicitation", solicitation),
             ("purchase_request", purchase_request),
             ("organization", organization),
@@ -3442,6 +3445,7 @@ class TangoClient:
         closes_date_before: str | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        fsc: str | None = None,
     ) -> PaginatedResponse:
         """
         List DLA DIBBS request-for-proposal solicitations.
@@ -3456,6 +3460,7 @@ class TangoClient:
             flat_lists: If True, flatten arrays using indexed keys
             nsn: Filter by National Stock Number
             part_number: Filter by manufacturer part number
+            fsc: Filter by four-digit Federal Supply Class (NSN prefix), e.g. "6515" or "6515|6530"
             solicitation: Filter by solicitation number
             organization: Filter by buying organization id
             buyer_code: Filter by buyer code
@@ -3483,6 +3488,7 @@ class TangoClient:
         for key, val in (
             ("nsn", nsn),
             ("part_number", part_number),
+            ("fsc", fsc),
             ("solicitation", solicitation),
             ("organization", organization),
             ("buyer_code", buyer_code),
@@ -3568,6 +3574,7 @@ class TangoClient:
         posted_date_before: str | None = None,
         search: str | None = None,
         ordering: str | None = None,
+        fsc: str | None = None,
     ) -> PaginatedResponse:
         """
         List DLA DIBBS awards.
@@ -3591,6 +3598,7 @@ class TangoClient:
             purchase_request: Filter by purchase request number
             nsn: Filter by National Stock Number
             part_number: Filter by manufacturer part number
+            fsc: Filter by four-digit Federal Supply Class (NSN prefix), e.g. "6515" or "6515|6530"
             awardee_cage: Filter by awardee CAGE code
             entity: Filter by awardee entity id
             organization: Filter by buying organization id
@@ -3621,6 +3629,7 @@ class TangoClient:
             ("purchase_request", purchase_request),
             ("nsn", nsn),
             ("part_number", part_number),
+            ("fsc", fsc),
             ("awardee_cage", awardee_cage),
             ("entity", entity),
             ("organization", organization),

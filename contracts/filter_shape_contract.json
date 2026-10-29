@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.11.0",
+    "api_version": "5.13.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "generated_from": "scripts/filter_shape_conformance.py",
     "schema_version": 2
@@ -1592,6 +1592,2230 @@
         "shape_supported": true,
         "shape_tier_required": null,
         "viewset": "agencies.views.AgencyFundingContractViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "assistance/direct_payments": {
+      "basename": "assistance-direct_payments",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "assistance/direct_payments",
+      "resource_key": "assistance/direct_payments",
+      "runtime": {
+        "filter_params": [
+          "assistance_type",
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "business_funds_indicator",
+          "cfda_number",
+          "disaster_emergency_fund_code",
+          "fain",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "funding_opportunity_number",
+          "key",
+          "obligated_gte",
+          "obligated_lte",
+          "ordering",
+          "pop_country",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "pop_state",
+          "pop_zip",
+          "recipient",
+          "record_type",
+          "search",
+          "uei",
+          "uri"
+        ],
+        "filter_params_detail": {
+          "assistance_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "business_funds_indicator": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "cfda_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "disaster_emergency_fund_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fain": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "funding_opportunity_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "obligated_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-pragmatic_obligations",
+              "award_date",
+              "obligated",
+              "pragmatic_obligations"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "pop_country": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_state": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_zip": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "record_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UeiToEntityUuidFilter",
+            "type": "string"
+          },
+          "uri": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "pragmatic_obligations"
+        ],
+        "pagination": {
+          "class": "AssistanceKeysetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "assistance_listing": {
+              "expands": {},
+              "fields": [
+                "number",
+                "title"
+              ]
+            },
+            "assistance_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "listings": {
+              "expands": {},
+              "fields": [
+                "cfda_number",
+                "face_value_of_loan",
+                "first_action_date",
+                "indirect_cost_federal_share_amount",
+                "is_primary",
+                "last_action_date",
+                "loan_subsidy_cost",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transactions_count"
+              ]
+            },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "code",
+                "country",
+                "county_fips",
+                "county_name",
+                "foreign_location",
+                "scope",
+                "state_code",
+                "state_fips",
+                "state_name",
+                "zip_code",
+                "zip_plus_four"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "business_types",
+                "congressional_district",
+                "congressional_district_original",
+                "county",
+                "duns",
+                "highest_owner",
+                "legal_business_name",
+                "legal_business_name_raw",
+                "uei",
+                "uuid"
+              ]
+            },
+            "recipient_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "congressional_district_current",
+                "congressional_district_original",
+                "country_code",
+                "county_fips",
+                "foreign_city_name",
+                "foreign_postal_code",
+                "foreign_province_name",
+                "state_fips",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_date_fiscal_year",
+                "action_type",
+                "assistance_type_code",
+                "award_amount_basis",
+                "award_recipient_basis",
+                "cfda_number",
+                "correction_delete_indicator",
+                "face_value_of_loan",
+                "indirect_cost_federal_share_amount",
+                "initial_report_date",
+                "key",
+                "last_modified_date",
+                "loan_subsidy_cost",
+                "modification_number",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transaction_date"
+              ]
+            }
+          },
+          "fields": [
+            "assistance_type",
+            "assistance_types_count",
+            "award_amount_basis",
+            "award_date",
+            "award_recipient_basis",
+            "award_total_face_value_of_loan",
+            "award_total_loan_subsidy_cost",
+            "award_total_non_federal_funding",
+            "award_total_obligated",
+            "award_total_outlayed",
+            "business_funds_indicator",
+            "cfda_number",
+            "covid19_obligated",
+            "covid19_outlayed",
+            "disaster_emergency_fund_codes",
+            "face_value_of_loan",
+            "fain",
+            "federal_accounts_funding_this_award",
+            "fiscal_year",
+            "former_award_keys",
+            "funding_opportunity_goals_text",
+            "funding_opportunity_number",
+            "iija_obligated",
+            "iija_outlayed",
+            "indirect_cost_federal_share_amount",
+            "insurance_coverage_amount",
+            "key",
+            "last_action_date",
+            "last_modified_date",
+            "listings_count",
+            "loan_subsidy_cost",
+            "non_federal_funding_amount",
+            "object_classes_funding_this_award",
+            "obligated",
+            "pragmatic_obligations",
+            "program_activities_funding_this_award",
+            "purposes_differ",
+            "record_type",
+            "sai_number",
+            "summary",
+            "title",
+            "transactions",
+            "transactions_count",
+            "treasury_accounts_funding_this_award",
+            "uri"
+          ]
+        },
+        "shape_flat_paths": [
+          "assistance_listing",
+          "assistance_listing.number",
+          "assistance_listing.title",
+          "assistance_type",
+          "assistance_type.code",
+          "assistance_type.description",
+          "assistance_types_count",
+          "award_amount_basis",
+          "award_date",
+          "award_recipient_basis",
+          "award_total_face_value_of_loan",
+          "award_total_loan_subsidy_cost",
+          "award_total_non_federal_funding",
+          "award_total_obligated",
+          "award_total_outlayed",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "business_funds_indicator",
+          "cfda_number",
+          "covid19_obligated",
+          "covid19_outlayed",
+          "disaster_emergency_fund_codes",
+          "face_value_of_loan",
+          "fain",
+          "federal_accounts_funding_this_award",
+          "fiscal_year",
+          "former_award_keys",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "funding_opportunity_goals_text",
+          "funding_opportunity_number",
+          "iija_obligated",
+          "iija_outlayed",
+          "indirect_cost_federal_share_amount",
+          "insurance_coverage_amount",
+          "key",
+          "last_action_date",
+          "last_modified_date",
+          "listings",
+          "listings.cfda_number",
+          "listings.face_value_of_loan",
+          "listings.first_action_date",
+          "listings.indirect_cost_federal_share_amount",
+          "listings.is_primary",
+          "listings.last_action_date",
+          "listings.loan_subsidy_cost",
+          "listings.non_federal_funding_amount",
+          "listings.obligated",
+          "listings.pragmatic_obligations",
+          "listings.transactions_count",
+          "listings_count",
+          "loan_subsidy_cost",
+          "non_federal_funding_amount",
+          "object_classes_funding_this_award",
+          "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.code",
+          "place_of_performance.country",
+          "place_of_performance.county_fips",
+          "place_of_performance.county_name",
+          "place_of_performance.foreign_location",
+          "place_of_performance.scope",
+          "place_of_performance.state_code",
+          "place_of_performance.state_fips",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "place_of_performance.zip_plus_four",
+          "pragmatic_obligations",
+          "program_activities_funding_this_award",
+          "purposes_differ",
+          "recipient",
+          "recipient.business_types",
+          "recipient.congressional_district",
+          "recipient.congressional_district_original",
+          "recipient.county",
+          "recipient.duns",
+          "recipient.highest_owner",
+          "recipient.legal_business_name",
+          "recipient.legal_business_name_raw",
+          "recipient.uei",
+          "recipient.uuid",
+          "recipient_address",
+          "recipient_address.address_line1",
+          "recipient_address.address_line2",
+          "recipient_address.city",
+          "recipient_address.congressional_district_current",
+          "recipient_address.congressional_district_original",
+          "recipient_address.country_code",
+          "recipient_address.county_fips",
+          "recipient_address.foreign_city_name",
+          "recipient_address.foreign_postal_code",
+          "recipient_address.foreign_province_name",
+          "recipient_address.state_fips",
+          "recipient_address.state_or_province_code",
+          "recipient_address.zip_code",
+          "recipient_address.zip_code_plus4",
+          "record_type",
+          "sai_number",
+          "summary",
+          "title",
+          "transactions",
+          "transactions.action_date_fiscal_year",
+          "transactions.action_type",
+          "transactions.assistance_type_code",
+          "transactions.award_amount_basis",
+          "transactions.award_recipient_basis",
+          "transactions.cfda_number",
+          "transactions.correction_delete_indicator",
+          "transactions.face_value_of_loan",
+          "transactions.indirect_cost_federal_share_amount",
+          "transactions.initial_report_date",
+          "transactions.key",
+          "transactions.last_modified_date",
+          "transactions.loan_subsidy_cost",
+          "transactions.modification_number",
+          "transactions.non_federal_funding_amount",
+          "transactions.obligated",
+          "transactions.pragmatic_obligations",
+          "transactions.transaction_date",
+          "transactions_count",
+          "treasury_accounts_funding_this_award",
+          "uri"
+        ],
+        "shape_gated_by_level": {},
+        "shape_supported": true,
+        "shape_tier_required": null,
+        "viewset": "assistance.views.DirectPaymentAwardViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "assistance/grants": {
+      "basename": "assistance-grants",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "assistance/grants",
+      "resource_key": "assistance/grants",
+      "runtime": {
+        "filter_params": [
+          "assistance_type",
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "business_funds_indicator",
+          "cfda_number",
+          "disaster_emergency_fund_code",
+          "fain",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "funding_opportunity_number",
+          "key",
+          "obligated_gte",
+          "obligated_lte",
+          "ordering",
+          "pop_country",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "pop_state",
+          "pop_zip",
+          "recipient",
+          "record_type",
+          "search",
+          "uei",
+          "uri"
+        ],
+        "filter_params_detail": {
+          "assistance_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "business_funds_indicator": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "cfda_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "disaster_emergency_fund_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fain": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "funding_opportunity_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "obligated_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-pragmatic_obligations",
+              "award_date",
+              "obligated",
+              "pragmatic_obligations"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "pop_country": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_state": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_zip": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "record_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UeiToEntityUuidFilter",
+            "type": "string"
+          },
+          "uri": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "pragmatic_obligations"
+        ],
+        "pagination": {
+          "class": "AssistanceKeysetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "assistance_listing": {
+              "expands": {},
+              "fields": [
+                "number",
+                "title"
+              ]
+            },
+            "assistance_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "listings": {
+              "expands": {},
+              "fields": [
+                "cfda_number",
+                "face_value_of_loan",
+                "first_action_date",
+                "indirect_cost_federal_share_amount",
+                "is_primary",
+                "last_action_date",
+                "loan_subsidy_cost",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transactions_count"
+              ]
+            },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "code",
+                "country",
+                "county_fips",
+                "county_name",
+                "foreign_location",
+                "scope",
+                "state_code",
+                "state_fips",
+                "state_name",
+                "zip_code",
+                "zip_plus_four"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "business_types",
+                "congressional_district",
+                "congressional_district_original",
+                "county",
+                "duns",
+                "highest_owner",
+                "legal_business_name",
+                "legal_business_name_raw",
+                "uei",
+                "uuid"
+              ]
+            },
+            "recipient_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "congressional_district_current",
+                "congressional_district_original",
+                "country_code",
+                "county_fips",
+                "foreign_city_name",
+                "foreign_postal_code",
+                "foreign_province_name",
+                "state_fips",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_date_fiscal_year",
+                "action_type",
+                "assistance_type_code",
+                "award_amount_basis",
+                "award_recipient_basis",
+                "cfda_number",
+                "correction_delete_indicator",
+                "face_value_of_loan",
+                "indirect_cost_federal_share_amount",
+                "initial_report_date",
+                "key",
+                "last_modified_date",
+                "loan_subsidy_cost",
+                "modification_number",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transaction_date"
+              ]
+            }
+          },
+          "fields": [
+            "assistance_type",
+            "assistance_types_count",
+            "award_amount_basis",
+            "award_date",
+            "award_recipient_basis",
+            "award_total_face_value_of_loan",
+            "award_total_loan_subsidy_cost",
+            "award_total_non_federal_funding",
+            "award_total_obligated",
+            "award_total_outlayed",
+            "business_funds_indicator",
+            "cfda_number",
+            "covid19_obligated",
+            "covid19_outlayed",
+            "disaster_emergency_fund_codes",
+            "face_value_of_loan",
+            "fain",
+            "federal_accounts_funding_this_award",
+            "fiscal_year",
+            "former_award_keys",
+            "funding_opportunity_goals_text",
+            "funding_opportunity_number",
+            "iija_obligated",
+            "iija_outlayed",
+            "indirect_cost_federal_share_amount",
+            "insurance_coverage_amount",
+            "key",
+            "last_action_date",
+            "last_modified_date",
+            "listings_count",
+            "loan_subsidy_cost",
+            "non_federal_funding_amount",
+            "object_classes_funding_this_award",
+            "obligated",
+            "pragmatic_obligations",
+            "program_activities_funding_this_award",
+            "purposes_differ",
+            "record_type",
+            "sai_number",
+            "summary",
+            "title",
+            "transactions",
+            "transactions_count",
+            "treasury_accounts_funding_this_award",
+            "uri"
+          ]
+        },
+        "shape_flat_paths": [
+          "assistance_listing",
+          "assistance_listing.number",
+          "assistance_listing.title",
+          "assistance_type",
+          "assistance_type.code",
+          "assistance_type.description",
+          "assistance_types_count",
+          "award_amount_basis",
+          "award_date",
+          "award_recipient_basis",
+          "award_total_face_value_of_loan",
+          "award_total_loan_subsidy_cost",
+          "award_total_non_federal_funding",
+          "award_total_obligated",
+          "award_total_outlayed",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "business_funds_indicator",
+          "cfda_number",
+          "covid19_obligated",
+          "covid19_outlayed",
+          "disaster_emergency_fund_codes",
+          "face_value_of_loan",
+          "fain",
+          "federal_accounts_funding_this_award",
+          "fiscal_year",
+          "former_award_keys",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "funding_opportunity_goals_text",
+          "funding_opportunity_number",
+          "iija_obligated",
+          "iija_outlayed",
+          "indirect_cost_federal_share_amount",
+          "insurance_coverage_amount",
+          "key",
+          "last_action_date",
+          "last_modified_date",
+          "listings",
+          "listings.cfda_number",
+          "listings.face_value_of_loan",
+          "listings.first_action_date",
+          "listings.indirect_cost_federal_share_amount",
+          "listings.is_primary",
+          "listings.last_action_date",
+          "listings.loan_subsidy_cost",
+          "listings.non_federal_funding_amount",
+          "listings.obligated",
+          "listings.pragmatic_obligations",
+          "listings.transactions_count",
+          "listings_count",
+          "loan_subsidy_cost",
+          "non_federal_funding_amount",
+          "object_classes_funding_this_award",
+          "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.code",
+          "place_of_performance.country",
+          "place_of_performance.county_fips",
+          "place_of_performance.county_name",
+          "place_of_performance.foreign_location",
+          "place_of_performance.scope",
+          "place_of_performance.state_code",
+          "place_of_performance.state_fips",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "place_of_performance.zip_plus_four",
+          "pragmatic_obligations",
+          "program_activities_funding_this_award",
+          "purposes_differ",
+          "recipient",
+          "recipient.business_types",
+          "recipient.congressional_district",
+          "recipient.congressional_district_original",
+          "recipient.county",
+          "recipient.duns",
+          "recipient.highest_owner",
+          "recipient.legal_business_name",
+          "recipient.legal_business_name_raw",
+          "recipient.uei",
+          "recipient.uuid",
+          "recipient_address",
+          "recipient_address.address_line1",
+          "recipient_address.address_line2",
+          "recipient_address.city",
+          "recipient_address.congressional_district_current",
+          "recipient_address.congressional_district_original",
+          "recipient_address.country_code",
+          "recipient_address.county_fips",
+          "recipient_address.foreign_city_name",
+          "recipient_address.foreign_postal_code",
+          "recipient_address.foreign_province_name",
+          "recipient_address.state_fips",
+          "recipient_address.state_or_province_code",
+          "recipient_address.zip_code",
+          "recipient_address.zip_code_plus4",
+          "record_type",
+          "sai_number",
+          "summary",
+          "title",
+          "transactions",
+          "transactions.action_date_fiscal_year",
+          "transactions.action_type",
+          "transactions.assistance_type_code",
+          "transactions.award_amount_basis",
+          "transactions.award_recipient_basis",
+          "transactions.cfda_number",
+          "transactions.correction_delete_indicator",
+          "transactions.face_value_of_loan",
+          "transactions.indirect_cost_federal_share_amount",
+          "transactions.initial_report_date",
+          "transactions.key",
+          "transactions.last_modified_date",
+          "transactions.loan_subsidy_cost",
+          "transactions.modification_number",
+          "transactions.non_federal_funding_amount",
+          "transactions.obligated",
+          "transactions.pragmatic_obligations",
+          "transactions.transaction_date",
+          "transactions_count",
+          "treasury_accounts_funding_this_award",
+          "uri"
+        ],
+        "shape_gated_by_level": {},
+        "shape_supported": true,
+        "shape_tier_required": null,
+        "viewset": "assistance.views.GrantAwardViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "assistance/loans": {
+      "basename": "assistance-loans",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "assistance/loans",
+      "resource_key": "assistance/loans",
+      "runtime": {
+        "filter_params": [
+          "assistance_type",
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "business_funds_indicator",
+          "cfda_number",
+          "disaster_emergency_fund_code",
+          "fain",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "funding_opportunity_number",
+          "key",
+          "obligated_gte",
+          "obligated_lte",
+          "ordering",
+          "pop_country",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "pop_state",
+          "pop_zip",
+          "recipient",
+          "record_type",
+          "search",
+          "uei",
+          "uri"
+        ],
+        "filter_params_detail": {
+          "assistance_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "business_funds_indicator": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "cfda_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "disaster_emergency_fund_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fain": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "funding_opportunity_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "obligated_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-pragmatic_obligations",
+              "award_date",
+              "obligated",
+              "pragmatic_obligations"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "pop_country": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_state": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_zip": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "record_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UeiToEntityUuidFilter",
+            "type": "string"
+          },
+          "uri": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "pragmatic_obligations"
+        ],
+        "pagination": {
+          "class": "AssistanceKeysetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "assistance_listing": {
+              "expands": {},
+              "fields": [
+                "number",
+                "title"
+              ]
+            },
+            "assistance_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "listings": {
+              "expands": {},
+              "fields": [
+                "cfda_number",
+                "face_value_of_loan",
+                "first_action_date",
+                "indirect_cost_federal_share_amount",
+                "is_primary",
+                "last_action_date",
+                "loan_subsidy_cost",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transactions_count"
+              ]
+            },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "code",
+                "country",
+                "county_fips",
+                "county_name",
+                "foreign_location",
+                "scope",
+                "state_code",
+                "state_fips",
+                "state_name",
+                "zip_code",
+                "zip_plus_four"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "business_types",
+                "congressional_district",
+                "congressional_district_original",
+                "county",
+                "duns",
+                "highest_owner",
+                "legal_business_name",
+                "legal_business_name_raw",
+                "uei",
+                "uuid"
+              ]
+            },
+            "recipient_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "congressional_district_current",
+                "congressional_district_original",
+                "country_code",
+                "county_fips",
+                "foreign_city_name",
+                "foreign_postal_code",
+                "foreign_province_name",
+                "state_fips",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_date_fiscal_year",
+                "action_type",
+                "assistance_type_code",
+                "award_amount_basis",
+                "award_recipient_basis",
+                "cfda_number",
+                "correction_delete_indicator",
+                "face_value_of_loan",
+                "indirect_cost_federal_share_amount",
+                "initial_report_date",
+                "key",
+                "last_modified_date",
+                "loan_subsidy_cost",
+                "modification_number",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transaction_date"
+              ]
+            }
+          },
+          "fields": [
+            "assistance_type",
+            "assistance_types_count",
+            "award_amount_basis",
+            "award_date",
+            "award_recipient_basis",
+            "award_total_face_value_of_loan",
+            "award_total_loan_subsidy_cost",
+            "award_total_non_federal_funding",
+            "award_total_obligated",
+            "award_total_outlayed",
+            "business_funds_indicator",
+            "cfda_number",
+            "covid19_obligated",
+            "covid19_outlayed",
+            "disaster_emergency_fund_codes",
+            "face_value_of_loan",
+            "fain",
+            "federal_accounts_funding_this_award",
+            "fiscal_year",
+            "former_award_keys",
+            "funding_opportunity_goals_text",
+            "funding_opportunity_number",
+            "iija_obligated",
+            "iija_outlayed",
+            "indirect_cost_federal_share_amount",
+            "insurance_coverage_amount",
+            "key",
+            "last_action_date",
+            "last_modified_date",
+            "listings_count",
+            "loan_subsidy_cost",
+            "non_federal_funding_amount",
+            "object_classes_funding_this_award",
+            "obligated",
+            "pragmatic_obligations",
+            "program_activities_funding_this_award",
+            "purposes_differ",
+            "record_type",
+            "sai_number",
+            "summary",
+            "title",
+            "transactions",
+            "transactions_count",
+            "treasury_accounts_funding_this_award",
+            "uri"
+          ]
+        },
+        "shape_flat_paths": [
+          "assistance_listing",
+          "assistance_listing.number",
+          "assistance_listing.title",
+          "assistance_type",
+          "assistance_type.code",
+          "assistance_type.description",
+          "assistance_types_count",
+          "award_amount_basis",
+          "award_date",
+          "award_recipient_basis",
+          "award_total_face_value_of_loan",
+          "award_total_loan_subsidy_cost",
+          "award_total_non_federal_funding",
+          "award_total_obligated",
+          "award_total_outlayed",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "business_funds_indicator",
+          "cfda_number",
+          "covid19_obligated",
+          "covid19_outlayed",
+          "disaster_emergency_fund_codes",
+          "face_value_of_loan",
+          "fain",
+          "federal_accounts_funding_this_award",
+          "fiscal_year",
+          "former_award_keys",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "funding_opportunity_goals_text",
+          "funding_opportunity_number",
+          "iija_obligated",
+          "iija_outlayed",
+          "indirect_cost_federal_share_amount",
+          "insurance_coverage_amount",
+          "key",
+          "last_action_date",
+          "last_modified_date",
+          "listings",
+          "listings.cfda_number",
+          "listings.face_value_of_loan",
+          "listings.first_action_date",
+          "listings.indirect_cost_federal_share_amount",
+          "listings.is_primary",
+          "listings.last_action_date",
+          "listings.loan_subsidy_cost",
+          "listings.non_federal_funding_amount",
+          "listings.obligated",
+          "listings.pragmatic_obligations",
+          "listings.transactions_count",
+          "listings_count",
+          "loan_subsidy_cost",
+          "non_federal_funding_amount",
+          "object_classes_funding_this_award",
+          "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.code",
+          "place_of_performance.country",
+          "place_of_performance.county_fips",
+          "place_of_performance.county_name",
+          "place_of_performance.foreign_location",
+          "place_of_performance.scope",
+          "place_of_performance.state_code",
+          "place_of_performance.state_fips",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "place_of_performance.zip_plus_four",
+          "pragmatic_obligations",
+          "program_activities_funding_this_award",
+          "purposes_differ",
+          "recipient",
+          "recipient.business_types",
+          "recipient.congressional_district",
+          "recipient.congressional_district_original",
+          "recipient.county",
+          "recipient.duns",
+          "recipient.highest_owner",
+          "recipient.legal_business_name",
+          "recipient.legal_business_name_raw",
+          "recipient.uei",
+          "recipient.uuid",
+          "recipient_address",
+          "recipient_address.address_line1",
+          "recipient_address.address_line2",
+          "recipient_address.city",
+          "recipient_address.congressional_district_current",
+          "recipient_address.congressional_district_original",
+          "recipient_address.country_code",
+          "recipient_address.county_fips",
+          "recipient_address.foreign_city_name",
+          "recipient_address.foreign_postal_code",
+          "recipient_address.foreign_province_name",
+          "recipient_address.state_fips",
+          "recipient_address.state_or_province_code",
+          "recipient_address.zip_code",
+          "recipient_address.zip_code_plus4",
+          "record_type",
+          "sai_number",
+          "summary",
+          "title",
+          "transactions",
+          "transactions.action_date_fiscal_year",
+          "transactions.action_type",
+          "transactions.assistance_type_code",
+          "transactions.award_amount_basis",
+          "transactions.award_recipient_basis",
+          "transactions.cfda_number",
+          "transactions.correction_delete_indicator",
+          "transactions.face_value_of_loan",
+          "transactions.indirect_cost_federal_share_amount",
+          "transactions.initial_report_date",
+          "transactions.key",
+          "transactions.last_modified_date",
+          "transactions.loan_subsidy_cost",
+          "transactions.modification_number",
+          "transactions.non_federal_funding_amount",
+          "transactions.obligated",
+          "transactions.pragmatic_obligations",
+          "transactions.transaction_date",
+          "transactions_count",
+          "treasury_accounts_funding_this_award",
+          "uri"
+        ],
+        "shape_gated_by_level": {},
+        "shape_supported": true,
+        "shape_tier_required": null,
+        "viewset": "assistance.views.LoanAwardViewSet"
+      },
+      "swagger_has_key": false,
+      "swagger_params": []
+    },
+    "assistance/other": {
+      "basename": "assistance-other",
+      "docs_file": null,
+      "docs_params": [],
+      "prefix": "assistance/other",
+      "resource_key": "assistance/other",
+      "runtime": {
+        "filter_params": [
+          "assistance_type",
+          "award_date",
+          "award_date_gte",
+          "award_date_lte",
+          "awarding_agency",
+          "business_funds_indicator",
+          "cfda_number",
+          "disaster_emergency_fund_code",
+          "fain",
+          "fiscal_year",
+          "fiscal_year_gte",
+          "fiscal_year_lte",
+          "funding_agency",
+          "funding_opportunity_number",
+          "key",
+          "obligated_gte",
+          "obligated_lte",
+          "ordering",
+          "pop_country",
+          "pop_end_date_gte",
+          "pop_end_date_lte",
+          "pop_start_date_gte",
+          "pop_start_date_lte",
+          "pop_state",
+          "pop_zip",
+          "recipient",
+          "record_type",
+          "search",
+          "uei",
+          "uri"
+        ],
+        "filter_params_detail": {
+          "assistance_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "award_date": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_gte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "award_date_lte": {
+            "filter_class": "DateFilter",
+            "type": "date"
+          },
+          "awarding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "business_funds_indicator": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "cfda_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "disaster_emergency_fund_code": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fain": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "fiscal_year": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_gte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "fiscal_year_lte": {
+            "filter_class": "NumberFilter",
+            "type": "number"
+          },
+          "funding_agency": {
+            "filter_class": "PerformantAgencyFilter",
+            "type": "string"
+          },
+          "funding_opportunity_number": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "key": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          },
+          "obligated_gte": {
+            "filter_class": "NumberFilter",
+            "lookup": "gte",
+            "type": "number"
+          },
+          "obligated_lte": {
+            "filter_class": "NumberFilter",
+            "lookup": "lte",
+            "type": "number"
+          },
+          "ordering": {
+            "choices": [
+              "-award_date",
+              "-obligated",
+              "-pragmatic_obligations",
+              "award_date",
+              "obligated",
+              "pragmatic_obligations"
+            ],
+            "choices_count": 6,
+            "filter_class": "OrderingFilter",
+            "type": "ordering"
+          },
+          "pop_country": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_end_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_end_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_start_date_gte": {
+            "filter_class": "DateFilter",
+            "lookup": "gte",
+            "type": "date"
+          },
+          "pop_start_date_lte": {
+            "filter_class": "DateFilter",
+            "lookup": "lte",
+            "type": "date"
+          },
+          "pop_state": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "pop_zip": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "recipient": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "record_type": {
+            "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "search": {
+            "filter_class": "CharFilter",
+            "type": "string"
+          },
+          "uei": {
+            "filter_class": "UeiToEntityUuidFilter",
+            "type": "string"
+          },
+          "uri": {
+            "filter_class": "IdListFilter",
+            "type": "string"
+          }
+        },
+        "ordering_aliases": [],
+        "ordering_fields": [
+          "award_date",
+          "obligated",
+          "pragmatic_obligations"
+        ],
+        "pagination": {
+          "class": "AssistanceKeysetPagination",
+          "max_page_size": 100
+        },
+        "shape": {
+          "expands": {
+            "assistance_listing": {
+              "expands": {},
+              "fields": [
+                "number",
+                "title"
+              ]
+            },
+            "assistance_type": {
+              "expands": {},
+              "fields": [
+                "code",
+                "description"
+              ]
+            },
+            "awarding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "funding_office": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            },
+            "listings": {
+              "expands": {},
+              "fields": [
+                "cfda_number",
+                "face_value_of_loan",
+                "first_action_date",
+                "indirect_cost_federal_share_amount",
+                "is_primary",
+                "last_action_date",
+                "loan_subsidy_cost",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transactions_count"
+              ]
+            },
+            "obligations_by_fiscal_year": {
+              "expands": {},
+              "fields": [
+                "fiscal_year",
+                "obligated"
+              ]
+            },
+            "officers": {
+              "expands": {},
+              "fields": [
+                "highly_compensated_officer_1_amount",
+                "highly_compensated_officer_1_name",
+                "highly_compensated_officer_2_amount",
+                "highly_compensated_officer_2_name",
+                "highly_compensated_officer_3_amount",
+                "highly_compensated_officer_3_name",
+                "highly_compensated_officer_4_amount",
+                "highly_compensated_officer_4_name",
+                "highly_compensated_officer_5_amount",
+                "highly_compensated_officer_5_name"
+              ]
+            },
+            "period_of_performance": {
+              "expands": {},
+              "fields": [
+                "current_end_date",
+                "start_date"
+              ]
+            },
+            "place_of_performance": {
+              "expands": {},
+              "fields": [
+                "city_name",
+                "code",
+                "country",
+                "county_fips",
+                "county_name",
+                "foreign_location",
+                "scope",
+                "state_code",
+                "state_fips",
+                "state_name",
+                "zip_code",
+                "zip_plus_four"
+              ]
+            },
+            "recipient": {
+              "expands": {},
+              "fields": [
+                "business_types",
+                "congressional_district",
+                "congressional_district_original",
+                "county",
+                "duns",
+                "highest_owner",
+                "legal_business_name",
+                "legal_business_name_raw",
+                "uei",
+                "uuid"
+              ]
+            },
+            "recipient_address": {
+              "expands": {},
+              "fields": [
+                "address_line1",
+                "address_line2",
+                "city",
+                "congressional_district_current",
+                "congressional_district_original",
+                "country_code",
+                "county_fips",
+                "foreign_city_name",
+                "foreign_postal_code",
+                "foreign_province_name",
+                "state_fips",
+                "state_or_province_code",
+                "zip_code",
+                "zip_code_plus4"
+              ]
+            },
+            "transactions": {
+              "expands": {},
+              "fields": [
+                "action_date_fiscal_year",
+                "action_type",
+                "assistance_type_code",
+                "award_amount_basis",
+                "award_recipient_basis",
+                "cfda_number",
+                "correction_delete_indicator",
+                "face_value_of_loan",
+                "indirect_cost_federal_share_amount",
+                "initial_report_date",
+                "key",
+                "last_modified_date",
+                "loan_subsidy_cost",
+                "modification_number",
+                "non_federal_funding_amount",
+                "obligated",
+                "pragmatic_obligations",
+                "transaction_date"
+              ]
+            }
+          },
+          "fields": [
+            "assistance_type",
+            "assistance_types_count",
+            "award_amount_basis",
+            "award_date",
+            "award_recipient_basis",
+            "award_total_face_value_of_loan",
+            "award_total_loan_subsidy_cost",
+            "award_total_non_federal_funding",
+            "award_total_obligated",
+            "award_total_outlayed",
+            "business_funds_indicator",
+            "cfda_number",
+            "covid19_obligated",
+            "covid19_outlayed",
+            "disaster_emergency_fund_codes",
+            "face_value_of_loan",
+            "fain",
+            "federal_accounts_funding_this_award",
+            "fiscal_year",
+            "former_award_keys",
+            "funding_opportunity_goals_text",
+            "funding_opportunity_number",
+            "iija_obligated",
+            "iija_outlayed",
+            "indirect_cost_federal_share_amount",
+            "insurance_coverage_amount",
+            "key",
+            "last_action_date",
+            "last_modified_date",
+            "listings_count",
+            "loan_subsidy_cost",
+            "non_federal_funding_amount",
+            "object_classes_funding_this_award",
+            "obligated",
+            "pragmatic_obligations",
+            "program_activities_funding_this_award",
+            "purposes_differ",
+            "record_type",
+            "sai_number",
+            "summary",
+            "title",
+            "transactions",
+            "transactions_count",
+            "treasury_accounts_funding_this_award",
+            "uri"
+          ]
+        },
+        "shape_flat_paths": [
+          "assistance_listing",
+          "assistance_listing.number",
+          "assistance_listing.title",
+          "assistance_type",
+          "assistance_type.code",
+          "assistance_type.description",
+          "assistance_types_count",
+          "award_amount_basis",
+          "award_date",
+          "award_recipient_basis",
+          "award_total_face_value_of_loan",
+          "award_total_loan_subsidy_cost",
+          "award_total_non_federal_funding",
+          "award_total_obligated",
+          "award_total_outlayed",
+          "awarding_office",
+          "awarding_office.agency_code",
+          "awarding_office.agency_name",
+          "awarding_office.department_code",
+          "awarding_office.department_name",
+          "awarding_office.office_code",
+          "awarding_office.office_name",
+          "awarding_office.organization_id",
+          "business_funds_indicator",
+          "cfda_number",
+          "covid19_obligated",
+          "covid19_outlayed",
+          "disaster_emergency_fund_codes",
+          "face_value_of_loan",
+          "fain",
+          "federal_accounts_funding_this_award",
+          "fiscal_year",
+          "former_award_keys",
+          "funding_office",
+          "funding_office.agency_code",
+          "funding_office.agency_name",
+          "funding_office.department_code",
+          "funding_office.department_name",
+          "funding_office.office_code",
+          "funding_office.office_name",
+          "funding_office.organization_id",
+          "funding_opportunity_goals_text",
+          "funding_opportunity_number",
+          "iija_obligated",
+          "iija_outlayed",
+          "indirect_cost_federal_share_amount",
+          "insurance_coverage_amount",
+          "key",
+          "last_action_date",
+          "last_modified_date",
+          "listings",
+          "listings.cfda_number",
+          "listings.face_value_of_loan",
+          "listings.first_action_date",
+          "listings.indirect_cost_federal_share_amount",
+          "listings.is_primary",
+          "listings.last_action_date",
+          "listings.loan_subsidy_cost",
+          "listings.non_federal_funding_amount",
+          "listings.obligated",
+          "listings.pragmatic_obligations",
+          "listings.transactions_count",
+          "listings_count",
+          "loan_subsidy_cost",
+          "non_federal_funding_amount",
+          "object_classes_funding_this_award",
+          "obligated",
+          "obligations_by_fiscal_year",
+          "obligations_by_fiscal_year.fiscal_year",
+          "obligations_by_fiscal_year.obligated",
+          "officers",
+          "officers.highly_compensated_officer_1_amount",
+          "officers.highly_compensated_officer_1_name",
+          "officers.highly_compensated_officer_2_amount",
+          "officers.highly_compensated_officer_2_name",
+          "officers.highly_compensated_officer_3_amount",
+          "officers.highly_compensated_officer_3_name",
+          "officers.highly_compensated_officer_4_amount",
+          "officers.highly_compensated_officer_4_name",
+          "officers.highly_compensated_officer_5_amount",
+          "officers.highly_compensated_officer_5_name",
+          "period_of_performance",
+          "period_of_performance.current_end_date",
+          "period_of_performance.start_date",
+          "place_of_performance",
+          "place_of_performance.city_name",
+          "place_of_performance.code",
+          "place_of_performance.country",
+          "place_of_performance.county_fips",
+          "place_of_performance.county_name",
+          "place_of_performance.foreign_location",
+          "place_of_performance.scope",
+          "place_of_performance.state_code",
+          "place_of_performance.state_fips",
+          "place_of_performance.state_name",
+          "place_of_performance.zip_code",
+          "place_of_performance.zip_plus_four",
+          "pragmatic_obligations",
+          "program_activities_funding_this_award",
+          "purposes_differ",
+          "recipient",
+          "recipient.business_types",
+          "recipient.congressional_district",
+          "recipient.congressional_district_original",
+          "recipient.county",
+          "recipient.duns",
+          "recipient.highest_owner",
+          "recipient.legal_business_name",
+          "recipient.legal_business_name_raw",
+          "recipient.uei",
+          "recipient.uuid",
+          "recipient_address",
+          "recipient_address.address_line1",
+          "recipient_address.address_line2",
+          "recipient_address.city",
+          "recipient_address.congressional_district_current",
+          "recipient_address.congressional_district_original",
+          "recipient_address.country_code",
+          "recipient_address.county_fips",
+          "recipient_address.foreign_city_name",
+          "recipient_address.foreign_postal_code",
+          "recipient_address.foreign_province_name",
+          "recipient_address.state_fips",
+          "recipient_address.state_or_province_code",
+          "recipient_address.zip_code",
+          "recipient_address.zip_code_plus4",
+          "record_type",
+          "sai_number",
+          "summary",
+          "title",
+          "transactions",
+          "transactions.action_date_fiscal_year",
+          "transactions.action_type",
+          "transactions.assistance_type_code",
+          "transactions.award_amount_basis",
+          "transactions.award_recipient_basis",
+          "transactions.cfda_number",
+          "transactions.correction_delete_indicator",
+          "transactions.face_value_of_loan",
+          "transactions.indirect_cost_federal_share_amount",
+          "transactions.initial_report_date",
+          "transactions.key",
+          "transactions.last_modified_date",
+          "transactions.loan_subsidy_cost",
+          "transactions.modification_number",
+          "transactions.non_federal_funding_amount",
+          "transactions.obligated",
+          "transactions.pragmatic_obligations",
+          "transactions.transaction_date",
+          "transactions_count",
+          "treasury_accounts_funding_this_award",
+          "uri"
+        ],
+        "shape_gated_by_level": {},
+        "shape_supported": true,
+        "shape_tier_required": null,
+        "viewset": "assistance.views.OtherAssistanceAwardViewSet"
       },
       "swagger_has_key": false,
       "swagger_params": []
@@ -3797,6 +6021,7 @@
           "awardee_cage",
           "delivery_order_number",
           "entity",
+          "fsc",
           "nsn",
           "organization",
           "part_number",
@@ -3833,6 +6058,10 @@
           },
           "entity": {
             "filter_class": "BaseSmartFilter",
+            "type": "string"
+          },
+          "fsc": {
+            "filter_class": "FscFilter",
             "type": "string"
           },
           "nsn": {
@@ -3981,6 +6210,7 @@
           "buyer_code",
           "closes_date_after",
           "closes_date_before",
+          "fsc",
           "issued_date_after",
           "issued_date_before",
           "nsn",
@@ -4004,6 +6234,10 @@
             "filter_class": "DateFilter",
             "lookup": "lte",
             "type": "date"
+          },
+          "fsc": {
+            "filter_class": "FscFilter",
+            "type": "string"
           },
           "issued_date_after": {
             "filter_class": "DateFilter",
@@ -4117,6 +6351,7 @@
       "resource_key": "dibbs/rfqs",
       "runtime": {
         "filter_params": [
+          "fsc",
           "issue_date_after",
           "issue_date_before",
           "nsn",
@@ -4134,6 +6369,10 @@
           "status_code"
         ],
         "filter_params_detail": {
+          "fsc": {
+            "filter_class": "FscFilter",
+            "type": "string"
+          },
           "issue_date_after": {
             "filter_class": "DateFilter",
             "lookup": "gte",
@@ -17665,6 +19904,10 @@
       "agencies",
       "agencies_contracts_awarding",
       "agencies_contracts_funding",
+      "assistance/direct_payments",
+      "assistance/grants",
+      "assistance/loans",
+      "assistance/other",
       "assistance_listings",
       "budget/accounts",
       "business_types",
@@ -17717,6 +19960,10 @@
     "no_swagger": [
       "agencies_contracts_awarding",
       "agencies_contracts_funding",
+      "assistance/direct_payments",
+      "assistance/grants",
+      "assistance/loans",
+      "assistance/other",
       "budget/accounts",
       "contracts_subawards",
       "dibbs/awards",

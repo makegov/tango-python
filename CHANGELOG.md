@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.21.0] - 2026-10-29
+
+### Added
+
+- **`fsc` on `list_dibbs_rfqs()`, `list_dibbs_rfps()` and `list_dibbs_awards()` (Tango API 5.13.0).** Filters DIBBS records by Federal Supply Class, the first four digits of the NSN (`fsc="6515"`); OR several with `|` (`"6515|6530"`). Each value must be exactly four digits, or the API returns 400. Optional and keyword-style, appended after the existing parameters, so existing calls send the same request.
+
 ## [1.20.0] - 2026-10-24
 
 ### Added
