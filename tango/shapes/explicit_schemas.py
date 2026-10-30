@@ -890,6 +890,71 @@ FEDERAL_REGISTER_DOCUMENT_SCHEMA: dict[str, FieldSchema] = {
 }
 
 
+AWARD_ANNOUNCEMENT_AWARDEE_SCHEMA: dict[str, FieldSchema] = {
+    "name": FieldSchema(name="name", type=str, is_optional=True, is_list=False),
+    "uei": FieldSchema(name="uei", type=str, is_optional=True, is_list=False),
+    "location": FieldSchema(name="location", type=str, is_optional=True, is_list=False),
+    "small_business": FieldSchema(
+        name="small_business", type=bool, is_optional=True, is_list=False
+    ),
+}
+
+AWARD_ANNOUNCEMENT_SCHEMA: dict[str, FieldSchema] = {
+    "uuid": FieldSchema(name="uuid", type=str, is_optional=True, is_list=False),
+    "source": FieldSchema(name="source", type=str, is_optional=True, is_list=False),
+    "source_name": FieldSchema(name="source_name", type=str, is_optional=True, is_list=False),
+    "source_url": FieldSchema(name="source_url", type=str, is_optional=True, is_list=False),
+    "source_record_id": FieldSchema(
+        name="source_record_id", type=str, is_optional=True, is_list=False
+    ),
+    "published_date": FieldSchema(
+        name="published_date", type=date, is_optional=True, is_list=False
+    ),
+    "award_date": FieldSchema(name="award_date", type=date, is_optional=True, is_list=False),
+    "title": FieldSchema(name="title", type=str, is_optional=True, is_list=False),
+    "text": FieldSchema(name="text", type=str, is_optional=True, is_list=False),
+    "amount": FieldSchema(name="amount", type=Decimal, is_optional=True, is_list=False),
+    "value_kind": FieldSchema(name="value_kind", type=str, is_optional=True, is_list=False),
+    "obligated_at_award": FieldSchema(
+        name="obligated_at_award", type=Decimal, is_optional=True, is_list=False
+    ),
+    "action_type": FieldSchema(name="action_type", type=str, is_optional=True, is_list=False),
+    "announcement_type": FieldSchema(
+        name="announcement_type", type=str, is_optional=True, is_list=False
+    ),
+    "award_kind": FieldSchema(name="award_kind", type=str, is_optional=True, is_list=False),
+    "awardee_count": FieldSchema(name="awardee_count", type=int, is_optional=True, is_list=False),
+    "piids": FieldSchema(name="piids", type=str, is_optional=True, is_list=True),
+    "award_uuids": FieldSchema(name="award_uuids", type=str, is_optional=True, is_list=True),
+    "civilian": FieldSchema(name="civilian", type=bool, is_optional=True, is_list=False),
+    "component": FieldSchema(name="component", type=str, is_optional=True, is_list=False),
+    "contracting_activity": FieldSchema(
+        name="contracting_activity", type=str, is_optional=True, is_list=False
+    ),
+    "is_modification": FieldSchema(
+        name="is_modification", type=bool, is_optional=True, is_list=False
+    ),
+    "is_multiple_award": FieldSchema(
+        name="is_multiple_award", type=bool, is_optional=True, is_list=False
+    ),
+    "corrections": FieldSchema(name="corrections", type=dict, is_optional=True, is_list=True),
+    "is_withdrawn": FieldSchema(name="is_withdrawn", type=bool, is_optional=True, is_list=False),
+    "awardees": FieldSchema(
+        name="awardees",
+        type=dict,
+        is_optional=True,
+        is_list=True,
+        nested_model="AwardAnnouncementAwardee",
+    ),
+    "organization": FieldSchema(
+        name="organization",
+        type=dict,
+        is_optional=True,
+        is_list=False,
+        nested_model="OrganizationOffice",
+    ),
+}
+
 EBUY_ATTACHMENT_SCHEMA: dict[str, FieldSchema] = {
     "doc_seq_num": FieldSchema(name="doc_seq_num", type=int, is_optional=True, is_list=False),
     "doc_name": FieldSchema(name="doc_name", type=str, is_optional=True, is_list=False),
@@ -1756,6 +1821,8 @@ EXPLICIT_SCHEMAS: dict[str, dict[str, FieldSchema]] = {
     "ProtestDocket": PROTEST_DOCKET_SCHEMA,
     "ContractAppeal": CONTRACT_APPEAL_SCHEMA,
     "FederalRegisterDocument": FEDERAL_REGISTER_DOCUMENT_SCHEMA,
+    "AwardAnnouncement": AWARD_ANNOUNCEMENT_SCHEMA,
+    "AwardAnnouncementAwardee": AWARD_ANNOUNCEMENT_AWARDEE_SCHEMA,
     "EbuyRequest": EBUY_REQUEST_SCHEMA,
     "EbuyAttachment": EBUY_ATTACHMENT_SCHEMA,
     "Agency": AGENCY_SCHEMA,

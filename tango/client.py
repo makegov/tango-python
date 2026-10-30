@@ -22,6 +22,7 @@ from tango.models import (
     OTA,
     OTIDV,
     Agency,
+    AwardAnnouncement,
     BudgetAccount,
     BusinessType,
     Contract,
@@ -3077,6 +3078,161 @@ class TangoClient:
         )
 
     # ============================================================================
+    # Award announcements
+    # ============================================================================
+
+    def list_award_announcements(
+        self,
+        page: int = 1,
+        limit: int = 25,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+        search: str | None = None,
+        source: str | None = None,
+        agency: str | None = None,
+        component: str | None = None,
+        published_date_after: str | None = None,
+        published_date_before: str | None = None,
+        award_date_after: str | None = None,
+        award_date_before: str | None = None,
+        amount_min: int | float | str | None = None,
+        amount_max: int | float | str | None = None,
+        piid: str | None = None,
+        awardee: str | None = None,
+        uei: str | None = None,
+        action_type: str | None = None,
+        announcement_type: str | None = None,
+        civilian: bool | None = None,
+        small_business: bool | None = None,
+        is_modification: bool | None = None,
+        is_multiple_award: bool | None = None,
+        include_withdrawn: bool | None = None,
+        ordering: str | None = None,
+    ) -> PaginatedResponse:
+        """
+        List federal award announcements (Tango API 5.14.0).
+
+        Announcements come from two sources, named on every row in ``source``.
+        ``official_release`` rows are the awards of $7.5 million or more in the Department of War's daily contracts release, with the text as published.
+        ``makegov_generated`` rows cover new civilian IDVs of $25 million or more and every new OTA and OT IDV: MakeGov writes them from FPDS data with a language model, and they are not government text.
+
+        A generated announcement is dropped when an official release covers the same award.
+        Announcements DoD later withdrew are hidden unless ``include_withdrawn=True``.
+
+        Args:
+            page: Page number
+            limit: Results per page (max 100)
+            shape: Response shape string (defaults to minimal shape, which leaves out ``text``)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+            search: Full-text search over the title and text; a match in the title ranks above a match in the text. Wrap in double quotes for a phrase
+            source: ``official_release`` or ``makegov_generated``
+            agency: A Tango agency name, abbreviation, code or organization key for the awarding organization, e.g. ``Navy``. OR several with ``|``
+            component: DoD component as printed in the official release's section header, e.g. ``NAVY``. Case-insensitive exact match. OR several with ``|``. Generated announcements have no component
+            published_date_after: Published on or after (YYYY-MM-DD)
+            published_date_before: Published on or before (YYYY-MM-DD)
+            award_date_after: Awarded on or after (YYYY-MM-DD)
+            award_date_before: Awarded on or before (YYYY-MM-DD)
+            amount_min: Amount at least this many US dollars
+            amount_max: Amount at most this many US dollars
+            piid: A contract number named in the announcement, e.g. ``N00019-25-C-0070`` or ``N0001925C0070``. Dashes and case are ignored. OR several with ``|``
+            awardee: Case-insensitive substring of an awardee name, at least 3 characters
+            uei: An exact awardee UEI. Official releases print no UEI, so this matches only where one was resolved
+            action_type: Action type, e.g. ``new_award``. OR several with ``|``
+            announcement_type: Announcement type. OR several with ``|``
+            civilian: Announces a civilian award
+            small_business: ``True`` keeps announcements with at least one small-business awardee, ``False`` those whose awardees are stated not to be small. Generated announcements state neither, so they match neither
+            is_modification: Announces a modification to an existing contract
+            is_multiple_award: Names more than one awardee
+            include_withdrawn: Include announcements DoD later withdrew
+            ordering: Sort field — ``published_date``, ``amount`` or ``rank``, with a leading ``-`` for descending. Defaults to ``-published_date``, or to ``-rank`` under ``search``. ``rank`` requires a non-empty ``search``
+        """
+        params: dict[str, Any] = {"page": page, "limit": min(limit, 100)}
+
+        if shape is None:
+            shape = ShapeConfig.AWARD_ANNOUNCEMENTS_MINIMAL
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        for key, val in (
+            ("search", search),
+            ("source", source),
+            ("agency", agency),
+            ("component", component),
+            ("published_date_after", published_date_after),
+            ("published_date_before", published_date_before),
+            ("award_date_after", award_date_after),
+            ("award_date_before", award_date_before),
+            ("amount_min", amount_min),
+            ("amount_max", amount_max),
+            ("piid", piid),
+            ("awardee", awardee),
+            ("uei", uei),
+            ("action_type", action_type),
+            ("announcement_type", announcement_type),
+            ("civilian", civilian),
+            ("small_business", small_business),
+            ("is_modification", is_modification),
+            ("is_multiple_award", is_multiple_award),
+            ("include_withdrawn", include_withdrawn),
+            ("ordering", ordering),
+        ):
+            if val is not None:
+                params[key] = val
+
+        data = self._get("/api/news/award_announcements/", params)
+
+        results = [
+            self._parse_response_with_shape(item, shape, AwardAnnouncement, flat, flat_lists)
+            for item in data["results"]
+        ]
+
+        return PaginatedResponse(
+            count=data["count"],
+            next=data.get("next"),
+            previous=data.get("previous"),
+            results=results,
+            meta=data.get("meta"),
+        )
+
+    def get_award_announcement(
+        self,
+        announcement_uuid: str,
+        shape: str | None = None,
+        flat: bool = False,
+        flat_lists: bool = False,
+    ) -> Any:
+        """
+        Get a single award announcement by uuid (Tango API 5.14.0).
+
+        A withdrawn announcement stays retrievable here, with ``is_withdrawn`` set, even though lists hide it by default.
+        Rows with ``source="makegov_generated"`` are written by MakeGov from FPDS data with a language model and are not government text.
+
+        Args:
+            announcement_uuid: Announcement UUID
+            shape: Response shape string (defaults to the comprehensive shape)
+            flat: If True, flatten nested objects in shaped response
+            flat_lists: If True, flatten arrays using indexed keys
+        """
+        params: dict[str, Any] = {}
+        if shape is None:
+            shape = ShapeConfig.AWARD_ANNOUNCEMENTS_COMPREHENSIVE
+        if shape:
+            params["shape"] = shape
+            if flat:
+                params["flat"] = "true"
+            if flat_lists:
+                params["flat_lists"] = "true"
+
+        data = self._get(f"/api/news/award_announcements/{announcement_uuid}/", params)
+        return self._parse_response_with_shape(data, shape, AwardAnnouncement, flat, flat_lists)
+
+    # ============================================================================
     # GSA eBuy requests
     # ============================================================================
 
@@ -5395,7 +5551,8 @@ class TangoClient:
             query_type: One of ``opportunity``, ``contract``, ``idv``, ``ota``,
                 ``otidv``, ``entity``, ``grant``, ``forecast``, ``exclusion``,
                 ``dibbs_rfq``, ``dibbs_rfp``, ``sled_opportunity``,
-                ``contract_appeal``, ``federal_register`` or ``ebuy_request``. :meth:`list_webhook_event_types` is the
+                ``contract_appeal``, ``federal_register``, ``ebuy_request`` or
+                ``award_announcement``. :meth:`list_webhook_event_types` is the
                 current authority — this list can only go stale.
             filters: Dict of query parameters that the alert matches against
                 (e.g. ``{"naics": "541330", "set_aside": "SBA"}``).

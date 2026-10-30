@@ -71,6 +71,7 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "contract_appeals": "ContractAppeal",
     "federal_register": "FederalRegisterDocument",
     "ebuy/requests": "EbuyRequest",
+    "news/award_announcements": "AwardAnnouncement",
     "offices": "Office",
     "assistance_listings": "AssistanceListing",
     "business_types": "BusinessType",
@@ -85,8 +86,6 @@ RESOURCE_TO_MODEL: dict[str, str] = {
     "sled/opportunities": "SledOpportunity",
     "sled/forecasts": "SledForecast",
     "mas_sins": "MasSin",
-    "events": "Event",
-    "news": "News",
 }
 
 

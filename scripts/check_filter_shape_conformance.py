@@ -80,16 +80,13 @@ RESOURCE_TO_METHOD: dict[str, str | None] = {
     "contract_appeals": "list_contract_appeals",
     "federal_register": "list_federal_register_documents",
     "ebuy/requests": "list_ebuy_requests",
+    "news/award_announcements": "list_award_announcements",
     "offices": "list_offices",
     "psc": "list_psc",
     "mas_sins": "list_mas_sins",
     "departments": "list_departments",
     "business_types": "list_business_types",
     "assistance_listings": "list_assistance_listings",
-    # Genuinely absent from the SDK. Both are content endpoints with no shaping
-    # and no list method; `list_webhook_event_types` is unrelated to `events`.
-    "events": None,
-    "news": None,
 }
 
 # Params the API genuinely accepts but the contract omits, so they would read as

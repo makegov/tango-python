@@ -10,7 +10,7 @@ A modern Python SDK for the [Tango API](https://tango.makegov.com) by MakeGov, f
 
 - **Dynamic Response Shaping** - Request only the fields you need, reducing payload sizes by 60-80%
 - **Full Type Safety** - Runtime-generated TypedDict types with accurate type hints for IDE autocomplete
-- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, IDVs, OTAs, entities, forecasts, opportunities, notices, grants, protests, webhooks, and more)
+- **Comprehensive API Coverage** - All major Tango API endpoints (contracts, IDVs, OTAs, entities, forecasts, opportunities, notices, grants, protests, award announcements, webhooks, and more)
 - **Flexible Data Access** - Dictionary-based response objects with validation
 - **Modern Python** - Built for Python 3.12+ using modern async-ready patterns
 - **Production-Ready** - Comprehensive test suite with VCR.py-based integration tests
@@ -262,6 +262,17 @@ grants = client.list_grants(agency="HHS", status="F", limit=25)  # F = Forecaste
 protests = client.list_protests(source_system="gao", outcome="Sustained", limit=25)
 protest = client.get_protest("CASE_UUID")
 ```
+
+### Award Announcements
+
+```python
+announcements = client.list_award_announcements(source="official_release", amount_min=100000000, limit=25)
+announcement = client.get_award_announcement("ANNOUNCEMENT_UUID")
+```
+
+Each row names its `source`.
+`official_release` rows are the Department of War's daily contracts release as published.
+`makegov_generated` rows are written by MakeGov from FPDS data with a language model and are not government text.
 
 ### GSA eBuy
 
