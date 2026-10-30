@@ -91,6 +91,7 @@ tango webhooks list-event-types
 # alerts.contract_appeal.match  CBCA/ASBCA appeal decision matched a saved alert
 # alerts.federal_register.match  Federal Register document matched a saved alert
 # alerts.ebuy_request.match  GSA eBuy request matched a saved alert
+# alerts.award_announcement.match  Award announcement matched a saved alert
 ```
 
 This list is served by the API, so it is always current — the SDK does not hardcode

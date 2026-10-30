@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **Award announcements** (Tango API 5.14.0). Two methods over the new `/api/news/award_announcements/` resource: `list_award_announcements()` and `get_award_announcement()` (by `uuid`), plus `AwardAnnouncement` and `AwardAnnouncementAwardee` schemas and the `AWARD_ANNOUNCEMENTS_MINIMAL` and `AWARD_ANNOUNCEMENTS_COMPREHENSIVE` shapes, including the `awardees` and `organization` expands. Each row names its `source`: `official_release` rows are the Department of War's daily contracts release as published, and `makegov_generated` rows are written by MakeGov from FPDS data with a language model and are not government text. Filter by text, source, agency, dates, amount, contract number, awardee and flags, and order by `published_date`, `amount` or `rank`. Withdrawn announcements are hidden from lists unless `include_withdrawn=True`.
+- **`alerts.award_announcement.match` is an alertable event type** (Tango API 5.14.0). `create_webhook_alert(query_type="award_announcement", ...)` works.
+
+### Changed
+
+- Re-vendored `contracts/filter_shape_contract.json` (Tango API 5.14.0).
+
 ## [1.21.0] - 2026-10-29
 
 ### Added

@@ -24,6 +24,7 @@ Complete reference for all Tango Python SDK methods and functionality.
 - [Protests](#protests)
 - [Contract Appeals](#contract-appeals)
 - [Federal Register](#federal-register)
+- [Award Announcements](#award-announcements)
 - [GSA eBuy](#gsa-ebuy)
 - [Budget](#budget)
 - [Business Types](#business-types)
@@ -1500,6 +1501,104 @@ document = client.get_federal_register_document(
 
 ---
 
+## Award Announcements
+
+Federal award announcements (Tango API 5.14.0), from two sources named on every row in `source`.
+
+- `official_release` rows are the awards of $7.5 million or more in the Department of War's daily contracts release, with the text as published.
+- `makegov_generated` rows cover new civilian IDVs of $25 million or more and every new OTA and OT IDV. MakeGov writes them from FPDS data with a language model, and they are not government text.
+
+A generated announcement is dropped when an official release covers the same award.
+
+### list_award_announcements()
+
+List announcements with filtering and shaping.
+
+```python
+announcements = client.list_award_announcements(
+    page=1,
+    limit=25,
+    shape=ShapeConfig.AWARD_ANNOUNCEMENTS_MINIMAL,
+    # Filter parameters (all optional)
+    search=None,
+    source=None,
+    agency=None,
+    component=None,
+    published_date_after=None,
+    published_date_before=None,
+    award_date_after=None,
+    award_date_before=None,
+    amount_min=None,
+    amount_max=None,
+    piid=None,
+    awardee=None,
+    uei=None,
+    action_type=None,
+    announcement_type=None,
+    civilian=None,
+    small_business=None,
+    is_modification=None,
+    is_multiple_award=None,
+    include_withdrawn=None,
+    ordering=None,
+)
+```
+
+**Filter Parameters:**
+- `search` - Full-text search over the title and text; a match in the title ranks above a match in the text. Wrap in double quotes for a phrase
+- `source` - `"official_release"` or `"makegov_generated"`
+- `agency` - A Tango agency name, abbreviation, code or organization key for the awarding organization, e.g. `"Navy"`; OR several with `|`
+- `component` - DoD component as printed in the official release's section header, e.g. `"NAVY"`. Case-insensitive exact match; OR several with `|`. Generated announcements have no component
+- `published_date_after` / `published_date_before` - Publication date range (`YYYY-MM-DD`)
+- `award_date_after` / `award_date_before` - Award date range (`YYYY-MM-DD`)
+- `amount_min` / `amount_max` - Amount range in US dollars
+- `piid` - A contract number named in the announcement, e.g. `"N00019-25-C-0070"` or `"N0001925C0070"`. Dashes and case are ignored; OR several with `|`
+- `awardee` - Case-insensitive substring of an awardee name, at least 3 characters
+- `uei` - An exact awardee UEI. Official releases print no UEI, so this matches only where one was resolved
+- `action_type` - Action type, e.g. `"new_award"`; OR several with `|`
+- `announcement_type` - Announcement type; OR several with `|`
+- `civilian` - Announces a civilian award
+- `small_business` - `True` keeps announcements with at least one small-business awardee, `False` those whose awardees are stated not to be small. Generated announcements state neither, so they match neither
+- `is_modification` - Announces a modification to an existing contract
+- `is_multiple_award` - Names more than one awardee
+- `include_withdrawn` - Include announcements DoD later withdrew, which are hidden by default
+- `ordering` - `published_date`, `amount` or `rank`, with a leading `-` for descending. Defaults to `-published_date`, or to `-rank` under `search`. `rank` requires a non-empty `search`
+
+**Returns:** [PaginatedResponse](#paginatedresponse) with announcement dictionaries
+
+**Example:**
+```python
+announcements = client.list_award_announcements(
+    source="official_release",
+    agency="Navy",
+    amount_min=100000000,
+    ordering="-amount",
+    limit=25,
+)
+
+for item in announcements.results:
+    print(f"{item['published_date']} ${item['amount']:,}: {item['title']}")
+```
+
+### get_award_announcement()
+
+Get a single announcement by `uuid`.
+
+```python
+announcement = client.get_award_announcement(
+    "ANNOUNCEMENT_UUID",
+    shape=ShapeConfig.AWARD_ANNOUNCEMENTS_COMPREHENSIVE,
+)
+```
+
+**Notes:**
+- A withdrawn announcement stays retrievable here, with `is_withdrawn` set, even though lists hide it by default.
+- `text` is on the detail default but not the list default, because a release paragraph can run past 16,000 characters. Name it in `shape` to get it on a list.
+- `awardees(...)` carries `name`, `uei`, `location` and `small_business`. `organization(...)` carries `organization_id`, `office_code`, `office_name`, `agency_code`, `agency_name`, `department_code` and `department_name`.
+- `amount` is the announced dollar value, and `value_kind` says what kind of value it is, e.g. `ceiling` or `face_value`.
+
+---
+
 ## State & Local (SLED)
 
 State, local and education procurement — solicitations that never appear on SAM.gov because they were never federal. **Beta**: coverage is partial and grows one jurisdiction at a time.
@@ -2675,6 +2774,8 @@ entity = client.get_entity("UEI_KEY", shape=ShapeConfig.ENTITIES_COMPREHENSIVE)
 | `CONTRACT_APPEALS_COMPREHENSIVE` | `get_contract_appeal` | The list fields plus docket_raw, docket_source, decision_date_repaired, decision_type_raw, listing_year, first_listed_at, listed, text_status, text_char_count (omits `decision_text`, which needs an Enterprise plan) |
 | `FEDERAL_REGISTER_MINIMAL` | `list_federal_register_documents` | uuid, document_number, publication_date, type, subtype, title, abstract, action, agencies, cfr_references, citation, significant, comments_close_on, effective_on, html_url, pdf_url |
 | `FEDERAL_REGISTER_COMPREHENSIVE` | `get_federal_register_document` | The list fields plus dates, signing_date, start_page, end_page, volume, docket_ids, dockets, regulation_id_numbers, topics, correction_of, corrections, executive_order_number, presidential_document_number, proclamation_number, comment_url, regulations_dot_gov_url, raw_text_url, body_html_url (omits `full_text`) |
+| `AWARD_ANNOUNCEMENTS_MINIMAL` | `list_award_announcements` | uuid, source, source_name, source_url, published_date, award_date, title, amount, value_kind, action_type, announcement_type, awardee_count, piids, is_modification, is_multiple_award, is_withdrawn |
+| `AWARD_ANNOUNCEMENTS_COMPREHENSIVE` | `get_award_announcement` | The list fields plus source_record_id, text, obligated_at_award, award_kind, award_uuids, civilian, component, contracting_activity, corrections, and the `awardees` and `organization` expands |
 | `EBUY_REQUESTS_MINIMAL` | `list_ebuy_requests` | rfq_id, request_type, title, schedule, sin, status, buyer_name, buyer_agency, buyer_agency_code, reference_number, issue_date, close_date, attachment_count, link_count, last_seen |
 | `EBUY_REQUESTS_COMPREHENSIVE` | `get_ebuy_request` | Every field, plus the `organization` and `attachments` expands (without `extracted_text`, which must be named) |
 | `BUDGET_ACCOUNTS_MINIMAL` | `list_budget_accounts`, `get_budget_account` | id, federal_account_symbol, fiscal_year, data_through_period, agency_code/name, bureau_name, account_title, bea_category, on_off_budget, subfunction_code, account_category, lifecycle (requested/enacted/apportioned/obligated/outlayed/unobligated), contract & assistance rollups, key ratios, next-year growth, source_anomalies |

@@ -1372,6 +1372,63 @@ class FederalRegisterDocument:
     full_text: str | None = None
 
 
+class AwardAnnouncementAwardee:
+    """Schema definition for one entry in an award announcement's ``awardees`` (not used for instances).
+
+    ``uei`` is set only where one was resolved: official releases print none.
+    ``small_business`` is never set on a generated announcement.
+    """
+
+    name: str | None = None
+    uei: str | None = None
+    location: str | None = None
+    small_business: bool | None = None
+
+
+class AwardAnnouncement:
+    """Schema definition for AwardAnnouncement (not used for instances).
+
+    Federal award announcements at ``/api/news/award_announcements/`` (Tango API 5.14.0), from two sources named on every row in ``source``.
+    Shape-on-demand, so every field is optional.
+
+    ``official_release`` rows are the awards of $7.5 million or more in the Department of War's daily contracts release, with the text as published.
+    ``makegov_generated`` rows cover new civilian IDVs of $25 million or more and every new OTA and OT IDV.
+    MakeGov writes them from FPDS data with a language model, and they are not government text.
+
+    ``text`` is left out of the list default because a release paragraph can run past 16,000 characters; name it in ``shape`` to get it on a list.
+    ``amount`` is the announced dollar value and ``value_kind`` says what kind of value it is, e.g. ``ceiling`` or ``face_value``.
+    ``corrections`` is the history of corrections applied to an official paragraph, in publish order, as DoD published them.
+    """
+
+    uuid: str | None = None
+    source: str | None = None
+    source_name: str | None = None
+    source_url: str | None = None
+    source_record_id: str | None = None
+    published_date: date | None = None
+    award_date: date | None = None
+    title: str | None = None
+    text: str | None = None
+    amount: Decimal | None = None
+    value_kind: str | None = None
+    obligated_at_award: Decimal | None = None
+    action_type: str | None = None
+    announcement_type: str | None = None
+    award_kind: str | None = None
+    awardee_count: int | None = None
+    piids: list[str] | None = None
+    award_uuids: list[str] | None = None
+    civilian: bool | None = None
+    component: str | None = None
+    contracting_activity: str | None = None
+    is_modification: bool | None = None
+    is_multiple_award: bool | None = None
+    corrections: list[dict[str, Any]] | None = None
+    is_withdrawn: bool | None = None
+    awardees: list[AwardAnnouncementAwardee] | None = None
+    organization: dict[str, Any] | None = None
+
+
 class EbuyAttachment:
     """Schema definition for one entry in an eBuy request's ``attachments`` (not used for instances).
 
@@ -1667,6 +1724,22 @@ class ShapeConfig:
         "dockets,regulation_id_numbers,topics,correction_of,corrections,"
         "executive_order_number,presidential_document_number,proclamation_number,"
         "comment_url,regulations_dot_gov_url,raw_text_url,body_html_url"
+    )
+
+    # Default for list_award_announcements(). Mirrors the API's own list default. `text` is left out on purpose: a release paragraph can run past 16,000 characters.
+    AWARD_ANNOUNCEMENTS_MINIMAL: Final = (
+        "uuid,source,source_name,source_url,published_date,award_date,title,amount,"
+        "value_kind,action_type,announcement_type,awardee_count,piids,is_modification,"
+        "is_multiple_award,is_withdrawn,awardees(*)"
+    )
+
+    # Default for get_award_announcement(). Mirrors the API's own retrieve default.
+    AWARD_ANNOUNCEMENTS_COMPREHENSIVE: Final = (
+        "uuid,source,source_name,source_url,published_date,award_date,title,amount,"
+        "value_kind,action_type,announcement_type,awardee_count,piids,is_modification,"
+        "is_multiple_award,is_withdrawn,awardees(*),source_record_id,text,obligated_at_award,"
+        "award_kind,award_uuids,civilian,component,contracting_activity,corrections,"
+        "organization(*)"
     )
 
     # Default for list_ebuy_requests(). Mirrors the API's own list default.

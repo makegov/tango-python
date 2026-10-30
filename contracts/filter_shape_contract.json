@@ -1,6 +1,6 @@
 {
   "meta": {
-    "api_version": "5.13.0",
+    "api_version": "5.14.0",
     "description": "Canonical API filter/shape contract. Downstream consumers (SDK, MCP) should validate their conformance against this manifest.",
     "schema_version": 2
   },
@@ -9039,64 +9039,6 @@
       },
       "swagger_params": []
     },
-    "events": {
-      "basename": "g2x-events",
-      "prefix": "events",
-      "resource_key": "events",
-      "runtime": {
-        "filter_params": [
-          "is_free",
-          "is_virtual",
-          "organizer",
-          "search",
-          "source",
-          "start_date_after",
-          "start_date_before",
-          "state"
-        ],
-        "filter_params_detail": {
-          "is_free": {
-            "type": "boolean"
-          },
-          "is_virtual": {
-            "type": "boolean"
-          },
-          "organizer": {
-            "lookup": "icontains",
-            "type": "string"
-          },
-          "search": {
-            "type": "string"
-          },
-          "source": {
-            "type": "string"
-          },
-          "start_date_after": {
-            "lookup": "gte",
-            "type": "date"
-          },
-          "start_date_before": {
-            "lookup": "lte",
-            "type": "date"
-          },
-          "state": {
-            "lookup": "iexact",
-            "type": "string"
-          }
-        },
-        "ordering_aliases": [],
-        "ordering_fields": [],
-        "pagination": {
-          "max_page_size": 100
-        },
-        "shape": null,
-        "shape_flat_paths": [],
-        "shape_gated_by_level": {},
-        "shape_supported": false,
-        "shape_tier_required": null
-      },
-      "swagger_params": []
-    },
     "exclusions": {
       "basename": "exclusion",
       "prefix": "exclusions",
@@ -12717,51 +12659,209 @@
         "show_shapes"
       ]
     },
-    "news": {
-      "basename": "g2x-news",
-      "prefix": "news",
-      "resource_key": "news",
+    "news/award_announcements": {
+      "basename": "awardannouncement",
+      "prefix": "news/award_announcements",
+      "resource_key": "news/award_announcements",
       "runtime": {
         "filter_params": [
-          "published_after",
-          "published_before",
+          "action_type",
+          "agency",
+          "amount_max",
+          "amount_min",
+          "announcement_type",
+          "award_date_after",
+          "award_date_before",
+          "awardee",
+          "civilian",
+          "component",
+          "include_withdrawn",
+          "is_modification",
+          "is_multiple_award",
+          "piid",
+          "published_date_after",
+          "published_date_before",
           "search",
+          "small_business",
           "source",
-          "tag",
-          "vertical"
+          "uei"
         ],
         "filter_params_detail": {
-          "published_after": {
-            "lookup": "gte",
-            "type": "datetime"
+          "action_type": {
+            "type": "string"
           },
-          "published_before": {
+          "agency": {
+            "type": "string"
+          },
+          "amount_max": {
             "lookup": "lte",
-            "type": "datetime"
+            "type": "number"
+          },
+          "amount_min": {
+            "lookup": "gte",
+            "type": "number"
+          },
+          "announcement_type": {
+            "type": "string"
+          },
+          "award_date_after": {
+            "lookup": "gte",
+            "type": "date"
+          },
+          "award_date_before": {
+            "lookup": "lte",
+            "type": "date"
+          },
+          "awardee": {
+            "type": "string"
+          },
+          "civilian": {
+            "type": "boolean"
+          },
+          "component": {
+            "type": "string"
+          },
+          "include_withdrawn": {
+            "type": "boolean"
+          },
+          "is_modification": {
+            "type": "boolean"
+          },
+          "is_multiple_award": {
+            "type": "boolean"
+          },
+          "piid": {
+            "type": "string"
+          },
+          "published_date_after": {
+            "lookup": "gte",
+            "type": "date"
+          },
+          "published_date_before": {
+            "lookup": "lte",
+            "type": "date"
           },
           "search": {
             "type": "string"
           },
+          "small_business": {
+            "type": "boolean"
+          },
           "source": {
-            "type": "string"
+            "choices": [
+              "makegov_generated",
+              "official_release"
+            ],
+            "choices_count": 2,
+            "type": "choice"
           },
-          "tag": {
-            "type": "string"
-          },
-          "vertical": {
-            "lookup": "iexact",
+          "uei": {
             "type": "string"
           }
         },
         "ordering_aliases": [],
-        "ordering_fields": [],
+        "ordering_fields": [
+          "amount",
+          "published_date",
+          "rank"
+        ],
         "pagination": {
           "max_page_size": 100
         },
-        "shape": null,
-        "shape_flat_paths": [],
+        "shape": {
+          "expands": {
+            "awardees": {
+              "expands": {},
+              "fields": [
+                "location",
+                "name",
+                "small_business",
+                "uei"
+              ]
+            },
+            "organization": {
+              "expands": {},
+              "fields": [
+                "agency_code",
+                "agency_name",
+                "department_code",
+                "department_name",
+                "office_code",
+                "office_name",
+                "organization_id"
+              ]
+            }
+          },
+          "fields": [
+            "action_type",
+            "amount",
+            "announcement_type",
+            "award_date",
+            "award_kind",
+            "award_uuids",
+            "awardee_count",
+            "civilian",
+            "component",
+            "contracting_activity",
+            "corrections",
+            "is_modification",
+            "is_multiple_award",
+            "is_withdrawn",
+            "obligated_at_award",
+            "piids",
+            "published_date",
+            "source",
+            "source_name",
+            "source_record_id",
+            "source_url",
+            "text",
+            "title",
+            "uuid",
+            "value_kind"
+          ]
+        },
+        "shape_flat_paths": [
+          "action_type",
+          "amount",
+          "announcement_type",
+          "award_date",
+          "award_kind",
+          "award_uuids",
+          "awardee_count",
+          "awardees",
+          "awardees.location",
+          "awardees.name",
+          "awardees.small_business",
+          "awardees.uei",
+          "civilian",
+          "component",
+          "contracting_activity",
+          "corrections",
+          "is_modification",
+          "is_multiple_award",
+          "is_withdrawn",
+          "obligated_at_award",
+          "organization",
+          "organization.agency_code",
+          "organization.agency_name",
+          "organization.department_code",
+          "organization.department_name",
+          "organization.office_code",
+          "organization.office_name",
+          "organization.organization_id",
+          "piids",
+          "published_date",
+          "source",
+          "source_name",
+          "source_record_id",
+          "source_url",
+          "text",
+          "title",
+          "uuid",
+          "value_kind"
+        ],
         "shape_gated_by_level": {},
-        "shape_supported": false,
+        "shape_supported": true,
         "shape_tier_required": null
       },
       "swagger_params": []
