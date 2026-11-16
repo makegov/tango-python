@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`TangoRateLimitError.limit_type` returns `premium_daily` for a per-feature cap instead of `daily`.** A detail that names no rate is now classified only by the words "daily" or "burst", never by "minutes" or "day" in its wait time.
+
 ## [1.21.0] - 2026-10-29
 
 ### Added

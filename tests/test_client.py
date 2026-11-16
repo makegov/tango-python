@@ -1507,13 +1507,43 @@ class TestErrorHandling:
         [
             # The API's own wording, with its waits as convert_seconds_to_human_readable_wait_time renders them.
             ("Rate limit exceeded for daily. Please try again in 16 hours, 58 minutes.", "daily"),
+            (
+                "Rate limit exceeded for daily. Please try again in 9 hours, 14 minutes, 3 seconds.",
+                "daily",
+            ),
             ("Rate limit exceeded for daily. Please try again in 1 minute.", "daily"),
-            ("Rate limit exceeded for burst. Please try again in 45 seconds.", "burst"),
+            ("Rate limit exceeded for burst. Please try again in 41 seconds.", "burst"),
             ("Rate limit exceeded for burst. Please try again in 1 minute.", "burst"),
+            (
+                "Rate limit exceeded for premium_daily. Please try again in 9 hours, 14 minutes, 3 seconds.",
+                "premium_daily",
+            ),
+            (
+                "Rate limit exceeded for daily. Please try again in 9 hours, 14 minutes, 3 seconds. "
+                "This limit is shared by everyone on your team; https://tango.makegov.com/account/team/ shows who to contact.",
+                "daily",
+            ),
+            ("Rate limit exceeded for monthly. Please try again in 3 days.", None),
             ("Too many requests.", None),
         ],
     )
     def test_limit_type_reads_the_rate_name_not_the_wait(self, detail, expected):
+        error = TangoRateLimitError("Rate limit exceeded", 429, {"detail": detail})
+
+        assert error.limit_type == expected
+
+    @pytest.mark.parametrize(
+        ("detail", "expected"),
+        [
+            ("Daily request quota reached.", "daily"),
+            ("Burst limit reached.", "burst"),
+            ("Request was throttled. Expected available in 3 minutes.", None),
+            ("Request was throttled. Expected available in 1 day.", None),
+        ],
+    )
+    def test_limit_type_without_a_rate_name_matches_only_the_words_daily_and_burst(
+        self, detail, expected
+    ):
         error = TangoRateLimitError("Rate limit exceeded", 429, {"detail": detail})
 
         assert error.limit_type == expected
