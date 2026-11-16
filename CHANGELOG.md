@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **`TangoRateLimitError.limit_type` reports a per-feature cap as `premium_daily`, not `daily`.** A 429 from a premium-gated endpoint (currently the CALC labor-rate endpoints) reads `Rate limit exceeded for premium_daily.`, and the SDK matched "daily" inside the rate's name, so callers couldn't tell a feature cap that blocks one endpoint from the account-wide daily lockout. The rate name now maps exactly to `daily`, `burst`, or `premium_daily`, and a name the SDK doesn't recognize returns `None`.
+- **`limit_type` no longer guesses from the wait time when the detail names no rate.** The fallback still treated "minute" as burst and "day" as daily, and those words appear in the wait text itself (`Expected available in 3 minutes.`). It now matches only the words "daily" and "burst", and returns `None` otherwise.
+
 ## [1.21.0] - 2026-10-29
 
 ### Added

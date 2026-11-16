@@ -5,6 +5,7 @@ from typing import Any
 
 # The API names the tripped rate in its 429 detail: "Rate limit exceeded for daily. Please try again in 16 hours, 58 minutes."
 _RATE_NAME = re.compile(r"exceeded for ([\w-]+)", re.IGNORECASE)
+_LIMIT_TYPES = {"daily": "daily", "burst": "burst", "premium_daily": "premium_daily"}
 
 
 class TangoAPIError(Exception):
@@ -88,16 +89,21 @@ class TangoRateLimitError(TangoAPIError):
 
     @property
     def limit_type(self) -> str | None:
-        """Which limit was hit: 'burst' or 'daily', parsed from detail."""
+        """Which limit was hit, parsed from detail.
+
+        ``"daily"`` or ``"burst"`` for the account's own caps, or ``"premium_daily"`` for a per-feature daily cap (currently the CALC labor-rate endpoints). ``None`` when the detail names no limit the SDK recognizes.
+        """
         d = self.detail
         if not d:
             return None
-        # Read the rate's name, not the whole sentence: a daily lockout's wait reads "16 hours, 58 minutes", which a match on "minute" took for burst.
         match = _RATE_NAME.search(d)
-        text = match.group(1).lower() if match else d.lower()
-        if "daily" in text or re.search(r"\bday\b", text):
+        if match:
+            return _LIMIT_TYPES.get(match.group(1).lower())
+        # Exact words only: "minute" and "day" also appear in the wait text ("9 hours, 14 minutes"), so they can't identify the limit.
+        lower = d.lower()
+        if re.search(r"\bdaily\b", lower):
             return "daily"
-        if "burst" in text or "minute" in text:
+        if re.search(r"\bburst\b", lower):
             return "burst"
         return None
 
