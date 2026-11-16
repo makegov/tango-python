@@ -91,7 +91,8 @@ class TangoRateLimitError(TangoAPIError):
     def limit_type(self) -> str | None:
         """Which limit was hit, parsed from detail.
 
-        ``"daily"`` or ``"burst"`` for the account's own caps, or ``"premium_daily"`` for a per-feature daily cap (currently the CALC labor-rate endpoints). ``None`` when the detail names no limit the SDK recognizes.
+        `"daily"` or `"burst"` for the account's own caps, or `"premium_daily"` for a per-feature daily cap
+        (currently the CALC labor-rate endpoints). `None` when the detail names no limit the SDK recognizes.
         """
         d = self.detail
         if not d:
